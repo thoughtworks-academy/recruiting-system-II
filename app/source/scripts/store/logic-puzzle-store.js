@@ -16,12 +16,16 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onLastPuzzle: function () {
-    _currentIndex -= 1;
+    if(_currentIndex > 1) {
+      _currentIndex -= 1;
+    }
     this.updateItem();
   },
 
   onNextPuzzle: function () {
-    _currentIndex += 1;
+    if(_currentIndex < 10) {
+      _currentIndex += 1;
+    }
     this.updateItem();
   },
 
