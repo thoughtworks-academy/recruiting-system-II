@@ -1,6 +1,12 @@
 var React = require('react');
+var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 
 var LogicPuzzleAnswerSubmit = React.createClass({
+
+  submitAnswer: function() {
+    LogicPuzzleActions.submitAnswer();
+  },
+
 
   render: function () {
     return (
@@ -13,7 +19,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
               <input type="text" className="form-control" id="result"/>
             </div>
             <div className="col-md-4 col-sm-4 col-xs-4">
-              <button type="text" className="btn btn-danger ">提交</button>
+              <button type="text" className="btn btn-danger" onClick={this.submitAnswer}>提交</button>
             </div>
           </div>
         </div>

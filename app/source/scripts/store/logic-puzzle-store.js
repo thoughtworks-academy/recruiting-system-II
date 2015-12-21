@@ -9,9 +9,13 @@ var LogicPuzzleStore = Reflux.createStore({
     this.updateItem();
   },
 
+  onSubmitAnswer: function(){
+    alert('交了也白交');
+  },
+
   updateItem: function() {
     var that = this;
-    request.get('/answer')
+    request.get('/logic-puzzle')
         .set('Content-Type', 'application/json')
         .end(function (err, res) {
           that.item = res.body;

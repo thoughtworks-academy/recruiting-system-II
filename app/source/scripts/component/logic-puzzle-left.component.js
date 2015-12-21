@@ -9,7 +9,7 @@ var LogicPuzzleChart = require('./logic-puzzle-chart.component');
 var LogicPuzzleDescription = require('./logic-puzzle-description.component');
 var LogicPuzzleAnswerSubmit = require('./logic-puzzle-answer-submit.component');
 
-var LogicPuzzle = React.createClass({
+var LogicPuzzleLeft = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore, 'item')],
 
   getInitialState: function () {
@@ -39,4 +39,4 @@ var LogicPuzzle = React.createClass({
   }
 });
 
-module.exports = LogicPuzzle;
+module.exports = LogicPuzzleLeft;
