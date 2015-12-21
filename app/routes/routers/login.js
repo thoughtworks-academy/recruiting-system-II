@@ -5,10 +5,10 @@ var constant = require('../../tools/back-constant.json');
 
 function checkLoginInfo(account, password) {
   var pass = true;
-  var verifyMobilePhone = /^1[3|4|5|8][0-9]\d{4,8}$/;
+  //var verifyMobilePhone = /^1[3|4|5|8][0-9]\d{4,8}$/;
   var verifyEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 
-  var isValid = verifyMobilePhone.test(account) || verifyEmail.test(account);
+  var isValid =  verifyEmail.test(account);
 
   if (!isValid) {
     pass = false;
