@@ -1,9 +1,8 @@
 var $ = global.jQuery = require('jquery');
-var ReactDom = require("react-dom");
+var ReactDom = require('react-dom');
 
-require("bootstrap");
-var request = require("superagent");
-
+require('bootstrap');
+var request = require('superagent');
 var RegisterApp = require('./component/register-app.component');
 
 ReactDom.render(
@@ -26,9 +25,9 @@ $(function() {
   var passwordSafe = {
     safe: function(val) {
       if (val == '') return 0;
-      var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
-      var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
-      var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+      var strongRegex = new RegExp('^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$', 'g');
+      var mediumRegex = new RegExp('^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$', 'g');
+      var enoughRegex = new RegExp('(?=.{6,}).*', 'g');
       if (enoughRegex.test(val) == false) {
         return 1;
       } else if (strongRegex.test(val)) {
@@ -64,11 +63,11 @@ $(function() {
   $('.toggle').on('click', function() {
     if (!flag) {
       $(this).text('隐藏密码');
-      $('#register-password').attr("type", "text");
+      $('#register-password').attr('type', 'text');
       flag = true;
     } else {
       $(this).text('显示密码');
-      $('#register-password').attr("type", "password");
+      $('#register-password').attr('type', 'password');
       flag = false;
     }
   });
@@ -81,7 +80,7 @@ $(function() {
   });
 
   function jumpToStart() {
-    location.href = "start.html"
+    location.href = 'start.html'
   }
 
   function register() {
@@ -112,14 +111,14 @@ $(function() {
 
   function checkRegisterData (){
 
-    if (!checkbox.prop("checked")) {
+    if (!checkbox.prop('checked')) {
       $('#agree-check').modal('show');
     } else {
       isChecked = true;
     }
   }
 
-  $("#register-btn").on('click', function() {
+  $('#register-btn').on('click', function() {
     checkRegisterData();
     if (isChecked) {
       register();
