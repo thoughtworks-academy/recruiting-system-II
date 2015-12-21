@@ -11,4 +11,4 @@ app.use(express.static('public'));
 route.setRoutes(app);
 app.listen(3000, function() {
   console.log('App listening at http://localhost:3000');
-})
+});

@@ -5,4 +5,4 @@ gulp.task('less', function() {
   gulp.src('./source/less/*.less')
     .pipe(less())
     .pipe(gulp.dest('./public/css'))
-})
+});
