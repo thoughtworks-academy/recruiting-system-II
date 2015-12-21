@@ -1,6 +1,15 @@
 var React = require('react');
+var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 
 var LogicPuzzleSidebar = React.createClass({
+
+  lastPuzzle: function () {
+    LogicPuzzleActions.lastPuzzle();
+  },
+
+  nextPuzzle: function () {
+    LogicPuzzleActions.nextPuzzle();
+  },
 
   render: function () {
     return (
@@ -25,8 +34,8 @@ var LogicPuzzleSidebar = React.createClass({
           </div>
 
           <div className="select">
-            <button type="button" className="btn btn-warning" name="button">上一题</button>
-            <button type="button" className="btn btn-warning" name="button">下一题</button>
+            <button type="button" className="btn btn-warning" name="button" onClick={this.lastPuzzle}>上一题</button>
+            <button type="button" className="btn btn-warning" name="button" onClick={this.nextPuzzle}>下一题</button>
           </div>
           <hr/>
           <div className="confirm">
