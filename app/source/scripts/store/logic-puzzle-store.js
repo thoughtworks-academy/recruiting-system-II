@@ -38,7 +38,17 @@ var LogicPuzzleStore = Reflux.createStore({
         })
         .end(function (err, res) {
           that.item = res.body;
-          that.trigger(res.body);
+          if(_currentIndex === 1) {
+            that.item['isFirstOne'] = true;
+            that.item['isLastOne'] = false;
+          } else if (_currentIndex === 10){
+            that.item['isFirstOne'] = false;
+            that.item['isLastOne'] = true;
+          } else {
+            that.item['isFirstOne'] = false;
+            that.item['isLastOne'] = false;
+          }
+          that.trigger(that.item);
         });
   }
 });

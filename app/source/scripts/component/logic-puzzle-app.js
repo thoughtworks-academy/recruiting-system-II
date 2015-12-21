@@ -15,7 +15,9 @@ var LogicPuzzle = React.createClass({
       item: {
         initializedBox: [],
         chartPath: '',
-        descriptionZh: []
+        descriptionZh: [],
+        isFirstOne: true,
+        isLastOne: false
       }
     };
   },
@@ -36,7 +38,8 @@ var LogicPuzzle = React.createClass({
             </div>
 
             <div className="col-md-3 col-sm-4">
-              <LogicPuzzleSidebar/>
+              <LogicPuzzleSidebar isFirstOne={this.state.item.isFirstOne}
+                                  isLastOne={this.state.item.isLastOne}/>
             </div>
           </div>
         </div>

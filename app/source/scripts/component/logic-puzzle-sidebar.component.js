@@ -34,8 +34,8 @@ var LogicPuzzleSidebar = React.createClass({
           </div>
 
           <div className="select">
-            <button type="button" className="btn btn-warning" name="button" onClick={this.lastPuzzle}>上一题</button>
-            <button type="button" className="btn btn-warning" name="button" onClick={this.nextPuzzle}>下一题</button>
+            <button type="button" className="btn btn-warning" name="button" disabled={this.props.isFirstOne ? 'disabled' : ''} onClick={this.lastPuzzle}>上一题</button>
+            <button type="button" className="btn btn-warning" name="button" disabled={this.props.isLastOne ? 'disabled' : ''} onClick={this.nextPuzzle}>下一题</button>
           </div>
           <hr/>
           <div className="confirm">
