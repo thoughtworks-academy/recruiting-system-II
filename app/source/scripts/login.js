@@ -21,7 +21,8 @@ $(function () {
           password: loginPassword
         })
         .end(function (err, req) {
-          if (req.text.status === 200) {
+          var data = JSON.parse(req.text);
+          if (data.status === 200) {
             jumpToStart();
           } else {
             $('[name=loginFailed]').show();
