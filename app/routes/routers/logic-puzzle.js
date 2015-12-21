@@ -15,18 +15,19 @@ var _logicPuzzleList = [
 ];
 
 router.get('/', function(req, resp) {
-
-  request
-      .get(apiServer+_logicPuzzleList[req.query.orderIndex])
-      .set('Content-Type', 'application/json')
-      .end(function(err, res){
-        resp.send({
-          initializedBox: JSON.parse(res.body.initializedBox),
-          questionZh: res.body.questionZh,
-          descriptionZh: JSON.parse(res.body.descriptionZh),
-          chartPath: res.body.chartPath
+  if(req.query.orderIndex >= 1 &&  req.query.orderIndex <= 10) {
+    request
+        .get(apiServer + _logicPuzzleList[req.query.orderIndex-1])
+        .set('Content-Type', 'application/json')
+        .end(function (err, res) {
+          resp.send({
+            initializedBox: JSON.parse(res.body.initializedBox),
+            questionZh: res.body.questionZh,
+            descriptionZh: JSON.parse(res.body.descriptionZh),
+            chartPath: res.body.chartPath
+          });
         });
-      });
+  }
 });
 
 module.exports = router;
