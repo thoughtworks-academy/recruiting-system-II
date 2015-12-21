@@ -1,7 +1,10 @@
+'use strict';
+
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var route = require('./routes/route');
+global.apiServer = 'http://localhost:8080/api/';
 
 app.use(bodyParser.urlencoded({
   extended: false

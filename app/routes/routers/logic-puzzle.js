@@ -5,7 +5,7 @@ var request = require('superagent');
 router.get('/', function(req, resp) {
 
   request
-      .get('http://localhost:8080/api/logic-puzzle/5')
+      .get(apiServer+'logic-puzzle/5')
       .set('Content-Type', 'application/json')
       .end(function(err, res){
         resp.send({
