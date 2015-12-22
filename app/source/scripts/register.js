@@ -77,10 +77,6 @@ $(function() {
   });
   $('[name=loginFailed]').hide();
 
-  function jumpToStart() {
-    location.href = "start.html"
-  }
-
   $("#login-btn").on('click', function (evt) {
     var phoneEmail = $('[name=phoneEmail]').val();
     var loginPassword = $('[name=loginPassword]').val();
