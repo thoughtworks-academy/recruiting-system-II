@@ -4,6 +4,7 @@ var ReactDom = require('react-dom');
 var RegisterForm = require('./register-form.component');
 var LoginForm = require('./login-form.component');
 var LoginInfo = require('./login-info.component');
+var RegisterAgreement = require('./register-agreement.component');
 
 var RegisterApp = React.createClass({
 
@@ -24,6 +25,7 @@ var RegisterApp = React.createClass({
                 <RegisterForm isLoginState={this.state.isLoginState}/>
                 <LoginForm isLoginState={this.state.isLoginState} />
                 <LoginInfo isLoginState={this.state.isLoginState} onStateChange={this.stateChange} />
+                <RegisterAgreement />
             </div>
         )
     }
