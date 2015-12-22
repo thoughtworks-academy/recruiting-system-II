@@ -33,7 +33,7 @@ router.get('/', function(req, res) {
     })
   } else {
     request
-      .post('http://localhost:8080/api/login')
+      .post(apiServer + 'login')
       .set('Content-Type', "application/json")
       .send({
         email: account,
