@@ -75,8 +75,7 @@ var asyncContainersFunc = {
                 }
                 done({mobilePhoneError: error});
             });
-    },
-    password: function() {}
+    }
 };
 
 function getError(validateInfo, field) {
