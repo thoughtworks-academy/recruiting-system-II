@@ -152,7 +152,7 @@ var RegisterForm = React.createClass({
                                 className={"lose" + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type={(this.state.isShowToggle === 'false' ? "password" : "text")} placeholder="请输入8~16位密码" name="password"
+                            <input className="form-control" type={(this.state.isShowToggle === false ? "password" : "text")} placeholder="请输入8~16位密码" name="password"
                                    id="register-password" onBlur={this.validate} onChange={this.checkPasswordSafe}/>
                             <div
                                 className={"lose" + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
