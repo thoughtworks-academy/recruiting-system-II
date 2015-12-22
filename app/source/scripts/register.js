@@ -16,12 +16,6 @@ $(function() {
     $('.modal .modal-body').css('overflow-y', 'auto').css('max-height', $(window).height() * 0.7);
   });
 
-  function resetPasswordSafe() {
-    $('[name=danger]').removeClass('danger');
-    $('[name=general]').removeClass('general');
-    $('[name=safe]').removeClass('safe');
-  }
-
   var flag = false;
 
   $('.toggle').on('click', function() {
