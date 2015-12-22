@@ -158,9 +158,9 @@ var RegisterForm = React.createClass({
                                 className={"lose" + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
                             </div>
                             <ul className="passport-safely">
-                                <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ""}>弱</li>
-                                <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ""}>中</li>
-                                <li className={this.state.passwordSafeLevel == 3 ? this.state.passwordSafeStyle : ""}>强</li>
+                                <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ""}>弱</li>&nbsp;
+                                <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ""}>中</li>&nbsp;
+                                <li className={this.state.passwordSafeLevel == 3 ? this.state.passwordSafeStyle : ""}>强</li>&nbsp;
                                 <RegisterToggle isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}/>
                             </ul>
                         </div>
