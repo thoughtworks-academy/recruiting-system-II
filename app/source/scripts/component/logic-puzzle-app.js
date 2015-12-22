@@ -39,7 +39,9 @@ var LogicPuzzle = React.createClass({
 
             <div className="col-md-3 col-sm-4">
               <LogicPuzzleSidebar isFirstOne={this.state.item.isFirstOne}
-                                  isLastOne={this.state.item.isLastOne}/>
+                                  isLastOne={this.state.item.isLastOne}
+                                  id={this.state.item.id}
+                                  />
             </div>
           </div>
         </div>

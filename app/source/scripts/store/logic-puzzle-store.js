@@ -4,6 +4,7 @@ var request = require('superagent');
 
 var _currentIndex = 1;
 
+
 var LogicPuzzleStore = Reflux.createStore({
   listenables: [LogicPuzzleActions],
 
@@ -30,25 +31,25 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   updateItem: function() {
-    var that = this;
     request.get('/logic-puzzle')
         .set('Content-Type', 'application/json')
         .query({
           orderIndex: _currentIndex
         })
-        .end(function (err, res) {
-          that.item = res.body;
+        .end((err, res) => {
+          this.item = res.body;
           if(_currentIndex === 1) {
-            that.item['isFirstOne'] = true;
-            that.item['isLastOne'] = false;
+            this.item['isFirstOne'] = true;
+            this.item['isLastOne'] = false;
           } else if (_currentIndex === 10){
-            that.item['isFirstOne'] = false;
-            that.item['isLastOne'] = true;
+            this.item['isFirstOne'] = false;
+            this.item['isLastOne'] = true;
           } else {
-            that.item['isFirstOne'] = false;
-            that.item['isLastOne'] = false;
+            this.item['isFirstOne'] = false;
+            this.item['isLastOne'] = false;
           }
-          that.trigger(that.item);
+          this.item.id = _currentIndex;
+          this.trigger(this.item);
         });
   }
 });

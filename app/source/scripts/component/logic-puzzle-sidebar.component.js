@@ -3,6 +3,12 @@ var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 
 var LogicPuzzleSidebar = React.createClass({
 
+  getInitialState: function () {
+    return {
+      total: 0
+    }
+  },
+
   lastPuzzle: function () {
     LogicPuzzleActions.lastPuzzle();
   },
@@ -29,13 +35,17 @@ var LogicPuzzleSidebar = React.createClass({
             </p>
 
             <p className="finish-rate">
-              当前第1题共10题，已完成x题
+              当前第{this.props.id}题共10题，已完成{this.state.total}题
             </p>
           </div>
 
           <div className="select">
-            <button type="button" className="btn btn-warning" name="button" disabled={this.props.isFirstOne ? 'disabled' : ''} onClick={this.lastPuzzle}>上一题</button>
-            <button type="button" className="btn btn-warning" name="button" disabled={this.props.isLastOne ? 'disabled' : ''} onClick={this.nextPuzzle}>下一题</button>
+            <button type="button" className="btn btn-warning" name="button"
+                    disabled={this.props.isFirstOne ? 'disabled' : ''} onClick={this.lastPuzzle}>上一题
+            </button>
+            <button type="button" className="btn btn-warning" name="button"
+                    disabled={this.props.isLastOne ? 'disabled' : ''} onClick={this.nextPuzzle}>下一题
+            </button>
           </div>
           <hr/>
           <div className="confirm">
