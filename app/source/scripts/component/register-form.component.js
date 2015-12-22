@@ -1,5 +1,6 @@
 var React = global.React = require('react');
 var $ = require('jquery');
+var ReactDOM = require('react-dom');
 var request = require('superagent');
 var validate = require("validate.js");
 var RegisterToggle = require('./register-toggle.component');
@@ -142,6 +143,36 @@ var RegisterForm = React.createClass({
             this.setState({passwordSafeLevel: level});
         },
 
+        register: function(){
+            var registerInfo = [];
+
+            registerInfo.push(
+                ReactDOM.findDOMNode(this.refs.mobilePhone),
+                ReactDOM.findDOMNode(this.refs.email),
+                ReactDOM.findDOMNode(this.refs.password)
+            );
+
+            var last = 2;
+
+            var callback = function(){
+                console.log(this.state);
+            };
+
+            registerInfo.forEach((item, i) => {
+                var value = item.value;
+                var name = item.name;
+                var valObj = {};
+                valObj[name] = value;
+
+                var result = validate(valObj, containers);
+                var error = getError(result, name);
+                var stateObj = {};
+                stateObj[name + 'Error'] = error;
+
+                this.setState(stateObj);
+            });
+        },
+
         render: function () {
 
             var classString = "col-md-7 logon-form-container" + (this.props.isLoginState ? ' hide' : '');
@@ -152,7 +183,7 @@ var RegisterForm = React.createClass({
 
                     <form action="">
                         <div className="form-group">
-                            <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone"
+                            <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
                                    onBlur={this.validate} />
 
                             <div
@@ -160,13 +191,13 @@ var RegisterForm = React.createClass({
                         </div>
 
                         <div className="form-group">
-                            <input className="form-control" type="text" placeholder="请输入邮箱" name="email"
+                            <input className="form-control" type="text" placeholder="请输入邮箱" name="email" ref="email"
                                    onBlur={this.validate}/>
                             <div
                                 className={"lose" + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type={(this.state.isShowToggle === false ? "password" : "text")} placeholder="请输入8~16位密码" name="password"
+                            <input className="form-control" type={(this.state.isShowToggle === false ? "password" : "text")} placeholder="请输入8~16位密码" name="password" ref="password"
                                    id="register-password" onBlur={this.validate} onChange={this.checkPasswordSafe}/>
                             <div
                                 className={"lose" + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
