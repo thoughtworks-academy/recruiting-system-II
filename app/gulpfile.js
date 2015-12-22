@@ -2,8 +2,9 @@ var gulp = require('./gulp')([
   'less',
   'watch-less',
   'watchify',
-  'browserify'
+  'browserify',
+  'livereload'
 ]);
 
 gulp.task('build', ['less', 'browserify']);
-gulp.task('combo',['watch-less', 'watchify']);
+gulp.task('combo',['livereload', 'watch-less', 'watchify']);

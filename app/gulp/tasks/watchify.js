@@ -8,6 +8,7 @@ var uglify = require('gulp-uglify');
 var buffer = require('vinyl-buffer');
 var rename = require('gulp-rename');
 var watchify = require('watchify');
+var livereload = require('gulp-livereload');
 
 gulp.task('watchify', function(done) {
   glob('./source/scripts/*.js', function(err, files) {
