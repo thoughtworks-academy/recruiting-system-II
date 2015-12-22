@@ -45,7 +45,22 @@ var containers = {
 };
 
 var asyncContainersFunc = {
-    email: function() {},
+    email: function(value, done) {
+        return request
+            .get('/register/validate-email')
+            .set('Content-Type', 'application/json')
+            .query({
+                email: value
+            })
+            .end((err, req) => {
+                var error = '';
+                if (req.body.status === 200) {
+                    error = '该邮箱已被注册';
+                }
+                done ({emailError: error})
+            })
+    },
+
     mobilePhone: function (value, done) {
         return request
             .get('/register/validate-mobile-phone')
@@ -54,7 +69,7 @@ var asyncContainersFunc = {
                 mobilePhone: value
             })
             .end((err, req) => {
-                var error = "";
+                var error = '';
                 if (req.body.status === 200) {
                     error = '该手机号已被注册';
                 }
