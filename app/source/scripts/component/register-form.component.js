@@ -3,56 +3,22 @@ var $ = require('jquery');
 var request = require('superagent');
 var validate = require("validate.js");
 
-$(function(){
-    function resetPasswordSafe() {
-        $('[name=danger]').removeClass('danger');
-        $('[name=general]').removeClass('general');
-        $('[name=safe]').removeClass('safe');
+function passwordSafe(val){
+    if (val == '') return 0;
+    var strongRegex = new RegExp('^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$', 'g');
+    var mediumRegex = new RegExp('^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$', 'g');
+    var enoughRegex = new RegExp('(?=.{6,}).*', 'g');
+    if (enoughRegex.test(val) == false) {
+        return 1;
+    } else if (strongRegex.test(val)) {
+        return 3;
+    } else if (mediumRegex.test(val)) {
+        return 2;
+    } else {
+        return 1;
     }
-
-    var passwordSafe = {
-        safe: function(val) {
-            if (val == '') return 0;
-            var strongRegex = new RegExp('^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$', 'g');
-            var mediumRegex = new RegExp('^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$', 'g');
-            var enoughRegex = new RegExp('(?=.{6,}).*', 'g');
-            if (enoughRegex.test(val) == false) {
-                return 1;
-            } else if (strongRegex.test(val)) {
-                return 3;
-            } else if (mediumRegex.test(val)) {
-                return 2;
-            } else {
-                return 1;
-            }
-            return false;
-        },
-        state: function($elem, level, stateclass) {
-            resetPasswordSafe();
-
-            switch (level) {
-                case 1:
-                    $('[name=danger]').addClass('danger');
-                    break;
-                case 2:
-                    $('[name=general]').addClass('general');
-                    break;
-                case 3:
-                    $('[name=safe]').addClass('safe');
-                    break;
-                case 0:
-                    break;
-            }
-        }
-    };
-
-    $('#register-password').bind('keyup', function() {
-        var val = $(this).val();
-        var level = passwordSafe.safe(val);
-
-        passwordSafe.state($('.passport-safely'), level, ['safely-danger', 'safely-general', 'safely-safe']);
-    });
-});
+    return false;
+}
 
 var containers = {
     email: {
@@ -109,7 +75,9 @@ var RegisterForm = React.createClass({
             return {
                 mobilePhoneError: '',
                 emailError: '',
-                passwordError: ''
+                passwordError: '',
+                passwordSafeLevel: '',
+                passwordSafeStyle: ''
             }
         },
 
@@ -132,6 +100,24 @@ var RegisterForm = React.createClass({
                     this.setState(stateObj);
                 })
             }
+        },
+
+        checkPasswordSafe: function(event){
+            var level = passwordSafe(event.target.value);
+            switch (level) {
+                case 1:
+                    this.setState({passwordSafeStyle: 'danger'});
+                    break;
+                case 2:
+                    this.setState({passwordSafeStyle: 'general'});
+                    break;
+                case 3:
+                    this.setState({passwordSafeStyle: 'safe'});
+                    break;
+                case 0:
+                    break;
+            }
+            this.setState({passwordSafeLevel: level});
         },
 
         render: function () {
@@ -159,14 +145,14 @@ var RegisterForm = React.createClass({
                         </div>
                         <div className="form-group">
                             <input className="form-control" type="password" placeholder="请输入8~16位密码" name="password"
-                                   id="register-password" onBlur={this.validate}/>
+                                   id="register-password" onBlur={this.validate} onChange={this.checkPasswordSafe}/>
                             <div
                                 className={"lose" + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
                             </div>
                             <ul className="passport-safely">
-                                <li name="danger">弱</li>
-                                <li name="general">中</li>
-                                <li name="safe">强</li>
+                                <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ""}>弱</li>
+                                <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ""}>中</li>
+                                <li className={this.state.passwordSafeLevel == 3 ? this.state.passwordSafeStyle : ""}>强</li>
                                 <li className="toggle">显示密码</li>
                             </ul>
                         </div>
