@@ -7,7 +7,3 @@ subprojects {
       jcenter()
   }
 }
-
-project(':api') {
-  apply plugin: 'idea'
-}
