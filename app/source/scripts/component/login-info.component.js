@@ -19,10 +19,10 @@ var LoginInfo = React.createClass({
                 <div className="third-party">
                     <div className="title">合作方账号登录</div>
                     <ul className="third-party-entry">
-                        <li className="qq"><a href="#"></a></li>
-                        <li className="weibo"><a href="#"></a></li>
-                        <li className="weixin"><a href="#"></a></li>
-                        <li className="other"><a href="#"></a></li>
+                        <li className="qq"><a href="#"></a></li>&nbsp;
+                        <li className="weibo"><a href="#"></a></li>&nbsp;
+                        <li className="weixin"><a href="#"></a></li>&nbsp;
+                        <li className="other"><a href="#"></a></li>&nbsp;
                     </ul>
                 </div>
             </div>
