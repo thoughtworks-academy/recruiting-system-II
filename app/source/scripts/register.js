@@ -16,19 +16,6 @@ $(function() {
     $('.modal .modal-body').css('overflow-y', 'auto').css('max-height', $(window).height() * 0.7);
   });
 
-  var flag = false;
-
-  $('.toggle').on('click', function() {
-    if (!flag) {
-      $(this).text('隐藏密码');
-      $('#register-password').attr('type', 'text');
-      flag = true;
-    } else {
-      $(this).text('显示密码');
-      $('#register-password').attr('type', 'password');
-      flag = false;
-    }
-  });
 
   function jumpToStart() {
     location.href = 'start.html'
