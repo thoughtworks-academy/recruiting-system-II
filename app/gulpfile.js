@@ -1,11 +1,8 @@
 var gulp = require('./gulp')([
-  'connect',
-  'html',
   'less',
   'watch-less',
   'watchify',
-  'watch',
-  'browserify',
+  'browserify'
 ]);
 
 gulp.task('build', ['less', 'browserify']);
