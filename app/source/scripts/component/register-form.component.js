@@ -2,6 +2,8 @@ var React = global.React = require('react');
 var $ = require('jquery');
 var request = require('superagent');
 var validate = require("validate.js");
+var RegisterToggle = require('./register-toggle.component');
+
 
 function passwordSafe(val){
     if (val == '') return 0;
@@ -77,8 +79,14 @@ var RegisterForm = React.createClass({
                 emailError: '',
                 passwordError: '',
                 passwordSafeLevel: '',
-                passwordSafeStyle: ''
+                passwordSafeStyle: '',
+                isShowToggle: false
             }
+        },
+
+        stateChange: function() {
+            var newState = !this.state.isShowToggle;
+            this.setState({isShowToggle: newState});
         },
 
         validate: function (event) {
@@ -144,7 +152,7 @@ var RegisterForm = React.createClass({
                                 className={"lose" + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type="password" placeholder="请输入8~16位密码" name="password"
+                            <input className="form-control" type={(this.state.isShowToggle === 'false' ? "password" : "text")} placeholder="请输入8~16位密码" name="password"
                                    id="register-password" onBlur={this.validate} onChange={this.checkPasswordSafe}/>
                             <div
                                 className={"lose" + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
@@ -153,7 +161,7 @@ var RegisterForm = React.createClass({
                                 <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ""}>弱</li>
                                 <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ""}>中</li>
                                 <li className={this.state.passwordSafeLevel == 3 ? this.state.passwordSafeStyle : ""}>强</li>
-                                <li className="toggle">显示密码</li>
+                                <RegisterToggle isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}/>
                             </ul>
                         </div>
 
