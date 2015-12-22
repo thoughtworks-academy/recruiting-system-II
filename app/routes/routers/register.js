@@ -5,11 +5,12 @@ var constant = require('../../tools/back-constant.json')
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
+
   if (registerInfo.mobilePhone.length !== constant.MOBILE_PHONE_LENGTH) {
     pass = false;
   }
-
   var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+
   if (!reg.test(registerInfo.email)) {
     pass = false;
   }
@@ -25,7 +26,7 @@ router.post('/', function(req, res) {
 
   if (checkRegisterInfo(registerInfo)) {
     request
-      .post('http://localhost:8080/api/register')
+      .post(apiServer + 'register')
       .set('Content-Type', 'application/json')
       .send(registerInfo)
       .end(function(err, result) {
@@ -61,7 +62,6 @@ router.get('/validate-mobile-phone', function(req, res) {
       }
     });
 });
-
 
 router.get('/validate-email', function(req, res) {
   request.get('http://localhost:8080/api/user')
