@@ -32,16 +32,13 @@ var LogicPuzzle = React.createClass({
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-9 col-sm-8 ">
-              <LogicPuzzleLeft boxes={this.state.item.initializedBox}
-                               chartPath={this.state.item.chartPath}
-                               description={this.state.item.descriptionZh}/>
+              <LogicPuzzleLeft item = {this.state.item}/>
             </div>
 
             <div className="col-md-3 col-sm-4">
               <LogicPuzzleSidebar isFirstOne={this.state.item.isFirstOne}
                                   isLastOne={this.state.item.isLastOne}
-                                  id={this.state.item.id}
-                                  />
+                                  id={this.state.item.id}/>
             </div>
           </div>
         </div>

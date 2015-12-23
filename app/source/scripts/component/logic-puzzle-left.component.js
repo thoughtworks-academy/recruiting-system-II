@@ -10,9 +10,9 @@ var LogicPuzzleLeft = React.createClass({
   render: function () {
     return (
         <div id="logic-puzzle">
-          <LogicPuzzleBoxes boxes={this.props.boxes}/>
-          <LogicPuzzleChart chartPath={this.props.chartPath}/>
-          <LogicPuzzleDescription description={this.props.description}/>
+          <LogicPuzzleBoxes boxes={this.props.item.boxes}/>
+          <LogicPuzzleChart chartPath={this.props.item.chartPath}/>
+          <LogicPuzzleDescription description={this.props.item.description}/>
           <LogicPuzzleAnswerSubmit />
 
         </div>
