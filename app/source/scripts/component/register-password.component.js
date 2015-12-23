@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDom = require('react-dom');
-var RegisterToggle = require('./register-toggle.component');
 var validate = require("validate.js");
 
 function passwordSafe(val){
@@ -49,9 +48,8 @@ var RegisterPassword = React.createClass({
     }
   },
 
-  stateChange: function() {
-    var newState = !this.state.isShowToggle;
-    this.setState({isShowToggle: newState});
+  toggleState: function() {
+    this.props.onStateChange();
   },
 
   validate: function (event) {
@@ -91,7 +89,7 @@ var RegisterPassword = React.createClass({
   render: function () {
     return (
         <div>
-          <input className="form-control" type={(this.state.isShowToggle === false ? "password" : "text")} placeholder="请输入8~16位密码" name="password" ref="password"
+          <input className="form-control" type={(this.props.isShowToggle === false ? "password" : "text")} placeholder="请输入8~16位密码" name="password" ref="password"
                  id="register-password" onBlur={this.validate} onChange={this.checkPasswordSafe}/>
           <div
               className={"lose" + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
@@ -100,7 +98,8 @@ var RegisterPassword = React.createClass({
             <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ""}>弱</li>&nbsp;
             <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ""}>中</li>&nbsp;
             <li className={this.state.passwordSafeLevel == 3 ? this.state.passwordSafeStyle : ""}>强</li>&nbsp;
-            <RegisterToggle isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}/>
+            <li className="toggle" onClick={this.toggleState} isShowToggle={this.props.isShowToggle} onStateChange={this.stateChange}>
+              {this.props.isShowToggle ? '隐藏密码' : '显示密码'}</li>
           </ul>
         </div>
     )
