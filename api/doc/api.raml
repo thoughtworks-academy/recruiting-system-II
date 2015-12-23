@@ -135,10 +135,9 @@ schemas:
           sections: object[]
             desc: string
               description: Markdown String to discribe what happen in the future
-            homeworkQuizzes: object[]
+            quizzes: object[]
               id: integer
-            blankQuizzes: object[]
-              id: integer
+              quizType: string
     response:
       201:
         body:
@@ -149,19 +148,17 @@ schemas:
       description: 获取一份考卷定义的细节，含section的细节
       response:
         200:
-          200:
-            body:
-              application/json:
-                sections: object[]
-                  id: integer
-                  desc: string
-                    description: Markdown String to discribe what happen in the future
-                  homeworkQuizzes: object[]
-                    uri: string
-                  blankQuizzes: object[]
-                    uri: string
-                maker:
+          body:
+            description: quizzes的顺序是有含义的，所以不能乱序
+            application/json:
+              sections: object[]
+                id: integer
+                desc: string
+                  description: Markdown String to discribe what happen in the future
+                quizzes: object[]
                   uri: string
+              maker:
+                uri: string
 /blankQuizzes:
   get:
     description: 获得所有的填空题定义
@@ -178,8 +175,18 @@ schemas:
           hardCount: integer
           normalCount: integer
           easyCount: integer
-          
-      
+  /{blankQuizId}/items
+    get:
+      response:
+        200:
+          type: object[]
+            quizItem:
+              id: integer
+            info:
+              picPath: string
+              description: string
+              # 根据前台需要的数据把剩下的补完，不能有正确答案
+            
 /quizItems:
   get:
     description: 获取所有的题目项定义
