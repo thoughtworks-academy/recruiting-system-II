@@ -70,8 +70,14 @@ var RegisterForm = React.createClass({
             return {
                 mobilePhoneError: '',
                 emailError: '',
-                agree: false
+                agree: false,
+                isShowToggle: false
             }
+        },
+
+        stateChange: function() {
+            var newState = !this.state.isShowToggle;
+            this.setState({isShowToggle: newState});
         },
 
         validate: function (event) {
@@ -184,7 +190,7 @@ var RegisterForm = React.createClass({
                         </div>
 
                         <div className="form-group">
-                            <RegisterPassword />
+                            <RegisterPassword isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}/>
                         </div>
 
                         <div className="checkbox">
