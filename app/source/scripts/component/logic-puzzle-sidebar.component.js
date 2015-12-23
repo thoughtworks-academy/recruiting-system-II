@@ -35,7 +35,7 @@ var LogicPuzzleSidebar = React.createClass({
             </p>
 
             <p className="finish-rate">
-              当前第{this.props.id}题共10题，已完成{this.state.total}题
+              当前第{this.props.index}题共10题，已完成{this.state.total}题
             </p>
           </div>
 

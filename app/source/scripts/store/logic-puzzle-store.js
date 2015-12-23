@@ -13,12 +13,14 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onSubmitAnswer: function(userPuzzle){
-     request.post('/user-puzzle')
-         .set('Content-Type', 'application/json')
-         .send(userPuzzle)
-         .end(function(err,res){
-           console.log(res.text);
-         });
+    userPuzzle.puzzle.userPuzzleIndex = this.item.index
+    userPuzzle.puzzle.puzzleId = this.item.id;
+    request.post('/user-puzzle')
+        .set('Content-Type', 'application/json')
+        .send(userPuzzle)
+        .end(function(err,res){
+        console.log(res.text);
+        });
   },
 
   onLastPuzzle: function () {
@@ -58,7 +60,7 @@ var LogicPuzzleStore = Reflux.createStore({
             this.item['isFirstOne'] = false;
             this.item['isLastOne'] = false;
           }
-          this.item.id = _currentIndex;
+          this.item.index = _currentIndex;
           this.trigger(this.item);
         });
   }

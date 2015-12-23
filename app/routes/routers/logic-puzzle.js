@@ -21,7 +21,8 @@ router.get('/', function(req, resp) {
         .set('Content-Type', 'application/json')
         .end(function (err, res) {
           resp.send({
-            id: 1,
+            id: res.body.id,
+            index: 1,
             initializedBox: JSON.parse(res.body.initializedBox),
             questionZh: res.body.questionZh,
             descriptionZh: JSON.parse(res.body.descriptionZh),
