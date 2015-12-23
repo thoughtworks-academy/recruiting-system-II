@@ -5,7 +5,6 @@ var db = require('../../utils/db-connection');
 var UserPuzzle = require('../../models/user-puzzle');
 
 router.post('/', function (req, res) {
-  console.log(req.body);
   var newUser = new UserPuzzle({
     userId: req.body.userId,
     puzzle: {
@@ -20,13 +19,7 @@ router.post('/', function (req, res) {
       res.send(err);
       return console.error(err);
     }
-    db.close(function(err){
-      if(err){
-        res.send(err);
-        return console.error(err);
-      }
-      res.send('success');
-    });
+    res.send('success');
   });
 });
 
