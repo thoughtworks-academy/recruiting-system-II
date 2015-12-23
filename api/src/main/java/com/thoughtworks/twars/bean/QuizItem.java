@@ -1,6 +1,6 @@
 package com.thoughtworks.twars.bean;
 
-public class LogicPuzzle {
+public class QuizItem {
     private int id;
     private String initializedBox;
     private String stepsString;
@@ -13,6 +13,12 @@ public class LogicPuzzle {
     private String description;
     private String descriptionZh;
     private String chartPath;
+
+    public String getInfoPath() {
+        return infoPath;
+    }
+
+    private String infoPath;
 
     public int getId() {
         return id;
@@ -44,10 +50,6 @@ public class LogicPuzzle {
 
     public int getMaxUpdateTimes() {
         return maxUpdateTimes;
-    }
-
-    public int getAnswer() {
-        return answer;
     }
 
     public String getDescription() {
