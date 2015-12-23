@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
-var constant = require('../../tools/back-constant.json')
+var constant = require('../../tools/back-constant.json');
+var Promise = this.Promise || require('promise');
+var agent = require('superagent-promise')(require('superagent'), Promise);
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
@@ -23,18 +25,55 @@ function checkRegisterInfo(registerInfo) {
 
 router.post('/', function(req, res) {
   var registerInfo = req.body;
+  var result = {};
+  result.data = {};
 
   if (checkRegisterInfo(registerInfo)) {
-    request
-      .post(apiServer + 'register')
+    agent('GET', appServer + 'register/validate-mobile-phone')
+
       .set('Content-Type', 'application/json')
-      .send(registerInfo)
-      .end(function(err, result) {
-        res.send({
-          status: result.status,
-          message: constant.REGISTER_SUCCESS
-        });
+      .query({
+        mobilePhone: registerInfo.mobilePhone
+      })
+      .end()
+      .then(function onResult(response) {
+        result.data.mobilePhoneStatus = response.body.status;
+
+        return agent('GET', appServer + 'register/validate-email')
+          .set('Content-Type', 'application/json')
+          .query({
+            email: registerInfo.email
+          }).end()
+
+      .then(function onResult(response) {
+
+        result.data.emailStatus = response.body.status;
+        if (result.data.mobilePhoneStatus === constant.SUCCESSFUL_STATUS || result.data.emailStatus === constant.SUCCESSFUL_STATUS) {
+          res.send({
+            status: constant.FAILING_STATUS,
+            data: result.data,
+            message: constant.REGISTER_FAILED
+          })
+        } else {
+          request
+            .post(apiServer + 'register')
+            .set('Content-Type', 'application/json')
+            .send(registerInfo)
+            .end(function (err, result) {
+              res.send({
+                status: result.status,
+                message: constant.REGISTER_SUCCESS
+              });
+            });
+        }
+
+      }, function onError(err) {
+        console.log(err)
       });
+
+    }, function onError(err) {
+      console.log(err)
+    });
   } else {
     res.send({
       message: constant.REGISTER_FAILED,

@@ -137,8 +137,11 @@ var RegisterForm = React.createClass({
         },
 
         register: function(){
-            var registerData = [];
+            if(this.state.mobilePhoneError !== '' || this.state.emailError !== ''){
+                return false
+            }
 
+            var registerData = [];
             var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone);
             var email = ReactDOM.findDOMNode(this.refs.email);
             var password = document.getElementById('register-password');
@@ -148,18 +151,24 @@ var RegisterForm = React.createClass({
             if (!this.checkRegisterData(registerData)) {
                 return false;
             }else {
+                $('#registration').modal('show');
+
                 request.post('/register').set('Content-Type', 'application/json').send({
                     mobilePhone: mobilePhone.value,
                     email: email.value,
                     password: password.value
 
-                }).end(function (err, req) {
-                    var data = JSON.parse(req.text);
-                    $('#register-info').text(data.message);
-                    if (data.status === 200) {
-                        $('#registration').modal('show');
+                }).end((err, req) => {
+                    var info = req.body;
+                    $('#register-info').text(info.message);
+
+                    if (info.status === 200) {
                         window.setTimeout(jumpToStart, 5000);
                     } else {
+                        var emailExist = info.data.emailStatus === 200 ? '该邮箱已被注册' : '';
+                        var mobilePhoneExist = info.data.mobilePhoneStatus === 200 ? '该手机号已被注册' : '';
+                        this.setState({mobilePhoneError: mobilePhoneExist,
+                                       emailError: emailExist});
                     }
                 });
             }
