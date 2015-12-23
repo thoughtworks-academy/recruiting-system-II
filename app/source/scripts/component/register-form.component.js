@@ -60,12 +60,17 @@ function getError(validateInfo, field) {
     return ""
 }
 
+function jumpToStart() {
+    location.href = 'start.html'
+}
+
 var RegisterForm = React.createClass({
 
         getInitialState: function () {
             return {
                 mobilePhoneError: '',
-                emailError: ''
+                emailError: '',
+                agree: false
             }
         },
 
@@ -90,34 +95,68 @@ var RegisterForm = React.createClass({
             }
         },
 
-        register: function(){
-            var registerInfo = [];
+        changeAgreeState: function () {
+            var newState = !this.state.agree;
+            this.setState({agree: newState});
+        },
 
-            registerInfo.push(
-                ReactDOM.findDOMNode(this.refs.mobilePhone),
-                ReactDOM.findDOMNode(this.refs.email),
-                ReactDOM.findDOMNode(this.refs.password)
-            );
+        checkRegisterData: function(registerInfo){
+            var passCheck = true;
 
-            var last = 2;
+            if (this.state.agree === false) {
+                $('#agree-check').modal('show');
+                passCheck = false;
+            }
 
-            var callback = function(){
-                console.log(this.state);
-            };
-
+            var stateObj = {};
             registerInfo.forEach((item, i) => {
+                var valObj = {};
+
                 var value = item.value;
                 var name = item.name;
-                var valObj = {};
+
                 valObj[name] = value;
-
                 var result = validate(valObj, containers);
-                var error = getError(result, name);
-                var stateObj = {};
-                stateObj[name + 'Error'] = error;
 
+                var error = getError(result, name);
+                if (error !== '') {
+                    passCheck = false;
+                }
+
+                stateObj[name + 'Error'] = error;
                 this.setState(stateObj);
             });
+
+            return passCheck;
+        },
+
+        register: function(){
+            var registerData = [];
+
+            var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone);
+            var email = ReactDOM.findDOMNode(this.refs.email);
+            var password = document.getElementById('register-password');
+
+            registerData.push(mobilePhone, email, password);
+
+            if (!this.checkRegisterData(registerData)) {
+                return false;
+            }else {
+                request.post('/register').set('Content-Type', 'application/json').send({
+                    mobilePhone: mobilePhone.value,
+                    email: email.value,
+                    password: password.value
+
+                }).end(function (err, req) {
+                    var data = JSON.parse(req.text);
+                    $('#register-info').text(data.message);
+                    if (data.status === 200) {
+                        $('#registration').modal('show');
+                        window.setTimeout(jumpToStart, 5000);
+                    } else {
+                    }
+                });
+            }
         },
 
         render: function () {
@@ -150,13 +189,13 @@ var RegisterForm = React.createClass({
 
                         <div className="checkbox">
                             <label>
-                                <input type="checkbox" className="agree-check"/> 同意
+                                <input type="checkbox" className="agree-check" onClick={this.changeAgreeState}/> 同意
                             </label>
                             <a id="agreement" data-toggle="modal" data-target="#agreementModal">协议</a>
                         </div>
 
 
-                        <button type="button" id="register-btn" className="btn btn-lg btn-block btn-primary">注册</button>
+                        <button type="button" id="register-btn" className="btn btn-lg btn-block btn-primary" onClick={this.register}>注册</button>
                     </form>
                 </div>
             )
