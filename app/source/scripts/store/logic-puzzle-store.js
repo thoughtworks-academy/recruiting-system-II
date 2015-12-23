@@ -12,8 +12,8 @@ var LogicPuzzleStore = Reflux.createStore({
     this.updateItem();
   },
 
-  onSubmitAnswer: function(){
-    alert('交了也白交');
+  onSubmitAnswer: function(userPuzzle){
+     alert(userPuzzle.puzzle.answer);
   },
 
   onLastPuzzle: function () {
@@ -29,6 +29,7 @@ var LogicPuzzleStore = Reflux.createStore({
     }
     this.updateItem();
   },
+
 
   updateItem: function() {
     request.get('/logic-puzzle')
@@ -52,6 +53,7 @@ var LogicPuzzleStore = Reflux.createStore({
           this.trigger(this.item);
         });
   }
+
 });
 
 module.exports = LogicPuzzleStore;
