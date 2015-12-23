@@ -13,7 +13,7 @@ var containers = {
     mobilePhone: {
         presence: {message: '^请输入手机号'},
         format: {
-            pattern: /^1[3|4|5|8][0-9]\d{8}$/,
+            pattern: /^1[3|4|5|7|8][0-9]\d{8}$/,
             message: '^请输入合法手机号'
         }
     },
