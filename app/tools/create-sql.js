@@ -15,9 +15,10 @@ glob('../public/logic-puzzle/*.json', function(err, files) {
       data.answer,
       JSON.stringify(data.desc),
       JSON.stringify(data.desc_zh),
-      'logic-puzzle/' + /(\d+)\.json$/.exec(file)[1] + '.png'
+      'logic-puzzle/' + /(\d+)\.json$/.exec(file)[1] + '.png',
+      'logic-puzzle/' + /(\d+)\.json$/.exec(file)[1] + '.json'
     ].join('\', \'');
-    return "INSERT INTO logicPuzzle VALUES(null, '"+values+"');";
+    return "INSERT INTO quizItem VALUES(null, '"+values+"');";
   }).join('\n');
 
   console.log(result);
