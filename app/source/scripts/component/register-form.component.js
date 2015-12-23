@@ -16,6 +16,14 @@ var containers = {
             pattern: /^1[3|4|5|8][0-9]\d{8}$/,
             message: '^请输入合法手机号'
         }
+    },
+    password: {
+        presence: {message: '^请输入密码'},
+        length: {
+            minimum: 8,
+            maximum: 16,
+            message: '^请输入合法密码'
+        }
     }
 };
 
@@ -70,6 +78,7 @@ var RegisterForm = React.createClass({
             return {
                 mobilePhoneError: '',
                 emailError: '',
+                passwordError: '',
                 agree: false,
                 isShowToggle: false
             }
@@ -199,7 +208,8 @@ var RegisterForm = React.createClass({
                         </div>
 
                         <div className="form-group">
-                            <RegisterPassword isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}/>
+                            <RegisterPassword isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}
+                                              passwordError={this.state.passwordError} onBlur={this.validate}/>
                         </div>
 
                         <div className="checkbox">
