@@ -4,18 +4,35 @@ var request = require('superagent');
 var constant = require('../../tools/back-constant.json');
 var Promise = this.Promise || require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
+var validate = require("validate.js");
+
+var containers = {
+  email: {
+    presence: {message: "^请输入邮箱"},
+    email: {message: "^请输入正确邮箱"}
+  },
+  mobilePhone: {
+    presence: {message: '^请输入手机号'},
+    format: {
+      pattern: /^1[3|4|5|8][0-9]\d{8}$/,
+      message: '^请输入合法手机号'
+    }
+  }
+};
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
 
-  if (registerInfo.mobilePhone.length !== constant.MOBILE_PHONE_LENGTH) {
-    pass = false;
-  }
-  var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+  var valObj = {};
+  valObj.email = registerInfo.email;
+  valObj.mobilePhone = registerInfo.mobilePhone;
 
-  if (!reg.test(registerInfo.email)) {
+  var result = validate(valObj, containers);
+
+  if (result !== undefined){
     pass = false;
   }
+
   if (registerInfo.password.length < constant.PASSWORD_MIN_LENGTH ||
       registerInfo.password.length > constant.PASSWORD_MAX_LENGTH) {
         pass = false;
@@ -29,6 +46,8 @@ router.post('/', function(req, res) {
   result.data = {};
 
   if (checkRegisterInfo(registerInfo)) {
+    var message = '';
+
     agent('GET', appServer + 'register/validate-mobile-phone')
 
       .set('Content-Type', 'application/json')
@@ -38,6 +57,7 @@ router.post('/', function(req, res) {
       .end()
       .then(function onResult(response) {
         result.data.mobilePhoneStatus = response.body.status;
+        message = response.body.status === constant.SUCCESSFUL_STATUS ? constant.MOBILE_PHONE : '';
 
         return agent('GET', appServer + 'register/validate-email')
           .set('Content-Type', 'application/json')
@@ -46,13 +66,14 @@ router.post('/', function(req, res) {
           }).end()
 
       .then(function onResult(response) {
-
         result.data.emailStatus = response.body.status;
-        if (result.data.mobilePhoneStatus === constant.SUCCESSFUL_STATUS || result.data.emailStatus === constant.SUCCESSFUL_STATUS) {
+        message += response.body.status === constant.SUCCESSFUL_STATUS ? constant.EMAIL : '';
+
+        if (message !== '') {
           res.send({
             status: constant.FAILING_STATUS,
             data: result.data,
-            message: constant.REGISTER_FAILED
+            message: message + constant.EXIST
           })
         } else {
           request
