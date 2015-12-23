@@ -5,12 +5,13 @@ var db = require('../../utils/db-connection');
 var UserPuzzle = require('../../models/user-puzzle');
 
 router.post('/', function (req, res) {
+  console.log(req.body);
   var newUser = new UserPuzzle({
     userId: req.body.userId,
     puzzle: {
-      puzzleId: req.body.puzzleId,
-      userPuzzleIndex: req.body.userPuzzleIndex,
-      userAnswer: req.body.userAnswer
+      puzzleId: req.body.puzzle.puzzleId,
+      userPuzzleIndex: req.body.puzzle.userPuzzleIndex,
+      userAnswer: req.body.puzzle.userAnswer
     }
   });
 
