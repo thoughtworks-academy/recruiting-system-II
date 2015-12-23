@@ -2,16 +2,16 @@ var express = require('express');
 var router = express.Router();
 var request = require('superagent');
 var _logicPuzzleList = [
-  'logic-puzzle/1',
-  'logic-puzzle/5',
-  'logic-puzzle/8',
-  'logic-puzzle/14',
-  'logic-puzzle/26',
-  'logic-puzzle/33',
-  'logic-puzzle/36',
-  'logic-puzzle/41',
-  'logic-puzzle/47',
-  'logic-puzzle/49'
+  'quizItems/1',
+  'quizItems/5',
+  'quizItems/8',
+  'quizItems/14',
+  'quizItems/26',
+  'quizItems/33',
+  'quizItems/36',
+  'quizItems/41',
+  'quizItems/47',
+  'quizItems/49'
 ];
 
 router.get('/', function(req, resp) {
