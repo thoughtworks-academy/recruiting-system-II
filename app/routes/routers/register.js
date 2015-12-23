@@ -44,7 +44,7 @@ router.post('/', function(req, res) {
 });
 
 router.get('/validate-mobile-phone', function(req, res) {
-  request.get('http://localhost:8080/api/user')
+  request.get(apiServer + 'user')
     .set('Content-Type', 'application/json')
     .query({
       field: 'mobilePhone',
@@ -64,7 +64,7 @@ router.get('/validate-mobile-phone', function(req, res) {
 });
 
 router.get('/validate-email', function(req, res) {
-  request.get('http://localhost:8080/api/user')
+  request.get(apiServer + 'user')
       .set('Content-Type', 'application/json')
       .query({
         field: 'email',
