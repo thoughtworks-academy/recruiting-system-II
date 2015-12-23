@@ -33,7 +33,8 @@ var LoginForm = React.createClass({
   getInitialState: function () {
     return {
       phoneEmailError: '',
-      loginPasswordError: ''
+      loginPasswordError: '',
+      loginFailed: false
     }
   },
 
@@ -62,12 +63,13 @@ var LoginForm = React.createClass({
           account: phoneEmail,
           password: loginPassword
         })
-        .end(function (err, req) {
+        .end((err, req) => {
           var data = JSON.parse(req.text);
           if (data.status === 200) {
+            this.setState({loginFailed : false});
             jumpToStart();
           } else {
-            $('[name=loginFailed]').show();
+            this.setState({loginFailed : true});
           }
         })
   },
@@ -79,7 +81,7 @@ var LoginForm = React.createClass({
     return (
         <div id="logon" className={classString}>
           <h4 className="welcome">欢迎登陆思沃学院</h4>
-          <div className="lose" name="loginFailed">用户名或密码错误</div>
+          <div className={"lose" + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
           <form action="">
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱" name="phoneEmail" onBlur={this.validate}

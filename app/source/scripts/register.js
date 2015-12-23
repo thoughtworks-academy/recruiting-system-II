@@ -14,6 +14,4 @@ $(function() {
   $('#agreementModal').on('show.bs.modal', function() {
     $('.modal .modal-body').css('overflow-y', 'auto').css('max-height', $(window).height() * 0.7);
   });
-
-  $('[name=loginFailed]').hide();
 });
