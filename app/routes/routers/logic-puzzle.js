@@ -28,6 +28,8 @@ router.get('/', function(req, resp) {
             chartPath: res.body.chartPath
           });
         });
+  }else {
+    resp.send({isOutRange: true });
   }
 });
 

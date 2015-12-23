@@ -38,6 +38,10 @@ var LogicPuzzleStore = Reflux.createStore({
           orderIndex: _currentIndex
         })
         .end((err, res) => {
+          if(res.body.isOutRange === true){
+              alert('outRange');
+              return ;
+          }
           this.item = res.body;
           if(_currentIndex === 1) {
             this.item['isFirstOne'] = true;
