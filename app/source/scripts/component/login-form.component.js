@@ -1,7 +1,6 @@
 var React = global.React = require('react');
 var validate = require('validate.js');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
 var request = require('superagent');
 
 var containers = {
