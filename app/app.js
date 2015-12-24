@@ -17,11 +17,11 @@ app.use(bodyParser.json());
 
 var compile = webpack(require("./webpack.config"));
 
-app.use(webpackDevMiddleware(compile, {
-  stats: {
-    colors: true
-  }
-}));
+//app.use(webpackDevMiddleware(compile, {
+//  stats: {
+//    colors: true
+//  }
+//}));
 
 app.use(express.static('public'));
 
