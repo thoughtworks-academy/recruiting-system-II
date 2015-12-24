@@ -13,7 +13,7 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onSubmitAnswer: function(userPuzzle){
-    userPuzzle.puzzle.userPuzzleIndex = this.item.index
+    userPuzzle.puzzle.userPuzzleIndex = this.item.index;
     userPuzzle.puzzle.puzzleId = this.item.id;
     request.post('/user-puzzle')
         .set('Content-Type', 'application/json')
