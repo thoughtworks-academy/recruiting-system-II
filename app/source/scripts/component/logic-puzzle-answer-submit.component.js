@@ -21,6 +21,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
     if(answer !== ''){
       this.userPuzzle.puzzle.userAnswer = parseInt(answer);
       LogicPuzzleActions.submitAnswer(this.userPuzzle);
+      ReactDOM.findDOMNode(this.refs.answer).value = '';
     }else {
       $('#warningModal').modal('show');
     }
