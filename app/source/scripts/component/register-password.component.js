@@ -18,6 +18,16 @@ function passwordSafe(val) {
   }
   return false;
 }
+
+function getPosition(level) {
+  var levelNumber = [1, 2, 3];
+
+  for(var position = 0; position < levelNumber.length; position ++) {
+    if(level < levelNumber[position] + 1) {
+      return position;
+    }
+  }
+}
 var RegisterPassword = React.createClass({
   getInitialState: function () {
     return {
@@ -33,23 +43,12 @@ var RegisterPassword = React.createClass({
   checkPasswordSafe: function (event) {
     var value = event.target.value;
     var level = passwordSafe(value);
+    var levelGrade = ['danger', 'general', 'safe'];
+    var position = getPosition(level);
 
-    switch (level) {
-      case 1:
-        this.setState({passwordSafeStyle: 'danger'});
-        break;
-      case 2:
-        this.setState({passwordSafeStyle: 'general'});
-        break;
-      case 3:
-        this.setState({passwordSafeStyle: 'safe'});
-        break;
-      case 0:
-        break;
-    }
+    this.setState({passwordSafeStyle: levelGrade[position]});
     this.setState({passwordSafeLevel: level});
   },
-
 
   render: function () {
     return (
