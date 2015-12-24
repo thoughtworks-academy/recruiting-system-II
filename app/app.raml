@@ -14,3 +14,37 @@ baseUri: http://api.bronzesword.com/
               tel:string
               email:string
               password:string
+
+/userPuzzle:
+  get:
+    request:
+      application/json:
+        properties:
+          userPuzzleIndex: Number
+
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              userAnswer: Number
+
+  post:
+    request:
+      application/json:
+        properties:
+          userPuzzle: {
+            id: Number
+            index: Number
+            answer: Number
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              status: 200
+
+
+
+

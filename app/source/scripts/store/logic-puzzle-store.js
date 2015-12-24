@@ -19,8 +19,10 @@ var LogicPuzzleStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .send(userPuzzle)
         .end(function(err,res){
+
         console.log(res.text);
         });
+    this.onNextPuzzle();
   },
 
   onLastPuzzle: function () {
