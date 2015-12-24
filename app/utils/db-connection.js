@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/twars');
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-
-module.exports = db;
+module.exports = {
+  open: function() {
+    mongoose.connect('mongodb://localhost/twars');
+  },
+  db: mongoose.connection
+};

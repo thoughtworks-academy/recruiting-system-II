@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../../utils/db-connection');
+var mongoose = require('../../utils/db-connection');
 
 var UserPuzzle = require('../../models/user-puzzle');
+
+var db = mongoose.db;
 
 router.post('/', function (req, res) {
   var newUser = new UserPuzzle({
@@ -14,13 +16,20 @@ router.post('/', function (req, res) {
     }
   });
 
-  newUser.save(function (err) {
-    if (err) {
-      res.send(err);
-      return console.error(err);
-    }
-    res.send('success');
+  mongoose.open();
+  db.once('open', function () {
+    newUser.save(function (err) {
+      if (err) {
+        res.send(err);
+        return console.error(err);
+      }
+      db.close(function () {
+        res.send('success');
+      });
+    });
   });
+
+
 });
 
 
