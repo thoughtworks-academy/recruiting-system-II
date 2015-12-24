@@ -6,20 +6,7 @@ var Promise = this.Promise || require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require("validate.js");
 var md5 = require('js-md5');
-
-var containers = {
-  email: {
-    presence: {message: "^请输入邮箱"},
-    email: {message: "^请输入正确邮箱"}
-  },
-  mobilePhone: {
-    presence: {message: '^请输入手机号'},
-    format: {
-      pattern: /^1[3|4|5|8][0-9]\d{8}$/,
-      message: '^请输入合法手机号'
-    }
-  }
-};
+var containers = require('../../common/containers');
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
@@ -27,6 +14,7 @@ function checkRegisterInfo(registerInfo) {
   var valObj = {};
   valObj.email = registerInfo.email;
   valObj.mobilePhone = registerInfo.mobilePhone;
+  valObj.password = registerInfo.password;
 
   var result = validate(valObj, containers);
 
