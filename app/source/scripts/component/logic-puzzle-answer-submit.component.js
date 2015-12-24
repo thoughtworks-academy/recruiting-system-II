@@ -7,51 +7,48 @@ require("bootstrap");
 
 var LogicPuzzleAnswerSubmit = React.createClass({
 
-  userPuzzle: {
-     userId: 0,
-       puzzle: {
-         puzzleId: 0,
-         userPuzzleIndex: 0,
-         userAnswer: 0
-       }
+
+  puzzle: {
+    puzzleId: 0,
+    userPuzzleIndex: 0,
+    userAnswer: 0
   },
 
-  submitAnswer: function() {
+  submitAnswer: function () {
     var answer = ReactDOM.findDOMNode(this.refs.answer).value;
-    if(answer !== ''){
-      this.userPuzzle.puzzle.userAnswer = parseInt(answer);
-      LogicPuzzleActions.submitAnswer(this.userPuzzle);
+    if (answer !== '') {
+      this.puzzle.userAnswer = parseInt(answer);
+      LogicPuzzleActions.submitAnswer(this.puzzle);
       ReactDOM.findDOMNode(this.refs.answer).value = '';
-    }else {
+    } else {
       $('#warningModal').modal('show');
     }
   },
 
 
-
   render: function () {
     return (
-    <div>
-        <div className="answer-submit">
-          <div className="row">
-            <div className="col-md-4 col-sm-4 col-xs-4 result-text">
-              <label htmlFor="result">结果为:</label>
-            </div>
-            <div className="col-md-4 col-sm-4 col-xs-4">
-              <input type="number" className="form-control" id="result" ref="answer"/>
-            </div>
-            <div className="col-md-4 col-sm-4 col-xs-4">
-              <button type="text" className="btn btn-danger" onClick={this.submitAnswer}>提交</button>
+        <div>
+          <div className="answer-submit">
+            <div className="row">
+              <div className="col-md-4 col-sm-4 col-xs-4 result-text">
+                <label htmlFor="result">结果为:</label>
+              </div>
+              <div className="col-md-4 col-sm-4 col-xs-4">
+                <input type="number" className="form-control" id="result" ref="answer"/>
+              </div>
+              <div className="col-md-4 col-sm-4 col-xs-4">
+                <button type="text" className="btn btn-danger" onClick={this.submitAnswer}>提交</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="modal fade bs-example-modal-sm" id="warningModal" tabIndex="-1" role="dialog" ref="warning">
+          <div className="modal fade bs-example-modal-sm" id="warningModal" tabIndex="-1" role="dialog" ref="warning">
             <div className="modal-dialog modal-sm" role="document" aria-hidden="true">
               <div className="modal-content">
                 <div className="modal-header">
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
-                          aria-hidden="true">&times;</span></button>
+                      aria-hidden="true">&times;</span></button>
                   <h3 className="modal-title" id="waringModalLabel">注意!</h3>
                 </div>
                 <div className="modal-body">
@@ -63,8 +60,8 @@ var LogicPuzzleAnswerSubmit = React.createClass({
                 </div>
               </div>
             </div>
+          </div>
         </div>
-    </div>
     )
   }
 

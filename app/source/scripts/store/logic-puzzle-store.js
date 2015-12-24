@@ -12,8 +12,8 @@ var LogicPuzzleStore = Reflux.createStore({
     this.updateItem();
   },
 
-  onSubmitAnswer: function (userPuzzle) {
-    this.onSaveUserAnswer(userPuzzle);
+  onSubmitAnswer: function (puzzle) {
+    this.onSaveUserAnswer(puzzle);
     this.onNextPuzzle();
   },
 
@@ -22,6 +22,7 @@ var LogicPuzzleStore = Reflux.createStore({
       _currentIndex -= 1;
     }
     this.updateItem();
+
   },
 
   onNextPuzzle: function () {
@@ -31,12 +32,12 @@ var LogicPuzzleStore = Reflux.createStore({
     this.updateItem();
   },
 
-  onSaveUserAnswer: function (userPuzzle) {
-    userPuzzle.index = _currentIndex;
-    userPuzzle.id = this.item.id;
+  onSaveUserAnswer: function (puzzle) {
+    puzzle.userPuzzleIndex = _currentIndex;
+    puzzle.puzzleId = this.item.id;
     request.post('/user-puzzle')
         .set('Content-Type', 'application/json')
-        .send(userPuzzle)
+        .send(puzzle)
         .end((err, res)=> {
           console.log(res.text);
         });
@@ -46,10 +47,11 @@ var LogicPuzzleStore = Reflux.createStore({
     request.get('/user-puzzle')
         .set('Content-Type', 'application/json')
         .query({
-          index: _currentIndex
+          index: parseInt(_currentIndex)
         })
         .end((err, res)=> {
-          return res.body.userAnswer
+          console.log(res.body);
+          return res.body
         });
   },
 

@@ -16,16 +16,14 @@ var LogicPuzzleSidebar = React.createClass({
   },
 
   lastPuzzle: function () {
-    var answer = document.getElementById('result').value;
-    this.puzzle.userAnswer = answer;
+    this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.lastPuzzle();
     document.getElementById('result').value = LogicPuzzleActions.getUserAnswer();
   },
 
   nextPuzzle: function () {
-    var answer = document.getElementById('result').value;
-    this.puzzle.userAnswer = answer;
+    this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.nextPuzzle();
     document.getElementById('result').value = LogicPuzzleActions.getUserAnswer();
