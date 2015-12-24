@@ -159,13 +159,43 @@ schemas:
                   uri: string
               maker:
                 uri: string
+
 /blankQuizzes:
   get:
     description: 获得所有的填空题定义
+    response:
+      200:
+        body:
+          application/json:
+            blankQuizzes:object[]
+              id:integer
+              sectionId:integer
+              type:string
+              count:integer
+              hardCount:integer
+              normalCount: integer
+              easyCount: integer
   post:
     description: 提交一份填空题定义
+    body:
+      multipart/form-data:
+        formParameters:
+          id:integer
+          sectionId:integer
+          type:string
+          count:integer
+          hardCount:integer
+          normalCount: integer
+          easyCount: integer
+    response:
+      200:
+        body:
+          application/json:
+            uri: string
+
   /{blankQuizId}:
     get:
+      description: 获取一份填空题的定义
       response:
         200:
           id: integer
@@ -177,21 +207,51 @@ schemas:
           easyCount: integer
   /{blankQuizId}/items
     get:
+      description: 获取一组题目的内容
       response:
         200:
           type: object[]
             quizItem:
               id: integer
-            info:
-              picPath: string
+              initializedBox: string
+              question: string
+              questionZh: string
               description: string
+              descripyionZh: string
+              chartPath: string
               # 根据前台需要的数据把剩下的补完，不能有正确答案
-            
 /quizItems:
   get:
     description: 获取所有的题目项定义
+    response:
+      200:
+        body:
+          application/json:
+            quizItems: object[]
+              id:integer
+              initializedBox: string
+              question: string
+              questionZh: string
+              description: string
+              descripyionZh: string
+              chartPath: string
   post:
     description: 提交一份题目项定义
+    body:
+      multipart/form-data:
+        formParameters:
+          id: integer
+          initialedBox: string
+          question: string
+          questionZh: string
+          description: string
+          descripyionZh: string
+          chartPath: string
+    response:
+      200:
+        body:
+          appication/json:
+            uri: string
   /{quizItemId}:
     get:
       description: 获得一份题目项定义的细节
@@ -202,7 +262,7 @@ schemas:
             description: Markdown String to discribe homework requirement
           infoPath: string
             description: path to item info json file which contains: hardness, rightAnswer and so on
- 
+
 /homeworkQuizzes:
   get:
     description: 获得所有的homework题目定义
