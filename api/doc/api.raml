@@ -159,6 +159,23 @@ schemas:
                   uri: string
               maker:
                 uri: string
+  /enrollment:
+    get:
+      description: 获取一份考卷定义的细节，含section的细节
+      response:
+        200:
+          body:
+            description: quizzes的顺序是有含义的，所以不能乱序
+            application/json:
+              sections: object[]
+                id: integer
+                desc: string
+                  description: Markdown String to discribe what happen in the future
+                quizzes: object[]
+                  uri: string
+              maker:
+                uri: string
+
 
 /blankQuizzes:
   get:
