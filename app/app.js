@@ -8,7 +8,6 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 
 global.apiServer = 'http://localhost:8080/api/';
-global.appServer = 'http://localhost:3000/';
 
 app.use(bodyParser.urlencoded({
   extended: false
