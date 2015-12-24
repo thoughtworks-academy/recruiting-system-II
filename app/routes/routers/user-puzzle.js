@@ -30,7 +30,7 @@ router.post('/', function (req, res) {
         var index = answerIndex(doc.puzzle, req.body.userPuzzleIndex);
         if (index !== -1) {
           doc.puzzle[index].userAnswer = req.body.userAnswer;
-          doc.save(function(){
+          doc.save(function () {
             if (err) {
               res.send(err);
               return console.error(err);
@@ -68,11 +68,23 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-  UserPuzzle.findOne({userId: _userId},function(err,doc){
-    console.log(doc.puzzle);
+  UserPuzzle.findOne({userId: _userId}, function (err, doc) {
+    if (err) {
+      res.send(err);
+      return console.error(err);
+    }
+    if (doc === null) {
+      res.send({answer: null});
+      return;
+    }
     var currentPuzzleIndex = answerIndex(doc.puzzle, parseInt(req.query.index));
-    console.log(currentPuzzleIndex);
-    res.send(doc.puzzle[currentPuzzleIndex].userAnswer);
+    if (currentPuzzleIndex !== -1) {
+      res.send({answer: doc.puzzle[currentPuzzleIndex].userAnswer});
+    } else {
+      res.send({answer: null});
+      return;
+    }
+
   });
 });
 

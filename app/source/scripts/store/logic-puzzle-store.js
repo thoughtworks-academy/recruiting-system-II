@@ -39,7 +39,9 @@ var LogicPuzzleStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .send(puzzle)
         .end((err, res)=> {
-          console.log(res.text);
+          if (res.answer === null) {
+            console.log('null');
+          }
         });
   },
 
@@ -50,9 +52,10 @@ var LogicPuzzleStore = Reflux.createStore({
           index: parseInt(_currentIndex)
         })
         .end((err, res)=> {
-          console.log(res.body);
-          return res.body
+          document.getElementById('result').value = res.body.answer;
         });
+
+
   },
 
 

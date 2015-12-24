@@ -10,23 +10,23 @@ var LogicPuzzleSidebar = React.createClass({
   },
 
   puzzle: {
-   puzzleId: 0,
-   userPuzzleIndex: 0,
-   userAnswer: 0
+    puzzleId: 0,
+    userPuzzleIndex: 0,
+    userAnswer: 0
   },
 
   lastPuzzle: function () {
     this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.lastPuzzle();
-    document.getElementById('result').value = LogicPuzzleActions.getUserAnswer();
+    LogicPuzzleActions.getUserAnswer();
   },
 
   nextPuzzle: function () {
     this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.nextPuzzle();
-    document.getElementById('result').value = LogicPuzzleActions.getUserAnswer();
+    LogicPuzzleActions.getUserAnswer();
   },
 
   render: function () {
