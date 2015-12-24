@@ -145,11 +145,10 @@ var RegisterForm = React.createClass({
             if(this.state.mobilePhoneError !== '' || this.state.emailError !== ''){
                 return false
             }
-
             var registerData = [];
-            var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone);
-            var email = ReactDOM.findDOMNode(this.refs.email);
-            var password = document.getElementById('register-password');
+            var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone).value;
+            var email = ReactDOM.findDOMNode(this.refs.email).value;
+            var password = document.getElementById('register-password').value;
 
             registerData.push(mobilePhone, email, password);
 
@@ -159,14 +158,14 @@ var RegisterForm = React.createClass({
                 $('#registration').modal('show');
 
                 request.post('/register').set('Content-Type', 'application/json').send({
-                    mobilePhone: mobilePhone.value,
-                    email: email.value,
-                    password: password.value
+                    mobilePhone: mobilePhone,
+                    email: email,
+                    password: password
 
                 }).end((err, req) => {
                     var info = req.body;
-                    $('#register-info').text(info.message);
 
+                    $('#register-info').text(info.message);
                     if (info.status === 200) {
                         location.href = 'start.html';
                     } else {
