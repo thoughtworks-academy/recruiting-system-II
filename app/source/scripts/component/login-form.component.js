@@ -2,21 +2,8 @@ var React = global.React = require('react');
 var validate = require('validate.js');
 var ReactDOM = require('react-dom');
 var request = require('superagent');
+var containers = require('../../../common/login-containers');
 
-var containers = {
-  phoneEmail: {
-    presence: {message: '^请输入邮箱'},
-    email: {message: '^请输入正确的形式'}
-  },
-  loginPassword: {
-    presence: {message: '^请输入密码'},
-    length: {
-      minimum: 8,
-      maximum: 16,
-      message: '^密码错误'
-    }
-  }
-};
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
     return validateInfo[field][0];

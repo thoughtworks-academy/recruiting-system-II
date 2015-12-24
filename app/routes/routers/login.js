@@ -3,15 +3,18 @@ var router = express.Router();
 var request = require('superagent');
 var constant = require('../../tools/back-constant.json');
 var md5 = require('js-md5');
+var validate = require('validate.js');
+var containers = require('../../common/login-containers');
 
 function checkLoginInfo(account, password) {
   var pass = true;
-  //var verifyMobilePhone = /^1[3|4|5|8][0-9]\d{4,8}$/;
-  var verifyEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+  var valObj = {};
 
-  var isValid =  verifyEmail.test(account);
+  valObj.phoneEmail = account;
+  valObj.loginPassword = password;
+  var result = validate(valObj, containers);
 
-  if (!isValid) {
+  if (result !== undefined) {
     pass = false;
   }
 
@@ -19,7 +22,6 @@ function checkLoginInfo(account, password) {
       password.length > constant.PASSWORD_MAX_LENGTH) {
         pass = false;
   }
-
   return pass;
 }
 
