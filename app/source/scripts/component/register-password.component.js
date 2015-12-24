@@ -3,20 +3,20 @@ var ReactDom = require('react-dom');
 
 function passwordSafe(val) {
   if (val == '') return 0;
-  var strongRegex = new RegExp('^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$', 'g');
-  var mediumRegex = new RegExp('^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$', 'g');
-  var enoughRegex = new RegExp('(?=.{6,}).*', 'g');
+  var safeRegex = [
+    new RegExp('(?=.{6,}).*', 'g'),
+    new RegExp('^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$', 'g'),
+    new RegExp('^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$', 'g')
+  ];
 
-  if (enoughRegex.test(val) == false) {
-    return 1;
-  } else if (strongRegex.test(val)) {
-    return 3;
-  } else if (mediumRegex.test(val)) {
-    return 2;
-  } else {
-    return 1;
-  }
-  return false;
+  var safeLevels = [1, 2, 3];
+
+  var result = 1;
+  safeRegex.forEach(function(reg, i){
+    result = reg.test(val) ? safeLevels[i] : result;
+  });
+
+  return result;
 }
 
 function getPosition(level) {
