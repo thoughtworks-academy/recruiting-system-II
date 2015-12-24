@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var request = require('superagent');
 var validate = require("validate.js");
 var RegisterPassword = require('./register-password.component');
-var containers = require('../../../common/containers');
+var containers = require('../../../common/register-containers');
 
 var asyncContainersFunc = {
     email: function(value, done) {

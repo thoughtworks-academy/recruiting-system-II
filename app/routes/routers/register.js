@@ -6,7 +6,7 @@ var Promise = this.Promise || require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require("validate.js");
 var md5 = require('js-md5');
-var containers = require('../../common/containers');
+var containers = require('../../common/register-containers');
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
