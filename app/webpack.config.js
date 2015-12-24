@@ -1,17 +1,16 @@
 module.exports = {
     entry: {
         "index": "./source/scripts/index.js",
+        "logic-puzzle": "./source/scripts/logic-puzzle",
         "dojo": "./source/scripts/dojo.js",
-        "logic-puzzle": "./source/scripts/logic-puzzle.js",
         "register": "./source/scripts/register.js"
     },
     output: {
-        path: __dirname + '/public/scripts/',
-        filename: "[name].bundle.js"
+        path: __dirname + '/public',
+        filename: 'scripts/[name].js'
     },
     module: {
         loaders: [
-            //{ test: /\.css$/, loader: "style!css" },
             {
                 test: /\.js?$/,
                 exclude: /(node_modules|bower_components)/,
@@ -21,6 +20,6 @@ module.exports = {
                 }
             }
         ]
-
-    }
+    },
+    devtool: '#inline-source-map'
 };
