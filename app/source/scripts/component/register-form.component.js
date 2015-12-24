@@ -68,10 +68,6 @@ function getError(validateInfo, field) {
     return ""
 }
 
-function jumpToStart() {
-    location.href = 'start.html'
-}
-
 var RegisterForm = React.createClass({
 
         getInitialState: function () {
@@ -172,7 +168,7 @@ var RegisterForm = React.createClass({
                     $('#register-info').text(info.message);
 
                     if (info.status === 200) {
-                        window.setTimeout(jumpToStart);
+                        location.href = 'start.html';
                     } else {
                         var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
                         var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
