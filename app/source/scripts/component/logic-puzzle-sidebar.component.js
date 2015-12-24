@@ -9,12 +9,26 @@ var LogicPuzzleSidebar = React.createClass({
     }
   },
 
+  puzzle: {
+   puzzleId: 0,
+   userPuzzleIndex: 0,
+   userAnswer: 0
+  },
+
   lastPuzzle: function () {
+    var answer = document.getElementById('result').value;
+    this.puzzle.userAnswer = answer;
+    LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.lastPuzzle();
+    document.getElementById('result').value = LogicPuzzleActions.getUserAnswer();
   },
 
   nextPuzzle: function () {
+    var answer = document.getElementById('result').value;
+    this.puzzle.userAnswer = answer;
+    LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.nextPuzzle();
+    document.getElementById('result').value = LogicPuzzleActions.getUserAnswer();
   },
 
   render: function () {

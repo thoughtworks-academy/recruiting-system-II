@@ -42,14 +42,14 @@ var LogicPuzzleStore = Reflux.createStore({
         });
   },
 
-  onGetUserAnswer: function (userPuzzle) {
+  onGetUserAnswer: function () {
     request.get('/user-puzzle')
         .set('Content-Type', 'application/json')
         .query({
           index: _currentIndex
         })
         .end((err, res)=> {
-
+          return res.body.userAnswer
         });
   },
 
