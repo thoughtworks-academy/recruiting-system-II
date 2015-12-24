@@ -172,10 +172,10 @@ var RegisterForm = React.createClass({
                     $('#register-info').text(info.message);
 
                     if (info.status === 200) {
-                        window.setTimeout(jumpToStart, 5000);
+                        window.setTimeout(jumpToStart);
                     } else {
-                        var emailExist = info.data.emailStatus === 200 ? '该邮箱已被注册' : '';
-                        var mobilePhoneExist = info.data.mobilePhoneStatus === 200 ? '该手机号已被注册' : '';
+                        var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
+                        var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
                         this.setState({mobilePhoneError: mobilePhoneExist,
                                        emailError: emailExist});
                     }

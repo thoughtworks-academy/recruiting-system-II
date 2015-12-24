@@ -40,6 +40,26 @@ function checkRegisterInfo(registerInfo) {
   return pass;
 }
 
+function checkMobilePhoneExist(mobilePhone){
+  return agent('GET', apiServer + 'user')
+    .set('Content-Type', 'application/json')
+    .query({
+      field: 'mobilePhone',
+      value: mobilePhone
+    })
+    .end()
+}
+
+function checkEmailExist(email){
+  return agent('GET', apiServer + 'user')
+    .set('Content-Type', 'application/json')
+    .query({
+      field: 'email',
+      value: email
+    })
+    .end()
+}
+
 router.post('/', function(req, res) {
   var registerInfo = req.body;
   var result = {};
@@ -48,53 +68,47 @@ router.post('/', function(req, res) {
   if (checkRegisterInfo(registerInfo)) {
     var message = '';
 
-    agent('GET', appServer + 'register/validate-mobile-phone')
+    var isMobilePhoneExist;
+    var isEmailExist;
 
-      .set('Content-Type', 'application/json')
-      .query({
-        mobilePhone: registerInfo.mobilePhone
-      })
-      .end()
+    checkMobilePhoneExist(registerInfo.mobilePhone)
       .then(function onResult(response) {
-        result.data.mobilePhoneStatus = response.body.status;
-        message = response.body.status === constant.SUCCESSFUL_STATUS ? constant.MOBILE_PHONE : '';
-
-        return agent('GET', appServer + 'register/validate-email')
-          .set('Content-Type', 'application/json')
-          .query({
-            email: registerInfo.email
-          }).end()
-
-      .then(function onResult(response) {
-        result.data.emailStatus = response.body.status;
-        message += response.body.status === constant.SUCCESSFUL_STATUS ? constant.EMAIL : '';
-
-        if (message !== '') {
-          res.send({
-            status: constant.FAILING_STATUS,
-            data: result.data,
-            message: message + constant.EXIST
-          })
-        } else {
-          request
-            .post(apiServer + 'register')
-            .set('Content-Type', 'application/json')
-            .send(registerInfo)
-            .end(function (err, result) {
-              res.send({
-                status: result.status,
-                message: constant.REGISTER_SUCCESS
-              });
-            });
-        }
-
+        isMobilePhoneExist = true;
       }, function onError(err) {
-        console.log(err)
+        isMobilePhoneExist = false;
+      })
+
+      .then(function() {
+        checkEmailExist(registerInfo.email)
+          .then(function onResult(response) {
+            isEmailExist = true;
+          }, function onError(err) {
+            isEmailExist = false;
+          }).then(function () {
+          if(isEmailExist || isMobilePhoneExist){
+            res.send({
+              status: constant.FAILING_STATUS,
+              message: constant.EXIST,
+              data: {
+                isEmailExist: isEmailExist,
+                isMobilePhoneExist: isMobilePhoneExist
+              }
+            });
+          }else {
+            request
+              .post(apiServer + 'register')
+              .set('Content-Type', 'application/json')
+              .send(registerInfo)
+              .end(function (err, result) {
+                res.send({
+                  status: result.status,
+                  message: constant.REGISTER_SUCCESS
+                });
+              });
+          }
+        })
       });
 
-    }, function onError(err) {
-      console.log(err)
-    });
   } else {
     res.send({
       message: constant.REGISTER_FAILED,
