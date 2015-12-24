@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('superagent');
 var constant = require('../../tools/back-constant.json');
+var md5 = require('js-md5');
 
 function checkLoginInfo(account, password) {
   var pass = true;
@@ -32,6 +33,8 @@ router.get('/', function(req, res) {
       status: 403
     })
   } else {
+    password = md5(password);
+
     request
       .post(apiServer + 'login')
       .set('Content-Type', "application/json")
