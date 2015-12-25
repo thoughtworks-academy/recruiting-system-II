@@ -25,6 +25,6 @@ public class TestBase extends JerseyTest {
         bind(paperMapper).to(PaperMapper.class);
 
       }
-    }).packages("com.thoughtworks.twars");
+    }).packages("com.thoughtworks.twars.api");
   }
 }

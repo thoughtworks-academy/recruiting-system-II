@@ -10,10 +10,11 @@ import javax.ws.rs.ApplicationPath;
 
 @ApplicationPath("resources")
 public class App extends ResourceConfig {
+
     public App() {
 
         SqlSession session = DBUtil.getSession();
-        UserMapper userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
+        final UserMapper userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
 
         packages("com.thoughtworks.twars.api")
             .register(new AbstractBinder() {
