@@ -4,6 +4,7 @@ import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.data.UserMapper;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
@@ -12,12 +13,8 @@ import java.util.Map;
 @Path("/user")
 public class UserResource extends Resource {
 
+    @Inject
     private UserMapper userMapper;
-
-    public UserResource() {
-        super();
-        userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
-    }
 
     @GET
     @Path("/{param}")
