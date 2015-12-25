@@ -2,7 +2,7 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.data.UserMapper;
+import com.thoughtworks.twars.mapper.UserMapper;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -19,7 +19,7 @@ public class RegisterResource extends Resource {
 
     public RegisterResource() {
         super();
-        userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
+        userMapper = session.getMapper(com.thoughtworks.twars.mapper.UserMapper.class);
     }
 
     @POST

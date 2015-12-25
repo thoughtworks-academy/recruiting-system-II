@@ -1,7 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Paper;
-import com.thoughtworks.twars.data.PaperMapper;
+import com.thoughtworks.twars.mapper.PaperMapper;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

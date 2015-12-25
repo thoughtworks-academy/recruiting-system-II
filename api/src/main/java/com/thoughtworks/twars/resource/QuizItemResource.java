@@ -1,7 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.QuizItem;
-import com.thoughtworks.twars.data.QuizItemMapper;
+import com.thoughtworks.twars.mapper.QuizItemMapper;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -1,6 +1,6 @@
 package com.thoughtworks.twars;
 
-import com.thoughtworks.twars.data.UserMapper;
+import com.thoughtworks.twars.mapper.UserMapper;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -14,9 +14,9 @@ public class App extends ResourceConfig {
     public App() {
 
         SqlSession session = DBUtil.getSession();
-        final UserMapper userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
+        final UserMapper userMapper = session.getMapper(com.thoughtworks.twars.mapper.UserMapper.class);
 
-        packages("com.thoughtworks.twars.api")
+        packages("com.thoughtworks.twars.resource")
             .register(new AbstractBinder() {
                 @Override
                 protected void configure() {

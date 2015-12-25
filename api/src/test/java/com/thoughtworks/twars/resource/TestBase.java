@@ -1,6 +1,6 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.data.PaperMapper;
+import com.thoughtworks.twars.mapper.PaperMapper;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -25,6 +25,6 @@ public class TestBase extends JerseyTest {
         bind(paperMapper).to(PaperMapper.class);
 
       }
-    }).packages("com.thoughtworks.twars.api");
+    }).packages("com.thoughtworks.twars.resource");
   }
 }

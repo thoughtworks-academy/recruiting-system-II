@@ -2,7 +2,7 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.data.UserMapper;
+import com.thoughtworks.twars.mapper.UserMapper;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
