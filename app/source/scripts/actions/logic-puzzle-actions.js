@@ -6,7 +6,8 @@ var LogicPuzzleActions = Reflux.createActions([
   'lastPuzzle',
   'nextPuzzle',
   'getUserAnswer',
-  'saveUserAnswer'
+  'saveUserAnswer',
+  'countTotal'
 ]);
 
 module.exports = LogicPuzzleActions;

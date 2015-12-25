@@ -54,7 +54,9 @@ var LogicPuzzleStore = Reflux.createStore({
         .end((err, res)=> {
           document.getElementById('result').value = res.body.answer;
         });
+  },
 
+  onCountTotal: function () {
 
   },
 
