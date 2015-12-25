@@ -4,7 +4,7 @@ var request = require('superagent');
 var constant = require('../../tools/back-constant.json');
 var md5 = require('js-md5');
 var validate = require('validate.js');
-var containers = require('../../common/login-containers');
+var constraint = require('../../common/login-constraint');
 
 function checkLoginInfo(account, password) {
   var pass = true;
@@ -12,7 +12,7 @@ function checkLoginInfo(account, password) {
 
   valObj.phoneEmail = account;
   valObj.loginPassword = password;
-  var result = validate(valObj, containers);
+  var result = validate(valObj, constraint);
 
   if (result !== undefined) {
     pass = false;

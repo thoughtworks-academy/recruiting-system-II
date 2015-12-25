@@ -6,7 +6,7 @@ var Promise = this.Promise || require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require("validate.js");
 var md5 = require('js-md5');
-var containers = require('../../common/register-containers');
+var constraint = require('../../common/register-constraint');
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
@@ -16,7 +16,7 @@ function checkRegisterInfo(registerInfo) {
   valObj.mobilePhone = registerInfo.mobilePhone;
   valObj.password = registerInfo.password;
 
-  var result = validate(valObj, containers);
+  var result = validate(valObj, constraint);
 
   if (result !== undefined){
     pass = false;

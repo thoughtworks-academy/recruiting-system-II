@@ -1,4 +1,4 @@
-var containers = {
+var constraint = {
   phoneEmail: {
     presence: {message: '^请输入邮箱'},
     email: {message: '^请输入正确的形式'}
@@ -12,4 +12,4 @@ var containers = {
     }
   }
 };
-module.exports = containers;
+module.exports = constraint;
