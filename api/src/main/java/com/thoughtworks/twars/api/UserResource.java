@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.resource;
+package com.thoughtworks.twars.api;
 
 import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;

@@ -15,7 +15,7 @@ public class App extends ResourceConfig {
         SqlSession session = DBUtil.getSession();
         UserMapper userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
 
-        packages("com.thoughtworks.twars.resource")
+        packages("com.thoughtworks.twars.api")
             .register(new AbstractBinder() {
                 @Override
                 protected void configure() {
