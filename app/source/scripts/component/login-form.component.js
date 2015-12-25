@@ -2,7 +2,7 @@ var React = global.React = require('react');
 var validate = require('validate.js');
 var ReactDOM = require('react-dom');
 var request = require('superagent');
-var containers = require('../../../common/login-containers');
+var constraint = require('../../../common/login-constraint');
 
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
@@ -31,7 +31,7 @@ var LoginForm = React.createClass({
     var valObj = {};
     valObj[name] = value;
 
-    var result = validate(valObj, containers);
+    var result = validate(valObj, constraint);
     var error = getError(result, name);
     var stateObj = {};
 

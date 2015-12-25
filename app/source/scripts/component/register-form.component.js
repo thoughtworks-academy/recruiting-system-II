@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var request = require('superagent');
 var validate = require("validate.js");
 var RegisterPassword = require('./register-password.component');
-var containers = require('../../../common/register-containers');
+var constraint = require('../../../common/register-constraint');
 
 var asyncContainersFunc = {
     email: function(value, done) {
@@ -71,7 +71,7 @@ var RegisterForm = React.createClass({
             var valObj = {};
             valObj[name] = value;
 
-            var result = validate(valObj, containers);
+            var result = validate(valObj, constraint);
             var error = getError(result, name);
             var stateObj = {};
             stateObj[name + 'Error'] = error;
@@ -106,7 +106,7 @@ var RegisterForm = React.createClass({
                 var name = item.name;
 
                 valObj[name] = value;
-                var result = validate(valObj, containers);
+                var result = validate(valObj, constraint);
 
                 var error = getError(result, name);
                 if (error !== '') {
