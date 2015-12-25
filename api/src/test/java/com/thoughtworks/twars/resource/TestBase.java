@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.api;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.data.PaperMapper;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;

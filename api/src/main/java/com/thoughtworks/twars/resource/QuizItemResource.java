@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.api;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.data.QuizItemMapper;

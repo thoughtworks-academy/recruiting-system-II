@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.api;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;

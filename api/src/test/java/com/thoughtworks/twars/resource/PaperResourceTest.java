@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.api;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Paper;
 import org.junit.Test;

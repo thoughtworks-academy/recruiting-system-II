@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.data;
+package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.QuizItem;
 

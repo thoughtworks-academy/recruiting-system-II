@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.api;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.data.PaperMapper;
@@ -22,7 +22,7 @@ public class PaperResource {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getUser() {
+  public Response getAllPapers() {
 
     List<Paper> papers = paperMapper.findPapers();
     List<Map> result = new ArrayList<>();
