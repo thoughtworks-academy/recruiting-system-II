@@ -11,7 +11,7 @@ import java.io.InputStream;
 public class DBUtil {
 
     public static SqlSession getSession() {
-        String resource = "/mybatis/mybatis-config.xml";
+        String resource = "mybatis/mybatis-config.xml";
         SqlSession session = null;
 
         try {

@@ -24,7 +24,7 @@ public class PaperResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getAllPapers() {
 
-    List<Paper> papers = paperMapper.findPapers();
+    List<Paper> papers = paperMapper.findAll();
     List<Map> result = new ArrayList<>();
 
     for(int i=0; i<papers.size(); i++) {

@@ -15,7 +15,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="/mybatis/UserMapper.xml"/>
-        <mapper resource="/mybatis/QuizItemMapper.xml"/>
+        <mapper resource="mybatis/UserMapper.xml"/>
+        <mapper resource="mybatis/QuizItemMapper.xml"/>
+        <mapper resource="mybatis/PaperMapper.xml"/>
     </mappers>
 </configuration>

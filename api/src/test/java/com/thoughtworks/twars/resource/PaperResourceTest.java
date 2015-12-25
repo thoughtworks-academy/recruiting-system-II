@@ -23,7 +23,7 @@ public class PaperResourceTest extends TestBase {
   @Test
   public void testGetAllPapers() throws Exception {
 
-    when(paperMapper.findPapers()).thenReturn(Arrays.asList(firstPaper, secondPaper));
+    when(paperMapper.findAll()).thenReturn(Arrays.asList(firstPaper, secondPaper));
     when(firstPaper.getId()).thenReturn(1);
     when(secondPaper.getId()).thenReturn(5);
 
