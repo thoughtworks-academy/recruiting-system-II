@@ -185,13 +185,7 @@ schemas:
         body:
           application/json:
             blankQuizzes:object[]
-              id:integer
-              sectionId:integer
-              type:string
-              count:integer
-              hardCount:integer
-              normalCount: integer
-              easyCount: integer
+              uri: string
   post:
     description: 提交一份填空题定义
     body:
@@ -234,9 +228,10 @@ schemas:
               question: string
               questionZh: string
               description: string
-              descripyionZh: string
+              descriptionZh: string
               chartPath: string
               # 根据前台需要的数据把剩下的补完，不能有正确答案
+
 /quizItems:
   get:
     description: 获取所有的题目项定义
