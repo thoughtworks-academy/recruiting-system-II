@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.action;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;
@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Path("/user")
-public class UserAction extends Action{
+public class UserResource extends Resource {
 
     private UserMapper userMapper;
 
-    public UserAction() {
+    public UserResource() {
         super();
         userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
     }

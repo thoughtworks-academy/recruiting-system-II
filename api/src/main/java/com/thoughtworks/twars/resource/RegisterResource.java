@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.action;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;
@@ -12,12 +12,12 @@ import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
-@Path("/login")
-public class LoginAction extends Action{
+@Path("/register")
+public class RegisterResource extends Resource {
 
     private UserMapper userMapper;
 
-    public LoginAction() {
+    public RegisterResource() {
         super();
         userMapper = session.getMapper(com.thoughtworks.twars.data.UserMapper.class);
     }
@@ -26,14 +26,12 @@ public class LoginAction extends Action{
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Map createUser(User user) {
-
-        System.out.println(user);
-        User result = userMapper.getUserByEmailAndPassWord(user);
+        userMapper.insertUser(user);
+        session.commit();
+        session.close();
 
         Map<String, Link> map = new HashMap<>();
-        map.put("user", result.getLink());
-
-        session.close();
+        map.put("user", user.getLink());
 
         return map;
     }

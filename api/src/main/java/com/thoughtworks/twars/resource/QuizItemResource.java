@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.action;
+package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.data.QuizItemMapper;
@@ -10,11 +10,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/quizItems")
-public class QuizItemAction extends Action{
+public class QuizItemResource extends Resource {
 
     private QuizItemMapper quizItemMapper;
 
-    public QuizItemAction() {
+    public QuizItemResource() {
         super();
         quizItemMapper = session.getMapper(QuizItemMapper.class);
     }
