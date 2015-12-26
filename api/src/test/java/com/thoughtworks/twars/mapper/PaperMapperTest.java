@@ -28,9 +28,9 @@ public class PaperMapperTest {
     }
 
     @Test
-    public void testFindAll() throws Exception {
+    public void should_return_all_papers() throws Exception {
         List<Paper> papers = paperMapper.findAll();
         assertThat(papers.size(), is(2));
-        assertThat(papers.get(0).getId(), is(1));
+        assertThat(papers.get(0).getMakerId(), is(1));
     }
 }

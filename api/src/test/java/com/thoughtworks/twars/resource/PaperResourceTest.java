@@ -21,7 +21,7 @@ public class PaperResourceTest extends TestBase {
 
 
   @Test
-  public void testGetAllPapers() throws Exception {
+  public void should_list_all_papers() throws Exception {
 
     when(paperMapper.findAll()).thenReturn(Arrays.asList(firstPaper, secondPaper));
     when(firstPaper.getId()).thenReturn(1);
