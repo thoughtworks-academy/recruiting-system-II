@@ -15,10 +15,8 @@ import static org.mockito.Mockito.when;
 
 public class PaperResourceTest extends TestBase {
 
-  private String basePath = "/papers";
   Paper firstPaper = mock(Paper.class);
   Paper secondPaper = mock(Paper.class);
-
 
   @Test
   public void should_list_all_papers() throws Exception {
@@ -28,6 +26,7 @@ public class PaperResourceTest extends TestBase {
     when(secondPaper.getId()).thenReturn(5);
 
 
+    String basePath = "/papers";
     Response response = target(basePath).request().get();
     assertThat(response.getStatus(), is(200));
 
