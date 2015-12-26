@@ -32,3 +32,10 @@ flyway {
     user = 'BronzeSword'
     password = '12345678'
 }
+
+task(DBRecovery, dependsOn: 'classes', type: JavaExec) {
+    main = 'com.thoughtworks.twars.tasks.DBRecovery'
+    classpath=sourceSets.main.runtimeClasspath
+}
+
+test.dependsOn DBRecovery
