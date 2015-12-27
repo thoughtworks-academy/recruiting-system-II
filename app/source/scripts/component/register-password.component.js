@@ -9,11 +9,9 @@ function passwordSafe(val) {
     new RegExp('^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$', 'g')
   ];
 
-  var safeLevels = [1, 2, 3];
-
   var result = 1;
   safeRegex.forEach(function(reg, i){
-    result = reg.test(val) ? safeLevels[i] : result;
+    result = reg.test(val) ? i + 1 : result;
   });
 
   return result;
