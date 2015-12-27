@@ -8,10 +8,18 @@ var db = mongoose.db;
 
 var _userId = 1;
 
-router.post('/', function (req, res) {
-
+router.post('/',function(req,res,next){
   mongoose.open();
   db.once('open', function () {
+    console.log('open!');
+    next();
+  });
+});
+
+router.post('/', function (req, res, next) {
+
+  //mongoose.open();
+  //db.once('open', function () {
 
     var newUser = new UserPuzzle({
       userId: _userId,
@@ -35,9 +43,7 @@ router.post('/', function (req, res) {
               res.send(err);
               return console.error(err);
             }
-            db.close(function () {
-              res.send('cover answer success');
-            });
+            res.send('cover answer success');
           });
         } else {
           doc.puzzle.push(req.body);
@@ -46,9 +52,7 @@ router.post('/', function (req, res) {
               res.send(err);
               return console.error(err);
             }
-            db.close(function () {
-              res.send('push answer success');
-            });
+            res.send('push answer success');
           })
         }
       } else {
@@ -57,34 +61,35 @@ router.post('/', function (req, res) {
             res.send(err);
             return console.error(err);
           }
-          db.close(function () {
-            res.send('create answer success');
-          });
-
+          res.send('create answer success');
         });
       }
     });
-  });
+  next()
+  //});
 });
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
   UserPuzzle.findOne({userId: _userId}, function (err, doc) {
     if (err) {
       res.send(err);
-      return console.error(err);
     }
     if (doc === null) {
       res.send({answer: null});
-      return;
     }
     var currentPuzzleIndex = answerIndex(doc.puzzle, parseInt(req.query.index));
     if (currentPuzzleIndex !== -1) {
       res.send({answer: doc.puzzle[currentPuzzleIndex].userAnswer});
     } else {
       res.send({answer: null});
-      return;
     }
+    next();
+  });
+});
 
+router.post('/',function(){
+  db.close(function () {
+    console.log('closed!')
   });
 });
 
