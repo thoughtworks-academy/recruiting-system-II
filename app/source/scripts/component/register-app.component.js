@@ -5,7 +5,6 @@ var LoginForm = require('./login-form.component');
 var LoginInfo = require('./login-info.component');
 var RegisterAgreement = require('./register-agreement.component');
 
-//require("babel-core").transform("code", options);
 var RegisterApp = React.createClass({
 
     getInitialState:function () {
