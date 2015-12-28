@@ -17,14 +17,19 @@ app.use(bodyParser.json());
 
 var compile = webpack(require("./webpack.config"));
 
-app.use(webpackDevMiddleware(compile, {
-  publicPath: "/assets/",   // 以/assets/作为请求的公共目录
-  lazy: true,               // 只有请求时才编译
-  noInfo: true,             // 只打印警告和错误信息
-  stats: {
-    colors: true
-  }
-}));
+var env = process.env.NODE_ENV === "production" ? "production" : "development";
+console.log(env);
+if(env === 'development') {
+  app.use(webpackDevMiddleware(compile, {
+    publicPath: "/assets/",   // 以/assets/作为请求的公共目录
+    lazy: true,               // 只有请求时才编译
+    noInfo: true,             // 只打印警告和错误信息
+    stats: {
+      colors: true
+    }
+  }));
+}
+
 
 app.use(express.static('public'));
 

@@ -2,7 +2,7 @@ var $ = global.jQuery = require('jquery');
 var ReactDom = require('react-dom');
 
 require('bootstrap');
-var request = require('superagent');
+require('../less/register.less');
 var RegisterApp = require('./component/register-app.component');
 
 ReactDom.render(
