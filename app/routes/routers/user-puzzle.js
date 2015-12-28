@@ -18,9 +18,6 @@ router.post('/',function(req,res,next){
 
 router.post('/', function (req, res, next) {
 
-  //mongoose.open();
-  //db.once('open', function () {
-
     var newUser = new UserPuzzle({
       userId: _userId,
       puzzle: [{
@@ -31,6 +28,7 @@ router.post('/', function (req, res, next) {
     });
 
     UserPuzzle.findOne({userId: 1}, function (err, doc) {
+
       if (err) {
         console.log(err)
       }
@@ -42,8 +40,10 @@ router.post('/', function (req, res, next) {
             if (err) {
               res.send(err);
               return console.error(err);
+            }else {
+              res.send('cover answer success');
             }
-            res.send('cover answer success');
+            next();
           });
         } else {
           doc.puzzle.push(req.body);
@@ -51,8 +51,10 @@ router.post('/', function (req, res, next) {
             if (err) {
               res.send(err);
               return console.error(err);
+            }else{
+              res.send('push answer success');
             }
-            res.send('push answer success');
+            next();
           })
         }
       } else {
@@ -60,13 +62,14 @@ router.post('/', function (req, res, next) {
           if (err) {
             res.send(err);
             return console.error(err);
+          }else{
+            res.send('create answer success');
           }
-          res.send('create answer success');
+          next();
         });
       }
     });
-  next()
-  //});
+
 });
 
 router.get('/', function (req, res, next) {
@@ -76,12 +79,14 @@ router.get('/', function (req, res, next) {
     }
     if (doc === null) {
       res.send({answer: null});
-    }
-    var currentPuzzleIndex = answerIndex(doc.puzzle, parseInt(req.query.index));
-    if (currentPuzzleIndex !== -1) {
-      res.send({answer: doc.puzzle[currentPuzzleIndex].userAnswer});
-    } else {
-      res.send({answer: null});
+    }else {
+
+      var currentPuzzleIndex = answerIndex(doc.puzzle, parseInt(req.query.index));
+      if (currentPuzzleIndex !== -1) {
+        res.send({answer: doc.puzzle[currentPuzzleIndex].userAnswer});
+      } else {
+        res.send({answer: null});
+      }
     }
     next();
   });
