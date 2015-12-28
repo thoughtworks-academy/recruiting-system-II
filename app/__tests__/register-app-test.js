@@ -1,4 +1,4 @@
-//jest.dontMock('../source/scripts/component/register-app.component.js');
+jest.dontMock('../source/scripts/component/register-app.component.js');
 
 var React = require('react');
 var ReactDom = require('react-dom');
