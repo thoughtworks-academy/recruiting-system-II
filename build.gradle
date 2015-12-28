@@ -27,8 +27,6 @@ task(startServer) {
         project(':app').startNodemon.execute()
     }
 
-
-
     doLast {
         project(':api').jettyStop.execute()
         println "Server stoped"
