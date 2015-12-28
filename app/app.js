@@ -6,6 +6,12 @@ var bodyParser = require('body-parser');
 var route = require('./routes/route');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var filterRoute = require('./filter-route');
+
+app.use(cookieParser());
+app.use(session({secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false}));
 
 global.apiServer = 'http://localhost:8080/api/';
 
@@ -30,6 +36,27 @@ if(env === 'development') {
   }));
 }
 
+if(env === 'production'){
+  app.use(function (req, res, next) {
+    if (req.session.user) {
+      next();
+    } else {
+      var arr = req.url.split('/');
+
+      arr.forEach(function(item, i){
+        arr[i] = item.split('?')[0];
+      });
+
+      var lastElement = arr[arr.length - 1];
+
+      if (lastElement.indexOf("html") !== -1 && filterRoute.blackList.indexOf(lastElement) !== -1){
+        res.redirect('/');
+      }else{
+        next();
+      }
+    }
+  });
+}
 
 app.use(express.static('public'));
 

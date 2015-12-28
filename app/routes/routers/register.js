@@ -91,6 +91,9 @@ router.post('/', function(req, res) {
                   .set('Content-Type', 'application/json')
                   .send(registerInfo)
                   .end(function (err, result) {
+                    if(result.body.user){
+                      req.session.user = result.body.user;
+                    }
                     res.send({
                       status: result.status,
                       message: constant.REGISTER_SUCCESS
