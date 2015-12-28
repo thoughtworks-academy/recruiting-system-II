@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 var compile = webpack(require("./webpack.config"));
 
 var env = process.env.NODE_ENV === "production" ? "production" : "development";
-console.log(env);
+
 if(env === 'development') {
   app.use(webpackDevMiddleware(compile, {
     publicPath: "/assets/",   // 以/assets/作为请求的公共目录

@@ -7,3 +7,16 @@ subprojects {
 }
 
 allprojects { apply plugin: "idea" }
+
+task(startServer) {
+    doFirst {
+        project(':api').jettyRun.daemon = true
+        project(':api').jettyRun.execute()
+        project(':api').DBRecovery.execute()
+        println "Server started"
+    }
+    doLast {
+        project(':api').jettyStop.execute()
+        println "Server stoped"
+    }
+}

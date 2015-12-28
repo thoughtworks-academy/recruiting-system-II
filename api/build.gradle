@@ -39,3 +39,6 @@ task(DBRecovery, dependsOn: 'classes', type: JavaExec) {
 }
 
 test.dependsOn DBRecovery
+
+[jettyRun, jettyRunWar,jettyStop]*.stopPort = 8081
+[jettyRun, jettyRunWar,jettyStop]*.stopKey = 'stopKey'

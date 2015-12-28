@@ -8,3 +8,8 @@ buildscript {
 }
 
 apply plugin: 'gulp'
+
+task startNodemon(type:Exec) {
+    executable "bash"
+    args "-c", "./node_modules/.bin/nodemon app.js"
+}
