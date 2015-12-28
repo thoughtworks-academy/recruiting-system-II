@@ -4,7 +4,7 @@
   "description": "ThoughtWorks Academy Recruiting System",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack-dev-server"
   },
   "repository": {
@@ -43,6 +43,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
+    "jest-cli": "^0.8.2",
     "kerberos": "0.0.17",
     "less-loader": "^2.2.2",
     "livereload": "^0.4.0",
