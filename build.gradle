@@ -10,12 +10,25 @@ allprojects { apply plugin: "idea" }
 
 task(startServer) {
     doFirst {
+        println "Starting jetty"
         project(':api').jettyRun.daemon = true
         project(':api').jettyRun.execute()
+        println "Jetty started"
+
+        println "Starting recover"
+        project(':api').flywayMigrate.execute()
         project(':api').DBRecovery.execute()
+<<<<<<< 963526e2aa56d63c30000420f07a1154461087ce
         println "Server started"
+=======
+        println "Date recovered"
+
+>>>>>>> Gradle: Add startServer task
         project(':app').startNodemon.execute()
     }
+
+
+
     doLast {
         project(':api').jettyStop.execute()
         println "Server stoped"
