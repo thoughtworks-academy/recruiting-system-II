@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var request = require('superagent');
 var validate = require("validate.js");
 var RegisterPassword = require('./register-password.component');
-var constraint = require('../../../common/register-constraint');
+var constraint = require('../../../mixin/register-constraint');
 
 var asyncContainersFunc = {
     email: function(value, done) {

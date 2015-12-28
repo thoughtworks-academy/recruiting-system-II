@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
-var constant = require('../../tools/back-constant.json');
+var constant = require('../../mixin/back-constant.json');
 var md5 = require('js-md5');
 var validate = require('validate.js');
-var constraint = require('../../common/login-constraint');
+var constraint = require('../../mixin/login-constraint');
 
 function checkLoginInfo(account, password) {
   var pass = true;

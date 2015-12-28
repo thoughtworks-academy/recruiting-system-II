@@ -2,7 +2,7 @@ var React = global.React = require('react');
 var validate = require('validate.js');
 var ReactDOM = require('react-dom');
 var request = require('superagent');
-var constraint = require('../../../common/login-constraint');
+var constraint = require('../../../mixin/login-constraint');
 
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {

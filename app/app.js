@@ -8,7 +8,7 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var filterRoute = require('./filter-route');
+var filterRoute = require('./mixin/filter-route');
 
 app.use(cookieParser());
 app.use(session({secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false}));

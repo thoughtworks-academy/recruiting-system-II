@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
-var constant = require('../../tools/back-constant.json');
+var constant = require('../../mixin/back-constant.json');
 var Promise = this.Promise || require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require("validate.js");
 var md5 = require('js-md5');
-var constraint = require('../../common/register-constraint');
+var constraint = require('../../mixin/register-constraint');
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
