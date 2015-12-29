@@ -134,3 +134,4 @@ app/public/scripts
 app/public/assets
 app/public/css
 app/.gitignore
+mongodb.conf
