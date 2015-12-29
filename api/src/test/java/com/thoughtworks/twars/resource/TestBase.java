@@ -1,6 +1,8 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.mapper.PaperMapper;
+import com.thoughtworks.twars.mapper.QuizItemMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -14,6 +16,7 @@ import static org.mockito.Mockito.mock;
 public class TestBase extends JerseyTest {
   protected PaperMapper paperMapper = mock(PaperMapper.class);
   protected UserMapper userMapper = mock(UserMapper.class);
+  protected QuizItemMapper quizItemMapper = mock(QuizItemMapper.class);
 
   @Override
   protected Application configure() {
@@ -26,6 +29,7 @@ public class TestBase extends JerseyTest {
       protected void configure() {
         bind(paperMapper).to(PaperMapper.class);
         bind(userMapper).to(UserMapper.class);
+        bind(quizItemMapper).to(QuizItemMapper.class);
 
 
       }

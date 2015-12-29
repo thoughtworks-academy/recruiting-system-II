@@ -3,7 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.QuizItemMapper">
-    <select id="getQuizItemById" resultType="com.thoughtworks.twars.bean.QuizItem">
-        select * from quizItem where id = #{id}
+    <select id="getAllQuizItems" resultType="com.thoughtworks.twars.bean.QuizItem">
+        SELECT * FROM quizItem
+    </select>
+
+    <insert id="insertQuizItem" parameterType="com.thoughtworks.twars.bean.QuizItem" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO quizItem(initializedBox,stepsString,count,question,questionZh,stepsLength,answer,maxUpdateTimes,description,descriptionZh,chartPath,infoPath)
+        VALUES (#{initializedBox},#{stepsString},#{count},"",#{questionZh},#{stepsLength},#{answer},#{maxUpdateTimes},"",#{descriptionZh},#{chartPath},#{infoPath})
+    </insert>
+
+    <select id="getQuizItemById" resultType="com.thoughtworks.twars.bean.QuizItem" >
+        SELECT * FROM quizItem WHERE id = #{id}
     </select>
 </mapper>

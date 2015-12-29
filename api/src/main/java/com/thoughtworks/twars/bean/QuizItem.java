@@ -13,12 +13,8 @@ public class QuizItem {
     private String description;
     private String descriptionZh;
     private String chartPath;
-
-    public String getInfoPath() {
-        return infoPath;
-    }
-
     private String infoPath;
+
 
     public int getId() {
         return id;
@@ -62,5 +58,57 @@ public class QuizItem {
 
     public String getChartPath() {
         return chartPath;
+    }
+
+    public String getInfoPath() {
+        return infoPath;
+    }
+
+    public void setInitializedBox(String initializedBox) {
+        this.initializedBox = initializedBox;
+    }
+
+    public void setStepsString(String stepsString) {
+        this.stepsString = stepsString;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setQuestionZh(String questionZh) {
+        this.questionZh = questionZh;
+    }
+
+    public void setStepsLength(int stepsLength) {
+        this.stepsLength = stepsLength;
+    }
+
+    public void setMaxUpdateTimes(int maxUpdateTimes) {
+        this.maxUpdateTimes = maxUpdateTimes;
+    }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDescriptionZh(String descriptionZh) {
+        this.descriptionZh = descriptionZh;
+    }
+
+    public void setChartPath(String chartPath) {
+        this.chartPath = chartPath;
+    }
+
+    public void setInfoPath(String infoPath) {
+        this.infoPath = infoPath;
     }
 }
