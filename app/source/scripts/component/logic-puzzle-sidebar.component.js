@@ -20,14 +20,12 @@ var LogicPuzzleSidebar = React.createClass({
     this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.lastPuzzle();
-    LogicPuzzleActions.getUserAnswer();
   },
 
   next: function () {
     this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.nextPuzzle();
-    LogicPuzzleActions.getUserAnswer();
   },
 
   render: function () {

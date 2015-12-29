@@ -1,39 +1,41 @@
 var express = require('express');
 var router = express.Router();
-var request = require('superagent');
-var _logicPuzzleList = [
-  'quizItems/1',
-  'quizItems/5',
-  'quizItems/8',
-  'quizItems/14',
-  'quizItems/26',
-  'quizItems/33',
-  'quizItems/36',
-  'quizItems/41',
-  'quizItems/47',
-  'quizItems/49'
-];
+var Promise = this.Promise || require('promise');
+var superAgent = require('superagent');
+var agent = require('superagent-promise')(superAgent, Promise);
+var userPuzzle = require('../../models/user-puzzle');
 
-router.get('/', function(req, resp) {
-  if(req.query.orderIndex >= 1 &&  req.query.orderIndex <= 10) {
-    request
-        .get(apiServer + _logicPuzzleList[req.query.orderIndex-1])
-        .set('Content-Type', 'application/json')
-        .end(function (err, res) {
-          resp.send({
-            id: res.body.id,
-            index: 1,
-            initializedBox: JSON.parse(res.body.initializedBox),
-            questionZh: res.body.questionZh,
-            descriptionZh: JSON.parse(res.body.descriptionZh),
-            chartPath: res.body.chartPath
-          });
+router.get('/', function (req, res) {
+
+  var orderId = req.query.orderId;
+  var userId = req.session.user.id;
+  var userAnswer;
+  var itemsCount;
+
+  userPuzzle.findOne({userId: userId})
+      .then(function (data) {
+        userAnswer = data.quizItems[orderId].userAnswer;
+        itemsCount = data.quizItems.length;
+        return data.quizItems[orderId].uri;
+      })
+      .then(function (uri) {
+        return agent.get(apiServer + uri)
+            .set('Content-Type', 'application/json')
+            .end();
+      })
+      .then(function (data) {
+        res.send({
+          item: {
+            id: data.body.id,
+            initializedBox: JSON.parse(data.body.initializedBox),
+            question: data.body.questionZh,
+            description: JSON.parse(data.body.descriptionZh),
+            chartPath: data.body.chartPath
+          },
+          userAnswer: userAnswer,
+          itemsCount: itemsCount
         });
-  }else {
-    resp.send({isOutRange: true });
-  }
+      });
 });
-
-
 
 module.exports = router;

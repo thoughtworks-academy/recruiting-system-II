@@ -4,11 +4,12 @@ var Schema = mongoose.Schema;
 
 var userPuzzleSchema = new Schema({
   userId: Number,
-  puzzle: [{
-    puzzleId: Number,
-    userPuzzleIndex: Number,
-    userAnswer: Number
-  }]
+  startTime: Number,
+  quizItems:[{
+      id: Number,
+      uri: String,
+      userAnswer: Number
+    }]
 });
 
 module.exports = mongoose.model('UserPuzzles', userPuzzleSchema);

@@ -6,6 +6,7 @@ module.exports = function(app, env) {
     if(env === 'development' && !req.session.user){
       req.session.userId = 1;
       req.session.user = {
+        id: 1,
         name: null,
         href: 'user/1'
       };

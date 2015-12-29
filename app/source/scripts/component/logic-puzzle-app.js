@@ -8,14 +8,14 @@ var LogicPuzzleLeft = require('./logic-puzzle-left.component');
 var LogicPuzzleSidebar = require('./logic-puzzle-sidebar.component');
 
 var LogicPuzzle = React.createClass({
-  mixins: [Reflux.connect(LogicPuzzleStore, 'item')],
+  mixins: [Reflux.connect(LogicPuzzleStore)],
 
   getInitialState: function () {
     return {
       item: {
         initializedBox: [],
         chartPath: '',
-        descriptionZh: [],
+        description: [],
         isFirstOne: true,
         isLastOne: false
       }
@@ -24,7 +24,10 @@ var LogicPuzzle = React.createClass({
 
   componentDidMount: function () {
     LogicPuzzleActions.loadItem();
-    LogicPuzzleActions.getUserAnswer();
+  },
+
+  handleAnswerChange: function(val) {
+    LogicPuzzleActions.changeAnswer(val);
   },
 
   render: function () {
@@ -33,7 +36,7 @@ var LogicPuzzle = React.createClass({
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-9 col-sm-8">
-              <LogicPuzzleLeft item = {this.state.item}/>
+              <LogicPuzzleLeft item={this.state.item} userAnswer={this.state.userAnswer} onAnswerChange={this.handleAnswerChange} />
             </div>
 
             <div className="col-md-3 col-sm-4">

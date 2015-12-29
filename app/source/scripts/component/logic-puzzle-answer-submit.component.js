@@ -6,8 +6,6 @@ require("bootstrap");
 
 
 var LogicPuzzleAnswerSubmit = React.createClass({
-
-
   puzzle: {
     puzzleId: 0,
     userPuzzleIndex: 0,
@@ -19,10 +17,14 @@ var LogicPuzzleAnswerSubmit = React.createClass({
     if (answer !== '') {
       this.puzzle.userAnswer = parseInt(answer);
       LogicPuzzleActions.submitAnswer(this.puzzle);
-      LogicPuzzleActions.getUserAnswer();
     } else {
       $('#warningModal').modal('show');
     }
+  },
+
+  handleAnswerChange: function(evt) {
+    var val = evt.target.value;
+    this.props.onAnswerChange(val);
   },
 
 
@@ -35,7 +37,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
                 <label htmlFor="result">结果为:</label>
               </div>
               <div className="col-md-4 col-sm-4 col-xs-4">
-                <input type="number" className="form-control" id="result" ref="answer"/>
+                <input type="number" className="form-control" id="result" value={this.props.userAnswer} onChange={this.handleAnswerChange}/>
               </div>
               <div className="col-md-4 col-sm-4 col-xs-4">
                 <button type="text" className="btn btn-danger" onClick={this.submitAnswer}>提交</button>

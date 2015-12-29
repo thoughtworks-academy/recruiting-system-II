@@ -7,13 +7,17 @@ var LogicPuzzleAnswerSubmit = require('./logic-puzzle-answer-submit.component');
 
 var LogicPuzzleLeft = React.createClass({
 
+  handleAnswerChange: function(val) {
+    this.props.onAnswerChange(val);
+  },
+
   render: function () {
     return (
         <div id="logic-puzzle">
           <LogicPuzzleBoxes boxes={this.props.item.initializedBox}/>
           <LogicPuzzleChart chartPath={this.props.item.chartPath}/>
-          <LogicPuzzleDescription description={this.props.item.descriptionZh}/>
-          <LogicPuzzleAnswerSubmit />
+          <LogicPuzzleDescription description={this.props.item.description}/>
+          <LogicPuzzleAnswerSubmit onAnswerChange={this.handleAnswerChange} userAnswer={this.props.userAnswer}/>
 
         </div>
     )
