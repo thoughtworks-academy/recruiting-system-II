@@ -225,9 +225,7 @@ schemas:
             quizItem:
               id: integer
               initializedBox: string
-              question: string
               questionZh: string
-              description: string
               descriptionZh: string
               chartPath: string
               # 根据前台需要的数据把剩下的补完，不能有正确答案
@@ -242,9 +240,7 @@ schemas:
             quizItems: object[]
               id:integer
               initializedBox: string
-              question: string
               questionZh: string
-              description: string
               descripyionZh: string
               chartPath: string
   post:
@@ -254,9 +250,7 @@ schemas:
         formParameters:
           id: integer
           initialedBox: string
-          question: string
           questionZh: string
-          description: string
           descripyionZh: string
           chartPath: string
     response:
