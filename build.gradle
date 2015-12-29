@@ -18,12 +18,10 @@ task(startServer) {
         println "Starting recover"
         project(':api').flywayMigrate.execute()
         project(':api').DBRecovery.execute()
-<<<<<<< 963526e2aa56d63c30000420f07a1154461087ce
-        println "Server started"
-=======
-        println "Date recovered"
 
->>>>>>> Gradle: Add startServer task
+        println "Server started"
+
+        println "Date recovered"
         project(':app').startNodemon.execute()
     }
 
