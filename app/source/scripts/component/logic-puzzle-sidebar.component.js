@@ -16,14 +16,14 @@ var LogicPuzzleSidebar = React.createClass({
     userAnswer: 0
   },
 
-  lastPuzzle: function () {
+  previous: function () {
     this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.lastPuzzle();
     LogicPuzzleActions.getUserAnswer();
   },
 
-  nextPuzzle: function () {
+  next: function () {
     this.puzzle.userAnswer = document.getElementById('result').value;
     LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.nextPuzzle();
@@ -54,10 +54,10 @@ var LogicPuzzleSidebar = React.createClass({
 
           <div className="select">
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={this.props.isFirstOne ? 'disabled' : ''} onClick={this.lastPuzzle}>上一题
+                    disabled={this.props.isFirstOne ? 'disabled' : ''} onClick={this.previous}>上一题
             </button>
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={this.props.isLastOne ? 'disabled' : ''} onClick={this.nextPuzzle}>下一题
+                    disabled={this.props.isLastOne ? 'disabled' : ''} onClick={this.next}>下一题
             </button>
           </div>
           <hr/>
