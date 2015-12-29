@@ -3,14 +3,12 @@ var filterRoute = require('../mixin/filter-route');
 module.exports = function(app, env) {
 
   app.use(function (req, res, next) {
-    if(env === 'development'){
-
-      if(!req.session.user){
-        req.session.user = {
-          name: null,
-          href: 'user/1'
-        };
-      }
+    if(env === 'development' && !req.session.user){
+      req.session.userId = 1;
+      req.session.user = {
+        name: null,
+        href: 'user/1'
+      };
     }
 
     if (req.session.user) {
