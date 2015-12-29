@@ -1,12 +1,12 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.mapper.UserMapper;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,21 +19,22 @@ public class UserResource extends Resource {
     @GET
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map getUser(@PathParam("param") int userId) {
+    public Response getUser(@PathParam("param") int userId) {
 
         User user = userMapper.getUserById(userId);
-        logger.error("/user/" + userId);
+
         Map<String, Object> map = new HashMap<>();
         map.put("id", user.getId());
         map.put("email", user.getEmail());
         map.put("mobilePhone", user.getMobilePhone());
 
-        return map;
+        return Response.status(200).entity(map).build();
     }
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Map getUserByField(
+    public Response getUserByField(
             @QueryParam("field") String field,
             @QueryParam("value") String value
     ) {
@@ -45,9 +46,13 @@ public class UserResource extends Resource {
             user = userMapper.getUserByMobilePhone(value);
         }
 
-        Map<String, Link> map = new HashMap<>();
-        map.put("user", user.getLink());
+        if(null != user) {
+          Map<String, String> map = new HashMap<>();
+          map.put("uri", "user/" + user.getId());
 
-        return map;
+          return Response.status(200).entity(map).build();
+        }
+
+        return Response.status(404).build();
     }
 }
