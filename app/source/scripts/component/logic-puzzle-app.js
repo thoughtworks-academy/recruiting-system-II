@@ -31,7 +31,7 @@ var LogicPuzzle = React.createClass({
 
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-9 col-sm-8 ">
+            <div className="col-md-9 col-sm-8">
               <LogicPuzzleLeft item = {this.state.item}/>
             </div>
 

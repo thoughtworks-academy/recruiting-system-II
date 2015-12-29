@@ -1,20 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('../../utils/db-connection');
 
 var UserPuzzle = require('../../models/user-puzzle');
 
-var db = mongoose.db;
-
 var _userId = 1;
-
-router.post('/',function(req,res,next){
-  mongoose.open();
-  db.once('open', function () {
-    console.log('open!');
-    next();
-  });
-});
 
 router.post('/', function (req, res, next) {
 
@@ -28,7 +17,6 @@ router.post('/', function (req, res, next) {
     });
 
     UserPuzzle.findOne({userId: 1}, function (err, doc) {
-
       if (err) {
         console.log(err)
       }
@@ -92,12 +80,6 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.post('/',function(){
-  db.close(function () {
-    console.log('closed!')
-  });
-});
-
 function answerIndex(puzzle, index) {
   for (var i = 0; i < puzzle.length; i++) {
     if (puzzle[i].userPuzzleIndex === index) {
@@ -106,6 +88,5 @@ function answerIndex(puzzle, index) {
   }
   return -1;
 }
-
 
 module.exports = router;

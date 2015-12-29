@@ -20,7 +20,6 @@ var LogicPuzzleAnswerSubmit = React.createClass({
       this.puzzle.userAnswer = parseInt(answer);
       LogicPuzzleActions.submitAnswer(this.puzzle);
       LogicPuzzleActions.getUserAnswer();
-      //ReactDOM.findDOMNode(this.refs.answer).value = '';
     } else {
       $('#warningModal').modal('show');
     }

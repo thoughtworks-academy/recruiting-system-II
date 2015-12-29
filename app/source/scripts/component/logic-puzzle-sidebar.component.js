@@ -1,4 +1,5 @@
 var React = require('react');
+
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 
 var LogicPuzzleSidebar = React.createClass({

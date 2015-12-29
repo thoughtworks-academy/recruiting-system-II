@@ -22,7 +22,6 @@ var LogicPuzzleStore = Reflux.createStore({
       _currentIndex -= 1;
     }
     this.updateItem();
-
   },
 
   onNextPuzzle: function () {
@@ -49,9 +48,10 @@ var LogicPuzzleStore = Reflux.createStore({
     request.get('/user-puzzle')
         .set('Content-Type', 'application/json')
         .query({
-          index: parseInt(_currentIndex)
+          index: _currentIndex
         })
         .end((err, res)=> {
+          console.log(res.body.answer);
           document.getElementById('result').value = res.body.answer;
         });
   },

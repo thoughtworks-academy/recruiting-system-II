@@ -9,6 +9,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var filterRoute = require('./mixin/filter-route');
+var dbConnection = require('./middleware/db-connection');
 
 app.use(cookieParser());
 app.use(session({secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false}));
@@ -21,11 +22,11 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-var compile = webpack(require("./webpack.config"));
 
 var env = process.env.NODE_ENV === "production" ? "production" : "development";
 
 if(env === 'development') {
+  var compile = webpack(require("./webpack.config"));
   app.use(webpackDevMiddleware(compile, {
     publicPath: "/assets/",   // 以/assets/作为请求的公共目录
     lazy: true,               // 只有请求时才编译
@@ -67,6 +68,8 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static('public'));
+
+dbConnection(app);
 
 route.setRoutes(app);
 
