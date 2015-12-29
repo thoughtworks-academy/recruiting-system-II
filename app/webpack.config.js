@@ -8,7 +8,8 @@ module.exports = {
         "index": "./source/scripts/index.js",
         "logic-puzzle": "./source/scripts/logic-puzzle",
         "dojo": "./source/scripts/dojo.js",
-        "register": "./source/scripts/register.js"
+        "register": "./source/scripts/register.js",
+        "start": "./source/scripts/start.js"
     },
     output: {
         path: __dirname + '/public/assets/',
