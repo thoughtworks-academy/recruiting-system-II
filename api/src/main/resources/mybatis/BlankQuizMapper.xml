@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thoughtworks.twars.mapper.BlankQuizMapper">
+
+    <resultMap id="blankListMap" type="com.thoughtworks.twars.bean.BlankQuiz">
+        <id property="id" column="id"></id>
+        <result column="sectionId" property="sectionId"></result>
+        <result column="type" property="type"></result>
+        <result column="count" property="count"></result>
+        <result column="hardCount" property="hardCount"></result>
+        <result column="normalCount" property="normalCount"></result>
+        <result column="easyCount" property="easyCount"></result>
+    </resultMap>
+
+    <select id="findAllBlankQuizzes" resultMap="blankListMap">
+        select * from BlankQuiz;
+    </select>
+</mapper>
