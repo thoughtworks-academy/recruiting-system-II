@@ -30,7 +30,7 @@ public class BlankQuizResource {
     for (int i = 0; i < blankQuizs.size(); i++) {
       BlankQuiz item = blankQuizs.get(i);
       Map<String,String> map = new HashMap<>();
-      map.put("uri","blankQuizzes" + item.getId());
+      map.put("uri","blankQuizzes/" + item.getId());
       result.add(map);
     }
 
