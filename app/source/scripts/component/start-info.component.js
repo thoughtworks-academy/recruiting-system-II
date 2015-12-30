@@ -1,4 +1,5 @@
 var React = global.React = require('react');
+var request = require('superagent');
 
 var StartInfo = React.createClass({
   getInitialState: function () {
@@ -10,6 +11,16 @@ var StartInfo = React.createClass({
   changeAgreeState() {
     var newState = !(this.state.agree);
     this.setState({agree: newState});
+  },
+
+  createUserPuzzle() {
+    request.post('/user-puzzle')
+      .set('Content-Type', 'application/json')
+      .end((err, req) => {
+      if(req.body.status === 200){
+        location.href = 'logic-puzzle.html';
+      }
+    });
   },
 
   render() {
@@ -57,8 +68,8 @@ var StartInfo = React.createClass({
             </div>
           </section>
           <section className="start-button">
-            <a href={this.state.agree ? "logic-puzzle.html" : "#"} type="submit" className="btn btn-info btn-lg btn-block"
-            disabled={this.state.agree ? "" : "disabled"}>开始</a>
+            <button className="btn btn-info btn-lg btn-block" onClick={this.createUserPuzzle}
+            disabled={this.state.agree ? "" : "disabled"}>开始</button>
           </section>
         </div>
     );
