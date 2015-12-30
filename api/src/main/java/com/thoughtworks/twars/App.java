@@ -1,5 +1,6 @@
 package com.thoughtworks.twars;
 
+import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 import com.thoughtworks.twars.util.DBUtil;
@@ -17,13 +18,14 @@ public class App extends ResourceConfig {
         SqlSession session = DBUtil.getSession();
         final UserMapper userMapper = session.getMapper(com.thoughtworks.twars.mapper.UserMapper.class);
         final PaperMapper paperMapper = session.getMapper(com.thoughtworks.twars.mapper.PaperMapper.class);
-
+        final BlankQuizMapper blankQuizMapper = session.getMapper(com.thoughtworks.twars.mapper.BlankQuizMapper.class);
         packages("com.thoughtworks.twars.resource")
             .register(new AbstractBinder() {
                 @Override
                 protected void configure() {
                     bind(userMapper).to(UserMapper.class);
                     bind(paperMapper).to(PaperMapper.class);
+                    bind(blankQuizMapper).to(BlankQuizMapper.class);
                 }
             });
     }
