@@ -15,36 +15,40 @@ baseUri: http://api.bronzesword.com/
               email:string
               password:string
 
-/userPuzzle:
-  get:
-    request:
-      application/json:
-        properties:
-          userPuzzleIndex: Number
-
-    responses:
-      200:
-        body:
-          application/json:
-            properties:
-              userAnswer: Number
-
+/userPuzzle/save:
   post:
     request:
       application/json:
         properties:
-          puzzle: {
-            puzzleId: Number
-            userPuzzleIndex: Number
-            userAnswer: Number
-          }
+          orderId: Number
+          userAnswer: Number
+          userId: Number
+
+    responses:
+      200:
+        text:
+          'submit success!'
+
+/logic-puzzle:
+  get:
+    request:
+      application/json:
+        query: orderId
     responses:
       200:
         body:
           application/json:
-            properties:
-              status: 200
-
+            {
+              item: {
+                      id: Number,
+                      initializedBox: json,
+                      question: string,
+                      description: json,
+                      chartPath: str
+                    },
+              userAnswer: Number,
+              itemsCount: Number
+            }
 
 
 
