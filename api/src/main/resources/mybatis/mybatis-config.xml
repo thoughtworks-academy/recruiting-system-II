@@ -18,5 +18,6 @@
         <mapper resource="mybatis/UserMapper.xml"/>
         <mapper resource="mybatis/QuizItemMapper.xml"/>
         <mapper resource="mybatis/PaperMapper.xml"/>
+        <mapper resource="mybatis/BlankQuizMapper.xml"></mapper>
     </mappers>
 </configuration>
