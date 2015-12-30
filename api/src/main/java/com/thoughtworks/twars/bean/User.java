@@ -5,8 +5,11 @@ public class User {
     private String email;
     private String mobilePhone;
     private String password;
+    private Link link;
+
 
     public Link getLink() {
+        link.setId(id);
         return link;
     }
 
@@ -14,7 +17,6 @@ public class User {
         this.link = link;
     }
 
-    private Link link;
 
     public int getId() {
         return id;

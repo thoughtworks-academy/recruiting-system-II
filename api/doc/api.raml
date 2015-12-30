@@ -28,6 +28,23 @@ schemas:
         body:
           application/json:
             properties:
+              id: number
+              user: halLink
+              userInfo: halLink
+
+/login:
+  post:
+    body:
+      application/x-www-form-urlencoded:
+        properties:
+          email: string
+          password: string
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              id: number
               user: halLink
               userInfo: halLink
               
