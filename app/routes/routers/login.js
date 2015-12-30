@@ -67,7 +67,6 @@ router.get('/github',
 router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     function(req, res) {
-      console.log(req.user);
       res.redirect('/start');
     });
 
