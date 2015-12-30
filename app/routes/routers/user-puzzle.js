@@ -13,7 +13,7 @@ router.post('/', function (req, res) {
 
     if (err === null && doc === null) {
 
-      var newUser = new UserPuzzle({
+      var newUser = new userPuzzle({
         userId: userId,
         startTime: Date.parse(new Date()) / 1000,
         quizItems: [
