@@ -9,7 +9,8 @@ module.exports = {
         "logic-puzzle": "./source/scripts/logic-puzzle",
         "dojo": "./source/scripts/dojo.js",
         "register": "./source/scripts/register.js",
-        "start": "./source/scripts/start.js"
+        "start": "./source/scripts/start.js",
+        "account": './source/scripts/account.js'
     },
     output: {
         path: __dirname + '/public/assets/',
