@@ -13,16 +13,6 @@ var StartInfo = React.createClass({
     this.setState({agree: newState});
   },
 
-  createUserPuzzle() {
-    request.post('/user-puzzle')
-      .set('Content-Type', 'application/json')
-      .end((err, req) => {
-      if(req.body.status === 200){
-        location.href = 'logic-puzzle.html';
-      }
-    });
-  },
-
   render() {
     return (
         <div>
@@ -68,8 +58,8 @@ var StartInfo = React.createClass({
             </div>
           </section>
           <section className="start-button">
-            <button className="btn btn-info btn-lg btn-block" onClick={this.createUserPuzzle}
-            disabled={this.state.agree ? "" : "disabled"}>开始</button>
+            <a href={this.state.agree ? "logic-puzzle.html" : "#"} type="submit" className="btn btn-info btn-lg btn-block"
+               disabled={this.state.agree ? "" : "disabled"}>开始</a>
           </section>
         </div>
     );
