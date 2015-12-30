@@ -22,6 +22,10 @@ var LogicPuzzleSidebar = React.createClass({
     LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
+  componentDidMount: function () {
+    LogicPuzzleActions.getRemainTime();
+  },
+
   render: function () {
 
     var isFirst = this.state.orderId === 0;
@@ -40,7 +44,7 @@ var LogicPuzzleSidebar = React.createClass({
 
           <div className="tip">
             <p className="remain-time">
-              您还有90分钟
+              您还有 {this.state.minutes} 分钟 {this.state.seconds} 秒
             </p>
 
             <p className="finish-rate">

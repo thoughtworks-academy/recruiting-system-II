@@ -50,8 +50,31 @@ var LogicPuzzleStore = Reflux.createStore({
           });
 
         });
-  }
+  },
 
+  refreshTime: function(remainTime){
+    setInterval(() => {
+      remainTime --;
+
+      var minutes = Math.floor(remainTime / 60);
+      var seconds = remainTime % 60;
+
+      this.trigger({
+        "minutes": minutes,
+        "seconds": seconds
+      });
+    }, 1000);
+  },
+
+  onGetRemainTime: function () {
+    request.get('/user-puzzle/remain-time')
+      .set('Content-Type', 'application/json')
+      .end((err, res) => {
+        this.refreshTime(res.body.remainTime);
+      });
+  }
 });
+
+
 
 module.exports = LogicPuzzleStore;

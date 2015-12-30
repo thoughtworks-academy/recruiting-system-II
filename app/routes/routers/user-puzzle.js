@@ -4,7 +4,6 @@ var router = express.Router();
 var userPuzzle = require('../../models/user-puzzle');
 var constant = require('../../mixin/back-constant.json');
 
-
 router.post('/', function (req, res) {
   var userId = req.session.user.id;
 
@@ -57,6 +56,16 @@ router.post('/', function (req, res) {
     });
 });
 
+router.get('/remain-time', function(req, res){
+  userPuzzle.findOne({userId: req.session.user.id})
+    .then(function(userPuzzle){
+      var now = Date.parse(new Date()) / 1000;
+      var usedTime = now - userPuzzle.startTime;
+      res.send({
+        remainTime: parseInt((5400 - usedTime))
+      });
+    });
+});
 
 router.post('/save',function(req, res){
   var orderId = req.body.orderId;
