@@ -4,7 +4,6 @@ module.exports = function(app, env) {
 
   app.use(function (req, res, next) {
     if(env === 'development' && !req.session.user){
-      req.session.userId = 1;
       req.session.user = {
         id: 1,
         name: null,

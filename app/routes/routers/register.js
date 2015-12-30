@@ -93,7 +93,6 @@ router.post('/', function(req, res) {
                   .end(function (err, result) {
                     if(result.body.user){
                       req.session.user = result.body.user;
-                      req.session.userId = result.body.user.href.split('/')[1];
                     }
                     res.send({
                       status: result.status,
