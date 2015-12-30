@@ -47,6 +47,9 @@ var LogicPuzzleStore = Reflux.createStore({
 
   onChangeAnswer: function (val) {
     _answer = val;
+    this.trigger({
+      "userAnswer": _answer
+    });
     console.log("action get:" + val);
   },
 

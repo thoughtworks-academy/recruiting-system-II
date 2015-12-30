@@ -23,6 +23,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
   },
 
   handleAnswerChange: function(evt) {
+    console.log(evt);
     var val = evt.target.value;
     this.props.onAnswerChange(val);
   },
