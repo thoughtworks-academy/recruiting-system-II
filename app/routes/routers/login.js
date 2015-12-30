@@ -5,6 +5,7 @@ var constant = require('../../mixin/back-constant.json');
 var md5 = require('js-md5');
 var validate = require('validate.js');
 var constraint = require('../../mixin/login-constraint');
+var passport = require('passport');
 
 function checkLoginInfo(account, password) {
   var pass = true;
@@ -54,5 +55,20 @@ router.get('/', function(req, res) {
       })
   }
 });
+
+router.get('/github',
+  passport.authenticate('github'),
+      function(req, res){
+        // The request will be redirected to GitHub for authentication, so this
+        // function will not be called.
+});
+
+
+router.get('/github/callback',
+    passport.authenticate('github', { failureRedirect: '/' }),
+    function(req, res) {
+      console.log(req.user);
+      res.redirect('/start');
+    });
 
 module.exports = router;
