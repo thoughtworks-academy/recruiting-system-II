@@ -67,12 +67,12 @@ var LogicPuzzleStore = Reflux.createStore({
     setInterval(() => {
       remainTime --;
 
-      var minutes = Math.floor(remainTime / 60) > 0 ? Math.floor(remainTime / 60) : 0;
-      var seconds = remainTime % 60 > 0 ? remainTime % 60 : 0;
+      var minutes = Math.floor(remainTime / 60);
+      var seconds = remainTime % 60;
 
       this.trigger({
-        "minutes": minutes,
-        "seconds": seconds
+        "minutes": minutes > 0 ? minutes : 0,
+        "seconds": seconds > 0 ? seconds : 0
       });
     }, 1000);
   },
