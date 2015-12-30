@@ -1,16 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-var UserPuzzle = require('../../models/user-puzzle');
+var userPuzzle = require('../../models/user-puzzle');
 var constant = require('../../mixin/back-constant.json');
 
-var _userId = 1;
 
 router.post('/', function (req, res) {
 
   var userId = req.session.user.id || 5;
 
-  UserPuzzle.findOne({userId: userId}, function (err, doc) {
+  userPuzzle.findOne({userId: userId}, function (err, doc) {
 
     if (err === null && doc === null) {
 
@@ -49,6 +48,25 @@ router.post('/', function (req, res) {
     }
 
   });
+});
+
+
+router.post('/save',function(req, res){
+  var orderId = req.body.orderId;
+  var userAnswer = req.body.userAnswer;
+  var userId = req.session.user.id;
+  userPuzzle.findOne({userId: userId})
+      .then(function(data){
+        data.quizItems[orderId].userAnswer = userAnswer;
+        data.save(function(err){
+          if(err)
+            console.log(err);
+        });
+      })
+      .then(function(){
+        res.send('submit success!');
+      })
+
 });
 
 module.exports = router;

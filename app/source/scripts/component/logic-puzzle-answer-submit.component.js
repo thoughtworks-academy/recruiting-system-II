@@ -6,17 +6,12 @@ require("bootstrap");
 
 
 var LogicPuzzleAnswerSubmit = React.createClass({
-  puzzle: {
-    puzzleId: 0,
-    userPuzzleIndex: 0,
-    userAnswer: 0
-  },
 
   submitAnswer: function () {
-    var answer = ReactDOM.findDOMNode(this.refs.answer).value;
-    if (answer !== '') {
-      this.puzzle.userAnswer = parseInt(answer);
-      LogicPuzzleActions.submitAnswer(this.puzzle);
+    console.log(this.props.userAnswer)
+    var answer = this.props.userAnswer;
+    if (answer !== null && answer !== '') {
+      LogicPuzzleActions.submitAnswer(answer);
     } else {
       $('#warningModal').modal('show');
     }

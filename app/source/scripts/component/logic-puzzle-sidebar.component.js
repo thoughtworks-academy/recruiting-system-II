@@ -4,12 +4,6 @@ var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 
 var LogicPuzzleSidebar = React.createClass({
 
-  getInitialState: function () {
-    return {
-      total: 0
-    }
-  },
-
   puzzle: {
     puzzleId: 0,
     userPuzzleIndex: 0,

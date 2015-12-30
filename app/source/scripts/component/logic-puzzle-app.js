@@ -30,13 +30,17 @@ var LogicPuzzle = React.createClass({
     LogicPuzzleActions.changeAnswer(val);
   },
 
+
+
   render: function () {
     return (
 
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-9 col-sm-8">
-              <LogicPuzzleLeft item={this.state.item} userAnswer={this.state.userAnswer} onAnswerChange={this.handleAnswerChange} />
+              <LogicPuzzleLeft item={this.state.item}
+                               userAnswer={this.state.userAnswer}
+                               onAnswerChange={this.handleAnswerChange} />
             </div>
 
             <div className="col-md-3 col-sm-4">
