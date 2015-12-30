@@ -45,9 +45,10 @@ schemas:
           application/json:
             properties:
               id: number
+              id: number
               user: halLink
-              userInfo: halLink
-              
+            userInfo: halLink
+
 /users:
   get:
     queryParameters:
@@ -241,8 +242,8 @@ schemas:
             quizItem:
               id: integer
               initializedBox: string
-              questionZh: string
-              descriptionZh: string
+              question: string
+              description: string
               chartPath: string
               # 根据前台需要的数据把剩下的补完，不能有正确答案
 
@@ -253,12 +254,7 @@ schemas:
       200:
         body:
           application/json:
-            quizItems: object[]
-              id:integer
-              initializedBox: string
-              questionZh: string
-              descripyionZh: string
-              chartPath: string
+            uri: string
   post:
     description: 提交一份题目项定义
     body:
@@ -266,8 +262,8 @@ schemas:
         formParameters:
           id: integer
           initialedBox: string
-          questionZh: string
-          descriptionZh: string
+          question: string
+          description: string
           chartPath: string
     response:
       200:
@@ -280,10 +276,10 @@ schemas:
       response:
         200:
           id: integer
-          desc: string
-            description: Markdown String to discribe homework requirement
-          infoPath: string
-            description: path to item info json file which contains: hardness, rightAnswer and so on
+          initialedBox: string
+          question: string
+          description: string
+          chartPath: string
 
 /homeworkQuizzes:
   get:
