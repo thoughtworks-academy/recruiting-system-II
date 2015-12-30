@@ -8,7 +8,7 @@ require("bootstrap");
 var LogicPuzzleAnswerSubmit = React.createClass({
 
   submitAnswer: function () {
-    console.log(this.props.userAnswer)
+    console.log(this.props.userAnswer);
     var answer = this.props.userAnswer;
     if (answer !== null && answer !== '') {
       LogicPuzzleActions.submitAnswer(answer);

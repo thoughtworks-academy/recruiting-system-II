@@ -1,28 +1,32 @@
 var React = require('react');
-
+var Reflux = require('reflux');
+var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
+var _newOrderId;
 
 var LogicPuzzleSidebar = React.createClass({
+  mixins: [Reflux.connect(LogicPuzzleStore)],
 
-  puzzle: {
-    puzzleId: 0,
-    userPuzzleIndex: 0,
-    userAnswer: 0
-  },
 
   previous: function () {
-    this.puzzle.userAnswer = document.getElementById('result').value;
-    //LogicPuzzleActions.saveUserAnswer(this.puzzle);
-    LogicPuzzleActions.lastPuzzle();
+    if(this.state.orderId > 0 ){
+      _newOrderId = this.state.orderId - 1;
+    }
+    LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
   next: function () {
-    this.puzzle.userAnswer = document.getElementById('result').value;
-    //LogicPuzzleActions.saveUserAnswer(this.puzzle);
-    LogicPuzzleActions.nextPuzzle(this.props.itemsCount);
+    if(this.state.orderId < this.state.itemsCount - 1 ){
+      _newOrderId = this.state.orderId + 1;
+    }
+    LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
   render: function () {
+
+    var isFirst = this.state.orderId === 0;
+    var isLast = this.state.orderId === (this.state.itemsCount - 1);
+
     return (
 
         <div className="sidebar">
@@ -40,16 +44,16 @@ var LogicPuzzleSidebar = React.createClass({
             </p>
 
             <p className="finish-rate">
-              当前第{this.props.orderId +1}题共{this.props.itemsCount}题
+              当前第{this.state.orderId + 1}题共{this.state.itemsCount}题
             </p>
           </div>
 
           <div className="select">
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={this.props.isFirstOne ? 'disabled' : ''} onClick={this.previous}>上一题
+                    disabled={isFirst ? 'disabled' : ''} onClick={this.previous}>上一题
             </button>
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={this.props.isLastOne ? 'disabled' : ''} onClick={this.next}>下一题
+                    disabled={isLast ? 'disabled' : ''} onClick={this.next}>下一题
             </button>
           </div>
           <hr/>

@@ -15,9 +15,7 @@ var LogicPuzzle = React.createClass({
       item: {
         initializedBox: [],
         chartPath: '',
-        description: [],
-        isFirstOne: true,
-        isLastOne: false
+        description: []
       }
     };
   },
@@ -26,11 +24,9 @@ var LogicPuzzle = React.createClass({
     LogicPuzzleActions.loadItem();
   },
 
-  handleAnswerChange: function(val) {
+  handleAnswerChange: function (val) {
     LogicPuzzleActions.changeAnswer(val);
   },
-
-
 
   render: function () {
     return (
@@ -40,13 +36,12 @@ var LogicPuzzle = React.createClass({
             <div className="col-md-9 col-sm-8">
               <LogicPuzzleLeft item={this.state.item}
                                userAnswer={this.state.userAnswer}
-                               onAnswerChange={this.handleAnswerChange} />
+                               onAnswerChange={this.handleAnswerChange}
+                               itemsCount={this.state.itemsCount}/>
             </div>
 
             <div className="col-md-3 col-sm-4">
-              <LogicPuzzleSidebar isFirstOne={this.state.item.last}
-                                  isLastOne={this.state.item.next}
-                                  orderId={this.state.orderId}
+              <LogicPuzzleSidebar orderId={this.state.orderId}
                                   itemsCount={this.state.itemsCount}/>
             </div>
           </div>

@@ -17,8 +17,9 @@ var LogicPuzzleLeft = React.createClass({
           <LogicPuzzleBoxes boxes={this.props.item.initializedBox}/>
           <LogicPuzzleChart chartPath={this.props.item.chartPath}/>
           <LogicPuzzleDescription description={this.props.item.description}/>
-          <LogicPuzzleAnswerSubmit onAnswerChange={this.handleAnswerChange} userAnswer={this.props.userAnswer}/>
-
+          <LogicPuzzleAnswerSubmit onAnswerChange={this.handleAnswerChange}
+                                   userAnswer={this.props.userAnswer}
+                                   itemsCount={this.props.itemsCount}/>
         </div>
     )
   }
