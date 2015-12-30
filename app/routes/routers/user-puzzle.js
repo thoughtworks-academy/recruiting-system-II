@@ -59,7 +59,6 @@ router.post('/', function (req, res) {
 
 
 router.post('/save',function(req, res){
-  console.log(req.body)
   var orderId = req.body.orderId;
   var userAnswer = req.body.userAnswer;
   var userId = req.session.user.id;

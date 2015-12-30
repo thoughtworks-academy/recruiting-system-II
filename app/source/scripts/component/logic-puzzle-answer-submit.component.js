@@ -8,17 +8,18 @@ require("bootstrap");
 var LogicPuzzleAnswerSubmit = React.createClass({
 
   submitAnswer: function () {
-    console.log(this.props.userAnswer);
     var answer = this.props.userAnswer;
     if (answer !== null && answer !== '') {
-      LogicPuzzleActions.submitAnswer(answer);
+      var newOrderId = this.props.orderId < this.props.itemsCount -1 ?
+                       this.props.orderId + 1:
+                       this.props.orderId;
+      LogicPuzzleActions.submitAnswer( newOrderId );
     } else {
       $('#warningModal').modal('show');
     }
   },
 
   handleAnswerChange: function(evt) {
-    console.log(evt);
     var val = evt.target.value;
     this.props.onAnswerChange(val);
   },
