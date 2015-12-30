@@ -18,14 +18,14 @@ var LogicPuzzleSidebar = React.createClass({
 
   previous: function () {
     this.puzzle.userAnswer = document.getElementById('result').value;
-    LogicPuzzleActions.saveUserAnswer(this.puzzle);
+    //LogicPuzzleActions.saveUserAnswer(this.puzzle);
     LogicPuzzleActions.lastPuzzle();
   },
 
   next: function () {
     this.puzzle.userAnswer = document.getElementById('result').value;
-    LogicPuzzleActions.saveUserAnswer(this.puzzle);
-    LogicPuzzleActions.nextPuzzle();
+    //LogicPuzzleActions.saveUserAnswer(this.puzzle);
+    LogicPuzzleActions.nextPuzzle(this.props.itemsCount);
   },
 
   render: function () {
@@ -46,7 +46,7 @@ var LogicPuzzleSidebar = React.createClass({
             </p>
 
             <p className="finish-rate">
-              当前第{this.props.index}题共10题，已完成{this.state.total}题
+              当前第{this.props.orderId +1}题共{this.props.itemsCount}题
             </p>
           </div>
 
