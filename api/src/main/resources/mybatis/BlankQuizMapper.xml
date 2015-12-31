@@ -5,7 +5,7 @@
 
 <mapper namespace="com.thoughtworks.twars.mapper.BlankQuizMapper">
 
-    <resultMap id="blankListMap" type="com.thoughtworks.twars.bean.BlankQuiz">
+    <resultMap id="blankQuizListMap" type="com.thoughtworks.twars.bean.BlankQuiz">
         <id property="id" column="id"></id>
         <result column="sectionId" property="sectionId"></result>
         <result column="type" property="type"></result>
@@ -15,7 +15,11 @@
         <result column="easyCount" property="easyCount"></result>
     </resultMap>
 
-    <select id="findAll" resultMap="blankListMap">
+    <select id="findAll" resultMap="blankQuizListMap">
         select * from BlankQuiz;
+    </select>
+
+    <select id="findBySectionId" resultMap="blankQuizListMap">
+        select * from BlankQuiz where sectionId  = #{sectionId}
     </select>
 </mapper>

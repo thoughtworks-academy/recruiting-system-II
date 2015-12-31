@@ -66,6 +66,9 @@ INSERT INTO users values(null, "lwj@qq.com", "18740362964", "31bb0b08ce6e051dfdf
 TRUNCATE blankQuiz;
 INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,2,"logicPuzzle",10,2,4,4);
+INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
+INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
+INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,3,"logicPuzzle",10,5,4,1);
 
 TRUNCATE section;
