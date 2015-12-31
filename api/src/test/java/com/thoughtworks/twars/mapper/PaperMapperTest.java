@@ -30,7 +30,7 @@ public class PaperMapperTest {
     @Test
     public void should_return_all_papers() throws Exception {
         List<Paper> papers = paperMapper.findAll();
-        assertThat(papers.size(), is(2));
+        assertThat(papers.size(), is(4));
         assertThat(papers.get(0).getMakerId(), is(1));
     }
 }

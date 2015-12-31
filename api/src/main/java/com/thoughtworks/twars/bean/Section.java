@@ -2,6 +2,16 @@ package com.thoughtworks.twars.bean;
 
 public class Section {
     private int id;
+    private int paperId;
+
+    public int getPaperId() {
+        return paperId;
+    }
+
+    public void setPaperId(int paperId) {
+        this.paperId = paperId;
+    }
+
     private String description;
 
     public int getId() {

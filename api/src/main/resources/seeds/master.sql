@@ -1,5 +1,7 @@
 TRUNCATE paper;
 INSERT INTO paper values(null, 1);
+INSERT INTO paper values(null, 2);
+INSERT INTO paper values(null, 2);
 INSERT INTO paper values(null, 5);
 
 TRUNCATE TABLE quizItem;
@@ -65,3 +67,8 @@ TRUNCATE blankQuiz;
 INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,2,"logicPuzzle",10,2,4,4);
 INSERT INTO blankQuiz VALUES (null,3,"logicPuzzle",10,5,4,1);
+
+TRUNCATE section;
+INSERT INTO section VALUES (NULL ,1,"");
+INSERT INTO section VALUES (NULL ,1,"");
+INSERT INTO section VALUES (NULL ,1,"");

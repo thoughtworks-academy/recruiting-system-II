@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.QuizItem;
+import com.thoughtworks.twars.tasks.DBRecovery;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
@@ -25,14 +26,15 @@ public class QuizItemMapperTest {
 
   @After
   public void tearDown() throws Exception {
+    DBRecovery.main(new String[] {});
     session.rollback();
     session.close();
   }
 
   @Test
   public void should_return_all_quizItems() throws Exception{
-    List<QuizItem> quizItemList = quizItemMapper.getAllQuizItems();
 
+    List<QuizItem> quizItemList = quizItemMapper.getAllQuizItems();
     assertThat(quizItemList.size(),is(50));
   }
 

@@ -24,11 +24,11 @@ public class BlankQuizResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getAllBlankQuizzes() {
 
-    List<BlankQuiz> blankQuizs = blankQuizMapper.findAll();
+    List<BlankQuiz> blankQuizzes = blankQuizMapper.findAll();
     List<Map> result = new ArrayList<>();
 
-    for (int i = 0; i < blankQuizs.size(); i++) {
-      BlankQuiz item = blankQuizs.get(i);
+    for (int i = 0; i < blankQuizzes.size(); i++) {
+      BlankQuiz item = blankQuizzes.get(i);
       Map<String,String> map = new HashMap<>();
       map.put("uri","blankQuizzes/" + item.getId());
       result.add(map);

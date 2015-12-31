@@ -1,6 +1,5 @@
 package com.thoughtworks.twars.mapper;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -8,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class UserMapperTest{
@@ -64,6 +63,6 @@ public class UserMapperTest{
 
     userMapper.insertUser(user);
 
-    assertThat(user.getId(), is(3));
+    assertThat(user.getId(), is(6));
   }
 }
