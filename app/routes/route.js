@@ -5,4 +5,5 @@ exports.setRoutes = function(app) {
   app.use('/login', require('./routers/login'));
   app.use('/user-puzzle',require('./routers/user-puzzle'));
   app.use('/start', require('./routers/start'));
+  app.use('/account', require('./routers/account'));
 };
