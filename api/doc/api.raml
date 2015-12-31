@@ -3,18 +3,6 @@ title: TWARecurting API
 description:
 version: V1
 baseUri: http://api.bronzesword.com/
-schemas:
-  - halLink: |
-      { "$schema": "http://json-schema.org/schema",
-        "type": "object",
-        "description": "a Hypertext Application Language link",
-        "properties": {
-          "name":  { "type": "string" },
-          "href":  { "type": "string" },
-          "tempted": {"type": "string"} }
-        },
-        "required": [ "href" ]
-      }
 /register:
   post:
     body:
@@ -29,9 +17,12 @@ schemas:
           application/json:
             properties:
               id: number
-              user: halLink
-              userInfo: halLink
-
+              user:
+                properties:
+                  uri: string
+              userInfo:
+                properties:
+                  uri: string
 /login:
   post:
     body:
@@ -45,10 +36,9 @@ schemas:
           application/json:
             properties:
               id: number
-              id: number
-              user: halLink
-            userInfo: halLink
-
+              userInfo:
+                properties:
+                  uri: string
 /users:
   get:
     queryParameters:
@@ -100,7 +90,7 @@ schemas:
             homeworkSubmitPostHistory: object[]
               homeworkURL: string
               version: string
-                
+
     response:
       201:
         body:
@@ -108,27 +98,27 @@ schemas:
             type: object
             properties:
               uri: string
-              
-  /{scoresheetId}: 
+
+  /{scoresheetId}:
     get:
       description: 获取成绩单的细节
       response:
         200:
           body:
             application/json:
-              examer: 
+              examer:
                 uri: string
               paper:
                 uri: string
               blankQuizSubmits: object[]
-                blankQuiz: 
+                blankQuiz:
                   uri: string
                 itemPosts: object[]
                   answer: string
-                  quizItem: 
+                  quizItem:
                     uri: string
               homeworkSubmits: object[]
-                homeworkQuiz: 
+                homeworkQuiz:
                   uri: string
                 homeworkSubmitPostHistory: object[]
                   homeworkURL: string
@@ -144,7 +134,7 @@ schemas:
           application/json:
            type: object[]
              uri: string
-       
+
   post:
     description: 提交一份考卷定义，含section定义
     body:
@@ -299,7 +289,7 @@ schemas:
             description: git url, contain dockerFile in repository
           templateRepository: string
             description: git url, contain dockerFile in repository
-            
+
 /userInfo/{id}:
   get:
   put:

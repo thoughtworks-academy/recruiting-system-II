@@ -12,56 +12,56 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class UserResourceTest extends TestBase{
-  User user = mock(User.class);
-  String basePath = "/user";
+public class UserResourceTest extends TestBase {
+    User user = mock(User.class);
+    String basePath = "/user";
 
-  @Test
-  public void should_return_user(){
-    when(userMapper.getUserById(1)).thenReturn(user);
+    @Test
+    public void should_return_user() {
+        when(userMapper.getUserById(1)).thenReturn(user);
 
-    when(user.getId()).thenReturn(1);
-    when(user.getEmail()).thenReturn("111@222.com");
-    when(user.getMobilePhone()).thenReturn("13111111111");
+        when(user.getId()).thenReturn(1);
+        when(user.getEmail()).thenReturn("111@222.com");
+        when(user.getMobilePhone()).thenReturn("13111111111");
 
-    Response response = target(basePath+"/1").request().get();
+        Response response = target(basePath + "/1").request().get();
 
-    assertThat(response.getStatus(),is(200));
+        assertThat(response.getStatus(), is(200));
 
-    Map user = response.readEntity(Map.class);
+        Map result = response.readEntity(Map.class);
 
-    assertThat((int)user.get("id"), is(1));
-    assertThat((String)user.get("email"), is("111@222.com"));
-    assertThat((String)user.get("mobilePhone"), is("13111111111"));
-  }
+        assertThat((Integer) result.get("id"), is(1));
+        assertThat((String) result.get("email"), is("111@222.com"));
+        assertThat((String) result.get("mobilePhone"), is("13111111111"));
+    }
 
-  @Test
-  public void should_return_user_by_field(){
-    when(userMapper.getUserByEmail(anyString())).thenReturn(user);
-    when(user.getId()).thenReturn(10);
+    @Test
+    public void should_return_user_by_field() {
+        when(userMapper.getUserByEmail(anyString())).thenReturn(user);
+        when(user.getId()).thenReturn(10);
 
-    Response response = target(basePath)
-            .queryParam("field", "email")
-            .queryParam("value", "abc@test.com")
-            .request().get();
+        Response response = target(basePath)
+                .queryParam("field", "email")
+                .queryParam("value", "abc@test.com")
+                .request().get();
 
-    assertThat(response.getStatus(),is(200));
+        assertThat(response.getStatus(), is(200));
 
-    Map result = response.readEntity(Map.class);
+        Map result = response.readEntity(Map.class);
 
-    assertThat((String)result.get("uri"), is("user/10"));
+        assertThat((String) result.get("uri"), is("user/10"));
 
-  }
+    }
 
-  @Test
-  public void should_return_404_when_not_found() throws Exception {
-    when(userMapper.getUserByEmail(anyString())).thenReturn(null);
+    @Test
+    public void should_return_404_when_not_found() throws Exception {
+        when(userMapper.getUserByEmail(anyString())).thenReturn(null);
 
-    Response response = target(basePath)
-            .queryParam("field", "email")
-            .queryParam("value", "abc@test.com")
-            .request().get();
+        Response response = target(basePath)
+                .queryParam("field", "email")
+                .queryParam("value", "abc@test.com")
+                .request().get();
 
-    assertThat(response.getStatus(),is(404));
-  }
+        assertThat(response.getStatus(), is(404));
+    }
 }

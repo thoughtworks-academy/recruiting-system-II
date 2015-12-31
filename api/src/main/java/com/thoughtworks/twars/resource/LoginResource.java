@@ -1,6 +1,5 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.Link;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.mapper.UserMapper;
 
@@ -9,6 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +25,20 @@ public class LoginResource extends Resource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Map createUser(User user) {
+    public Response createUser(User user) {
 
-        System.out.println(user);
-        User result = userMapper.getUserByEmailAndPassWord(user);
+        User resultUser = userMapper.getUserByEmailAndPassWord(user);
 
-        Map<String, Link> map = new HashMap<>();
-        map.put("user", result.getLink());
+        Map<String, Object> map = new HashMap<>();
+        Map<String, String> userInfo = new HashMap<>();
+
+        map.put("id", resultUser.getId());
+        userInfo.put("uri", "user/" + resultUser.getId());
+
+        map.put("userInfo", userInfo);
 
         session.close();
 
-        return map;
+        return Response.status(200).entity(map).build();
     }
 }
