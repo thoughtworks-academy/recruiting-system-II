@@ -21,6 +21,11 @@ db.once('open', function () {
           {id: 41, uri : 'quizItems/41',  userAnswer: 4},
           {id: 47, uri : 'quizItems/47',  userAnswer: null},
           {id: 49, uri : 'quizItems/49',  userAnswer: null}
+        ],
+        quizDemo: [
+          {id: 1, uri: 'quizItem/1'},
+          {id: 2, uri: 'quizItem/2'},
+          {id: 3, uri: 'quizItem/3'}
         ]
       }
     ], function () {
