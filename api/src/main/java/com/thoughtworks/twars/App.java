@@ -2,6 +2,7 @@ package com.thoughtworks.twars;
 
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.PaperMapper;
+import com.thoughtworks.twars.mapper.QuizItemMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -19,6 +20,8 @@ public class App extends ResourceConfig {
         final UserMapper userMapper = session.getMapper(com.thoughtworks.twars.mapper.UserMapper.class);
         final PaperMapper paperMapper = session.getMapper(com.thoughtworks.twars.mapper.PaperMapper.class);
         final BlankQuizMapper blankQuizMapper = session.getMapper(com.thoughtworks.twars.mapper.BlankQuizMapper.class);
+        final QuizItemMapper quizItemMapper = session.getMapper(com.thoughtworks.twars.mapper.QuizItemMapper.class);
+
         packages("com.thoughtworks.twars.resource")
             .register(new AbstractBinder() {
                 @Override
@@ -26,6 +29,7 @@ public class App extends ResourceConfig {
                     bind(userMapper).to(UserMapper.class);
                     bind(paperMapper).to(PaperMapper.class);
                     bind(blankQuizMapper).to(BlankQuizMapper.class);
+                    bind(quizItemMapper).to(QuizItemMapper.class);
                 }
             });
     }

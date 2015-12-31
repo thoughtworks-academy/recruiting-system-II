@@ -1,6 +1,5 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
 import com.thoughtworks.twars.mapper.UserMapper;

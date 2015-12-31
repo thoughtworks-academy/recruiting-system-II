@@ -3,15 +3,21 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Path("/quizItems")
 public class QuizItemResource extends Resource {
 
+    @Inject
     private QuizItemMapper quizItemMapper;
 
     public QuizItemResource() {
@@ -20,13 +26,51 @@ public class QuizItemResource extends Resource {
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllQuizItems(){
+        List<QuizItem> quizItems = quizItemMapper.getAllQuizItems();
+        List<Map> result = new ArrayList<>();
+
+        for(int i=0; i<quizItems.size(); i++) {
+            QuizItem item = quizItems.get(i);
+            Map<String, String> map = new HashMap<>();
+            map.put("uri", "quizItems/" + item.getId());
+            result.add(map);
+        }
+
+        return Response.status(200).entity(result).build();
+    }
+
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map insertQuizItem(QuizItem quizItem){
+
+        quizItemMapper.insertQuizItem(quizItem);
+
+        Map map = new HashMap();
+        map.put("uri","quizItems/"+quizItem.getId());
+
+        return map;
+    }
+
+
+    @GET
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public QuizItem getUser(@PathParam("param") int id) {
+    public Response getQuizItem(@PathParam("param") int id) {
 
         QuizItem quizItem = quizItemMapper.getQuizItemById(id);
+        Map map = new HashMap();
+        map.put("id",quizItem.getId());
+        map.put("description",quizItem.getDescriptionZh());
+        map.put("chartPath",quizItem.getChartPath());
+        map.put("question",quizItem.getQuestionZh());
+        map.put("initializedBox",quizItem.getInitializedBox());
+
 
         session.close();
-        return quizItem;
+
+        return Response.status(200).entity(map).build();
     }
 }

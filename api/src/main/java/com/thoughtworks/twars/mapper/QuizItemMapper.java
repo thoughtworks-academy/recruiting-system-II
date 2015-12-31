@@ -8,7 +8,7 @@ public interface QuizItemMapper {
 
     public List<QuizItem> getAllQuizItems();
 
-    public void insertQuizItem(QuizItem quizItem);
+    public int insertQuizItem(QuizItem quizItem);
 
     public QuizItem getQuizItemById(int id);
 }

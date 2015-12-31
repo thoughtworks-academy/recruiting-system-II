@@ -1,7 +1,6 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.mapper.UserMapper;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
