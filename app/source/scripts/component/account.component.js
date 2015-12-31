@@ -14,7 +14,7 @@ var Account = React.createClass({
       school: '',
       name: '',
       mobilePhone: '',
-      email: '',
+      email: '',  
       gender: '',
       major: '',
       birthday: '',
