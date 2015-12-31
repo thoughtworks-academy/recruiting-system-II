@@ -5,10 +5,14 @@ var Schema = mongoose.Schema;
 var userPuzzleSchema = new Schema({
   userId: Number,
   startTime: Number,
-  quizItems:[{
+  quizItems: [{
+    id: Number,
+    uri: String,
+    userAnswer: Number
+  }],
+  quizDemo: [{
       id: Number,
-      uri: String,
-      userAnswer: Number
+      uri: String
     }]
 });
 
