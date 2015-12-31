@@ -21,10 +21,9 @@ var LogicPuzzleSidebar = React.createClass({
     }
     LogicPuzzleActions.submitAnswer(_newOrderId);
   },
-
-  componentDidMount: function () {
-    LogicPuzzleActions.getRemainTime();
-  },
+  //
+  //componentDidMount: function () {
+  //},
 
   render: function () {
 

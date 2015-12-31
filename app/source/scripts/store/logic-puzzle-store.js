@@ -14,23 +14,31 @@ var LogicPuzzleStore = Reflux.createStore({
 
     this.updateItem()
         .then((res) => {
+          _answer = res.body.userAnswer;
           this.trigger({
             "item": res.body.item,
             "userAnswer": res.body.userAnswer,
             "itemsCount": res.body.itemsCount,
             "orderId": _currentIndex
           });
-        });
+          return res;
+        })
+        .then((res) => {
+          this.onGetRemainTime()
+              .then((res) => {
+                this.refreshTime(res.body.remainTime);
+              })
+        })
   },
 
   onSubmitAnswer: function (newOrderId) {
-    _answer = document.getElementById("result").value;
     this.onSaveUserAnswer()
         .then(() => {
           _currentIndex = newOrderId;
           return this.updateItem()
         })
         .then((res) => {
+          _answer = res.body.userAnswer;
           this.trigger({
             "item": res.body.item,
             "userAnswer": res.body.userAnswer,
@@ -63,9 +71,9 @@ var LogicPuzzleStore = Reflux.createStore({
         .end();
   },
 
-  refreshTime: function(remainTime){
+  refreshTime: function (remainTime) {
     setInterval(() => {
-      remainTime --;
+      remainTime--;
 
       var minutes = Math.floor(remainTime / 60);
       var seconds = remainTime % 60;
@@ -78,14 +86,11 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onGetRemainTime: function () {
-    request.get('/user-puzzle/remain-time')
-      .set('Content-Type', 'application/json')
-      .end((err, res) => {
-        this.refreshTime(res.body.remainTime);
-      });
+    return agent.get('/user-puzzle/remain-time')
+        .set('Content-Type', 'application/json')
+        .end();
   }
 });
-
 
 
 module.exports = LogicPuzzleStore;
