@@ -10,15 +10,10 @@ var AccountStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           this.trigger({
-            id: res.body.id,
-            school: res.body.school,
-            name: res.body.name,
-            mobilePhone: res.body.mobilePhone,
-            email: res.body.email,
-            gender: res.body.gender,
-            major: res.body.major,
-            grade: res.body.grade,
-            birthday: res.body.birth
+            list:[
+                res.body.school,
+                res.body.name
+            ]
           });
         })
   }

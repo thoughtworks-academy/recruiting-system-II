@@ -11,19 +11,16 @@ var Account = React.createClass({
 
   getInitialState: function () {
     return {
-      school: '',
-      name: '',
-      mobilePhone: '',
-      email: '',
-      gender: '',
-      major: '',
-      birthday: '',
-      degree: ''
+      list:[' ', ' ',' ', ' ', ' ', ' ', ' ']
     }
   },
 
   componentDidMount: function () {
     AccountActions.loadUserInfo();
+  },
+
+  handleChange: function(evt){
+    this.setState({value: event.target.value});
   },
 
   render() {
@@ -45,10 +42,12 @@ var Account = React.createClass({
                   <label htmlFor={"input" + item.english}
                          className="col-sm-4 col-md-4 control-label">{item.chinese}</label>
                   <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id={"input" + item.english} placeholder={item.chinese}
+                    <input type="text" className="form-control" id={"input" + item.english}
+                           placeholder={item.chinese === '出生年月' ? 'YYYY-MM-DD' : item.chinese}
                            disabled={item.english === "Email" || item.english === "MobilePhone" ? 'disabled' : ''}
-                           value={this.state.school}/>
+                           value={this.state.list[index]} onChange={this.handleChange}/>
                   </div>
+                  <div></div>
                 </div>
             )
           })}
@@ -63,6 +62,7 @@ var Account = React.createClass({
               </Input>
             </div>
           </div>
+
           <div className="form-group">
             <div className="col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4">
               <button type="submit" className="btn btn-default">保存</button>
