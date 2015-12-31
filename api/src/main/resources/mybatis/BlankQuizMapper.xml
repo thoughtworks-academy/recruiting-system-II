@@ -15,7 +15,7 @@
         <result column="easyCount" property="easyCount"></result>
     </resultMap>
 
-    <select id="findAllBlankQuizzes" resultMap="blankListMap">
+    <select id="findAll" resultMap="blankListMap">
         select * from BlankQuiz;
     </select>
 </mapper>

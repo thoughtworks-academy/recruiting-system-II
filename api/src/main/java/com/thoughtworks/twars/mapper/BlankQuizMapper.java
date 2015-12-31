@@ -5,5 +5,6 @@ import com.thoughtworks.twars.bean.BlankQuiz;
 import java.util.List;
 
 public interface BlankQuizMapper {
-  List<BlankQuiz> findAllBlankQuizzes();
+  List<BlankQuiz> findAll();
+  List<BlankQuiz> findBySectionId(int sectionId);
 }

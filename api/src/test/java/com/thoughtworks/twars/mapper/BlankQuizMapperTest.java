@@ -30,7 +30,7 @@ public class BlankQuizMapperTest {
 
   @Test
   public void should_return_all_blankQuizzes() throws Exception {
-    List<BlankQuiz> blankQuizs = blankQuizMapper.findAllBlankQuizzes();
+    List<BlankQuiz> blankQuizs = blankQuizMapper.findAll();
     assertThat(blankQuizs.size(),is(2));
   }
 }

@@ -24,7 +24,7 @@ public class BlankQuizResource {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getAllBlankQuizzes() {
 
-    List<BlankQuiz> blankQuizs = blankQuizMapper.findAllBlankQuizzes();
+    List<BlankQuiz> blankQuizs = blankQuizMapper.findAll();
     List<Map> result = new ArrayList<>();
 
     for (int i = 0; i < blankQuizs.size(); i++) {
