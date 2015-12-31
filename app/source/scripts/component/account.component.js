@@ -1,62 +1,71 @@
 var React = global.React = require('react');
 var ReactDom = require('react-dom');
+var request = require('superagent');
+var Input = require('react-bootstrap/lib/Input');
+var AccountActions = require('../actions/account-actions');
+var AccountStore = require('../store/account-store');
+var Reflux = require('reflux');
 
 var Account = React.createClass({
+  mixins: [Reflux.connect(AccountStore)],
+
+  getInitialState: function () {
+    return {
+      school: '',
+      name: '',
+      mobilePhone: '',
+      email: '',
+      gender: '',
+      major: '',
+      birthday: '',
+      degree: ''
+    }
+  },
+
+  componentDidMount: function () {
+    AccountActions.loadUserInfo();
+  },
+
   render() {
+    var tags = [
+      {chinese: '学校', english: 'School'},
+      {chinese: '姓名', english: "Name"},
+      {chinese: '手机', english: 'MobilePhone'},
+      {chinese: '邮箱', english: "Email"},
+      {chinese: '性别', english: 'Gender'},
+      {chinese: '专业', english: "Major"},
+      {chinese: '出生年月', english: "Birthday"}
+    ];
+
     return (
         <div id="account-info">
-          <div className="form-group">
-            <label htmlFor="inputSchool" className="col-sm-4 col-md-4 control-label">学校:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputSchool" placeholder="学校" />
-            </div>
-          </div>
-          <div className="form-group">
-            <label htmlFor="inputName" className="col-sm-4 col-md-4 control-label">姓名:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputName" placeholder="姓名" />
-            </div>
-          </div>
+          {tags.map((item, index) => {
+            return (
+                <div className="form-group" key={index}>
+                  <label htmlFor={"input" + item.english}
+                         className="col-sm-4 col-md-4 control-label">{item.chinese}</label>
+                  <div className="col-sm-4 col-md-4">
+                    <input type="text" className="form-control" id={"input" + item.english} placeholder={item.chinese}
+                           disabled={item.english === "Email" || item.english === "MobilePhone" ? 'disabled' : ''}
+                           value={this.state.school}/>
+                  </div>
+                </div>
+            )
+          })}
 
           <div className="form-group">
-            <label htmlFor="inputPhone" className="col-sm-4 col-md-4 control-label">手机号:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputPhone" placeholder="手机号" />
+            <label htmlFor="inputDegree" className="col-sm-4 col-md-4 control-label">学历学位</label>
+            <div className="col-sm-4 col-md-4 degree">
+              <Input type="select" placeholder="学历学位">
+                <option value="regular">本科</option>
+                <option value="master">硕士</option>
+                <option value="doctor">博士</option>
+              </Input>
             </div>
           </div>
-
           <div className="form-group">
-            <label htmlFor="inputEmail" className="col-sm-4 col-md-4 control-label">邮箱:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputEmail" placeholder="邮箱" />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="inputGender" className="col-sm-4 col-md-4 control-label">性别:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputGender" placeholder="性别" />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputMajor" placeholder="专业" />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="inputGrade" className="col-sm-4 col-md-4 control-label">年级:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputGrade" placeholder="年级" />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="inputBirth" className="col-sm-4 col-md-4 control-label">出生日期:</label>
-            <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputBirth" placeholder="出生日期" />
+            <div className="col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4">
+              <button type="submit" className="btn btn-default">保存</button>
             </div>
           </div>
         </div>
