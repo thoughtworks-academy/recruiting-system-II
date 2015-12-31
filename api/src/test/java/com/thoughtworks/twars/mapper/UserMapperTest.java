@@ -1,8 +1,6 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.util.DBUtil;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,22 +8,19 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class UserMapperTest{
+public class UserMapperTest extends TestBase{
 
   private UserMapper userMapper;
-  private SqlSession session;
 
   @Before
   public void setUp() throws Exception {
-    session = DBUtil.getSession();
-    session.getConnection().setAutoCommit(false);
+    super.setUp();
     userMapper = session.getMapper(UserMapper.class);
   }
 
   @After
   public void tearDown() throws Exception {
-    session.rollback();
-    session.close();
+    super.tearDown();
   }
 
   @Test

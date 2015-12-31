@@ -2,8 +2,6 @@ package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.tasks.DBRecovery;
-import com.thoughtworks.twars.util.DBUtil;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,22 +11,19 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class QuizItemMapperTest {
+public class QuizItemMapperTest extends TestBase{
   private QuizItemMapper quizItemMapper;
-  private SqlSession session;
 
   @Before
   public void setUp() throws Exception {
-    session = DBUtil.getSession();
-    session.getConnection().setAutoCommit(false);
+    super.setUp();
     quizItemMapper = session.getMapper(QuizItemMapper.class);
   }
 
   @After
   public void tearDown() throws Exception {
+    super.tearDown();
     DBRecovery.main(new String[] {});
-    session.rollback();
-    session.close();
   }
 
   @Test

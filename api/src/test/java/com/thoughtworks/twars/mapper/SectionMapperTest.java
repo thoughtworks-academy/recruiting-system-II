@@ -1,8 +1,6 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.Section;
-import com.thoughtworks.twars.util.DBUtil;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,22 +10,19 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class SectionMapperTest {
+public class SectionMapperTest extends TestBase{
 
-    SectionMapper sectionMapper;
-    SqlSession session;
+    private SectionMapper sectionMapper;
 
     @Before
     public void setUp() throws Exception {
-        session = DBUtil.getSession();
-        session.getConnection().setAutoCommit(false);
+        super.setUp();
         sectionMapper = session.getMapper(SectionMapper.class);
     }
 
     @After
     public void tearDown() throws Exception {
-
-
+        super.tearDown();
     }
 
     @Test
