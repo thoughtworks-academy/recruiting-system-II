@@ -1,6 +1,5 @@
 var Reflux = require('reflux');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
-var request = require('superagent');
 var Promise = require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var _currentIndex = 0;
@@ -20,6 +19,7 @@ var LogicPuzzleStore = Reflux.createStore({
             "userAnswer": res.body.userAnswer,
             "itemsCount": res.body.itemsCount,
             "orderId": _currentIndex
+
           });
           return res;
         })

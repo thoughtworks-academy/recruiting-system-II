@@ -1,6 +1,7 @@
 var React = require('react');
 
 var LogicPuzzleBoxes = require('./logic-puzzle-boxes.component');
+//var LogicPuzzleExample = require('./logic-puzzle-example.component')
 var LogicPuzzleChart = require('./logic-puzzle-chart.component');
 var LogicPuzzleDescription = require('./logic-puzzle-description.component');
 var LogicPuzzleAnswerSubmit = require('./logic-puzzle-answer-submit.component');
