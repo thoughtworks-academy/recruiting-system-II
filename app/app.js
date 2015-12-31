@@ -9,7 +9,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var dbConnection = require('./middleware/db-connection');
-var sessionChick= require('./middleware/session-check');
+var sessionCheck= require('./middleware/session-check');
 var passport = require('passport');
 var util = require('util');
 var GitHubStrategy = require('passport-github').Strategy;
@@ -66,11 +66,11 @@ if(env === 'development') {
   }));
 }
 
-sessionChick(app, env);
+app.use(sessionCheck);
 
 app.use(express.static('public'));
 
-dbConnection(app);
+app.use(dbConnection);
 
 route.setRoutes(app);
 
