@@ -55,7 +55,8 @@ var RegisterForm = React.createClass({
                 emailError: '',
                 passwordError: '',
                 agree: false,
-                isShowToggle: false
+                isShowToggle: false,
+                disabled: false
             }
         },
 
@@ -134,7 +135,9 @@ var RegisterForm = React.createClass({
             if (!this.checkRegisterData(registerData)) {
                 return false;
             }else {
-                $('#registration').modal('show');
+                this.setState({
+                    disabled: true
+                });
 
                 request.post('/register').set('Content-Type', 'application/json').send({
                     mobilePhone: mobilePhone.value,
@@ -144,7 +147,6 @@ var RegisterForm = React.createClass({
                 }).end((err, req) => {
                     var info = req.body;
 
-                    $('#register-info').text(info.message);
                     if (info.status === 200) {
                         location.href = 'start.html';
                     } else {
@@ -152,6 +154,9 @@ var RegisterForm = React.createClass({
                         var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
                         this.setState({mobilePhoneError: mobilePhoneExist,
                                        emailError: emailExist});
+                        this.setState({
+                            disabled: false
+                        });
                     }
                 });
             }
@@ -194,7 +199,7 @@ var RegisterForm = React.createClass({
                         </div>
 
 
-                        <button type="button" id="register-btn" className="btn btn-lg btn-block btn-primary" onClick={this.register}>注册</button>
+                        <button type="button" id="register-btn" disabled={this.state.disabled} className="btn btn-lg btn-block btn-primary" ref="register" onClick={this.register}>注册</button>
                     </form>
                 </div>
             )

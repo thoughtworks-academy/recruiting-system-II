@@ -55,53 +55,54 @@ router.post('/', function(req, res) {
   result.data = {};
 
   if (checkRegisterInfo(registerInfo)) {
-    var message = '';
-
     var isMobilePhoneExist;
     var isEmailExist;
 
     checkMobilePhoneExist(registerInfo.mobilePhone)
-        .then(function onResult(response) {
-          isMobilePhoneExist = true;
-        }, function onError(err) {
-          isMobilePhoneExist = false;
-        })
+      .then(function onResult(response) {
+        isMobilePhoneExist = true;
+      }, function onError(err) {
+        isMobilePhoneExist = false;
+      })
+      .then(function(){
+        return checkEmailExist(registerInfo.email);
+      })
+      .then(function onResult(response) {
+        isEmailExist = true;
+      }, function onError(err) {
+        isEmailExist = false;
+      })
+      .then(function(){
+        if(isEmailExist || isMobilePhoneExist){
+          throw new Error('isExist');
+        }else {
+          registerInfo.password = md5(registerInfo.password);
 
-        .then(function() {
-          checkEmailExist(registerInfo.email)
-              .then(function onResult(response) {
-                isEmailExist = true;
-              }, function onError(err) {
-                isEmailExist = false;
-              }).then(function () {
-            if(isEmailExist || isMobilePhoneExist){
-              res.send({
-                status: constant.FAILING_STATUS,
-                message: constant.EXIST,
-                data: {
-                  isEmailExist: isEmailExist,
-                  isMobilePhoneExist: isMobilePhoneExist
-                }
-              });
-            }else {
-              registerInfo.password = md5(registerInfo.password);
-
-              request
-                  .post(apiServer + 'register')
-                  .set('Content-Type', 'application/json')
-                  .send(registerInfo)
-                  .end(function (err, result) {
-                    if(result.body.user){
-                      req.session.user = result.body.user;
-                    }
-                    res.send({
-                      status: result.status,
-                      message: constant.REGISTER_SUCCESS
-                    });
-                  });
-            }
-          })
+          return agent('POST', apiServer + 'register')
+            .set('Content-Type', 'application/json')
+            .send(registerInfo)
+            .end();
+        }
+      })
+      .then(function(result){
+        if(result.body.user){
+          req.session.user = result.body.user;
+        }
+        res.send({
+          status: result.status,
+          message: constant.REGISTER_SUCCESS
         });
+      })
+      .catch(function(err){
+        res.send({
+          status: constant.FAILING_STATUS,
+          message: constant.EXIST,
+          data: {
+            isEmailExist: isEmailExist,
+            isMobilePhoneExist: isMobilePhoneExist
+          }
+        });
+      });
 
   } else {
     res.send({
@@ -119,7 +120,7 @@ router.get('/validate-mobile-phone', function(req, res) {
         value: req.query.mobilePhone
       })
       .end(function(err, result) {
-        if(result.body.user) {
+        if(result.body.uri) {
           res.send({
             status: constant.SUCCESSFUL_STATUS
           });
@@ -139,7 +140,7 @@ router.get('/validate-email', function(req, res) {
         value: req.query.email
       })
       .end(function(err, result) {
-        if(result.body.user) {
+        if(result.body.uri) {
           res.send({
             status: constant.SUCCESSFUL_STATUS
           });
