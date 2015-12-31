@@ -22,7 +22,7 @@ var LoginInfo = React.createClass({
                         <li className="qq"><a href="#"></a></li>&nbsp;
                         <li className="weibo"><a href="#"></a></li>&nbsp;
                         <li className="weixin"><a href="#"></a></li>&nbsp;
-                        <li className="other"><a href="/login/github"></a></li>&nbsp;
+                        <li className="github"><a href="/login/github"></a></li>&nbsp;
                     </ul>
                 </div>
             </div>
