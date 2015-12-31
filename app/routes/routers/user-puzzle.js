@@ -6,9 +6,22 @@ var constant = require('../../mixin/back-constant.json');
 
 router.get('/remain-time', function(req, res){
   userPuzzle.findOne({userId: req.session.user.id})
-    .then(function(userPuzzle){
+    .then((userPuzzle) => {
+      
+      if(!userPuzzle.startTime){
+        userPuzzle.startTime = Date.parse(new Date()) / 1000;
+
+        return userPuzzle.save();
+
+      }else{
+        return userPuzzle;
+      }
+    })
+    .then((userPuzzle) => {
+
       var now = Date.parse(new Date()) / 1000;
       var usedTime = now - userPuzzle.startTime;
+
       res.send({
         remainTime: parseInt((5400 - usedTime))
       });
