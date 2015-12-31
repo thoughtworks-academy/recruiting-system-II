@@ -60,3 +60,8 @@ INSERT INTO users values(null, "test2@qq.com", "12345678902", "simple_word", 145
 INSERT INTO users values(null, "wjj@qq.com", "18740404040", "dd54fbd6caef66344a0c729c99eed17b", 1451368017);
 INSERT INTO users values(null, "ydp@qq.com", "18730304826", "12f7cc94124e91cc2332d456f2791226", 1451370576);
 INSERT INTO users values(null, "lwj@qq.com", "18740362964", "31bb0b08ce6e051dfdf7f70eaf5fe37e", 1451370686);
+
+TRUNCATE blankQuiz;
+INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
+INSERT INTO blankQuiz VALUES (null,2,"logicPuzzle",10,2,4,4);
+INSERT INTO blankQuiz VALUES (null,3,"logicPuzzle",10,5,4,1);
