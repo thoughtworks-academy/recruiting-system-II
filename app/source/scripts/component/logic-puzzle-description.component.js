@@ -16,6 +16,18 @@ var LogicPuzzleDescription = React.createClass({
               )
             })}
           </ol>
+          {
+              this.props.isExample ?
+                  <ul className="example">
+                    <li>此</li>
+                    <li>题</li>
+                    <li>为</li>
+                    <li>例</li>
+                    <li>题</li>
+                  </ul>:
+                  null
+          }
+
         </div>
     )
   }

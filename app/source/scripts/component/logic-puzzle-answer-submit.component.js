@@ -35,12 +35,12 @@ var LogicPuzzleAnswerSubmit = React.createClass({
               </div>
               <div className="col-md-4 col-sm-4 col-xs-4">
                 <input type="number" className="form-control" id="result" ref="answer"
-                       //disabled={this.props.isExample ? 'disabled' : ''}
+                       disabled={this.props.isExample ? 'disabled' : ''}
                        value={this.props.userAnswer} onChange={this.handleAnswerChange}/>
               </div>
               <div className="col-md-4 col-sm-4 col-xs-4">
                 <button type="text" className="btn btn-danger"
-                        //disabled={this.props.isExample ? 'disabled' : ''}
+                        disabled={this.props.isExample ? 'disabled' : ''}
                         onClick={this.submitAnswer}>提交</button>
               </div>
             </div>

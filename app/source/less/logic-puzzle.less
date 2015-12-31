@@ -13,6 +13,7 @@ body {
   }
 
   #logic-puzzle {
+    position: relative;
     background-color: @white;
     min-height: 630px;
     .logic-title {
@@ -87,11 +88,23 @@ body {
     }
 
     .right-description {
+
       line-height: 3em;
       float: left;
       display: inline-block;
       background-color: @white;
       margin-left: 20px;
+      ul {
+        position: absolute;
+        font-size: 40px;
+        top: 100px;
+        left: 850px;
+        color: red;
+        li {
+          list-style: none;
+          line-height: 90px;
+        }
+      }
     }
 
     .result-text {

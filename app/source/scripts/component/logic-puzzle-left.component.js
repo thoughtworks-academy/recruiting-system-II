@@ -17,11 +17,13 @@ var LogicPuzzleLeft = React.createClass({
         <div id="logic-puzzle">
           <LogicPuzzleBoxes boxes={this.props.item.initializedBox}/>
           <LogicPuzzleChart chartPath={this.props.item.chartPath}/>
-          <LogicPuzzleDescription description={this.props.item.description}/>
+          <LogicPuzzleDescription description={this.props.item.description}
+                                  isExample={this.props.isExample}/>
           <LogicPuzzleAnswerSubmit onAnswerChange={this.handleAnswerChange}
                                    userAnswer={this.props.userAnswer}
                                    itemsCount={this.props.itemsCount}
-                                   orderId={this.props.orderId}/>
+                                   orderId={this.props.orderId}
+                                   isExample={this.props.isExample}/>
         </div>
     )
   }

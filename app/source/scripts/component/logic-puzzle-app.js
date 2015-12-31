@@ -42,7 +42,8 @@ var LogicPuzzle = React.createClass({
                                userAnswer={this.state.userAnswer}
                                onAnswerChange={this.handleAnswerChange}
                                itemsCount={this.state.itemsCount}
-                               orderId={this.state.orderId}/>
+                               orderId={this.state.orderId}
+                               isExample={this.state.isExample}/>
 
             </div>
 

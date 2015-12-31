@@ -13,13 +13,14 @@ var LogicPuzzleStore = Reflux.createStore({
 
     this.updateItem()
         .then((res) => {
+
           _answer = res.body.userAnswer;
           this.trigger({
             "item": res.body.item,
             "userAnswer": res.body.userAnswer,
             "itemsCount": res.body.itemsCount,
-            "orderId": _currentIndex
-
+            "orderId": _currentIndex,
+            "isExample": res.body.isExample
           });
           return res;
         })
@@ -34,6 +35,7 @@ var LogicPuzzleStore = Reflux.createStore({
   onSubmitAnswer: function (newOrderId) {
     this.onSaveUserAnswer()
         .then(() => {
+
           _currentIndex = newOrderId;
           return this.updateItem()
         })
@@ -43,7 +45,8 @@ var LogicPuzzleStore = Reflux.createStore({
             "item": res.body.item,
             "userAnswer": res.body.userAnswer,
             "itemsCount": res.body.itemsCount,
-            "orderId": _currentIndex
+            "orderId": _currentIndex,
+            "isExample": res.body.isExample
           });
         })
   },

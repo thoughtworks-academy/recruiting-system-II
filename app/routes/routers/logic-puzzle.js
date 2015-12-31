@@ -9,14 +9,16 @@ router.get('/', function (req, res) {
 
   var orderId = req.query.orderId;
   var userId = req.session.user.id;
+  var quizAll;
   var userAnswer;
   var itemsCount;
 
   userPuzzle.findOne({userId: userId})
       .then(function (data) {
-        userAnswer = data.quizItems[orderId].userAnswer;
-        itemsCount = data.quizItems.length;
-        return data.quizItems[orderId].uri;
+        quizAll = data.quizDemos.concat(data.quizItems);
+
+        itemsCount = quizAll.length;
+        return quizAll[orderId].uri;
       })
       .then(function (uri) {
         return agent.get(apiServer + uri)
@@ -24,6 +26,8 @@ router.get('/', function (req, res) {
             .end();
       })
       .then(function (data) {
+
+        userAnswer = quizAll[orderId].userAnswer || 6;//data.body.answer
         res.send({
           item: {
             id: data.body.id,
@@ -33,9 +37,11 @@ router.get('/', function (req, res) {
             chartPath: data.body.chartPath
           },
           userAnswer: userAnswer,
-          itemsCount: itemsCount
+          itemsCount: itemsCount,
+          isExample: quizAll[orderId].userAnswer === undefined
         });
       });
 });
+
 
 module.exports = router;

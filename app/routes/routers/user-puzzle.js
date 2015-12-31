@@ -32,16 +32,19 @@ router.post('/save',function(req, res){
   var orderId = req.body.orderId;
   var userAnswer = req.body.userAnswer;
   var userId = req.session.user.id;
+
   userPuzzle.findOne({userId: userId})
       .then(function(data){
-        data.quizItems[orderId].userAnswer = userAnswer;
-        data.save(function(err){
-          if(err)
-            console.log(err);
-        });
+        if(orderId > data.quizDemos.length - 1){
+          data.quizItems[orderId - data.quizDemos.length].userAnswer = userAnswer;
+          data.save(function(err){
+            if(err)
+              console.log(err);
+          });
+        }
       })
       .then(function(){
-        res.send('submit success!');
+        res.send(200);
       })
 
 });
