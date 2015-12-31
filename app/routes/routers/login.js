@@ -46,8 +46,11 @@ router.get('/', function(req, res) {
         password: password
       })
       .end(function(err, result) {
-        if(result.body.user){
-          req.session.user = result.body.user;
+        if(result.body.id){
+          req.session.user = {
+            id: result.body.id,
+            userInfo: result.body.userInfo
+          };
         }
         res.send({
           status: result.status

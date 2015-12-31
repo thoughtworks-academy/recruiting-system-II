@@ -6,8 +6,9 @@ module.exports = function (req, res, next) {
   if(env === 'development' && !req.session.user){
     req.session.user = {
       id: 1,
-      name: null,
-      href: 'user/1'
+      userInfo: {
+        uri: 'user/1'
+      }
     };
   }
 
