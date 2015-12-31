@@ -75,6 +75,13 @@ var LogicPuzzleStore = Reflux.createStore({
     setInterval(() => {
       remainTime--;
 
+      if(remainTime % 300 === 1){
+        this.onGetRemainTime()
+          .then((res) => {
+            remainTime = res.body.remainTime;
+          })
+      }
+
       this.trigger({
         'remainTime': remainTime
       });

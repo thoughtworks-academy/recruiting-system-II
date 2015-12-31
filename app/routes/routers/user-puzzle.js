@@ -7,7 +7,7 @@ var constant = require('../../mixin/back-constant.json');
 router.get('/remain-time', function(req, res){
   userPuzzle.findOne({userId: req.session.user.id})
     .then((userPuzzle) => {
-      
+
       if(!userPuzzle.startTime){
         userPuzzle.startTime = Date.parse(new Date()) / 1000;
 
