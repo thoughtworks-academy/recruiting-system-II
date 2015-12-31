@@ -65,33 +65,35 @@ baseUri: http://api.bronzesword.com/
 /scoresheets:
   get:
     description: 得到所有的成绩单
-    response:
-      200:
-        body:
-          application/json:
-            type: object[]
-            properties:
-              uri: string
+    responses:
+        200:
+          body:
+            application/json:
+              properties:
+                uris: string[]
 
   post:
     description: 考试完毕，提交成绩单
     body:
-      multipart/form-data:
-        formParameters:
+      application/json:
+        properties:
           examerId: integer
           paperId: integer
-          blankQuizSubmits: object[]
-            blankQuizId: integer
-            itemPosts: object[]
-              answer: string
-              quizItemId: integer
-          homeworkSubmits: object[]
-            homeworkQuizId: integer
-            homeworkSubmitPostHistory: object[]
-              homeworkURL: string
-              version: string
-
-    response:
+          blankQuizSubmits[]:
+            properties:
+              blankQuizId: integer
+              itemPosts[]:
+                properties:
+                  answer: string
+                  quizItemId: integer
+          homeworkSubmits:
+            properties:
+              homeworkQuizId: integer
+              homeworkSubmitPostHistory:
+                properties:
+                  homeworkURL: string
+                  version: string
+    responses:
       201:
         body:
           application/json:
@@ -102,174 +104,211 @@ baseUri: http://api.bronzesword.com/
   /{scoresheetId}:
     get:
       description: 获取成绩单的细节
-      response:
+      responses:
         200:
           body:
             application/json:
-              examer:
-                uri: string
-              paper:
-                uri: string
-              blankQuizSubmits: object[]
-                blankQuiz:
-                  uri: string
-                itemPosts: object[]
-                  answer: string
-                  quizItem:
+              properties:
+                examer:
+                  properties:
                     uri: string
-              homeworkSubmits: object[]
-                homeworkQuiz:
-                  uri: string
-                homeworkSubmitPostHistory: object[]
-                  homeworkURL: string
-                  branch: string
-                  version: string
+                paper:
+                  properties:
+                    uri: string
+                blankQuizSubmits[]:
+                  properties:
+                    blankQuiz:
+                      properties:
+                       uri: string
+                    itemPosts[]:
+                      properties:
+                        answer: string
+                        quizItem:
+                        uri: string
+                homeworkSubmits[]:
+                  properties:
+                    homeworkQuiz:
+                      properties:
+                        uri: string
+                    homeworkSubmitPostHistory[]:
+                      properties:
+                        homeworkURL: string
+                        branch: string
+                        version: string
 
 /papers:
   get:
     description: 获得所有的考卷定义
-    response:
+    responses:
       200:
         body:
           application/json:
-           type: object[]
-             uri: string
+            properties:
+              type[]:
+                properties:
+                  uri: string
 
   post:
     description: 提交一份考卷定义，含section定义
     body:
-      multipart/form-data:
-        formParameters:
-          sections: object[]
-            desc: string
-              description: Markdown String to discribe what happen in the future
-            quizzes: object[]
-              id: integer
-              quizType: string
-    response:
+      application/json:
+        properties:
+          sections[]:
+            properties:
+              desc: string
+                # description: Markdown String to discribe what happen in the future
+              quizzes[]:
+                properties:
+                  id: integer
+                  quizType: string
+    responses:
       201:
         body:
           application/json:
-            uri: string
+            properties:
+              uri: string
   /{paperId}:
     get:
       description: 获取一份考卷定义的细节，含section的细节
-      response:
+      responses:
         200:
           body:
-            description: quizzes的顺序是有含义的，所以不能乱序
+            # description: quizzes的顺序是有含义的，所以不能乱序
             application/json:
-              sections: object[]
-                id: integer
-                desc: string
-                  description: Markdown String to discribe what happen in the future
-                quizzes: object[]
-                  uri: string
-              maker:
-                uri: string
+              properties:
+                sections[]:
+                  properties:
+                    id: integer
+                    desc: string
+                      # description: Markdown String to discribe what happen in the future
+                    quizzes[]:
+                      properties:
+                        uri: string
+                    maker:
+                      properties:
+                        uri: string
   /enrollment:
     get:
       description: 获取一份考卷定义的细节，含section的细节
-      response:
+      responses:
         200:
           body:
-            description: quizzes的顺序是有含义的，所以不能乱序
+            # description: quizzes的顺序是有含义的，所以不能乱序
             application/json:
-              sections: object[]
-                id: integer
-                desc: string
-                  description: Markdown String to discribe what happen in the future
-                quizzes: object[]
-                  uri: string
-              maker:
-                uri: string
+              properties:
+                sections[]:
+                  properties:
+                    id: integer
+                    desc: string
+                      # description: Markdown String to discribe what happen in the future
+                    quizzes[]:
+                      properties:
+                        uri: string
+                    maker:
+                      properties:
+                        uri: string
 
 /blankQuizzes:
   get:
-    description: 获得所有的填空题定义
-    response:
+    # description: 获得所有的填空题定义
+    responses:
       200:
         body:
           application/json:
-            blankQuizzes:object[]
-              uri: string
+            properties:
+              blankQuizzes[]:
+                properties:
+                  uri: string
   post:
     description: 提交一份填空题定义
     body:
-      multipart/form-data:
-        formParameters:
-          id:integer
-          sectionId:integer
-          type:string
-          count:integer
-          hardCount:integer
-          normalCount: integer
-          easyCount: integer
-    response:
-      200:
-        body:
-          application/json:
-            uri: string
-
-  /{blankQuizId}:
-    get:
-      description: 获取一份填空题的定义
-      response:
-        200:
+      application/json:
+        properties:
           id: integer
+          sectionId: integer
           type: string
-            description: class name of generator
           count: integer
           hardCount: integer
           normalCount: integer
           easyCount: integer
-  /{blankQuizId}/items
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              uri: string
+  /{blankQuizId}:
     get:
-      description: 获取一组题目的内容
-      response:
+      #  description: 获取一份填空题的定义
+      responses:
         200:
-          type: object[]
-            quizItem:
-              id: integer
-              initializedBox: string
-              question: string
-              description: string
-              chartPath: string
-              # 根据前台需要的数据把剩下的补完，不能有正确答案
+          body:
+            application/json:
+              properties:
+                id: integer
+                type: string
+                  # description: class name of generator
+                count: integer
+                hardCount: integer
+                normalCount: integer
+                easyCount: integer
+    /items:
+      get:
+        # description: 获取一组题目的内容
+        responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  type[]:
+                    properties:
+                      quizItem:
+                        properties:
+                          id: integer
+                          initializedBox: string
+                          question: string
+                          description: string
+                          chartPath: string
+                          # 根据前台需要的数据把剩下的补完，不能有正确答案
 
 /quizItems:
   get:
     description: 获取所有的题目项定义
-    response:
+    responses:
       200:
         body:
           application/json:
-            uri: string
+            properties:
+              uri: string
   post:
     description: 提交一份题目项定义
     body:
-      multipart/form-data:
-        formParameters:
+      application/json:
+        properties:
           id: integer
           initialedBox: string
           question: string
           description: string
           chartPath: string
-    response:
+    responses:
       200:
         body:
-          appication/json:
-            uri: string
+          application/json:
+            properties:
+              uri: string
   /{quizItemId}:
     get:
       description: 获得一份题目项定义的细节
-      response:
+      responses:
         200:
-          id: integer
-          initialedBox: string
-          question: string
-          description: string
-          chartPath: string
+          body:
+            application/json:
+              properties:
+                id: integer
+                initialedBox: string
+                question: string
+                description: string
+                chartPath: string
 
 /homeworkQuizzes:
   get:
@@ -279,30 +318,49 @@ baseUri: http://api.bronzesword.com/
   /{homeworkQuizId}:
     get:
       description: 获得一份homework题目定义的细节
-      response:
+      responses:
         200:
-          id: integer
-          desc: string
-            description: Markdown String to discribe homework requirement
-          evaluateScript: string
-          evaluateRepository: string
-            description: git url, contain dockerFile in repository
-          templateRepository: string
-            description: git url, contain dockerFile in repository
-
-/userInfo/{id}:
+          body:
+            application/json:
+              properties:
+                id: integer
+                desc: string
+                  # description: Markdown String to discribe homework requirement
+                evaluateScript: string
+                evaluateRepository: string
+                  # description: git url, contain dockerFile in repository
+                templateRepository: string
+                  # description: git url, contain dockerFile in repository
+/userInfo:
   get:
+    description: 获取用户信息
+    body:
+      application/json:
+        properties:
+          userId: integer
+          school: string
+          mobilePhone: string
+          email: string
+          major: string
+          class: string
+          birthday: integer
   put:
-/logic-puzzle/{id}:
-  description: A logic exam subject
-  get:
-/userSubjects:
-  get:
-    queryParameters:
-      userId:
+    description: 提交用户的详细信息
+    body:
+      application/json:
+        properties:
+          userId: integer
+          school: string
+          mobilePhone: string
+          email: string
+          major: string
+          class: string
+          birthday: integer
     responses:
       200:
         body:
           application/json:
             properties:
-              subjects: halLink[]
+              userInfo:
+                properties:
+                  uri: string
