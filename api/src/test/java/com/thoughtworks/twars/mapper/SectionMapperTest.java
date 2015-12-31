@@ -36,4 +36,8 @@ public class SectionMapperTest {
         List<Section> sections = sectionMapper.getSectionsByPaperId(1);
         assertThat(sections.size(), is(3));
     }
+
+
+
+
 }
