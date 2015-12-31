@@ -148,7 +148,7 @@ var RegisterForm = React.createClass({
                     var info = req.body;
 
                     if (info.status === 200) {
-                        location.href = 'start.html';
+                        location.href = 'account.html';
                     } else {
                         var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
                         var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
