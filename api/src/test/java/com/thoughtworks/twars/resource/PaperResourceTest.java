@@ -68,9 +68,9 @@ public class PaperResourceTest extends TestBase {
 
     List<Map> quizzes = (List<Map>) sections.get(0).get("quizzes");
     assertThat(quizzes.size(), is(2));
-    assertThat(quizzes.get(0).get("itemsUri"),is("/blankQuizzes/4/items"));
-    assertThat(quizzes.get(0).get("definitionUri"), is("/blankQuizzes/4"));
-    assertThat(quizzes.get(0).get("examplesUri"), is("/blankQuizzes/4/examples"));
+    assertThat(quizzes.get(0).get("items"),is("/blankQuizzes/4/items"));
+    assertThat(quizzes.get(0).get("definition"), is("/blankQuizzes/4"));
+    assertThat(quizzes.get(0).get("examples"), is("/blankQuizzes/4/examples"));
   }
 
   @Test
@@ -89,6 +89,7 @@ public class PaperResourceTest extends TestBase {
     when(blankQuizMapper.findBySectionId(22)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
 
     when(firstBlankQuiz.getId()).thenReturn(3);
+    when(firstBlankQuiz.getType()).thenReturn("blankQuizzes");
 
     Response response = target(basePath + "/enrollment").request().get();
     assertThat(response.getStatus(), is(200));
@@ -102,9 +103,9 @@ public class PaperResourceTest extends TestBase {
 
     List<Map> quizzes = (List<Map>) sections.get(0).get("quizzes");
     assertThat(quizzes.size(), is(2));
-    assertThat(quizzes.get(0).get("itemsUri"),is("/blankQuizzes/3/items"));
-    assertThat(quizzes.get(0).get("definitionUri"), is("/blankQuizzes/3"));
-    assertThat(quizzes.get(0).get("examplesUri"), is("/blankQuizzes/3/examples"));
+    assertThat(quizzes.get(0).get("items"),is("/blankQuizzes/3/items"));
+    assertThat(quizzes.get(0).get("definition"), is("{uri:/blankQuizzes/3}"));
+    assertThat(quizzes.get(0).get("examples"), is("{uri:/blankQuizzes/3/examples}"));
 
   }
 }

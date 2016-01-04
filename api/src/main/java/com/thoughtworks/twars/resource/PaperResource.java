@@ -74,10 +74,9 @@ public class PaperResource {
 
 
   private List<Map> getQuizzesBySectionId(int sectionId) {
-      Map definitionMap = new HashMap<>();
+      Map<String, Object> definitionMap = new HashMap<>();
       Map itemsMap = new HashMap<>();
       Map examplesMap = new HashMap<>();
-
 
       return blankQuizMapper.findBySectionId(sectionId)
             .stream()

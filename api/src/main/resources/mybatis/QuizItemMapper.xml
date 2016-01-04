@@ -15,4 +15,8 @@
     <select id="getQuizItemById" resultType="com.thoughtworks.twars.bean.QuizItem" >
         SELECT * FROM quizItem WHERE id = #{id}
     </select>
+
+    <select id="findByBlankQuizId" resultType="com.thoughtworks.twars.bean.QuizItem">
+        SELECT  * FROM quizItem order by rand() LIMIT 10 ;
+    </select>
 </mapper>

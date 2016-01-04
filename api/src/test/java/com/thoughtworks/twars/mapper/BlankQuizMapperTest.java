@@ -35,6 +35,6 @@ public class BlankQuizMapperTest extends TestBase {
     @Test
     public void should_return_some_blank_quizzes_by_given_section_id() throws Exception {
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(1);
-        assertThat(blankQuizzes.size(), is(4));
+        assertThat(blankQuizzes.size(), is(3));
     }
 }
