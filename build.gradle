@@ -15,14 +15,6 @@ task(startServer) {
         project(':api').jettyRun.execute()
         println "Jetty started"
 
-        println "Starting recover"
-        project(':api').flywayClean.execute()
-        project(':api').flywayMigrate.execute()
-        project(':api').DBRecovery.execute()
-
-        println "Server started"
-
-        println "Date recovered"
         project(':app').startNodemon.execute()
     }
 
@@ -31,3 +23,7 @@ task(startServer) {
         println "Server stoped"
     }
 }
+
+startServer.dependsOn ':api:flywayClean'
+startServer.dependsOn ':api:flywayMigrate'
+startServer.dependsOn ':api:DBRecovery'

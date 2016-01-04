@@ -2,15 +2,17 @@ buildscript {
     repositories {
         jcenter()
     }
-    dependencies {
-        classpath 'be.filipblondeel.gradle:gradle-gulp-plugin:0.1'
-    }
 }
 
-apply plugin: 'gulp'
+task npmInstall(type:Exec) {
+    executable "bash"
+    args "-c", "npm install"
+}
 
 task startNodemon(type:Exec) {
     executable "bash"
     args "-c", "./node_modules/.bin/nodemon app.js"
     ignoreExitValue true // 被取消时，不会报错
 }
+
+startNodemon.dependsOn npmInstall
