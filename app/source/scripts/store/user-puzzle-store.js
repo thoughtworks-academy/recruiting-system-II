@@ -15,6 +15,10 @@ var UserPuzzleStore = Reflux.createStore({
           'remainTime': res.body.remainTime
         });
       });
+  },
+
+  onSubmit: function () {
+    //TODO
   }
 });
 

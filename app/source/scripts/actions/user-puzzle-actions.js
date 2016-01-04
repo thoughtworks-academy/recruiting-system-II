@@ -1,7 +1,8 @@
 var Reflux = require('reflux');
 
 var UserPuzzleActions = Reflux.createActions([
-  'getRemainTime'
+  'getRemainTime',
+  'submit'
 ]);
 
 module.exports = UserPuzzleActions;

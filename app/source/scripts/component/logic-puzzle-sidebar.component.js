@@ -33,6 +33,11 @@ var LogicPuzzleSidebar = React.createClass({
     setInterval(() => {
       if(this.state.remainTime){
         var remainTime = this.state.remainTime - 1;
+
+        if(remainTime <= 0){
+          UserPuzzleActions.submit();
+        }
+
         this.setState({
           remainTime: remainTime
         });
