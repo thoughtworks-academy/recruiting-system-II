@@ -6,8 +6,7 @@ router.get('/', function(req, res) {
 
   res.send({
     id:userId,
-    school: 'sw',
-    name:'ly'
+    school: 'sw'
   });
 
 //request.get('/userInfo')
@@ -26,6 +25,29 @@ router.get('/', function(req, res) {
 //        }
 //    })
 });
+
+
+router.post('/update', function(req, res) {
+    res.send({
+      status:200
+    });
+
+  //request.post('/userInfo/update')
+  //       .set('Content-Type', "application/json")
+  //       .send({
+  //         id: req.session.user.id,
+  //         data: req.body.userData
+  //       })
+  //       .end(function (err, res) {
+  //         if(res.body.status === 200) {
+  //           res.send({
+  //             status: 200
+  //           })
+  //         }
+  //       })
+  //
+});
+
 
 var request = require('superagent');
 

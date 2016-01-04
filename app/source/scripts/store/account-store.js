@@ -10,12 +10,25 @@ var AccountStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           this.trigger({
-            list:[
-                res.body.school,
-                res.body.name
+            list: [
+              res.body.school,
+              res.body.name
             ]
           });
         })
+  },
+  onUpdateUserInfo: function (userData) {
+
+    request.post('/account/update')
+        .set('Content-Type', 'application/json')
+        .send({
+          data: userData
+        })
+        .end((err, req) => {
+          if(req.body.status === 200) {
+            alert('修改成功');
+          }
+        });
   }
 });
 
