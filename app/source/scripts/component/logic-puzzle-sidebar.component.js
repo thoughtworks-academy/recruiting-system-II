@@ -12,7 +12,6 @@ var LogicPuzzleSidebar = React.createClass({
     if(this.state.orderId > 0 ){
       _newOrderId = this.state.orderId - 1;
     }
-    console.log("上题第"+(this.state.orderId+1) + "题");
     LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
@@ -20,7 +19,6 @@ var LogicPuzzleSidebar = React.createClass({
     if(this.state.orderId < this.state.itemsCount - 1 ){
       _newOrderId = this.state.orderId + 1;
     }
-    console.log("上题第"+(this.state.orderId+1) + "题");
     LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
