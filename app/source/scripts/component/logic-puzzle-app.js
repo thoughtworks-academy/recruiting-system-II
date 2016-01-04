@@ -29,9 +29,6 @@ var LogicPuzzle = React.createClass({
   },
 
   render: function () {
-    if(this.state.remainTime <= 0){
-      //TODO:调用交卷方法
-    }
 
     return (
 
