@@ -5,6 +5,7 @@ var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var UserPuzzleActions = require('../actions/user-puzzle-actions');
 var UserPuzzleStore = require('../store/user-puzzle-store');
 var _newOrderId;
+var able = false;
 
 var LogicPuzzleSidebar = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(UserPuzzleStore)],
@@ -53,6 +54,7 @@ var LogicPuzzleSidebar = React.createClass({
 
     var isFirst = this.state.orderId === 0;
     var isLast = this.state.orderId === (this.state.itemsCount - 1);
+    if(isLast)able=true;
     var minutes = this.state.remainTime > 0 ? Math.floor(this.state.remainTime / 60) : 0;
     var seconds = this.state.remainTime > 0 ? this.state.remainTime % 60 : 0;
 
@@ -79,22 +81,43 @@ var LogicPuzzleSidebar = React.createClass({
 
           <div className="select">
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={isFirst ? 'disabled' : ''} onClick={this.previous}>上一题
+                    disabled={isFirst ? 'disabled' : ''} onClick={isFirst? '' : this.previous}>上一题
             </button>
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={isLast ? 'disabled' : ''} onClick={this.next}>下一题
+                    disabled={isLast ? 'disabled' : ''} onClick={isLast ? '' : this.next}>下一题
             </button>
           </div>
           <hr/>
           <div className="confirm">
             <a href="javascript:void(0)" className="btn btn-lg btn-danger btn-block" data-toggle="modal"
-               data-target={isLast ? "#submitModal": ""} disabled={isLast ? '' : 'disabled'}>交卷</a>
+               data-target={isLast ? "#submitModal": ""} disabled={able ? '' : 'disabled'}>交卷</a>
           </div>
           <div className="hint">
             <span>{isLast ? "检查完毕后可以交卷": "只有在最后一题才可以交卷"}</span>
           </div>
 
+          <div className="modal fade bs-example-modal-sm" id="submitModal" tabIndex="-1" role="dialog">
+            <div className="modal-dialog modal-sm" role="document" aria-hidden="true">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+                  <h3 className="modal-title" id="submitModalLabel">注意!</h3>
+                </div>
+                <div className="modal-body">
+                  <b>您确定要交卷么?一旦提交将无法继续修改!</b>
+
+                  <div className="modal-footer">
+                    <a className="btn btn-danger submit" onclick={LogicPuzzleActions.submitPaper()}>确认提交</a>
+                    <a className="btn btn-default" data-dismiss="modal">关闭</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
 
     )
   }
