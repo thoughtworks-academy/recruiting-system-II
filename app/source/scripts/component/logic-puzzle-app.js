@@ -27,7 +27,6 @@ var LogicPuzzle = React.createClass({
   },
 
   componentDidMount: function () {
-    LogicPuzzleActions.createUser();
     LogicPuzzleActions.loadItem();
   },
 
