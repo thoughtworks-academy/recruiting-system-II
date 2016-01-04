@@ -35,16 +35,16 @@ router.post('/save', function (req, res) {
   var userAnswer = req.body.userAnswer;
   var userId = req.session.user.id;
   userPuzzle.findOne({userId: userId})
-      .then(function(data){
-        if(orderId > data.quizExamples.length - 1){
+      .then(function (data) {
+        if (orderId > data.quizExamples.length - 1) {
           data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
-          data.save(function(err){
-            if(err)
+          data.save(function (err) {
+            if (err)
               console.log(err);
           });
         }
       })
-      .then(function(){
+      .then(function () {
         res.sendStatus(200);
       })
 
@@ -58,13 +58,18 @@ router.get('/createUser', function (req, res) {
   var quizzesExamplesUrl = '';
   var quizItems;
   var quizExamples;
+  var blankQuizId;
+  var paperId;
 
   //agent.get(apiServer + userPuzzleUrl)
   //    .set('Content-Type', 'application/json')
   //    .end()
   //    .then(function (err, res) {
-  //      quizzesItemsUrl = res.body.section[0].quizzes[0].items;
-  //      quizzesExamplesUrl = res.body.section[0].quizzes[0].examples;
+  //      let quizzes = res.body.sections[0].quizzes[0];
+  //      quizzesItemsUrl =quizzes.items;
+  //      quizzesExamplesUrl =quizzes.examples;
+  //      blankQuizId =quizzes.id;
+  //      paperId = res.body.id;
   //    });
   //
   //agent.get(apiServer + quizzesItemsUrl)
@@ -110,6 +115,9 @@ router.get('/createUser', function (req, res) {
             {id: 3, uri: 'quizItems/3'},
             {id: 4, uri: 'quizItems/4'}
           ];
+
+          newUser.blankQuizId = 1;
+          newUser.paperId = 1;
 
           return newUser.save();
         }

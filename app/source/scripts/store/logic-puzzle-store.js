@@ -61,13 +61,13 @@ var LogicPuzzleStore = Reflux.createStore({
 
   onSubmitPaper: function () {
     this.onSaveUserAnswer()
-        .then(function(res) {
+        .then(function (res) {
           superAgent.post('/logic-puzzle')
               .set('Content_Type', 'application/json')
               .end()
         })
 
-    },
+  },
 
   updateItem: function () {
     return agent.get('/logic-puzzle')
@@ -77,6 +77,7 @@ var LogicPuzzleStore = Reflux.createStore({
         })
         .end();
   }
+
 });
 
 

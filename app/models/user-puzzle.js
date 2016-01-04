@@ -11,9 +11,13 @@ var userPuzzleSchema = new Schema({
     userAnswer: Number
   }],
   quizExamples: [{
-      id: Number,
-      uri: String
-    }]
+    id: Number,
+    uri: String
+  }],
+  blankQuizId: Number,
+  paperId: Number,
+  isCommited: String,
+  endTime: String
 });
 
 module.exports = mongoose.model('UserPuzzles', userPuzzleSchema);
