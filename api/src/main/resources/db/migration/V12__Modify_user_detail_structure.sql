@@ -1,0 +1,5 @@
+ALTER TABLE userDetail ADD COLUMN gender ENUM("男", "女");
+ALTER TABLE userDetail DROP COLUMN id;
+ALTER TABLE userDetail ADD COLUMN userId INT UNIQUE NOT NULL FIRST;
+
+
