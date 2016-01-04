@@ -61,8 +61,8 @@ public class PaperResourceTest extends TestBase {
     List<Map> sections = (List<Map>) result.get("sections");
 
     assertThat(sections.size(), is(1));
-    assertThat(sections.get(0).get("id"), is(23));
-    assertThat(sections.get(0).get("desc"), is("逻辑题"));
+    assertThat((int)sections.get(0).get("id"), is(2));
+    assertThat((String) sections.get(0).get("desc"), is("逻辑题"));
 
     List<Map> quizzes = (List<Map>) sections.get(0).get("quizzes");
     assertThat(quizzes.size(), is(2));
