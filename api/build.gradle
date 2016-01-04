@@ -38,6 +38,7 @@ task(DBRecovery, dependsOn: 'classes', type: JavaExec) {
     classpath=sourceSets.main.runtimeClasspath
 }
 
+DBRecovery.dependsOn flywayMigrate
 test.dependsOn DBRecovery
 
 [jettyRun, jettyRunWar,jettyStop]*.stopPort = 8081
