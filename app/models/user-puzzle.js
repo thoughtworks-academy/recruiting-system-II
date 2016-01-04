@@ -10,7 +10,7 @@ var userPuzzleSchema = new Schema({
     uri: String,
     userAnswer: Number
   }],
-  quizDemos: [{
+  quizExamples: [{
       id: Number,
       uri: String
     }]
