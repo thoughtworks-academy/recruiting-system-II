@@ -118,6 +118,8 @@ router.get('/createUser', function (req, res) {
 
           newUser.blankQuizId = 1;
           newUser.paperId = 1;
+          newUser.endTime = null;
+          newUser.isCommited = false;
 
           return newUser.save();
         }

@@ -42,33 +42,33 @@ router.get('/', function (req, res) {
 });
 
 router.post('/',function(req, res) {
-  var examerId = req.session.id;
+  var examerId = req.session.user.id;
   var endTime = Date.parse(new Date()) / 1000;
-
-  userPuzzle.findOne({userId: userId})
+  console.log(req.session.user.id);
+  userPuzzle.findOne({userId: examerId})
       .then(function(data){
+
         var itemPosts = [];
-        data.body.quizItems.forEach(function(quizItem){
+        data.quizItems.forEach(function(quizItem){
           itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
         });
-
+        console.log(itemPosts)
         var result = {
           examerId: examerId,
-          paperId: data.body.paperId,
+          paperId: data.paperId,
           blankQuizSubmits: [
             {
-              blankQuizId: data.body.blankQuizId,
+              blankQuizId: data.blankQuizId,
               itemPosts: itemPosts
             }
           ]
         };
-
-
         return data;
       })
       .then(function(data){
-        data.body.endTime = endTime;
-        data.body.isCommited = true;
+        data.endTime = endTime;
+        data.isCommited = true;
+        console.log(data);
         data.save();
         res.send({status:200});
       })
