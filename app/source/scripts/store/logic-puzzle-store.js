@@ -1,7 +1,8 @@
 var Reflux = require('reflux');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var Promise = require('promise');
-var agent = require('superagent-promise')(require('superagent'), Promise);
+var superAgent = require('superagent');
+var agent = require('superagent-promise')(superAgent, Promise);
 var _currentIndex = 0;
 var _answer;
 
@@ -29,7 +30,6 @@ var LogicPuzzleStore = Reflux.createStore({
   onSubmitAnswer: function (newOrderId) {
     this.onSaveUserAnswer()
         .then(() => {
-
           _currentIndex = newOrderId;
           return this.updateItem()
         })
@@ -58,6 +58,16 @@ var LogicPuzzleStore = Reflux.createStore({
       "userAnswer": _answer
     });
   },
+
+  onSubmitPaper: function () {
+    this.onSaveUserAnswer()
+        .then(function(res) {
+          superAgent.post('/logic-puzzle')
+              .set('Content_Type', 'application/json')
+              .end()
+        })
+
+    },
 
   updateItem: function () {
     return agent.get('/logic-puzzle')

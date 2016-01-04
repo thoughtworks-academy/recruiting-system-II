@@ -42,5 +42,15 @@ router.get('/', function (req, res) {
       })
 });
 
+router.post('/',function(req, res) {
+  var userId = req.session.id;
+  var endTime = Date.parse(new Date()) / 1000;
+
+  userPuzzle.findOne({userId: userId})
+      .then(function(data){
+
+      })
+});
+
 
 module.exports = router;

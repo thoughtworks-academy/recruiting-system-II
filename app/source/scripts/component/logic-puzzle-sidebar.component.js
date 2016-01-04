@@ -12,6 +12,10 @@ var LogicPuzzleSidebar = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(UserPuzzleStore)],
 
 
+  submitPaper: function () {
+    LogicPuzzleActions.submitPaper();
+  },
+
   previous: function () {
     if(this.state.orderId > 0 ){
       _newOrderId = this.state.orderId - 1;
@@ -94,7 +98,7 @@ var LogicPuzzleSidebar = React.createClass({
                data-target={isLast ? "#submitModal": ""} disabled={able ? '' : 'disabled'}>交卷</a>
           </div>
           <div className="hint">
-            <span>{isLast ? "检查完毕后可以交卷": "只有在最后一题才可以交卷"}</span>
+            <span>{able ? "检查完毕后可以交卷": "只有在查看完所有题后才可以交卷"}</span>
           </div>
 
           <div className="modal fade bs-example-modal-sm" id="submitModal" tabIndex="-1" role="dialog">
@@ -109,7 +113,7 @@ var LogicPuzzleSidebar = React.createClass({
                   <b>您确定要交卷么?一旦提交将无法继续修改!</b>
 
                   <div className="modal-footer">
-                    <a className="btn btn-danger submit" onclick={LogicPuzzleActions.submitPaper()}>确认提交</a>
+                    <a className="btn btn-danger submit" onclick={this.submitPaper}>确认提交</a>
                     <a className="btn btn-default" data-dismiss="modal">关闭</a>
                   </div>
                 </div>

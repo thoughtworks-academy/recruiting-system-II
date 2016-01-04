@@ -4,7 +4,9 @@ var LogicPuzzleActions = Reflux.createActions([
   'loadItem',
   'submitAnswer',
   'saveUserAnswer',
-  'changeAnswer'
+  'changeAnswer',
+  'getRemainTime',
+  'submitPaper'
 ]);
 
 module.exports = LogicPuzzleActions;
