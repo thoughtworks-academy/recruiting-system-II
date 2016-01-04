@@ -13,7 +13,6 @@ router.get('/', function (req, res) {
   var userAnswer;
   var itemsCount;
 
-
   userPuzzle.findOne({userId: userId})
       .then(function (data) {
         quizAll = data.quizExamples.concat(data.quizItems);

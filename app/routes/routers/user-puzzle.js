@@ -105,7 +105,7 @@ router.get('/createUser', function (req, res) {
           ];
 
           //newUser.quizExamples = quizExamples;
-          newUser.quizDemos = [
+          newUser.quizExamples = [
             {id: 2, uri: 'quizItems/2'},
             {id: 3, uri: 'quizItems/3'},
             {id: 4, uri: 'quizItems/4'}
