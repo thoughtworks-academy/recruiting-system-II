@@ -65,16 +65,16 @@ INSERT INTO users values(null, "lwj@qq.com", "18740362964", "31bb0b08ce6e051dfdf
 
 TRUNCATE blankQuiz;
 INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
-INSERT INTO blankQuiz VALUES (null,2,"logicPuzzle",10,2,4,4);
-INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
-INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
-INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
+INSERT INTO blankQuiz VALUES (null,2,"singlePuzzle",10,2,4,4);
+INSERT INTO blankQuiz VALUES (null,1,"mutilPuzzle",10,3,4,3);
+INSERT INTO blankQuiz VALUES (null,1,"singlePuzzle",10,3,4,3);
+INSERT INTO blankQuiz VALUES (null,2,"singlePuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,3,"logicPuzzle",10,5,4,1);
 
 TRUNCATE section;
-INSERT INTO section VALUES (NULL ,1,"");
-INSERT INTO section VALUES (NULL ,1,"");
-INSERT INTO section VALUES (NULL ,1,"");
+INSERT INTO section VALUES (NULL ,1,"blankQuizzes");
+INSERT INTO section VALUES (NULL ,1,"blankQuizzes");
+INSERT INTO section VALUES (NULL ,1,"homeworkQuizzes");
 
 TRUNCATE userDetail;
 INSERT INTO userDetail VALUES (1, "思沃学院", "测试一", "计算机", "本科", 0, "男");
