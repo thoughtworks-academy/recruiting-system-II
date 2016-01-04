@@ -235,9 +235,16 @@ baseUri: http://api.bronzesword.com/
                       "desc": "逻辑题",
                       "quizzes": [
                         {
-                          "definitionUri": "blankQuizzes/1",
-                          "itemsUri": "blankQuizzes/1/items",
-                          "examplesUri": "blankQuizzes/1/items"
+                          "id": 1,
+                          "definition": {
+                            "uri": "blankQuizzes/1"
+                            },
+                          "items":{
+                            "uri": "blankQuizzes/1/items"
+                            },
+                          "examples":{
+                            "uri": "blankQuizzes/1/items"
+                            }
                         }
                       ],
                       "maker":{
@@ -258,13 +265,21 @@ baseUri: http://api.bronzesword.com/
                           properties:
                             []:
                               properties:
-                                definitionUri: string
-                                itemsUri: string
-                                examplesUri: string
+                                id: integer
+                                definition:
+                                  properties:
+                                    uri: string
+                                items:
+                                  properties:
+                                    uri: string
+                                examples:
+                                  properties:
+                                    uri: string
                         maker:
                           properties:
                             uri: string
   /enrollment:
+    description: 获取固定ID的考卷定义细节
     get:
       description: 获取一份考卷定义的细节，含section的细节
       responses:
@@ -272,18 +287,57 @@ baseUri: http://api.bronzesword.com/
           body:
             # description: quizzes的顺序是有含义的，所以不能乱序
             application/json:
+              example: |
+                {
+                  "sections": [
+                    {
+                      "id": 1,
+                      "desc": "逻辑题",
+                      "quizzes": [
+                        {
+                          "id": 1,
+                          "definition": {
+                            "uri": "blankQuizzes/1"
+                            },
+                          "items":{
+                            "uri": "blankQuizzes/1/items"
+                            },
+                          "examples":{
+                            "uri": "blankQuizzes/1/items"
+                            }
+                        }
+                      ],
+                      "maker":{
+                        "uri": "userInfo/2"
+                      }
+                    }
+                  ]
+                }
               properties:
-                sections[]:
+                sections:
                   properties:
-                    id: integer
-                    desc: string
-                      # description: Markdown String to discribe what happen in the future
-                    quizzes[]:
+                    []:
                       properties:
-                        uri: string
-                    maker:
-                      properties:
-                        uri: string
+                        id: integer
+                        desc: string
+                          # description: Markdown String to discribe what happen in the future
+                        quizzes:
+                          properties:
+                            []:
+                              properties:
+                                id: integer
+                                definition:
+                                  properties:
+                                    uri: string
+                                items:
+                                  properties:
+                                    uri: string
+                                examples:
+                                  properties:
+                                    uri: string
+                        maker:
+                          properties:
+                            uri: string
 
 /blankQuizzes:
   get:
