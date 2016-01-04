@@ -34,11 +34,14 @@ flyway {
 }
 
 task(DBRecovery, dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        flywayClean.execute()
+        flywayMigrate.execute()
+    }
     main = 'com.thoughtworks.twars.tasks.DBRecovery'
     classpath=sourceSets.main.runtimeClasspath
 }
 
-DBRecovery.dependsOn flywayMigrate
 test.dependsOn DBRecovery
 
 [jettyRun, jettyRunWar,jettyStop]*.stopPort = 8081

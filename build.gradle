@@ -24,6 +24,4 @@ task(startServer) {
     }
 }
 
-startServer.dependsOn ':api:flywayClean'
-startServer.dependsOn ':api:flywayMigrate'
 startServer.dependsOn ':api:DBRecovery'
