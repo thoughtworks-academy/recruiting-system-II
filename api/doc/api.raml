@@ -62,6 +62,41 @@ baseUri: http://api.bronzesword.com/
                 mobilePhone: string
                 name: string
 
+  /{id}/detail:
+    get:
+      description: 获取用户信息
+      body:
+        application/json:
+          properties:
+            userId: integer
+            school: string
+            mobilePhone: string
+            email: string
+            major: string
+            class: string
+            birthday: integer
+    put:
+      description: 提交用户的详细信息
+      body:
+        application/json:
+          properties:
+            userId: integer
+            school: string
+            mobilePhone: string
+            email: string
+            major: string
+            class: string
+            birthday: integer
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                userInfo:
+                  properties:
+                    uri: string
+
+
 /scoresheets:
   get:
     description: 得到所有的成绩单
@@ -350,36 +385,3 @@ baseUri: http://api.bronzesword.com/
                   # description: git url, contain dockerFile in repository
                 templateRepository: string
                   # description: git url, contain dockerFile in repository
-/userInfo:
-  get:
-    description: 获取用户信息
-    body:
-      application/json:
-        properties:
-          userId: integer
-          school: string
-          mobilePhone: string
-          email: string
-          major: string
-          class: string
-          birthday: integer
-  put:
-    description: 提交用户的详细信息
-    body:
-      application/json:
-        properties:
-          userId: integer
-          school: string
-          mobilePhone: string
-          email: string
-          major: string
-          class: string
-          birthday: integer
-    responses:
-      200:
-        body:
-          application/json:
-            properties:
-              userInfo:
-                properties:
-                  uri: string

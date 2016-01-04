@@ -18,47 +18,49 @@ import java.util.Map;
 
 @Path("/blankQuizzes")
 public class BlankQuizResource {
-  @Inject
-  private BlankQuizMapper blankQuizMapper;
+    @Inject
+    private BlankQuizMapper blankQuizMapper;
 
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getAllBlankQuizzes() {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllBlankQuizzes() {
 
-    List<BlankQuiz> blankQuizzes = blankQuizMapper.findAll();
-    List<Map> result = new ArrayList<>();
+        List<BlankQuiz> blankQuizzes = blankQuizMapper.findAll();
+        List<Map> result = new ArrayList<>();
 
-    for (int i = 0; i < blankQuizzes.size(); i++) {
-      BlankQuiz item = blankQuizzes.get(i);
-      Map<String,String> map = new HashMap<>();
-      map.put("uri","blankQuizzes/" + item.getId());
-      result.add(map);
+        for (int i = 0; i < blankQuizzes.size(); i++) {
+            BlankQuiz item = blankQuizzes.get(i);
+            Map<String, String> map = new HashMap<>();
+            map.put("uri", "blankQuizzes/" + item.getId());
+            result.add(map);
+        }
+
+        return Response.status(200).entity(result).build();
     }
 
-    return Response.status(200).entity(result).build();
-  }
 
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path("/{param}")
-  public Response getBlankQuizzesBySectionId(
-          @PathParam("param") int sectionId
-  ){
-    List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(sectionId);
-    List<Map> result = new ArrayList<>();
 
-    for(int i = 0 ; i < blankQuizzes.size() ; i++){
-      BlankQuiz item = blankQuizzes.get(i);
-      Map map = new HashMap<>();
-      map.put("id",item.getId());
-      map.put("type",item.getType());
-      map.put("count",item.getCount());
-      map.put("hardCount",item.getHardCount());
-      map.put("normalCount",item.getNormalCount());
-      map.put("easyCount",item.getEasyCount());
-      result.add(map);
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{param}")
+    public Response getBlankQuizzesBySectionId(
+            @PathParam("param") int sectionId
+    ) {
+        List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(sectionId);
+        List<Map> result = new ArrayList<>();
+
+        for (int i = 0; i < blankQuizzes.size(); i++) {
+            BlankQuiz item = blankQuizzes.get(i);
+            Map map = new HashMap<>();
+            map.put("id", item.getId());
+            map.put("type", item.getType());
+            map.put("count", item.getCount());
+            map.put("hardCount", item.getHardCount());
+            map.put("normalCount", item.getNormalCount());
+            map.put("easyCount", item.getEasyCount());
+            result.add(map);
+        }
+
+        return Response.status(200).entity(result).build();
     }
-
-    return Response.status(200).entity(result).build();
-  }
 }
