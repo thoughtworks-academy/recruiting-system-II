@@ -19,10 +19,12 @@
         SELECT * FROM Users WHERE email = #{email} AND password = #{password} LIMIT 1
     </select>
 
-
-
     <insert id="insertUser" parameterType="com.thoughtworks.twars.bean.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO Users(email, mobilePhone, password, createDate)
         VALUES (#{email}, #{mobilePhone}, #{password}, UNIX_TIMESTAMP())
     </insert>
+
+    <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">
+        SELECT * FROM UserDetail WHERE userId = #{userId};
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
+import com.thoughtworks.twars.bean.UserDetail;
 
 public interface UserMapper {
 
@@ -13,4 +14,6 @@ public interface UserMapper {
     public User getUserByMobilePhone(String mobilePhone);
 
     public User getUserByEmailAndPassWord(User user);
+
+    public UserDetail getUserDetailById(int userId);
 }
