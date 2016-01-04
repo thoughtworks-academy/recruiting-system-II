@@ -40,7 +40,7 @@ router.get('/', function (req, res) {
           ];
 
           newUser.save(function () {
-            return 'success'
+            console.log('success')
           });
         }
 
@@ -57,14 +57,14 @@ router.get('/', function (req, res) {
               .end();
         })
         .then(function (data) {
-
+console.log(data.body)
           userAnswer = quizAll[orderId].userAnswer || 6;//data.body.answer
           res.send({
             item: {
               id: data.body.id,
               initializedBox: JSON.parse(data.body.initializedBox),
-              question: data.body.questionZh,
-              description: JSON.parse(data.body.descriptionZh),
+              question: data.body.question,
+              description: JSON.parse(data.body.description),
               chartPath: data.body.chartPath
             },
             userAnswer: userAnswer,
