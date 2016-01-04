@@ -35,25 +35,17 @@ router.post('/save', function (req, res) {
   var userAnswer = req.body.userAnswer;
   var userId = req.session.user.id;
   userPuzzle.findOne({userId: userId})
-<<<<<<< HEAD
-      .then(function (data) {
-        if (orderId > data.quizDemos.length - 1) {
-          data.quizItems[orderId - data.quizDemos.length].userAnswer = userAnswer;
-          data.save(function (err) {
-            if (err)
-=======
       .then(function(data){
         if(orderId > data.quizExamples.length - 1){
           data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
           data.save(function(err){
             if(err)
->>>>>>> App : chang the quizDemos->quizExamples
               console.log(err);
           });
         }
       })
-      .then(function () {
-        res.send(200);
+      .then(function(){
+        res.sendStatus(200);
       })
 
 });
