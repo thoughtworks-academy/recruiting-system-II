@@ -17,38 +17,42 @@ baseUri: http://api.bronzesword.com/
 
 /userPuzzle/save:
   post:
-    request:
+    body:
       application/json:
         properties:
-          orderId: Number
-          userAnswer: Number
-          userId: Number
+          orderId: number
+          userAnswer: number
+          userId: number
 
     responses:
       200:
-        text:
-          'submit success!'
+        body:
+
+/userPuzzle/createUser:
+  get:
+    description: 创建一条用户记录
+    responses:
+        200:
+          body:
+            application/json:
+              properties:
 
 /logic-puzzle:
   get:
-    request:
-      application/json:
-        query: orderId
+    description: 获取logic-puzzle题
+    queryParameters:
+      orderId: number
     responses:
       200:
         body:
           application/json:
-            {
-              item: {
-                      id: Number,
-                      initializedBox: json,
-                      question: string,
-                      description: json,
-                      chartPath: str
-                    },
-              userAnswer: Number,
-              itemsCount: Number
-            }
-
-
-
+            properties:
+              item:
+                properties:
+                      id: number
+                      initializedBox: string
+                      question: string
+                      descriptinon: string
+                      chartPath: string
+              userAnswer: number
+              itemsCount: number
