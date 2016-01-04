@@ -13,6 +13,7 @@ var passport = require('passport');
 var util = require('util');
 var GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 
 mongoose.connect("mongodb://localhost/twars");
 
@@ -40,7 +41,13 @@ passport.use(new GitHubStrategy({
 ));
 
 app.use(cookieParser());
-app.use(session({secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false}));
+app.use(session({
+  secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false,
+  store: new MongoStore({
+    url: 'mongodb://localhost/twars',
+    ttl: 60 * 60
+  })
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
