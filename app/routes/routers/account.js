@@ -1,52 +1,55 @@
 var express = require('express');
 var router = express.Router();
+var request = require('superagent');
 
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   var userId = req.session.user.id;
+  var uri = 'user/' + userId + '/detail';
 
-  res.send({
-    id:userId,
-    school: 'sw'
-  });
-
-//request.get('/userInfo')
-//    .set('Content-Type', 'application/json')
-//    .query({
-//      id: userId
-//    })
-//    .end(function (err, res) {
-//        if(res.body.status === 200) {
-//          res.send({
-//            status: 200,
-//            data:{
-//             id: userId
-//             }
-//           })
-//        }
-//    })
+  request
+      .get(apiServer + uri)
+      .set('Content-Type', 'application/json')
+      .end(function (err, result) {
+        if (result.status === 200) {
+          res.send({
+            status: 200,
+            data: result.body
+          })
+        } else {
+          res.send({
+            status: 400
+          })
+        }
+      })
 });
 
+router.get('/emailPhone', function(req, res) {
+  var userId = req.session.user.id;
+  var uri = 'user/' + userId;
 
-router.post('/update', function(req, res) {
-    res.send({
-      status:200
-    });
-
-  //request.post('/userInfo/update')
-  //       .set('Content-Type', "application/json")
-  //       .send({
-  //         id: req.session.user.id,
-  //         data: req.body.userData
-  //       })
-  //       .end(function (err, res) {
-  //         if(res.body.status === 200) {
-  //           res.send({
-  //             status: 200
-  //           })
-  //         }
-  //       })
-  //
+  request
+    .get(apiServer + uri)
+    .set('Content-Type', 'application/json')
+    .end(function(err, result) {
+      if (result.status === 200) {
+        res.send({
+          status: 200,
+          data: result.body
+        })
+      } else {
+        res.send({
+          status: 400
+        })
+      }
+    })
 });
+
+//router.post('/update', function (req, res) {
+//  res.send({
+//    status: 200
+//  });
+//
+//});
 
 
 var request = require('superagent');
