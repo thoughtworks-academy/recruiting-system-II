@@ -57,7 +57,6 @@ router.get('/', function (req, res) {
               .end();
         })
         .then(function (data) {
-console.log(data.body)
           userAnswer = quizAll[orderId].userAnswer || 6;//data.body.answer
           res.send({
             item: {
