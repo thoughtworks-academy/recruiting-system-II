@@ -2,10 +2,12 @@ var React = require('react');
 var Reflux = require('reflux');
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
+var UserPuzzleActions = require('../actions/user-puzzle-actions');
+var UserPuzzleStore = require('../store/user-puzzle-store');
 var _newOrderId;
 
 var LogicPuzzleSidebar = React.createClass({
-  mixins: [Reflux.connect(LogicPuzzleStore)],
+  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(UserPuzzleStore)],
 
 
   previous: function () {
@@ -20,6 +22,26 @@ var LogicPuzzleSidebar = React.createClass({
       _newOrderId = this.state.orderId + 1;
     }
     LogicPuzzleActions.submitAnswer(_newOrderId);
+  },
+
+  componentDidMount: function () {
+    UserPuzzleActions.getRemainTime();
+    this.countDown();
+  },
+
+  countDown: function(){
+    setInterval(() => {
+      if(this.state.remainTime){
+        var remainTime = this.state.remainTime - 1;
+        this.setState({
+          remainTime: remainTime
+        });
+
+        if(remainTime % 300 === 1){
+          UserPuzzleActions.getRemainTime();
+        }
+      }
+    }, 1000);
   },
 
   render: function () {
