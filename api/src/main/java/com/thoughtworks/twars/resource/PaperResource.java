@@ -61,6 +61,7 @@ public class PaperResource {
 
     Map<String, Object> result = new HashMap<>();
     result.put("sections", sectionList);
+    result.put("id", id);
     return Response.status(200).entity(result).build();
   }
 
@@ -68,33 +69,24 @@ public class PaperResource {
   @Path("/enrollment")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getOnePaper() {
-
-    List<Map> sectionList = sectionMapper.getSectionsByPaperId(1)
-            .stream()
-            .map(item -> {
-              Map<String,Object> map = new HashMap<>();
-              map.put("id", item.getId());
-              map.put("desc", item.getDescription());
-              map.put("quizzes", getQuizzesBySectionId(item.getId()));
-              return map;
-            })
-            .collect(Collectors.toList());
-
-    Map<String, Object> result = new HashMap<>();
-    result.put("sections", sectionList);
-    return Response.status(200).entity(result).build();
+    return getOnePaper(1);
   }
 
 
   private List<Map> getQuizzesBySectionId(int sectionId) {
+      Map definitionMap = new HashMap<>();
+      Map itemsMap = new HashMap<>();
+      Map examplesMap = new HashMap<>();
 
-    return blankQuizMapper.findBySectionId(sectionId)
+
+      return blankQuizMapper.findBySectionId(sectionId)
             .stream()
             .map(b -> {
               HashMap<String, Object> item = new HashMap<>();
-              item.put("definitionUri", "/blankQuizzes/" + b.getId());
-              item.put("itemsUri", "/blankQuizzes/" + b.getId() + "/items");
-              item.put("examplesUri", "/blankQuizzes/" + b.getId() + "/examples");
+              item.put("id",b.getId());
+              item.put("definition", definitionMap.put("uri","/blankQuizzes/" + b.getId()));
+              item.put("items", itemsMap.put("uri","/blankQuizzes/" + b.getId() + "/items"));
+              item.put("examples", examplesMap.put("uri","/blankQuizzes/" + b.getId() + "/examples"));
               return item;
             })
             .collect(Collectors.toList());
