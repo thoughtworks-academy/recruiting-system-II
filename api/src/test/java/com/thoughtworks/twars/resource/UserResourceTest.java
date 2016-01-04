@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.User;
+import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -63,5 +64,39 @@ public class UserResourceTest extends TestBase {
                 .request().get();
 
         assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_return_user_detail_by_user_id() throws Exception {
+
+        UserDetail theDetail = mock(UserDetail.class);
+
+        when(userMapper.getUserDetailById(1)).thenReturn(theDetail);
+        when(theDetail.getUserId()).thenReturn(1);
+        when(theDetail.getSchool()).thenReturn("哈佛");
+        when(theDetail.getMajor()).thenReturn("宗教");
+        when(theDetail.getDegree()).thenReturn("博士");
+        when(theDetail.getName()).thenReturn("狗剩");
+        when(theDetail.getGender()).thenReturn("男");
+
+
+
+
+
+
+        Response response = target(basePath + "/1/detail").request().get();
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+
+        assertThat(result.get("userId"), is(1));
+        assertThat(result.get("school"), is("哈佛"));
+        assertThat(result.get("major"), is("宗教"));
+        assertThat(result.get("degree"), is("博士"));
+        assertThat(result.get("name"), is("狗剩"));
+        assertThat(result.get("gender"), is("男"));
+//        assertThat(result.get("birthday"), is(0));
+
     }
 }
