@@ -38,6 +38,11 @@ public class UserResource extends Resource {
     public Response getUserDetail(@PathParam("param") int userId) {
 
         UserDetail detail = userMapper.getUserDetailById(userId);
+
+        if(null == detail) {
+            return Response.status(404).build();
+        }
+        
         Map<String, Object> map = new HashMap<>();
         map.put("userId", detail.getUserId());
         map.put("school", detail.getSchool());

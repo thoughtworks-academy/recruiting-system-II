@@ -9,6 +9,7 @@ import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -79,11 +80,6 @@ public class UserResourceTest extends TestBase {
         when(theDetail.getName()).thenReturn("狗剩");
         when(theDetail.getGender()).thenReturn("男");
 
-
-
-
-
-
         Response response = target(basePath + "/1/detail").request().get();
 
         assertThat(response.getStatus(), is(200));
@@ -96,7 +92,15 @@ public class UserResourceTest extends TestBase {
         assertThat(result.get("degree"), is("博士"));
         assertThat(result.get("name"), is("狗剩"));
         assertThat(result.get("gender"), is("男"));
-//        assertThat(result.get("birthday"), is(0));
+    }
 
+    @Test
+    public void should_return_404_when_get_no_detail() throws Exception {
+
+        when(userMapper.getUserDetailById(anyInt())).thenReturn(null);
+
+        Response response = target(basePath + "/99/detail").request().get();
+
+        assertThat(response.getStatus(), is(404));
     }
 }
