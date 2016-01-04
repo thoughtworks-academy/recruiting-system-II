@@ -61,7 +61,7 @@ public class PaperResourceTest extends TestBase {
     List<Map> sections = (List<Map>) result.get("sections");
 
     assertThat(sections.size(), is(1));
-    assertThat((int)sections.get(0).get("id"), is(2));
+    assertThat((int)sections.get(0).get("id"), is(23));
     assertThat((String) sections.get(0).get("desc"), is("逻辑题"));
 
     List<Map> quizzes = (List<Map>) sections.get(0).get("quizzes");
@@ -69,4 +69,34 @@ public class PaperResourceTest extends TestBase {
 //    assertThat(quizzes.get(0).get("uri"), is("/blankQuizzes/7"));
 //    assertThat(quizzes.get(1).get("uri"), is("/blankQuizzes/9"));
   }
+
+//  @Test
+//  public void should_return_detail_when_request_enrollment() throws Exception {
+//    Section blankSection = mock(Section.class);
+//
+//    BlankQuiz firstBlankQuiz = mock(BlankQuiz.class);
+//    BlankQuiz secondBlankQuiz = mock(BlankQuiz.class);
+//
+//    when(paperMapper.getPaperById(1)).thenReturn(firstPaper);
+//    when(sectionMapper.getSectionsByPaperId(1)).thenReturn(Arrays.asList(blankSection));
+//
+//    when(blankSection.getId()).thenReturn(2);
+//    when(blankSection.getDescription()).thenReturn("逻辑题");
+//
+//    when(blankQuizMapper.findBySectionId(23)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
+//
+//    Response response = target(basePath + "/enrollment").request().get();
+//    assertThat(response.getStatus(), is(200));
+//
+//    Map result = response.readEntity(Map.class);
+//    List<Map> sections = (List<Map>) result.get("sections");
+//
+//    assertThat(sections.size(), is(1));
+//    assertThat((int) sections.get(0).get("id"), is(2));
+//    assertThat((String) sections.get(0).get("desc"), is("逻辑题"));
+//
+//    List<Map> quizzes = (List<Map>) sections.get(0).get("quizzes");
+//    assertThat(quizzes.size(), is(2));
+//
+//  }
 }
