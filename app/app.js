@@ -8,11 +8,13 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var dbConnection = require('./middleware/db-connection');
 var sessionCheck= require('./middleware/session-check');
 var passport = require('passport');
 var util = require('util');
 var GitHubStrategy = require('passport-github').Strategy;
+var mongoose = require('mongoose');
+
+mongoose.connect("mongodb://localhost/twars");
 
 var GITHUB_CLIENT_ID = "3d1ce4b21c72eed40be3";
 var GITHUB_CLIENT_SECRET = "fe406b1fdc3f386871979976e244e01224c933ac";
@@ -69,8 +71,6 @@ if(env === 'development') {
 app.use(sessionCheck);
 
 app.use(express.static('public'));
-
-app.use(dbConnection);
 
 route.setRoutes(app);
 

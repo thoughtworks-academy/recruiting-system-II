@@ -24,12 +24,12 @@ var LogicPuzzleStore = Reflux.createStore({
           });
           return res;
         })
+  
+    this.onGetRemainTime()
         .then((res) => {
-          this.onGetRemainTime()
-              .then((res) => {
-                this.refreshTime(res.body.remainTime);
-              })
+          this.refreshTime(res.body.remainTime);
         })
+
   },
 
   onSubmitAnswer: function (newOrderId) {
@@ -78,11 +78,11 @@ var LogicPuzzleStore = Reflux.createStore({
     setInterval(() => {
       remainTime--;
 
-      if(remainTime % 300 === 1){
+      if (remainTime % 300 === 1) {
         this.onGetRemainTime()
-          .then((res) => {
-            remainTime = res.body.remainTime;
-          })
+            .then((res) => {
+              remainTime = res.body.remainTime;
+            })
       }
 
       this.trigger({
