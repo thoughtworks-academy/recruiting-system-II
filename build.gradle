@@ -16,6 +16,7 @@ task(startServer) {
         println "Jetty started"
 
         println "Starting recover"
+        project(':api').flywayClean.execute()
         project(':api').flywayMigrate.execute()
         project(':api').DBRecovery.execute()
 
