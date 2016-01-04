@@ -88,7 +88,7 @@ var LogicPuzzleSidebar = React.createClass({
           <hr/>
           <div className="confirm">
             <a href="javascript:void(0)" className="btn btn-lg btn-danger btn-block" data-toggle="modal"
-               data-target="#submitModal" disabled={isLast ? '' : 'disabled'}>交卷</a>
+               data-target={isLast ? "#submitModal": ""} disabled={isLast ? '' : 'disabled'}>交卷</a>
           </div>
           <div className="hint">
             <span>{isLast ? "检查完毕后可以交卷": "只有在最后一题才可以交卷"}</span>
