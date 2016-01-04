@@ -44,32 +44,35 @@ router.get('/', function (req, res) {
           });
         }
 
-      }).then(function (data) {
-        quizAll = data.quizDemos.concat(data.quizItems);
-        itemsCount = quizAll.length;
-        return quizAll[orderId].uri;
-      })
-      .then(function (uri) {
-        return agent.get(apiServer + uri)
-            .set('Content-Type', 'application/json')
-            .end();
-      })
-      .then(function (data) {
+      }).then(function () {
+    userPuzzle.findOne({userId: userId})
+        .then(function (data) {
+          quizAll = data.quizDemos.concat(data.quizItems);
+          itemsCount = quizAll.length;
+          return quizAll[orderId].uri;
+        })
+        .then(function (uri) {
+          return agent.get(apiServer + uri)
+              .set('Content-Type', 'application/json')
+              .end();
+        })
+        .then(function (data) {
 
-        userAnswer = quizAll[orderId].userAnswer || 6;//data.body.answer
-        res.send({
-          item: {
-            id: data.body.id,
-            initializedBox: JSON.parse(data.body.initializedBox),
-            question: data.body.questionZh,
-            description: JSON.parse(data.body.descriptionZh),
-            chartPath: data.body.chartPath
-          },
-          userAnswer: userAnswer,
-          itemsCount: itemsCount,
-          isExample: quizAll[orderId].userAnswer === undefined
-        });
-      });
+          userAnswer = quizAll[orderId].userAnswer || 6;//data.body.answer
+          res.send({
+            item: {
+              id: data.body.id,
+              initializedBox: JSON.parse(data.body.initializedBox),
+              question: data.body.questionZh,
+              description: JSON.parse(data.body.descriptionZh),
+              chartPath: data.body.chartPath
+            },
+            userAnswer: userAnswer,
+            itemsCount: itemsCount,
+            isExample: quizAll[orderId].userAnswer === undefined
+          });
+        })
+  });
 });
 
 
