@@ -337,16 +337,18 @@ baseUri: http://api.bronzesword.com/
             body:
               application/json:
                 properties:
-                  type[]:
+                  type:
                     properties:
-                      quizItem:
+                      []:
                         properties:
-                          id: integer
-                          initializedBox: string
-                          question: string
-                          description: string
-                          chartPath: string
-                          # 根据前台需要的数据把剩下的补完，不能有正确答案
+                          quizItem:
+                            properties:
+                              id: integer
+                              initializedBox: string
+                              question: string
+                              description: string
+                              chartPath: string
+                              # 根据前台需要的数据把剩下的补完，不能有正确答案
 
 /quizItems:
   get:
