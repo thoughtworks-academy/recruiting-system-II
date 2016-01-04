@@ -37,6 +37,7 @@ var Account = React.createClass({
     });
 
     AccountActions.updateUserInfo(userData);
+    console.log(userData);
   },
 
   render() {
@@ -58,8 +59,7 @@ var Account = React.createClass({
                   <label htmlFor={"input" + item.english}
                          className="col-sm-4 col-md-4 control-label">{item.chinese}</label>
                   <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id={"input" + item.english}
-                           placeholder={item.chinese === '出生年月' ? 'YYYY-MM-DD' : item.chinese}
+                    <input type="text" className="form-control" id={"input" + item.english} placeholder={item.chinese}
                            disabled={item.english === "Email" || item.english === "MobilePhone" ? 'disabled' : ''}
                            value={this.state.list[index]} onChange={this.handleChange} ref={item.english}/>
                   </div>
