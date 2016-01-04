@@ -4,6 +4,7 @@ var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var UserPuzzleActions = require('../actions/user-puzzle-actions');
 var UserPuzzleStore = require('../store/user-puzzle-store');
+var Modal = require('react-bootstrap/lib/Modal');
 var _newOrderId;
 var able = false;
 

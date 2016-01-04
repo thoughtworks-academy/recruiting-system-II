@@ -7,8 +7,13 @@ var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var LogicPuzzleLeft = require('./logic-puzzle-left.component');
 var LogicPuzzleSidebar = require('./logic-puzzle-sidebar.component');
 
+var UserPuzzleStore = require('../store/user-puzzle-store');
+
+var Modal = require('react-bootstrap/lib/Modal');
+var Button = require('react-bootstrap/lib/Button');
+
 var LogicPuzzle = React.createClass({
-  mixins: [Reflux.connect(LogicPuzzleStore)],
+  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(UserPuzzleStore)],
 
   getInitialState: function () {
     return {
@@ -16,7 +21,8 @@ var LogicPuzzle = React.createClass({
         initializedBox: [],
         chartPath: '',
         description: []
-      }
+      },
+      showModal: false
     };
   },
 
@@ -48,6 +54,21 @@ var LogicPuzzle = React.createClass({
               <LogicPuzzleSidebar orderId={this.state.orderId}
                                   itemsCount={this.state.itemsCount}/>
             </div>
+
+            <Modal
+              show={this.state.showModal}
+              dialogClassName="custom-modal"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-lg">提示:</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                时间到,已提交.点击确定后开始dojo测试
+              </Modal.Body>
+              <Modal.Footer>
+                <Button href="progress.html">确定</Button>
+              </Modal.Footer>
+            </Modal>
           </div>
         </div>
     )
