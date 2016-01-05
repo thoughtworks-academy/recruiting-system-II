@@ -1,5 +1,7 @@
 package com.thoughtworks.twars.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.BlankQuiz;
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.bean.Section;
@@ -17,95 +19,81 @@ import static org.mockito.Mockito.when;
 
 public class PaperResourceTest extends TestBase {
 
-  String basePath = "/papers";
+    Gson gson = new GsonBuilder().create();
 
-  Paper firstPaper = mock(Paper.class);
-  Paper secondPaper = mock(Paper.class);
+    String basePath = "/papers";
 
-
-  @Test
-  public void should_list_all_papers() throws Exception {
-
-    when(paperMapper.findAll()).thenReturn(Arrays.asList(firstPaper, secondPaper));
-    when(firstPaper.getId()).thenReturn(1);
-    when(secondPaper.getId()).thenReturn(5);
+    Paper firstPaper = mock(Paper.class);
+    Paper secondPaper = mock(Paper.class);
 
 
-    Response response = target(basePath).request().get();
-    assertThat(response.getStatus(), is(200));
+    @Test
+    public void should_list_all_papers() throws Exception {
 
-    List<Map> result = response.readEntity(List.class);
-    assertThat((String)result.get(0).get("uri"), is("papers/1"));
-    assertThat((String)result.get(1).get("uri"), is("papers/5"));
-  }
+        when(paperMapper.findAll()).thenReturn(Arrays.asList(firstPaper, secondPaper));
+        when(firstPaper.getId()).thenReturn(1);
+        when(secondPaper.getId()).thenReturn(5);
 
-  @Test
-  public void should_return_detail_when_request_a_specified_paper() throws Exception {
-    Section blankSection = mock(Section.class);
 
-    BlankQuiz firstBlankQuiz = mock(BlankQuiz.class);
-    BlankQuiz secondBlankQuiz = mock(BlankQuiz.class);
+        Response response = target(basePath).request().get();
+        assertThat(response.getStatus(), is(200));
 
-    when(paperMapper.getPaperById(1)).thenReturn(firstPaper);
-    when(sectionMapper.getSectionsByPaperId(1)).thenReturn(Arrays.asList(blankSection));
+        List<Map> result = response.readEntity(List.class);
+        assertThat((String) result.get(0).get("uri"), is("papers/1"));
+        assertThat((String) result.get(1).get("uri"), is("papers/5"));
+    }
 
-    when(blankSection.getId()).thenReturn(23);
-    when(blankSection.getDescription()).thenReturn("逻辑题");
+    @Test
+    public void should_return_detail_when_request_a_specified_paper() throws Exception {
+        Section blankSection = mock(Section.class);
 
-    when(blankQuizMapper.findBySectionId(23)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
+        BlankQuiz firstBlankQuiz = mock(BlankQuiz.class);
+        BlankQuiz secondBlankQuiz = mock(BlankQuiz.class);
 
-    when(firstBlankQuiz.getId()).thenReturn(4);
+        when(paperMapper.getPaperById(1)).thenReturn(firstPaper);
+        when(sectionMapper.getSectionsByPaperId(1)).thenReturn(Arrays.asList(blankSection));
 
-    Response response = target(basePath + "/1").request().get();
-    assertThat(response.getStatus(), is(200));
+        when(blankSection.getId()).thenReturn(23);
+        when(blankSection.getDescription()).thenReturn("逻辑题");
 
-    Map result = response.readEntity(Map.class);
-    List<Map> sections = (List<Map>) result.get("sections");
+        when(blankQuizMapper.findBySectionId(23)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
 
-    assertThat(sections.size(), is(1));
-    assertThat((int)sections.get(0).get("id"), is(23));
-    assertThat((String) sections.get(0).get("desc"), is("逻辑题"));
+        when(firstBlankQuiz.getId()).thenReturn(4);
 
-    List<Map> quizzes = (List<Map>) sections.get(0).get("quizzes");
-    assertThat(quizzes.size(), is(2));
-    assertThat(quizzes.get(0).get("items"),is("/blankQuizzes/4/items"));
-    assertThat(quizzes.get(0).get("definition"), is("/blankQuizzes/4"));
-    assertThat(quizzes.get(0).get("examples"), is("/blankQuizzes/4/examples"));
-  }
+        Response response = target(basePath + "/1").request().get();
+        assertThat(response.getStatus(), is(200));
 
-  @Test
-  public void should_return_detail_when_request_enrollment() throws Exception {
-    Section blankSection = mock(Section.class);
+        Map result = response.readEntity(Map.class);
+        String jsonStr = gson.toJson(result);
 
-    BlankQuiz firstBlankQuiz = mock(BlankQuiz.class);
-    BlankQuiz secondBlankQuiz = mock(BlankQuiz.class);
+        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":23,\"quizzes\":[{\"examples\":{\"uri\":\"/blankQuizzes/4/examples\"},\"definition\":{\"uri\":\"/blankQuizzes/4\"},\"id\":4,\"items\":{\"uri\":\"/blankQuizzes/4/items\"}},{\"examples\":{\"uri\":\"/blankQuizzes/0/examples\"},\"definition\":{\"uri\":\"/blankQuizzes/0\"},\"id\":0,\"items\":{\"uri\":\"/blankQuizzes/0/items\"}}],\"desc\":\"逻辑题\"}]}"));
 
-    when(paperMapper.getPaperById(1)).thenReturn(firstPaper);
-    when(sectionMapper.getSectionsByPaperId(1)).thenReturn(Arrays.asList(blankSection));
+    }
 
-    when(blankSection.getId()).thenReturn(22);
-    when(blankSection.getDescription()).thenReturn("逻辑题");
+    @Test
+    public void should_return_detail_when_request_enrollment() throws Exception {
+        Section blankSection = mock(Section.class);
 
-    when(blankQuizMapper.findBySectionId(22)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
+        BlankQuiz firstBlankQuiz = mock(BlankQuiz.class);
 
-    when(firstBlankQuiz.getId()).thenReturn(3);
-    when(firstBlankQuiz.getType()).thenReturn("blankQuizzes");
+        when(paperMapper.getPaperById(1)).thenReturn(firstPaper);
+        when(sectionMapper.getSectionsByPaperId(1)).thenReturn(Arrays.asList(blankSection));
 
-    Response response = target(basePath + "/enrollment").request().get();
-    assertThat(response.getStatus(), is(200));
+        when(blankSection.getId()).thenReturn(22);
+        when(blankSection.getDescription()).thenReturn("逻辑题");
 
-    Map result = response.readEntity(Map.class);
-    List<Map> sections = (List<Map>) result.get("sections");
+        when(blankQuizMapper.findBySectionId(22)).thenReturn(Arrays.asList(firstBlankQuiz));
 
-    assertThat(sections.size(), is(1));
-    assertThat((int)sections.get(0).get("id"), is(22));
-    assertThat((String) sections.get(0).get("desc"), is("逻辑题"));
+        when(firstBlankQuiz.getId()).thenReturn(3);
+        when(firstBlankQuiz.getType()).thenReturn("blankQuizzes");
 
-    List<Map> quizzes = (List<Map>) sections.get(0).get("quizzes");
-    assertThat(quizzes.size(), is(2));
-    assertThat(quizzes.get(0).get("items"),is("/blankQuizzes/3/items"));
-    assertThat(quizzes.get(0).get("definition"), is("{uri:/blankQuizzes/3}"));
-    assertThat(quizzes.get(0).get("examples"), is("{uri:/blankQuizzes/3/examples}"));
+        Response response = target(basePath + "/enrollment").request().get();
+        assertThat(response.getStatus(), is(200));
 
-  }
+        Map result = response.readEntity(Map.class);
+        String jsonStr = gson.toJson(result);
+
+        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":22,\"quizzes\":[{\"examples\":{\"uri\":\"/blankQuizzes/3/examples\"},\"definition\":{\"uri\":\"/blankQuizzes/3\"},\"id\":3,\"items\":{\"uri\":\"/blankQuizzes/3/items\"}}],\"desc\":\"逻辑题\"}]}"));
+
+    }
 }
