@@ -11,6 +11,4 @@ public interface QuizItemMapper {
     public int insertQuizItem(QuizItem quizItem);
 
     public QuizItem getQuizItemById(int id);
-
-    public List<QuizItem> findByBlankQuizId(int blankQuizId);
 }
