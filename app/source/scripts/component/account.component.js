@@ -1,6 +1,5 @@
 var React = global.React = require('react');
 var ReactDom = require('react-dom');
-var request = require('superagent');
 var Input = require('react-bootstrap/lib/Input');
 var AccountActions = require('../actions/account-actions');
 var AccountStore = require('../store/account-store');
@@ -11,7 +10,13 @@ var Account = React.createClass({
 
   getInitialState: function () {
     return {
-      list:[' ', ' ',' ', ' ', ' ', ' ', ' ']
+      school: '',
+      name: '',
+      mobilePhone: '',
+      email: '',
+      gender: '',
+      major: '',
+      degree: ''
     }
   },
 
@@ -19,59 +24,67 @@ var Account = React.createClass({
     AccountActions.loadUserInfo();
   },
 
-  handleChange: function(evt){
-    for(var i = 0; i < this.state.list.length; i ++){
-      var newState = evt.target.value;
-
-      this.setState({list: this.state.list.splice(i,1,newState)});
-    }
-  },
-
-  update: function(evt) {
-    evt.preventDefault();
-    var userData = [];
-    var items = ['School', 'Name', 'MobilePhone', 'Email', 'Gender', 'Major', 'Birthday'];
-
-    items.forEach((item, index) => {
-      userData.push(ReactDom.findDOMNode(this.refs.item));
-    });
-
-    AccountActions.updateUserInfo(userData);
-    console.log(userData);
-  },
-
-  render() {
-    var tags = [
-      {chinese: '学校', english: 'School'},
-      {chinese: '姓名', english: "Name"},
-      {chinese: '手机', english: 'MobilePhone'},
-      {chinese: '邮箱', english: "Email"},
-      {chinese: '性别', english: 'Gender'},
-      {chinese: '专业', english: "Major"},
-      {chinese: '出生年月', english: "Birthday"}
-    ];
+  render: function () {
 
     return (
         <div id="account-info">
-          {tags.map((item, index) => {
-            return (
-                <div className="form-group" key={index}>
-                  <label htmlFor={"input" + item.english}
-                         className="col-sm-4 col-md-4 control-label">{item.chinese}</label>
-                  <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id={"input" + item.english} placeholder={item.chinese}
-                           disabled={item.english === "Email" || item.english === "MobilePhone" ? 'disabled' : ''}
-                           value={this.state.list[index]} onChange={this.handleChange} ref={item.english}/>
-                  </div>
-                  <div></div>
-                </div>
-            )
-          })}
+          <div className="form-group">
+            <label htmlFor="inputSchool" className="col-sm-4 col-md-4 control-label">学校</label>
+            <div className="col-sm-4 col-md-4">
+              <input type="text" className="form-control" id="inputSchool" placeholder="学校"
+                     onChange={this.handleChange} ref="school" value={this.state.school}/>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="inputName" className="col-sm-4 col-md-4 control-label">姓名</label>
+            <div className="col-sm-4 col-md-4">
+              <input type="text" className="form-control" id="inputName" placeholder="姓名"
+                     onChange={this.handleChange} ref="name" value={this.state.name}/>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="inputMobilePhone" className="col-sm-4 col-md-4 control-label">手机</label>
+            <div className="col-sm-4 col-md-4">
+              <input type="text" className="form-control" id="inputMobilePhone" placeholder="手机"
+                     disabled="disabled" value={this.state.mobilePhone}/>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="inputEmail" className="col-sm-4 col-md-4 control-label">邮箱</label>
+            <div className="col-sm-4 col-md-4">
+              <input type="text" className="form-control" id="inputEmail" placeholder="邮箱" disabled="disabled"
+                     value={this.state.email}/>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="inputGender" className="col-sm-4 col-md-4 control-label">性别</label>
+            <div className="col-sm-4 col-md-4">
+
+              <input type="radio" name="options" className="gender"
+                     checked={this.state.gender === "男" ? "checked" : ""}/>男
+
+              <input type="radio" name="options" className="gender"
+                     checked={this.state.gender === "女" ? "checked" : ""}/>女
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业</label>
+            <div className="col-sm-4 col-md-4">
+              <input type="text" className="form-control" id="inputMajor" placeholder="专业"
+                     onChange={this.handleChange} ref="major" value={this.state.major}/>
+            </div>
+            <div></div>
+          </div>
 
           <div className="form-group">
             <label htmlFor="inputDegree" className="col-sm-4 col-md-4 control-label">学历学位</label>
             <div className="col-sm-4 col-md-4 degree">
-              <Input type="select" placeholder="学历学位">
+              <Input type="select" placeholder="学历学位" ref="degree" defaultValue='regular'>
                 <option value="regular">本科</option>
                 <option value="master">硕士</option>
                 <option value="doctor">博士</option>
