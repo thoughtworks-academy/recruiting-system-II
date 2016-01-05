@@ -19,7 +19,7 @@ var UserPuzzleStore = Reflux.createStore({
 
   onSubmit: function () {
     this.trigger({
-      show: true
+      showModal: true
     });
   }
 });
