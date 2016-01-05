@@ -5,8 +5,6 @@ import com.thoughtworks.twars.mapper.QuizItemMapper;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -27,29 +25,29 @@ public class QuizItemResource extends Resource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllQuizItems(){
+    public Response getAllQuizItems() {
         List<QuizItem> quizItems = quizItemMapper.getAllQuizItems();
         List<Map> result = new ArrayList<>();
 
-        for(int i=0; i<quizItems.size(); i++) {
+        for (int i = 0; i < quizItems.size(); i++) {
             QuizItem item = quizItems.get(i);
             Map<String, String> map = new HashMap<>();
             map.put("uri", "quizItems/" + item.getId());
             result.add(map);
         }
-
+        session.close();
         return Response.status(200).entity(result).build();
     }
 
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map insertQuizItem(QuizItem quizItem){
+    public Map insertQuizItem(QuizItem quizItem) {
 
         quizItemMapper.insertQuizItem(quizItem);
 
         Map map = new HashMap();
-        map.put("uri","quizItems/"+quizItem.getId());
+        map.put("uri", "quizItems/" + quizItem.getId());
 
         return map;
     }
@@ -62,11 +60,11 @@ public class QuizItemResource extends Resource {
 
         QuizItem quizItem = quizItemMapper.getQuizItemById(id);
         Map map = new HashMap();
-        map.put("id",quizItem.getId());
-        map.put("description",quizItem.getDescriptionZh());
-        map.put("chartPath",quizItem.getChartPath());
-        map.put("question",quizItem.getQuestionZh());
-        map.put("initializedBox",quizItem.getInitializedBox());
+        map.put("id", quizItem.getId());
+        map.put("description", quizItem.getDescriptionZh());
+        map.put("chartPath", quizItem.getChartPath());
+        map.put("question", quizItem.getQuestionZh());
+        map.put("initializedBox", quizItem.getInitializedBox());
 
 
         session.close();
