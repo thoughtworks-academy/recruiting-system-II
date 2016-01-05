@@ -19,76 +19,82 @@ import java.util.stream.Collectors;
 @Path("/papers")
 public class PaperResource {
 
-  @Inject
-  private PaperMapper paperMapper;
-  @Inject
-  private SectionMapper sectionMapper;
-  @Inject
-  private BlankQuizMapper blankQuizMapper;
+    @Inject
+    private PaperMapper paperMapper;
+    @Inject
+    private SectionMapper sectionMapper;
+    @Inject
+    private BlankQuizMapper blankQuizMapper;
 
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getAllPapers() {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllPapers() {
 
-    List<Paper> papers = paperMapper.findAll();
-    List<Map> result = new ArrayList<>();
+        List<Paper> papers = paperMapper.findAll();
+        List<Map> result = new ArrayList<>();
 
-    for (int i = 0; i < papers.size(); i++) {
-      Paper item = papers.get(i);
-      Map<String, String> map = new HashMap<>();
-      map.put("uri", "papers/" + item.getId());
-      result.add(map);
+        for (int i = 0; i < papers.size(); i++) {
+            Paper item = papers.get(i);
+            Map<String, String> map = new HashMap<>();
+            map.put("uri", "papers/" + item.getId());
+            result.add(map);
+        }
+
+        return Response.status(200).entity(result).build();
     }
 
-    return Response.status(200).entity(result).build();
-  }
+    @GET
+    @Path("/{param}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOnePaper(@PathParam("param") int id) {
 
-  @GET
-  @Path("/{param}")
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getOnePaper(@PathParam("param") int id) {
+        List<Map> sectionList = sectionMapper.getSectionsByPaperId(id)
+                .stream()
+                .map(item -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", item.getId());
+                    map.put("desc", item.getDescription());
+                    map.put("quizzes", getQuizzesBySectionId(item.getId()));
+                    return map;
+                })
+                .collect(Collectors.toList());
 
-    List<Map> sectionList = sectionMapper.getSectionsByPaperId(id)
-            .stream()
-            .map(item -> {
-              Map<String, Object> map = new HashMap<>();
-              map.put("id", item.getId());
-              map.put("desc", item.getDescription());
-              map.put("quizzes", getQuizzesBySectionId(item.getId()));
-              return map;
-            })
-            .collect(Collectors.toList());
+        Map<String, Object> result = new HashMap<>();
+        result.put("sections", sectionList);
+        result.put("id", id);
+        return Response.status(200).entity(result).build();
+    }
 
-    Map<String, Object> result = new HashMap<>();
-    result.put("sections", sectionList);
-    result.put("id", id);
-    return Response.status(200).entity(result).build();
-  }
+    @GET
+    @Path("/enrollment")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOnePaper() {
+        return getOnePaper(1);
+    }
 
-  @GET
-  @Path("/enrollment")
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getOnePaper() {
-    return getOnePaper(1);
-  }
+    private List<Map> getQuizzesBySectionId(int sectionId) {
 
-  private List<Map> getQuizzesBySectionId(int sectionId) {
-      Map<String, Object> definitionMap = new HashMap<>();
-      Map<String, Object> itemsMap = new HashMap<>();
-      Map<String, Object> examplesMap = new HashMap<>();
+        String basePath = "/blankQuizzes/";
 
-      return blankQuizMapper.findBySectionId(sectionId)
-            .stream()
-            .map(b -> {
-              HashMap<String, Object> item = new HashMap<>();
-              item.put("id",b.getId());
-              item.put("definition", definitionMap.put("uri","/blankQuizzes/" + b.getId()));
-              item.put("items", itemsMap.put("uri","/blankQuizzes/" + b.getId() + "/items"));
-              item.put("examples", examplesMap.put("uri","/blankQuizzes/" + b.getId() + "/examples"));
-              return item;
-            })
-            .collect(Collectors.toList());
-  }
+        return blankQuizMapper.findBySectionId(sectionId)
+                .stream()
+                .map(b -> {
+                    HashMap<String, Object> item = new HashMap<>();
+                    item.put("id", b.getId());
+
+                    item.put("definition", buildURIMap(basePath + b.getId()));
+                    item.put("items", buildURIMap(basePath + b.getId() + "/items"));
+                    item.put("examples", buildURIMap(basePath + b.getId() + "/examples"));
+                    return item;
+                })
+                .collect(Collectors.toList());
+    }
+
+    private Map<String, String> buildURIMap(String uri) {
+        Map<String, String> result = new HashMap<>();
+        result.put("uri", uri);
+        return result;
+    }
 }
 
 
