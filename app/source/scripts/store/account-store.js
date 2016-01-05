@@ -9,32 +9,11 @@ var AccountStore = Reflux.createStore({
     request.get('/account')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
-          var status = JSON.parse(res.text).status;
-          var data = JSON.parse(res.text).data;
-
-          if(status === 200) {
-            this.trigger({
-              school: data.school,
-              name: data.name,
-              gender: data.gender,
-              major: data.major,
-              degree: data.degree
-            });
+          if(err || res.status !== 200) {
+            return;
           }
+          this.trigger(res.body.data);
         });
-    request.get('/account/emailPhone')
-           .set('Content-Type', 'application/json')
-           .end((err, res) => {
-             var status = JSON.parse(res.text).status;
-             var data = JSON.parse(res.text).data;
-
-             if(status === 200) {
-               this.trigger({
-                 email: data.email,
-                 mobilePhone: data.mobilePhone
-               });
-             }
-           });
   },
 
   onUpdateUserInfo: function (userData) {
