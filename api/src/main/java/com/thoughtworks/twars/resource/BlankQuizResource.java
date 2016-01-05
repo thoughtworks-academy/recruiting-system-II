@@ -66,28 +66,4 @@ public class BlankQuizResource {
         return Response.status(200).entity(result).build();
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{param}/items")
-    public Response getQuizItemsByBlankQuizId(
-            @PathParam("param") int blankQuizId
-    ) {
-        List<QuizItem> quizItems = quizItemMapper.findByBlankQuizId(blankQuizId);
-        List<Map> result = new ArrayList<>();
-
-        for (int i = 0; i < quizItems.size(); i++) {
-            QuizItem item = quizItems.get(i);
-            Map map = new HashMap<>();
-            map.put("id", item.getId());
-            map.put("description", item.getDescriptionZh());
-            map.put("initializedBox", item.getInitializedBox());
-            map.put("chartPath", item.getChartPath());
-            map.put("question", item.getQuestionZh());
-            result.add(map);
-        }
-
-        return Response.status(200).entity(result).build();
-    }
-
-
 }
