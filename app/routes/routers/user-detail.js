@@ -4,6 +4,22 @@ var Promise = this.Promise || require('promise');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var _ = require('lodash');
+var validate = require('validate.js');
+var constraint = require('../../mixin/user-detail-constraint');
+
+function checkUserInfo(userInfo) {
+  var valObj = {};
+
+  valObj.school = userInfo.school;
+  valObj.name = userInfo.name;
+  valObj.major = userInfo.major;
+
+  var result = validate(valObj, constraint);
+
+  if (result === undefined) {
+    return true;
+  }
+}
 
 router.get('/', function (req, res) {
   var userId = req.session.user.id;
@@ -49,14 +65,19 @@ router.get('/', function (req, res) {
 
 router.put('/update', function (req, res) {
   var userId = req.session.user.id;
+  var userInfo = req.body.data;
 
-  agent.put(apiServer + 'user/' + userId)
-      .set('Content-Type', 'application/json')
-      .end(function (err, resp) {
-        res.send({
-          status: 200
+  if (checkUserInfo(userInfo)) {
+    agent.put(apiServer + 'user/' + userId)
+        .set('Content-Type', 'application/json')
+        .end(function (err, resp) {
+          res.send({
+            status: 200
+          })
         })
-      })
+  }else {
+    res.send({status:500})
+  }
 });
 
 module.exports = router;
