@@ -22,7 +22,6 @@ RUN { \
 	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql
 
 RUN rm -rf /var/lib/apt/lists/*
-RUN groupadd -r mysql && useradd -r -g mysql mysql
 RUN mkdir /docker-entrypoint-initdb.d
 
 # comment out a few problematic configuration values
@@ -38,4 +37,3 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3306
 CMD ["mysqld"]
-

@@ -1,3 +1,5 @@
 mysql:
-  build: /mysql
+  build: ./mysql
+  ports:
+    - "13306:3306"
   env_file: test.env
