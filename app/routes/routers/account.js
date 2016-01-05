@@ -1,57 +1,50 @@
 var express = require('express');
 var router = express.Router();
-var request = require('superagent');
+var Promise = this.Promise || require('promise');
+var superAgent = require('superagent');
+var agent = require('superagent-promise')(superAgent, Promise);
+var _ = require('lodash');
 
 router.get('/', function (req, res) {
   var userId = req.session.user.id;
-  var uri = 'user/' + userId + '/detail';
+  var result;
 
-  request
-      .get(apiServer + uri)
+  agent.get(apiServer + 'user/' + userId + '/detail')
       .set('Content-Type', 'application/json')
-      .end(function (err, result) {
-        if (result.status === 200) {
-          res.send({
-            status: 200,
-            data: result.body
-          })
+      .end()
+      .then(function (resp) {
+        if (resp.status === 200) {
+          result = _.assign(resp.body);
         } else {
-          res.send({
-            status: 400
-          })
+          throw new Error;
         }
+        return result;
       })
-});
-
-router.get('/emailPhone', function(req, res) {
-  var userId = req.session.user.id;
-  var uri = 'user/' + userId;
-
-  request
-    .get(apiServer + uri)
-    .set('Content-Type', 'application/json')
-    .end(function(err, result) {
-      if (result.status === 200) {
+      .then(function () {
+        return agent.get(apiServer + 'user/' + userId)
+            .set('Content-Type', 'application/json')
+            .end();
+      })
+      .then(function (resp) {
+        if (resp.status === 200) {
+          result = _.assign(result, resp.body);
+        } else {
+          throw new Error;
+        }
+        return result
+      })
+      .then(function (result) {
         res.send({
           status: 200,
-          data: result.body
+          data: result
         })
-      } else {
+      })
+      .catch(function (e) {
+        res.status(404);
         res.send({
-          status: 400
+          status: 404
         })
-      }
-    })
+      })
 });
-
-//router.post('/update', function (req, res) {
-//  res.send({
-//    status: 200
-//  });
-//
-//});
-
-
-var request = require('superagent');
 
 module.exports = router;
