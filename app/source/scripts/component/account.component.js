@@ -84,10 +84,10 @@ var Account = React.createClass({
           <div className="form-group">
             <label htmlFor="inputDegree" className="col-sm-4 col-md-4 control-label">学历学位</label>
             <div className="col-sm-4 col-md-4 degree">
-              <Input type="select" placeholder="学历学位" ref="degree" defaultValue='regular'>
-                <option value="regular">本科</option>
-                <option value="master">硕士</option>
-                <option value="doctor">博士</option>
+              <Input type="select" placeholder="学历学位" ref="degree" value={this.state.degree}>
+                <option value="本科">本科</option>
+                <option value="硕士">硕士</option>
+                <option value="博士">博士</option>
               </Input>
             </div>
           </div>
