@@ -28,7 +28,8 @@ var UserDetail = React.createClass({
       degree: '',
       schoolError: '',
       nameError: '',
-      majorError:''
+      majorError: '',
+      genderError: false
     }
   },
 
@@ -43,14 +44,13 @@ var UserDetail = React.createClass({
     this.setState({[stateName]: newState});
 
   },
-
   genderChange: function (evt) {
     var newState = '';
     var choose = evt.target.name;
 
-    if(choose === '男') {
+    if (choose === '男') {
       newState = '男';
-    }else {
+    } else {
       newState = '女';
     }
     this.setState({gender: newState});
@@ -72,8 +72,19 @@ var UserDetail = React.createClass({
     this.setState(stateObj);
   },
 
+  genderValidate: function () {
+    if(this.state.genderError === true) {
+      this.setState({genderError: false})
+    }
+  },
   update: function (evt) {
     evt.preventDefault();
+
+    if (this.state.gender === '') {
+      this.setState({genderError: true})
+    } else {
+      this.setState({genderError: false});
+    }
 
     var userData = {
       school: this.state.school,
@@ -85,8 +96,8 @@ var UserDetail = React.createClass({
       degree: this.state.degree
     };
 
-    if(this.state.schoolError !== '' || this.state.nameError !== '' || this.state.majorError !== '') {
-      return ;
+    if (this.state.schoolError !== '' || this.state.nameError !== '' || this.state.majorError !== '') {
+      return;
     }
     UserDetailActions.updateUserDetail(userData);
   },
@@ -131,7 +142,7 @@ var UserDetail = React.createClass({
 
           <div className="form-group">
             <label htmlFor="inputGender" className="col-sm-4 col-md-4 control-label">性别</label>
-            <div className="col-sm-4 col-md-4">
+            <div className="col-sm-4 col-md-4" onClick={this.genderValidate}>
 
               <input type="radio" name="男" className="gender" onChange={this.genderChange}
                      checked={this.state.gender === "男" ? "checked" : ""}/>男
@@ -139,6 +150,7 @@ var UserDetail = React.createClass({
               <input type="radio" name="女" className="gender" onChange={this.genderChange}
                      checked={this.state.gender === "女" ? "checked" : ""}/>女
             </div>
+            <div className={"error" + (this.state.genderError === true ? '' : ' hide')}>请选择性别</div>
           </div>
 
           <div className="form-group">
@@ -154,7 +166,8 @@ var UserDetail = React.createClass({
           <div className="form-group">
             <label htmlFor="inputDegree" className="col-sm-4 col-md-4 control-label">学历学位</label>
             <div className="col-sm-4 col-md-4 degree">
-              <Input type="select" placeholder="学历学位" name="degree" value={this.state.degree} onChange={this.handleChange}>
+              <Input type="select" placeholder="学历学位" name="degree" value={this.state.degree}
+                     onChange={this.handleChange}>
                 <option value="专科">专科及以下</option>
                 <option value="本科">本科</option>
                 <option value="硕士">硕士</option>
