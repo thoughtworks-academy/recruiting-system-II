@@ -25,10 +25,11 @@ router.get('/', function (req, res) {
   var userId = req.session.user.id;
   var result;
 
-  agent.get(apiServer + 'user/' + userId + '/detail')
+  agent.get(apiServer + 'user/' + userId )
       .set('Content-Type', 'application/json')
       .end()
       .then(function (resp) {
+
         if (resp.status === 200) {
           result = _.assign(resp.body);
         } else {
@@ -37,17 +38,20 @@ router.get('/', function (req, res) {
         return result;
       })
       .then(function () {
-        return agent.get(apiServer + 'user/' + userId)
+        return agent.get(apiServer + 'user/' + userId  + '/detail')
             .set('Content-Type', 'application/json')
             .end();
       })
       .then(function (resp) {
+          console.log('111');
         if (resp.status === 200) {
           result = _.assign(result, resp.body);
         } else {
           throw new Error;
         }
         return result
+      }, function () {
+        console.log('333 ')
       })
       .then(function (result) {
         res.send({
@@ -56,6 +60,8 @@ router.get('/', function (req, res) {
         })
       })
       .catch(function (e) {
+        console.log('222');
+
         res.status(404);
         res.send({
           status: 404
