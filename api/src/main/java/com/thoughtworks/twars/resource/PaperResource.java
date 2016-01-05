@@ -72,11 +72,10 @@ public class PaperResource {
     return getOnePaper(1);
   }
 
-
   private List<Map> getQuizzesBySectionId(int sectionId) {
       Map<String, Object> definitionMap = new HashMap<>();
-      Map itemsMap = new HashMap<>();
-      Map examplesMap = new HashMap<>();
+      Map<String, Object> itemsMap = new HashMap<>();
+      Map<String, Object> examplesMap = new HashMap<>();
 
       return blankQuizMapper.findBySectionId(sectionId)
             .stream()
@@ -91,3 +90,5 @@ public class PaperResource {
             .collect(Collectors.toList());
   }
 }
+
+
