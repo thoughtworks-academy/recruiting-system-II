@@ -1,4 +1,4 @@
-var filterRoute = require('../mixin/filter-route');
+var getJumpControl = require('../mixin/get-jump-control');
 
 module.exports = function (req, res, next) {
   var env = process.env.NODE_ENV === "production" ? "production" : "development";
@@ -12,21 +12,35 @@ module.exports = function (req, res, next) {
     };
   }
 
+  var hasSession = false;
+
   if (req.session.user) {
-    next();
-  } else {
-    var arr = req.url.split('/');
+    hasSession = true;
+  }
 
-    arr.forEach(function(item, i){
-      arr[i] = item.split('?')[0];
-    });
+  var jumpControl = getJumpControl(hasSession);
 
-    var lastElement = arr[arr.length - 1];
+  var arr = req.url.split('/');
 
-    if (lastElement.indexOf("html") !== -1 && filterRoute.blackList.indexOf(lastElement) !== -1){
-      res.redirect('/');
-    }else{
-      next();
+  arr.forEach(function(item, i){
+    arr[i] = item.split('?')[0];
+  });
+
+  var lastElement = arr[arr.length - 1];
+
+  var redirectionAddress;
+  var needRedirect = false;
+
+  jumpControl.forEach((item) => {
+    if (item.originPath.indexOf(lastElement) !== -1 && item.condition){
+      redirectionAddress = item.targetPath;
+      needRedirect = true;
     }
+  });
+
+  if (needRedirect) {
+    res.redirect(redirectionAddress);
+  }else {
+    next();
   }
 };

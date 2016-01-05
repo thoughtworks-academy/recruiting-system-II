@@ -1,9 +1,0 @@
-{
-  "blackList": [
-    "account.html",
-    "dojo.html",
-    "logic-puzzle.html",
-    "progress.html",
-    "start.html"
-  ]
-}
