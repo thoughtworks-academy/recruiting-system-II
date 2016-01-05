@@ -1,7 +1,5 @@
 FROM ubuntu:14.04
 
-COPY sources.list.trusty /etc/apt/sources.list
-
 RUN apt-get update
 
 ENV MYSQL_MAJOR 5.7
