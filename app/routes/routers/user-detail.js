@@ -47,4 +47,16 @@ router.get('/', function (req, res) {
       })
 });
 
+router.put('/update', function (req, res) {
+  var userId = req.session.user.id;
+
+  agent.put(apiServer + 'user/' + userId)
+      .set('Content-Type', 'application/json')
+      .end(function (err, resp) {
+        res.send({
+          status: 200
+        })
+      })
+});
+
 module.exports = router;

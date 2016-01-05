@@ -18,7 +18,7 @@ var UserDetailStore = Reflux.createStore({
 
   onUpdateUserDetail: function (userData) {
 
-    request.post('/account/update')
+    request.put('/user-detail/update')
         .set('Content-Type', 'application/json')
         .send({
           data: userData
