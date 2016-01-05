@@ -1,12 +1,12 @@
 var React = global.React = require('react');
 var ReactDom = require('react-dom');
 var Input = require('react-bootstrap/lib/Input');
-var AccountActions = require('../actions/account-actions');
-var AccountStore = require('../store/account-store');
+var UserDetailActions = require('../actions/user-detail-actions');
+var UserDetailStore = require('../store/user-detail-store');
 var Reflux = require('reflux');
 
-var Account = React.createClass({
-  mixins: [Reflux.connect(AccountStore)],
+var UserDetail = React.createClass({
+  mixins: [Reflux.connect(UserDetailStore)],
 
   getInitialState: function () {
     return {
@@ -21,7 +21,7 @@ var Account = React.createClass({
   },
 
   componentDidMount: function () {
-    AccountActions.loadUserInfo();
+    UserDetailActions.loadUserDetail();
   },
 
   render: function () {
@@ -102,4 +102,4 @@ var Account = React.createClass({
   }
 });
 
-module.exports = Account;
+module.exports = UserDetail;

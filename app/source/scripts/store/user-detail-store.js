@@ -1,12 +1,12 @@
 var Reflux = require('reflux');
-var AccountActions = require('../actions/account-actions');
+var UserDetailActions = require('../actions/user-detail-actions');
 var request = require('superagent');
 
-var AccountStore = Reflux.createStore({
-  listenables: [AccountActions],
+var UserDetailStore = Reflux.createStore({
+  listenables: [UserDetailActions],
 
-  onLoadUserInfo: function () {
-    request.get('/account')
+  onLoadUserDetail: function () {
+    request.get('/user-detail')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err || res.status !== 200) {
@@ -16,7 +16,7 @@ var AccountStore = Reflux.createStore({
         });
   },
 
-  onUpdateUserInfo: function (userData) {
+  onUpdateUserDetail: function (userData) {
 
     request.post('/account/update')
         .set('Content-Type', 'application/json')
@@ -31,4 +31,4 @@ var AccountStore = Reflux.createStore({
   }
 });
 
-module.exports = AccountStore;
+module.exports = UserDetailStore;

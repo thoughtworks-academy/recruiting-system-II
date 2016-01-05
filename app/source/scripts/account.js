@@ -4,9 +4,9 @@ var ReactDom = require('react-dom');
 require('bootstrap');
 require('../less/account.less');
 
-var Account = require('./component/account.component');
+var UserDetail = require('./component/user-detail.component');
 
 ReactDom.render(
-    <Account />,
+    <UserDetail />,
     document.getElementById('account-info')
 );
