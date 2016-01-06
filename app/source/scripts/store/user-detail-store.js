@@ -25,7 +25,9 @@ var UserDetailStore = Reflux.createStore({
         })
         .end((err, req) => {
           if (req.body.status === 200) {
-            alert('修改成功');
+            location.href = 'dashboard.html';
+          }else{
+            console.log('update error');
           }
         });
   }
