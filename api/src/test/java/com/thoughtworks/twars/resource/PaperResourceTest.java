@@ -66,7 +66,7 @@ public class PaperResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
 
-        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":23,\"quizzes\":[{\"examples\":{\"uri\":\"/blankQuizzes/4/examples\"},\"definition\":{\"uri\":\"/blankQuizzes/4\"},\"id\":4,\"items\":{\"uri\":\"/blankQuizzes/4/items\"}},{\"examples\":{\"uri\":\"/blankQuizzes/0/examples\"},\"definition\":{\"uri\":\"/blankQuizzes/0\"},\"id\":0,\"items\":{\"uri\":\"/blankQuizzes/0/items\"}}],\"desc\":\"逻辑题\"}]}"));
+        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":23,\"quizzes\":[{\"definition\":{\"uri\":\"/blankQuizzes/4\"},\"id\":4,\"items\":{\"uri\":\"/blankQuizzes/4/items\"}},{\"definition\":{\"uri\":\"/blankQuizzes/0\"},\"id\":0,\"items\":{\"uri\":\"/blankQuizzes/0/items\"}}],\"desc\":\"逻辑题\"}]}"));
 
     }
 
@@ -93,7 +93,7 @@ public class PaperResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
 
-        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":22,\"quizzes\":[{\"examples\":{\"uri\":\"/blankQuizzes/3/examples\"},\"definition\":{\"uri\":\"/blankQuizzes/3\"},\"id\":3,\"items\":{\"uri\":\"/blankQuizzes/3/items\"}}],\"desc\":\"逻辑题\"}]}"));
+        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":22,\"quizzes\":[{\"definition\":{\"uri\":\"/blankQuizzes/3\"},\"id\":3,\"items\":{\"uri\":\"/blankQuizzes/3/items\"}}],\"desc\":\"逻辑题\"}]}"));
 
     }
 }
