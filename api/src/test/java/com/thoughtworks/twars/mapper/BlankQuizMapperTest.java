@@ -37,4 +37,14 @@ public class BlankQuizMapperTest extends TestBase {
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(1);
         assertThat(blankQuizzes.size(), is(3));
     }
+
+    @Test
+    public void shoule_return_count_object_by_given_id() throws Exception {
+        BlankQuiz blankQuiz = blankQuizMapper.findById(1);
+        assertThat(blankQuiz.getCount(), is(10));
+        assertThat(blankQuiz.getNormalCount(), is(4));
+        assertThat(blankQuiz.getHardCount(), is(3));
+        assertThat(blankQuiz.getEasyCount(), is(3));
+
+    }
 }
