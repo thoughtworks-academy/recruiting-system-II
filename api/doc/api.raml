@@ -336,9 +336,6 @@ baseUri: http://api.bronzesword.com/
                                 items:
                                   properties:
                                     uri: string
-                                examples:
-                                  properties:
-                                    uri: string
                         maker:
                           properties:
                             uri: string
@@ -395,18 +392,26 @@ baseUri: http://api.bronzesword.com/
             body:
               application/json:
                 properties:
-                  type:
+                  quizItems:
                     properties:
                       []:
                         properties:
-                          quizItem:
-                            properties:
-                              id: integer
-                              initializedBox: string
-                              question: string
-                              description: string
-                              chartPath: string
-                              # 根据前台需要的数据把剩下的补完，不能有正确答案
+                          id: integer
+                          uri: string
+                          question: string
+                          description: string
+                          chartPath: string
+                          # 根据前台需要的数据把剩下的补完，不能有正确答案
+                  quizItemExamples:
+                    properties:
+                      []:
+                        properties:
+                          id: integer
+                          uri: string
+                          question: string
+                          description: string
+                          chartPath: string
+                          answer: string
 
 /quizItems:
   get:
