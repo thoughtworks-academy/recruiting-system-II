@@ -34,6 +34,12 @@ var LogicPuzzle = React.createClass({
     LogicPuzzleActions.changeAnswer(val);
   },
 
+  modalStateChange: function() {
+    this.setState({
+      showModal: true
+    })
+  },
+
   render: function () {
 
     return (
@@ -52,7 +58,8 @@ var LogicPuzzle = React.createClass({
 
             <div className="col-md-3 col-sm-4">
               <LogicPuzzleSidebar orderId={this.state.orderId}
-                                  itemsCount={this.state.itemsCount}/>
+                                  itemsCount={this.state.itemsCount}
+                                  onModalStateChange={this.modalStateChange}/>
             </div>
 
             <Modal
@@ -63,10 +70,10 @@ var LogicPuzzle = React.createClass({
                 <Modal.Title id="contained-modal-title-lg">提示:</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                时间到,已提交.点击确定后开始dojo测试
+                时间到,已提交.
               </Modal.Body>
               <Modal.Footer>
-                <Button href="progress.html">确定</Button>
+                <Button href="dashboard.html">确定</Button>
               </Modal.Footer>
             </Modal>
           </div>
