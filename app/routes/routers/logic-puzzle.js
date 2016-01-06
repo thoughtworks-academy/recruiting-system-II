@@ -15,6 +15,12 @@ router.get('/', function (req, res) {
 
   userPuzzle.findOne({userId: userId})
       .then(function (data) {
+        data.quizExamples.forEach(function(example){
+          example.isExample = true;
+        });
+        data.quizItems.forEach(function(item){
+          item.isExample = false;
+        });
         quizAll = data.quizExamples.concat(data.quizItems);
         itemsCount = quizAll.length;
         return quizAll[orderId].uri;
@@ -36,7 +42,7 @@ router.get('/', function (req, res) {
           },
           userAnswer: userAnswer,
           itemsCount: itemsCount,
-          isExample: quizAll[orderId].userAnswer === undefined
+          isExample: quizAll[orderId].isExample
         });
       })
 });
