@@ -2,11 +2,11 @@ var $ = global.jQuery = require('jquery');
 var ReactDom = require('react-dom');
 
 require('bootstrap');
-require('../less/account.less');
+require('../less/user-center.less');
 
-var UserDetail = require('./component/user-detail.component');
+var UserCenter = require('./component/user-center.component');
 
 ReactDom.render(
-    <UserDetail />,
+    <UserCenter />,
     document.getElementById('account-info')
 );

@@ -10,7 +10,7 @@ module.exports = {
         "dojo": "./source/scripts/dojo.js",
         "register": "./source/scripts/register.js",
         "start": "./source/scripts/start.js",
-        "account": './source/scripts/account.js',
+        "user-center": './source/scripts/user-center.js',
         "dashboard":'./source/scripts/dashboard.js'
     },
     output: {

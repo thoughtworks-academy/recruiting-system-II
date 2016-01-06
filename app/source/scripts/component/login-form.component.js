@@ -12,7 +12,7 @@ function getError(validateInfo, field) {
 }
 
 function jumpToStart() {
-  location.href = 'account.html'
+  location.href = 'user-center.html'
 }
 
 var LoginForm = React.createClass({

@@ -159,7 +159,7 @@ var RegisterForm = React.createClass({
 
             if (info.status === 200) {
               createUser();
-              location.href = 'account.html';
+              location.href = 'user-center.html';
 
             } else {
               var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
