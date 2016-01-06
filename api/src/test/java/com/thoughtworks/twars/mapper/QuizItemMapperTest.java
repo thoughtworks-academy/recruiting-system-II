@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class QuizItemMapperTest extends TestBase {
     private QuizItemMapper quizItemMapper;
@@ -69,5 +70,13 @@ public class QuizItemMapperTest extends TestBase {
         assertThat(easyItems.size(), is(3));
         assertThat(normalItems.size(), is(4));
         assertThat(hardItems.size(), is(3));
+    }
+
+    @Test
+    public void should_return_example_item() throws Exception {
+
+        List<QuizItem> exampleItems = quizItemMapper.getExampleItems();
+        assertThat(exampleItems.size(), is(2));
+        assertThat(exampleItems.size(), is(lessThan(15)));
     }
 }
