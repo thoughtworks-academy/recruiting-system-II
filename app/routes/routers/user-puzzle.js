@@ -30,25 +30,7 @@ router.get('/remain-time', function (req, res) {
       });
 });
 
-router.post('/save', function (req, res) {
-  var orderId = req.body.orderId;
-  var userAnswer = req.body.userAnswer;
-  var userId = req.session.user.id;
-  userPuzzle.findOne({userId: userId})
-      .then(function (data) {
-        if (orderId > data.quizExamples.length - 1) {
-          data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
-          data.save(function (err) {
-            if (err)
-              console.log(err);
-          });
-        }
-      })
-      .then(function () {
-        res.sendStatus(200);
-      })
-
-});
+router.post('/save', function (req, res) {userPuzzle.saveAnswer(req, res)});
 
 router.get('/createUser', function (req, res) {
 
@@ -125,6 +107,5 @@ router.get('/createUser', function (req, res) {
         res.send({status: 200})
       });
 });
-
 
 module.exports = router;

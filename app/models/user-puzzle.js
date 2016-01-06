@@ -96,5 +96,23 @@ userPuzzleSchema.statics.submitPaper = function (req, res){
       })
 };
 
+userPuzzleSchema.statics.saveAnswer = function(reqq, res){
+  var orderId = req.body.orderId;
+  var userAnswer = req.body.userAnswer;
+  var userId = req.session.user.id;
+  this.findOne({userId: userId})
+      .then(function (data) {
+        if (orderId > data.quizExamples.length - 1) {
+          data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
+          data.save(function (err) {
+            if (err)
+              console.log(err);
+          });
+        }
+      })
+      .then(function () {
+        res.sendStatus(200);
+      })
+};
 
 module.exports = mongoose.model('UserPuzzles', userPuzzleSchema);
