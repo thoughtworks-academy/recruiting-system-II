@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.QuizItem;
+import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ public class QuizItemResource extends Resource {
 
     @Inject
     private QuizItemMapper quizItemMapper;
+    private BlankQuizMapper blankQuizMapper;
 
     public QuizItemResource() {
         super();
@@ -71,4 +73,6 @@ public class QuizItemResource extends Resource {
 
         return Response.status(200).entity(map).build();
     }
+
+
 }
