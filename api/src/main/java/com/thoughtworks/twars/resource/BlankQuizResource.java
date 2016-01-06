@@ -106,18 +106,18 @@ public class BlankQuizResource {
         Map<String, Object> result = new HashMap<>();
         result.put("id", quizItem.getId());
         result.put("initializedBox", quizItem.getInitializedBox());
-        result.put("question", quizItem.getQuestion());
+        result.put("question", quizItem.getQuestionZh());
         result.put("chartPath", quizItem.getChartPath());
-        result.put("description", quizItem.getDescription());
+        result.put("description", quizItem.getDescriptionZh());
         return result;
     }
     private static Map buildExampleMap(QuizItem quizItem) {
         Map<String, Object> result = new HashMap<>();
         result.put("id", quizItem.getId());
         result.put("initializedBox", quizItem.getInitializedBox());
-        result.put("question", quizItem.getQuestion());
+        result.put("question", quizItem.getQuestionZh());
         result.put("chartPath", quizItem.getChartPath());
-        result.put("description", quizItem.getDescription());
+        result.put("description", quizItem.getDescriptionZh());
         result.put("answer", quizItem.getAnswer());
         return result;
     }
