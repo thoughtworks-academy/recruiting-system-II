@@ -3,3 +3,7 @@ mysql:
   ports:
     - "13306:3306"
   env_file: test.env
+api-server:
+  build: ./api-server
+  links:
+    - mysql
