@@ -67,7 +67,7 @@ public class BlankQuizResourceTest extends TestBase {
         QuizItem normalQuizItem = mock(QuizItem.class);
         QuizItem hardQuizItem = mock(QuizItem.class);
 
-        when(blankQuizMapper.findById(anyInt())).thenReturn(firstBlankQuiz);
+        when(blankQuizMapper.findOne(anyInt())).thenReturn(firstBlankQuiz);
 
         when(firstBlankQuiz.getEasyCount()).thenReturn(1);
         when(firstBlankQuiz.getNormalCount()).thenReturn(1);
@@ -111,7 +111,7 @@ public class BlankQuizResourceTest extends TestBase {
         QuizItem firstExampleItems = mock(QuizItem.class);
         QuizItem secondExampleItems = mock(QuizItem.class);
 
-        when(blankQuizMapper.findById(anyInt())).thenReturn(firstBlankQuiz);
+        when(blankQuizMapper.findOne(anyInt())).thenReturn(firstBlankQuiz);
         when(firstExampleItems.getId()).thenReturn(88);
         when(secondExampleItems.getId()).thenReturn(99);
         when(firstExampleItems.getInitializedBox()).thenReturn("InitializedBox 88");
