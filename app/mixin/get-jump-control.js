@@ -14,7 +14,7 @@ function jumpControl(hasSession, isCommited){
       "logic-puzzle.html",
       "start.html"
     ],
-    targetPath: 'http://localhost:3000/dashboard.html',
+    targetPath: '/dashboard.html',
     condition: hasSession && isCommited
   }]
 }
