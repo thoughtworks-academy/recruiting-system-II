@@ -22,4 +22,8 @@
     <select id="findBySectionId" resultMap="blankQuizListMap">
         select * from BlankQuiz where sectionId  = #{sectionId}
     </select>
+
+    <select id="findById" resultMap="blankQuizListMap">
+        select * from BlankQuiz where id = #{id}
+    </select>
 </mapper>
