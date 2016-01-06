@@ -52,35 +52,36 @@ module.exports = function (req, res, next) {
     isPaperCommited: function (done) {
       if (!userId) {
         done(null, false);
+      }else{
+
+        userPuzzle.findOne({userId: userId}, (err, userPuzzle) => {
+          if (err || !userPuzzle) {
+            done(null, false);
+          }else {
+            var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
+            var now = Date.parse(new Date()) / 1000;
+            var usedTime = now - startTime;
+
+            done(null, userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0);
+          }
+        })
       }
-
-      userPuzzle.findOne({userId: userId}, (err, userPuzzle) => {
-        if (err) {
-          done(null, false);
-        }
-
-        var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
-        var now = Date.parse(new Date()) / 1000;
-        var usedTime = now - startTime;
-
-        done(null, userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0);
-      })
     },
 
     isDetailed: function (done) {
       if (!userId) {
         done(null, false);
+      }else {
+        superagent.get(apiServer + 'user/' + userId + '/detail')
+          .set('Content-Type', 'application/json')
+          .end(function (err) {
+            if (err) {
+              done(null, false)
+            } else {
+              done(null, true);
+            }
+          })
       }
-
-      superagent.get(apiServer + 'user/' + userId + '/detail')
-        .set('Content-Type', 'application/json')
-        .end(function (err) {
-          if (err) {
-            done(null, false)
-          } else {
-            done(null, true);
-          }
-        })
     }
   }, function (err, data) {
     var jumpControl = getJumpControl(data.isLoged, data.isPaperCommited, data.isDetailed);
