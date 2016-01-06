@@ -78,8 +78,8 @@ public class BlankQuizResourceTest extends TestBase {
         when(quizItemMapper.getHardItems(1)).thenReturn(Arrays.asList(hardQuizItem));
 
         when(easyQuizItem.getId()).thenReturn(88);
-        when(easyQuizItem.getDescription()).thenReturn("描述 88");
-        when(easyQuizItem.getQuestion()).thenReturn("Question 88");
+        when(easyQuizItem.getDescriptionZh()).thenReturn("描述 88");
+        when(easyQuizItem.getQuestionZh()).thenReturn("Question 88");
         when(easyQuizItem.getChartPath()).thenReturn("ChartPath 88");
         when(easyQuizItem.getInitializedBox()).thenReturn("InitializedBox 88");
 
@@ -115,9 +115,9 @@ public class BlankQuizResourceTest extends TestBase {
         when(firstExampleItems.getId()).thenReturn(88);
         when(secondExampleItems.getId()).thenReturn(99);
         when(firstExampleItems.getInitializedBox()).thenReturn("InitializedBox 88");
-        when(firstExampleItems.getQuestion()).thenReturn("Question 88");
+        when(firstExampleItems.getQuestionZh()).thenReturn("Question 88");
         when(firstExampleItems.getChartPath()).thenReturn("ChartPath 88");
-        when(firstExampleItems.getDescription()).thenReturn("Description 88");
+        when(firstExampleItems.getDescriptionZh()).thenReturn("Description 88");
         when(firstExampleItems.getAnswer()).thenReturn(3);
         when(quizItemMapper.getExampleItems()).thenReturn(Arrays.asList(firstExampleItems,secondExampleItems));
 
