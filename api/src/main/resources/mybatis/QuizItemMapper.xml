@@ -3,6 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.QuizItemMapper">
+
+    <resultMap id="quizItemListMap" type="com.thoughtworks.twars.bean.QuizItem">
+        <id property="id" column="id"></id>
+        <result property="initializedBox" column="initializedBox"></result>
+        <result property="questionZh" column="questionZh"></result>
+        <result property="descriptionZh" column="descriptionZh"></result>
+        <result property="chartPath" column="chartPath"></result>
+    </resultMap>
+
     <select id="getAllQuizItems" resultType="com.thoughtworks.twars.bean.QuizItem">
         SELECT * FROM quizItem
     </select>
@@ -16,7 +25,15 @@
         SELECT * FROM quizItem WHERE id = #{id}
     </select>
 
-    <select id="findByBlankQuizId" resultType="com.thoughtworks.twars.bean.QuizItem">
-        SELECT  * FROM quizItem order by rand() LIMIT 10 ;
+    <select id="getEasyItems" resultMap="quizItemListMap">
+        select * from quizItem where count between 0 and 25 limit #{easyCount}
+    </select>
+
+    <select id="getNormalItems" resultMap="quizItemListMap">
+        select * from quizItem where count between 26 and 33 limit #{normalCount}
+    </select>
+
+    <select id="getHardItems" resultMap="quizItemListMap">
+        select * from quizItem where count between 34 and 50 limit #{hardCount}
     </select>
 </mapper>
