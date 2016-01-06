@@ -6,6 +6,7 @@ var UserDetailStore = require('../store/user-detail-store');
 var Reflux = require('reflux');
 var validate = require("validate.js");
 var constraint = require('../../../mixin/user-detail-constraint');
+var UserCenterGender = require('./user-center-gender.component');
 
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
@@ -73,16 +74,16 @@ var UserDetail = React.createClass({
     this.setState(stateObj);
   },
 
-  genderValidate: function (evt) {
+  genderValidate: function () {
     if (this.state.genderError === true) {
       this.setState({genderError: false})
     }
   },
 
-  degreeValidate:function (evt) {
-    if(this.state.degree !== '') {
+  degreeValidate: function (evt) {
+    if (this.state.degree !== '') {
       this.setState({degreeError: false})
-    }else {
+    } else {
       this.setState({degreeError: true})
     }
   },
@@ -197,16 +198,8 @@ var UserDetail = React.createClass({
 
           <label htmlFor="inputGender" className="col-sm-4 col-md-4 control-label">性别</label>
           <div className="form-group">
-            <div className="col-sm-4 col-md-4" onClick={this.genderValidate}>
-              <input type="radio" name="男" className="gender" onChange={this.genderChange}
-                     checked={this.state.gender === "男" ? "checked" : ""}/>男
-              <input type="radio" name="女" className="gender" onChange={this.genderChange}
-                     checked={this.state.gender === "女" ? "checked" : ""}/>女
-            </div>
-            <div className={"error alert alert-danger" + (this.state.genderError === true ? '' : ' hide')} role="alert">
-              <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              请选择性别
-            </div>
+            <UserCenterGender gender={this.state.gender} genderError={this.state.genderError}
+                              onStateChange={this.genderChange} onValidate={this.genderValidate}/>
           </div>
 
           <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业</label>
@@ -230,7 +223,7 @@ var UserDetail = React.createClass({
               <Input type="select" placeholder="学历学位" name="degree" value={this.state.degree}
                      onChange={this.handleChange}>
                 <option value="">请选择</option>
-                <option value="专科" >专科及以下</option>
+                <option value="专科">专科及以下</option>
                 <option value="本科">本科</option>
                 <option value="硕士">硕士</option>
                 <option value="博士">博士</option>
