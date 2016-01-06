@@ -11,17 +11,18 @@ var userPuzzleSchema = new Schema({
   quizItems: [{
     id: Number,
     question: String,
-    description:String,
-    chartPath:String,
-    initializedBox:String
+    description: String,
+    chartPath: String,
+    initializedBox: String,
+    userAnswer: Number
   }],
   quizExamples: [{
     id: Number,
     question: String,
-    answer:Number,
-    description:String,
-    chartPath:String,
-    initializedBox:String
+    answer: Number,
+    description: String,
+    chartPath: String,
+    initializedBox: String
   }],
   blankQuizId: Number,
   paperId: Number,
@@ -29,10 +30,11 @@ var userPuzzleSchema = new Schema({
   endTime: String
 });
 
+
+
 userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
   var orderId = req.query.orderId;
   var userId = req.session.user.id;
-  var quizAll;
   var userAnswer;
   var itemsCount;
 
@@ -44,26 +46,20 @@ userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
         data.quizItems.forEach(function (item) {
           item.isExample = false;
         });
-        quizAll = data.quizExamples.concat(data.quizItems);
+        var quizAll = data.quizExamples.concat(data.quizItems);
         itemsCount = quizAll.length;
-        return quizAll[orderId].uri;
+        return quizAll
       })
-      .then(function (uri) {
-        return agent.get(apiServer + uri)
-            .set('Content-Type', 'application/json')
-            .end();
-      })
-      .then(function (data) {
-        console.log(data);
-        userAnswer = quizAll[orderId].userAnswer || data.body.answer || null;
+      .then(function (quizAll) {
+        userAnswer = quizAll[orderId].userAnswer || quizAll[orderId].answer || null;
 
         res.send({
           item: {
-            id: data.body.id,
-            initializedBox: JSON.parse(data.body.initializedBox),
-            question: data.body.question,
-            description: JSON.parse(data.body.description),
-            chartPath: data.body.chartPath
+            id: quizAll[orderId].id,
+            initializedBox: JSON.parse(quizAll[orderId].initializedBox),
+            question: quizAll[orderId].question,
+            description: JSON.parse(quizAll[orderId].description),
+            chartPath: quizAll[orderId].chartPath
           },
           userAnswer: userAnswer,
           itemsCount: itemsCount,
@@ -72,14 +68,14 @@ userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
       })
 };
 
-userPuzzleSchema.statics.submitPaper = function (req, res){
+userPuzzleSchema.statics.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
   var endTime = Date.parse(new Date()) / 1000;
   this.findOne({userId: examerId})
-      .then(function(data){
+      .then(function (data) {
 
         var itemPosts = [];
-        data.quizItems.forEach(function(quizItem){
+        data.quizItems.forEach(function (quizItem) {
           itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
         });
         var result = {
@@ -94,22 +90,25 @@ userPuzzleSchema.statics.submitPaper = function (req, res){
         };
         return data;
       })
-      .then(function(data){
+      .then(function (data) {
         data.endTime = endTime;
         data.isCommited = true;
         data.save();
-        res.send({status:200});
+        res.send({status: 200});
       })
 };
 
-userPuzzleSchema.statics.saveAnswer = function(reqq, res){
+userPuzzleSchema.statics.saveAnswer = function (req, res) {
   var orderId = req.body.orderId;
   var userAnswer = req.body.userAnswer;
   var userId = req.session.user.id;
+  console.log(userAnswer);
   this.findOne({userId: userId})
       .then(function (data) {
+
         if (orderId > data.quizExamples.length - 1) {
           data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
+          console.log(data.quizItems[orderId - data.quizExamples.length].userAnswer)
           data.save(function (err) {
             if (err)
               console.log(err);
@@ -118,6 +117,68 @@ userPuzzleSchema.statics.saveAnswer = function(reqq, res){
       })
       .then(function () {
         res.sendStatus(200);
+      })
+};
+
+userPuzzleSchema.statics.initialDB = function (req, res) {
+  var userId = req.session.user.id;
+  var quizItems,quizExamples,blankQuizId,paperId;
+  var userPuzzleUrl = 'papers/enrollment';
+
+  this.findOne({userId: userId})
+      .then((data) => {
+        if(!data){
+          return agent.get(apiServer + userPuzzleUrl)
+              .set('Content-Type', 'application/json')
+              .end()
+        }else{
+          return null;
+        }
+
+      })
+      .then((res) => {
+        if(res){
+          var quizzes = res.body.sections[0].quizzes[0];
+          blankQuizId = quizzes.id;
+          paperId = res.body.id;
+          return quizzes.items.uri;
+        }else{
+          return null;
+        }
+
+      })
+      .then((itemsUri) => {
+        if(itemsUri){
+          return agent.get(apiServer + itemsUri)
+              .set('Content-Type', 'application/json')
+              .end()
+        }else{
+          return null;
+        }
+
+      })
+      .then((items) => {
+        if(items){
+          quizItems = items.body.quizItems;
+          quizExamples = items.body.exampleItems;
+          return {isNotExit: true};
+        }else{
+          return {isNotExit: false};
+        }
+      })
+      .then((result) => {
+        if(result.isNotExit){
+          this.create({
+            userId: userId,
+            quizItems: quizItems,
+            quizExamples: quizExamples,
+            blankQuizId: blankQuizId,
+            paperId: paperId
+          },function (){
+            process.exit();
+            res.send({status: 200})
+          })
+        }
       })
 };
 

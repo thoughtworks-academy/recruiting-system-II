@@ -33,48 +33,7 @@ router.get('/remain-time', function (req, res) {
 router.post('/save', function (req, res) {userPuzzle.saveAnswer(req, res)});
 
 router.get('/createUser', function (req, res) {
-
-  var userId = req.session.user.id;
-  var userPuzzleUrl = 'papers/enrollment';
-  var newUser;
-  
-  userPuzzle.findOne({userId: userId})
-      .then(function (data) {
-        if (data === null) {
-          newUser = new userPuzzle({
-            userId: userId
-          });
-        }else{
-          res.send({status: 200});
-        }
-      })
-      .then(function(){
-        return agent.get(apiServer + userPuzzleUrl)
-            .set('Content-Type', 'application/json')
-            .end()
-      })
-      .then(function (res) {
-        var quizzes = res.body.sections[0].quizzes[0];
-        newUser.blankQuizId =quizzes.id;
-        newUser.paperId = res.body.id;
-        return quizzes.items.url;
-      })
-      .then(function(itemsUrl){
-        return agent.get(apiServer + itemsUrl)
-            .set('Content-Type', 'application/json')
-            .end()
-      })
-      .then(function(items){
-        newUser.quizItems = items.body.quizItems;
-        newUser.quizExamples = items.body.exampleItems;
-        newUser.save(function(err){
-          if(err){
-            console.log(err);
-          }else{
-            res.send({status:200});
-          }
-        })
-      })
+  userPuzzle.initialDB(req, res)
 });
 
 module.exports = router;
