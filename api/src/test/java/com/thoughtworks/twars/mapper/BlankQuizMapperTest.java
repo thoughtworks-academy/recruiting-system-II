@@ -40,7 +40,7 @@ public class BlankQuizMapperTest extends TestBase {
 
     @Test
     public void shoule_return_count_object_by_given_id() throws Exception {
-        BlankQuiz blankQuiz = blankQuizMapper.findById(1);
+        BlankQuiz blankQuiz = blankQuizMapper.findOne(1);
         assertThat(blankQuiz.getCount(), is(10));
         assertThat(blankQuiz.getNormalCount(), is(4));
         assertThat(blankQuiz.getHardCount(), is(3));
