@@ -221,7 +221,7 @@ var UserDetail = React.createClass({
           <div className="form-group">
             <div className="col-sm-4 col-md-4 degree" onBlur={this.degreeValidate}>
               <Input type="select" placeholder="学历学位" name="degree" value={this.state.degree}
-                     onChange={this.handleChange}>
+                     onChange={this.handleChange} className={this.state.degreeError === true ? "select" : ""}>
                 <option value="">请选择</option>
                 <option value="专科">专科及以下</option>
                 <option value="本科">本科</option>
