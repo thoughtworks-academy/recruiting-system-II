@@ -155,7 +155,7 @@ var UserDetail = React.createClass({
           <label htmlFor="inputSchool" className="col-sm-4 col-md-4 control-label">学校</label>
           <div className={"form-group has-" + (this.state.schoolError === '' ? '' : 'error')}>
             <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputSuccess1" aria-describedby="helpBlock2"
+              <input type="text" className="form-control" id="inputSchool" aria-describedby="helpBlock2"
                      placeholder="学校"
                      onChange={this.handleChange} ref="school" name="school" value={this.state.school}
                      onBlur={this.validate}/>
@@ -169,7 +169,7 @@ var UserDetail = React.createClass({
           <label htmlFor="inputName" className="col-sm-4 col-md-4 control-label">姓名</label>
           <div className={"form-group has-" + (this.state.nameError === '' ? '' : 'error')}>
             <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputSuccess1" aria-describedby="helpBlock2"
+              <input type="text" className="form-control" id="inputName" aria-describedby="helpBlock2"
                      placeholder="姓名"
                      onChange={this.handleChange} name="name" ref="name" value={this.state.name}
                      onBlur={this.validate}/>
@@ -205,7 +205,7 @@ var UserDetail = React.createClass({
           <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业</label>
           <div className={"form-group has-" + (this.state.majorError === '' ? '' : 'error')}>
             <div className="col-sm-4 col-md-4">
-              <input type="text" className="form-control" id="inputSuccess1" aria-describedby="helpBlock2"
+              <input type="text" className="form-control" id="inputMajor" aria-describedby="helpBlock2"
                      placeholder="专业"
                      onChange={this.handleChange} name="major" ref="major" value={this.state.major}
                      onBlur={this.validate}/>
