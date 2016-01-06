@@ -11,8 +11,8 @@ function getError(validateInfo, field) {
   return '';
 }
 
-function jumpToStart() {
-  location.href = 'user-center.html'
+function jumpToDashboard() {
+  location.href = 'dashboard.html'
 }
 
 var LoginForm = React.createClass({
@@ -53,7 +53,7 @@ var LoginForm = React.createClass({
           var data = JSON.parse(req.text);
           if (data.status === 200) {
             this.setState({loginFailed : false});
-            jumpToStart();
+            jumpToDashboard();
           } else {
             this.setState({loginFailed : true});
           }
