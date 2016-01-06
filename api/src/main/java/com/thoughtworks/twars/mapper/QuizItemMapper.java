@@ -11,4 +11,10 @@ public interface QuizItemMapper {
     public int insertQuizItem(QuizItem quizItem);
 
     public QuizItem getQuizItemById(int id);
+
+    public List<QuizItem> getEasyItems(int easyCount);
+
+    public List<QuizItem> getNormalItems(int normalCount);
+
+    public List<QuizItem> getHardItems(int hardItems);
 }
