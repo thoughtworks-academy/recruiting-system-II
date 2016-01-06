@@ -36,4 +36,10 @@
     <select id="getHardItems" resultMap="quizItemListMap">
         select * from quizItem where count between 34 and 50 limit #{hardCount}
     </select>
+
+    <select id="getExampleItems" resultMap="quizItemListMap">
+        <![CDATA[
+            select * from quizItem where count  <  15 limit 2
+        ]]>
+    </select>
 </mapper>
