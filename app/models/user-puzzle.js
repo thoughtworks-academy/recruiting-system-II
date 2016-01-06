@@ -10,12 +10,18 @@ var userPuzzleSchema = new Schema({
   startTime: Number,
   quizItems: [{
     id: Number,
-    uri: String,
-    userAnswer: Number
+    question: String,
+    description:String,
+    chartPath:String,
+    initializedBox:String
   }],
   quizExamples: [{
     id: Number,
-    uri: String
+    question: String,
+    answer:Number,
+    description:String,
+    chartPath:String,
+    initializedBox:String
   }],
   blankQuizId: Number,
   paperId: Number,
