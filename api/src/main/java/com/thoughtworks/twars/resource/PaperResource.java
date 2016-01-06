@@ -74,7 +74,7 @@ public class PaperResource {
 
     private List<Map> getQuizzesBySectionId(int sectionId) {
 
-        String basePath = "/blankQuizzes/";
+        String basePath = "blankQuizzes/";
 
         return blankQuizMapper.findBySectionId(sectionId)
                 .stream()
