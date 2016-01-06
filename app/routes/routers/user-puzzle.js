@@ -97,16 +97,16 @@ router.get('/createUser', function (req, res) {
           //newUser.quizItems = quizItems;
 
           newUser.quizItems = [
-            {id: 1, uri: 'quizItems/1', userAnswer: 9},
-            {id: 5, uri: 'quizItems/5', userAnswer: null},
-            {id: 8, uri: 'quizItems/8', userAnswer: null},
-            {id: 14, uri: 'quizItems/14', userAnswer: 1},
-            {id: 26, uri: 'quizItems/26', userAnswer: null},
-            {id: 33, uri: 'quizItems/33', userAnswer: null},
-            {id: 36, uri: 'quizItems/36', userAnswer: null},
-            {id: 41, uri: 'quizItems/41', userAnswer: 1},
-            {id: 47, uri: 'quizItems/47', userAnswer: null},
-            {id: 49, uri: 'quizItems/49', userAnswer: null}
+            {id: 1, uri: 'quizItems/1'},
+            {id: 5, uri: 'quizItems/5'},
+            {id: 8, uri: 'quizItems/8'},
+            {id: 14, uri: 'quizItems/14'},
+            {id: 26, uri: 'quizItems/26'},
+            {id: 33, uri: 'quizItems/33'},
+            {id: 36, uri: 'quizItems/36'},
+            {id: 41, uri: 'quizItems/41'},
+            {id: 47, uri: 'quizItems/47'},
+            {id: 49, uri: 'quizItems/49'}
           ];
 
           //newUser.quizExamples = quizExamples;
@@ -118,8 +118,6 @@ router.get('/createUser', function (req, res) {
 
           newUser.blankQuizId = 1;
           newUser.paperId = 1;
-          newUser.endTime = null;
-          newUser.isCommited = false;
 
           return newUser.save();
         }
