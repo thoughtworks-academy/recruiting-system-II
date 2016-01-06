@@ -73,7 +73,7 @@ public class BlankQuizResource {
     public Response getItems(@PathParam("param") int blankQuizId) {
 
 
-        BlankQuiz blankQuiz = blankQuizMapper.findById(blankQuizId);
+        BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizId);
 
         List<QuizItem> easyItems = quizItemMapper.getEasyItems(blankQuiz.getEasyCount());
         List<QuizItem> normalItems = quizItemMapper.getNormalItems(blankQuiz.getNormalCount());
