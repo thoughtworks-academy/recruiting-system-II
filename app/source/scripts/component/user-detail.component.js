@@ -73,10 +73,39 @@ var UserDetail = React.createClass({
   },
 
   genderValidate: function () {
-    if(this.state.genderError === true) {
+    if (this.state.genderError === true) {
       this.setState({genderError: false})
     }
   },
+
+  checkInfo: function () {
+    var school = ReactDom.findDOMNode(this.refs.school);
+    var name = ReactDom.findDOMNode(this.refs.name);
+    var major = ReactDom.findDOMNode(this.refs.major);
+    var userInfo = [];
+
+    userInfo.push(school, name, major);
+    var pass = false;
+    var stateObj = {};
+
+    userInfo.forEach((item) => {
+      var valObj = {};
+      var value = item.value;
+      var name = item.name;
+
+      valObj[name] = value;
+      var result = validate(valObj, constraint);
+      var error = getError(result, name);
+
+      if (error !== '') {
+        pass = true;
+      }
+      stateObj[name + 'Error'] = error;
+      this.setState(stateObj);
+    });
+    return pass;
+  },
+
   update: function (evt) {
     evt.preventDefault();
 
@@ -85,7 +114,7 @@ var UserDetail = React.createClass({
     } else {
       this.setState({genderError: false});
     }
-
+    
     var userData = {
       school: this.state.school,
       name: this.state.name,
@@ -97,6 +126,8 @@ var UserDetail = React.createClass({
     };
 
     if (this.state.schoolError !== '' || this.state.nameError !== '' || this.state.majorError !== '') {
+      return;
+    } else if (this.checkInfo()) {
       return;
     }
     UserDetailActions.updateUserDetail(userData);
@@ -110,7 +141,8 @@ var UserDetail = React.createClass({
             <label htmlFor="inputSchool" className="col-sm-4 col-md-4 control-label">学校</label>
             <div className="col-sm-4 col-md-4">
               <input type="text" className="form-control" id="inputSchool" placeholder="学校"
-                     onChange={this.handleChange} name="school" value={this.state.school} onBlur={this.validate}/>
+                     onChange={this.handleChange} ref="school" name="school" value={this.state.school}
+                     onBlur={this.validate}/>
             </div>
             <div className={"error" + (this.state.schoolError === '' ? ' hide' : '')}>{this.state.schoolError}</div>
           </div>
@@ -119,7 +151,8 @@ var UserDetail = React.createClass({
             <label htmlFor="inputName" className="col-sm-4 col-md-4 control-label">姓名</label>
             <div className="col-sm-4 col-md-4">
               <input type="text" className="form-control" id="inputName" placeholder="姓名"
-                     onChange={this.handleChange} name="name" value={this.state.name} onBlur={this.validate}/>
+                     onChange={this.handleChange} name="name" ref="name" value={this.state.name}
+                     onBlur={this.validate}/>
             </div>
             <div className={"error" + (this.state.nameError === '' ? ' hide' : '')}>{this.state.nameError}</div>
           </div>
@@ -157,7 +190,7 @@ var UserDetail = React.createClass({
             <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业</label>
             <div className="col-sm-4 col-md-4">
               <input type="text" className="form-control" id="inputMajor" placeholder="专业"
-                     onChange={this.handleChange} name="major" value={this.state.major} onBlur={this.validate}/>
+                     onChange={this.handleChange} name="major" ref="major" value={this.state.major} onBlur={this.validate}/>
             </div>
             <div className={"error" + (this.state.majorError === '' ? ' hide' : '')}>{this.state.majorError}</div>
 
