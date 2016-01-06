@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thoughtworks.twars.mapper.ScoreSheetMapper">
+
+    <resultMap id="scoreSheetsMap" type="com.thoughtworks.twars.bean.ScoreSheet">
+        <id property="id" column="id"></id>
+        <result column="examerId" property="examerId"></result>
+        <result column="blankQuizId" property="blankQuizId"></result>
+        <result column="quizItemId" property="quizItemId"></result>
+        <result column="userAnswer" property="userAnswer"></result>
+
+    </resultMap>
+
+    <select id="findAll" resultMap="scoreSheetsMap">
+        select * from blankQuizScoresheet;
+    </select>
+
+    <insert id="insertScoreSheet" parameterType="com.thoughtworks.twars.bean.ScoreSheet" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO blankQuizScoreSheet(examerId,blankQuizId,quizItemId,userAnswer)
+        VALUES (#{examerId},#{blankQuizId},#{quizItemId},#{userAnswer})
+    </insert>
+</mapper>
