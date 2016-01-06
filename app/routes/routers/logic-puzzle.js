@@ -50,7 +50,6 @@ router.get('/', function (req, res) {
 router.post('/',function(req, res) {
   var examerId = req.session.user.id;
   var endTime = Date.parse(new Date()) / 1000;
-  console.log(req.session.user.id);
   userPuzzle.findOne({userId: examerId})
       .then(function(data){
 
@@ -58,7 +57,6 @@ router.post('/',function(req, res) {
         data.quizItems.forEach(function(quizItem){
           itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
         });
-        console.log(itemPosts)
         var result = {
           examerId: examerId,
           paperId: data.paperId,
@@ -74,7 +72,6 @@ router.post('/',function(req, res) {
       .then(function(data){
         data.endTime = endTime;
         data.isCommited = true;
-        console.log(data);
         data.save();
         res.send({status:200});
       })
