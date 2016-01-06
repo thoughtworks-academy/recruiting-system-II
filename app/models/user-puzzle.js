@@ -17,7 +17,6 @@ var userPuzzleSchema = new Schema({
   blankQuizId: Number,
   paperId: Number,
   isCommited: Boolean,
-  isCompleted:Boolean,
   endTime: String
 });
 

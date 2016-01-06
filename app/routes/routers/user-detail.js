@@ -6,7 +6,6 @@ var agent = require('superagent-promise')(superAgent, Promise);
 var _ = require('lodash');
 var validate = require('validate.js');
 var constraint = require('../../mixin/user-detail-constraint');
-var userPuzzle = require('../../models/user-puzzle');
 
 
 function checkUserInfo(userInfo) {
@@ -71,16 +70,6 @@ router.put('/update', function (req, res) {
     agent.put(apiServer + 'user/' + userId)
         .set('Content-Type', 'application/json')
         .end(function (err, resp) {
-          userPuzzle.findOne({userId: userId})
-              .then(function (data) {
-                if (data === null) {
-                  res.send({
-                    status: 500
-                  })
-                }
-                data.isCompleted = true;
-                data.save();
-              });
 
           res.send({
             status: 200

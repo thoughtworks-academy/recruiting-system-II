@@ -64,7 +64,7 @@ var LogicPuzzleStore = Reflux.createStore({
         .then(function (res) {
           superAgent.post('/logic-puzzle')
               .set('Content_Type', 'application/json')
-              .end(function(err,res){
+              .end(function (err, res) {
                 console.log(res.body.status);
               })
         })
