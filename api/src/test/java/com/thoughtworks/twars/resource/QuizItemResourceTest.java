@@ -1,12 +1,8 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.QuizItem;
-import org.junit.Assert;
 import org.junit.Test;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
@@ -73,5 +69,4 @@ public class QuizItemResourceTest extends TestBase{
     assertThat((String) result.get("question"),is("www"));
 
   }
-
 }
