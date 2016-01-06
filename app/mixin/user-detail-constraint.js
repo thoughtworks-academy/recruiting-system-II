@@ -1,6 +1,10 @@
 var constraint = {
   school: {
     presence: {message: '^学校不能为空'},
+    length: {
+      maximum: 20,
+      message: '^学校名称过长'
+    },
     format: {
       pattern: /^[\u4E00-\u9FA5A-Za-z]+$/,
       message: '^请输入合法学校名称'
@@ -12,7 +16,11 @@ var constraint = {
     format: {
       pattern: /^[\u4E00-\u9FA5A-Za-z]+$/,
       message: '^请输入合法姓名'
-    }
+    },
+    length: {
+      maximum: 20,
+      message: '^姓名过长'
+    },
   },
 
   major: {
