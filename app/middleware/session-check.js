@@ -1,19 +1,8 @@
 var getJumpControl = require('../mixin/get-jump-control');
 var userPuzzle = require('../models/user-puzzle');
-
-function checkIsCommited (req){
-  return userPuzzle.findOne({userId: req.session.user.id})
-    .then((userPuzzle) => {
-      if(userPuzzle){
-        var now = Date.parse(new Date()) / 1000;
-        var usedTime = now - userPuzzle.startTime;
-
-        return userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0;
-      }else {
-        return false;
-      }
-    });
-}
+var Promise = this.Promise || require('promise');
+var superagent = require('superagent')
+var async = require('async');
 
 function pathControl (req, res, next, jumpControl) {
   var arr = req.url.split('/');
@@ -53,20 +42,49 @@ module.exports = function (req, res, next) {
     };
   }
 
-  var hasSession = false;
+  var userId = req.session.user.id || undefined;
 
-  if (req.session.user) {
-    hasSession = true;
-  }
+  async.parallel({
+    isLoged: function (done) {
+      done(null, Boolean(req.session.user));
+    },
 
-  if(hasSession){
-    checkIsCommited(req)
-      .then((isCommited) => {
-        var jumpControl = getJumpControl(hasSession, isCommited);
-        pathControl(req, res, next, jumpControl);
+    isPaperCommited: function (done) {
+      if (!userId) {
+        done(null, false);
+      }
+
+      userPuzzle.findOne({userId: userId}, (err, userPuzzle) => {
+        if (err) {
+          done(null, false);
+        }
+
+        var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
+        var now = Date.parse(new Date()) / 1000;
+        var usedTime = now - startTime;
+
+        done(null, userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0);
       })
-  }else{
-    var jumpControl = getJumpControl(hasSession, false);
+    },
+
+    isDetailed: function (done) {
+      if (!userId) {
+        done(null, false);
+      }
+
+      superagent.get(apiServer + 'user/' + userId + '/detail')
+        .set('Content-Type', 'application/json')
+        .end(function (err) {
+          if (err) {
+            done(null, false)
+          } else {
+            done(null, true);
+          }
+        })
+    }
+  }, function (err, data) {
+    var jumpControl = getJumpControl(data.isLoged, data.isPaperCommited, data.isDetailed);
+
     pathControl(req, res, next, jumpControl);
-  }
+  });
 };

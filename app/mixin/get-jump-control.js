@@ -1,21 +1,32 @@
-function jumpControl(hasSession, isCommited){
+function jumpControl(isLoged, isPaperCommited, isDetailed){
   return [{
     originPath: [
-      "account.html",
+      "user-center.html",
       "dojo.html",
       "logic-puzzle.html",
       "progress.html",
-      "start.html"
+      "start.html",
+      "dashboard.html"
     ],
     targetPath: '/',
-    condition: !hasSession
+    condition: !isLoged
   },{
     originPath: [
       "logic-puzzle.html",
       "start.html"
     ],
     targetPath: '/dashboard.html',
-    condition: hasSession && isCommited
+    condition: isLoged && isPaperCommited && isDetailed
+  },{
+    originPath: [
+      "dojo.html",
+      "logic-puzzle.html",
+      "progress.html",
+      "start.html",
+      "dashboard.html"
+    ],
+    targetPath: '/user-center.html',
+    condition: isLoged && !isDetailed
   }]
 }
 module.exports = jumpControl;
