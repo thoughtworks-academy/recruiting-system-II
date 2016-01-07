@@ -47,14 +47,10 @@ var UserDetail = React.createClass({
   },
 
   genderChange: function (evt) {
-    var newState = '';
+    var newState;
     var choose = evt.target.name;
-
-    if (choose === 'M') {
-      newState = '男';
-    } else {
-      newState = '女';
-    }
+    
+    newState = choose;
     this.setState({gender: newState});
   },
 
