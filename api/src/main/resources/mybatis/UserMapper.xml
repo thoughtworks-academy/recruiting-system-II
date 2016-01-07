@@ -25,6 +25,6 @@
     </insert>
 
     <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">
-        SELECT * FROM UserDetail WHERE userId = #{userId};
+        SELECT * FROM userDetail WHERE userId = #{userId};
     </select>
 </mapper>
