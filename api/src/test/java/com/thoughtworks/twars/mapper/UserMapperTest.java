@@ -71,6 +71,6 @@ public class UserMapperTest extends TestBase {
         assertThat(detail.getName(), is("测试一"));
         assertThat(detail.getMajor(), is("计算机"));
         assertThat(detail.getDegree(), is("本科"));
-        assertThat(detail.getGender(), is("男"));
+        assertThat(detail.getGender(), is("F"));
     }
 }
