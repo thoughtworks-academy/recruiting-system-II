@@ -50,7 +50,7 @@ var UserDetail = React.createClass({
     var newState = '';
     var choose = evt.target.name;
 
-    if (choose === '男') {
+    if (choose === 'M') {
       newState = '男';
     } else {
       newState = '女';

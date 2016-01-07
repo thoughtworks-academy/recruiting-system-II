@@ -13,11 +13,11 @@ var UserCenterGender = React.createClass({
     return (
         <div>
           <div className="col-sm-4 col-md-4" onClick={this.genderValidate}>
-            <input type="radio" name="男" className="gender" onChange={this.genderChange}
-                   checked={this.props.gender === "男" ? "checked" : ""} id="man"/>
+            <input type="radio" name="M" className="gender" onChange={this.genderChange}
+                   checked={this.props.gender === "M" ? "checked" : ""} id="man"/>
             <label htmlFor="man">男</label>
-            <input type="radio" name="女" className="gender" onChange={this.genderChange}
-                   checked={this.props.gender === "女" ? "checked" : ""} id="female"/>
+            <input type="radio" name="F" className="gender" onChange={this.genderChange}
+                   checked={this.props.gender === "F" ? "checked" : ""} id="female"/>
             <label htmlFor="female">女</label>
 
           </div>
