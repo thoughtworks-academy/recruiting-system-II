@@ -1,9 +1,20 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
+var userPuzzle = require('../../models/user-puzzle');
 
-  res.send({status: 200});
+router.get('/', function (req, res) {
+  if (req.session.user){
+    let userId = req.session.user.id;
+    userPuzzle.isPaperCommited(userId)
+        .then((data) => {
+          res.send(data);
+        })
+  }else {
+    res.send({status: 404});
+  }
 });
 
 module.exports = router;

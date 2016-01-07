@@ -30,7 +30,27 @@ var userPuzzleSchema = new Schema({
   endTime: String
 });
 
+userPuzzleSchema.statics.isPaperCommited = function (userId) {
+  var data = {};
 
+  return this.findOne({userId: userId})
+      .then((userPuzzle, err) => {
+
+        if (err || !userPuzzle) {
+          data.status = 404;
+        }else {
+
+          var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
+          var now = Date.parse(new Date()) / 1000;
+          var usedTime = now - startTime;
+
+          data.isPaperCommited = userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0 ? true : false;
+          data.status = 200;
+        }
+
+        return data;
+      })
+};
 
 userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
   var orderId = req.query.orderId;
@@ -102,13 +122,11 @@ userPuzzleSchema.statics.saveAnswer = function (req, res) {
   var orderId = req.body.orderId;
   var userAnswer = req.body.userAnswer;
   var userId = req.session.user.id;
-  console.log(userAnswer);
   this.findOne({userId: userId})
       .then(function (data) {
 
         if (orderId > data.quizExamples.length - 1) {
           data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
-          console.log(data.quizItems[orderId - data.quizExamples.length].userAnswer)
           data.save(function (err) {
             if (err)
               console.log(err);

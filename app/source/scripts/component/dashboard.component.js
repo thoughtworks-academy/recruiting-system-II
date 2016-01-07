@@ -2,6 +2,8 @@ var React = global.React = require('react');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Alertcontent = require('./alert-content.component');
+var Promise = require('promise');
+var agent = require('superagent-promise')(require('superagent'), Promise);
 
 var Dashboard = React.createClass({
 
@@ -15,10 +17,16 @@ var Dashboard = React.createClass({
   },
 
   componentDidMount: function () {
-    this.setState({
-      puzzleEnabled: false,
-      dojoEnabled: false
-    })
+
+    agent.get('/dashboard')
+      .set('Content-Type', 'application/json')
+      .end()
+      .then((res) => {
+        this.setState({
+          puzzleEnabled: res.body.isPaperCommited ? false : true,
+          dojoEnabled: res.body.isPaperCommited
+        })
+      });
   },
 
   showPrompt: function (event) {
