@@ -54,7 +54,7 @@ router.get('/', function (req, res) {
           data: result
         })
       })
-      .catch(function (e) {
+      .catch(function () {
         res.status(404);
         res.send({
           status: 404
@@ -69,10 +69,23 @@ router.put('/update', function (req, res) {
   if (checkUserInfo(userInfo)) {
     agent.put(apiServer + 'user/' + userId)
         .set('Content-Type', 'application/json')
-        .end(function (err, resp) {
-
+        .send({
+          data: userInfo
+        })
+        .end()
+        .then(function (resp) {
+          if (resp.status === 200) {
+            res.send({
+              status: 200
+            })
+          } else {
+            throw new Error
+          }
+        })
+        .catch(function () {
+          res.status(404);
           res.send({
-            status: 200
+            status: 404
           })
         })
   } else {
