@@ -8,7 +8,7 @@ function jumpControl(isLoged, isPaperCommited, isDetailed){
       "start.html",
       "dashboard.html"
     ],
-    targetPath: '/',
+    targetPath: '/register.html',
     condition: !isLoged
   },{
     originPath: [
