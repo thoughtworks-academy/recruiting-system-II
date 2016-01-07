@@ -15,7 +15,7 @@
     </resultMap>
 
     <select id="findAll" resultMap="scoreSheetsMap">
-        select * from blankQuizScoresheet;
+        select * from blankQuizScoreSheet;
     </select>
 
     <insert id="insertScoreSheet" parameterType="com.thoughtworks.twars.bean.ScoreSheet" useGeneratedKeys="true" keyProperty="id">

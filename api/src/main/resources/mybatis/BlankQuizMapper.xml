@@ -16,14 +16,14 @@
     </resultMap>
 
     <select id="findAll" resultMap="blankQuizListMap">
-        select * from BlankQuiz;
+        select * from blankQuiz;
     </select>
 
     <select id="findBySectionId" resultMap="blankQuizListMap">
-        select * from BlankQuiz where sectionId  = #{sectionId}
+        select * from blankQuiz where sectionId  = #{sectionId}
     </select>
 
     <select id="findOne" resultMap="blankQuizListMap">
-        select * from BlankQuiz where id = #{id}
+        select * from blankQuiz where id = #{id}
     </select>
 </mapper>

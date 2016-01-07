@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.thoughtworks.twars.mapper.PaperMapper">
-    
+
     <resultMap id="paperListMap" type="com.thoughtworks.twars.bean.Paper">
         <id property="id" column="id"></id>
         <result column="makerId" property="makerId"></result>
     </resultMap>
-    
+
     <select id="findAll" resultMap="paperListMap">
-        select * from Paper;
+        select * from paper;
     </select>
 </mapper>
