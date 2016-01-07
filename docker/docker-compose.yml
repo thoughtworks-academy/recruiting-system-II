@@ -15,7 +15,7 @@ jenkins:
   ports:
     - "8080:8080"
   volumes:
-    - /var/jenkins_home
+    - /Users/Thoughtworks/works/docker-cached/jenkins_home:/var/jenkins_home
   links:
     - mysql
   environment:
