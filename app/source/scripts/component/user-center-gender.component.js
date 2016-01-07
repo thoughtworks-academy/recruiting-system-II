@@ -10,15 +10,22 @@ var UserCenterGender = React.createClass({
   },
 
   render: function() {
+    var tags = [
+      {mark: 'M', name: 'man', label: '男'},
+      {mark: 'F', name: 'female', label: '女'}
+    ];
     return (
         <div>
           <div className="col-sm-4 col-md-4" onClick={this.genderValidate}>
-            <input type="radio" name="M" className="gender" onChange={this.genderChange}
-                   checked={this.props.gender === "M" ? "checked" : ""} id="man"/>
-            <label htmlFor="man">男</label>
-            <input type="radio" name="F" className="gender" onChange={this.genderChange}
-                   checked={this.props.gender === "F" ? "checked" : ""} id="female"/>
-            <label htmlFor="female">女</label>
+            {tags.map((item, index) => {
+              return (
+                  <div key={index}>
+                    <input type="radio" name={item.mark} className="gender" onChange={this.genderChange}
+                           checked={this.props.gender === item.mark ? "checked" : ""} id={item.name}/>
+                    <label htmlFor={item.name}>{item.label}</label>
+                  </div>
+              )
+            })}
 
           </div>
           <div className={"error alert alert-danger" + (this.props.genderError === true ? '' : ' hide')} role="alert">
