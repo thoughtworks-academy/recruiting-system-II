@@ -6,4 +6,5 @@ exports.setRoutes = function (app) {
   app.use('/start', require('./routers/start'));
   app.use('/user-detail', require('./routers/user-detail'));
   app.use('/dashboard', require('./routers/dashboard'));
+  app.use('/logout', require('./routers/logout'));
 };

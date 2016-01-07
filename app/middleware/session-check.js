@@ -42,7 +42,11 @@ module.exports = function (req, res, next) {
     };
   }
 
-  var userId = req.session.user.id || undefined;
+  var userId;
+
+  if (Boolean(req.session.user)){
+    userId = req.session.user.id;
+  }
 
   async.parallel({
     isLoged: function (done) {
