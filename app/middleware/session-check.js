@@ -65,8 +65,9 @@ module.exports = function (req, res, next) {
             var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
             var now = Date.parse(new Date()) / 1000;
             var usedTime = now - startTime;
+            var isCommited = userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0;
 
-            done(null, userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0);
+            done(null, isCommited);
           }
         })
       }
