@@ -4,6 +4,7 @@ var Col = require('react-bootstrap/lib/Col');
 var Alertcontent = require('./alert-content.component');
 var Promise = require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
+var DashboardIcon = require('./dashboard-icon.component');
 
 var Dashboard = React.createClass({
 
@@ -57,60 +58,56 @@ var Dashboard = React.createClass({
   },
 
   render() {
+    var iconInfos = [];
+
+    var PuzzleHref = this.state.puzzleEnabled===true ? 'start.html':'javascript:void(0)';
+    var dojoHref = this.state.dojoEnabled===true ? 'dojo.html':'javascript:void(0)';
 
     var puzzleDisable = (this.state.puzzleEnabled === true ? 'enable' : 'disable');
     var dojoDisable = (this.state.dojoEnabled === true ? 'enable' : 'disable');
 
+    var userCenterInfo = {
+      title: "个人中心",
+      href: "user-center.html",
+      isEnabled: "enable",
+      name: "userCenter",
+      glyphicon: "glyphicon-user"
+    };
+
+    var logicPuzzleInfo = {
+      title: "逻辑题",
+      href: PuzzleHref,
+      isEnabled: puzzleDisable,
+      name: "logic",
+      glyphicon: "glyphicon-education"
+    };
+
+    var dojoPuzzleInfo = {
+      title: "编程题",
+      href: dojoHref,
+      isEnabled: dojoDisable,
+      name: "dojo",
+      glyphicon: "glyphicon-road"
+    };
+
+    iconInfos.push(userCenterInfo, logicPuzzleInfo, dojoPuzzleInfo);
 
     return (
 
-        <div className="app-list">
-          <Alertcontent words={this.state.tipContent} disabled={this.state.isTip===true?'':'hidden'}/>
-          <Row>
-            <Col xs={12} sm={6} md={4} lg={4}>
-              <a href="user-center.html" className="icon-view">
-                <div className="icon-wrapper-enable">
-                  <div className="icon-img">
-                    <span className="glyphicon glyphicon-user" aria-hidden="true"/>
-                  </div>
-                  <div className="icon-name">
-                    个人中心
-                  </div>
-                </div>
-              </a>
-            </Col>
-            <Col xs={12} sm={6} md={4} lg={4}>
-              <a href={this.state.puzzleEnabled===true ? 'logic-puzzle.html':'javascript:void(0)'}
-                 className="icon-view"
-                 onMouseOver={this.showPrompt}
-                 onMouseOut={this.hidePrompt}>
-                <div className={'icon-wrapper-'+puzzleDisable} name="logic">
-                  <div className="icon-img" name="logic">
-                    <span className="glyphicon glyphicon-education" aria-hidden="true"/>
-                  </div>
-                  <div className="icon-name">
-                    逻辑题
-                  </div>
-                </div>
-              </a>
-            </Col>
-            <Col xs={12} sm={6} md={4} lg={4}>
-              <a href={this.state.dojoEnabled===true ? 'dojo.html':'javascript:void(0)'}
-                 className="icon-view"
-                 onMouseOver={this.showPrompt}
-                 onMouseOut={this.hidePrompt}>
-                <div className={'icon-wrapper-'+dojoDisable} name="dojo">
-                  <div className="icon-img" name="dojo">
-                    <span className="glyphicon glyphicon-road" aria-hidden="true"/>
-                  </div>
-                  <div className="icon-name">
-                    编程题
-                  </div>
-                </div>
-              </a>
-            </Col>
-          </Row>
-        </div>
+      <div className="app-list">
+        <Alertcontent words={this.state.tipContent} disabled={this.state.isTip===true?'':'hidden'}/>
+        <Row>
+
+          {
+            iconInfos.map((item, rowId) => {
+              return <DashboardIcon info={item}
+                                    key={rowId}
+                                    onShowPrompt={this.showPrompt}
+                                    onHidePrompt={this.hidePrompt}/>
+            })
+          }
+        </Row>
+      </div>
 
     );
   }
