@@ -17,23 +17,22 @@ import java.util.List;
 import java.util.Map;
 
 
-
 @Path("/scoresheets")
-public class ScoreSheetResource extends Resource{
+public class ScoreSheetResource extends Resource {
     @Inject
     private ScoreSheetMapper scoreSheetMapper;
 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll(){
+    public Response findAll() {
         List<ScoreSheet> scoreSheets = scoreSheetMapper.findAll();
         List<Map> result = new ArrayList<>();
 
-        for(int i = 0;i < scoreSheets.size() ; i++){
+        for (int i = 0; i < scoreSheets.size(); i++) {
             ScoreSheet scoreSheet = scoreSheets.get(i);
-            Map<String ,String> map = new HashMap<>();
-            map.put("uri","scoresheets/"+scoreSheet.getId());
+            Map<String, String> map = new HashMap<>();
+            map.put("uri", "scoresheets/" + scoreSheet.getId());
 
             result.add(map);
         }
@@ -44,11 +43,12 @@ public class ScoreSheetResource extends Resource{
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertScoreSheet(ScoreSheet scoreSheet){
+    public Response insertScoreSheet(ScoreSheet scoreSheet) {
+
         scoreSheetMapper.insertScoreSheet(scoreSheet);
 
         Map map = new HashMap<>();
-        map.put("uri","/scoresheets/"+scoreSheet.getId());
+        map.put("uri", "/scoresheets/" + scoreSheet.getId());
 
         return Response.status(201).entity(map).build();
     }
