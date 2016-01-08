@@ -75,7 +75,8 @@ public class BlankQuizResource {
 
         BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizId);
 
-        List<QuizItem> easyItems = quizItemMapper.getEasyItems(blankQuiz.getEasyCount());
+        List<QuizItem> easyItems = quizItemMapper
+                .getEasyItems(blankQuiz.getEasyCount());
         List<QuizItem> normalItems = quizItemMapper.getNormalItems(blankQuiz.getNormalCount());
         List<QuizItem> hardItems = quizItemMapper.getHardItems(blankQuiz.getHardCount());
         List<QuizItem> exampleItems = quizItemMapper.getExampleItems();

@@ -1,6 +1,5 @@
 package com.thoughtworks.twars;
 
-import com.thoughtworks.twars.bean.ScoreSheet;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
