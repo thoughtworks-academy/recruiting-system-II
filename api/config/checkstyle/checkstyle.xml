@@ -89,10 +89,6 @@
             <message key="indentation.error" value="你缩进了{1}个空格，正确应该缩进 {2}个空格。"/>
             <message key="indentation.child.error" value="你缩进了{1}个空格，正确应该缩进 {2}个空格。"/>
         </module>
-        <module name="AvoidStarImport">
-            <property name="severity" value="warning"/>
-            <message key="import.avoidStar" value="避免引用包时使用*号."/>
-        </module>
         <module name="IllegalImport">
             <message key="import.illegal" value="{0}为非法包."/>
         </module>
