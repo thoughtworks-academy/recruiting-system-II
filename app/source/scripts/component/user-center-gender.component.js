@@ -16,12 +16,12 @@ var UserCenterGender = React.createClass({
     ];
     return (
         <div>
-          <div className="col-sm-4 col-md-4" onClick={this.genderValidate}>
+          <div className="col-sm-4 col-md-4">
             {tags.map((item, index) => {
               return (
                   <div key={index}>
                     <input type="radio" name={item.mark} className="gender" onChange={this.genderChange}
-                           checked={this.props.gender === item.mark ? "checked" : ""} id={item.genderName}/>
+                           checked={this.props.gender === item.mark ? "checked" : ""} id={item.genderName} onClick={this.genderValidate}/>
                     <label htmlFor={item.genderName}>{item.label}</label>
                   </div>
               )
