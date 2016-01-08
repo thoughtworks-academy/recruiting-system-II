@@ -4,7 +4,10 @@ import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Test;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
@@ -92,6 +95,28 @@ public class UserResourceTest extends TestBase {
         assertThat(result.get("degree"), is("博士"));
         assertThat(result.get("name"), is("狗剩"));
         assertThat(result.get("gender"), is("男"));
+    }
+
+    @Test
+    public void should_update_user_detail() throws Exception {
+        UserDetail updateUserDetail = new UserDetail();
+
+        updateUserDetail.setUserId(2);
+        updateUserDetail.setBirthday(1);
+        updateUserDetail.setName("purple");
+        updateUserDetail.setDegree("benke");
+        updateUserDetail.setSchool("xian");
+        updateUserDetail.setGender("F");
+        updateUserDetail.setMajor("cs");
+
+        Entity<UserDetail> entityUserDetail= Entity.entity(updateUserDetail, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/2/detail").request().put(entityUserDetail);
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+        assertThat(result.get("uri"),is("userDetail/2"));
+
     }
 
     @Test
