@@ -101,7 +101,6 @@ var UserDetail = React.createClass({
       }
       stateObj[name + 'Error'] = error;
       this.setState(stateObj);
-      console.log(stateObj);
     });
     return pass;
   },
@@ -181,7 +180,7 @@ var UserDetail = React.createClass({
           <label htmlFor="inputGender" className="col-sm-4 col-md-4 control-label">性别</label>
           <div className="form-group">
             <UserCenterGender gender={this.state.gender} genderError={this.state.genderError}
-                              onStateChange={this.genderChange} onValidate={this.genderValidate} ref="gender"/>
+                              onGenderChange={this.genderChange} onValidate={this.genderValidate} ref="gender"/>
           </div>
 
           <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业</label>

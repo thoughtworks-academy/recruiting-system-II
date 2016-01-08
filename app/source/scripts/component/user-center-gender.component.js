@@ -2,7 +2,7 @@ var React = require('react');
 
 var UserCenterGender = React.createClass({
   genderChange:function(evt) {
-    this.props.onStateChange(evt);
+    this.props.onGenderChange(evt);
   },
 
   genderValidate: function () {
@@ -11,8 +11,8 @@ var UserCenterGender = React.createClass({
 
   render: function() {
     var tags = [
-      {mark: 'M', name: 'man', label: '男'},
-      {mark: 'F', name: 'female', label: '女'}
+      {mark: 'M', genderName: 'man', label: '男'},
+      {mark: 'F', genderName: 'female', label: '女'}
     ];
     return (
         <div>
@@ -21,8 +21,8 @@ var UserCenterGender = React.createClass({
               return (
                   <div key={index}>
                     <input type="radio" name={item.mark} className="gender" onChange={this.genderChange}
-                           checked={this.props.gender === item.mark ? "checked" : ""} id={item.name}/>
-                    <label htmlFor={item.name}>{item.label}</label>
+                           checked={this.props.gender === item.mark ? "checked" : ""} id={item.genderName}/>
+                    <label htmlFor={item.genderName}>{item.label}</label>
                   </div>
               )
             })}
