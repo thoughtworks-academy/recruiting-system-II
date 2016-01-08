@@ -24,7 +24,15 @@
         VALUES (#{email}, #{mobilePhone}, #{password}, UNIX_TIMESTAMP())
     </insert>
 
+    <insert id="insertUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true" keyProperty="userId">
+        insert into userDetail(userId,name,major,school,gender,degree,birthday) values(#{userId}, #{name},#{major}, #{school}, #{gender}, #{degree}, #{birthday})
+    </insert>
+
     <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">
         SELECT * FROM userDetail WHERE userId = #{userId};
     </select>
+
+    <update id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true" keyProperty="userId">
+        UPDATE userDetail set school = #{school},name = #{name},major = #{major},gender = #{gender},degree = #{degree} where userId = #{userId};
+    </update>
 </mapper>
