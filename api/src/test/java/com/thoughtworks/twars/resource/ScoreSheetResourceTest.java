@@ -38,20 +38,14 @@ public class ScoreSheetResourceTest extends TestBase{
 
     @Test
     public void should_return_insert_score_sheet_uri(){
+        ScoreSheet scoreSheet = new ScoreSheet();
 
-        when(scoreSheetMapper.insertScoreSheet(firstScoreSheet)).thenReturn(1);
-        when(firstScoreSheet.getId()).thenReturn(5);
-        when(firstScoreSheet.getBlankQuizId()).thenReturn(6);
-        when(firstScoreSheet.getExamerId()).thenReturn(7);
-        when(firstScoreSheet.getQuizItemId()).thenReturn(8);
-        when(firstScoreSheet.getUserAnswer()).thenReturn("9");
+        scoreSheet.setBlankQuizId(1);
+        scoreSheet.setExamerId(5);
+        scoreSheet.setQuizItemId(6);
+        scoreSheet.setUserAnswer("44");
 
-        secondScoreSheet.setBlankQuizId(1);
-        secondScoreSheet.setExamerId(5);
-        secondScoreSheet.setQuizItemId(6);
-        secondScoreSheet.setUserAnswer("44");
-
-//        Response response = target(basePath).request().post(Entity.entity(secondScoreSheet, MediaType.APPLICATION_JSON_TYPE));
-//        assertThat(response.getStatus(),is(201));
+        Response response = target(basePath).request().post(Entity.entity(scoreSheet, MediaType.APPLICATION_JSON_TYPE));
+        assertThat(response.getStatus(),is(201));
     }
 }
