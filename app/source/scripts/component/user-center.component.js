@@ -31,7 +31,7 @@ var UserDetail = React.createClass({
       nameError: '',
       majorError: '',
       genderError: false,
-      degreeError: false
+      degreeError: ''
     }
   },
 
@@ -48,7 +48,7 @@ var UserDetail = React.createClass({
 
   genderChange: function (evt) {
     var newState = evt.target.name;
-    
+
     this.setState({gender: newState});
   },
 
@@ -74,21 +74,16 @@ var UserDetail = React.createClass({
     }
   },
 
-  degreeValidate: function (evt) {
-    if (this.state.degree !== '') {
-      this.setState({degreeError: false})
-    } else {
-      this.setState({degreeError: true})
-    }
-  },
-
   checkInfo: function () {
     var school = ReactDom.findDOMNode(this.refs.school);
     var name = ReactDom.findDOMNode(this.refs.name);
     var major = ReactDom.findDOMNode(this.refs.major);
+    var degree = ReactDom.findDOMNode(this.refs.degree);
+
     var userInfo = [];
 
-    userInfo.push(school, name, major);
+    userInfo.push(school, name, major, degree);
+
     var pass = false;
     var stateObj = {};
 
@@ -106,6 +101,7 @@ var UserDetail = React.createClass({
       }
       stateObj[name + 'Error'] = error;
       this.setState(stateObj);
+      console.log(stateObj);
     });
     return pass;
   },
@@ -119,17 +115,9 @@ var UserDetail = React.createClass({
       this.setState({genderError: false});
     }
 
-    if (this.state.degree === '') {
-      this.setState({degreeError: true})
-    } else {
-      this.setState({degreeError: false});
-    }
-
     var userData = {
       school: this.state.school,
       name: this.state.name,
-      mobilePhone: this.state.mobilePhone,
-      email: this.state.email,
       gender: this.state.gender,
       major: this.state.major,
       degree: this.state.degree
@@ -193,7 +181,7 @@ var UserDetail = React.createClass({
           <label htmlFor="inputGender" className="col-sm-4 col-md-4 control-label">性别</label>
           <div className="form-group">
             <UserCenterGender gender={this.state.gender} genderError={this.state.genderError}
-                              onStateChange={this.genderChange} onValidate={this.genderValidate}/>
+                              onStateChange={this.genderChange} onValidate={this.genderValidate} ref="gender"/>
           </div>
 
           <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业</label>
@@ -208,26 +196,26 @@ var UserDetail = React.createClass({
               <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               {this.state.majorError}
             </div>
-
           </div>
 
           <label htmlFor="inputDegree" className="col-sm-4 col-md-4 control-label">学历学位</label>
           <div className="form-group">
-            <div className="col-sm-4 col-md-4 degree" onBlur={this.degreeValidate}>
-              <Input type="select" placeholder="学历学位" name="degree" value={this.state.degree}
-                     onChange={this.handleChange} className={this.state.degreeError === true ? "select" : ""}>
+            <div className="col-sm-4 col-md-4 degree" onBlur={this.validate}>
+              <select ref="degree" placeholder="学历学位" name="degree" value={this.state.degree}
+                      onChange={this.handleChange}
+                      className={"form-control size" + (this.state.degreeError === "" ? "" : " select")}>
                 <option value="">请选择</option>
                 <option value="专科">专科及以下</option>
                 <option value="本科">本科</option>
                 <option value="硕士">硕士</option>
                 <option value="博士">博士</option>
-              </Input>
+              </select>
             </div>
-            <div className={"error alert alert-danger" + (this.state.degreeError === true ? '' : ' hide')} role="alert">
+
+            <div className={"error alert alert-danger" + (this.state.degreeError === "" ? " hide" : "")} role="alert">
               <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               请选择学历
             </div>
-
           </div>
 
           <div className="form-group">

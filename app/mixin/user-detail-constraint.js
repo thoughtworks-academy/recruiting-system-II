@@ -29,6 +29,10 @@ var constraint = {
       pattern: /^[\u4E00-\u9FA5A-Za-z]+$/,
       message: '^请输入合法专业'
     }
+  },
+
+  degree: {
+    presence: {message: '^请选择学历'}
   }
 };
 module.exports = constraint;
