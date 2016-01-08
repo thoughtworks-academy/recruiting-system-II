@@ -73,4 +73,38 @@ public class UserMapperTest extends TestBase {
         assertThat(detail.getDegree(), is("本科"));
         assertThat(detail.getGender(), is("F"));
     }
+
+    @Test
+    public void should_add_user_Detail() throws Exception {
+        UserDetail detail = new UserDetail();
+        detail.setUserId(3);
+        detail.setName("purple");
+        detail.setDegree("undergraduate");
+        detail.setGender("F");
+        detail.setMajor("computer science");
+        detail.setSchool("xi'an university tecnology");
+        detail.setBirthday(1);
+
+        userMapper.insertUserDetail(detail);
+
+        assertThat(detail.getUserId(),is(3));
+    }
+
+    @Test
+    public void should_modify_user_detail() throws Exception {
+        UserDetail detail = new UserDetail();
+        detail.setName("purple");
+        detail.setDegree("benke");
+        detail.setGender("F");
+        detail.setMajor("cs");
+        detail.setSchool("xian");
+
+        userMapper.updateUserDetail(detail);
+
+        assertThat(detail.getDegree(), is("benke"));
+        assertThat(detail.getGender(),is("F"));
+        assertThat(detail.getMajor(),is("cs"));
+        assertThat(detail.getName(),is("purple"));
+        assertThat(detail.getSchool(),is("xian"));
+    }
 }
