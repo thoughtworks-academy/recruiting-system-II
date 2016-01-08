@@ -63,14 +63,15 @@ router.get('/', function (req, res) {
 });
 
 router.put('/update', function (req, res) {
-  var userId = req.session.user.id;
+  var userId = {userId: req.session.user.id};
   var userInfo = req.body.data;
+  var result = _.assign(userId, userInfo);
 
   if (checkUserInfo(userInfo)) {
     agent.put(apiServer + 'user/' + userId)
         .set('Content-Type', 'application/json')
         .send({
-          data: userInfo
+          data: result
         })
         .end()
         .then(function (resp) {
