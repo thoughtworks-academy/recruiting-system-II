@@ -63,48 +63,33 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
+    public void should_update_user_detail() throws Exception {
+        UserDetail userDetail = new UserDetail();
+
+        userDetail.setGender("F");
+        userDetail.setUserId(1);
+        userDetail.setDegree("benke");
+        userDetail.setMajor("cs");
+        userDetail.setSchool("xi'an");
+        userDetail.setName("purple");
+        userDetail.setBirthday(2);
+
+        userMapper.updateUserDetail(userDetail);
+
+        assertThat(userDetail.getUserId(),is(1));
+    }
+
+    @Test
     public void should_return_user_detail_by_id() throws Exception {
         UserDetail detail = userMapper.getUserDetailById(1);
 
         assertThat(detail.getUserId(), is(1));
-        assertThat(detail.getSchool(), is("思沃学院"));
-        assertThat(detail.getName(), is("测试一"));
-        assertThat(detail.getMajor(), is("计算机"));
-        assertThat(detail.getDegree(), is("本科"));
-        assertThat(detail.getGender(), is("F"));
-    }
-
-    @Test
-    public void should_add_user_Detail() throws Exception {
-        UserDetail detail = new UserDetail();
-        detail.setUserId(3);
-        detail.setName("purple");
-        detail.setDegree("undergraduate");
-        detail.setGender("F");
-        detail.setMajor("computer science");
-        detail.setSchool("xi'an university tecnology");
-        detail.setBirthday(1);
-
-        userMapper.insertUserDetail(detail);
-
-        assertThat(detail.getUserId(),is(3));
-    }
-
-    @Test
-    public void should_modify_user_detail() throws Exception {
-        UserDetail detail = new UserDetail();
-        detail.setName("purple");
-        detail.setDegree("benke");
-        detail.setGender("F");
-        detail.setMajor("cs");
-        detail.setSchool("xian");
-
-        userMapper.updateUserDetail(detail);
-
+        assertThat(detail.getSchool(), is("xi'an"));
+        assertThat(detail.getName(), is("purple"));
+        assertThat(detail.getMajor(), is("cs"));
         assertThat(detail.getDegree(), is("benke"));
-        assertThat(detail.getGender(),is("F"));
-        assertThat(detail.getMajor(),is("cs"));
-        assertThat(detail.getName(),is("purple"));
-        assertThat(detail.getSchool(),is("xian"));
+        assertThat(detail.getGender(), is("F"));
+        assertThat(detail.getBirthday(), is(2));
     }
+
 }
