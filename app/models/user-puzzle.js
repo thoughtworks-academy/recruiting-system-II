@@ -98,17 +98,21 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
         data.quizItems.forEach(function (quizItem) {
           itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
         });
-        var result = {
-          examerId: examerId,
-          paperId: data.paperId,
-          blankQuizSubmits: [
-            {
-              blankQuizId: data.blankQuizId,
-              itemPosts: itemPosts
-            }
-          ]
-        };
-        return data;
+        agent.post(apiServer + 'scoresheets')
+            .set('Content-Type', 'application/json')
+            .send({
+              examerId: examerId,
+              paperId: data.paperId,
+              blankQuizSubmits: [
+                {
+                  blankQuizId: data.blankQuizId,
+                  itemPosts: itemPosts
+                }
+              ]
+            })
+            .end(function(err){
+              if(err)console.log(err);
+            })
       })
       .then(function (data) {
         data.endTime = endTime;
@@ -179,6 +183,8 @@ userPuzzleSchema.statics.initialDB = function (req, res) {
         if(items){
           quizItems = items.body.quizItems;
           quizExamples = items.body.exampleItems;
+          console.log(quizItems);
+          console.log(quizExamples);
           return {isNotExit: true};
         }else{
           return {isNotExit: false};
@@ -192,10 +198,10 @@ userPuzzleSchema.statics.initialDB = function (req, res) {
             quizExamples: quizExamples,
             blankQuizId: blankQuizId,
             paperId: paperId
-          },function (){
-            process.exit();
-            res.send({status: 200})
-          })
+          });
+          res.send({status: 200, message: '创建成功!'});
+        }else{
+          res.send({status: 200, message: '数据库已存在!'});
         }
       })
 };

@@ -32,8 +32,6 @@ router.get('/remain-time', function (req, res) {
 
 router.post('/save', function (req, res) {userPuzzle.saveAnswer(req, res)});
 
-router.get('/createUser', function (req, res) {
-  userPuzzle.initialDB(req, res)
-});
+router.get('/createUser', function (req, res) {userPuzzle.initialDB(req, res)});
 
 module.exports = router;
