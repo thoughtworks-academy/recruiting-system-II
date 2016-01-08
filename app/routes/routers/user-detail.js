@@ -14,6 +14,7 @@ function checkUserInfo(userInfo) {
   valObj.school = userInfo.school;
   valObj.name = userInfo.name;
   valObj.major = userInfo.major;
+  valObj.degree = userInfo.degree;
 
   var result = validate(valObj, constraint);
 
@@ -63,16 +64,14 @@ router.get('/', function (req, res) {
 });
 
 router.put('/update', function (req, res) {
-  var userId = {userId: req.session.user.id};
+  var userId = req.session.user.id;
   var userInfo = req.body.data;
-  var result = _.assign(userId, userInfo);
+  var result = _.assign({userId: req.session.user.id}, userInfo);
 
-  if (checkUserInfo(userInfo)) {
-    agent.put(apiServer + 'user/' + userId)
+  if (checkUserInfo(result) && result.gender !== '') {
+    agent.put(apiServer + 'user/' + userId + '/detail')
         .set('Content-Type', 'application/json')
-        .send({
-          data: result
-        })
+        .send(result)
         .end()
         .then(function (resp) {
           if (resp.status === 200) {
