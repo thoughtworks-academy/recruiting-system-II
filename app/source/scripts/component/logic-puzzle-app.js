@@ -34,7 +34,7 @@ var LogicPuzzle = React.createClass({
     LogicPuzzleActions.changeAnswer(val);
   },
 
-  modalStateChange: function() {
+  timeOver: function() {
     this.setState({
       showModal: true
     })
@@ -59,7 +59,7 @@ var LogicPuzzle = React.createClass({
             <div className="col-md-3 col-sm-4">
               <LogicPuzzleSidebar orderId={this.state.orderId}
                                   itemsCount={this.state.itemsCount}
-                                  onModalStateChange={this.modalStateChange}/>
+                                  onTimeOver={this.timeOver}/>
             </div>
 
             <Modal

@@ -42,7 +42,7 @@ var LogicPuzzleSidebar = React.createClass({
 
         if(remainTime <= 0){
           LogicPuzzleActions.submitPaper();
-          this.props.onModalStateChange();
+          this.props.onTimeOver();
         }
 
         this.setState({
