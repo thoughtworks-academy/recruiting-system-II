@@ -11,6 +11,8 @@ import java.sql.Connection;
 
 public class DBRecovery {
 
+    private DBRecovery() {}
+
     public static void main(String[] args) throws IOException {
         SqlSession session = DBUtil.getSession();
         Connection connection = session.getConnection();
