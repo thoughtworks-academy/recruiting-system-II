@@ -1,5 +1,18 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
+    }
+
+}
+
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'org.flywaydb.flyway'
+apply plugin: "jacoco"
+apply plugin: 'checkstyle'
 
 dependencies {
     compile 'mysql:mysql-connector-java:5.1.37'
@@ -18,16 +31,6 @@ dependencies {
     testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:2.22.1'
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
-    }
-}
-
-apply plugin: 'org.flywaydb.flyway'
 
 flyway {
     url = 'jdbc:mysql://localhost:3306/BronzeSword'
