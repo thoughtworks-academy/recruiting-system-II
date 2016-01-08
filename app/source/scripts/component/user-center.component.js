@@ -122,11 +122,12 @@ var UserDetail = React.createClass({
       degree: this.state.degree
     };
 
-    if (this.state.schoolError !== '' || this.state.nameError !== '' || this.state.majorError !== '') {
+    if (this.checkInfo()) {
       return;
-    } else if (this.checkInfo()) {
-      return;
+    } else if (this.state.gender === '') {
+      return ;
     }
+
     UserDetailActions.updateUserDetail(userData);
   },
 
