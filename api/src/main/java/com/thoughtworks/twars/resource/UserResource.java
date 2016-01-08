@@ -54,6 +54,22 @@ public class UserResource extends Resource {
         return Response.status(200).entity(map).build();
     }
 
+    @PUT
+    @Path("/{param}/detail")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUserDetail(
+            @PathParam("param") int userId,
+            UserDetail userDetail
+    ) {
+        userMapper.updateUserDetail(userDetail);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("uri", "userDetail/" + userDetail.getUserId());
+
+        return Response.status(200).entity(map).build();
+    }
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
