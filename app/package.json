@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "jshint": "jshint --reporter=checkstyle ./ >> reports/jshintreport.xml",
+    "jshint": "jshint ./ --reporter=checkstyle > reports/jshintreport.xml",
     "start": "nodemon app.js"
   },
   "jest": {
@@ -56,6 +56,7 @@
     "file-loader": "^0.8.5",
     "jest-cli": "^0.8.2",
     "jshint": "^2.8.0",
+    "jsxhint": "^0.15.1",
     "kerberos": "0.0.17",
     "less-loader": "^2.2.2",
     "passport": "^0.3.2",
