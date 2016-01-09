@@ -15,4 +15,9 @@ task startNodemon(type:Exec) {
     ignoreExitValue true // 被取消时，不会报错
 }
 
+task jsxhint(type:Exec) {
+    executable "bash"
+    args "-c", "./node_modules/.bin/jsxhint ."
+}
+
 startNodemon.dependsOn npmInstall
