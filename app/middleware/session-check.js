@@ -1,7 +1,8 @@
+"use strict";
+
 var getJumpControl = require('../mixin/get-jump-control');
 var userPuzzle = require('../models/user-puzzle');
-var Promise = this.Promise || require('promise');
-var superagent = require('superagent')
+var superagent = require('superagent');
 var async = require('async');
 
 function pathControl (req, res, next, jumpControl) {
@@ -69,7 +70,7 @@ module.exports = function (req, res, next) {
 
             done(null, isCommited);
           }
-        })
+        });
       }
     },
 
@@ -81,11 +82,11 @@ module.exports = function (req, res, next) {
           .set('Content-Type', 'application/json')
           .end(function (err) {
             if (err) {
-              done(null, false)
+              done(null, false);
             } else {
               done(null, true);
             }
-          })
+          });
       }
     }
   }, function (err, data) {
