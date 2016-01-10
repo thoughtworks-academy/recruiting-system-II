@@ -4,5 +4,6 @@
   "nocomma": true,
   "esnext": true,
   "node": true,
-  "strict": true
+  "strict": true,
+  "indent": 2
 }
