@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.Connection;
 
-public class DBRecovery {
+public final class DBRecovery {
 
     private DBRecovery() {}
 

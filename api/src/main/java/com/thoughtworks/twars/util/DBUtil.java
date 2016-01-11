@@ -16,7 +16,8 @@ public class DBUtil {
 
         try {
             InputStream is = Resources.getResourceAsStream(resource);
-            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+            SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+            SqlSessionFactory sqlSessionFactory = builder.build(is);
 
             session = sqlSessionFactory.openSession(true);
         } catch (IOException e) {

@@ -83,7 +83,8 @@ public class PaperResource {
                     item.put("id", b.getId());
 
                     item.put("definition", buildURIMap(basePath + b.getId()));
-                    item.put("items", buildURIMap(basePath + b.getId() + "/items"));
+                    item.put("items", buildURIMap(basePath + b.getId() +
+                            "/items"));
                     return item;
                 })
                 .collect(Collectors.toList());

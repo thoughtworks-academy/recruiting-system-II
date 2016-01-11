@@ -29,7 +29,7 @@ public class UserResource extends Resource {
         map.put("email", user.getEmail());
         map.put("mobilePhone", user.getMobilePhone());
 
-        return Response.status(200).entity(map).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 
     @GET
@@ -39,10 +39,10 @@ public class UserResource extends Resource {
 
         UserDetail detail = userMapper.getUserDetailById(userId);
 
-        if(null == detail) {
-            return Response.status(404).build();
+        if (null == detail) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        
+
         Map<String, Object> map = new HashMap<>();
         map.put("userId", detail.getUserId());
         map.put("school", detail.getSchool());
@@ -51,7 +51,7 @@ public class UserResource extends Resource {
         map.put("name", detail.getName());
         map.put("gender", detail.getGender());
 
-        return Response.status(200).entity(map).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 
     @PUT
@@ -67,7 +67,7 @@ public class UserResource extends Resource {
         Map<String, Object> map = new HashMap<>();
         map.put("uri", "userDetail/" + userDetail.getUserId());
 
-        return Response.status(200).entity(map).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 
 
@@ -79,19 +79,19 @@ public class UserResource extends Resource {
     ) {
         User user = null;
 
-        if(field.equals("email")) {
+        if ("email".equals(field)) {
             user = userMapper.getUserByEmail(value);
-        } else if(field.equals("mobilePhone")) {
+        } else if ("mobilePhone".equals(field)) {
             user = userMapper.getUserByMobilePhone(value);
         }
 
-        if(null != user) {
-          Map<String, String> map = new HashMap<>();
-          map.put("uri", "user/" + user.getId());
+        if (null != user) {
+            Map<String, String> map = new HashMap<>();
+            map.put("uri", "user/" + user.getId());
 
-          return Response.status(200).entity(map).build();
+            return Response.status(Response.Status.OK).entity(map).build();
         }
 
-        return Response.status(404).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }

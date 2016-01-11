@@ -10,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +36,7 @@ public class ScoreSheetResource extends Resource {
             result.add(map);
         }
 
-        return Response.status(200).entity(result).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
 
@@ -50,6 +49,6 @@ public class ScoreSheetResource extends Resource {
         Map map = new HashMap<>();
         map.put("uri", "/scoresheets/" + scoreSheet.getId());
 
-        return Response.status(201).entity(map).build();
+        return Response.status(Response.Status.CREATED).entity(map).build();
     }
 }

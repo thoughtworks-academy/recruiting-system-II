@@ -38,7 +38,7 @@ public class QuizItemResource extends Resource {
             result.add(map);
         }
         session.close();
-        return Response.status(200).entity(result).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
 
@@ -71,7 +71,7 @@ public class QuizItemResource extends Resource {
 
         session.close();
 
-        return Response.status(200).entity(map).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 
 

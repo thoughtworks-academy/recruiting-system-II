@@ -19,7 +19,7 @@ public class RegisterResource extends Resource {
 
     public RegisterResource() {
         super();
-        userMapper = session.getMapper(com.thoughtworks.twars.mapper.UserMapper.class);
+        userMapper = session.getMapper(UserMapper.class);
     }
 
     @POST
@@ -31,12 +31,12 @@ public class RegisterResource extends Resource {
         session.close();
 
         Map<String, Object> map = new HashMap<>();
-        Map<String, String> userInfo  = new HashMap<>();
+        Map<String, String> userInfo = new HashMap<>();
 
         map.put("id", user.getId());
-        userInfo.put("uri","user/"+user.getId());
+        userInfo.put("uri", "user/" + user.getId());
         map.put("userInfo", userInfo);
 
-        return Response.status(200).entity(map).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 }
