@@ -3,6 +3,7 @@
 var getJumpControl = require('../mixin/get-jump-control');
 var userPuzzle = require('../models/user-puzzle');
 var superagent = require('superagent');
+var apiServer = require('../configuration').apiServer;
 var async = require('async');
 
 function pathControl (req, res, next, jumpControl) {
