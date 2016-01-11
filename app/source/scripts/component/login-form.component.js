@@ -5,6 +5,7 @@ var validate = require('validate.js');
 var ReactDOM = require('react-dom');
 var request = require('superagent');
 var constraint = require('../../../mixin/login-constraint');
+var page = require('page');
 
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
@@ -14,7 +15,7 @@ function getError(validateInfo, field) {
 }
 
 function jumpToDashboard() {
-  location.href = 'dashboard.html';
+  page('dashboard.html');
 }
 
 var LoginForm = React.createClass({

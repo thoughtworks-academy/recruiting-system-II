@@ -5,6 +5,7 @@ var request = require('superagent');
 var validate = require("validate.js");
 var RegisterPassword = require('./register-password.component');
 var constraint = require('../../../mixin/register-constraint');
+var page = require('page');
 
 var asyncContainersFunc = {
   email: function (value, done) {
@@ -159,7 +160,7 @@ var RegisterForm = React.createClass({
 
             if (info.status === 200) {
               createUser();
-              location.href = 'user-center.html';
+              page('user-center.html');
 
             } else {
               var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
