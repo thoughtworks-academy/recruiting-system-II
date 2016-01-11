@@ -40,7 +40,7 @@ public class PaperResource {
             result.add(map);
         }
 
-        return Response.status(200).entity(result).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
@@ -62,7 +62,7 @@ public class PaperResource {
         Map<String, Object> result = new HashMap<>();
         result.put("sections", sectionList);
         result.put("id", id);
-        return Response.status(200).entity(result).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET

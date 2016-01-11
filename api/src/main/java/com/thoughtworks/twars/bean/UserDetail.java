@@ -9,19 +9,33 @@ public class UserDetail {
     private int userId;
     private int birthday;
 
-    public void setSchool(String school) { this.school = school; }
+    public void setSchool(String school) {
+        this.school = school;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setMajor(String major) { this.major = major; }
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
-    public void setDegree(String degree) { this.degree = degree; }
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
 
-    public void setGender(String gender) { this.gender = gender; }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-    public void setUserId(int userId) { this.userId = userId; }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-    public void setBirthday(int birthday) { this.birthday = birthday; }
+    public void setBirthday(int birthday) {
+        this.birthday = birthday;
+    }
 
     public String getSchool() {
         return school;
@@ -47,5 +61,7 @@ public class UserDetail {
         return userId;
     }
 
-    public int getBirthday() { return birthday; }
+    public int getBirthday() {
+        return birthday;
+    }
 }

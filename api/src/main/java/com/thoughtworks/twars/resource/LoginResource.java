@@ -19,7 +19,7 @@ public class LoginResource extends Resource {
 
     public LoginResource() {
         super();
-        userMapper = session.getMapper(com.thoughtworks.twars.mapper.UserMapper.class);
+        userMapper = session.getMapper(UserMapper.class);
     }
 
     @POST
@@ -39,6 +39,6 @@ public class LoginResource extends Resource {
 
         session.close();
 
-        return Response.status(200).entity(map).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 }

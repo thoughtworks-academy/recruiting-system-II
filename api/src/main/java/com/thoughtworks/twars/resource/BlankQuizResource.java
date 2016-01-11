@@ -12,7 +12,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -38,9 +41,8 @@ public class BlankQuizResource {
             result.add(map);
         }
 
-        return Response.status(200).entity(result).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
-
 
 
     @GET
@@ -49,7 +51,9 @@ public class BlankQuizResource {
     public Response getBlankQuizzesBySectionId(
             @PathParam("param") int sectionId
     ) {
-        List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(sectionId);
+        List<BlankQuiz> blankQuizzes = blankQuizMapper
+                .findBySectionId(sectionId);
+
         List<Map> result = new ArrayList<>();
 
         for (int i = 0; i < blankQuizzes.size(); i++) {
@@ -64,7 +68,7 @@ public class BlankQuizResource {
             result.add(map);
         }
 
-        return Response.status(200).entity(result).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
@@ -77,8 +81,10 @@ public class BlankQuizResource {
 
         List<QuizItem> easyItems = quizItemMapper
                 .getEasyItems(blankQuiz.getEasyCount());
-        List<QuizItem> normalItems = quizItemMapper.getNormalItems(blankQuiz.getNormalCount());
-        List<QuizItem> hardItems = quizItemMapper.getHardItems(blankQuiz.getHardCount());
+        List<QuizItem> normalItems = quizItemMapper.getNormalItems(blankQuiz
+                .getNormalCount());
+        List<QuizItem> hardItems = quizItemMapper.getHardItems(blankQuiz
+                .getHardCount());
         List<QuizItem> exampleItems = quizItemMapper.getExampleItems();
 
         List<QuizItem> quizItems = new ArrayList<>();
@@ -98,9 +104,9 @@ public class BlankQuizResource {
 
         Map<String, List> result = new HashMap<>();
         result.put("quizItems", quizList);
-        result.put("exampleItems",exampleList);
+        result.put("exampleItems", exampleList);
 
-        return Response.status(200).entity(result).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     private static Map buildItemMap(QuizItem quizItem) {
@@ -112,6 +118,7 @@ public class BlankQuizResource {
         result.put("description", quizItem.getDescriptionZh());
         return result;
     }
+
     private static Map buildExampleMap(QuizItem quizItem) {
         Map<String, Object> result = new HashMap<>();
         result.put("id", quizItem.getId());

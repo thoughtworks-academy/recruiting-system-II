@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface PaperMapper {
 
-  List<Paper> findAll();
-  Paper getPaperById(int id);
+    List<Paper> findAll();
+
+    Paper getPaperById(int id);
 }
