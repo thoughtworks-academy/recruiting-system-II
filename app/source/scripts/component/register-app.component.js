@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var ReactDom = require('react-dom');
 var RegisterForm = require('./register-form.component');
@@ -10,7 +12,7 @@ var RegisterApp = React.createClass({
     getInitialState:function () {
         return {
             isLoginState: false
-        }
+        };
     },
     stateChange:function () {
         var newState = !this.state.isLoginState;
