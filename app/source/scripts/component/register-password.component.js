@@ -1,8 +1,12 @@
+'use strict';
+
 var React = require('react');
 var ReactDom = require('react-dom');
 
 function passwordSafe(val) {
-  if (val == '') return 0;
+  if (val === ''){
+    return 0;
+  }
   var safeRegex = [
     new RegExp('(?=.{6,}).*', 'g'),
     new RegExp('^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$', 'g'),
@@ -31,7 +35,7 @@ var RegisterPassword = React.createClass({
     return {
       passwordSafeLevel: '',
       passwordSafeStyle: ''
-    }
+    };
   },
 
   toggleState: function () {
@@ -62,13 +66,13 @@ var RegisterPassword = React.createClass({
             &nbsp;
             <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ""}>中</li>
             &nbsp;
-            <li className={this.state.passwordSafeLevel == 3 ? this.state.passwordSafeStyle : ""}>强</li>
+            <li className={this.state.passwordSafeLevel === 3 ? this.state.passwordSafeStyle : ""}>强</li>
             &nbsp;
             <li className="toggle" onClick={this.toggleState} isShowToggle={this.props.isShowToggle}>
               {this.props.isShowToggle ? '隐藏密码' : '显示密码'}</li>
           </ul>
         </div>
-    )
+    );
   }
 });
 module.exports = RegisterPassword;
