@@ -1,6 +1,7 @@
+'use strict';
+
 var Reflux = require('reflux');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
-var Promise = require('promise');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var _currentIndex = 0;
