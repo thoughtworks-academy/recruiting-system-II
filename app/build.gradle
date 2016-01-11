@@ -20,4 +20,9 @@ task jsxhint(type:Exec) {
     args "-c", "./node_modules/.bin/jsxhint ."
 }
 
+task mongoRefresh(type:Exec) {
+    executable "bash"
+    args "-c", "node ./tools/seeds/refresh.js"
+}
+
 startNodemon.dependsOn npmInstall

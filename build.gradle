@@ -15,6 +15,7 @@ task(startServer) {
         project(':api').jettyRun.execute()
         println "Jetty started"
 
+        project(':app').mongoRefresh.execute()
         project(':app').startNodemon.execute()
     }
 
