@@ -23,14 +23,14 @@ var LogicPuzzleStore = Reflux.createStore({
             "orderId": _currentIndex,
             "isExample": res.body.isExample
           });
-        })
+        });
   },
 
   onSubmitAnswer: function (newOrderId) {
     this.onSaveUserAnswer()
         .then(() => {
           _currentIndex = newOrderId;
-          return this.updateItem()
+          return this.updateItem();
         })
         .then((res) => {
           _answer = res.body.userAnswer;
@@ -41,7 +41,7 @@ var LogicPuzzleStore = Reflux.createStore({
             "orderId": _currentIndex,
             "isExample": res.body.isExample
           });
-        })
+        });
   },
 
   onSaveUserAnswer: function () {
@@ -67,8 +67,8 @@ var LogicPuzzleStore = Reflux.createStore({
                 if(res.body.status === 200){
                   res.redirect('dashboard.html');
                 }
-              })
-        })
+              });
+        });
   },
 
   updateItem: function () {
