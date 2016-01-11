@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 
 var LogicPuzzleBoxes = React.createClass({
@@ -16,12 +18,12 @@ var LogicPuzzleBoxes = React.createClass({
                       <div>{idx + 1}</div>
                       <div className="num">{box}</div>
                     </li>
-                )
+                );
               })}
             </ol>
           </div>
         </div>
-    )
+    );
   }
 });
 
