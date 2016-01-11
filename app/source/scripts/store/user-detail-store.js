@@ -1,6 +1,9 @@
+'use strict';
+
 var Reflux = require('reflux');
 var UserDetailActions = require('../actions/user-detail-actions');
 var request = require('superagent');
+var page = require('page');
 
 var UserDetailStore = Reflux.createStore({
   listenables: [UserDetailActions],
@@ -25,7 +28,7 @@ var UserDetailStore = Reflux.createStore({
         })
         .end((err, req) => {
           if (req.body.status === 200) {
-            location.href = 'dashboard.html';
+            page('dashboard.html');
           }else{
             console.log('update error');
           }
