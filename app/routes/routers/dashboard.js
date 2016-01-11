@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
     userPuzzle.isPaperCommited(userId)
         .then((data) => {
           res.send(data);
-        })
+        });
   }else {
     res.send({status: 404});
   }
