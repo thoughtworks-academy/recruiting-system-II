@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var Reflux = require('reflux');
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
@@ -60,7 +62,9 @@ var LogicPuzzleSidebar = React.createClass({
 
     var isFirst = this.state.orderId === 0;
     var isLast = this.state.orderId === (this.state.itemsCount - 1);
-    if(isLast)able=true;
+    if(isLast){
+      able=true;
+    }
     var minutes = this.state.remainTime > 0 ? Math.floor(this.state.remainTime / 60) : 0;
     var seconds = this.state.remainTime > 0 ? this.state.remainTime % 60 : 0;
 
@@ -95,7 +99,7 @@ var LogicPuzzleSidebar = React.createClass({
           </div>
           <hr/>
           <div className="confirm">
-            <a href="javascript:void(0)" className="btn btn-lg btn-danger btn-block" data-toggle="modal"
+            <a href="#" className="btn btn-lg btn-danger btn-block" data-toggle="modal"
                data-target={able ? "#submitModal": ""} disabled={able ? '' : 'disabled'}>交卷</a>
           </div>
           <div className="hint">
@@ -125,7 +129,7 @@ var LogicPuzzleSidebar = React.createClass({
         </div>
 
 
-    )
+    );
   }
 });
 
