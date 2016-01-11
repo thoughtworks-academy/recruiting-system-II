@@ -6,10 +6,7 @@ import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -42,6 +39,21 @@ public class BlankQuizResource {
         }
 
         return Response.status(Response.Status.OK).entity(result).build();
+    }
+
+
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response insertBlankQuiz(BlankQuiz blankQuiz){
+
+
+        blankQuizMapper.insertBlankQuiz(blankQuiz);
+
+        Map map = new HashMap<>();
+        map.put("uri","blankQuizzes/"+blankQuiz.getId());
+
+        return Response.status(200).entity(map).build();
     }
 
 

@@ -33,6 +33,20 @@ public class BlankQuizMapperTest extends TestBase {
     }
 
     @Test
+    public void should_return_insert_blank_quiz_uri() throws Exception{
+        BlankQuiz blankQuiz = new BlankQuiz();
+        blankQuiz.setType("quizItem");
+        blankQuiz.setCount(10);
+        blankQuiz.setHardCount(3);
+        blankQuiz.setNormalCount(4);
+        blankQuiz.setEasyCount(3);
+
+        blankQuizMapper.insertBlankQuiz(blankQuiz);
+
+        assertThat(blankQuiz.getId(),is(7));
+    }
+
+    @Test
     public void should_return_some_blank_quizzes_by_given_section_id() throws Exception {
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(1);
         assertThat(blankQuizzes.size(), is(3));

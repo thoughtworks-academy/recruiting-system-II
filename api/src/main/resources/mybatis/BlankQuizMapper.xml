@@ -26,4 +26,9 @@
     <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuiz">
         select * from blankQuiz where id = #{id}
     </select>
+
+    <insert id="insertBlankQuiz" parameterType="com.thoughtworks.twars.bean.BlankQuiz" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO blankQuiz(sectionId,type,count,hardCount,normalCount,easyCount)
+        VALUES (#{sectionId},#{type},#{count},#{hardCount},#{normalCount},#{easyCount})
+    </insert>
 </mapper>
