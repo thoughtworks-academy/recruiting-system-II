@@ -1,7 +1,10 @@
+'use strict';
+
 var mongoose = require('mongoose');
-var Promise = this.Promise || require('promise');
+var Promise = require('promise');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
+var apiServer = require('../configuration').apiServer;
 
 var Schema = mongoose.Schema;
 
@@ -49,7 +52,7 @@ userPuzzleSchema.statics.isPaperCommited = function (userId) {
         }
 
         return data;
-      })
+      });
 };
 
 userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
@@ -68,7 +71,7 @@ userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
         });
         var quizAll = data.quizExamples.concat(data.quizItems);
         itemsCount = quizAll.length;
-        return quizAll
+        return quizAll;
       })
       .then(function (quizAll) {
         userAnswer = quizAll[orderId].userAnswer || quizAll[orderId].answer || null;
@@ -85,7 +88,7 @@ userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
           itemsCount: itemsCount,
           isExample: quizAll[orderId].isExample
         });
-      })
+      });
 };
 
 userPuzzleSchema.statics.submitPaper = function (req, res) {
@@ -111,15 +114,17 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
               ]
             })
             .end(function(err){
-              if(err)console.log(err);
-            })
+              if(err){
+                console.log(err);
+              }
+            });
       })
       .then(function (data) {
         data.endTime = endTime;
         data.isCommited = true;
         data.save();
         res.send({status: 200});
-      })
+      });
 };
 
 userPuzzleSchema.statics.saveAnswer = function (req, res) {
@@ -132,14 +137,15 @@ userPuzzleSchema.statics.saveAnswer = function (req, res) {
         if (orderId > data.quizExamples.length - 1) {
           data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
           data.save(function (err) {
-            if (err)
+            if (err) {
               console.log(err);
+            }
           });
         }
       })
       .then(function () {
         res.sendStatus(200);
-      })
+      });
 };
 
 userPuzzleSchema.statics.initialDB = function (req, res) {
@@ -152,7 +158,7 @@ userPuzzleSchema.statics.initialDB = function (req, res) {
         if(!data){
           return agent.get(apiServer + userPuzzleUrl)
               .set('Content-Type', 'application/json')
-              .end()
+              .end();
         }else{
           return null;
         }
@@ -173,7 +179,7 @@ userPuzzleSchema.statics.initialDB = function (req, res) {
         if(itemsUri){
           return agent.get(apiServer + itemsUri)
               .set('Content-Type', 'application/json')
-              .end()
+              .end();
         }else{
           return null;
         }
@@ -203,7 +209,7 @@ userPuzzleSchema.statics.initialDB = function (req, res) {
         }else{
           res.send({status: 200, message: '数据库已存在!'});
         }
-      })
+      });
 };
 
 module.exports = mongoose.model('UserPuzzles', userPuzzleSchema);
