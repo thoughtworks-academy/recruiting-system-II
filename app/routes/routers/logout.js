@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
     }else {
       res.redirect('/register.html');
     }
-  })
+  });
 });
 
 module.exports = router;
