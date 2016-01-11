@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 
 var LogicPuzzleDescription = React.createClass({
@@ -7,13 +9,13 @@ var LogicPuzzleDescription = React.createClass({
         <div className="right-description">
           <ol>
             {this.props.description.filter((val) => {
-              return val != '';
+              return val !== '';
             }).map((description, idx) => {
               return (
                   <li key={idx}>
                     <div>{description}</div>
                   </li>
-              )
+              );
             })}
           </ol>
           {
@@ -29,7 +31,7 @@ var LogicPuzzleDescription = React.createClass({
           }
 
         </div>
-    )
+    );
   }
 });
 
