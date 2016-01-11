@@ -1,8 +1,9 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
 var constant = require('../../mixin/back-constant.json');
-var Promise = this.Promise || require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require("validate.js");
 var md5 = require('js-md5');
@@ -36,7 +37,7 @@ function checkMobilePhoneExist(mobilePhone){
         field: 'mobilePhone',
         value: mobilePhone
       })
-      .end()
+      .end();
 }
 
 function checkEmailExist(email){
@@ -46,7 +47,7 @@ function checkEmailExist(email){
         field: 'email',
         value: email
       })
-      .end()
+      .end();
 }
 
 router.post('/', function(req, res) {
