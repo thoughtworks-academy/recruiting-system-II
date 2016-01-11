@@ -23,7 +23,7 @@
         select * from blankQuiz where sectionId  = #{sectionId}
     </select>
 
-    <select id="findOne" resultMap="blankQuizListMap">
+    <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuiz">
         select * from blankQuiz where id = #{id}
     </select>
 </mapper>
