@@ -44,6 +44,7 @@ var RegisterPassword = React.createClass({
     var levelGrade = ['danger', 'general', 'safe'];
     var position = getPosition(level);
 
+    this.props.onInputPassword(value);
     this.setState({passwordSafeStyle: levelGrade[position]});
     this.setState({passwordSafeLevel: level});
   },

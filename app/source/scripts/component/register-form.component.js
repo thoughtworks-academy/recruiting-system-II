@@ -1,3 +1,5 @@
+'use strict';
+
 var React = global.React = require('react');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
@@ -67,7 +69,8 @@ var RegisterForm = React.createClass({
           passwordError: '',
           agree: false,
           isShowToggle: false,
-          disabled: false
+          disabled: false,
+          password: ''
         };
       },
 
@@ -139,7 +142,10 @@ var RegisterForm = React.createClass({
         var registerData = [];
         var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone);
         var email = ReactDOM.findDOMNode(this.refs.email);
-        var password = document.getElementById('register-password');
+        var password = {
+          name: 'password',
+          value: this.state.password
+        };
 
         registerData.push(mobilePhone, email, password);
 
@@ -177,6 +183,12 @@ var RegisterForm = React.createClass({
         }
       },
 
+      inputPassword: function (password) {
+        this.setState({
+          password: password
+        });
+      },
+
       render: function () {
 
         var classString = "col-md-7 logon-form-container" + (this.props.isLoginState ? ' hide' : '');
@@ -203,7 +215,7 @@ var RegisterForm = React.createClass({
 
                 <div className="form-group">
                   <RegisterPassword isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}
-                                    passwordError={this.state.passwordError} onBlur={this.validate}/>
+                                    passwordError={this.state.passwordError} onBlur={this.validate} onInputPassword={this.inputPassword}/>
                 </div>
 
                 <div className="checkbox">
