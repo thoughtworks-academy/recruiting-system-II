@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var Reflux = require('reflux');
 
@@ -37,7 +39,7 @@ var LogicPuzzle = React.createClass({
   timeOver: function() {
     this.setState({
       showModal: true
-    })
+    });
   },
 
   render: function () {
@@ -78,7 +80,7 @@ var LogicPuzzle = React.createClass({
             </Modal>
           </div>
         </div>
-    )
+    );
   }
 });
 
