@@ -1,3 +1,8 @@
-/**
- * Created by Jessica on 1/11/16.
- */
+var ReactDom = require('react-dom');
+var Navigation = require('./component/navigation.component');
+require('../less/progress.less');
+
+ReactDom.render(
+    <Navigation />,
+    document.getElementById('navigation')
+);
