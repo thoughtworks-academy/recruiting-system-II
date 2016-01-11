@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "jshint": "./node_modules/.bin/jsxhint . --reporter=checkstyle > reports/jshintreport.xml",
     "start": "nodemon app.js"
   },
   "jest": {
