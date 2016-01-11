@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 
 var LogicPuzzleBoxes = require('./logic-puzzle-boxes.component');
@@ -24,7 +26,7 @@ var LogicPuzzleLeft = React.createClass({
                                    orderId={this.props.orderId}
                                    isExample={this.props.isExample}/>
         </div>
-    )
+    );
   }
 });
 
