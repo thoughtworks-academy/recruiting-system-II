@@ -8,6 +8,7 @@ var md5 = require('js-md5');
 var validate = require('validate.js');
 var constraint = require('../../mixin/login-constraint');
 var passport = require('passport');
+var apiServer = require('../../configuration').apiServer;
 
 function checkLoginInfo(account, password) {
   var pass = true;
