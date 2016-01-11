@@ -1,6 +1,7 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
-var Promise = this.Promise || require('promise');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var userPuzzle = require('../../models/user-puzzle');
@@ -30,8 +31,12 @@ router.get('/remain-time', function (req, res) {
       });
 });
 
-router.post('/save', function (req, res) {userPuzzle.saveAnswer(req, res)});
+router.post('/save', function (req, res) {
+  userPuzzle.saveAnswer(req, res);
+});
 
-router.get('/createUser', function (req, res) {userPuzzle.initialDB(req, res)});
+router.get('/createUser', function (req, res) {
+  userPuzzle.initialDB(req, res);
+});
 
 module.exports = router;
