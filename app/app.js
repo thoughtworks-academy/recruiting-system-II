@@ -52,6 +52,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+global.apiServer = 'http://localhost:8080/api/';
+
 app.use(bodyParser.urlencoded({
   extended: false
 }));
