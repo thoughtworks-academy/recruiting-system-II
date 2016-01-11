@@ -80,6 +80,23 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
+    public void should_insert_user_detail() throws Exception {
+        UserDetail userDetail = new UserDetail();
+
+        userDetail.setBirthday(3);
+        userDetail.setGender("F");
+        userDetail.setDegree("benke");
+        userDetail.setSchool("shannxi");
+        userDetail.setUserId(5);
+        userDetail.setMajor("sc");
+        userDetail.setName("purple");
+
+        userMapper.updateUserDetail(userDetail);
+
+        assertThat(userDetail.getUserId(),is(5));
+    }
+
+    @Test
     public void should_return_user_detail_by_id() throws Exception {
         UserDetail detail = userMapper.getUserDetailById(1);
 
