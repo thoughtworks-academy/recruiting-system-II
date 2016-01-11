@@ -1,3 +1,5 @@
+"use strict";
+
 function jumpControl(isLoged, isPaperCommited, isDetailed){
   return [{
     originPath: [
@@ -27,6 +29,6 @@ function jumpControl(isLoged, isPaperCommited, isDetailed){
     ],
     targetPath: '/user-center.html',
     condition: isLoged && !isDetailed
-  }]
+  }];
 }
 module.exports = jumpControl;
