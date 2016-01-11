@@ -1,11 +1,13 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
-var Promise = this.Promise || require('promise');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var _ = require('lodash');
 var validate = require('validate.js');
 var constraint = require('../../mixin/user-detail-constraint');
+var apiServer = require('../configuration').apiServer;
 
 
 function checkUserInfo(userInfo) {
@@ -34,7 +36,7 @@ router.get('/', function (req, res) {
         if (resp.status === 200) {
           result = _.assign(resp.body);
         } else {
-          throw new Error;
+          throw new Error();
         }
         return result;
       })
@@ -53,14 +55,14 @@ router.get('/', function (req, res) {
         res.send({
           status: 200,
           data: result
-        })
+        });
       })
       .catch(function () {
         res.status(404);
         res.send({
           status: 404
-        })
-      })
+        });
+      });
 });
 
 router.put('/update', function (req, res) {
@@ -77,19 +79,19 @@ router.put('/update', function (req, res) {
           if (resp.status === 200) {
             res.send({
               status: 200
-            })
+            });
           } else {
-            throw new Error
+            throw new Error();
           }
         })
         .catch(function () {
           res.status(404);
           res.send({
             status: 404
-          })
-        })
+          });
+        });
   } else {
-    res.send({status: 500})
+    res.send({status: 500});
   }
 });
 
