@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 
 var LoginInfo = React.createClass({
@@ -11,7 +13,7 @@ var LoginInfo = React.createClass({
             <div id="login-info" className="col-md-5 register-form-right">
                 <div id="register-right" className="link">
                     {this.props.isLoginState ? '还没账号?' : '已有账号?'}
-                    <a id="change-to-logon" href="javascript:void(0)" onClick={this.toggleState}>
+                    <a id="change-to-logon" href="#" onClick={this.toggleState}>
                         {this.props.isLoginState ? '立即注册' : '立即登录'}
                     </a>
                 </div>
@@ -26,7 +28,7 @@ var LoginInfo = React.createClass({
                     </ul>
                 </div>
             </div>
-        )
+        );
     }
 });
 
