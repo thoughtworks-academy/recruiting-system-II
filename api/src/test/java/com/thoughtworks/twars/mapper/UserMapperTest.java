@@ -59,7 +59,7 @@ public class UserMapperTest extends TestBase {
 
         userMapper.insertUser(user);
 
-        assertThat(user.getId(), is(6));
+        assertThat(user.getId(), is(7));
     }
 
     @Test
