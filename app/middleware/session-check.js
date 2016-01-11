@@ -33,17 +33,6 @@ function pathControl (req, res, next, jumpControl) {
 }
 
 module.exports = function (req, res, next) {
-  var env = process.env.NODE_ENV === "production" ? "production" : "development";
-
-  if(env === 'development' && !req.session.user){
-    req.session.user = {
-      id: 1,
-      userInfo: {
-        uri: 'user/1'
-      }
-    };
-  }
-
   var userId;
 
   if (Boolean(req.session.user)){
