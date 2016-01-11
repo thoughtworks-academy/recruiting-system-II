@@ -1,3 +1,7 @@
+/* jshint browser: true */
+
+'use strict';
+
 var $ = global.jQuery = require('jquery');
 var ReactDom = require('react-dom');
 
