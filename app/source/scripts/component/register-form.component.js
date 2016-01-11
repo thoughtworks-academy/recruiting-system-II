@@ -20,8 +20,8 @@ var asyncContainersFunc = {
           if (req.body.status === 200) {
             error = '该邮箱已被注册';
           }
-          done({emailError: error})
-        })
+          done({emailError: error});
+        });
   },
 
   mobilePhone: function (value, done) {
@@ -45,7 +45,7 @@ function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
     return validateInfo[field][0];
   }
-  return ""
+  return "";
 }
 
 function createUser() {
@@ -68,7 +68,7 @@ var RegisterForm = React.createClass({
           agree: false,
           isShowToggle: false,
           disabled: false
-        }
+        };
       },
 
       stateChange: function () {
@@ -93,7 +93,7 @@ var RegisterForm = React.createClass({
         if ('' === error) {
           asyncContainersFunc[name](value, (stateObj) => {
             this.setState(stateObj);
-          })
+          });
         }
       },
 
@@ -134,7 +134,7 @@ var RegisterForm = React.createClass({
 
       register: function () {
         if (this.state.mobilePhoneError !== '' || this.state.emailError !== '') {
-          return false
+          return false;
         }
         var registerData = [];
         var mobilePhone = ReactDOM.findDOMNode(this.refs.mobilePhone);
@@ -219,7 +219,7 @@ var RegisterForm = React.createClass({
                 </button>
               </form>
             </div>
-        )
+        );
       }
     })
     ;
