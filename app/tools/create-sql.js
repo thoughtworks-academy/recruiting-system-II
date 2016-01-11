@@ -1,3 +1,5 @@
+'use strict';
+
 var glob = require('glob');
 
 glob('../public/logic-puzzle/*.json', function(err, files) {
