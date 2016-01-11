@@ -1,3 +1,5 @@
+'use strict';
+
 var React = global.React = require('react');
 var validate = require('validate.js');
 var ReactDOM = require('react-dom');
@@ -12,7 +14,7 @@ function getError(validateInfo, field) {
 }
 
 function jumpToDashboard() {
-  location.href = 'dashboard.html'
+  location.href = 'dashboard.html';
 }
 
 var LoginForm = React.createClass({
@@ -21,7 +23,7 @@ var LoginForm = React.createClass({
       phoneEmailError: '',
       loginPasswordError: '',
       loginFailed: false
-    }
+    };
   },
 
   validate: function (event) {
@@ -57,7 +59,7 @@ var LoginForm = React.createClass({
           } else {
             this.setState({loginFailed : true});
           }
-        })
+        });
   },
 
   render: function () {
@@ -87,7 +89,7 @@ var LoginForm = React.createClass({
             </button>
           </form>
         </div>
-    )
+    );
   }
 });
 
