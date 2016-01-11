@@ -1,3 +1,5 @@
+'use strict';
+
 var Reflux = require('reflux');
 var UserPuzzleActions = require('../actions/user-puzzle-actions');
 var Promise = require('promise');
