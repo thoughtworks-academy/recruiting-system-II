@@ -1,3 +1,5 @@
+'use strict';
+
 var React = global.React = require('react');
 
 var Alertcontent = React.createClass({
