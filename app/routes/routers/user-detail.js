@@ -7,7 +7,7 @@ var agent = require('superagent-promise')(superAgent, Promise);
 var _ = require('lodash');
 var validate = require('validate.js');
 var constraint = require('../../mixin/user-detail-constraint');
-var apiServer = require('../configuration').apiServer;
+var apiServer = require('../../configuration').apiServer;
 
 
 function checkUserInfo(userInfo) {

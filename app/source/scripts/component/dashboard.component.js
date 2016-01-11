@@ -14,7 +14,7 @@ var Dashboard = React.createClass({
       puzzleEnabled: false,
       dojoEnabled: false,
       tipContent: ''
-    }
+    };
   },
 
   componentDidMount: function () {
@@ -26,7 +26,7 @@ var Dashboard = React.createClass({
         this.setState({
           puzzleEnabled: res.body.isPaperCommited ? false : true,
           dojoEnabled: res.body.isPaperCommited
-        })
+        });
       });
   },
 
@@ -54,7 +54,7 @@ var Dashboard = React.createClass({
   hidePrompt: function () {
     this.setState({
       isTip: false
-    })
+    });
   },
 
   render() {
