@@ -102,12 +102,6 @@ public class UserResourceTest extends TestBase {
         UserDetail updateUserDetail = new UserDetail();
 
         updateUserDetail.setUserId(2);
-        updateUserDetail.setBirthday(1);
-        updateUserDetail.setName("purple");
-        updateUserDetail.setDegree("benke");
-        updateUserDetail.setSchool("xian");
-        updateUserDetail.setGender("F");
-        updateUserDetail.setMajor("cs");
 
         Entity<UserDetail> entityUserDetail= Entity.entity(updateUserDetail, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/2/detail").request().put(entityUserDetail);
@@ -117,6 +111,27 @@ public class UserResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         assertThat(result.get("uri"),is("userDetail/2"));
 
+    }
+
+    @Test
+    public void should_insert_user_detail() throws Exception {
+        UserDetail insertUserDetail = new UserDetail();
+
+        insertUserDetail.setUserId(18);
+        insertUserDetail.setBirthday(2);
+        insertUserDetail.setDegree("benke");
+        insertUserDetail.setGender("F");
+        insertUserDetail.setMajor("cs");
+        insertUserDetail.setName("purple");
+        insertUserDetail.setSchool("shannxi");
+
+        Entity<UserDetail> entityUserDetail= Entity.entity(insertUserDetail, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/18/detail").request().put(entityUserDetail);
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+        assertThat(result.get("uri"),is("userDetail/18"));
     }
 
     @Test
