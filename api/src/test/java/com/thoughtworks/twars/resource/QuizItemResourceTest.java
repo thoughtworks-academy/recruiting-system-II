@@ -3,6 +3,8 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.QuizItem;
 import org.junit.Test;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
@@ -34,19 +36,19 @@ public class QuizItemResourceTest extends TestBase{
 
   @Test
   public void should_return_insert_quizItem_uri(){
-    when(quizItemMapper.insertQuizItem(firstQuizItem)).thenReturn(1);
-    when(firstQuizItem.getId()).thenReturn(10);
-//    Response response = target(basePath).request().post(Entity.entity(firstQuizItem,MediaType.APPLICATION_JSON),Response.class);
-//
-//    assertThat(response.getStatus(),is(200));
-//
-//    Map result = response.readEntity(Map.class);
-//    assertThat((String) result.get("uri"),is(basePath+"10"));
+    QuizItem quizItem = new QuizItem();
+    quizItem.setId(6);
+    quizItem.setInitializedBox("8,3,4,5,6");
+    quizItem.setChartPath("/chart");
+    quizItem.setQuestionZh("question");
+    quizItem.setDescriptionZh("description");
 
-//    Entity<QuizItem> quizItemEntity = Entity.entity(firstQuizItem, MediaType.APPLICATION_JSON_TYPE);
-//    QuizItem result = target("book").request(MediaType.APPLICATION_JSON_TYPE).post(quizItemEntity, QuizItem.class);
-//    assertThat(result.getId(),is(10));
+    Response response = target(basePath).request().post(Entity.entity(quizItem, MediaType.APPLICATION_JSON),Response.class);
 
+    assertThat(response.getStatus(),is(200));
+
+    Map result = response.readEntity(Map.class);
+    assertThat((String) result.get("uri"),is(basePath+"/6"));
   }
 
   @Test

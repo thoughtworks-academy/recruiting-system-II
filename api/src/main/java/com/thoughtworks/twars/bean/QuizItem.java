@@ -68,6 +68,8 @@ public class QuizItem {
         this.initializedBox = initializedBox;
     }
 
+    public void setId(int id) { this.id = id;}
+
     public int getAnswer() { return answer; }
 
     public void setStepsString(String stepsString) {
