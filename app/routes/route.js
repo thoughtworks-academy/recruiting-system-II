@@ -1,3 +1,5 @@
+'use strict';
+
 exports.setRoutes = function (app) {
   app.use('/register', require('./routers/register'));
   app.use('/logic-puzzle', require('./routers/logic-puzzle'));
