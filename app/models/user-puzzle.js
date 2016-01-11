@@ -1,7 +1,6 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Promise = require('promise');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var apiServer = require('../configuration').apiServer;
