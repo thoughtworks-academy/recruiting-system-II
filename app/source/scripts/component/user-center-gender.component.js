@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 
 var UserCenterGender = React.createClass({
@@ -24,7 +26,7 @@ var UserCenterGender = React.createClass({
                            checked={this.props.gender === item.mark ? "checked" : ""} id={item.genderName} onClick={this.genderValidate}/>
                     <label htmlFor={item.genderName}>{item.label}</label>
                   </div>
-              )
+              );
             })}
 
           </div>
@@ -33,7 +35,7 @@ var UserCenterGender = React.createClass({
             请选择性别
           </div>
         </div>
-    )
+    );
   }
 });
 
