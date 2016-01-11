@@ -20,6 +20,11 @@ task jsxhint(type:Exec) {
     args "-c", "./node_modules/.bin/jsxhint ."
 }
 
+task jsxhintReport(type:Exec) {
+    executable "bash"
+    args "-c", "./node_modules/.bin/jsxhint --reporter=checkstyle . > reports/jshint-report.xml"
+}
+
 task mongoRefresh(type:Exec) {
     executable "bash"
     args "-c", "node ./tools/seeds/refresh.js"
