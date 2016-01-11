@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
@@ -65,7 +67,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
             </div>
           </div>
         </div>
-    )
+    );
   }
 
 
