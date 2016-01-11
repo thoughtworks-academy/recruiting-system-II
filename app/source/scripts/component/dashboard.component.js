@@ -1,8 +1,9 @@
+'use strict';
+
 var React = global.React = require('react');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Alertcontent = require('./alert-content.component');
-var Promise = require('promise');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var DashboardIcon = require('./dashboard-icon.component');
 
@@ -60,8 +61,8 @@ var Dashboard = React.createClass({
   render() {
     var iconInfos = [];
 
-    var PuzzleHref = this.state.puzzleEnabled===true ? 'start.html':'javascript:void(0)';
-    var dojoHref = this.state.dojoEnabled===true ? 'dojo.html':'javascript:void(0)';
+    var PuzzleHref = (this.state.puzzleEnabled===true ? 'start.html':'#');
+    var dojoHref = (this.state.dojoEnabled===true ? 'dojo.html':'#');
 
     var puzzleDisable = (this.state.puzzleEnabled === true ? 'enable' : 'disable');
     var dojoDisable = (this.state.dojoEnabled === true ? 'enable' : 'disable');
@@ -103,7 +104,7 @@ var Dashboard = React.createClass({
               return <DashboardIcon info={item}
                                     key={rowId}
                                     onShowPrompt={this.showPrompt}
-                                    onHidePrompt={this.hidePrompt}/>
+                                    onHidePrompt={this.hidePrompt}/>;
             })
           }
         </Row>
