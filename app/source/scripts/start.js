@@ -1,3 +1,7 @@
+/* jshint browser: true */
+
+'use strict';
+
 var ReactDom = require('react-dom');
 var StartInfo = require('./component/start-info.component');
 var Navigation = require('./component/navigation.component');
