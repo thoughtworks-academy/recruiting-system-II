@@ -1,3 +1,5 @@
+'use strict';
+
 var React = global.React = require('react');
 var ReactDom = require('react-dom');
 var Input = require('react-bootstrap/lib/Input');
@@ -12,7 +14,7 @@ function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
     return validateInfo[field][0];
   }
-  return ""
+  return "";
 }
 
 var UserDetail = React.createClass({
@@ -32,7 +34,7 @@ var UserDetail = React.createClass({
       majorError: '',
       genderError: false,
       degreeError: ''
-    }
+    };
   },
 
   componentDidMount: function () {
@@ -70,7 +72,7 @@ var UserDetail = React.createClass({
 
   genderValidate: function () {
     if (this.state.genderError === true) {
-      this.setState({genderError: false})
+      this.setState({genderError: false});
     }
   },
 
@@ -109,7 +111,7 @@ var UserDetail = React.createClass({
     evt.preventDefault();
 
     if (this.state.gender === '') {
-      this.setState({genderError: true})
+      this.setState({genderError: true});
     } else {
       this.setState({genderError: false});
     }
@@ -224,7 +226,7 @@ var UserDetail = React.createClass({
             </div>
           </div>
         </div>
-    )
+    );
 
   }
 });
