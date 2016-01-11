@@ -15,12 +15,19 @@ public class App extends ResourceConfig {
 
         SqlSession session = DBUtil.getSession();
         final UserMapper userMapper = session.getMapper(UserMapper.class);
-        final PaperMapper paperMapper = session.getMapper(PaperMapper.class);
+        final PaperMapper paperMapper =
+                session.getMapper(PaperMapper.class);
         final BlankQuizMapper blankQuizMapper = session
                 .getMapper(BlankQuizMapper.class);
-        final QuizItemMapper quizItemMapper = session.getMapper(QuizItemMapper.class);
-        final SectionMapper sectionMapper = session.getMapper(SectionMapper.class);
-        final ScoreSheetMapper scoreSheetMapper = session.getMapper(ScoreSheetMapper.class);
+
+        final QuizItemMapper quizItemMapper = session
+                .getMapper(QuizItemMapper.class);
+
+        final SectionMapper sectionMapper = session
+                .getMapper(SectionMapper.class);
+
+        final ScoreSheetMapper scoreSheetMapper = session
+                .getMapper(ScoreSheetMapper.class);
 
 
         packages("com.thoughtworks.twars.resource")

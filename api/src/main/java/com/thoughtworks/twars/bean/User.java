@@ -5,18 +5,6 @@ public class User {
     private String email;
     private String mobilePhone;
     private String password;
-    private Link link;
-
-
-    public Link getLink() {
-        link.setId(id);
-        return link;
-    }
-
-    public void setLink(Link link) {
-        this.link = link;
-    }
-
 
     public int getId() {
         return id;
@@ -24,8 +12,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-        Link link = new Link("user/" + String.valueOf(id));
-        this.setLink(link);
     }
 
     public String getEmail() {
