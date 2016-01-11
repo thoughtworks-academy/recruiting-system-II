@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
@@ -34,7 +36,7 @@ router.get('/', function(req, res) {
     res.send({
       message: constant.LOGIN_FAILED,
       status: 403
-    })
+    });
   } else {
     password = md5(password);
 
@@ -55,7 +57,7 @@ router.get('/', function(req, res) {
         res.send({
           status: result.status
         });
-      })
+      });
   }
 });
 
