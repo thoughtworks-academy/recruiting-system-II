@@ -1,9 +1,11 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var userPuzzle = require("../../models/user-puzzle");
 
 
 mongoose.connect("mongodb://localhost/twars");
-db = mongoose.connection;
+var db = mongoose.connection;
 db.once('open', function () {
   console.log('mongo refresh start...');
   userPuzzle.remove(function () {
