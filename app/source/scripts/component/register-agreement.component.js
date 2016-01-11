@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var registerAgreement = React.createClass({
 
@@ -45,7 +47,7 @@ var registerAgreement = React.createClass({
             </div>
           </div>
         </div>
-    )
+    );
   }
 });
 module.exports = registerAgreement;
