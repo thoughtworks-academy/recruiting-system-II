@@ -40,7 +40,7 @@ userPuzzleSchema.statics.isPaperCommited = function (userId) {
 
         if (err || !userPuzzle) {
           data.status = 404;
-        }else {
+        } else {
 
           var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
           var now = Date.parse(new Date()) / 1000;
@@ -54,9 +54,7 @@ userPuzzleSchema.statics.isPaperCommited = function (userId) {
       });
 };
 
-userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
-  var orderId = req.query.orderId;
-  var userId = req.session.user.id;
+userPuzzleSchema.statics.getUserPuzzle = function (orderId, userId) {
   var userAnswer;
   var itemsCount;
 
@@ -74,8 +72,7 @@ userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
       })
       .then(function (quizAll) {
         userAnswer = quizAll[orderId].userAnswer || quizAll[orderId].answer || null;
-
-        res.send({
+        var userPuzzle = {
           item: {
             id: quizAll[orderId].id,
             initializedBox: JSON.parse(quizAll[orderId].initializedBox),
@@ -86,7 +83,8 @@ userPuzzleSchema.statics.getUserPuzzle = function (req, res) {
           userAnswer: userAnswer,
           itemsCount: itemsCount,
           isExample: quizAll[orderId].isExample
-        });
+        };
+        return userPuzzle;
       });
 };
 
@@ -112,8 +110,8 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
                 }
               ]
             })
-            .end(function(err){
-              if(err){
+            .end(function (err) {
+              if (err) {
                 console.log(err);
               }
             });
@@ -149,54 +147,54 @@ userPuzzleSchema.statics.saveAnswer = function (req, res) {
 
 userPuzzleSchema.statics.initialDB = function (req, res) {
   var userId = req.session.user.id;
-  var quizItems,quizExamples,blankQuizId,paperId;
+  var quizItems, quizExamples, blankQuizId, paperId;
   var userPuzzleUrl = 'papers/enrollment';
 
   this.findOne({userId: userId})
       .then((data) => {
-        if(!data){
+        if (!data) {
           return agent.get(apiServer + userPuzzleUrl)
               .set('Content-Type', 'application/json')
               .end();
-        }else{
+        } else {
           return null;
         }
 
       })
       .then((res) => {
-        if(res){
+        if (res) {
           var quizzes = res.body.sections[0].quizzes[0];
           blankQuizId = quizzes.id;
           paperId = res.body.id;
           return quizzes.items.uri;
-        }else{
+        } else {
           return null;
         }
 
       })
       .then((itemsUri) => {
-        if(itemsUri){
+        if (itemsUri) {
           return agent.get(apiServer + itemsUri)
               .set('Content-Type', 'application/json')
               .end();
-        }else{
+        } else {
           return null;
         }
 
       })
       .then((items) => {
-        if(items){
+        if (items) {
           quizItems = items.body.quizItems;
           quizExamples = items.body.exampleItems;
           console.log(quizItems);
           console.log(quizExamples);
           return {isNotExit: true};
-        }else{
+        } else {
           return {isNotExit: false};
         }
       })
       .then((result) => {
-        if(result.isNotExit){
+        if (result.isNotExit) {
           this.create({
             userId: userId,
             quizItems: quizItems,
@@ -205,7 +203,7 @@ userPuzzleSchema.statics.initialDB = function (req, res) {
             paperId: paperId
           });
           res.send({status: 200, message: '创建成功!'});
-        }else{
+        } else {
           res.send({status: 200, message: '数据库已存在!'});
         }
       });

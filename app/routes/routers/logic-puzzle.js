@@ -5,7 +5,10 @@ var router = express.Router();
 
 var userPuzzle = require('../../models/user-puzzle');
 
-router.get('/', function (req, res) {userPuzzle.getUserPuzzle(req, res);});
+var UserPuzzleController = require('../../controllers/user-puzzle');
+var userPuzzleController = new UserPuzzleController();
+
+router.get('/', userPuzzleController.getUserPuzzle);
 
 router.post('/',function(req, res) {userPuzzle.submitPaper(req, res);});
 
