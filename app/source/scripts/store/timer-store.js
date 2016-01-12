@@ -8,7 +8,7 @@ var TimerStore = Reflux.createStore({
   listenables: [TimerActions],
 
   onGetRemainTime: function () {
-    agent.get('/user-puzzle/remain-time')
+    agent.get('/timer/remain-time')
       .set('Content-Type', 'application/json')
       .end()
       .then((res) => {
