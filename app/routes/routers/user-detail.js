@@ -95,4 +95,12 @@ router.put('/update', function (req, res) {
   }
 });
 
+router.post('/change-password', function (req, res) {
+  var userId = req.session.user.id;
+  var passwordInfo = req.body.data;
+  var result = _.assign({userId: userId}, passwordInfo);
+
+  console.log(result);
+});
+
 module.exports = router;
