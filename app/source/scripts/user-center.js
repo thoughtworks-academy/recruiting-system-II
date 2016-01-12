@@ -9,7 +9,7 @@ var Navigation = require('./component/navigation.component');
 
 ReactDom.render(
     <UserCenterApp />,
-    document.getElementById('account-info')
+    document.getElementById('user-center')
 );
 
 ReactDom.render(
