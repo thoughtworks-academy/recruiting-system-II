@@ -2,7 +2,8 @@ var Reflux = require('reflux');
 
 var UserDetailActions = Reflux.createActions([
   'loadUserDetail',
-  'updateUserDetail'
+  'updateUserDetail',
+  'changePassword'
 ]);
 
 module.exports = UserDetailActions;

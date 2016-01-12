@@ -66,6 +66,19 @@ var ChangePassword = React.createClass({
     return pass;
   },
 
+  savePassword:function(evt) {
+    evt.preventDefault();
+
+    if(this.checkInfo()) {
+      return ;
+    }
+    var passwordData = {
+      oldPassword:ReactDom.findDOMNode(this.refs.oldPassword).value,
+      newPassword:ReactDom.findDOMNode(this.refs.newPassword).value
+  };
+    UserDetailActions.changePassword(passwordData);
+  },
+
   render: function () {
     var classString = (this.props.isChangePassword ? '' : ' hide');
 
