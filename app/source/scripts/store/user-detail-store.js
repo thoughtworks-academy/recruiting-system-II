@@ -43,9 +43,9 @@ var UserDetailStore = Reflux.createStore({
         })
         .end((err, req) => {
           if (req.body.status === 200) {
-            console.log('修改成功');
+            alert('修改成功');
           } else if (req.body.status === 400) {
-            console.log('密码错误');
+            this.trigger({oldPasswordError:'旧密码错误'});
           } else {
             console.log('error');
           }
