@@ -24,7 +24,7 @@ var UserCenterSide = React.createClass({
             </ol>
           </div>
         </div>
-    )
+    );
   }
 });
 

@@ -9,7 +9,7 @@ var UserCenterApp = React.createClass({
   getInitialState:function() {
     return {
       isChangePassword: false
-    }
+    };
   },
 
   stateChange:function() {
@@ -25,7 +25,7 @@ var UserCenterApp = React.createClass({
           <UserInfo isChangePassword={this.state.isChangePassword}/>
           <ChangePassword isChangePassword={this.state.isChangePassword}/>
         </div>
-    )
+    );
   }
 });
 
