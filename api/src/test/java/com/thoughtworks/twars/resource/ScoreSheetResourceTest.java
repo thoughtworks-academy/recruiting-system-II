@@ -35,7 +35,7 @@ public class ScoreSheetResourceTest extends TestBase{
 
 
     @Test
-    public void should_return_insert_score_sheet_uri(){
+    public void should_insert_score_sheet_uri(){
 
         Map itemPost = new HashMap<>();
         itemPost.put("answer","10");
@@ -54,6 +54,7 @@ public class ScoreSheetResourceTest extends TestBase{
 
         Map scoreSheet = new HashMap<>();
         scoreSheet.put("examerId",1);
+        scoreSheet.put("paperId",1);
         scoreSheet.put("blankQuizSubmits",blankQuizSubmits);
 
         Entity<Map> entity = Entity.entity(scoreSheet, MediaType.APPLICATION_JSON_TYPE);
