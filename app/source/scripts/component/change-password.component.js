@@ -13,7 +13,7 @@ var Reflux = require('reflux');
 var ChangePassword = React.createClass({
   mixins: [Reflux.connect(UserDetailStore)],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       oldPasswordError: '',
       newPasswordError: '',
@@ -22,7 +22,7 @@ var ChangePassword = React.createClass({
     };
   },
 
-  validate: function(evt) {
+  validate: function (evt) {
     var target = evt.target;
     var name = target.name;
     var value = target.value;
@@ -67,19 +67,19 @@ var ChangePassword = React.createClass({
     return pass;
   },
 
-  savePassword:function(evt) {
+  savePassword: function (evt) {
     evt.preventDefault();
 
     var passwordData = {
-      oldPassword:ReactDom.findDOMNode(this.refs.oldPassword).value,
-      password:ReactDom.findDOMNode(this.refs.newPassword).value,
-      confirmPassword:ReactDom.findDOMNode(this.refs.confirmPassword).value
+      oldPassword: ReactDom.findDOMNode(this.refs.oldPassword).value,
+      password: ReactDom.findDOMNode(this.refs.newPassword).value,
+      confirmPassword: ReactDom.findDOMNode(this.refs.confirmPassword).value
     };
 
-    if(this.checkInfo()) {
-      return ;
-    }else if(passwordData.password !== passwordData.confirmPassword) {
-      return ;
+    if (this.checkInfo()) {
+      return;
+    } else if (passwordData.password !== passwordData.confirmPassword) {
+      return;
     }
 
     UserDetailActions.changePassword(passwordData);
@@ -91,15 +91,20 @@ var ChangePassword = React.createClass({
     return (
         <div className={"col-md-9 col-sm-9 col-xs-12" + classString}>
           <div className="content">
-            <div className={"success-prompt" + (this.state.success ? '' : ' hide')}>修改成功</div>
             <form className="form-horizontal form-top-height">
+              <div className={this.state.success ? '' : 'hide'}>
+                <div className={"success-prompt alert alert-success"}>
+                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  修改成功
+                </div>
+              </div>
               <div id="change-password">
                 <label htmlFor="oldPassword" className="col-sm-4 col-md-4 control-label">旧密码</label>
                 <div className={"form-group has-" + (this.state.oldPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
                     <input type="text" className="form-control" aria-describedby="helpBlock2"
                            name="oldPassword" id="oldPassword" ref="oldPassword"
-                           placeholder="请输入旧密码"  onBlur={this.validate}/>
+                           placeholder="请输入旧密码" onBlur={this.validate}/>
                   </div>
                   <div className={"error alert alert-danger" + (this.state.oldPasswordError === '' ? ' hide' : '')}
                        role="alert">
@@ -125,7 +130,7 @@ var ChangePassword = React.createClass({
                 <label htmlFor="confirmPassword" className="col-sm-4 col-md-4 control-label">确认密码</label>
                 <div className={"form-group has-" + (this.state.confirmPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
-                    <input type="password" className="form-control"  aria-describedby="helpBlock2"
+                    <input type="password" className="form-control" aria-describedby="helpBlock2"
                            name="confirmPassword" id="confirmPassword" ref="confirmPassword"
                            placeholder="请再次确认新密码" onBlur={this.validate}/>
                   </div>
