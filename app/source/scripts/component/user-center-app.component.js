@@ -12,16 +12,19 @@ var UserCenterApp = React.createClass({
     };
   },
 
-  stateChange:function() {
-    var newState = !this.state.isChangePassword;
+  infoStateChange:function() {
+    this.setState({isChangePassword: false});
+  },
 
-    this.setState({isChangePassword: newState});
+  passwordStateChange:function() {
+    this.setState({isChangePassword: true});
   },
 
   render() {
     return (
         <div className="row">
-          <UserCenterSidebar isChangePassword={this.state.isChangePassword} onStateChange={this.stateChange}/>
+          <UserCenterSidebar isChangePassword={this.state.isChangePassword}
+                             onPasswordStateChange={this.passwordStateChange} onInfoStateChange={this.infoStateChange}/>
           <UserInfo isChangePassword={this.state.isChangePassword}/>
           <ChangePassword isChangePassword={this.state.isChangePassword}/>
         </div>
