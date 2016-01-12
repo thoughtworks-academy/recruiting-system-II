@@ -16,12 +16,12 @@ var userPuzzleSchema = new Schema({
     description: String,
     chartPath: String,
     initializedBox: String,
-    userAnswer: Number
+    userAnswer: String
   }],
   quizExamples: [{
     id: Number,
     question: String,
-    answer: Number,
+    answer: String,
     description: String,
     chartPath: String,
     initializedBox: String
@@ -98,7 +98,7 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
         data.quizItems.forEach(function (quizItem) {
           itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
         });
-        agent.post(apiServer + 'scoresheets')
+        return agent.post(apiServer + 'scoresheets')
             .set('Content-Type', 'application/json')
             .send({
               examerId: examerId,
@@ -110,16 +110,18 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
                 }
               ]
             })
-            .end(function (err) {
-              if (err) {
+            .end((err) => {
+              if(err){
                 console.log(err);
+              }else {
+                data.endTime = endTime;
+                data.isCommited = true;
+
+                return data.save();
               }
             });
       })
       .then(function (data) {
-        data.endTime = endTime;
-        data.isCommited = true;
-        data.save();
         res.send({status: 200});
       });
 };

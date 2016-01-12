@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
+var page = require('page');
 var _currentIndex = 0;
 var _answer;
 
@@ -65,7 +66,7 @@ var LogicPuzzleStore = Reflux.createStore({
               .set('Content_Type', 'application/json')
               .end(function (err, res) {
                 if(res.body.status === 200){
-                  res.redirect('dashboard.html');
+                  page('dashboard.html');
                 }
               });
         });
