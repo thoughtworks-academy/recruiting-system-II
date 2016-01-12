@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class DBUtil {
+public final class DBUtil {
+
+    private DBUtil() {}
 
     public static SqlSession getSession() {
         String resource = "mybatis/mybatis-config.xml";

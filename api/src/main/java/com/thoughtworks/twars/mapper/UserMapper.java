@@ -2,6 +2,7 @@ package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
 
@@ -18,4 +19,9 @@ public interface UserMapper {
     public UserDetail getUserDetailById(int userId);
 
     public int updateUserDetail(UserDetail detail);
+
+    public int updatePassword(
+            @Param("id")int id,
+            @Param("oldPassword")String oldPassword,
+            @Param("password")String password);
 }

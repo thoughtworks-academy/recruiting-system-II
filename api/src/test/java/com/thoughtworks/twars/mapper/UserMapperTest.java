@@ -6,6 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -123,5 +126,23 @@ public class UserMapperTest extends TestBase {
         assertThat(result, is(1));
 
         assertThat(addedUser.getPassword(), is("202cb962ac59075b964b07152d234b70"));
+    }
+
+
+    @Test
+    public void should_update_password() throws Exception {
+
+        Map<String, Object> passwordMap = new HashMap();
+
+        int id = 1;
+        String oldPassword = "25d55ad283aa400af464c76d713c07ad";
+        String password = "123";
+
+        int result = userMapper.updatePassword(id, oldPassword, password);
+
+        User resultUser = userMapper.getUserById(1);
+
+        assertThat(result, is(1));
+        assertThat(resultUser.getPassword(), is("202cb962ac59075b964b07152d234b70"));
     }
 }

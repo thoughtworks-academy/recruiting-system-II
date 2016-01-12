@@ -94,4 +94,27 @@ public class UserResource extends Resource {
 
         return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+    @PUT
+    @Path("/{param}/password")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUserDetail(
+            @PathParam("param") int userId,
+            Map userPasswordMap
+    ) {
+        String oldPassword = (String) userPasswordMap.get("oldPassword");
+        String password = (String) userPasswordMap.get("password");
+        int result = userMapper
+                .updatePassword(userId, oldPassword, password);
+
+        if (1 == result) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("uri", "user/" + userId);
+
+            return Response.status(Response.Status.OK).entity(map).build();
+        }
+
+        return Response.status(Response.Status.BAD_REQUEST).build();
+    }
 }

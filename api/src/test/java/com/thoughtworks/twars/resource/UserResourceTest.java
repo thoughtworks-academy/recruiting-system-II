@@ -103,13 +103,15 @@ public class UserResourceTest extends TestBase {
 
         updateUserDetail.setUserId(2);
 
-        Entity<UserDetail> entityUserDetail= Entity.entity(updateUserDetail, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/2/detail").request().put(entityUserDetail);
+        Entity<UserDetail> entityUserDetail = Entity.entity(updateUserDetail,
+                MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/2/detail").request().put
+                (entityUserDetail);
 
         assertThat(response.getStatus(), is(200));
 
         Map result = response.readEntity(Map.class);
-        assertThat(result.get("uri"),is("userDetail/2"));
+        assertThat(result.get("uri"), is("userDetail/2"));
 
     }
 
@@ -125,13 +127,15 @@ public class UserResourceTest extends TestBase {
         insertUserDetail.setName("purple");
         insertUserDetail.setSchool("shannxi");
 
-        Entity<UserDetail> entityUserDetail= Entity.entity(insertUserDetail, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/18/detail").request().put(entityUserDetail);
+        Entity<UserDetail> entityUserDetail = Entity.entity(insertUserDetail,
+                MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/18/detail").request().put
+                (entityUserDetail);
 
         assertThat(response.getStatus(), is(200));
 
         Map result = response.readEntity(Map.class);
-        assertThat(result.get("uri"),is("userDetail/18"));
+        assertThat(result.get("uri"), is("userDetail/18"));
     }
 
     @Test
@@ -142,5 +146,21 @@ public class UserResourceTest extends TestBase {
         Response response = target(basePath + "/99/detail").request().get();
 
         assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_change_user_password() throws Exception {
+        Map userMap = new HashMap<String, String>();
+
+        userMap.put("oldPassword", "25d55ad283aa400af464c76d713c07ad");
+        userMap.put("password", "123");
+
+        when(userMapper.updatePassword(1, "25d55ad283aa400af464c76d713c07ad", "123")).thenReturn(1);
+
+        Entity entity = Entity.entity(userMap, MediaType.APPLICATION_JSON);
+
+        Response response = target(basePath + "/1/password").request().put(entity);
+
+        assertThat(response.getStatus(), is(200));
     }
 }

@@ -31,4 +31,8 @@
     <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">
         SELECT * FROM userDetail WHERE userId = #{userId};
     </select>
+
+    <update id="updatePassword">
+        UPDATE users SET password=MD5(#{password}) WHERE id = #{id} AND password=MD5(#{oldPassword});
+    </update>
 </mapper>
