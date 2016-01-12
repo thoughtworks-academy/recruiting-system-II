@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var apiServer = require('../configuration').apiServer;
@@ -126,11 +127,8 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
       });
 };
 
-userPuzzleSchema.statics.saveAnswer = function (req, res) {
-  var orderId = req.body.orderId;
-  var userAnswer = req.body.userAnswer;
-  var userId = req.session.user.id;
-  this.findOne({userId: userId})
+userPuzzleSchema.statics.saveAnswer = function (orderId,userAnswer,userId) {
+  return this.findOne({userId: userId})
       .then(function (data) {
 
         if (orderId > data.quizExamples.length - 1) {
@@ -143,7 +141,7 @@ userPuzzleSchema.statics.saveAnswer = function (req, res) {
         }
       })
       .then(function () {
-        res.sendStatus(200);
+        return true;
       });
 };
 
