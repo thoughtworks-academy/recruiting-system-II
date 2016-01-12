@@ -140,7 +140,7 @@ public class BlankQuizResourceTest extends TestBase {
         when(firstExampleItems.getQuestionZh()).thenReturn("Question 88");
         when(firstExampleItems.getChartPath()).thenReturn("ChartPath 88");
         when(firstExampleItems.getDescriptionZh()).thenReturn("Description 88");
-        when(firstExampleItems.getAnswer()).thenReturn(3);
+        when(firstExampleItems.getAnswer()).thenReturn("3");
         when(quizItemMapper.getExampleItems()).thenReturn(Arrays.asList(firstExampleItems,secondExampleItems));
 
         Response response = target(basePath + "/1/items").request().get();
@@ -157,7 +157,7 @@ public class BlankQuizResourceTest extends TestBase {
         assertThat(quizItems.get(0).get("question"), is("Question 88"));
         assertThat(quizItems.get(0).get("chartPath"), is("ChartPath 88"));
         assertThat(quizItems.get(0).get("initializedBox"), is("InitializedBox 88"));
-        assertThat(quizItems.get(0).get("answer"),is(3));
+        assertThat(quizItems.get(0).get("answer"),is("3"));
 
     }
 }
