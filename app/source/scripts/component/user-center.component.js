@@ -9,13 +9,7 @@ var Reflux = require('reflux');
 var validate = require("validate.js");
 var constraint = require('../../../mixin/user-detail-constraint');
 var UserCenterGender = require('./user-center-gender.component');
-
-function getError(validateInfo, field) {
-  if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
-    return validateInfo[field][0];
-  }
-  return "";
-}
+var getError = require('../../../mixin/get-error');
 
 var UserDetail = React.createClass({
   mixins: [Reflux.connect(UserDetailStore)],
