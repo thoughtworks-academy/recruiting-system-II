@@ -8,4 +8,6 @@ public interface ScoreSheetMapper {
     int insertScoreSheet(ScoreSheet scoreSheet);
 
     List<ScoreSheet> findAll();
+
+    ScoreSheet findOne(int id);
 }

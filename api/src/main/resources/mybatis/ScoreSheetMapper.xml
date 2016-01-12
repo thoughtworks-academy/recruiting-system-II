@@ -11,11 +11,16 @@
         <result column="blankQuizId" property="blankQuizId"></result>
         <result column="quizItemId" property="quizItemId"></result>
         <result column="userAnswer" property="userAnswer"></result>
+        <result column="paperId" property="paperId"></result>
 
     </resultMap>
 
     <select id="findAll" resultMap="scoreSheetsMap">
         select * from blankQuizScoreSheet;
+    </select>
+
+    <select id="findOne" resultType="com.thoughtworks.twars.bean.ScoreSheet">
+        select * from blankQuizScoreSheet where id = #{id};
     </select>
 
     <insert id="insertScoreSheet" parameterType="com.thoughtworks.twars.bean.ScoreSheet" useGeneratedKeys="true" keyProperty="id">

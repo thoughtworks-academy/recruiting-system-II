@@ -35,6 +35,13 @@ public class ScoreSheetMapperTest extends com.thoughtworks.twars.mapper.TestBase
     }
 
     @Test
+    public void should_return_one_score_sheet(){
+        ScoreSheet scoreSheet = scoreSheetMapper.findOne(1);
+        assertThat(scoreSheet.getId(), is(1));
+        assertThat(scoreSheet.getUserAnswer(), is("23"));
+    }
+
+    @Test
     public void  should_insert_score_sheet(){
         ScoreSheet scoreSheet = new ScoreSheet();
         scoreSheet.setPaperId(1);

@@ -1,5 +1,7 @@
 package com.thoughtworks.twars.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.ScoreSheet;
 import com.thoughtworks.twars.mapper.ScoreSheetMapper;
 import org.junit.Test;
@@ -15,6 +17,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ScoreSheetResourceTest extends TestBase{
+
+    Gson gson = new GsonBuilder().create();
 
     ScoreSheet firstScoreSheet = mock(ScoreSheet.class);
     ScoreSheet secondScoreSheet = mock(ScoreSheet.class);
@@ -61,7 +65,25 @@ public class ScoreSheetResourceTest extends TestBase{
 
         Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(),is(201));
+    }
 
+    @Test
+    public void shoule_return_one_score_sheet_by_id(){
+        when(scoreSheetMapper.findOne(1)).thenReturn(firstScoreSheet);
+        when(firstScoreSheet.getId()).thenReturn(1);
+        when(firstScoreSheet.getExamerId()).thenReturn(2);
+        when(firstScoreSheet.getBlankQuizId()).thenReturn(3);
+        when(firstScoreSheet.getQuizItemId()).thenReturn(4);
+        when(firstScoreSheet.getPaperId()).thenReturn(5);
+        when(firstScoreSheet.getUserAnswer()).thenReturn("12345");
 
+        Response response = target(basePath+"/1").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Map map = response.readEntity(Map.class);
+        String str = gson.toJson(map.get("blankQuizSubmits"));
+        assertThat(map.get("examer"), is(2));
+        assertThat(map.get("paper"), is(5));
+        assertThat(str, is("[{\"blankQuiz\":\"blankQuizzes/3\",\"itemPosts\":[{\"answer\":\"12345\",\"quizItem\":\"quizItems/4\"}]}]"));
     }
 }

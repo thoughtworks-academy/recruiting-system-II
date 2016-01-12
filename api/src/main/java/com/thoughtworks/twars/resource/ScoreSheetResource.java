@@ -69,9 +69,37 @@ public class ScoreSheetResource extends Resource {
             }
         }
 
-
-
         return Response.status(Response.Status.CREATED).build();
+    }
 
+
+    @GET
+    @Path("/{scoresheetId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findOne(
+            @PathParam("scoresheetId") int scoresheetId
+    ){
+        ScoreSheet scoreSheet = scoreSheetMapper.findOne(scoresheetId);
+
+        List<Map> itemPosts = new ArrayList<>();
+        List<Map> blankQuizSubmits = new ArrayList<>();
+
+        Map itemPost = new HashMap<>();
+        Map blankQuizItem = new HashMap<>();
+
+        itemPost.put("answer", scoreSheet.getUserAnswer());
+        itemPost.put("quizItem", "quizItems/"+scoreSheet.getQuizItemId());
+        itemPosts.add(itemPost);
+
+        blankQuizItem.put("blankQuiz",
+                "blankQuizzes/"+scoreSheet.getBlankQuizId());
+        blankQuizItem.put("itemPosts", itemPosts);
+        blankQuizSubmits.add(blankQuizItem);
+
+        Map map = new HashMap<>();
+        map.put("examer", scoreSheet.getExamerId());
+        map.put("paper", scoreSheet.getPaperId());
+        map.put("blankQuizSubmits", blankQuizSubmits);
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 }

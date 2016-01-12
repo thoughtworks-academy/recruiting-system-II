@@ -39,7 +39,7 @@
 
     <select id="getExampleItems" resultMap="quizItemListMap">
         <![CDATA[
-            select * from quizItem where count  <  15 limit 2
+            select * from quizItem where count  <  15 limit 2;
         ]]>
     </select>
 </mapper>

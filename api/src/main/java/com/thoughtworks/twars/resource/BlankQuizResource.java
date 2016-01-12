@@ -51,9 +51,9 @@ public class BlankQuizResource {
         blankQuizMapper.insertBlankQuiz(blankQuiz);
 
         Map map = new HashMap<>();
-        map.put("uri","blankQuizzes/"+blankQuiz.getId());
+        map.put("uri", "blankQuizzes/"+blankQuiz.getId());
 
-        return Response.status(200).entity(map).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 
 
