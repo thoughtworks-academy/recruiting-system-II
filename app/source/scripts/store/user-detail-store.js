@@ -36,13 +36,19 @@ var UserDetailStore = Reflux.createStore({
   },
 
   onChangePassword: function (passwordInfo) {
-    request.post('/user-detail/change-password')
+    request.put('/user-detail/change-password')
         .set('Content-Type', 'application/json')
         .send({
           data: passwordInfo
         })
         .end((err, req) => {
-
+          if (req.body.status === 200) {
+            console.log('修改成功');
+          } else if (req.body.status === 400) {
+            console.log('密码错误');
+          } else {
+            console.log('error');
+          }
         });
   }
 });

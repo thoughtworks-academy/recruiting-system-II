@@ -6,23 +6,16 @@ var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var _ = require('lodash');
 var validate = require('validate.js');
-var constraint = require('../../mixin/user-detail-constraint');
+var userConstraint = require('../../mixin/user-detail-constraint');
+var passwordConstraint = require('../../mixin/password-constraint');
+var md5 = require('js-md5');
 var apiServer = require('../../configuration').apiServer;
 
+function checkInfo(info, constraint) {
+  var result = validate(info, constraint);
 
-function checkUserInfo(userInfo) {
-  var valObj = {};
-
-  valObj.school = userInfo.school;
-  valObj.name = userInfo.name;
-  valObj.major = userInfo.major;
-  valObj.degree = userInfo.degree;
-
-  var result = validate(valObj, constraint);
-
-  if (result === undefined) {
-    return true;
-  }
+  if(result === undefined) {}
+  return true;
 }
 
 router.get('/', function (req, res) {
@@ -68,9 +61,9 @@ router.get('/', function (req, res) {
 router.put('/update', function (req, res) {
   var userId = req.session.user.id;
   var userInfo = req.body.data;
-  var result = _.assign({userId: req.session.user.id}, userInfo);
+  var result = _.assign({userId: userId}, userInfo);
 
-  if (checkUserInfo(result) && result.gender !== '') {
+  if (checkInfo(result, userConstraint) && result.gender !== '') {
     agent.put(apiServer + 'user/' + userId + '/detail')
         .set('Content-Type', 'application/json')
         .send(result)
@@ -95,12 +88,40 @@ router.put('/update', function (req, res) {
   }
 });
 
-router.post('/change-password', function (req, res) {
+router.put('/change-password', function (req, res) {
   var userId = req.session.user.id;
   var passwordInfo = req.body.data;
-  var result = _.assign({userId: userId}, passwordInfo);
 
-  console.log(result);
+  if(checkInfo(passwordInfo, passwordConstraint) && passwordInfo.password === passwordInfo.confirmPassword) {
+    var partResult = {};
+
+    partResult.oldPassword = md5(passwordInfo.oldPassword);
+    partResult.password = md5(passwordInfo.password);
+
+    agent.put(apiServer + 'user/' + userId + '/password')
+        .set('Content-Type', 'application/json')
+        .send(partResult)
+        .end()
+        .then(function (resp) {
+          if(resp.status === 200) {
+            res.send({
+              status: 200
+            });
+          }else {
+            throw new Error();
+          }
+        })
+        .catch(function() {
+          res.status(400);
+          res.send({
+            status: 400
+          });
+        });
+  }else {
+    res.send({
+      status: 500
+    });
+  }
 });
 
 module.exports = router;

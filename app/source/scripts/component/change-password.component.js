@@ -3,7 +3,7 @@
 var React = require('react');
 var ReactDom = require('react-dom');
 var validate = require('validate.js');
-var constraint = require('../../../mixin/user-detail-constraint');
+var constraint = require('../../../mixin/password-constraint');
 var getError = require('../../../mixin/get-error');
 var UserDetailActions = require('../actions/user-detail-actions');
 var UserDetailStore = require('../store/user-detail-store');
@@ -69,13 +69,18 @@ var ChangePassword = React.createClass({
   savePassword:function(evt) {
     evt.preventDefault();
 
-    if(this.checkInfo()) {
-      return ;
-    }
     var passwordData = {
       oldPassword:ReactDom.findDOMNode(this.refs.oldPassword).value,
-      newPassword:ReactDom.findDOMNode(this.refs.newPassword).value
-  };
+      password:ReactDom.findDOMNode(this.refs.newPassword).value,
+      confirmPassword:ReactDom.findDOMNode(this.refs.confirmPassword).value
+    };
+
+    if(this.checkInfo()) {
+      return ;
+    }else if(passwordData.password !== passwordData.confirmPassword) {
+      return ;
+    }
+
     UserDetailActions.changePassword(passwordData);
   },
 
@@ -105,7 +110,7 @@ var ChangePassword = React.createClass({
                 <label htmlFor="newPassword" className="col-sm-4 col-md-4 control-label">新密码</label>
                 <div className={"form-group has-" + (this.state.newPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" aria-describedby="helpBlock2"
+                    <input type="password" className="form-control" aria-describedby="helpBlock2"
                            name="newPassword" id="newPassword" ref="newPassword"
                            placeholder="请输入新密码" onBlur={this.validate}/>
                   </div>
@@ -119,7 +124,7 @@ var ChangePassword = React.createClass({
                 <label htmlFor="confirmPassword" className="col-sm-4 col-md-4 control-label">确认密码</label>
                 <div className={"form-group has-" + (this.state.confirmPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control"  aria-describedby="helpBlock2"
+                    <input type="password" className="form-control"  aria-describedby="helpBlock2"
                            name="confirmPassword" id="confirmPassword" ref="confirmPassword"
                            placeholder="请再次确认新密码" onBlur={this.validate}/>
                   </div>
