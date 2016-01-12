@@ -4,14 +4,14 @@ var React = require('react');
 var Reflux = require('reflux');
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
-var UserPuzzleActions = require('../actions/user-puzzle-actions');
-var UserPuzzleStore = require('../store/user-puzzle-store');
+var TimerStore = require('../store/timer-store');
+var TimerActions = require('../actions/timer-action');
 var Modal = require('react-bootstrap/lib/Modal');
 var _newOrderId;
 var able = false;
 
 var LogicPuzzleSidebar = React.createClass({
-  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(UserPuzzleStore)],
+  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(TimerStore)],
 
 
   submitPaper: function () {
@@ -33,7 +33,7 @@ var LogicPuzzleSidebar = React.createClass({
   },
 
   componentDidMount: function () {
-    UserPuzzleActions.getRemainTime();
+    TimerActions.getRemainTime();
     this.countDown();
   },
 
@@ -52,7 +52,7 @@ var LogicPuzzleSidebar = React.createClass({
         });
 
         if(remainTime % 300 === 1){
-          UserPuzzleActions.getRemainTime();
+          TimerActions.getRemainTime();
         }
       }
     }, 1000);

@@ -9,13 +9,13 @@ var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var LogicPuzzleLeft = require('./logic-puzzle-left.component');
 var LogicPuzzleSidebar = require('./logic-puzzle-sidebar.component');
 
-var UserPuzzleStore = require('../store/user-puzzle-store');
+var TimerStore = require('../store/timer-store');
 
 var Modal = require('react-bootstrap/lib/Modal');
 var Button = require('react-bootstrap/lib/Button');
 
 var LogicPuzzle = React.createClass({
-  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(UserPuzzleStore)],
+  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(TimerStore)],
 
   getInitialState: function () {
     return {
