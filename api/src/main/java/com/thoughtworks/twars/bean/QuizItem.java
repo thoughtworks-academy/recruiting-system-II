@@ -9,7 +9,7 @@ public class QuizItem {
     private String questionZh;
     private int stepsLength;
     private int maxUpdateTimes;
-    private int answer;
+    private String answer;
     private String description;
     private String descriptionZh;
     private String chartPath;
@@ -72,7 +72,7 @@ public class QuizItem {
         this.id = id;
     }
 
-    public int getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
@@ -100,7 +100,7 @@ public class QuizItem {
         this.maxUpdateTimes = maxUpdateTimes;
     }
 
-    public void setAnswer(int answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 
