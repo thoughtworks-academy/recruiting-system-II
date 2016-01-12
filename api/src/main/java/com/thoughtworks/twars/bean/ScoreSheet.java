@@ -5,7 +5,16 @@ public class ScoreSheet {
     private int examerId;
     private int blankQuizId;
     private int quizItemId;
+    private int paperId;
     private String userAnswer;
+
+    public int getPaperId() {
+        return paperId;
+    }
+
+    public void setPaperId(int paperId) {
+        this.paperId = paperId;
+    }
 
     public int getId() {
         return id;
