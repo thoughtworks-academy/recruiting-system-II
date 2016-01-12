@@ -18,7 +18,8 @@ var ChangePassword = React.createClass({
       oldPasswordError: '',
       newPasswordError: '',
       confirmPasswordError: '',
-      success: false
+      success: false,
+      isRespond: false
     };
   },
 
@@ -143,7 +144,8 @@ var ChangePassword = React.createClass({
 
                 <div className="form-group">
                   <div className="col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4">
-                    <button type="submit" className="btn btn-default" onClick={this.savePassword}>保存</button>
+                    <button type="submit" className="btn btn-default" onClick={this.savePassword}
+                    disabled={this.state.isRespond}>保存</button>
                   </div>
                 </div>
               </div>

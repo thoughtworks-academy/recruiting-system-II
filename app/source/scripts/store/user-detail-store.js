@@ -36,6 +36,7 @@ var UserDetailStore = Reflux.createStore({
   },
 
   onChangePassword: function (passwordInfo) {
+    this.trigger({isRespond: true});
     request.put('/user-detail/change-password')
         .set('Content-Type', 'application/json')
         .send({
@@ -44,8 +45,9 @@ var UserDetailStore = Reflux.createStore({
         .end((err, req) => {
           if (req.body.status === 200) {
             this.trigger({success: true});
+            this.trigger({isRespond: false});
           } else if (req.body.status === 400) {
-            this.trigger({oldPasswordError:'旧密码错误'});
+            this.trigger({oldPasswordError: '旧密码错误'});
           } else {
             console.log('error');
           }
