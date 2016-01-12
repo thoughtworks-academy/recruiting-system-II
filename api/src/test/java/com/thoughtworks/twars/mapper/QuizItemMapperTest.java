@@ -42,7 +42,7 @@ public class QuizItemMapperTest extends TestBase {
         quizItem.setCount(10);
         quizItem.setQuestionZh("经过以上操作之后，现在6号盒子中的数字是多少?");
         quizItem.setStepsLength(11);
-        quizItem.setAnswer(10);
+        quizItem.setAnswer("10");
         quizItem.setDescriptionZh("[\"\",\"更改指令9：将该指令中的第2个盒子的编号加1\",\"判断：指令9中第2个盒子的编号比2号盒子中的数字大吗\",\"相乘：6号盒子中的数字*9号盒子中的数字，将结果放在6号盒子中。\",\"判断：指令9中第1个盒子的编号比5号盒子中的数字大吗\",\"判断：指令9中第2个盒子的编号比2号盒子中的数字大吗\",\"更改指令9：将该指令中的第1个盒子的编号加1\",\"更改指令1：将该指令中的第2个盒子的编号加1\",\"将4号盒子中的数字放在2号盒子中\",\"\"]");
         quizItem.setChartPath("logic-puzzle/1.png");
         quizItem.setInfoPath("logic-puzzle/1.json");
