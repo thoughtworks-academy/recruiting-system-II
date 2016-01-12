@@ -4,11 +4,11 @@ var ReactDom = require('react-dom');
 require('bootstrap');
 require('../less/user-center.less');
 
-var UserCenter = require('./component/user-center.component');
+var UserCenterApp = require('./component/user-center-app.component');
 var Navigation = require('./component/navigation.component');
 
 ReactDom.render(
-    <UserCenter />,
+    <UserCenterApp />,
     document.getElementById('account-info')
 );
 
