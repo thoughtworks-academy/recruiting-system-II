@@ -7,9 +7,7 @@ import org.junit.Test;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -38,14 +36,31 @@ public class ScoreSheetResourceTest extends TestBase{
 
     @Test
     public void should_return_insert_score_sheet_uri(){
-        ScoreSheet scoreSheet = new ScoreSheet();
 
-        scoreSheet.setBlankQuizId(1);
-        scoreSheet.setExamerId(5);
-        scoreSheet.setQuizItemId(6);
-        scoreSheet.setUserAnswer("44");
+        Map itemPost = new HashMap<>();
+        itemPost.put("answer","10");
+        itemPost.put("quizItemId",3);
 
-        Response response = target(basePath).request().post(Entity.entity(scoreSheet, MediaType.APPLICATION_JSON_TYPE));
+        List<Map> itemPosts = new ArrayList<>();
+        itemPosts.add(itemPost);
+
+
+        Map blankQuizSubmit = new HashMap<>();
+        blankQuizSubmit.put("blankQuizId",1);
+        blankQuizSubmit.put("itemPosts",itemPosts);
+
+        List<Map> blankQuizSubmits = new ArrayList<>();
+        blankQuizSubmits.add(blankQuizSubmit);
+
+        Map scoreSheet = new HashMap<>();
+        scoreSheet.put("examerId",1);
+        scoreSheet.put("blankQuizSubmits",blankQuizSubmits);
+
+        Entity<Map> entity = Entity.entity(scoreSheet, MediaType.APPLICATION_JSON_TYPE);
+
+        Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(),is(201));
+
+
     }
 }

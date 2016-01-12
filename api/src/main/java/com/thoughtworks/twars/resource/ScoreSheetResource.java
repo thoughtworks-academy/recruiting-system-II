@@ -4,16 +4,14 @@ import com.thoughtworks.twars.bean.ScoreSheet;
 import com.thoughtworks.twars.mapper.ScoreSheetMapper;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Path("/scoresheets")
@@ -26,7 +24,7 @@ public class ScoreSheetResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         List<ScoreSheet> scoreSheets = scoreSheetMapper.findAll();
-        List<Map> result = new ArrayList<>();
+        List<Map<String, String>> result = new ArrayList<Map<String, String>>();
 
         for (int i = 0; i < scoreSheets.size(); i++) {
             ScoreSheet scoreSheet = scoreSheets.get(i);
@@ -42,13 +40,35 @@ public class ScoreSheetResource extends Resource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertScoreSheet(ScoreSheet scoreSheet) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response insertScoreSheet(Map data) {
 
-        scoreSheetMapper.insertScoreSheet(scoreSheet);
+        int examerId = (int) data.get("examerId");
+        int blankQuizId;
+        int quizItemId;
+        String answer;
+        List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
+        for (int j = 0; j < blankQuizSubmits.size(); j++) {
+            blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
+            List<Map> itemPosts = (List) blankQuizSubmits.get(j).get("itemPosts");
+            for(int i=0; i<itemPosts.size(); i++) {
+                Map itemPost = itemPosts.get(i);
+                answer = (String) itemPost.get("answer");
+                quizItemId = (Integer) itemPost.get("quizItemId");
+                ScoreSheet sheet = new ScoreSheet();
+                sheet.setUserAnswer(answer);
+                sheet.setQuizItemId(quizItemId);
+                sheet.setBlankQuizId(blankQuizId);
+                sheet.setExamerId(examerId);
 
-        Map map = new HashMap<>();
-        map.put("uri", "/scoresheets/" + scoreSheet.getId());
+                scoreSheetMapper.insertScoreSheet(sheet);
 
-        return Response.status(Response.Status.CREATED).entity(map).build();
+            }
+        }
+
+
+
+        return Response.status(201).build();
+
     }
 }
