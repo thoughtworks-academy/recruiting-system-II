@@ -20,6 +20,6 @@
 
     <insert id="insertScoreSheet" parameterType="com.thoughtworks.twars.bean.ScoreSheet" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO blankQuizScoreSheet(examerId,blankQuizId,quizItemId,paperId,userAnswer)
-        VALUES (#{paperId},#{examerId},#{blankQuizId},#{quizItemId},#{userAnswer})
+        VALUES (#{examerId},#{blankQuizId},#{quizItemId},#{paperId},#{userAnswer})
     </insert>
 </mapper>
