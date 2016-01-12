@@ -17,7 +17,8 @@ var ChangePassword = React.createClass({
     return {
       oldPasswordError: '',
       newPasswordError: '',
-      confirmPasswordError: ''
+      confirmPasswordError: '',
+      success: false
     };
   },
 
@@ -90,9 +91,9 @@ var ChangePassword = React.createClass({
     return (
         <div className={"col-md-9 col-sm-9 col-xs-12" + classString}>
           <div className="content">
+            <div className={"success-prompt" + (this.state.success ? '' : ' hide')}>修改成功</div>
             <form className="form-horizontal form-top-height">
               <div id="change-password">
-
                 <label htmlFor="oldPassword" className="col-sm-4 col-md-4 control-label">旧密码</label>
                 <div className={"form-group has-" + (this.state.oldPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
