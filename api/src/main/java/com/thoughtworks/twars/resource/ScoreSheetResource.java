@@ -46,12 +46,14 @@ public class ScoreSheetResource extends Resource {
         int examerId = (int) data.get("examerId");
         int blankQuizId;
         int quizItemId;
+        int paperId = (int) data.get("paperId");
         String answer;
         List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
         for (int j = 0; j < blankQuizSubmits.size(); j++) {
             blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
-            List<Map> itemPosts = (List) blankQuizSubmits.get(j).get("itemPosts");
-            for(int i=0; i<itemPosts.size(); i++) {
+            List<Map> itemPosts = (List) blankQuizSubmits.get(j)
+                    .get("itemPosts");
+            for (int i=0; i<itemPosts.size(); i++) {
                 Map itemPost = itemPosts.get(i);
                 answer = (String) itemPost.get("answer");
                 quizItemId = (Integer) itemPost.get("quizItemId");
@@ -60,6 +62,7 @@ public class ScoreSheetResource extends Resource {
                 sheet.setQuizItemId(quizItemId);
                 sheet.setBlankQuizId(blankQuizId);
                 sheet.setExamerId(examerId);
+                sheet.setPaperId(paperId);
 
                 scoreSheetMapper.insertScoreSheet(sheet);
 
@@ -68,7 +71,7 @@ public class ScoreSheetResource extends Resource {
 
 
 
-        return Response.status(201).build();
+        return Response.status(Response.Status.CREATED).build();
 
     }
 }
