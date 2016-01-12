@@ -44,9 +44,12 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_user_by_email_and_password() throws Exception {
-        User returnUser = userMapper.getUserById(1);
-        User user = userMapper.getUserByEmailAndPassWord(returnUser);
-        assertThat(user.getMobilePhone(), is("12345678901"));
+        User user = new User();
+        user.setEmail("test@163.com");
+        user.setPassword("25d55ad283aa400af464c76d713c07ad");
+
+        User resultUser = userMapper.getUserByEmailAndPassWord(user);
+        assertThat(resultUser.getMobilePhone(), is("12345678901"));
     }
 
     @Test
@@ -101,12 +104,24 @@ public class UserMapperTest extends TestBase {
         UserDetail detail = userMapper.getUserDetailById(1);
 
         assertThat(detail.getUserId(), is(1));
-        assertThat(detail.getSchool(), is("xi'an"));
-        assertThat(detail.getName(), is("purple"));
-        assertThat(detail.getMajor(), is("cs"));
-        assertThat(detail.getDegree(), is("benke"));
+        assertThat(detail.getSchool(), is("思沃学院"));
+        assertThat(detail.getName(), is("测试一"));
+        assertThat(detail.getMajor(), is("计算机"));
+        assertThat(detail.getDegree(), is("本科"));
         assertThat(detail.getGender(), is("F"));
-        assertThat(detail.getBirthday(), is(2));
+        assertThat(detail.getBirthday(), is(0));
     }
 
+    @Test
+    public void should_encrypt_password_when_create_new_user () throws Exception {
+        User newUser = new User();
+        newUser.setPassword("123");
+        int result = userMapper.insertUser(newUser);
+        int userId = newUser.getId();
+        User addedUser = userMapper.getUserById(userId);
+
+        assertThat(result, is(1));
+
+        assertThat(addedUser.getPassword(), is("202cb962ac59075b964b07152d234b70"));
+    }
 }

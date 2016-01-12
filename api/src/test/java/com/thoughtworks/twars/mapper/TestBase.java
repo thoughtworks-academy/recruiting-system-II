@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.mapper;
 
+import com.thoughtworks.twars.tasks.DBRecovery;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
@@ -16,7 +17,7 @@ public class TestBase {
 
     @After
     public void tearDown() throws Exception {
-        session.rollback();
-        session.close();
+        String[] args = new String[]{"1"};
+        DBRecovery.main(args);
     }
 }

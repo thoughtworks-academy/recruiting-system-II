@@ -16,12 +16,12 @@
     </select>
 
     <select id="getUserByEmailAndPassWord" parameterType="com.thoughtworks.twars.bean.User" resultType="com.thoughtworks.twars.bean.User">
-        SELECT * FROM users WHERE email = #{email} AND password = #{password} LIMIT 1
+        SELECT * FROM users WHERE email = #{email} AND password = MD5(#{password}) LIMIT 1
     </select>
 
     <insert id="insertUser" parameterType="com.thoughtworks.twars.bean.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users(email, mobilePhone, password, createDate)
-        VALUES (#{email}, #{mobilePhone}, #{password}, UNIX_TIMESTAMP())
+        VALUES (#{email}, #{mobilePhone}, MD5(#{password}), UNIX_TIMESTAMP())
     </insert>
 
     <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true" keyProperty="userId">
