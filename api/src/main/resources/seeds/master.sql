@@ -83,7 +83,7 @@ INSERT INTO userDetail VALUES (1, "思沃学院", "测试一", "计算机", "本
 INSERT INTO userDetail VALUES (2, "思沃大讲堂", "测试二", "电工", "本科", 1, "M");
 
 TRUNCATE blankQuizScoreSheet;
-INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 2, "23");
-INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 3, "34");
-INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 4, "45");
+INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 2, "23",1);
+INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 3, "34",1);
+INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 4, "45",1);
 
