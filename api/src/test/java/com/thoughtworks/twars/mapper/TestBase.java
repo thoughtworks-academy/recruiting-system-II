@@ -12,7 +12,6 @@ public class TestBase {
     @Before
     public void setUp() throws Exception {
         session = DBUtil.getSession();
-        session.getConnection().setAutoCommit(false);
     }
 
     @After

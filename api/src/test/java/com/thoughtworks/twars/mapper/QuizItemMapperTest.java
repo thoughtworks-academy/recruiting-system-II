@@ -24,7 +24,6 @@ public class QuizItemMapperTest extends TestBase {
     @After
     public void tearDown() throws Exception {
         super.tearDown();
-        DBRecovery.main(new String[]{});
     }
 
     @Test
