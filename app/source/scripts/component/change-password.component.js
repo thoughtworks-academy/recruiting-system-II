@@ -26,6 +26,18 @@ var ChangePassword = React.createClass({
     };
   },
 
+  componentWillReceiveProps:function() {
+    this.setState({
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+      oldPasswordError: '',
+      newPasswordError: '',
+      confirmPasswordError: '',
+      success: false
+    });
+  },
+
   validate: function (evt) {
     var target = evt.target;
     var name = target.name;
