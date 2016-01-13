@@ -5,7 +5,7 @@ body {
   background-color: @pale-white;
 }
 
-#account-div{
+#account-div {
   .header-major;
   .sidebar,
   .content {
@@ -24,46 +24,21 @@ body {
     li {
       padding-left: 20px;
       line-height: 40px;
-      //height: 40px;
       border-bottom: 1px solid @light-grey;
       font-size: 15px;
       overflow: hidden;
       div {
         display: inline-block;
         width: 60%;
+        a {
+          cursor: pointer;
+        }
       }
-    }
-  }
-  .content {
-    text-align: center;
-    border-radius: 4px 0 0 0;
-    .tab-content {
-      p {
-        padding-top: 10px;
-        padding-left: 30px;
-      }
-      .row {
-        margin-top: 30px;
-        margin-bottom: 50px;
-      }
-    }
-    ul > li.li-error-definition {
-      display: none;
-    }
-    .nav-tabs > li.active > a,
-    .nav-tabs > li.active > a:hover,
-    .nav-tabs > li.active > a:focus {
-      border: 1px solid transparent;
-      border-bottom: 1px solid @light-grey;
-      background-color: @light-blue;
-    }
-    .nav-tabs > li > a:hover{
-      background-color: @light-blue;
     }
   }
 
-  .form-top-height{
-    margin-top:100px;
+  .form-top-height {
+    margin-top: 100px;
     .gender {
       margin-right: 5px;
       margin-top: 10px;
@@ -91,6 +66,7 @@ body {
     }
   }
 }
+
 .success-prompt {
   margin-left: 37%;
   margin-right: 42%;
