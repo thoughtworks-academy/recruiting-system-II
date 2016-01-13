@@ -48,18 +48,8 @@ module.exports = function (req, res, next) {
       if (!userId) {
         done(null, false);
       }else{
-
-        userPuzzle.findOne({userId: userId}, (err, userPuzzle) => {
-          if (err || !userPuzzle) {
-            done(null, false);
-          }else {
-            var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
-            var now = Date.parse(new Date()) / 1000;
-            var usedTime = now - startTime;
-            var isCommited = userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0;
-
-            done(null, isCommited);
-          }
+        userPuzzle.isPaperCommited(userId, (data) => {
+          done(null, data);
         });
       }
     },
