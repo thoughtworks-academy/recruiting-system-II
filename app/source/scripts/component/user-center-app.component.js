@@ -13,7 +13,9 @@ var UserCenterApp = React.createClass({
   },
 
   changeState:function(state) {
-    this.setState({currentState: state});
+    if(state !== this.state.currentState) {
+      this.setState({currentState: state});
+    }
   },
 
   render() {
