@@ -32,7 +32,7 @@ UserPuzzleController.prototype.saveAnswer = function (req, res) {
 };
 
 UserPuzzleController.prototype.createUser = function (req, res) {
-  var userId = 10;
+  var userId = req.session.user.id;
   var quizItems, quizExamples, blankQuizId, paperId;
   var userPuzzleUrl = 'papers/enrollment';
 
