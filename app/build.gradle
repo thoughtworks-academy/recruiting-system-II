@@ -1,13 +1,17 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "com.moowork.gradle:gradle-node-plugin:0.11"
     }
 }
 
-task npmInstall(type:Exec) {
-    executable "bash"
-    args "-c", "npm install"
-}
+apply plugin: 'com.moowork.node'
 
 task startNodemon(type:Exec) {
     executable "bash"
