@@ -1,0 +1,5 @@
+wdio.conf.js
+__tests__/
+node_modules/
+public/
+webpack.config.js
