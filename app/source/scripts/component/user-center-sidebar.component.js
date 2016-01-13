@@ -23,10 +23,10 @@ var UserCenterSide = React.createClass({
             <ul>
               <Nav bsStyle="pills" stacked activeKey={this.props.currentState}>
                 <NavItem eventKey={'userDetail'} href="#" onClick={this.changeState}>个人中心
-                  <span className={"glyphicon glyphicon-check"} aria-hidden="true"></span></NavItem>
+                  <i className="fa fa-user-plus"></i></NavItem>
 
                 <NavItem eventKey={'password'} href="#" onClick={this.changeState}>修改密码
-                  <span className={"glyphicon glyphicon-check"} aria-hidden="true"></span></NavItem>
+                <i className="fa fa-user-secret"></i></NavItem>
               </Nav>
             </ul>
           </div>
