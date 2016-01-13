@@ -50,13 +50,13 @@ public class BlankQuizResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertBlankQuiz(BlankQuiz blankQuiz){
 
-
         blankQuizMapper.insertBlankQuiz(blankQuiz);
+
 
         Map map = new HashMap<>();
         map.put("uri", "blankQuizzes/"+blankQuiz.getId());
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.CREATED).entity(map).build();
     }
 
 
@@ -68,6 +68,9 @@ public class BlankQuizResource {
     ) {
         List<BlankQuiz> blankQuizzes = blankQuizMapper
                 .findBySectionId(sectionId);
+        if (blankQuizzes == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
         List<Map> result = new ArrayList<>();
 
@@ -94,13 +97,45 @@ public class BlankQuizResource {
 
         BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizId);
 
+        if (blankQuiz == null) {
+            Map errorInfo = new HashMap<>();
+            errorInfo.put("errorInfo", "findBlankQuizError");
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(errorInfo).build();
+        }
+
         List<QuizItem> easyItems = quizItemMapper
                 .getEasyItems(blankQuiz.getEasyCount());
+        if (easyItems == null) {
+            Map errorInfo = new HashMap<>();
+            errorInfo.put("errorInfo", "getEasyItems");
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(errorInfo).build();
+        }
         List<QuizItem> normalItems = quizItemMapper.getNormalItems(blankQuiz
                 .getNormalCount());
+        if (normalItems == null) {
+            Map errorInfo = new HashMap<>();
+            errorInfo.put("errorInfo", "getNormalItems");
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(errorInfo).build();
+        }
         List<QuizItem> hardItems = quizItemMapper.getHardItems(blankQuiz
                 .getHardCount());
+        if (hardItems == null) {
+            Map errorInfo = new HashMap<>();
+            errorInfo.put("errorInfo", "getHardItems");
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(errorInfo).build();
+        }
         List<QuizItem> exampleItems = quizItemMapper.getExampleItems();
+
+        if (exampleItems == null) {
+            Map errorInfo = new HashMap<>();
+            errorInfo.put("errorInfo", "getExampleItems");
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(errorInfo).build();
+        }
 
         List<QuizItem> quizItems = new ArrayList<>();
 
