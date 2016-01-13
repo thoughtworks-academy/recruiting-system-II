@@ -1,3 +1,5 @@
+/* jshint browser: true */
+
 'use strict';
 
 var $ = global.jQuery = require('jquery');

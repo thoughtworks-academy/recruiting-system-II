@@ -1,3 +1,5 @@
+/* jshint browser: true */
+
 'use strict';
 
 var ReactDom = require('react-dom');
