@@ -71,11 +71,10 @@ var UserDetail = React.createClass({
   },
 
   checkInfo: function () {
-    var school = ReactDom.findDOMNode(this.refs.school);
-    var name = ReactDom.findDOMNode(this.refs.name);
-    var major = ReactDom.findDOMNode(this.refs.major);
-    var degree = ReactDom.findDOMNode(this.refs.degree);
-
+    var school = {school: this.state.school};
+    var name = {name: this.state.name};
+    var major = {major: this.state.major};
+    var degree = {degree: this.state.degree};
     var userInfo = [];
 
     userInfo.push(school, name, major, degree);
@@ -84,18 +83,13 @@ var UserDetail = React.createClass({
     var stateObj = {};
 
     userInfo.forEach((item) => {
-      var valObj = {};
-      var value = item.value;
-      var name = item.name;
-
-      valObj[name] = value;
-      var result = validate(valObj, constraint);
-      var error = getError(result, name);
+      var result = validate(item, constraint);
+      var error = getError(result, Object.keys[item]);
 
       if (error !== '') {
         pass = true;
       }
-      stateObj[name + 'Error'] = error;
+      stateObj[Object.keys(item) + 'Error'] = error;
       this.setState(stateObj);
     });
     return pass;

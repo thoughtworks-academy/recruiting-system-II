@@ -15,6 +15,9 @@ var ChangePassword = React.createClass({
 
   getInitialState: function () {
     return {
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
       oldPasswordError: '',
       newPasswordError: '',
       confirmPasswordError: '',
@@ -39,30 +42,30 @@ var ChangePassword = React.createClass({
     this.setState(stateObj);
   },
 
+  handleChange: function (evt) {
+    var newState = evt.target.value;
+    var stateName = evt.target.name;
+
+    this.setState({[stateName]: newState});
+  },
+
   checkInfo: function () {
-    var oldPassword = ReactDom.findDOMNode(this.refs.oldPassword);
-    var newPassword = ReactDom.findDOMNode(this.refs.newPassword);
-    var confirmPassword = ReactDom.findDOMNode(this.refs.confirmPassword);
+    var oldPassword = {oldPassword: this.state.oldPassword};
+    var newPassword = {newPassword: this.state.newPassword};
+    var confirmPassword = {confirmPassword: this.state.confirmPassword};
     var passwordInfo = [];
-
-    passwordInfo.push(oldPassword, newPassword, confirmPassword);
-
     var pass = false;
     var stateObj = {};
 
+    passwordInfo.push(oldPassword, newPassword, confirmPassword);
     passwordInfo.forEach((item) => {
-      var valObj = {};
-      var value = item.value;
-      var name = item.name;
-
-      valObj[name] = value;
-      var result = validate(valObj, constraint);
-      var error = getError(result, name);
+      var result = validate(item, constraint);
+      var error = getError(result, Object.keys(item));
 
       if (error !== '') {
         pass = true;
       }
-      stateObj[name + 'Error'] = error;
+      stateObj[Object.keys(item) + 'Error'] = error;
       this.setState(stateObj);
     });
     return pass;
@@ -72,9 +75,9 @@ var ChangePassword = React.createClass({
     evt.preventDefault();
 
     var passwordData = {
-      oldPassword: ReactDom.findDOMNode(this.refs.oldPassword).value,
-      password: ReactDom.findDOMNode(this.refs.newPassword).value,
-      confirmPassword: ReactDom.findDOMNode(this.refs.confirmPassword).value
+      oldPassword: this.state.oldPassword,
+      password: this.state.newPassword,
+      confirmPassword: this.state.confirmPassword
     };
 
     if (this.checkInfo()) {
@@ -99,13 +102,14 @@ var ChangePassword = React.createClass({
                   修改成功
                 </div>
               </div>
+
               <div id="change-password">
                 <label htmlFor="oldPassword" className="col-sm-4 col-md-4 control-label">旧密码</label>
                 <div className={"form-group has-" + (this.state.oldPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
                     <input type="text" className="form-control" aria-describedby="helpBlock2"
-                           name="oldPassword" id="oldPassword" ref="oldPassword"
-                           placeholder="请输入旧密码" onBlur={this.validate}/>
+                           name="oldPassword" id="oldPassword" onChange={this.handleChange}
+                           placeholder="请输入旧密码" onBlur={this.validate} value={this.state.oldPassword}/>
                   </div>
                   <div className={"error alert alert-danger" + (this.state.oldPasswordError === '' ? ' hide' : '')}
                        role="alert">
@@ -118,8 +122,9 @@ var ChangePassword = React.createClass({
                 <div className={"form-group has-" + (this.state.newPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
                     <input type="password" className="form-control" aria-describedby="helpBlock2"
-                           name="newPassword" id="newPassword" ref="newPassword"
-                           placeholder="请输入新密码" onBlur={this.validate}/>
+                           name="newPassword" id="newPassword"
+                           placeholder="请输入新密码" onBlur={this.validate}
+                           onChange={this.handleChange} value={this.state.newPassword}/>
                   </div>
                   <div className={"error alert alert-danger" + (this.state.newPasswordError === '' ? ' hide' : '')}
                        role="alert">
@@ -132,8 +137,9 @@ var ChangePassword = React.createClass({
                 <div className={"form-group has-" + (this.state.confirmPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
                     <input type="password" className="form-control" aria-describedby="helpBlock2"
-                           name="confirmPassword" id="confirmPassword" ref="confirmPassword"
-                           placeholder="请再次确认新密码" onBlur={this.validate}/>
+                           name="confirmPassword" id="confirmPassword"
+                           placeholder="请再次确认新密码" onBlur={this.validate}
+                           onChange={this.handleChange} value={this.state.confirmPassword}/>
                   </div>
                   <div className={"error alert alert-danger" + (this.state.confirmPasswordError === '' ? ' hide' : '')}
                        role="alert">
@@ -145,7 +151,8 @@ var ChangePassword = React.createClass({
                 <div className="form-group">
                   <div className="col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4">
                     <button type="submit" className="btn btn-default" onClick={this.savePassword}
-                    disabled={this.state.isRespond}>保存</button>
+                            disabled={this.state.isRespond}>保存
+                    </button>
                   </div>
                 </div>
               </div>
