@@ -26,7 +26,7 @@ var ChangePassword = React.createClass({
     };
   },
 
-  componentWillReceiveProps:function() {
+  componentWillReceiveProps: function () {
     this.setState({
       oldPassword: '',
       newPassword: '',
@@ -44,8 +44,14 @@ var ChangePassword = React.createClass({
     var value = target.value;
     var valObj = {};
 
-    valObj[name] = value;
-
+    if (name === 'confirmPassword') {
+      valObj = {
+        password: this.state.newPassword,
+        confirmPassword: this.state.confirmPassword
+      };
+    } else {
+      valObj[name] = value;
+    }
     var result = validate(valObj, constraint);
     var error = getError(result, name);
     var stateObj = {};
@@ -93,9 +99,6 @@ var ChangePassword = React.createClass({
     };
 
     if (this.checkInfo()) {
-      return;
-    } else if (passwordData.password !== passwordData.confirmPassword) {
-      this.setState({confirmPasswordError: '两次密码不匹配'});
       return;
     }
 

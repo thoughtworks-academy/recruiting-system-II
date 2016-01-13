@@ -18,23 +18,19 @@ body {
     margin-bottom: 14px;
   }
   .sidebar {
-    ol {
-      padding-left: 0;
+    ul {
+      margin-left: -20px;
     }
     li {
-      padding-left: 20px;
       line-height: 40px;
       border-bottom: 1px solid @light-grey;
       font-size: 15px;
       overflow: hidden;
-      div {
-        display: inline-block;
-        width: 60%;
-        a {
-          cursor: pointer;
-        }
-        .selected {
-          color:@purple;
+      a {
+        cursor: pointer;
+        padding-left: 20%;
+        span {
+          margin-left: 20%;
         }
       }
     }

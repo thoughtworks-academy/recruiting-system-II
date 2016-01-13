@@ -35,6 +35,21 @@ var UserDetail = React.createClass({
     UserDetailActions.loadUserDetail();
   },
 
+  componentWillReceiveProps: function() {
+    this.setState({
+      school: '',
+      name: '',
+      gender: '',
+      major: '',
+      degree: '',
+      schoolError: '',
+      nameError: '',
+      majorError: '',
+      genderError: false,
+      degreeError: ''
+    });
+  },
+
   handleChange: function (evt) {
     var newState = evt.target.value;
     var stateName = evt.target.name;

@@ -1,10 +1,12 @@
 'use strict';
 
 var React = require('react');
+var Nav = require('react-bootstrap/lib/Nav');
+var NavItem = require('react-bootstrap/lib/NavItem');
 
 var UserCenterSide = React.createClass({
   changeState: function (evt) {
-    var name = evt.target.name;
+    var name = evt.target.innerText === '个人中心' ? 'userDetail' : 'password';
 
     this.props.onChangeState(name);
   },
@@ -18,23 +20,18 @@ var UserCenterSide = React.createClass({
     return (
         <div className="col-md-3 col-sm-3 col-xs-12">
           <div className="sidebar">
-            <ol>
-              {tags.map((item, index) => {
-                return (
-                    <div key={index}>
-                      <li>
-                        <div>
-                          <a ref="#" onClick={this.changeState} name={item.mark}
-                             className={this.props.currentState === item.mark ? 'selected' : ''}>{item.value}</a>
-                        </div>
-                        <span className={"glyphicon glyphicon-check"} aria-hidden="true"></span>
-                      </li>
-                    </div>
-                );
-              })}
-            </ol>
+            <ul>
+              <Nav bsStyle="pills" stacked activeKey={this.props.currentState}>
+                <NavItem eventKey={'userDetail'} href="#" onClick={this.changeState}>个人中心
+                  <span className={"glyphicon glyphicon-check"} aria-hidden="true"></span></NavItem>
+
+                <NavItem eventKey={'password'} href="#" onClick={this.changeState}>修改密码
+                  <span className={"glyphicon glyphicon-check"} aria-hidden="true"></span></NavItem>
+              </Nav>
+            </ul>
           </div>
         </div>
+
     );
   }
 });
