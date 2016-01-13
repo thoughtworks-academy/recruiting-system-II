@@ -23,6 +23,9 @@ public class UserResource extends Resource {
     public Response getUser(@PathParam("param") int userId) {
 
         User user = userMapper.getUserById(userId);
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
         Map<String, Object> map = new HashMap<>();
         map.put("id", user.getId());
