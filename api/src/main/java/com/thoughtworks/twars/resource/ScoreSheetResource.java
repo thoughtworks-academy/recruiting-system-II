@@ -74,12 +74,12 @@ public class ScoreSheetResource extends Resource {
 
 
     @GET
-    @Path("/{scoresheetId}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findOne(
-            @PathParam("scoresheetId") int scoresheetId
+            @PathParam("id") int id
     ){
-        ScoreSheet scoreSheet = scoreSheetMapper.findOne(scoresheetId);
+        ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
 
         List<Map> itemPosts = new ArrayList<>();
         List<Map> blankQuizSubmits = new ArrayList<>();
