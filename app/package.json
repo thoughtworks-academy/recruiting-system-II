@@ -4,7 +4,7 @@
   "description": "ThoughtWorks Academy Recruiting System",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jasmine",
     "start": "nodemon app.js"
   },
   "jest": {
@@ -53,6 +53,7 @@
     "event-stream": "^3.3.2",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.5",
+    "jasmine": "^2.4.1",
     "jest-cli": "^0.8.2",
     "jshint": "^2.8.0",
     "jsxhint": "^0.15.1",
