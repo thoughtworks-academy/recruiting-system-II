@@ -28,6 +28,9 @@ public class LoginResource extends Resource {
     public Response createUser(User user) {
 
         User resultUser = userMapper.getUserByEmailAndPassWord(user);
+        if (resultUser == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
         Map<String, Object> map = new HashMap<>();
         Map<String, String> userInfo = new HashMap<>();
