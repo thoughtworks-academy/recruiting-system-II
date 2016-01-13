@@ -29,7 +29,7 @@ public class LoginResource extends Resource {
 
         User resultUser = userMapper.getUserByEmailAndPassWord(user);
         if (resultUser == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
         Map<String, Object> map = new HashMap<>();
