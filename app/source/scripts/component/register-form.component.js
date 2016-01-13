@@ -165,7 +165,7 @@ var RegisterForm = React.createClass({
         var info = req.body;
 
         if (info.status === 200) {
-          createUser();
+          initialUser();
           page('user-center.html');
 
         } else {
