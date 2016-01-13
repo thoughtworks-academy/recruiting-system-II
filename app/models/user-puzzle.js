@@ -33,26 +33,23 @@ var userPuzzleSchema = new Schema({
   endTime: String
 });
 
-userPuzzleSchema.statics.isPaperCommited = function (userId) {
-  var data = {};
+userPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
+  var isPaperCommited;
 
-  return this.findOne({userId: userId})
-      .then((userPuzzle, err) => {
+  this.findOne({userId: userId}, (err, userPuzzle) => {
+    if (err || !userPuzzle) {
+      isPaperCommited = false;
+    } else {
 
-        if (err || !userPuzzle) {
-          data.status = 404;
-        } else {
+      var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
+      var now = Date.parse(new Date()) / 1000;
+      var usedTime = now - startTime;
 
-          var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
-          var now = Date.parse(new Date()) / 1000;
-          var usedTime = now - startTime;
+      isPaperCommited = userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0 ? true : false;
+    }
 
-          data.isPaperCommited = userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0 ? true : false;
-          data.status = 200;
-        }
-
-        return data;
-      });
+    callback(isPaperCommited);
+  });
 };
 
 userPuzzleSchema.statics.getUserPuzzle = function (orderId, userId) {
