@@ -13,8 +13,8 @@ var UserCenterSide = React.createClass({
 
   render() {
     var tags = [
-      {mark: 'userDetail', value: '个人中心'},
-      {mark: 'password', value: '修改密码'}
+      {mark: 'userDetail', value: '个人中心', icon: 'fa fa-user-secret'},
+      {mark: 'password', value: '修改密码', icon: 'fa fa-user-plus'}
     ];
 
     return (
@@ -22,16 +22,16 @@ var UserCenterSide = React.createClass({
           <div className="sidebar">
             <ul>
               <Nav bsStyle="pills" stacked activeKey={this.props.currentState}>
-                <NavItem eventKey={'userDetail'} href="#" onClick={this.changeState}>个人中心
-                  <i className="fa fa-user-plus"></i></NavItem>
-
-                <NavItem eventKey={'password'} href="#" onClick={this.changeState}>修改密码
-                <i className="fa fa-user-secret"></i></NavItem>
+                {tags.map((item, index) => {
+                  return (
+                      <NavItem eventKey={item.mark} href="#" onClick={this.changeState} key={index}>{item.value}
+                        <i className={item.icon}></i></NavItem>
+                  );
+                })}
               </Nav>
             </ul>
           </div>
         </div>
-
     );
   }
 });
