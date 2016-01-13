@@ -29,6 +29,9 @@ public class BlankQuizResource {
     public Response getAllBlankQuizzes() {
 
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findAll();
+        if (blankQuizzes == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         List<Map> result = new ArrayList<>();
 
         for (int i = 0; i < blankQuizzes.size(); i++) {
