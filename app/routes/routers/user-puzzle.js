@@ -8,6 +8,6 @@ var userPuzzleController = new UserPuzzleController();
 
 router.post('/save', userPuzzleController.saveAnswer);
 
-router.get('/createUser', userPuzzleController.createUser);
+router.get('/initialUser', userPuzzleController.initialUser);
 
 module.exports = router;

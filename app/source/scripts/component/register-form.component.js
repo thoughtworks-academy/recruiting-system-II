@@ -50,8 +50,8 @@ function getError(validateInfo, field) {
   return "";
 }
 
-function createUser() {
-  request.get('/user-puzzle/createUser').
+function initialUser() {
+  request.get('/user-puzzle/initialUser').
       set('Content-Type', 'application/json')
       .end(function(err){
         if(err){
@@ -165,7 +165,7 @@ var RegisterForm = React.createClass({
             var info = req.body;
 
             if (info.status === 200) {
-              createUser();
+              initialUser();
               page('user-center.html');
 
             } else {

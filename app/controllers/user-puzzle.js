@@ -1,8 +1,6 @@
 'use strict';
 
 var apiRequest = require('../services/api-request');
-var superAgent = require('superagent');
-var apiServer = require('../configuration').apiServer;
 var userPuzzle = require('../models/user-puzzle');
 var async = require('async');
 
@@ -31,7 +29,7 @@ UserPuzzleController.prototype.saveAnswer = function (req, res) {
       });
 };
 
-UserPuzzleController.prototype.createUser = function (req, res) {
+UserPuzzleController.prototype.initialUser = function (req, res) {
   var userId = req.session.user.id;
   var quizItems, quizExamples, blankQuizId, paperId;
   var userPuzzleUrl = 'papers/enrollment';
