@@ -42,7 +42,7 @@ public class LoginResourceTest extends TestBase{
 
         Entity entity = Entity.entity(loginUser, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath).request().post(entity);
-        assertThat(response.getStatus(), is(404));
+        assertThat(response.getStatus(), is(401));
     }
 
 }
