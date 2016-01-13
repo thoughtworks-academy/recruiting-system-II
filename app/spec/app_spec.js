@@ -1,5 +1,5 @@
-"use strict";
+'use strict';
 
 beforeAll(function() {
-  console.log("Start!!!");
+  console.log('Start!!!');
 });

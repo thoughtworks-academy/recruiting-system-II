@@ -18,11 +18,11 @@ var LogicPuzzleStore = Reflux.createStore({
         .then((res) => {
           _answer = res.body.userAnswer;
           this.trigger({
-            "item": res.body.item,
-            "userAnswer": res.body.userAnswer,
-            "itemsCount": res.body.itemsCount,
-            "orderId": _currentIndex,
-            "isExample": res.body.isExample
+            'item': res.body.item,
+            'userAnswer': res.body.userAnswer,
+            'itemsCount': res.body.itemsCount,
+            'orderId': _currentIndex,
+            'isExample': res.body.isExample
           });
         });
   },
@@ -36,11 +36,11 @@ var LogicPuzzleStore = Reflux.createStore({
         .then((res) => {
           _answer = res.body.userAnswer;
           this.trigger({
-            "item": res.body.item,
-            "userAnswer": res.body.userAnswer,
-            "itemsCount": res.body.itemsCount,
-            "orderId": _currentIndex,
-            "isExample": res.body.isExample
+            'item': res.body.item,
+            'userAnswer': res.body.userAnswer,
+            'itemsCount': res.body.itemsCount,
+            'orderId': _currentIndex,
+            'isExample': res.body.isExample
           });
         });
   },
@@ -55,7 +55,7 @@ var LogicPuzzleStore = Reflux.createStore({
   onChangeAnswer: function (val) {
     _answer = val;
     this.trigger({
-      "userAnswer": _answer
+      'userAnswer': _answer
     });
   },
 

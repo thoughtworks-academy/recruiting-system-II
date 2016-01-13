@@ -1,3 +1,5 @@
+'use strict';
+
 var ReactDom = require('react-dom');
 var DashBoard = require('./component/dashBoard.component');
 var Navigation = require('./component/navigation.component');

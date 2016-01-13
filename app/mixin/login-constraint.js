@@ -1,3 +1,5 @@
+"use strict";
+
 var constraint = {
   phoneEmail: {
     presence: {message: '^请输入邮箱'},

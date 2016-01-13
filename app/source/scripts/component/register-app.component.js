@@ -9,26 +9,26 @@ var RegisterAgreement = require('./register-agreement.component');
 
 var RegisterApp = React.createClass({
 
-    getInitialState:function () {
-        return {
-            isLoginState: false
-        };
-    },
-    stateChange:function () {
-        var newState = !this.state.isLoginState;
-        this.setState({isLoginState: newState});
-    },
+  getInitialState: function () {
+    return {
+      isLoginState: false
+    };
+  },
+  stateChange: function () {
+    var newState = !this.state.isLoginState;
+    this.setState({isLoginState: newState});
+  },
 
-    render() {
-        return (
-            <div className="row">
-                <RegisterForm isLoginState={this.state.isLoginState} />
-                <LoginForm isLoginState={this.state.isLoginState} />
-                <LoginInfo isLoginState={this.state.isLoginState} onStateChange={this.stateChange} />
-                <RegisterAgreement />
-            </div>
-        );
-    }
+  render() {
+    return (
+        <div className="row">
+          <RegisterForm isLoginState={this.state.isLoginState}/>
+          <LoginForm isLoginState={this.state.isLoginState}/>
+          <LoginInfo isLoginState={this.state.isLoginState} onStateChange={this.stateChange}/>
+          <RegisterAgreement />
+        </div>
+    );
+  }
 });
 
 module.exports = RegisterApp;

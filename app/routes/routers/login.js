@@ -24,12 +24,12 @@ function checkLoginInfo(account, password) {
 
   if (password.length < constant.PASSWORD_MIN_LENGTH ||
       password.length > constant.PASSWORD_MAX_LENGTH) {
-        pass = false;
+    pass = false;
   }
   return pass;
 }
 
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   var account = req.query.account;
   var password = req.query.password;
 
@@ -42,37 +42,37 @@ router.get('/', function(req, res) {
     password = md5(password);
 
     request
-      .post(apiServer + 'login')
-      .set('Content-Type', "application/json")
-      .send({
-        email: account,
-        password: password
-      })
-      .end(function(err, result) {
-        if(result.body.id){
-          req.session.user = {
-            id: result.body.id,
-            userInfo: result.body.userInfo
-          };
-        }
-        res.send({
-          status: result.status
+        .post(apiServer + 'login')
+        .set('Content-Type', "application/json")
+        .send({
+          email: account,
+          password: password
+        })
+        .end(function (err, result) {
+          if (result.body.id) {
+            req.session.user = {
+              id: result.body.id,
+              userInfo: result.body.userInfo
+            };
+          }
+          res.send({
+            status: result.status
+          });
         });
-      });
   }
 });
 
 router.get('/github',
-  passport.authenticate('github'),
-      function(req, res){
-        // The request will be redirected to GitHub for authentication, so this
-        // function will not be called.
-});
+    passport.authenticate('github'),
+    function (req, res) {
+      // The request will be redirected to GitHub for authentication, so this
+      // function will not be called.
+    });
 
 
 router.get('/github/callback',
-    passport.authenticate('github', { failureRedirect: '/' }),
-    function(req, res) {
+    passport.authenticate('github', {failureRedirect: '/'}),
+    function (req, res) {
       res.redirect('/start');
     });
 

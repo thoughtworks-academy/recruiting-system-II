@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
 var UserPuzzleController = require('../../controllers/user-puzzle');
 var userPuzzle = require('../../models/user-puzzle');
 
-describe("UserPuzzleController", function() {
+describe('UserPuzzleController', function() {
 
   var controller;
 
@@ -13,7 +13,7 @@ describe("UserPuzzleController", function() {
 
   });
 
-  it("should_return_quiz_item_by_order_index", function(done) {
+  it('should_return_quiz_item_by_order_index', function(done) {
 
     spyOn(userPuzzle, 'getUserPuzzle').and.callFake(function(orderId, userId) {
 

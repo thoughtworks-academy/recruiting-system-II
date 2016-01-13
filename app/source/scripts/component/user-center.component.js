@@ -6,7 +6,7 @@ var Input = require('react-bootstrap/lib/Input');
 var UserDetailActions = require('../actions/user-detail-actions');
 var UserDetailStore = require('../store/user-detail-store');
 var Reflux = require('reflux');
-var validate = require("validate.js");
+var validate = require('validate.js');
 var constraint = require('../../../mixin/user-detail-constraint');
 var UserCenterGender = require('./user-center-gender.component');
 var getError = require('../../../mixin/get-error');
@@ -125,101 +125,101 @@ var UserDetail = React.createClass({
     var classString = (this.props.currentState === 'userDetail' ? '' : '  hide');
 
     return (
-        <div className={"col-md-9 col-sm-9 col-xs-12" + classString}>
-          <div className="content">
-            <form className="form-horizontal form-top-height">
-              <div id="account-info">
-                <label htmlFor="inputSchool" className="col-sm-4 col-md-4 control-label">学校</label>
-                <div className={"form-group has-" + (this.state.schoolError === '' ? '' : 'error')}>
-                  <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id="inputSchool" aria-describedby="helpBlock2"
-                           placeholder="学校"
-                           onChange={this.handleChange} ref="school" name="school" value={this.state.school}
+        <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
+          <div className='content'>
+            <form className='form-horizontal form-top-height'>
+              <div id='account-info'>
+                <label htmlFor='inputSchool' className='col-sm-4 col-md-4 control-label'>学校</label>
+                <div className={'form-group has-' + (this.state.schoolError === '' ? '' : 'error')}>
+                  <div className='col-sm-4 col-md-4'>
+                    <input type='text' className='form-control' id='inputSchool' aria-describedby='helpBlock2'
+                           placeholder='学校'
+                           onChange={this.handleChange} ref='school' name='school' value={this.state.school}
                            onBlur={this.validate}/>
                   </div>
-                  <div className={"error alert alert-danger" + (this.state.schoolError === '' ? ' hide' : '')}
-                       role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <div className={'error alert alert-danger' + (this.state.schoolError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                     {this.state.schoolError}
                   </div>
                 </div>
 
-                <label htmlFor="inputName" className="col-sm-4 col-md-4 control-label">姓名</label>
-                <div className={"form-group has-" + (this.state.nameError === '' ? '' : 'error')}>
-                  <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id="inputName" aria-describedby="helpBlock2"
-                           placeholder="姓名"
-                           onChange={this.handleChange} name="name" ref="name" value={this.state.name}
+                <label htmlFor='inputName' className='col-sm-4 col-md-4 control-label'>姓名</label>
+                <div className={'form-group has-' + (this.state.nameError === '' ? '' : 'error')}>
+                  <div className='col-sm-4 col-md-4'>
+                    <input type='text' className='form-control' id='inputName' aria-describedby='helpBlock2'
+                           placeholder='姓名'
+                           onChange={this.handleChange} name='name' ref='name' value={this.state.name}
                            onBlur={this.validate}/>
                   </div>
-                  <div className={"error alert alert-danger" + (this.state.nameError === '' ? ' hide' : '')}
-                       role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <div className={'error alert alert-danger' + (this.state.nameError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                     {this.state.nameError}
                   </div>
                 </div>
 
-                <label htmlFor="inputMobilePhone" className="col-sm-4 col-md-4 control-label">手机</label>
-                <div className="form-group">
-                  <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id="inputMobilePhone" placeholder="手机"
-                           disabled="disabled" value={this.state.mobilePhone}/>
+                <label htmlFor='inputMobilePhone' className='col-sm-4 col-md-4 control-label'>手机</label>
+                <div className='form-group'>
+                  <div className='col-sm-4 col-md-4'>
+                    <input type='text' className='form-control' id='inputMobilePhone' placeholder='手机'
+                           disabled='disabled' value={this.state.mobilePhone}/>
                   </div>
                 </div>
 
-                <label htmlFor="inputEmail" className="col-sm-4 col-md-4 control-label">邮箱</label>
-                <div className="form-group">
-                  <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id="inputEmail" placeholder="邮箱" disabled="disabled"
+                <label htmlFor='inputEmail' className='col-sm-4 col-md-4 control-label'>邮箱</label>
+                <div className='form-group'>
+                  <div className='col-sm-4 col-md-4'>
+                    <input type='text' className='form-control' id='inputEmail' placeholder='邮箱' disabled='disabled'
                            value={this.state.email}/>
                   </div>
                 </div>
 
-                <label htmlFor="inputGender" className="col-sm-4 col-md-4 control-label">性别</label>
-                <div className="form-group">
+                <label htmlFor='inputGender' className='col-sm-4 col-md-4 control-label'>性别</label>
+                <div className='form-group'>
                   <UserCenterGender gender={this.state.gender} genderError={this.state.genderError}
-                                    onGenderChange={this.genderChange} onValidate={this.genderValidate} ref="gender"/>
+                                    onGenderChange={this.genderChange} onValidate={this.genderValidate} ref='gender'/>
                 </div>
 
-                <label htmlFor="inputMajor" className="col-sm-4 col-md-4 control-label">专业</label>
-                <div className={"form-group has-" + (this.state.majorError === '' ? '' : 'error')}>
-                  <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" id="inputMajor" aria-describedby="helpBlock2"
-                           placeholder="专业"
-                           onChange={this.handleChange} name="major" ref="major" value={this.state.major}
+                <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业</label>
+                <div className={'form-group has-' + (this.state.majorError === '' ? '' : 'error')}>
+                  <div className='col-sm-4 col-md-4'>
+                    <input type='text' className='form-control' id='inputMajor' aria-describedby='helpBlock2'
+                           placeholder='专业'
+                           onChange={this.handleChange} name='major' ref='major' value={this.state.major}
                            onBlur={this.validate}/>
                   </div>
-                  <div className={"error alert alert-danger" + (this.state.majorError === '' ? ' hide' : '')}
-                       role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <div className={'error alert alert-danger' + (this.state.majorError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                     {this.state.majorError}
                   </div>
                 </div>
 
-                <label htmlFor="inputDegree" className="col-sm-4 col-md-4 control-label">学历学位</label>
-                <div className="form-group">
-                  <div className="col-sm-4 col-md-4 degree" onBlur={this.validate}>
-                    <select ref="degree" placeholder="学历学位" name="degree" value={this.state.degree}
+                <label htmlFor='inputDegree' className='col-sm-4 col-md-4 control-label'>学历学位</label>
+                <div className='form-group'>
+                  <div className='col-sm-4 col-md-4 degree' onBlur={this.validate}>
+                    <select ref='degree' placeholder='学历学位' name='degree' value={this.state.degree}
                             onChange={this.handleChange}
-                            className={"form-control size" + (this.state.degreeError === "" ? "" : " select")}>
-                      <option value="">请选择</option>
-                      <option value="专科">专科及以下</option>
-                      <option value="本科">本科</option>
-                      <option value="硕士">硕士</option>
-                      <option value="博士">博士</option>
+                            className={'form-control size' + (this.state.degreeError === '' ? '' : ' select')}>
+                      <option value=''>请选择</option>
+                      <option value='专科'>专科及以下</option>
+                      <option value='本科'>本科</option>
+                      <option value='硕士'>硕士</option>
+                      <option value='博士'>博士</option>
                     </select>
                   </div>
 
-                  <div className={"error alert alert-danger" + (this.state.degreeError === "" ? " hide" : "")}
-                       role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <div className={'error alert alert-danger' + (this.state.degreeError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                     请选择学历
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <div className="col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4">
-                    <button type="submit" className="btn btn-default" onClick={this.update}>保存</button>
+                <div className='form-group'>
+                  <div className='col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4'>
+                    <button type='submit' className='btn btn-default' onClick={this.update}>保存</button>
                   </div>
                 </div>
               </div>

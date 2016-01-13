@@ -1,3 +1,5 @@
+'use strict';
+
 var constraint = {
   oldPassword: {
     presence: {message: '^请输入旧密码'},

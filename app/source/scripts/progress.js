@@ -1,3 +1,5 @@
+'use strict';
+
 var ReactDom = require('react-dom');
 var Navigation = require('./component/navigation.component');
 require('../less/progress.less');

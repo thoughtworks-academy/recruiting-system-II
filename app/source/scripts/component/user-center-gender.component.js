@@ -3,7 +3,7 @@
 var React = require('react');
 
 var UserCenterGender = React.createClass({
-  genderChange:function(evt) {
+  genderChange: function (evt) {
     this.props.onGenderChange(evt);
   },
 
@@ -11,7 +11,7 @@ var UserCenterGender = React.createClass({
     this.props.onValidate();
   },
 
-  render: function() {
+  render: function () {
     var tags = [
       {mark: 'M', genderName: 'male', label: '男'},
       {mark: 'F', genderName: 'female', label: '女'}
@@ -23,14 +23,15 @@ var UserCenterGender = React.createClass({
               return (
                   <div key={index}>
                     <input type="radio" name={item.mark} className="gender" onChange={this.genderChange}
-                           checked={this.props.gender === item.mark ? "checked" : ""} id={item.genderName} onClick={this.genderValidate}/>
+                           checked={this.props.gender === item.mark ? 'checked' : ''} id={item.genderName}
+                           onClick={this.genderValidate}/>
                     <label htmlFor={item.genderName}>{item.label}</label>
                   </div>
               );
             })}
 
           </div>
-          <div className={"error alert alert-danger" + (this.props.genderError === true ? '' : ' hide')} role="alert">
+          <div className={'error alert alert-danger' + (this.props.genderError === true ? '' : ' hide')} role="alert">
             <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             请选择性别
           </div>

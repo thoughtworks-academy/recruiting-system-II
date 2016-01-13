@@ -56,17 +56,17 @@ var RegisterPassword = React.createClass({
   render: function () {
     return (
         <div>
-          <input className="form-control" type={(this.props.isShowToggle === false ? "password" : "text")}
+          <input className="form-control" type={(this.props.isShowToggle === false ? 'password' : 'text')}
                  placeholder="请输入8~16位密码" name="password" ref="password"
                  id="register-password" onBlur={this.props.onBlur} onChange={this.checkPasswordSafe}/>
-          <div className={"lose" + (this.props.passwordError === '' ? ' hide' : '')}>{this.props.passwordError}
+          <div className={'lose' + (this.props.passwordError === '' ? ' hide' : '')}>{this.props.passwordError}
           </div>
           <ul className="passport-safely">
-            <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ""}>弱</li>
+            <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ''}>弱</li>
             &nbsp;
-            <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ""}>中</li>
+            <li className={this.state.passwordSafeLevel >= 2 ? this.state.passwordSafeStyle : ''}>中</li>
             &nbsp;
-            <li className={this.state.passwordSafeLevel === 3 ? this.state.passwordSafeStyle : ""}>强</li>
+            <li className={this.state.passwordSafeLevel === 3 ? this.state.passwordSafeStyle : ''}>强</li>
             &nbsp;
             <li className="toggle" onClick={this.toggleState} isShowToggle={this.props.isShowToggle}>
               {this.props.isShowToggle ? '隐藏密码' : '显示密码'}</li>

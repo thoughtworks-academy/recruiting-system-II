@@ -1,3 +1,5 @@
+'use strict';
+
 var constraint = {
   email: {
     presence: {message: "^请输入邮箱"},
@@ -11,12 +13,12 @@ var constraint = {
     }
   },
   password: {
-        presence: {message: '^请输入密码'},
-        length: {
-            minimum: 8,
-            maximum: 16,
-            message: '^请输入合法密码'
-        }
+    presence: {message: '^请输入密码'},
+    length: {
+      minimum: 8,
+      maximum: 16,
+      message: '^请输入合法密码'
     }
+  }
 };
 module.exports = constraint;

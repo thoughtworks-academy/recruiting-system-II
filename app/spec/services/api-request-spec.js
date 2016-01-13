@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
 var apiRequest = require('../../services/api-request');
 var superAgent = require('superagent');
 var apiServer = require('../../configuration').apiServer;
 
-describe("apiRequest", function () {
+describe('apiRequest', function () {
 
-  describe("get", function () {
+  describe('get', function () {
 
     var testData = {};
 
@@ -20,7 +20,7 @@ describe("apiRequest", function () {
           return this;
         },
         end: function (callback) {
-          callback({data: "OK"});
+          callback({data: 'OK'});
         }
       });
     });
@@ -29,20 +29,20 @@ describe("apiRequest", function () {
       testData = {};
     });
 
-    it("should invoke superagent get", function () {
+    it('should invoke superagent get', function () {
       apiRequest.get('papers/enrollment', function (data) {
         expect(data).toEqual({
-          data: "OK"
+          data: 'OK'
         });
       });
 
       expect(superAgent.get).toHaveBeenCalledWith(apiServer + 'papers/enrollment');
     });
 
-    it("should invoke superagent get with query", function () {
+    it('should invoke superagent get with query', function () {
       apiRequest.get('papers/enrollment', {id: 1}, function (data) {
         expect(data).toEqual({
-          data: "OK"
+          data: 'OK'
         });
       });
 
@@ -52,7 +52,7 @@ describe("apiRequest", function () {
 
   });
 
-  describe("post", function () {
+  describe('post', function () {
 
     var testData = {};
 
@@ -66,7 +66,7 @@ describe("apiRequest", function () {
           return this;
         },
         end: function (callback) {
-          callback({data: "OK"});
+          callback({data: 'OK'});
         }
       });
     });
@@ -75,10 +75,10 @@ describe("apiRequest", function () {
       testData = {};
     });
 
-    it("should invoke superagent post", function () {
+    it('should invoke superagent post', function () {
       apiRequest.post('papers/enrollment', {id: 1}, function (data) {
         expect(data).toEqual({
-          data: "OK"
+          data: 'OK'
         });
       });
 

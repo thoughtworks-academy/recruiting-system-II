@@ -7,7 +7,7 @@ glob('../public/logic-puzzle/*.json', function(err, files) {
 
   var result = files.map(function(file) {
     data = require(file);
-    values = ["[0,2,7,2,1,5,7,1,4,8]",
+    values = ['[0,2,7,2,1,5,7,1,4,8]',
       encodeURI(data.steps_string),
       data.count,
       data.question,
@@ -20,7 +20,7 @@ glob('../public/logic-puzzle/*.json', function(err, files) {
       'logic-puzzle/' + /(\d+)\.json$/.exec(file)[1] + '.png',
       'logic-puzzle/' + /(\d+)\.json$/.exec(file)[1] + '.json'
     ].join('\', \'');
-    return "INSERT INTO quizItem VALUES(null, '"+values+"');";
+    return 'INSERT INTO quizItem VALUES(null, \''+values+'\');';
   }).join('\n');
 
   console.log(result);

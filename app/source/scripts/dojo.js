@@ -1,11 +1,11 @@
 'use strict';
 
 var $ = global.jQuery = require('jquery');
-require("bootstrap");
+require('bootstrap');
 
-$(function(){
-    $('.nav a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-    });
+$(function () {
+  $('.nav a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
 });
