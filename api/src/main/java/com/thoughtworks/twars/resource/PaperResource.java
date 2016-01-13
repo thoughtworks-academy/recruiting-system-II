@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Paper;
+import com.thoughtworks.twars.bean.Section;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
@@ -33,6 +34,10 @@ public class PaperResource {
         List<Paper> papers = paperMapper.findAll();
         List<Map> result = new ArrayList<>();
 
+        if (papers == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
         for (int i = 0; i < papers.size(); i++) {
             Paper item = papers.get(i);
             Map<String, String> map = new HashMap<>();
@@ -47,6 +52,10 @@ public class PaperResource {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(@PathParam("param") int id) {
+
+        if (sectionMapper.getSectionsByPaperId(id) == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
         List<Map> sectionList = sectionMapper.getSectionsByPaperId(id)
                 .stream()

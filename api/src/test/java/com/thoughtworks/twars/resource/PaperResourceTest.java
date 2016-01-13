@@ -44,6 +44,16 @@ public class PaperResourceTest extends TestBase {
     }
 
     @Test
+    public void should_return_404_when_response_all_papers() throws Exception {
+
+        when(paperMapper.findAll()).thenReturn(null);
+
+        Response response = target(basePath).request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+
+    @Test
     public void should_return_detail_when_request_a_specified_paper() throws Exception {
         Section blankSection = mock(Section.class);
 
@@ -66,8 +76,17 @@ public class PaperResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
 
-        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":23,\"quizzes\":[{\"definition\":{\"uri\":\"blankQuizzes/4\"},\"id\":4,\"items\":{\"uri\":\"blankQuizzes/4/items\"}},{\"definition\":{\"uri\":\"blankQuizzes/0\"},\"id\":0,\"items\":{\"uri\":\"blankQuizzes/0/items\"}}],\"desc\":\"逻辑题\"}]}"));
 
+        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":23,\"quizzes\":[{\"definition\":{\"uri\":\"blankQuizzes/4\"},\"id\":4,\"items\":{\"uri\":\"blankQuizzes/4/items\"}},{\"definition\":{\"uri\":\"blankQuizzes/0\"},\"id\":0,\"items\":{\"uri\":\"blankQuizzes/0/items\"}}],\"desc\":\"逻辑题\"}]}"));
+    }
+
+    @Test
+    public void should_return_404_when_request_one_paper() throws Exception {
+
+        when(sectionMapper.getSectionsByPaperId(9)).thenReturn(null);
+
+        Response response = target(basePath+"/9").request().get();
+        assertThat(response.getStatus(), is(404));
     }
 
     @Test
