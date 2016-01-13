@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.resource;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
@@ -31,6 +32,10 @@ public class QuizItemResource extends Resource {
         List<QuizItem> quizItems = quizItemMapper.getAllQuizItems();
         List<Map> result = new ArrayList<>();
 
+        if (quizItems == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
         for (int i = 0; i < quizItems.size(); i++) {
             QuizItem item = quizItems.get(i);
             Map<String, String> map = new HashMap<>();
@@ -44,14 +49,14 @@ public class QuizItemResource extends Resource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Map insertQuizItem(QuizItem quizItem) {
+    public Response insertQuizItem(QuizItem quizItem) {
 
         quizItemMapper.insertQuizItem(quizItem);
 
         Map map = new HashMap();
         map.put("uri", "quizItems/" + quizItem.getId());
 
-        return map;
+        return Response.status(Response.Status.CREATED).entity(map).build();
     }
 
 
@@ -61,13 +66,17 @@ public class QuizItemResource extends Resource {
     public Response getQuizItem(@PathParam("param") int id) {
 
         QuizItem quizItem = quizItemMapper.getQuizItemById(id);
+
+        if (quizItem == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
         Map map = new HashMap();
         map.put("id", quizItem.getId());
         map.put("description", quizItem.getDescriptionZh());
         map.put("chartPath", quizItem.getChartPath());
         map.put("question", quizItem.getQuestionZh());
         map.put("initializedBox", quizItem.getInitializedBox());
-
 
         session.close();
 

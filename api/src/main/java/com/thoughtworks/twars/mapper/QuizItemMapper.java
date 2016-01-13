@@ -6,17 +6,17 @@ import java.util.List;
 
 public interface QuizItemMapper {
 
-    public List<QuizItem> getAllQuizItems();
+    List<QuizItem> getAllQuizItems();
 
-    public int insertQuizItem(QuizItem quizItem);
+    int insertQuizItem(QuizItem quizItem);
 
-    public QuizItem getQuizItemById(int id);
+    QuizItem getQuizItemById(int id);
 
-    public List<QuizItem> getEasyItems(int easyCount);
+    List<QuizItem> getEasyItems(int easyCount);
 
-    public List<QuizItem> getNormalItems(int normalCount);
+    List<QuizItem> getNormalItems(int normalCount);
 
-    public List<QuizItem> getHardItems(int hardItems);
+    List<QuizItem> getHardItems(int hardItems);
 
-    public List<QuizItem> getExampleItems();
+    List<QuizItem> getExampleItems();
 }
