@@ -83,6 +83,7 @@ var ChangePassword = React.createClass({
     if (this.checkInfo()) {
       return;
     } else if (passwordData.password !== passwordData.confirmPassword) {
+      this.setState({confirmPasswordError: '两次密码不匹配'});
       return;
     }
 
@@ -107,7 +108,7 @@ var ChangePassword = React.createClass({
                 <label htmlFor="oldPassword" className="col-sm-4 col-md-4 control-label">旧密码</label>
                 <div className={"form-group has-" + (this.state.oldPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
-                    <input type="text" className="form-control" aria-describedby="helpBlock2"
+                    <input type="password" className="form-control" aria-describedby="helpBlock2"
                            name="oldPassword" id="oldPassword" onChange={this.handleChange}
                            placeholder="请输入旧密码" onBlur={this.validate} value={this.state.oldPassword}/>
                   </div>
