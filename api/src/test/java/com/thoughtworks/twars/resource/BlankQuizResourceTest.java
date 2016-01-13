@@ -61,11 +61,12 @@ public class BlankQuizResourceTest extends TestBase {
         blankQuiz.setType("quizItem");
 
         Response response = target(basePath).request().post(Entity.entity(blankQuiz, MediaType.APPLICATION_JSON_TYPE));
-        assertThat(response.getStatus(),is(200));
+        assertThat(response.getStatus(),is(201));
 
         Map map = response.readEntity(Map.class);
         assertThat(map.get("uri"),is("blankQuizzes/5"));
     }
+    
 
     @Test
     public void shoud_return_blank_quizzes_by_section_id() {
@@ -88,6 +89,14 @@ public class BlankQuizResourceTest extends TestBase {
         assertThat(blankQuizzes.get(0).get("hardCount"), is(3));
         assertThat(blankQuizzes.get(0).get("normalCount"), is(4));
         assertThat(blankQuizzes.get(0).get("easyCount"), is(3));
+    }
+
+    @Test
+    public void should_return_404_when_get_blank_quiz_by_section_id() {
+        when(blankQuizMapper.findBySectionId(9)).thenReturn(null);
+
+        Response response = target(basePath + "9").request().get();
+        assertThat(response.getStatus(), is(404));
     }
 
     @Test
@@ -167,5 +176,45 @@ public class BlankQuizResourceTest extends TestBase {
         assertThat(quizItems.get(0).get("initializedBox"), is("InitializedBox 88"));
         assertThat(quizItems.get(0).get("answer"),is("3"));
 
+    }
+
+    @Test
+    public void should_return_error_info_when_find_one() {
+        when(blankQuizMapper.findOne(9)).thenReturn(null);
+
+        Response response = target(basePath + "/9/items").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_return_error_info_when_get_easy_items() {
+        when(quizItemMapper.getEasyItems(89)).thenReturn(null);
+
+        Response response = target(basePath + "/89/items").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_return_error_info_when_get_normal_items() {
+        when(quizItemMapper.getNormalItems(90)).thenReturn(null);
+
+        Response response = target(basePath + "/90/items").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_return_error_info_when_get_hard_items() {
+        when(quizItemMapper.getHardItems(20)).thenReturn(null);
+
+        Response response = target(basePath + "/20/items").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_return_error_info_when_get_example_items() {
+        when(quizItemMapper.getExampleItems()).thenReturn(null);
+
+        Response response = target(basePath + "/2/items").request().get();
+        assertThat(response.getStatus(), is(404));
     }
 }
