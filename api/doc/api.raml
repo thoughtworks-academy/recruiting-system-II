@@ -62,40 +62,48 @@ baseUri: http://api.bronzesword.com/
                 mobilePhone: string
                 name: string
 
-  /{id}/detail:
-    get:
-      description: 获取用户信息
-      body:
-        application/json:
-          properties:
-            userId: integer
-            name: string
-            school: string
-            major: string
-            degree: string
-            gender: string
-    put:
-      description: 提交用户的详细信息
-      body:
-        application/json:
-          properties:
-            userId: integer
-            school: string
-            mobilePhone: string
-            email: string
-            major: string
-            class: string
-            birthday: integer
-      responses:
-        200:
-          body:
-            application/json:
-              properties:
-                userInfo:
-                  properties:
-                    uri: string
+    /detail:
+      get:
+        description: 获取用户信息
+        body:
+          application/json:
+            properties:
+              userId: integer
+              name: string
+              school: string
+              major: string
+              degree: string
+              gender: string
+      put:
+        description: 提交用户的详细信息
+        body:
+          application/json:
+            properties:
+              userId: integer
+              school: string
+              mobilePhone: string
+              email: string
+              major: string
+              class: string
+              birthday: integer
+        responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  userInfo:
+                    properties:
+                      uri: string
 
-
+    /password:
+      put:
+        description: 修改用户密码
+        body:
+          application/json:
+            properties:
+              oldPassword: string
+              password: string
+                
 /scoresheets:
   get:
     description: 得到所有的成绩单
