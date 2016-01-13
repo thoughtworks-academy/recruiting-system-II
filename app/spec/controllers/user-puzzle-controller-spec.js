@@ -1,3 +1,5 @@
+"use strict";
+
 var UserPuzzleController = require('../../controllers/user-puzzle');
 var userPuzzle = require('../../models/user-puzzle');
 
@@ -21,7 +23,7 @@ describe("UserPuzzleController", function() {
             fn({data: 123});
           }, 1000);
         }
-      }
+      };
     });
 
     controller.getUserPuzzle({
@@ -39,5 +41,5 @@ describe("UserPuzzleController", function() {
     });
 
 
-  })
+  });
 });
