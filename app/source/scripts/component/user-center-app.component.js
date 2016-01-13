@@ -8,25 +8,20 @@ var UserCenterSidebar = require('./user-center-sidebar.component');
 var UserCenterApp = React.createClass({
   getInitialState:function() {
     return {
-      isChangePassword: false
+      currentState: 'userDetail'
     };
   },
 
-  infoStateChange:function() {
-    this.setState({isChangePassword: false});
-  },
-
-  passwordStateChange:function() {
-    this.setState({isChangePassword: true});
+  changeState:function(state) {
+    this.setState({currentState: state});
   },
 
   render() {
     return (
         <div className="row">
-          <UserCenterSidebar isChangePassword={this.state.isChangePassword}
-                             onPasswordStateChange={this.passwordStateChange} onInfoStateChange={this.infoStateChange}/>
-          <UserInfo isChangePassword={this.state.isChangePassword}/>
-          <ChangePassword isChangePassword={this.state.isChangePassword}/>
+          <UserCenterSidebar currentState={this.state.currentState} onChangeState={this.changeState}/>
+          <UserInfo currentState={this.state.currentState}/>
+          <ChangePassword currentState={this.state.currentState}/>
         </div>
     );
   }
