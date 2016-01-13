@@ -5,13 +5,13 @@ var ReactDom = require('react-dom');
 var validate = require('validate.js');
 var constraint = require('../../../mixin/password-constraint');
 var getError = require('../../../mixin/get-error');
-var UserDetailActions = require('../actions/user-detail-actions');
-var UserDetailStore = require('../store/user-detail-store');
+var ChangePasswordActions = require('../actions/change-password-actions');
+var ChangePasswordStore = require('../store/change-password-store');
 var Reflux = require('reflux');
 
 
 var ChangePassword = React.createClass({
-  mixins: [Reflux.connect(UserDetailStore)],
+  mixins: [Reflux.connect(ChangePasswordStore)],
 
   getInitialState: function () {
     return {
@@ -83,7 +83,7 @@ var ChangePassword = React.createClass({
       return;
     }
 
-    UserDetailActions.changePassword(passwordData);
+    ChangePasswordActions.changePassword(passwordData);
   },
 
   render: function () {
