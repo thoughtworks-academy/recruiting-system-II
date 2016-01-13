@@ -41,6 +41,14 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
+    public void should_return_404_when_get_user() {
+        when(userMapper.getUserById(90)).thenReturn(null);
+
+        Response response = target(basePath + "/90").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
     public void should_return_user_by_field() {
         when(userMapper.getUserByEmail(anyString())).thenReturn(user);
         when(user.getId()).thenReturn(10);
@@ -59,12 +67,44 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
+    public void should_return_404_when_get_user_detail() {
+        when(userMapper.getUserDetailById(90)).thenReturn(null);
+
+        Response response = target(basePath + "/7/detail").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
     public void should_return_404_when_not_found() throws Exception {
         when(userMapper.getUserByEmail(anyString())).thenReturn(null);
 
         Response response = target(basePath)
                 .queryParam("field", "email")
                 .queryParam("value", "abc@test.com")
+                .request().get();
+
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_404_when_get_user_by_email() {
+        when(userMapper.getUserByEmail(anyString())).thenReturn(null);
+
+        Response response = target(basePath)
+                .queryParam("field", "email")
+                .queryParam("value", "abc@test.com")
+                .request().get();
+
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_404_when_get_user_by_mobile_phone() {
+        when(userMapper.getUserByMobilePhone(anyString())).thenReturn(null);
+
+        Response response = target(basePath)
+                .queryParam("field", "mobilePhone")
+                .queryParam("value", "4585295152")
                 .request().get();
 
         assertThat(response.getStatus(), is(404));
