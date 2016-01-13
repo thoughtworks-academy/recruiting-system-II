@@ -13,10 +13,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class LoginResourceTest extends TestBase{
-
+    String basePath = "/login";
     @Test
     public void should_create_user_when_login() throws Exception {
-        String basePath = "/login";
+
         User loginUser = new User();
         loginUser.setEmail("test@163.com");
         loginUser.setPassword("25d55ad283aa400af464c76d713c07ad");
@@ -32,6 +32,17 @@ public class LoginResourceTest extends TestBase{
 
         assertThat(userId, is(1));
         assertThat(userInfoUri, is("user/1"));
+    }
+
+    @Test
+    public void should_return_404_when_not_find_user() throws Exception {
+        User loginUser = new User();
+        loginUser.setEmail("test7@163.com");
+        loginUser.setPassword("25d55ad283aa400af464c76d713c07ad");
+
+        Entity entity = Entity.entity(loginUser, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath).request().post(entity);
+        assertThat(response.getStatus(), is(404));
     }
 
 }
