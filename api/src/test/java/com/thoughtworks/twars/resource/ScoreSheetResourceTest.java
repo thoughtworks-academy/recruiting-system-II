@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import java.util.*;
 
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ScoreSheetResourceTest extends TestBase{
+public class ScoreSheetResourceTest extends TestBase {
 
     Gson gson = new GsonBuilder().create();
 
@@ -26,49 +27,57 @@ public class ScoreSheetResourceTest extends TestBase{
 
 
     @Test
-    public void should_return_all_score_sheets(){
-        when(scoreSheetMapper.findAll()).thenReturn(Arrays.asList(firstScoreSheet,secondScoreSheet));
+    public void should_return_all_score_sheets() {
+        when(scoreSheetMapper.findAll()).thenReturn(Arrays.asList(firstScoreSheet, secondScoreSheet));
         when(firstScoreSheet.getId()).thenReturn(3);
 
         Response response = target(basePath).request().get();
-        assertThat(response.getStatus(),is(200));
+        assertThat(response.getStatus(), is(200));
 
         List<Map> result = response.readEntity(List.class);
-        assertThat(result.get(0).get("uri"),is("scoresheets/3"));
+        assertThat(result.get(0).get("uri"), is("scoresheets/3"));
+    }
+
+    @Test
+    public void should_return_404_when_not_find_score_sheets() {
+        when(scoreSheetMapper.findAll()).thenReturn(null);
+
+        Response response = target(basePath).request().get();
+        assertThat(response.getStatus(), is(404));
     }
 
 
     @Test
-    public void should_insert_score_sheet_uri(){
+    public void should_insert_score_sheet_uri() {
 
         Map itemPost = new HashMap<>();
-        itemPost.put("answer","10");
-        itemPost.put("quizItemId",3);
+        itemPost.put("answer", "10");
+        itemPost.put("quizItemId", 3);
 
         List<Map> itemPosts = new ArrayList<>();
         itemPosts.add(itemPost);
 
 
         Map blankQuizSubmit = new HashMap<>();
-        blankQuizSubmit.put("blankQuizId",1);
-        blankQuizSubmit.put("itemPosts",itemPosts);
+        blankQuizSubmit.put("blankQuizId", 1);
+        blankQuizSubmit.put("itemPosts", itemPosts);
 
         List<Map> blankQuizSubmits = new ArrayList<>();
         blankQuizSubmits.add(blankQuizSubmit);
 
         Map scoreSheet = new HashMap<>();
-        scoreSheet.put("examerId",1);
-        scoreSheet.put("paperId",1);
-        scoreSheet.put("blankQuizSubmits",blankQuizSubmits);
+        scoreSheet.put("examerId", 1);
+        scoreSheet.put("paperId", 1);
+        scoreSheet.put("blankQuizSubmits", blankQuizSubmits);
 
         Entity<Map> entity = Entity.entity(scoreSheet, MediaType.APPLICATION_JSON_TYPE);
 
         Response response = target(basePath).request().post(entity);
-        assertThat(response.getStatus(),is(201));
+        assertThat(response.getStatus(), is(201));
     }
 
     @Test
-    public void shoule_return_one_score_sheet_by_id(){
+    public void shoule_return_one_score_sheet_by_id() {
         when(scoreSheetMapper.findOne(1)).thenReturn(firstScoreSheet);
         when(firstScoreSheet.getId()).thenReturn(1);
         when(firstScoreSheet.getExamerId()).thenReturn(2);
@@ -77,7 +86,7 @@ public class ScoreSheetResourceTest extends TestBase{
         when(firstScoreSheet.getPaperId()).thenReturn(5);
         when(firstScoreSheet.getUserAnswer()).thenReturn("12345");
 
-        Response response = target(basePath+"/1").request().get();
+        Response response = target(basePath + "/1").request().get();
         assertThat(response.getStatus(), is(200));
 
         Map map = response.readEntity(Map.class);
@@ -85,5 +94,13 @@ public class ScoreSheetResourceTest extends TestBase{
         assertThat(map.get("examer"), is(2));
         assertThat(map.get("paper"), is(5));
         assertThat(str, is("[{\"blankQuiz\":\"blankQuizzes/3\",\"itemPosts\":[{\"answer\":\"12345\",\"quizItem\":\"quizItems/4\"}]}]"));
+    }
+
+    @Test
+    public void should_return_404_when_not_find_score_sheet_by_id() {
+        when(scoreSheetMapper.findOne(1)).thenReturn(null);
+
+        Response response = target(basePath + "/1").request().get();
+        assertThat(response.getStatus(), is(404));
     }
 }

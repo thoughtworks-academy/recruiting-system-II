@@ -26,6 +26,10 @@ public class ScoreSheetResource extends Resource {
         List<ScoreSheet> scoreSheets = scoreSheetMapper.findAll();
         List<Map<String, String>> result = new ArrayList<Map<String, String>>();
 
+        if (scoreSheets == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
         for (int i = 0; i < scoreSheets.size(); i++) {
             ScoreSheet scoreSheet = scoreSheets.get(i);
             Map<String, String> map = new HashMap<>();
@@ -48,12 +52,13 @@ public class ScoreSheetResource extends Resource {
         int quizItemId;
         int paperId = (int) data.get("paperId");
         String answer;
+
         List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
         for (int j = 0; j < blankQuizSubmits.size(); j++) {
             blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
             List<Map> itemPosts = (List) blankQuizSubmits.get(j)
                     .get("itemPosts");
-            for (int i=0; i<itemPosts.size(); i++) {
+            for (int i = 0; i < itemPosts.size(); i++) {
                 Map itemPost = itemPosts.get(i);
                 answer = (String) itemPost.get("answer");
                 quizItemId = (Integer) itemPost.get("quizItemId");
@@ -78,8 +83,12 @@ public class ScoreSheetResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findOne(
             @PathParam("id") int id
-    ){
+    ) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
+
+        if (scoreSheet == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
         List<Map> itemPosts = new ArrayList<>();
         List<Map> blankQuizSubmits = new ArrayList<>();
@@ -88,11 +97,11 @@ public class ScoreSheetResource extends Resource {
         Map blankQuizItem = new HashMap<>();
 
         itemPost.put("answer", scoreSheet.getUserAnswer());
-        itemPost.put("quizItem", "quizItems/"+scoreSheet.getQuizItemId());
+        itemPost.put("quizItem", "quizItems/" + scoreSheet.getQuizItemId());
         itemPosts.add(itemPost);
 
         blankQuizItem.put("blankQuiz",
-                "blankQuizzes/"+scoreSheet.getBlankQuizId());
+                "blankQuizzes/" + scoreSheet.getBlankQuizId());
         blankQuizItem.put("itemPosts", itemPosts);
         blankQuizSubmits.add(blankQuizItem);
 
