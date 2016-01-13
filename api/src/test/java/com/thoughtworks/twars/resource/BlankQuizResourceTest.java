@@ -39,6 +39,14 @@ public class BlankQuizResourceTest extends TestBase {
         assertThat((String) result.get(1).get("uri"), is("blankQuizzes/4"));
     }
 
+    @Test
+    public void should_return_not_fount_when_request_all_blank_quizzes() {
+        when(blankQuizMapper.findAll()).thenReturn(null);
+
+        Response response = target(basePath).request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
 
     @Test
     public void should_return_blankQuiz_uri(){
