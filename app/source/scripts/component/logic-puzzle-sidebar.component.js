@@ -100,10 +100,10 @@ var LogicPuzzleSidebar = React.createClass({
           <hr/>
           <div className="confirm">
             <a href="#" className="btn btn-lg btn-danger btn-block" data-toggle="modal"
-               data-target={able ? "#submitModal": ""} disabled={able ? '' : 'disabled'}>交卷</a>
+               data-target={able ? '#submitModal': ''} disabled={able ? '' : 'disabled'}>交卷</a>
           </div>
           <div className="hint">
-            <span>{able ? "检查完毕后可以交卷": "只有在查看完所有题后才可以交卷"}</span>
+            <span>{able ? '检查完毕后可以交卷': '只有在查看完所有题后才可以交卷'}</span>
           </div>
 
           <div className="modal fade bs-example-modal-sm" id="submitModal" tabIndex="-1" role="dialog">

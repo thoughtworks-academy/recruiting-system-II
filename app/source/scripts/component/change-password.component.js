@@ -109,7 +109,7 @@ var ChangePassword = React.createClass({
     var classString = (this.props.currentState === 'password' ? '' : ' hide');
 
     return (
-        <div className={"col-md-9 col-sm-9 col-xs-12" + classString}>
+        <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className="content">
             <form className="form-horizontal form-top-height">
               <div className={this.state.success ? '' : 'hide'}>
@@ -121,13 +121,13 @@ var ChangePassword = React.createClass({
 
               <div id="change-password">
                 <label htmlFor="oldPassword" className="col-sm-4 col-md-4 control-label">旧密码</label>
-                <div className={"form-group has-" + (this.state.oldPasswordError === '' ? '' : 'error')}>
+                <div className={'form-group has-' + (this.state.oldPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
                     <input type="password" className="form-control" aria-describedby="helpBlock2"
                            name="oldPassword" id="oldPassword" onChange={this.handleChange}
                            placeholder="请输入旧密码" onBlur={this.validate} value={this.state.oldPassword}/>
                   </div>
-                  <div className={"error alert alert-danger" + (this.state.oldPasswordError === '' ? ' hide' : '')}
+                  <div className={'error alert alert-danger' + (this.state.oldPasswordError === '' ? ' hide' : '')}
                        role="alert">
                     <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     {this.state.oldPasswordError}
@@ -135,14 +135,14 @@ var ChangePassword = React.createClass({
                 </div>
 
                 <label htmlFor="newPassword" className="col-sm-4 col-md-4 control-label">新密码</label>
-                <div className={"form-group has-" + (this.state.newPasswordError === '' ? '' : 'error')}>
+                <div className={'form-group has-' + (this.state.newPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
                     <input type="password" className="form-control" aria-describedby="helpBlock2"
                            name="newPassword" id="newPassword"
                            placeholder="请输入新密码" onBlur={this.validate}
                            onChange={this.handleChange} value={this.state.newPassword}/>
                   </div>
-                  <div className={"error alert alert-danger" + (this.state.newPasswordError === '' ? ' hide' : '')}
+                  <div className={'error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
                        role="alert">
                     <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     {this.state.newPasswordError}
@@ -150,14 +150,14 @@ var ChangePassword = React.createClass({
                 </div>
 
                 <label htmlFor="confirmPassword" className="col-sm-4 col-md-4 control-label">确认密码</label>
-                <div className={"form-group has-" + (this.state.confirmPasswordError === '' ? '' : 'error')}>
+                <div className={'form-group has-' + (this.state.confirmPasswordError === '' ? '' : 'error')}>
                   <div className="col-sm-4 col-md-4">
                     <input type="password" className="form-control" aria-describedby="helpBlock2"
                            name="confirmPassword" id="confirmPassword"
                            placeholder="请再次确认新密码" onBlur={this.validate}
                            onChange={this.handleChange} value={this.state.confirmPassword}/>
                   </div>
-                  <div className={"error alert alert-danger" + (this.state.confirmPasswordError === '' ? ' hide' : '')}
+                  <div className={'error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
                        role="alert">
                     <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     {this.state.confirmPasswordError}

@@ -1,3 +1,5 @@
+'use strict';
+
 var constraint = {
   school: {
     presence: {message: '^学校不能为空'},

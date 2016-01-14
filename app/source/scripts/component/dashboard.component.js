@@ -68,27 +68,27 @@ var Dashboard = React.createClass({
     var dojoDisable = (this.state.dojoEnabled === true ? 'enable' : 'disable');
 
     var userCenterInfo = {
-      title: "个人中心",
-      href: "user-center.html",
-      isEnabled: "enable",
-      name: "userCenter",
-      glyphicon: "glyphicon-user"
+      title: '个人中心',
+      href: 'user-center.html',
+      isEnabled: 'enable',
+      name: 'userCenter',
+      glyphicon: 'glyphicon-user'
     };
 
     var logicPuzzleInfo = {
-      title: "逻辑题",
+      title: '逻辑题',
       href: PuzzleHref,
       isEnabled: puzzleDisable,
-      name: "logic",
-      glyphicon: "glyphicon-education"
+      name: 'logic',
+      glyphicon: 'glyphicon-education'
     };
 
     var dojoPuzzleInfo = {
-      title: "编程题",
+      title: '编程题',
       href: dojoHref,
       isEnabled: dojoDisable,
-      name: "dojo",
-      glyphicon: "glyphicon-road"
+      name: 'dojo',
+      glyphicon: 'glyphicon-road'
     };
 
     iconInfos.push(userCenterInfo, logicPuzzleInfo, dojoPuzzleInfo);

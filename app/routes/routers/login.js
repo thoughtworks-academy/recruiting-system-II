@@ -43,7 +43,7 @@ router.get('/', function (req, res) {
 
     request
         .post(apiServer + 'login')
-        .set('Content-Type', "application/json")
+        .set('Content-Type', 'application/json')
         .send({
           email: account,
           password: password
