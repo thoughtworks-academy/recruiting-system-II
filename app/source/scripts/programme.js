@@ -1,6 +1,8 @@
 'use strict';
 
 var $ = global.jQuery = require('jquery');
+require('../less/programme.less');
+
 require('bootstrap');
 
 $(function () {
