@@ -1,9 +1,13 @@
+/* jshint browser: true */
+
 'use strict';
 
 var $ = global.jQuery = require('jquery');
-require('../less/programme.less');
-
 require('bootstrap');
+
+require('../less/programme.less');
+var ReactDom = require('react-dom');
+var Navigation = require('./component/navigation.component');
 
 $(function () {
   $('.nav a').click(function (e) {
@@ -11,3 +15,8 @@ $(function () {
     $(this).tab('show');
   });
 });
+
+ReactDom.render(
+    <Navigation />,
+    document.getElementById('navigation')
+);
