@@ -29,11 +29,11 @@ var ProgrammeSidebar = React.createClass({
 
   render() {
     var tags = [
-      {mark: 'one', value: '第一题', state: 3},
-      {mark: 'two', value: '第二题', state: 4},
-      {mark: 'three', value: '第三题', state: 2},
-      {mark: 'four', value: '第四题', state: 1},
-      {mark: 'five', value: '第五题', state: 0}
+      {mark: 1, value: '第一题', state: 3},
+      {mark: 2, value: '第二题', state: 4},
+      {mark: 3, value: '第三题', state: 2},
+      {mark: 4, value: '第四题', state: 1},
+      {mark: 5, value: '第五题', state: 0}
     ];
 
     var itemHtml = tags.map((item, index) => {

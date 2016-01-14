@@ -7,7 +7,7 @@ var Programme = require('./programme.component');
 var ProgrammeApp = React.createClass({
   getInitialState: function () {
     return {
-      currentTopicNumber: 'one'
+      currentTopicNumber: 1
     };
   },
 
