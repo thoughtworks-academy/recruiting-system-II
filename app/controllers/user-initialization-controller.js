@@ -5,7 +5,8 @@ var logicPuzzle = require('../models/logic-puzzle');
 var constant = require('../mixin/constant');
 var async = require('async');
 
-function UserInitializationController() {}
+function UserInitializationController() {
+}
 
 UserInitializationController.prototype.initialLogicPuzzle = function (req, res) {
   var userId = req.session.user.id;
@@ -24,7 +25,9 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
         }
       });
     }, function (data, done) {
+
       apiRequest.get(logicPuzzleUrl, done);
+
     }, function (responds, done) {
 
       var quizzes = responds.body.sections[0].quizzes[0];
@@ -33,10 +36,13 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
       var itemsUri = quizzes.items.uri;
 
       done(null, itemsUri);
+
     }, function (itemsUri, done) {
+
       apiRequest.get(itemsUri, done);
+
     }, function (responds, done) {
-      console.log(responds.body);
+
       quizItems = responds.body.quizItems;
       quizExamples = responds.body.exampleItems;
 
@@ -51,7 +57,7 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
         quizExamples: quizExamples,
         blankQuizId: blankQuizId,
         paperId: paperId
-      },done);
+      }, done);
 
     }
   ], function (err) {
