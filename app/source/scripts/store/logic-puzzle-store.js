@@ -7,7 +7,7 @@ var agent = require('superagent-promise')(superAgent, Promise);
 var page = require('page');
 var _currentIndex = 0;
 var _answer;
-var OK = 200;
+var httpCode = require('../../../mixin/constant');
 
 
 var LogicPuzzleStore = Reflux.createStore({
@@ -66,7 +66,7 @@ var LogicPuzzleStore = Reflux.createStore({
           superAgent.post('/logic-puzzle')
               .set('Content_Type', 'application/json')
               .end(function (err, res) {
-                if(res.body.status === OK){
+                if(res.body.status === httpCode.OK){
                   page('dashboard.html');
                 }
               });
