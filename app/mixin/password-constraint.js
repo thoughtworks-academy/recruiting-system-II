@@ -23,7 +23,7 @@ var constraint = {
     presence: {message: '^请确认新密码'},
     equality: {
       attribute: 'password',
-      message: '两次密码不匹配'
+      message: '^两次密码不匹配'
     }
   }
 };
