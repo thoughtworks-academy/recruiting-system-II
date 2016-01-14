@@ -75,7 +75,7 @@ describe('UserInitializationController', function () {
 
   });
 
-  it("should throw Error when it's error", function (done) {
+  it('should throw Error when it is error', function (done) {
     spyOn(logicPuzzle,'findOne').and.callFake(function(id,done){
       var err = new Error('ops!');
       done(err,false);
