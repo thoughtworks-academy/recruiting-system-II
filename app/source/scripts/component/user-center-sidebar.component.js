@@ -24,7 +24,7 @@ var UserCenterSide = React.createClass({
               <Nav bsStyle="pills" stacked activeKey={this.props.currentState}>
                 {tags.map((item, index) => {
                   return (
-                      <NavItem eventKey={item.mark} href="#" onClick={this.changeState} key={index}>{item.value}
+                      <NavItem eventKey={item.mark} href="javascript:void(0)" onClick={this.changeState} key={index}>{item.value}
                         <i className={item.icon}></i></NavItem>
                   );
                 })}
