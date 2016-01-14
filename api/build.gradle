@@ -21,7 +21,14 @@ test{
 
 jacoco {
     toolVersion = "0.7.4.201502262128"
-//    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
 }
 
 
