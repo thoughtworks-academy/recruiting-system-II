@@ -1,6 +1,5 @@
 package com.thoughtworks.twars.resource;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
