@@ -3,16 +3,17 @@
 var express = require('express');
 var router = express.Router();
 
-var userPuzzle = require('../../models/user-puzzle');
+var logicPuzzle = require('../../models/logic-puzzle');
 
-var UserPuzzleController = require('../../controllers/user-puzzle');
-var userPuzzleController = new UserPuzzleController();
+var LogicPuzzleController = require('../../controllers/logic-puzzle-controller');
+var logicPuzzleController = new LogicPuzzleController();
 
-router.get('/', userPuzzleController.getUserPuzzle);
+router.get('/', logicPuzzleController.getLogicPuzzle);
 
 router.post('/', function (req, res) {
-  userPuzzle.submitPaper(req, res);
+  logicPuzzle.submitPaper(req, res);
 });
 
+router.post('/save', logicPuzzleController.saveAnswer);
 
 module.exports = router;

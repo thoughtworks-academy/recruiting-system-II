@@ -15,7 +15,7 @@ baseUri: http://api.bronzesword.com/
               email:string
               password:string
 
-/userPuzzle/save:
+/logicPuzzle/save:
   post:
     body:
       application/json:
@@ -27,15 +27,6 @@ baseUri: http://api.bronzesword.com/
     responses:
       200:
         body:
-
-/userPuzzle/createUser:
-  get:
-    description: 创建一条用户记录
-    responses:
-        200:
-          body:
-            application/json:
-              properties:
 
 /logic-puzzle:
   get:

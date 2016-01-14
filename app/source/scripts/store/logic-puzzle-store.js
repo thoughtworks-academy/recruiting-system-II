@@ -47,7 +47,7 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onSaveUserAnswer: function () {
-    return agent.post('/user-puzzle/save')
+    return agent.post('/logic-puzzle/save')
         .set('Content-Type', 'application/json')
         .send({userAnswer: _answer, orderId: _currentIndex})
         .end();

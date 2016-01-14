@@ -1,7 +1,7 @@
 'use strict';
 
 var getJumpControl = require('../mixin/get-jump-control');
-var userPuzzle = require('../models/user-puzzle');
+var logicPuzzle = require('../models/logic-puzzle');
 var superagent = require('superagent');
 var apiServer = require('../configuration').apiServer;
 var async = require('async');
@@ -50,7 +50,7 @@ module.exports = function (req, res, next) {
       if (!userId) {
         done(null, false);
       }else{
-        userPuzzle.isPaperCommited(userId, (data) => {
+        logicPuzzle.isPaperCommited(userId, (data) => {
           done(null, data);
         });
       }

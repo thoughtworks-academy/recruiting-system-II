@@ -3,11 +3,11 @@
 var express = require('express');
 var router = express.Router();
 
-var userPuzzle = require('../../models/user-puzzle');
+var logicPuzzle = require('../../models/logic-puzzle');
 
 router.get('/', function (req, res) {
   let userId = req.session.user.id;
-  userPuzzle.isPaperCommited(userId, (data) => {
+  logicPuzzle.isPaperCommited(userId, (data) => {
     res.send({
       isPaperCommited: data
     });

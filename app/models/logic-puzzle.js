@@ -11,7 +11,7 @@ var _timeBase = 90;
 
 var Schema = mongoose.Schema;
 
-var userPuzzleSchema = new Schema({
+var logicPuzzleSchema = new Schema({
   userId: Number,
   startTime: Number,
   quizItems: [{
@@ -36,27 +36,28 @@ var userPuzzleSchema = new Schema({
   endTime: String
 });
 
-userPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
+logicPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
   var isPaperCommited;
 
-  this.findOne({userId: userId}, (err, userPuzzle) => {
-    if (err || !userPuzzle) {
+  this.findOne({userId: userId}, (err, logicPuzzle) => {
+    if (err || !logicPuzzle) {
       isPaperCommited = false;
     } else {
       var TOTAL_TIME = _timeBase * time.MINUTE;
 
-      var startTime = userPuzzle.startTime || Date.parse(new Date()) / time.SECONDS;
+      var startTime = logicPuzzle.startTime || Date.parse(new Date()) / time.SECONDS;
       var now = Date.parse(new Date()) / time.SECONDS;
+
       var usedTime = now - startTime;
 
-      isPaperCommited = userPuzzle.isCommited || parseInt(TOTAL_TIME - usedTime) <= 0 ? true : false;
+      isPaperCommited = logicPuzzle.isCommited || parseInt(TOTAL_TIME - usedTime) <= 0 ? true : false;
     }
 
     callback(isPaperCommited);
   });
 };
 
-userPuzzleSchema.statics.getUserPuzzle = function (orderId, userId) {
+logicPuzzleSchema.statics.getLogicPuzzle = function (orderId, userId) {
   var userAnswer;
   var itemsCount;
 
@@ -74,7 +75,7 @@ userPuzzleSchema.statics.getUserPuzzle = function (orderId, userId) {
       })
       .then(function (quizAll) {
         userAnswer = quizAll[orderId].userAnswer || quizAll[orderId].answer || null;
-        var userPuzzle = {
+        return {
           item: {
             id: quizAll[orderId].id,
             initializedBox: JSON.parse(quizAll[orderId].initializedBox),
@@ -86,11 +87,10 @@ userPuzzleSchema.statics.getUserPuzzle = function (orderId, userId) {
           itemsCount: itemsCount,
           isExample: quizAll[orderId].isExample
         };
-        return userPuzzle;
       });
 };
 
-userPuzzleSchema.statics.submitPaper = function (req, res) {
+logicPuzzleSchema.statics.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
   var endTime = Date.parse(new Date()) / time.SECONDS;
   this.findOne({userId: examerId})
@@ -128,7 +128,7 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
       });
 };
 
-userPuzzleSchema.statics.saveAnswer = function (orderId,userAnswer,userId) {
+logicPuzzleSchema.statics.saveAnswer = function (orderId,userAnswer,userId) {
   return this.findOne({userId: userId})
       .then(function (data) {
 
@@ -146,4 +146,4 @@ userPuzzleSchema.statics.saveAnswer = function (orderId,userAnswer,userId) {
       });
 };
 
-module.exports = mongoose.model('UserPuzzles', userPuzzleSchema);
+module.exports = mongoose.model('LogicPuzzle', logicPuzzleSchema);

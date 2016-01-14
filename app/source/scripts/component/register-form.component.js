@@ -51,8 +51,8 @@ function getError(validateInfo, field) {
   return '';
 }
 
-function initialUser() {
-  request.get('/user-puzzle/initialUser').
+function initialLogicPuzzle() {
+  request.get('/user-initialization/initialLogicPuzzle').
       set('Content-Type', 'application/json')
       .end(function (err) {
         if (err) {
@@ -166,7 +166,7 @@ var RegisterForm = React.createClass({
         var info = req.body;
 
         if (info.status === httpCode.OK) {
-          initialUser();
+          initialLogicPuzzle();
           page('user-center.html');
 
         } else {
@@ -186,7 +186,7 @@ var RegisterForm = React.createClass({
             var info = req.body;
 
             if (info.status === httpCode.OK) {
-              initialUser();
+              initialLogicPuzzle();
               page('user-center.html');
 
             } else {
