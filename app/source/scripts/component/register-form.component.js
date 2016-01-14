@@ -176,30 +176,8 @@ var RegisterForm = React.createClass({
             mobilePhoneError: mobilePhoneExist,
             emailError: emailExist
           });
-
-          request.post('/register').set('Content-Type', 'application/json').send({
-            mobilePhone: mobilePhone.value,
-            email: email.value,
-            password: password.value
-
-          }).end((err, req) => {
-            var info = req.body;
-
-            if (info.status === httpCode.OK) {
-              initialLogicPuzzle();
-              page('user-center.html');
-
-            } else {
-              var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
-              var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
-              this.setState({
-                mobilePhoneError: mobilePhoneExist,
-                emailError: emailExist
-              });
-              this.setState({
-                disabled: false
-              });
-            }
+          this.setState({
+            disabled: false
           });
         }
       });
