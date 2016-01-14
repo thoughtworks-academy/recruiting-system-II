@@ -28,14 +28,12 @@ var ProgrammeSidebar = React.createClass({
   },
 
   render() {
-    var tags = [
-      {mark: 1, value: '第一题', state: 3},
-      {mark: 2, value: '第二题', state: 4},
-      {mark: 3, value: '第三题', state: 2},
-      {mark: 4, value: '第四题', state: 1},
-      {mark: 5, value: '第五题', state: 0}
-    ];
+    var tags = [];
 
+    for(var i = 0; i < 10; i ++ ) {
+      var index = i + 1;
+      tags.push({mark:index, value: '第' + index + '题', state: 2});
+    }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
                                         + (item.state === 0 ? ' disabled' : '');
@@ -57,7 +55,7 @@ var ProgrammeSidebar = React.createClass({
             <div className="list-group-item active">
               <div className="row">
                 <div className="col-xs-9 h4 text-center">编程题</div>
-                <div className="col-xs-3"><i className={'programme-nav-icon h4 fa fa-pencil-square-o'}/></div>
+                <div className="col-xs-3"><i className='programme-nav-icon h4 fa fa-pencil-square-o'></i></div>
               </div>
             </div>
             {itemHtml}
