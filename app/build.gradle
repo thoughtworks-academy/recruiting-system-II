@@ -24,9 +24,9 @@ task eslint(type:Exec) {
     args "-c", "./node_modules/.bin/eslint ."
 }
 
-task jsxhintReport(type:Exec) {
+task eslintReport(type:Exec) {
     executable "bash"
-    args "-c", "./node_modules/.bin/jsxhint --reporter=checkstyle . > reports/jshint-report.xml"
+    args "-c", "./node_modules/.bin/eslint -f checkstyle -o reports/eslint-report.xml ."
 }
 
 task mongoRefresh(type:Exec) {
