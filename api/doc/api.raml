@@ -103,7 +103,7 @@ baseUri: http://api.bronzesword.com/
             properties:
               oldPassword: string
               password: string
-                
+
 /scoresheets:
   get:
     description: 得到所有的成绩单
@@ -154,6 +154,7 @@ baseUri: http://api.bronzesword.com/
               homeworkSubmitPostHistory:
                 properties:
                   homeworkURL: string
+                  homeworkQuizItemId: integer
                   version: string
     responses:
       201:
@@ -314,6 +315,24 @@ baseUri: http://api.bronzesword.com/
                       "maker":{
                         "uri": "userInfo/2"
                       }
+                    },
+                    {
+                      "id": 2,
+                      "desc": "dojo"
+                      "quizzes" : [
+                      {
+                        "id": 1,
+                        "definition": {
+                          "uri": "homeworkQuizzes/2"
+                        },
+                        "items": {
+                          "uri": "homeworkQuizzes/3"
+                        }
+                      }
+                      ]
+                      "maker": {
+                        "uri": "userInfo/3"
+                      }
                     }
                   ]
                 }
@@ -447,12 +466,31 @@ baseUri: http://api.bronzesword.com/
 
 /homeworkQuizzes:
   get:
-    description: 获得所有的homework题目定义
+    # description: 获得所有的homework题目定义
+      responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  homeworkQuizzes[]:
+                    properties:
+                      uri: string
   post:
     description: 提交一份homework题目定义
+    body:
+      application/json:
+        properties:
+          id: integer
+          sectionId: integer
+    responses:
+      201:
+        body:
+          application/json:
+            properties:
+              uri: string
   /{homeworkQuizId}:
     get:
-      description: 获得一份homework题目定义的细节
+      description: 获得一份homework题目内容
       responses:
         200:
           body:
