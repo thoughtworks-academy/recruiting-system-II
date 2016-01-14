@@ -18,7 +18,7 @@ public final class DBRecovery {
         SqlSession session = DBUtil.getSession();
         Connection connection = session.getConnection();
 
-        PrintStream ps = new PrintStream("/tmp/aaa");
+        PrintStream ps = new PrintStream("/dev/null");
         PrintStream stdout = System.out;
         System.setOut(ps);
 
