@@ -8,7 +8,7 @@ var getError = require('../../../mixin/get-error');
 var ChangePasswordActions = require('../actions/change-password-actions');
 var ChangePasswordStore = require('../store/change-password-store');
 var Reflux = require('reflux');
-
+var _  = require('lodash');
 
 var ChangePassword = React.createClass({
   mixins: [Reflux.connect(ChangePasswordStore)],
@@ -46,7 +46,7 @@ var ChangePassword = React.createClass({
 
     if (name === 'confirmPassword') {
       valObj = {
-        password: this.state.newPassword,
+        newPassword: this.state.newPassword,
         confirmPassword: this.state.confirmPassword
       };
     } else {
@@ -77,9 +77,14 @@ var ChangePassword = React.createClass({
 
     passwordInfo.push(oldPassword, newPassword, confirmPassword);
     passwordInfo.forEach((item) => {
+      var confirmItem;
       var result = validate(item, constraint);
-      var error = getError(result, Object.keys(item));
 
+      if(Object.keys(item).toString() === 'confirmPassword') {
+        confirmItem = _.assign(_.cloneDeep(item), newPassword);
+        result = validate(confirmItem, constraint);
+      }
+      var error = getError(result, Object.keys(item));
       if (error !== '') {
         pass = true;
       }
