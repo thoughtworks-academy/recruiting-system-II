@@ -45,7 +45,7 @@ var ProgrammeSidebar = React.createClass({
              onClick={this.handleClick.bind(null, item.mark)}>
             <div className="row">
               <div className="col-xs-9 h5 text-center">{item.value}</div>
-              <div className="col-xs-3"><i className={this.changeIcon(item.state)}></i></div>
+              <div className="col-xs-3"><i className={this.changeIcon(item.state)}/></div>
             </div>
           </a>
       );
@@ -57,7 +57,7 @@ var ProgrammeSidebar = React.createClass({
             <div className="list-group-item active">
               <div className="row">
                 <div className="col-xs-9 h4 text-center">编程题</div>
-                <div className="col-xs-3"><i className={'programme-nav-icon h4 fa fa-pencil-square-o'}></i></div>
+                <div className="col-xs-3"><i className={'programme-nav-icon h4 fa fa-pencil-square-o'}/></div>
               </div>
             </div>
             {itemHtml}
