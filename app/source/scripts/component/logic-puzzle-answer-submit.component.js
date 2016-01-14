@@ -4,7 +4,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var $ = global.jQuery = require('jquery');
-require("bootstrap");
+require('bootstrap');
 
 
 var LogicPuzzleAnswerSubmit = React.createClass({

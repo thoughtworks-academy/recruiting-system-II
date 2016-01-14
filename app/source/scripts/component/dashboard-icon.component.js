@@ -13,9 +13,9 @@ var DashboardIcon = React.createClass({
            onMouseOver={this.props.onShowPrompt}
            onMouseOut={this.props.onHidePrompt}>
 
-          <div className={"icon-wrapper-"+this.props.info.isEnabled} name={this.props.info.name}>
+          <div className={'icon-wrapper-'+this.props.info.isEnabled} name={this.props.info.name}>
             <div className="icon-img" name={this.props.info.name}>
-              <span className={"glyphicon "+this.props.info.glyphicon} aria-hidden="true"/>
+              <span className={'glyphicon '+this.props.info.glyphicon} aria-hidden="true"/>
             </div>
             <div className="icon-name">
               {this.props.info.title}

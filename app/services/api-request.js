@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var superAgent = require('superagent');
 var apiServer = require('../configuration').apiServer;

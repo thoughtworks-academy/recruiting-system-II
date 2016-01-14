@@ -47,7 +47,7 @@ var LoginForm = React.createClass({
     var loginPassword = ReactDOM.findDOMNode(this.refs.loginPassword).value;
 
     request.get('/login')
-        .set('Content-Type', "application/json")
+        .set('Content-Type', 'application/json')
         .query({
           account: phoneEmail,
           password: loginPassword
@@ -65,25 +65,25 @@ var LoginForm = React.createClass({
 
   render: function () {
 
-    var classString = "col-md-7 logon-form-container" + (this.props.isLoginState ? '' : ' hide');
+    var classString = 'col-md-7 logon-form-container' + (this.props.isLoginState ? '' : ' hide');
 
     return (
         <div id="logon" className={classString}>
           <h4 className="welcome">欢迎登陆思沃学院</h4>
-          <div className={"lose" + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
+          <div className={'lose' + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
           <form action="">
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱" name="phoneEmail" onBlur={this.validate}
                      ref="phoneEmail"/>
               <div
-                  className={"lose" + (this.state.phoneEmailError === '' ? ' hide' : '')}>{this.state.phoneEmailError}
+                  className={'lose' + (this.state.phoneEmailError === '' ? ' hide' : '')}>{this.state.phoneEmailError}
               </div>
             </div>
             <div className="form-group">
               <input className="form-control" type="password" placeholder="请输入密码" name="loginPassword"
                      ref="loginPassword" onBlur={this.validate}/>
               <div
-                  className={"lose" + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
+                  className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
               </div>
             </div>
             <button type="button" id="login-btn" className="btn btn-lg btn-block btn-primary" onClick={this.login}>登陆

@@ -2,8 +2,8 @@
 
 var constraint = {
   email: {
-    presence: {message: "^请输入邮箱"},
-    email: {message: "^请输入正确邮箱"}
+    presence: {message: '^请输入邮箱'},
+    email: {message: '^请输入正确邮箱'}
   },
   mobilePhone: {
     presence: {message: '^请输入手机号'},
