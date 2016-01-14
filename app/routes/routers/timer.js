@@ -2,18 +2,18 @@
 
 var express = require('express');
 var router = express.Router();
-var time = require('../../mixin/time');
+var constant = require('../../mixin/constant');
 var _timeBase = 90;
 var logicPuzzle = require('../../models/logic-puzzle');
 
 router.get('/remain-time', function (req, res) {
-  var TOTAL_TIME = _timeBase * time.MINUTE;
+  var TOTAL_TIME = _timeBase * constant.time.SECONDS_PER_MINUTE;
 
   logicPuzzle.findOne({userId: req.session.user.id})
       .then((logicPuzzle) => {
 
         if (!logicPuzzle.startTime) {
-          logicPuzzle.startTime = Date.parse(new Date()) / time.SECONDS;
+          logicPuzzle.startTime = Date.parse(new Date()) / constant.time.SECONDS_PER_MINUTE;
 
           return logicPuzzle.save();
 
@@ -23,7 +23,7 @@ router.get('/remain-time', function (req, res) {
       })
       .then((logicPuzzle) => {
 
-        var now = Date.parse(new Date()) / time.SECONDS;
+        var now = Date.parse(new Date()) / constant.time.SECONDS_PER_MINUTE;
         var usedTime = now - logicPuzzle.startTime;
 
         res.send({

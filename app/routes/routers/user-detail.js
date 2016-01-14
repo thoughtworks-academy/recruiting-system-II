@@ -10,7 +10,7 @@ var userConstraint = require('../../mixin/user-detail-constraint');
 var passwordConstraint = require('../../mixin/password-constraint');
 var md5 = require('js-md5');
 var apiServer = require('../../configuration').apiServer;
-var httpCode = require('../../mixin/constant');
+var constant = require('../../mixin/constant');
 
 function checkInfo(info, constraint) {
   var result = validate(info, constraint);
@@ -27,7 +27,7 @@ router.get('/', function (req, res) {
       .set('Content-Type', 'application/json')
       .end()
       .then(function (resp) {
-        if (resp.status === httpCode.OK) {
+        if (resp.status === constant.httpCode.OK) {
           result = _.assign(resp.body);
         } else {
           throw new Error();
@@ -47,14 +47,14 @@ router.get('/', function (req, res) {
       })
       .then(function (result) {
         res.send({
-          status: httpCode.OK,
+          status: constant.httpCode.OK,
           data: result
         });
       })
       .catch(function () {
-        res.status(httpCode.NOT_FOUND);
+        res.status(constant.httpCode.NOT_FOUND);
         res.send({
-          status: httpCode.NOT_FOUND
+          status: constant.httpCode.NOT_FOUND
         });
       });
 });
@@ -70,22 +70,22 @@ router.put('/update', function (req, res) {
         .send(result)
         .end()
         .then(function (resp) {
-          if (resp.status === httpCode.OK) {
+          if (resp.status === constant.httpCode.OK) {
             res.send({
-              status: httpCode.OK
+              status: constant.httpCode.OK
             });
           } else {
             throw new Error();
           }
         })
         .catch(function () {
-          res.status(httpCode.NOT_FOUND);
+          res.status(constant.httpCode.NOT_FOUND);
           res.send({
-            status: httpCode.NOT_FOUND
+            status: constant.httpCode.NOT_FOUND
           });
         });
   } else {
-    res.send({status: httpCode.INTERNAL_SERVER_ERROR});
+    res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR});
   }
 });
 
@@ -104,23 +104,23 @@ router.put('/change-password', function (req, res) {
         .send(partResult)
         .end()
         .then(function (resp) {
-          if(resp.status === httpCode.OK) {
+          if(resp.status === constant.httpCode.OK) {
             res.send({
-              status: httpCode.OK
+              status: constant.httpCode.OK
             });
           }else {
             throw new Error();
           }
         })
         .catch(function() {
-          res.status(httpCode.BAD_REQUEST);
+          res.status(constant.httpCode.BAD_REQUEST);
           res.send({
-            status: httpCode.BAD_REQUEST
+            status: constant.httpCode.BAD_REQUEST
           });
         });
   }else {
     res.send({
-      status: httpCode.INTERNAL_SERVER_ERROR
+      status: constant.httpCode.INTERNAL_SERVER_ERROR
     });
   }
 });

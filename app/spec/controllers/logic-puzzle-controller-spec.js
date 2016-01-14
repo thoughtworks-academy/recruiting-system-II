@@ -3,7 +3,6 @@
 var LogicPuzzleController = require('../../controllers/logic-puzzle-controller');
 var logicPuzzle = require('../../models/logic-puzzle');
 var apiRequest = require('../../services/api-request');
-var time = require('../../mixin/time');
 var constant = require('../../mixin/constant');
 
 describe('LogicPuzzleController', function () {
@@ -27,7 +26,7 @@ describe('LogicPuzzleController', function () {
           then: function (fn) {
             setTimeout(function () {
               fn({data: 123});
-            }, time.SECONDS);
+            }, constant.time.MILLISECOND_PER_SECONDS);
           }
         };
       });

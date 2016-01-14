@@ -5,9 +5,8 @@ var mongoose = require('mongoose');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var apiServer = require('../configuration').apiServer;
-var time = require('../mixin/time');
-var httpCode = require('../mixin/constant');
-var async = require('async');
+
+var constant = require('../mixin/constant');
 var _timeBase = 90;
 
 var Schema = mongoose.Schema;
@@ -44,10 +43,10 @@ logicPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
     if (err || !logicPuzzle) {
       isPaperCommited = false;
     } else {
-      var TOTAL_TIME = _timeBase * time.MINUTE;
+      var TOTAL_TIME = _timeBase * constant.time.MINUTE_PER_HOUR;
 
-      var startTime = logicPuzzle.startTime || Date.parse(new Date()) / time.SECONDS;
-      var now = Date.parse(new Date()) / time.SECONDS;
+      var startTime = logicPuzzle.startTime || Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
+      var now = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
 
       var usedTime = now - startTime;
 
@@ -93,7 +92,7 @@ logicPuzzleSchema.statics.getLogicPuzzle = function (orderId, userId) {
 
 logicPuzzleSchema.statics.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
-  var endTime = Date.parse(new Date()) / time.SECONDS;
+  var endTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
   this.findOne({userId: examerId})
       .then(function (data) {
 
@@ -125,7 +124,7 @@ logicPuzzleSchema.statics.submitPaper = function (req, res) {
             });
       })
       .then(function (data) {
-        res.send({status: httpCode.OK});
+        res.send({status: constant.httpCode.OK});
       });
 };
 

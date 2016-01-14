@@ -6,7 +6,7 @@ var ReactDOM = require('react-dom');
 var request = require('superagent');
 var constraint = require('../../../mixin/login-constraint');
 var page = require('page');
-var httpCode = require('../../../mixin/constant');
+var constant = require('../../../mixin/constant');
 
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
@@ -55,7 +55,7 @@ var LoginForm = React.createClass({
         })
         .end((err, req) => {
           var data = JSON.parse(req.text);
-          if (data.status === httpCode.OK) {
+          if (data.status === constant.httpCode.OK) {
             this.setState({loginFailed : false});
             jumpToDashboard();
           } else {

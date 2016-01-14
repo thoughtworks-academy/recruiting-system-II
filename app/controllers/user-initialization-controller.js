@@ -62,7 +62,7 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
     }
   ], function (err) {
     if (true !== err && err) {
-      res.statusCode(constant.INTERNAL_SERVER_ERROR);
+      res.statusCode(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: 500, message: '服务器错误'});
     } else {
       res.send({status: 200, message: '初始化成功!'});

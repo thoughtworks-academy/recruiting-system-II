@@ -14,7 +14,7 @@ var util = require('util');
 var GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
-var time = require('./mixin/time');
+var constant = require('./mixin/constant');
 
 mongoose.connect('mongodb://localhost/twars');
 
@@ -44,7 +44,7 @@ app.use(session({
   secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false,
   store: new MongoStore({
     url: 'mongodb://localhost/twars',
-    ttl: time.HOUR * time.MINUTE
+    ttl: constant.time.MINUTE_PER_HOUR * constant.time.SECONDS_PER_MINUTE
   })
 }));
 app.use(passport.initialize());

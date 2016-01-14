@@ -8,7 +8,7 @@ var TimerStore = require('../store/timer-store');
 var TimerActions = require('../actions/timer-action');
 var Modal = require('react-bootstrap/lib/Modal');
 var _newOrderId;
-var time = require('../../../mixin/time');
+var constant = require('../../../mixin/constant');
 var able = false;
 
 var LogicPuzzleSidebar = React.createClass({
@@ -52,11 +52,11 @@ var LogicPuzzleSidebar = React.createClass({
           remainTime: remainTime
         });
 
-        if(remainTime % (time.MINTUE * 2) === 1){
+        if(remainTime % (constant.time.SECONDS_PER_MINUTE * 2) === 1){
           TimerActions.getRemainTime();
         }
       }
-    }, time.SECONDS);
+    }, constant.time.MILLISECOND_PER_SECONDS);
   },
 
   render: function () {
@@ -66,8 +66,8 @@ var LogicPuzzleSidebar = React.createClass({
     if(isLast){
       able=true;
     }
-    var minutes = this.state.remainTime > 0 ? Math.floor(this.state.remainTime / time.MINUTE) : 0;
-    var seconds = this.state.remainTime > 0 ? this.state.remainTime % time.HOUR : 0;
+    var minutes = this.state.remainTime > 0 ? Math.floor(this.state.remainTime / constant.time.SECONDS_PER_MINUTE) : 0;
+    var seconds = this.state.remainTime > 0 ? this.state.remainTime % constant.time.MINUTE_PER_HOUR : 0;
 
     return (
 

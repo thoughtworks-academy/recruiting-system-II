@@ -92,7 +92,7 @@ describe('UserInitializationController', function () {
         done();
       },
       statusCode: function(code){
-        expect(code).toEqual(constant.INTERNAL_SERVER_ERROR);
+        expect(code).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
       }
     });
 

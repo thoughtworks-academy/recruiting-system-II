@@ -1,12 +1,19 @@
 'use strict';
 
 var constant = {
-  OK: 200,
-  CREATED: 201,
-  NOT_FOUND: 404,
-  UNAUTHORIZED: 401,
-  BAD_REQUEST: 400,
-  INTERNAL_SERVER_ERROR: 500
+  httpCode: {
+    OK: 200,
+    CREATED: 201,
+    NOT_FOUND: 404,
+    UNAUTHORIZED: 401,
+    BAD_REQUEST: 400,
+    INTERNAL_SERVER_ERROR: 500
+  },
+  time: {
+    MINUTE_PER_HOUR: 60,
+    SECONDS_PER_MINUTE: 60,
+    MILLISECOND_PER_SECONDS: 1000
+  }
 };
 
 module.exports = constant;
