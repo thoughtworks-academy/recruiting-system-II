@@ -22,7 +22,7 @@ var ProgrammeSidebar = React.createClass({
   handleClick: function (mark, evt) {
     var name = evt.target.offsetParent.className;
 
-    if(name.indexOf('disabled') === -1) {
+    if(name.includes('disabled') === false) {
       this.props.onChangeState(mark);
     }
   },
@@ -32,6 +32,7 @@ var ProgrammeSidebar = React.createClass({
 
     for(var i = 0; i < 10; i ++ ) {
       var index = i + 1;
+
       tags.push({mark:index, value: '第' + index + '题', state: 2});
     }
     var itemHtml = tags.map((item, index) => {
