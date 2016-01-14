@@ -6,6 +6,7 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.sql.Connection;
 
@@ -16,9 +17,15 @@ public final class DBRecovery {
     public static void main(String[] args) throws IOException {
         SqlSession session = DBUtil.getSession();
         Connection connection = session.getConnection();
-        ScriptRunner runner = new ScriptRunner(connection);
 
+        PrintStream ps = new PrintStream("/tmp/aaa");
+        PrintStream stdout = System.out;
+        System.setOut(ps);
+
+        ScriptRunner runner = new ScriptRunner(connection);
         Reader reader = Resources.getResourceAsReader("./seeds/master.sql");
         runner.runScript(reader);
+
+        System.setOut(stdout);
     }
 }
