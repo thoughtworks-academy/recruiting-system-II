@@ -13,7 +13,7 @@ var Dashboard = React.createClass({
     return {
       isTip: false,
       puzzleEnabled: false,
-      dojoEnabled: false,
+      programmeEnabled: false,
       tipContent: ''
     };
   },
@@ -26,7 +26,7 @@ var Dashboard = React.createClass({
       .then((res) => {
         this.setState({
           puzzleEnabled: res.body.isPaperCommited ? false : true,
-          dojoEnabled: res.body.isPaperCommited
+          programmeEnabled: res.body.isPaperCommited
         });
       });
   },
@@ -41,7 +41,7 @@ var Dashboard = React.createClass({
       return;
     }
 
-    if (iconName === 'dojo' && this.state.dojoEnabled === false) {
+    if (iconName === 'programme' && this.state.programmeEnabled === false) {
 
       this.setState({
         isTip: true,
@@ -62,10 +62,10 @@ var Dashboard = React.createClass({
     var iconInfos = [];
 
     var PuzzleHref = (this.state.puzzleEnabled===true ? 'start.html':'#');
-    var dojoHref = (this.state.dojoEnabled===true ? 'dojo.html':'#');
+    var programmeHref = (this.state.programmeEnabled===true ? 'programme.html':'#');
 
     var puzzleDisable = (this.state.puzzleEnabled === true ? 'enable' : 'disable');
-    var dojoDisable = (this.state.dojoEnabled === true ? 'enable' : 'disable');
+    var programmeDisable = (this.state.programmeEnabled === true ? 'enable' : 'disable');
 
     var userCenterInfo = {
       title: '个人中心',
@@ -83,15 +83,15 @@ var Dashboard = React.createClass({
       glyphicon: 'glyphicon-education'
     };
 
-    var dojoPuzzleInfo = {
+    var programmePuzzleInfo = {
       title: '编程题',
-      href: dojoHref,
-      isEnabled: dojoDisable,
-      name: 'dojo',
+      href: programmeHref,
+      isEnabled: programmeDisable,
+      name: 'programme',
       glyphicon: 'glyphicon-road'
     };
 
-    iconInfos.push(userCenterInfo, logicPuzzleInfo, dojoPuzzleInfo);
+    iconInfos.push(userCenterInfo, logicPuzzleInfo, programmePuzzleInfo);
 
     return (
 
