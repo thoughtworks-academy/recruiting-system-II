@@ -41,11 +41,14 @@ userPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
       isPaperCommited = false;
     } else {
 
-      var startTime = userPuzzle.startTime || Date.parse(new Date()) / 1000;
-      var now = Date.parse(new Date()) / 1000;
+      var THOUSAND_MILLISECONDS = 1000;
+      var TOTAL_TIME = 5400;
+
+      var startTime = userPuzzle.startTime || Date.parse(new Date()) / THOUSAND_MILLISECONDS;
+      var now = Date.parse(new Date()) / THOUSAND_MILLISECONDS;
       var usedTime = now - startTime;
 
-      isPaperCommited = userPuzzle.isCommited || parseInt(5400 - usedTime) <= 0 ? true : false;
+      isPaperCommited = userPuzzle.isCommited || parseInt(TOTAL_TIME - usedTime) <= 0 ? true : false;
     }
 
     callback(isPaperCommited);
@@ -88,7 +91,8 @@ userPuzzleSchema.statics.getUserPuzzle = function (orderId, userId) {
 
 userPuzzleSchema.statics.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
-  var endTime = Date.parse(new Date()) / 1000;
+  var THOUSAND_MILLISECONDS = 1000;
+  var endTime = Date.parse(new Date()) / THOUSAND_MILLISECONDS;
   this.findOne({userId: examerId})
       .then(function (data) {
 

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var getJumpControl = require('../mixin/get-jump-control');
 var userPuzzle = require('../models/user-puzzle');
@@ -18,8 +18,10 @@ function pathControl (req, res, next, jumpControl) {
   var redirectionAddress;
   var needRedirect = false;
 
+  var NOT_FOUND = -1;
+
   jumpControl.forEach((item) => {
-    if (item.originPath.indexOf(lastElement) !== -1 && item.condition){
+    if (item.originPath.indexOf(lastElement) !== NOT_FOUND && item.condition){
       redirectionAddress = item.targetPath;
       needRedirect = true;
     }
