@@ -10,6 +10,7 @@ var userConstraint = require('../../mixin/user-detail-constraint');
 var passwordConstraint = require('../../mixin/password-constraint');
 var md5 = require('js-md5');
 var apiServer = require('../../configuration').apiServer;
+var httpCode = require('../../mixin/constant');
 
 function checkInfo(info, constraint) {
   var result = validate(info, constraint);
@@ -26,7 +27,7 @@ router.get('/', function (req, res) {
       .set('Content-Type', 'application/json')
       .end()
       .then(function (resp) {
-        if (resp.status === 200) {
+        if (resp.status === httpCode.OK) {
           result = _.assign(resp.body);
         } else {
           throw new Error();
@@ -46,14 +47,14 @@ router.get('/', function (req, res) {
       })
       .then(function (result) {
         res.send({
-          status: 200,
+          status: httpCode.OK,
           data: result
         });
       })
       .catch(function () {
-        res.status(404);
+        res.status(httpCode.NOT_FOUND);
         res.send({
-          status: 404
+          status: httpCode.NOT_FOUND
         });
       });
 });
@@ -69,22 +70,22 @@ router.put('/update', function (req, res) {
         .send(result)
         .end()
         .then(function (resp) {
-          if (resp.status === 200) {
+          if (resp.status === httpCode.OK) {
             res.send({
-              status: 200
+              status: httpCode.OK
             });
           } else {
             throw new Error();
           }
         })
         .catch(function () {
-          res.status(404);
+          res.status(httpCode.NOT_FOUND);
           res.send({
-            status: 404
+            status: httpCode.NOT_FOUND
           });
         });
   } else {
-    res.send({status: 500});
+    res.send({status: httpCode.INTERNAL_SERVER_ERROR});
   }
 });
 
@@ -103,23 +104,23 @@ router.put('/change-password', function (req, res) {
         .send(partResult)
         .end()
         .then(function (resp) {
-          if(resp.status === 200) {
+          if(resp.status === httpCode.OK) {
             res.send({
-              status: 200
+              status: httpCode.OK
             });
           }else {
             throw new Error();
           }
         })
         .catch(function() {
-          res.status(400);
+          res.status(httpCode.BAD_REQUEST);
           res.send({
-            status: 400
+            status: httpCode.BAD_REQUEST
           });
         });
   }else {
     res.send({
-      status: 500
+      status: httpCode.INTERNAL_SERVER_ERROR
     });
   }
 });

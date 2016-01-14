@@ -1,5 +1,5 @@
 'use strict';
-
+var httpCode = require('../mixin/constant');
 var apiRequest = require('../services/api-request');
 var userPuzzle = require('../models/user-puzzle');
 var async = require('async');
@@ -24,7 +24,7 @@ UserPuzzleController.prototype.saveAnswer = function (req, res) {
   userPuzzle.saveAnswer(orderId, userAnswer, userId)
       .then((isSucceed) => {
         if (isSucceed === true) {
-          res.sendStatus(200);
+          res.sendStatus(httpCode.OK);
         }
       });
 };
@@ -78,10 +78,10 @@ UserPuzzleController.prototype.initialUser = function (req, res) {
     }
   ], function (err) {
     if (true !== err && err) {
-      res.statusCode(500);
-      res.send({status: 500, message: '服务器错误'});
+      res.statusCode(httpCode.INTERNAL_SERVER_ERROR);
+      res.send({status: httpCode.INTERNAL_SERVER_ERROR, message: '服务器错误'});
     } else {
-      res.send({status: 200, message: '初始化成功!'});
+      res.send({status: httpCode.OK, message: '初始化成功!'});
     }
   });
 };

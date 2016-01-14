@@ -5,6 +5,9 @@ var mongoose = require('mongoose');
 var superAgent = require('superagent');
 var agent = require('superagent-promise')(superAgent, Promise);
 var apiServer = require('../configuration').apiServer;
+var time = require('../mixin/time');
+var httpCode = require('../mixin/constant');
+var _timeBase = 90;
 
 var Schema = mongoose.Schema;
 
@@ -40,12 +43,10 @@ userPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
     if (err || !userPuzzle) {
       isPaperCommited = false;
     } else {
+      var TOTAL_TIME = _timeBase * time.MINUTE;
 
-      var THOUSAND_MILLISECONDS = 1000;
-      var TOTAL_TIME = 5400;
-
-      var startTime = userPuzzle.startTime || Date.parse(new Date()) / THOUSAND_MILLISECONDS;
-      var now = Date.parse(new Date()) / THOUSAND_MILLISECONDS;
+      var startTime = userPuzzle.startTime || Date.parse(new Date()) / time.SECONDS;
+      var now = Date.parse(new Date()) / time.SECONDS;
       var usedTime = now - startTime;
 
       isPaperCommited = userPuzzle.isCommited || parseInt(TOTAL_TIME - usedTime) <= 0 ? true : false;
@@ -91,8 +92,7 @@ userPuzzleSchema.statics.getUserPuzzle = function (orderId, userId) {
 
 userPuzzleSchema.statics.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
-  var THOUSAND_MILLISECONDS = 1000;
-  var endTime = Date.parse(new Date()) / THOUSAND_MILLISECONDS;
+  var endTime = Date.parse(new Date()) / time.SECONDS;
   this.findOne({userId: examerId})
       .then(function (data) {
 
@@ -124,7 +124,7 @@ userPuzzleSchema.statics.submitPaper = function (req, res) {
             });
       })
       .then(function (data) {
-        res.send({status: 200});
+        res.send({status: httpCode.OK});
       });
 };
 

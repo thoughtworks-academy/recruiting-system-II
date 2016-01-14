@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var constant = require('../../mixin/back-constant.json');
+var constant = require('../../mixin/back-constant');
 var UserPuzzleController = require('../../controllers/user-puzzle');
 var userPuzzleController = new UserPuzzleController();
 

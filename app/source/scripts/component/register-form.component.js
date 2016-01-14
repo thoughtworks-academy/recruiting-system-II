@@ -8,6 +8,7 @@ var validate = require('validate.js');
 var RegisterPassword = require('./register-password.component');
 var constraint = require('../../../mixin/register-constraint');
 var page = require('page');
+var httpCode = require('../../../mixin/constant');
 
 var asyncContainersFunc = {
   email: function (value, done) {
@@ -19,7 +20,7 @@ var asyncContainersFunc = {
         })
         .end((err, req) => {
           var error = '';
-          if (req.body.status === 200) {
+          if (req.body.status === httpCode.OK) {
             error = '该邮箱已被注册';
           }
           done({emailError: error});
@@ -35,7 +36,7 @@ var asyncContainersFunc = {
         })
         .end((err, req) => {
           var error = '';
-          if (req.body.status === 200) {
+          if (req.body.status === httpCode.OK) {
             error = '该手机号已被注册';
           }
           done({mobilePhoneError: error});
@@ -164,7 +165,7 @@ var RegisterForm = React.createClass({
       }).end((err, req) => {
         var info = req.body;
 
-        if (info.status === 200) {
+        if (info.status === httpCode.OK) {
           initialUser();
           page('user-center.html');
 
@@ -184,7 +185,7 @@ var RegisterForm = React.createClass({
           }).end((err, req) => {
             var info = req.body;
 
-            if (info.status === 200) {
+            if (info.status === httpCode.OK) {
               initialUser();
               page('user-center.html');
 

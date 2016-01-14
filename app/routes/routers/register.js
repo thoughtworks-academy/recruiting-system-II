@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
-var constant = require('../../mixin/back-constant.json');
+var constant = require('../../mixin/back-constant');
 var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require('validate.js');
 var md5 = require('js-md5');

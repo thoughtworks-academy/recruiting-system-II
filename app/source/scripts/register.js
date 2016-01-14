@@ -1,5 +1,3 @@
-/* jshint browser: true */
-
 'use strict';
 
 var $ = global.jQuery = require('jquery');
@@ -14,8 +12,10 @@ ReactDom.render(
     document.getElementById('register-container')
 );
 
+var SIZE = 0.7;
+
 $(function() {
   $('#agreementModal').on('show.bs.modal', function() {
-    $('.modal .modal-body').css('overflow-y', 'auto').css('max-height', $(window).height() * 0.7);
+    $('.modal .modal-body').css('overflow-y', 'auto').css('max-height', $(window).height() * SIZE);
   });
 });

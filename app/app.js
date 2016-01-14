@@ -14,6 +14,7 @@ var util = require('util');
 var GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
+var time = require('./mixin/time');
 
 mongoose.connect('mongodb://localhost/twars');
 
@@ -43,7 +44,7 @@ app.use(session({
   secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false,
   store: new MongoStore({
     url: 'mongodb://localhost/twars',
-    ttl: 60 * 60
+    ttl: time.HOUR * time.MINUTE
   })
 }));
 app.use(passport.initialize());
@@ -79,6 +80,8 @@ app.use(express.static('public'));
 
 route.setRoutes(app);
 
-app.listen(3000, function () {
+var port = 3000;
+
+app.listen(port, function () {
   console.log('App listening at http://localhost:3000');
 });

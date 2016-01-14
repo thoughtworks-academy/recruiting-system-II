@@ -2,6 +2,7 @@
 
 var UserPuzzleController = require('../../controllers/user-puzzle');
 var userPuzzle = require('../../models/user-puzzle');
+var time = require('../../mixin/time');
 
 describe('UserPuzzleController', function() {
 
@@ -21,7 +22,7 @@ describe('UserPuzzleController', function() {
         then: function(fn) {
           setTimeout(function() {
             fn({data: 123});
-          }, 1000);
+          }, time.SECONDS);
         }
       };
     });
