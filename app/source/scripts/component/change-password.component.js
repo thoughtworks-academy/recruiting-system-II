@@ -114,7 +114,7 @@ var ChangePassword = React.createClass({
             <form className="form-horizontal form-top-height">
               <div className={this.state.success ? '' : 'hide'}>
                 <div className={"success-prompt alert alert-success"}>
-                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
                   修改成功
                 </div>
               </div>
@@ -129,7 +129,7 @@ var ChangePassword = React.createClass({
                   </div>
                   <div className={'error alert alert-danger' + (this.state.oldPasswordError === '' ? ' hide' : '')}
                        role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
                     {this.state.oldPasswordError}
                   </div>
                 </div>
@@ -144,7 +144,7 @@ var ChangePassword = React.createClass({
                   </div>
                   <div className={'error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
                        role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
                     {this.state.newPasswordError}
                   </div>
                 </div>
@@ -159,7 +159,7 @@ var ChangePassword = React.createClass({
                   </div>
                   <div className={'error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
                        role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
                     {this.state.confirmPasswordError}
                   </div>
                 </div>
