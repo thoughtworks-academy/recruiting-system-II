@@ -37,11 +37,6 @@ var UserDetail = React.createClass({
 
   componentWillReceiveProps: function() {
     this.setState({
-      school: '',
-      name: '',
-      gender: '',
-      major: '',
-      degree: '',
       schoolError: '',
       nameError: '',
       majorError: '',

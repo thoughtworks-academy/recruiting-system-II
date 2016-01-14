@@ -3,11 +3,15 @@
 var React = require('react');
 var Nav = require('react-bootstrap/lib/Nav');
 var NavItem = require('react-bootstrap/lib/NavItem');
+var UserDetailActions = require('../actions/user-detail-actions');
 
 var UserCenterSide = React.createClass({
 
   handleClick: function (mark) {
     this.props.onChangeState(mark);
+    if(mark === 'userDetail') {
+      UserDetailActions.loadUserDetail();
+    }
   },
 
   render() {
