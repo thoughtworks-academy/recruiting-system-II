@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
+    "eslint": "eslint .",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -38,8 +39,6 @@
     "font-awesome": "^4.5.0",
     "jasmine": "^2.4.1",
     "jest-cli": "^0.8.2",
-    "jshint": "^2.8.0",
-    "jsxhint": "^0.15.1",
     "kerberos": "0.0.17",
     "less-loader": "^2.2.2",
     "passport": "^0.3.2",

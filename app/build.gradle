@@ -19,9 +19,9 @@ task startNodemon(type:Exec) {
     ignoreExitValue true // 被取消时，不会报错
 }
 
-task jsxhint(type:Exec) {
+task eslint(type:Exec) {
     executable "bash"
-    args "-c", "./node_modules/.bin/jsxhint ."
+    args "-c", "./node_modules/.bin/eslint ."
 }
 
 task jsxhintReport(type:Exec) {
