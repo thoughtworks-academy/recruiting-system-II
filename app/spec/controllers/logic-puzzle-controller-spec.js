@@ -165,8 +165,8 @@ describe('LogicPuzzleController', function () {
 
       controller.submitPaper({session: {user: {id: 1}}},
         {
-          send: function(data){
-            expect(data).toEqual({status: constant.httpCode.OK});
+          sendStatus: function(data){
+            expect(data).toEqual(constant.httpCode.OK);
             expect(doc.isCommited).toEqual(true);
             done();
           }

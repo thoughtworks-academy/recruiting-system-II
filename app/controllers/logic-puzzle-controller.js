@@ -86,9 +86,9 @@ LogicPuzzleController.prototype.submitPaper = function (req, res) {
     }
   ], function (err) {
     if (!err) {
-      res.send({status: constant.httpCode.OK});
+      res.sendStatus(constant.httpCode.OK);
     }else {
-      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR})
+      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR)
     }
 
   });
