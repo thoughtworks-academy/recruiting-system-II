@@ -1,3 +1,9 @@
-/**
- * Created by Jessica on 1/15/16.
- */
+'use strict';
+
+var Reflux = require('reflux');
+
+var ProgrammeActions = Reflux.createActions([
+  'loadTopicState'
+]);
+
+module.exports = ProgrammeActions;
