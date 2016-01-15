@@ -23,7 +23,7 @@ var ProgrammeSidebar = React.createClass({
   },
 
   componentDidMount: function () {
-    ProgrammeActions.loadTopicState();
+    ProgrammeActions.loadTopicStatus();
   },
 
   changeIcon: function (state) {
