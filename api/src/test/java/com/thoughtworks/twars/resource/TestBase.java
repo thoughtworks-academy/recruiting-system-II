@@ -17,6 +17,7 @@ public class TestBase extends JerseyTest {
   protected SectionMapper sectionMapper = mock(SectionMapper.class);
   protected BlankQuizMapper blankQuizMapper = mock(BlankQuizMapper.class);
   protected ScoreSheetMapper scoreSheetMapper = mock(ScoreSheetMapper.class);
+  protected HomeWorkQuizMapper homeWorkQuizMapper = mock(HomeWorkQuizMapper.class);
 
 
   @Override
@@ -34,6 +35,7 @@ public class TestBase extends JerseyTest {
         bind(sectionMapper).to(SectionMapper.class);
         bind(blankQuizMapper).to(BlankQuizMapper.class);
         bind(scoreSheetMapper).to(ScoreSheetMapper.class);
+        bind(homeWorkQuizMapper).to(HomeWorkQuizMapper.class);
       }
     }).packages("com.thoughtworks.twars.resource");
   }
