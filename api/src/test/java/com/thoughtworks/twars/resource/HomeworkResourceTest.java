@@ -33,7 +33,7 @@ public class HomeworkResourceTest extends TestBase {
         Response response = target(basePath + "1/items").request().get();
         assertThat(response.getStatus(), is(200));
 
-        Map result = response.readEntity(Map.class);
+        Map<String, List> result = response.readEntity(Map.class);
         List<Map> homeworkItems = (List) result.get("homeworkQuizItems");
 
         assertThat(homeworkItems.size(), is(1));
