@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var userHomeworkQuizzesSchema = new Schema({
   userId: Number,
   homeworkItems: [{
-    id: Numebr,
+    id: Number,
     locked: Boolean,
     states: Number
   }]
