@@ -3,8 +3,22 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
+var ProgrammeActions = require('../actions/programme-actions');
+var ProgrammeStore = require('../store/programme-store');
 
 var ProgrammeSidebar = React.createClass({
+  mixins: [Reflux.connect(ProgrammeStore)],
+
+  getInitialState:function() {
+    return {
+      topicState: [3,3,4,3,4,2,1,0,0,0]
+    };
+  },
+
+  componentDidMount:function() {
+    ProgrammeActions.loadTopicState();
+  },
 
   changeIcon: function (state) {
     var icon = 'h4 fa fa-';
@@ -33,7 +47,7 @@ var ProgrammeSidebar = React.createClass({
     for (var i = 0; i < 10; i++) {
       var index = i + 1;
 
-      tags.push({mark: index, value: '第' + index + '题', state: 0});
+      tags.push({mark: index, value: '第' + index + '题', state: this.state.topicState[i]});
     }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
