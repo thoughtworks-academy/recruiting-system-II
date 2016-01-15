@@ -7,7 +7,8 @@ module.exports = {
     entry: {
         "index": "./source/scripts/index.js",
         "logic-puzzle": "./source/scripts/logic-puzzle",
-        "programme": "./source/scripts/programme.js",
+        "homework-quizzes": "./source/scripts/homework-quizzes.js",
+        "user-homework-quizzes": "./source/scripts/user-homework-quizzes.js",
         "register": "./source/scripts/register.js",
         "start": "./source/scripts/start.js",
         "user-center": './source/scripts/user-center.js',
