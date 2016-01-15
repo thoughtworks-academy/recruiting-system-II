@@ -74,7 +74,6 @@ INSERT INTO blankQuiz VALUES (null,3,"logicPuzzle",10,5,4,1);
 
 TRUNCATE section;
 INSERT INTO section VALUES (NULL ,1,"blankQuizzes");
-INSERT INTO section VALUES (NULL ,1,"blankQuizzes");
 INSERT INTO section VALUES (NULL ,1,"homeworkQuizzes");
 
 TRUNCATE userDetail;
@@ -88,7 +87,7 @@ INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 3, "34",1);
 INSERT INTO blankQuizScoreSheet VALUES (NULL ,1, 1, 4, "45",1);
 
 TRUNCATE homeworkQuiz;
-INSERT INTO homeworkQuiz VALUES (NULL ,3);
-INSERT INTO homeworkQuiz VALUES (NULL ,3);
-INSERT INTO homeworkQuiz VALUES (NULL ,3);
+INSERT INTO homeworkQuiz VALUES (NULL ,2);
+INSERT INTO homeworkQuiz VALUES (NULL ,2);
+INSERT INTO homeworkQuiz VALUES (NULL ,2);
 
