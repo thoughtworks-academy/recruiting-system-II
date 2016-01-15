@@ -5,4 +5,12 @@
 
 <mapper namespace="com.thoughtworks.twars.mapper.HomeWorkQuizMapper">
 
+    <resultMap id="homeworkQuizListMap" type="com.thoughtworks.twars.bean.HomeworkQuiz">
+        <id property="id" column="id"></id>
+        <result column="sectionId" property="sectionId"></result>
+    </resultMap>
+
+    <select id="findBySectionId" resultMap="homeworkQuizListMap">
+        select * from homeworkQuiz where sectionId  = #{sectionId}
+    </select>
 </mapper>
