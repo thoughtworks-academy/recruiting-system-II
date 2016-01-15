@@ -1,12 +1,15 @@
 subprojects {
-  apply plugin: 'java'
+    apply plugin: 'java'
 
-  repositories {
-      jcenter()
-  }
+    repositories {
+        jcenter()
+    }
 }
 
-allprojects { apply plugin: "idea" }
+allprojects {
+
+    apply plugin: "idea"
+}
 
 task(startServer) {
     doFirst {

@@ -7,28 +7,25 @@ buildscript {
     }
 }
 
+plugins {
+    id "net.saliman.cobertura" version "2.3.0"
+}
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'org.flywaydb.flyway'
 apply plugin: "jacoco"
 apply plugin: 'checkstyle'
 
-test{
-    beforeTest{ descr ->
+
+
+test {
+    beforeTest { descr ->
         logger.warn("Starting Test ${descr.className} : ${descr.name}")
     }
 }
 
-jacoco {
-    toolVersion = "0.7.4.201502262128"
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        csv.enabled false
-        html.destination "${buildDir}/jacocoHtml"
-    }
+cobertura {
+    auxiliaryClasspath += project.sourceSets.test.compileClasspath
 }
 
 
@@ -62,15 +59,15 @@ task(DBRecovery, dependsOn: 'classes', type: JavaExec) {
         flywayMigrate.execute()
     }
     main = 'com.thoughtworks.twars.tasks.DBRecovery'
-    classpath=sourceSets.main.runtimeClasspath
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 test.dependsOn DBRecovery
 
-[jettyRun, jettyRunWar,jettyStop]*.stopPort = 8081
-[jettyRun, jettyRunWar,jettyStop]*.stopKey = 'stopKey'
+[jettyRun, jettyRunWar, jettyStop]*.stopPort = 8081
+[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stopKey'
 
-task createCoberturaReport(type:Exec) {
+task createCoberturaReport(type: Exec) {
     executable "bash"
     args "-c", "mkdir ./build/reports/cobertura && ./tools/cover2cover.py ./build/reports/jacoco/test/jacocoTestReport.xml src/main/java > ./build/reports/cobertura/coverage.xml"
 }
