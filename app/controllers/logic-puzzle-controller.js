@@ -2,7 +2,6 @@
 
 var logicPuzzle = require('../models/logic-puzzle');
 var constant = require('../mixin/constant');
-var time = require('../mixin/time');
 var async = require('async');
 var apiRequest = require('../services/api-request');
 
@@ -50,7 +49,7 @@ LogicPuzzleController.prototype.saveAnswer = function (req, res) {
 
 LogicPuzzleController.prototype.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
-  var endTime = Date.parse(new Date()) / time.SECONDS;
+  var endTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
   var scoreSheetUri = 'scoresheets';
   var data;
   async.waterfall([
@@ -88,7 +87,10 @@ LogicPuzzleController.prototype.submitPaper = function (req, res) {
   ], function (err) {
     if (!err) {
       res.send({status: constant.httpCode.OK});
+    }else {
+      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR})
     }
+
   });
 
 };
