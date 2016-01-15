@@ -9,10 +9,12 @@ describe('LogicPuzzleController', function () {
 
   var controller;
   var quiz;
+  var doc;
 
   beforeEach(function () {
     controller = new LogicPuzzleController();
     quiz = null;
+    doc = null;
 
   });
 
@@ -76,7 +78,7 @@ describe('LogicPuzzleController', function () {
       },
         {
           sendStatus: function (data) {
-            expect(data).toEqual(constant.OK);
+            expect(data).toEqual(constant.httpCode.OK);
             expect(quiz[1].userAnswer).toEqual('1');
             done();
           }
@@ -107,7 +109,7 @@ describe('LogicPuzzleController', function () {
         }
       }, {
         sendStatus: function (data) {
-          expect(data).toEqual(constant.OK);
+          expect(data).toEqual(constant.httpCode.OK);
           expect(quiz).toEqual(null);
           done();
         }
@@ -123,12 +125,53 @@ describe('LogicPuzzleController', function () {
       controller.saveAnswer({body: {orderId: 4, userAnswer: '1'}, session: {user: {id: 1}}},
         {
           sendStatus: function (data) {
-            expect(data).toEqual(constant.INTERNAL_SERVER_ERROR);
+            expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
             done();
           }
         });
     });
 
+  });
+
+  describe('submitPaper', function () {
+
+    it('should submit paper and return success info', function (done) {
+      spyOn(logicPuzzle, 'findOne').and.callFake(function (id, done) {
+        done(null, {
+          save: function (done) {
+            doc = this;
+            done(null, 'data');
+          },
+          paperId: 1,
+          blankQuizId: 1,
+          quizItems:[{id:3,userAnswer:'10'}]
+        });
+      });
+
+      spyOn(apiRequest, 'post').and.callFake(function(uri,body,done){
+        expect(body).toEqual({
+          examerId: 1,
+          paperId: 1,
+          blankQuizSubmits: [
+            {
+              blankQuizId: 1,
+              itemPosts: [{quizItemId:3,answer:'10'}]
+            }
+          ]
+        });
+        done(null,'OK!');
+      });
+
+
+      controller.submitPaper({session: {user: {id: 1}}},
+        {
+          send: function(data){
+            expect(data).toEqual({status: constant.httpCode.OK});
+            expect(doc.isCommited).toEqual(true);
+            done();
+          }
+        });
+    });
   });
 
 });
