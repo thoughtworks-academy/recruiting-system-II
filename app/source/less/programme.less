@@ -6,13 +6,8 @@ body {
   background-color: @pale-white;
 }
 
-#dojo-div {
+#programme-div {
   .header-major;
-  .content {
-    background-color: @white;
-    height: 600px;
-    overflow-y: scroll;
-  }
   header {
     margin-bottom: 14px;
   }
@@ -22,32 +17,21 @@ body {
   .selected {
     background: #BCD2EE;
   }
-
+  button.list-group-item {
+    outline: none;
+  }
   .content {
+    background-color: @white;
+    height: 600px;
+    overflow-y: scroll;
+    .nav-tabs > li > a {
+      outline: none;
+    }
     text-align: center;
     border-radius: 4px 0 0 0;
-    .tab-content {
-      p {
-        padding-top: 10px;
-        padding-left: 30px;
-      }
-      .row {
-        margin-top: 30px;
-        margin-bottom: 50px;
-      }
-    }
-    ul > li.li-error-definition {
-      display: none;
-    }
-    .nav-tabs > li.active > a,
-    .nav-tabs > li.active > a:hover,
-    .nav-tabs > li.active > a:focus {
-      border: 1px  solid transparent;
-      border-bottom: 1px solid @light-grey;
-      background-color: @light-blue;
-    }
-    .nav-tabs > li > a:hover{
-      background-color: @light-blue;
+    .row {
+      margin-top: 30px;
+      margin-bottom: 50px;
     }
   }
 }

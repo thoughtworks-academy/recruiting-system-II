@@ -33,20 +33,20 @@ var ProgrammeSidebar = React.createClass({
     for (var i = 0; i < 10; i++) {
       var index = i + 1;
 
-      tags.push({mark: index, value: '第' + index + '题', state: 2});
+      tags.push({mark: index, value: '第' + index + '题', state: 0});
     }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
           + (item.state === 0 ? ' disabled' : '');
       return (
-          <a className={classStr} href="javascript:void(0)" key={index}
+          <button className={classStr} disabled={item.state === 0 ? true : false} href="javascript:void(0)" key={index}
              onClick={this.handleClick.bind(null, item.mark)}>
             <div className="row">
               <div className="col-xs-9 h5 text-center">{item.value}</div>
-              <div className={'col-xs-3' + (item.state === 0 ? ' disabled' : '')}>
+              <div className='col-xs-3'>
                 <i className={this.changeIcon(item.state)}/></div>
             </div>
-          </a>
+          </button>
       );
     });
 
