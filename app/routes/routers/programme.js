@@ -7,8 +7,6 @@ var programme = require('../../models/programme');
 var ProgrammeController  = require('../../controllers/programme-controller');
 var programmeController  = new  ProgrammeController();
 
-router.get('/getlist', programmeController.getList);
-
-
+router.get('/get-list', programmeController.getList);
 
 module.exports = router;
