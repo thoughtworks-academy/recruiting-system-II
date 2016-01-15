@@ -1,12 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose');
-
-var superAgent = require('superagent');
-var agent = require('superagent-promise')(superAgent, Promise);
-var apiServer = require('../configuration').apiServer;
-
 var constant = require('../mixin/constant');
+var time = require('../mixin/time');
+
 var _timeBase = 90;
 
 var Schema = mongoose.Schema;
@@ -90,6 +87,7 @@ logicPuzzleSchema.statics.getLogicPuzzle = function (orderId, userId) {
       });
 };
 
+<<<<<<< HEAD
 logicPuzzleSchema.statics.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
   var endTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
@@ -127,5 +125,8 @@ logicPuzzleSchema.statics.submitPaper = function (req, res) {
         res.send({status: constant.httpCode.OK});
       });
 };
+=======
+
+>>>>>>> App : move the submitPaper to logic-puzzle-controller
 
 module.exports = mongoose.model('LogicPuzzle', logicPuzzleSchema);
