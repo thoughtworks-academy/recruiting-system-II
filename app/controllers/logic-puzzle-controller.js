@@ -5,7 +5,6 @@ var constant = require('../mixin/constant');
 var time = require('../mixin/time');
 var async = require('async');
 var apiRequest = require('../services/api-request');
-var httpCode = require('../mixin/constant');
 
 function LogicPuzzleController() {
 }
@@ -42,9 +41,9 @@ LogicPuzzleController.prototype.saveAnswer = function (req, res) {
     }
   ], function (err) {
     if (!err) {
-      res.sendStatus(constant.OK);
+      res.sendStatus(constant.httpCode.OK);
     } else {
-      res.sendStatus(constant.INTERNAL_SERVER_ERROR);
+      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     }
   });
 };
@@ -88,7 +87,7 @@ LogicPuzzleController.prototype.submitPaper = function (req, res) {
     }
   ], function (err) {
     if (!err) {
-      res.send({status: httpCode.OK});
+      res.send({status: constant.httpCode.OK});
     }
   });
 
