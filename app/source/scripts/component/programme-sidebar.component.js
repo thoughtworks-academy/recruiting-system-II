@@ -10,13 +10,19 @@ var ProgrammeStore = require('../store/programme-store');
 var ProgrammeSidebar = React.createClass({
   mixins: [Reflux.connect(ProgrammeStore)],
 
-  getInitialState:function() {
+  getInitialState: function () {
+    var list = [];
+
+    for(var i = 0 ;i < 5; i ++) {
+      list.push({topicStatus: 0});
+    }
+
     return {
-      topicState: [3,3,4,3,4,2,1,0,0,0]
+      topicStateList: list
     };
   },
 
-  componentDidMount:function() {
+  componentDidMount: function () {
     ProgrammeActions.loadTopicState();
   },
 
@@ -44,17 +50,17 @@ var ProgrammeSidebar = React.createClass({
   render() {
     var tags = [];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
       var index = i + 1;
 
-      tags.push({mark: index, value: '第' + index + '题', state: this.state.topicState[i]});
+      tags.push({mark: index, value: '第' + index + '题', state: this.state.topicStateList[i].topicStatus});
     }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
           + (item.state === 0 ? ' disabled' : '');
       return (
           <button className={classStr} disabled={item.state === 0 ? true : false} href="javascript:void(0)" key={index}
-             onClick={this.handleClick.bind(null, item.mark)}>
+                  onClick={this.handleClick.bind(null, item.mark)}>
             <div className="row">
               <div className="col-xs-9 h5 text-center">{item.value}</div>
               <div className='col-xs-3'>
