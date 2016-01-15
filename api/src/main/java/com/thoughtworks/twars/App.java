@@ -29,6 +29,9 @@ public class App extends ResourceConfig {
         final ScoreSheetMapper scoreSheetMapper = session
                 .getMapper(ScoreSheetMapper.class);
 
+        final HomeWorkQuizMapper homeWorkQuizMapper = session
+                .getMapper(HomeWorkQuizMapper.class);
+
 
         packages("com.thoughtworks.twars.resource")
             .register(new AbstractBinder() {
@@ -40,6 +43,7 @@ public class App extends ResourceConfig {
                     bind(quizItemMapper).to(QuizItemMapper.class);
                     bind(sectionMapper).to(SectionMapper.class);
                     bind(scoreSheetMapper).to(ScoreSheetMapper.class);
+                    bind(homeWorkQuizMapper).to(HomeWorkQuizMapper.class);
                 }
             });
     }
