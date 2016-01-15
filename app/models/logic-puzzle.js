@@ -7,6 +7,7 @@ var agent = require('superagent-promise')(superAgent, Promise);
 var apiServer = require('../configuration').apiServer;
 var time = require('../mixin/time');
 var httpCode = require('../mixin/constant');
+var async = require('async');
 var _timeBase = 90;
 
 var Schema = mongoose.Schema;
@@ -125,24 +126,6 @@ logicPuzzleSchema.statics.submitPaper = function (req, res) {
       })
       .then(function (data) {
         res.send({status: httpCode.OK});
-      });
-};
-
-logicPuzzleSchema.statics.saveAnswer = function (orderId,userAnswer,userId) {
-  return this.findOne({userId: userId})
-      .then(function (data) {
-
-        if (orderId > data.quizExamples.length - 1) {
-          data.quizItems[orderId - data.quizExamples.length].userAnswer = userAnswer;
-          data.save(function (err) {
-            if (err) {
-              console.log(err);
-            }
-          });
-        }
-      })
-      .then(function () {
-        return true;
       });
 };
 
