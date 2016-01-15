@@ -18,7 +18,7 @@ var ProgrammeSidebar = React.createClass({
     }
 
     return {
-      topicStateList: list
+      topicStatusList: list
     };
   },
 
@@ -29,9 +29,9 @@ var ProgrammeSidebar = React.createClass({
   changeIcon: function (state) {
     var icon = 'h4 fa fa-';
     var iconList = ['lock', '', 'clock-o', 'check-circle', 'times-circle'];
-    var stateCode = [0, 1, 2, 3, 4];
+    var statusCode = [0, 1, 2, 3, 4];
 
-    stateCode.forEach((item, index) => {
+    statusCode.forEach((item, index) => {
       if (state === item) {
         icon = icon + iconList[index];
       }
@@ -53,7 +53,7 @@ var ProgrammeSidebar = React.createClass({
     for (var i = 0; i < 5; i++) {
       var index = i + 1;
 
-      tags.push({mark: index, value: '第' + index + '题', state: this.state.topicStateList[i].topicStatus});
+      tags.push({mark: index, value: '第' + index + '题', state: this.state.topicStatusList[i].topicStatus});
     }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
