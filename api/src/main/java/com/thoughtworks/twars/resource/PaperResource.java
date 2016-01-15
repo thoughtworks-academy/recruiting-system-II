@@ -90,7 +90,7 @@ public class PaperResource {
         String blankQuizBasePath = "blankQuizzes/";
         String homeworkQuizBasePath = "homeworkQuizzes/";
 
-        if (description.equals("blankQuizzes")) {
+        if ("blankQuizzes".equals(description)) {
             return blankQuizMapper.findBySectionId(sectionId)
                     .stream()
                     .map(b -> {
