@@ -12,6 +12,4 @@ var userHomeworkQuizzesSchema = new Schema({
   }]
 });
 
-findOne({homeworkItems: [{id: 9}]});
-
 module.exports = mongoose.model('UserHomeworkQuizzes', userHomeworkQuizzesSchema);
