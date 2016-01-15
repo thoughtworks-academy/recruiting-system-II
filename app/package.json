@@ -37,6 +37,7 @@
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.5",
     "font-awesome": "^4.5.0",
+    "istanbul": "^0.4.2",
     "jasmine": "^2.4.1",
     "jest-cli": "^0.8.2",
     "kerberos": "0.0.17",

@@ -29,6 +29,11 @@ task eslintReport(type:Exec) {
     args "-c", "./node_modules/.bin/eslint -f checkstyle -o reports/eslint-report.xml ."
 }
 
+task testCoverageReport(type:Exec) {
+    executable "bash"
+    args "-c", "./node_modules/.bin/istanbul cover --report cobertura ./node_modules/.bin/jasmine"
+}
+
 task mongoRefresh(type:Exec) {
     executable "bash"
     args "-c", "node ./tools/seeds/refresh.js"
