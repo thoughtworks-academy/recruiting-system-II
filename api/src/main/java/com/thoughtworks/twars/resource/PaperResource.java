@@ -3,6 +3,7 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.bean.Section;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
+import com.thoughtworks.twars.mapper.HomeWorkQuizMapper;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
 
@@ -26,6 +27,8 @@ public class PaperResource {
     private SectionMapper sectionMapper;
     @Inject
     private BlankQuizMapper blankQuizMapper;
+    @Inject
+    private HomeWorkQuizMapper homeWorkQuizMapper;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -63,7 +66,8 @@ public class PaperResource {
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", item.getId());
                     map.put("desc", item.getDescription());
-                    map.put("quizzes", getQuizzesBySectionId(item.getId()));
+                    map.put("quizzes", getQuizzesBySectionId(item.getId(),
+                            item.getDescription()));
                     return map;
                 })
                 .collect(Collectors.toList());
@@ -81,22 +85,42 @@ public class PaperResource {
         return getOnePaper(1);
     }
 
-    private List<Map> getQuizzesBySectionId(int sectionId) {
+    private List<Map> getQuizzesBySectionId(int sectionId, String description) {
 
-        String basePath = "blankQuizzes/";
+        String blankQuizBasePath = "blankQuizzes/";
+        String homeworkQuizBasePath = "homeworkQuizzes/";
 
-        return blankQuizMapper.findBySectionId(sectionId)
-                .stream()
-                .map(b -> {
-                    HashMap<String, Object> item = new HashMap<>();
-                    item.put("id", b.getId());
+        if (description.equals("blankQuizzes")) {
+            return blankQuizMapper.findBySectionId(sectionId)
+                    .stream()
+                    .map(b -> {
+                        HashMap<String, Object> item = new HashMap<>();
+                        item.put("id", b.getId());
 
-                    item.put("definition", buildURIMap(basePath + b.getId()));
-                    item.put("items", buildURIMap(basePath + b.getId() +
-                            "/items"));
-                    return item;
-                })
-                .collect(Collectors.toList());
+                        item.put("definition", buildURIMap(blankQuizBasePath +
+                                b.getId()));
+                        item.put("items", buildURIMap(blankQuizBasePath +
+                                b.getId() + "/items"));
+                        return item;
+                    })
+                    .collect(Collectors.toList());
+        } else {
+            return homeWorkQuizMapper.findBySectionId(sectionId)
+                    .stream()
+                    .map(h -> {
+                        HashMap<String, Object> homeworkItem = new HashMap<>();
+                        homeworkItem.put("id", h.getId());
+                        homeworkItem.put("definition", buildURIMap(
+                                homeworkQuizBasePath + h.getId()));
+                        homeworkItem.put("items", buildURIMap(
+                                homeworkQuizBasePath + h.getId() +
+                                "/items"));
+                        return homeworkItem;
+                    })
+                    .collect(Collectors.toList());
+
+        }
+
     }
 
     private Map<String, String> buildURIMap(String uri) {
