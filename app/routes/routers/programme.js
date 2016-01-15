@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var programme = require('../../models/programme');
+var programme = require('../../models/user-homework-quizzes');
 
 var ProgrammeController  = require('../../controllers/programme-controller');
 var programmeController  = new  ProgrammeController();
