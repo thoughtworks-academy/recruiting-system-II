@@ -29,10 +29,6 @@ public class SectionMapperTest extends TestBase{
     public void should_return_section_by_paper_id() throws Exception {
 
         List<Section> sections = sectionMapper.getSectionsByPaperId(1);
-        assertThat(sections.size(), is(3));
+        assertThat(sections.size(), is(2));
     }
-
-
-
-
 }
