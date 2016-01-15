@@ -87,46 +87,5 @@ logicPuzzleSchema.statics.getLogicPuzzle = function (orderId, userId) {
       });
 };
 
-<<<<<<< HEAD
-logicPuzzleSchema.statics.submitPaper = function (req, res) {
-  var examerId = req.session.user.id;
-  var endTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
-  this.findOne({userId: examerId})
-      .then(function (data) {
-
-        var itemPosts = [];
-        data.quizItems.forEach(function (quizItem) {
-          itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
-        });
-        return agent.post(apiServer + 'scoresheets')
-            .set('Content-Type', 'application/json')
-            .send({
-              examerId: examerId,
-              paperId: data.paperId,
-              blankQuizSubmits: [
-                {
-                  blankQuizId: data.blankQuizId,
-                  itemPosts: itemPosts
-                }
-              ]
-            })
-            .end((err) => {
-              if(err){
-                console.log(err);
-              }else {
-                data.endTime = endTime;
-                data.isCommited = true;
-
-                return data.save();
-              }
-            });
-      })
-      .then(function (data) {
-        res.send({status: constant.httpCode.OK});
-      });
-};
-=======
-
->>>>>>> App : move the submitPaper to logic-puzzle-controller
 
 module.exports = mongoose.model('LogicPuzzle', logicPuzzleSchema);
