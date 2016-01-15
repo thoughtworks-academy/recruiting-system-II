@@ -148,17 +148,7 @@ describe('LogicPuzzleController', function () {
         });
       });
 
-      spyOn(apiRequest, 'post').and.callFake(function(uri,body,done){
-        expect(body).toEqual({
-          examerId: 1,
-          paperId: 1,
-          blankQuizSubmits: [
-            {
-              blankQuizId: 1,
-              itemPosts: [{quizItemId:3,answer:'10'}]
-            }
-          ]
-        });
+      spyOn(LogicPuzzleController, 'setScoreSheet').and.callFake(function(data,done){
         done(null,'OK!');
       });
 

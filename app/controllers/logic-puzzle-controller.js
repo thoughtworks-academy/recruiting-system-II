@@ -50,32 +50,13 @@ LogicPuzzleController.prototype.saveAnswer = function (req, res) {
 LogicPuzzleController.prototype.submitPaper = function (req, res) {
   var examerId = req.session.user.id;
   var endTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
-  var scoreSheetUri = 'scoresheets';
   var data;
   async.waterfall([
     function (done) {
       logicPuzzle.findOne({userId: examerId}, done);
-    },
-    function (doc, done) {
-      var itemPosts = [];
+    },(doc,done) => {
       data = doc;
-      data.quizItems.forEach(function (quizItem) {
-        itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
-      });
-      var body = {
-        examerId: examerId,
-        paperId: data.paperId,
-        blankQuizSubmits: [
-          {
-            blankQuizId: data.blankQuizId,
-            itemPosts: itemPosts
-          }
-        ]
-      };
-      done(null, body);
-    },
-    function (body, done) {
-      apiRequest.post(scoreSheetUri, body, done);
+      LogicPuzzleController.setScoreSheet(data, done);
     },
     function (responds, done) {
       data.endTime = endTime;
@@ -88,11 +69,30 @@ LogicPuzzleController.prototype.submitPaper = function (req, res) {
     if (!err) {
       res.sendStatus(constant.httpCode.OK);
     }else {
-      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR)
+      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     }
 
   });
 
+};
+
+LogicPuzzleController.setScoreSheet = function (data, done){
+  var scoreSheetUri = 'scoresheets';
+  var itemPosts = [];
+  data.quizItems.forEach(function (quizItem) {
+    itemPosts.push({answer: quizItem.userAnswer, quizItemId: quizItem.id});
+  });
+  var body = {
+    examerId: data.userId,
+    paperId: data.paperId,
+    blankQuizSubmits: [
+      {
+        blankQuizId: data.blankQuizId,
+        itemPosts: itemPosts
+      }
+    ]
+  };
+  apiRequest.post(scoreSheetUri, body, done);
 };
 
 module.exports = LogicPuzzleController;
