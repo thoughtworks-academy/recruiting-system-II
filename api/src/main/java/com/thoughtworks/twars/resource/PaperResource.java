@@ -88,14 +88,15 @@ public class PaperResource {
     private List<Map> getQuizzesBySectionId(int sectionId, String description) {
 
         if ("blankQuizzes".equals(description)) {
-            return getBlankQuizzes(blankQuizMapper,sectionId);
+            return getBlankQuizzes(blankQuizMapper, sectionId);
         }
-        return getHomeworkQuizzes(homeWorkQuizMapper,sectionId);
+        return getHomeworkQuizzes(homeWorkQuizMapper, sectionId);
     }
 
-    private List<Map> getHomeworkQuizzes(HomeWorkQuizMapper homeWorkQuizMapper, int sectionId) {
+    private List<Map> getHomeworkQuizzes(
+            HomeWorkQuizMapper localHomeWorkQuizMapper, int sectionId) {
         String homeworkQuizBasePath = "homeworkQuizzes/";
-        return homeWorkQuizMapper.findBySectionId(sectionId)
+        return localHomeWorkQuizMapper.findBySectionId(sectionId)
                 .stream()
                 .map(h -> {
                     HashMap<String, Object> homeworkItem = new HashMap<>();
@@ -110,9 +111,10 @@ public class PaperResource {
                 .collect(Collectors.toList());
     }
 
-    private List<Map> getBlankQuizzes(BlankQuizMapper blankQuizMapper, int sectionId) {
+    private List<Map> getBlankQuizzes(BlankQuizMapper localBlankQuizMapper,
+                                      int sectionId) {
         String blankQuizBasePath = "blankQuizzes/";
-        return blankQuizMapper.findBySectionId(sectionId)
+        return localBlankQuizMapper.findBySectionId(sectionId)
                 .stream()
                 .map(b -> {
                     HashMap<String, Object> item = new HashMap<>();
