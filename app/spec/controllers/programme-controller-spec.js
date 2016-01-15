@@ -57,21 +57,20 @@ describe('ProgrammeController', function () {
 
 
     spyOn(controller, 'updateAllStatus').and.callFake(function (done) {
-      var data =
-          [
-            {
-              topicStatus: 3
-            },
-            {
-              topicStatus: 4
-            },
-            {
-              topicStatus: 3
-            },
-            {
-              topicStatus: 4
-            }
-          ];
+      var data = [
+        {
+          topicStatus: 3
+        },
+        {
+          topicStatus: 4
+        },
+        {
+          topicStatus: 3
+        },
+        {
+          topicStatus: 4
+        }
+      ];
 
       done(null, data);
     });
