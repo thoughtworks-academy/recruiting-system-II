@@ -10,5 +10,5 @@ exports.setRoutes = function (app) {
   app.use('/logout', require('./routers/logout'));
   app.use('/timer', require('./routers/timer'));
   app.use('/user-initialization', require('./routers/user-initialization'));
-  //app.use('/programme',require('./routers/programme'));
+  app.use('/programme',require('./routers/programme'));
 };
