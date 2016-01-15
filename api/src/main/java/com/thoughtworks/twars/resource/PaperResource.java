@@ -87,40 +87,44 @@ public class PaperResource {
 
     private List<Map> getQuizzesBySectionId(int sectionId, String description) {
 
-        String blankQuizBasePath = "blankQuizzes/";
-        String homeworkQuizBasePath = "homeworkQuizzes/";
-
         if ("blankQuizzes".equals(description)) {
-            return blankQuizMapper.findBySectionId(sectionId)
-                    .stream()
-                    .map(b -> {
-                        HashMap<String, Object> item = new HashMap<>();
-                        item.put("id", b.getId());
-
-                        item.put("definition", buildURIMap(blankQuizBasePath +
-                                b.getId()));
-                        item.put("items", buildURIMap(blankQuizBasePath +
-                                b.getId() + "/items"));
-                        return item;
-                    })
-                    .collect(Collectors.toList());
-        } else {
-            return homeWorkQuizMapper.findBySectionId(sectionId)
-                    .stream()
-                    .map(h -> {
-                        HashMap<String, Object> homeworkItem = new HashMap<>();
-                        homeworkItem.put("id", h.getId());
-                        homeworkItem.put("definition", buildURIMap(
-                                homeworkQuizBasePath + h.getId()));
-                        homeworkItem.put("items", buildURIMap(
-                                homeworkQuizBasePath + h.getId() +
-                                "/items"));
-                        return homeworkItem;
-                    })
-                    .collect(Collectors.toList());
-
+            return getBlankQuizzes(blankQuizMapper,sectionId);
         }
+        return getHomeworkQuizzes(homeWorkQuizMapper,sectionId);
+    }
 
+    private List<Map> getHomeworkQuizzes(HomeWorkQuizMapper homeWorkQuizMapper, int sectionId) {
+        String homeworkQuizBasePath = "homeworkQuizzes/";
+        return homeWorkQuizMapper.findBySectionId(sectionId)
+                .stream()
+                .map(h -> {
+                    HashMap<String, Object> homeworkItem = new HashMap<>();
+                    homeworkItem.put("id", h.getId());
+                    homeworkItem.put("definition", buildURIMap(
+                            homeworkQuizBasePath + h.getId()));
+                    homeworkItem.put("items", buildURIMap(
+                            homeworkQuizBasePath + h.getId() +
+                                    "/items"));
+                    return homeworkItem;
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<Map> getBlankQuizzes(BlankQuizMapper blankQuizMapper, int sectionId) {
+        String blankQuizBasePath = "blankQuizzes/";
+        return blankQuizMapper.findBySectionId(sectionId)
+                .stream()
+                .map(b -> {
+                    HashMap<String, Object> item = new HashMap<>();
+                    item.put("id", b.getId());
+
+                    item.put("definition", buildURIMap(blankQuizBasePath +
+                            b.getId()));
+                    item.put("items", buildURIMap(blankQuizBasePath +
+                            b.getId() + "/items"));
+                    return item;
+                })
+                .collect(Collectors.toList());
     }
 
     private Map<String, String> buildURIMap(String uri) {
