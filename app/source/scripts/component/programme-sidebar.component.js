@@ -33,7 +33,7 @@ var ProgrammeSidebar = React.createClass({
     for (var i = 0; i < 10; i++) {
       var index = i + 1;
 
-      tags.push({mark: index, value: '第' + index + '题', state: 0});
+      tags.push({mark: index, value: '第' + index + '题', state: 2});
     }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
