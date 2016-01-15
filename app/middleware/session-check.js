@@ -18,10 +18,8 @@ function pathControl (req, res, next, jumpControl) {
   var redirectionAddress;
   var needRedirect = false;
 
-  var NONE = -1;
-
   jumpControl.forEach((item) => {
-    if (item.originPath.indexOf(lastElement) !== NONE && item.condition){
+    if (~item.originPath.indexOf(lastElement) && item.condition){
       redirectionAddress = item.targetPath;
       needRedirect = true;
     }
