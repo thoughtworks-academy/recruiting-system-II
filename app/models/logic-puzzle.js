@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose');
 var constant = require('../mixin/constant');
-var time = require('../mixin/time');
 
 var _timeBase = 90;
 
