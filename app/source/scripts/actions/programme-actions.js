@@ -3,7 +3,7 @@
 var Reflux = require('reflux');
 
 var ProgrammeActions = Reflux.createActions([
-  'loadTopicState'
+  'loadTopicStatus'
 ]);
 
 module.exports = ProgrammeActions;

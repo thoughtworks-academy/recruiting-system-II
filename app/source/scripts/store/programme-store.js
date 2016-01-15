@@ -9,7 +9,7 @@ var constant = require('../../../mixin/constant');
 var ProgrammeStore = Reflux.createStore({
   listenables: [ProgrammeActions],
 
-  onLoadTopicState: function () {
+  onLoadTopicStatus: function () {
     request.get('/programme/get-list')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
