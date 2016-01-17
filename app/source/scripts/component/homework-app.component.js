@@ -11,7 +11,7 @@ var HomeworkApp = React.createClass({
     };
   },
 
-  changeState: function (state) {
+  changeTopicNumber: function (state) {
     if (state !== this.state.currentTopicNumber) {
       this.setState({currentTopicNumber: state});
     }
@@ -21,7 +21,7 @@ var HomeworkApp = React.createClass({
     return (
         <div className="row">
           <HomeworkSidebar currentTopicNumber={this.state.currentTopicNumber}
-                            onChangeState={this.changeState}/>
+                            onChangeState={this.changeTopicNumber}/>
           <Homework />
         </div>
     );
