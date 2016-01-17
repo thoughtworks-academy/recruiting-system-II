@@ -1,16 +1,16 @@
 'use strict';
 
 var Reflux = require('reflux');
-var ProgrammeActions = require('../actions/programme-actions');
+var HomeworkActions = require('../actions/homework-actions');
 var request = require('superagent');
 var constant = require('../../../mixin/constant');
 
 
-var ProgrammeStore = Reflux.createStore({
-  listenables: [ProgrammeActions],
+var HomeworkStore = Reflux.createStore({
+  listenables: [HomeworkActions],
 
   onLoadTopicStatus: function () {
-    request.get('/programme/get-list')
+    request.get('/homework/get-list')
         .set('Content-Type', 'application/json')
         .end((err, res) => {
           if (err || res.status !== constant.httpCode.OK) {
@@ -21,4 +21,4 @@ var ProgrammeStore = Reflux.createStore({
   }
 });
 
-module.exports = ProgrammeStore;
+module.exports = HomeworkStore;

@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var ProgrammeTemplate = React.createClass({
+var HomeworkTemplate = React.createClass({
   render() {
     return (
         <div>
@@ -12,4 +12,4 @@ var ProgrammeTemplate = React.createClass({
   }
 });
 
-module.exports = ProgrammeTemplate;
+module.exports = HomeworkTemplate;

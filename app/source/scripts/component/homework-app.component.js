@@ -1,10 +1,10 @@
 'use strict';
 
 var React = require('react');
-var ProgrammeSidebar = require('./programme-sidebar.component');
-var Programme = require('./programme.component');
+var HomeworkSidebar = require('./homework-sidebar.component');
+var Homework = require('./homework.component');
 
-var ProgrammeApp = React.createClass({
+var HomeworkApp = React.createClass({
   getInitialState: function () {
     return {
       currentTopicNumber: 1
@@ -20,12 +20,12 @@ var ProgrammeApp = React.createClass({
   render() {
     return (
         <div className="row">
-          <ProgrammeSidebar currentTopicNumber={this.state.currentTopicNumber}
+          <HomeworkSidebar currentTopicNumber={this.state.currentTopicNumber}
                             onChangeState={this.changeState}/>
-          <Programme />
+          <Homework />
         </div>
     );
   }
 });
 
-module.exports = ProgrammeApp;
+module.exports = HomeworkApp;

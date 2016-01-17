@@ -1,9 +1,9 @@
 'use strict';
 
-require('../less/programme.less');
+require('../less/homework.less');
 var ReactDom = require('react-dom');
 var Navigation = require('./component/navigation.component');
-var ProgrammeApp = require('./component/programme-app.component');
+var HomeworkApp = require('./component/homework-app.component');
 
 ReactDom.render(
     <Navigation />,
@@ -11,6 +11,6 @@ ReactDom.render(
 );
 
 ReactDom.render(
-    <ProgrammeApp />,
-    document.getElementById('programme')
+    <HomeworkApp />,
+    document.getElementById('homework')
 );

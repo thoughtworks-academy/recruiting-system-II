@@ -4,11 +4,11 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var ProgrammeActions = require('../actions/programme-actions');
-var ProgrammeStore = require('../store/programme-store');
+var HomeworkActions = require('../actions/homework-actions');
+var HomeworkStore = require('../store/homework-store');
 
-var ProgrammeSidebar = React.createClass({
-  mixins: [Reflux.connect(ProgrammeStore)],
+var HomeworkSidebar = React.createClass({
+  mixins: [Reflux.connect(HomeworkStore)],
 
   getInitialState: function () {
     var list = [];
@@ -23,7 +23,7 @@ var ProgrammeSidebar = React.createClass({
   },
 
   componentDidMount: function () {
-    ProgrammeActions.loadTopicStatus();
+    HomeworkActions.loadTopicStatus();
   },
 
   changeIcon: function (state) {
@@ -76,7 +76,7 @@ var ProgrammeSidebar = React.createClass({
             <div className="list-group-item active">
               <div className="row">
                 <div className="col-xs-9 h4 text-center">编程题</div>
-                <div className="col-xs-3"><i className='programme-nav-icon h4 fa fa-pencil-square-o'></i></div>
+                <div className="col-xs-3"><i className='homework-nav-icon h4 fa fa-pencil-square-o'></i></div>
               </div>
             </div>
             {itemHtml}
@@ -86,4 +86,4 @@ var ProgrammeSidebar = React.createClass({
   }
 });
 
-module.exports = ProgrammeSidebar;
+module.exports = HomeworkSidebar;

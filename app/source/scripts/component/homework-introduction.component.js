@@ -5,7 +5,7 @@ var ReactDom = require('react-dom');
 var markdown = require('markdown').markdown;
 
 
-var ProgrammeIntroduction = React.createClass({
+var HomeworkIntroduction = React.createClass({
   getInitialState: function() {
     var content = markdown.toHTML("###题目说明");
 
@@ -26,4 +26,4 @@ var ProgrammeIntroduction = React.createClass({
   }
 });
 
-module.exports = ProgrammeIntroduction;
+module.exports = HomeworkIntroduction;
