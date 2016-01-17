@@ -2,14 +2,14 @@
 
 var React = require('react');
 
-var ProgrammeRequired = React.createClass({
+var ProgrammeTemplate = React.createClass({
   render() {
     return (
         <div>
-          题目要求
+          题目模板
         </div>
     );
   }
 });
 
-module.exports = ProgrammeRequired;
+module.exports = ProgrammeTemplate;

@@ -6,8 +6,10 @@ var React = require('react');
 var Tabs = require('react-bootstrap/lib/Tabs');
 var Tab = require('react-bootstrap/lib/Tab');
 var ProgrammeIntroduction = require('./programme-introduction.component');
-var ProgrammeRequired = require('./programme-required.component');
-var SubmissionIntroduction = require('./submisson-introduction.component');
+var ProgrammeTemplate = require('./programme-template.component');
+var SubmissionIntroduction = require('./submission-introduction.component');
+var RunningResult = require('./running-result.component');
+
 
 var Programme = React.createClass({
   render() {
@@ -16,8 +18,9 @@ var Programme = React.createClass({
           <div className="content">
             <Tabs defaultActiveKey={1} animation={false}>
               <Tab eventKey={1} title="题目说明"><ProgrammeIntroduction /></Tab>
-              <Tab eventKey={2} title="题目要求"><ProgrammeRequired /></Tab>
+              <Tab eventKey={2} title="题目模板"><ProgrammeTemplate/></Tab>
               <Tab eventKey={3} title="提交说明"><SubmissionIntroduction /></Tab>
+              <Tab eventKey={4} title="运行结果"><RunningResult /></Tab>
             </Tabs>
           </div>
         </div>
