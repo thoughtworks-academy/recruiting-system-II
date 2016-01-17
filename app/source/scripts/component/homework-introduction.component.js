@@ -7,11 +7,11 @@ var markdown = require('markdown').markdown;
 
 var HomeworkIntroduction = React.createClass({
   getInitialState: function() {
-    var content = markdown.toHTML("###题目说明");
+    var content = markdown.toHTML('###题目说明');
 
     return {
       describe: content
-    }
+    };
   },
   componentDidMount:function() {
   },
