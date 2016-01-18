@@ -13,7 +13,7 @@ var HomeworkSidebar = React.createClass({
   getInitialState: function () {
     var list = [];
 
-    for(var i = 0 ;i < 5; i ++) {
+    for (var i = 0; i < 5; i++) {
       list.push({topicStatus: 0});
     }
 
@@ -44,6 +44,7 @@ var HomeworkSidebar = React.createClass({
     if (name.includes('disabled') === false) {
       this.props.onChangeState(mark);
     }
+    history.pushState(null, '', '#' + mark);
   },
 
   render() {
@@ -57,8 +58,9 @@ var HomeworkSidebar = React.createClass({
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
           + (item.state === 0 ? ' disabled' : '');
+
       return (
-          <button className={classStr} disabled={item.state === 0 ? true : false} href="javascript:void(0)" key={index}
+          <button className={classStr} disabled={item.state === 0 ? true : false} key={index}
                   onClick={this.handleClick.bind(null, item.mark)}>
             <div className="row">
               <div className="col-xs-9 h4 text-center ">{item.value}</div>

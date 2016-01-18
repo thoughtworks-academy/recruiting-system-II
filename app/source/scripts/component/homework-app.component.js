@@ -6,8 +6,16 @@ var Homework = require('./homework.component');
 
 var HomeworkApp = React.createClass({
   getInitialState: function () {
+    var topicNumber;
+    var getNumber = location.href.split('#');
+
+    if(getNumber.length === 1) {
+      topicNumber = 1;
+    }else {
+      topicNumber = parseInt(getNumber[1]);
+    }
     return {
-      currentTopicNumber: 1
+      currentTopicNumber: topicNumber
     };
   },
 
