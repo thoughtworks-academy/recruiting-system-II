@@ -27,7 +27,7 @@ var HomeworkSidebar = React.createClass({
   },
 
   changeIcon: function (state) {
-    var icon = 'h4 fa fa-';
+    var icon = 'home-icon h4 fa fa-lg fa-';
     var iconList = ['lock', '', 'clock-o', 'check-circle', 'times-circle'];
     var statusCode = [0, 1, 2, 3, 4];
 
@@ -38,7 +38,6 @@ var HomeworkSidebar = React.createClass({
     });
     return icon;
   },
-
   handleClick: function (mark, evt) {
     var name = evt.target.offsetParent.className;
 
@@ -62,7 +61,7 @@ var HomeworkSidebar = React.createClass({
           <button className={classStr} disabled={item.state === 0 ? true : false} href="javascript:void(0)" key={index}
                   onClick={this.handleClick.bind(null, item.mark)}>
             <div className="row">
-              <div className="col-xs-9 h5 text-center">{item.value}</div>
+              <div className="col-xs-9 h4 text-center ">{item.value}</div>
               <div className='col-xs-3'>
                 <i className={this.changeIcon(item.state)}/></div>
             </div>
@@ -75,8 +74,8 @@ var HomeworkSidebar = React.createClass({
           <div className="list-group">
             <div className="list-group-item active">
               <div className="row">
-                <div className="col-xs-9 h4 text-center">编程题</div>
-                <div className="col-xs-3"><i className='homework-nav-icon h4 fa fa-pencil-square-o'></i></div>
+                <div className="col-xs-9 h3 text-center">编程题</div>
+                <div className="col-xs-3"><i className='homework-nav-icon h3 fa fa-pencil-square-o'></i></div>
               </div>
             </div>
             {itemHtml}
