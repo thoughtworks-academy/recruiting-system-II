@@ -1,20 +1,49 @@
 'use strict';
 
-var homework = require('../models/user-homework-quizzes');
+var programme = require('../models/programme');
 var async = require('async');
 
-function HomeworkController() {
+function ProgrammeController() {
 
 }
 
-HomeworkController.prototype.getList = function (req, res) {
-  res.send({topicStatusList: [{topicStatus: 3}, {topicStatus: 4}, {topicStatus: 2}, {topicStatus: 1}, {topicStatus: 0}]});
+ProgrammeController.prototype.getList = function (req, res) {
+  var userId = req.session.id;
+
+  var homeworkQuizzesUrl = 'scoresheets';
+  async.waterfall([
+
+    function (done) {
+
+      var items = {
+        userId: userId,
+        homeworkQuizzes: 1,
+        homeworkItems: [
+          {
+            id: 1,
+            states: 0
+          }
+        ]
+
+      };
+
+      done(null, items);
+    }, function (data, done) {
+      apiRequest.get(scoresheets, done);
+
+    }, function (responds, done) {
+
+    }
+
+  ], function (err) {
+    //TODO:
+  });
 };
 
 
-HomeworkController.prototype.updateStatus = function (existStatus, receiceStatus) {
+ProgrammeController.prototype.updateStatus = function (existStatus, receiceStatus) {
   //TODO:
 };
 
 
-module.exports = HomeworkController;
+module.exports = ProgrammeController;
