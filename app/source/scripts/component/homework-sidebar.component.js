@@ -14,7 +14,7 @@ var HomeworkSidebar = React.createClass({
     var list = [];
 
     for (var i = 0; i < 5; i++) {
-      list.push({topicStatus: 0});
+      list.push({topicStatus: 'lock'});
     }
 
     return {
@@ -29,7 +29,7 @@ var HomeworkSidebar = React.createClass({
   changeIcon: function (state) {
     var icon = 'home-icon h4 fa fa-lg fa-';
     var iconList = ['lock', '', 'clock-o', 'check-circle', 'times-circle'];
-    var statusCode = [0, 1, 2, 3, 4];
+    var statusCode = ['lock', 'active', 'progress', 'success', 'error'];
 
     statusCode.forEach((item, index) => {
       if (state === item) {
