@@ -1,6 +1,6 @@
 'use strict';
 
-var programme = require('../models/programme');
+var programme = require('../models/user-homework-quizzes');
 var async = require('async');
 
 function ProgrammeController() {
