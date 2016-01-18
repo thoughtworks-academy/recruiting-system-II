@@ -19,4 +19,5 @@ public class HomeworkQuiz {
     public void setSectionId(int sectionId) {
         this.sectionId = sectionId;
     }
+
 }

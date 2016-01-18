@@ -29,7 +29,7 @@ public class BlankQuizMapperTest extends TestBase {
     @Test
     public void should_return_all_blankQuizzes() throws Exception {
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findAll();
-        assertThat(blankQuizzes.size(), is(6));
+        assertThat(blankQuizzes.size(), is(5));
     }
 
     @Test
@@ -43,13 +43,13 @@ public class BlankQuizMapperTest extends TestBase {
 
         blankQuizMapper.insertBlankQuiz(blankQuiz);
 
-        assertThat(blankQuiz.getId(),is(7));
+        assertThat(blankQuiz.getId(),is(6));
     }
 
     @Test
     public void should_return_some_blank_quizzes_by_given_section_id() throws Exception {
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(1);
-        assertThat(blankQuizzes.size(), is(3));
+        assertThat(blankQuizzes.size(), is(2));
     }
 
     @Test

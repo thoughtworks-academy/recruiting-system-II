@@ -3,12 +3,10 @@ package com.thoughtworks.twars.resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.ScoreSheet;
-import com.thoughtworks.twars.mapper.ScoreSheetMapper;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import java.util.*;
 
@@ -48,7 +46,7 @@ public class ScoreSheetResourceTest extends TestBase {
 
 
     @Test
-    public void should_insert_score_sheet_uri() {
+    public void should_insert_blank_quiz_score_sheet_uri() {
 
         Map itemPost = new HashMap<>();
         itemPost.put("answer", "10");
@@ -75,6 +73,32 @@ public class ScoreSheetResourceTest extends TestBase {
         Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(), is(201));
     }
+
+
+    @Test
+    public void should_insert_homework_quiz_score_sheet_uri() {
+
+        int examerId = 2;
+        int paperId = 1;
+
+        String homeworkURL = "github.com/jjweng/1";
+        int homeworkQuizItemId = 1;
+
+        Map homeworkSubmitPostHistory = new HashMap<>();
+        homeworkSubmitPostHistory.put("homeworkURL", homeworkURL);
+        homeworkSubmitPostHistory.put("homeworkQuizItemId", homeworkQuizItemId);
+
+        Map homeworkScoreSheet = new HashMap<>();
+        homeworkScoreSheet.put("examerId", examerId);
+        homeworkScoreSheet.put("paperId", paperId);
+        homeworkScoreSheet.put("homeworkSubmitPostHistory", homeworkSubmitPostHistory);
+
+        Entity<Map> entity = Entity.entity(homeworkScoreSheet, MediaType.APPLICATION_JSON_TYPE);
+
+        Response response = target(basePath).request().post(entity);
+        assertThat(response.getStatus(), is(201));
+    }
+
 
     @Test
     public void shoule_return_one_score_sheet_by_id() {

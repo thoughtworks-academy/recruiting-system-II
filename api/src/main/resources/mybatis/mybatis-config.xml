@@ -23,5 +23,6 @@
         <mapper resource="mybatis/ScoreSheetMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkQuizMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkQuizItemMapper.xml"></mapper>
+        <mapper resource="mybatis/HomeworkQuizScoreSheetMapper.xml"></mapper>
     </mappers>
 </configuration>

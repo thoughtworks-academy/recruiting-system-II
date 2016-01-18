@@ -67,7 +67,7 @@ INSERT INTO users values(null, "z@z.com", "18291895012", "550e1bafe077ff0b0b67f4
 TRUNCATE blankQuiz;
 INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,2,"singlePuzzle",10,2,4,4);
-INSERT INTO blankQuiz VALUES (null,1,"mutilPuzzle",10,3,4,3);
+INS,ERT INTO blankQuiz VALUES (null,1,"mutilPuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,1,"singlePuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,2,"singlePuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,3,"logicPuzzle",10,5,4,1);
@@ -90,4 +90,11 @@ TRUNCATE homeworkQuiz;
 INSERT INTO homeworkQuiz VALUES (NULL ,2);
 INSERT INTO homeworkQuiz VALUES (NULL ,2);
 INSERT INTO homeworkQuiz VALUES (NULL ,2);
+
+TRUNCATE homeworkQuizScoreSheet;
+INSERT INTO homeworkQuizScoreSheet VALUES (NULL ,1, 1, 2, "github.com/purper/1", 1);
+INSERT INTO homeworkQuizScoreSheet VALUES (NULL ,1, 1, 2, "github.com/purper/2", 2);
+INSERT INTO homeworkQuizScoreSheet VALUES (NULL ,1, 1, 2, "github.com/purper/3", 3);
+INSERT INTO homeworkQuizScoreSheet VALUES (NULL ,1, 1, 2, "github.com/purper/4", 4);
+INSERT INTO homeworkQuizScoreSheet VALUES (NULL ,1, 1, 2, "github.com/purper/5", 5);
 
