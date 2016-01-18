@@ -29,6 +29,8 @@ public class TestBase {
                 pps.getProperty("user"),
                 pps.getProperty("password")
         );
+
+        flyway.setEncoding("UTF-8");
     }
 
 
