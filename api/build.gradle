@@ -32,6 +32,15 @@ jacocoTestReport {
 }
 
 
+checkstyleMain {
+    reports {
+        xml {
+            destination "build/reports/checkstyle/main.xml"
+        }
+    }
+}
+
+
 dependencies {
     compile 'mysql:mysql-connector-java:5.1.37'
     compile 'org.mybatis:mybatis:3.3.0'
