@@ -26,7 +26,7 @@ public class HomeworkQuizItemMapperTest extends TestBase {
     @Test
     public void should_return_all_homework_quiz_items() throws Exception {
         List<HomeworkQuizItem> homeworkQuizItems = homeworkQuizItemMapper.findByHomeworkQuizId(1);
-        assertThat(homeworkQuizItems.size(), is(0));
+        assertThat(homeworkQuizItems.size(), is(2));
     }
 
 }

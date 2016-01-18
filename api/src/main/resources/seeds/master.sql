@@ -99,7 +99,7 @@ INSERT INTO homeworkQuizScoreSheet VALUES (NULL ,1, 1, 2, "github.com/purper/4",
 INSERT INTO homeworkQuizScoreSheet VALUES (NULL ,1, 1, 2, "github.com/purper/5", 5);
 
 TRUNCATE homeworkQuizItem;
-INSERT INTO homeworkQuizItem VALUES (NULL , "art", "www.baidu.com", "evaluateRepository", "templateRepository",4);
-INSERT INTO homeworkQuizItem VALUES (NULL , "math", "www.baidu.com", "evaluateRepository", "templateRepository",4);
+INSERT INTO homeworkQuizItem VALUES (NULL , "art", "www.baidu.com", "evaluateRepository", "templateRepository",1);
+INSERT INTO homeworkQuizItem VALUES (NULL , "math", "www.baidu.com", "evaluateRepository", "templateRepository",1);
 
 
