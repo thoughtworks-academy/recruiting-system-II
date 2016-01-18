@@ -59,8 +59,10 @@ LogicPuzzleController.prototype.submitPaper = function (req, res) {
       LogicPuzzleController.setScoreSheet(data, done);
     },
     function (responds, done) {
-      data.endTime = endTime;
-      data.isCommited = true;
+      if(data){
+        data.endTime = endTime;
+        data.isCommited = true;
+      }
       data.save((err, doc)=> {
         done(err, doc);
       });

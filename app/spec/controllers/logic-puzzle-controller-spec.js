@@ -162,6 +162,24 @@ describe('LogicPuzzleController', function () {
           }
         });
     });
+
+    it('can\'t find the userPuzzle when submit paper ', function (done) {
+      spyOn(logicPuzzle, 'findOne').and.callFake(function (id, done) {
+        done('error', {});
+      });
+
+      spyOn(LogicPuzzleController, 'setScoreSheet').and.callFake(function(data,done){
+        done(null,'OK!');
+      });
+
+      controller.submitPaper({session: {user: {id: 1}}},
+        {
+          sendStatus: function(data){
+            expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
+            done();
+          }
+        });
+    });
   });
 
 });
