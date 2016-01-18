@@ -2,6 +2,8 @@
 
 var apiRequest = require('../services/api-request');
 var logicPuzzle = require('../models/logic-puzzle');
+var homeworkQuizzes = require('../models/homework-quizzes');
+var userHomeworkQuizzes = require('../models/user-homework-quizzes');
 var constant = require('../mixin/constant');
 var async = require('async');
 
@@ -66,6 +68,42 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
       res.send({status: 500, message: '服务器错误'});
     } else {
       res.send({status: 200, message: '初始化成功!'});
+    }
+  });
+};
+
+UserInitializationController.prototype.initialHomeworkQuizzes = (req, res) => {
+  async.waterfall([
+    (done) => {
+      apiRequest.get('papers/enrollment', done);
+    },
+
+    (response, done) => {
+      if(!!response.body.sections) {
+        var result;
+        response.body.sections.forEach((element, i) => {
+          result = element.desc === 'homeworkQuizzes' ? element.quizzes : result;
+        });
+        apiRequest.get(result[0].items.uri, done);
+      }else {
+        done(new Error(''));
+      }
+    },
+
+    (result, done) => {
+      homeworkQuizzes.upsertData(result.body.homeworkQuizItems, done);
+    },
+
+    (result, done) => {
+      var userId = req.session.user.id;
+      userHomeworkQuizzes.initUserHomeworkQuizzes(userId, result, done);
+    }
+  ], function (err, data) {
+
+    if (err) {
+      res.send({status: 500, message: err.message});
+    }else {
+      res.send({status: 200});
     }
   });
 };

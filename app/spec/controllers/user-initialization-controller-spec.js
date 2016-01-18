@@ -2,6 +2,8 @@
 
 var UserInitializationController = require('../../controllers/user-initialization-controller');
 var logicPuzzle = require('../../models/logic-puzzle');
+var homeworkQuizzes = require('../../models/homework-quizzes');
+var userHomeworkQuizzes = require('../../models/user-homework-quizzes');
 var apiRequest = require('../../services/api-request');
 var constant = require('../../mixin/constant');
 
@@ -98,4 +100,97 @@ describe('UserInitializationController', function () {
 
   });
 
+  describe('initialHomeworkQuizzes', function () {
+    var homeworkQuiz;
+    var userInitializationController;
+
+    beforeEach(() => {
+      paperEnrollment =
+      {
+        'id': 1,
+        'sections': [{
+          'id': 1,
+          'quizzes': [{
+            'id': 1,
+            'items': {
+              'uri': 'blankQuizzes/1/items'
+            }
+          }]
+        }, {
+          'id': 2,
+          'quizzes': [{
+            'id': 1,
+            'items': {
+              'uri': 'homeworkQuizzes/1/items'
+            }
+          }],
+          'desc': 'homeworkQuizzes'
+        }]
+      };
+
+      homeworkQuiz = {
+        homeworkQuizzes: [{
+          id: 1,
+          desc: '这是一道比较难的题!',
+          templateRespos: 'github'
+        }]
+      };
+
+      userInitializationController = new UserInitializationController();
+    });
+
+    it('should initial user homework quizzes in mongoDB when use is not exist.', function (done) {
+      spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
+        if (uri === 'papers/enrollment') {
+          done(null, {body: paperEnrollment});
+        } else if(uri === 'homeworkQuizzes/1/items') {
+          done(null, {body: {homeworkQuiz}});
+        }
+      });
+
+      spyOn(homeworkQuizzes,'upsertData').and.callFake(function(data, done){
+        done(null, data);
+      });
+
+      spyOn(userHomeworkQuizzes,'initUserHomeworkQuizzes').and.callFake(function(userId, data, done){
+        done(null, null);
+      });
+
+      userInitializationController.initialHomeworkQuizzes({
+        session: {user: {id: 1}}
+      },{
+        send: function (data) {
+          expect(data).toEqual({status: 200});
+          done();
+        }
+      });
+    });
+
+    it('should throw error when user is exist.', function (done) {
+      spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
+        if (uri === 'papers/enrollment') {
+          done(null, {body: paperEnrollment});
+        } else if(uri === 'homeworkQuizzes/1/items') {
+          done(null, {body: {homeworkQuiz}});
+        }
+      });
+
+      spyOn(homeworkQuizzes,'upsertData').and.callFake(function(data, done){
+        done(null, data);
+      });
+
+      spyOn(userHomeworkQuizzes,'initUserHomeworkQuizzes').and.callFake(function(userId, data, done){
+        done(new Error('is exist'));
+      });
+
+      userInitializationController.initialHomeworkQuizzes({
+        session: {user: {id: 1}}
+      },{
+        send: function (data) {
+          expect(data).toEqual({status: 500, message: 'is exist'});
+          done();
+        }
+      });
+    });
+  });
 });
