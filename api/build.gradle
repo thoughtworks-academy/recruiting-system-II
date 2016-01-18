@@ -50,13 +50,6 @@ dependencies {
     testCompile 'org.flywaydb:flyway-core:3.2.1'
 }
 
-
-flyway {
-    url = 'jdbc:mysql://localhost:3306/BronzeSword'
-    user = 'BronzeSword'
-    password = '12345678'
-}
-
 task(DBRecovery, dependsOn: 'classes', type: JavaExec) {
     doFirst {
         flywayClean.execute()
