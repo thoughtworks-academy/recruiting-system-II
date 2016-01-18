@@ -6,30 +6,30 @@ var Homework = require('./homework.component');
 
 var HomeworkApp = React.createClass({
   getInitialState: function () {
-    var topicNumber;
+    var homeworkNumber;
     var getNumber = location.hash.substr(1);
 
     if(getNumber === '') {
-      topicNumber = 1;
+      homeworkNumber = 1;
     }else {
-      topicNumber = parseInt(getNumber);
+      homeworkNumber = parseInt(getNumber);
     }
     return {
-      currentTopicNumber: topicNumber
+      currentHomeworkNumber: homeworkNumber
     };
   },
 
-  changeTopicNumber: function (state) {
-    if (state !== this.state.currentTopicNumber) {
-      this.setState({currentTopicNumber: state});
+  changeHomeworkNumber: function (state) {
+    if (state !== this.state.currentHomeworkNumber) {
+      this.setState({currentHomeworkNumber: state});
     }
   },
 
   render() {
     return (
         <div className="row">
-          <HomeworkSidebar currentTopicNumber={this.state.currentTopicNumber}
-                            onChangeState={this.changeTopicNumber}/>
+          <HomeworkSidebar currentHomeworkNumber={this.state.currentHomeworkNumber}
+                            onChangeNumber={this.changeHomeworkNumber}/>
           <Homework />
         </div>
     );

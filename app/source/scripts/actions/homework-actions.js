@@ -3,7 +3,7 @@
 var Reflux = require('reflux');
 
 var HomeworkActions = Reflux.createActions([
-  'loadTopicStatus'
+  'loadHomeworkStatus'
 ]);
 
 module.exports = HomeworkActions;

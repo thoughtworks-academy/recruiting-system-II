@@ -14,16 +14,16 @@ var HomeworkSidebar = React.createClass({
     var list = [];
 
     for (var i = 0; i < 5; i++) {
-      list.push({topicStatus: 'lock'});
+      list.push({homeworkStatus: 'lock'});
     }
 
     return {
-      topicStatusList: list
+      homeworkStatusList: list
     };
   },
 
   componentDidMount: function () {
-    HomeworkActions.loadTopicStatus();
+    HomeworkActions.loadHomeworkStatus();
   },
 
   changeIcon: function (state) {
@@ -42,7 +42,7 @@ var HomeworkSidebar = React.createClass({
     var name = evt.target.offsetParent.className;
 
     if (name.includes('disabled') === false) {
-      this.props.onChangeState(mark);
+      this.props.onChangeNumber(mark);
     }
     history.pushState(null, '', '#' + mark);
   },
@@ -53,10 +53,10 @@ var HomeworkSidebar = React.createClass({
     for (var i = 0; i < 5; i++) {
       var index = i + 1;
 
-      tags.push({mark: index, value: '第' + index + '题', state: this.state.topicStatusList[i].topicStatus});
+      tags.push({mark: index, value: '第' + index + '题', state: this.state.homeworkStatusList[i].homeworkStatus});
     }
     var itemHtml = tags.map((item, index) => {
-      var classStr = 'list-group-item ' + (item.mark === this.props.currentTopicNumber ? 'selected' : '')
+      var classStr = 'list-group-item ' + (item.mark === this.props.currentHomeworkNumber ? 'selected' : '')
           + (item.state === 0 ? ' disabled' : '');
 
       return (
