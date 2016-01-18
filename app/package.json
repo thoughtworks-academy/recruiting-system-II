@@ -43,6 +43,7 @@
     "kerberos": "0.0.17",
     "less-loader": "^2.2.2",
     "passport": "^0.3.2",
+    "pm2": "^1.0.0",
     "promise": "^7.1.1",
     "react-addons-test-utils": "^0.14.3",
     "reflux": "^0.3.0",

@@ -1,13 +1,11 @@
 subprojects {
     apply plugin: 'java'
-
     repositories {
         jcenter()
     }
 }
 
 allprojects {
-
     apply plugin: "idea"
 }
 
