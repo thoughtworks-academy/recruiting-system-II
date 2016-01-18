@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var ReactDom = require('react-dom');
 var markdown = require('markdown').markdown;
 
 
@@ -13,13 +12,14 @@ var HomeworkIntroduction = React.createClass({
       describe: content
     };
   },
+
   componentDidMount:function() {
+    document.getElementById('introduction').innerHTML = this.state.describe;
   },
 
   render() {
-    console.log(this.state.describe);
     return (
-        <div>
+        <div id="introduction">
           题目说明
         </div>
     );
