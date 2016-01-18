@@ -67,7 +67,7 @@ INSERT INTO users values(null, "z@z.com", "18291895012", "550e1bafe077ff0b0b67f4
 TRUNCATE blankQuiz;
 INSERT INTO blankQuiz VALUES (null,1,"logicPuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,2,"singlePuzzle",10,2,4,4);
-INS,ERT INTO blankQuiz VALUES (null,1,"mutilPuzzle",10,3,4,3);
+INSERT INTO blankQuiz VALUES (null,1,"mutilPuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,1,"singlePuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,2,"singlePuzzle",10,3,4,3);
 INSERT INTO blankQuiz VALUES (null,3,"logicPuzzle",10,5,4,1);
