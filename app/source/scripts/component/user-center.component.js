@@ -88,13 +88,12 @@ var UserDetail = React.createClass({
     var userInfo = [];
 
     userInfo.push(school, name, major, degree);
-
     var pass = false;
     var stateObj = {};
 
     userInfo.forEach((item) => {
       var result = validate(item, constraint);
-      var error = getError(result, Object.keys[item]);
+      var error = getError(result, Object.keys(item));
 
       if (error !== '') {
         pass = true;
@@ -127,7 +126,7 @@ var UserDetail = React.createClass({
     } else if (this.state.gender === '') {
       return;
     }
-
+    this.checkInfo();
     UserDetailActions.updateUserDetail(userData);
   },
 
