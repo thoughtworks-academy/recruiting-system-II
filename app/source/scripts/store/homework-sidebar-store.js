@@ -1,13 +1,13 @@
 'use strict';
 
 var Reflux = require('reflux');
-var HomeworkActions = require('../actions/homework-actions');
+var HomeworkSidebarActions = require('../actions/homework-sidebar-actions');
 var request = require('superagent');
 var constant = require('../../../mixin/constant');
 
 
-var HomeworkStore = Reflux.createStore({
-  listenables: [HomeworkActions],
+var HomeworkSidebarStore = Reflux.createStore({
+  listenables: [HomeworkSidebarActions],
 
   onLoadHomeworkStatus: function () {
     request.get('/homework/get-list')
@@ -21,4 +21,4 @@ var HomeworkStore = Reflux.createStore({
   }
 });
 
-module.exports = HomeworkStore;
+module.exports = HomeworkSidebarStore;

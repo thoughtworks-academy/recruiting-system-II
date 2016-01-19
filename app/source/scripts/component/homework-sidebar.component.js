@@ -4,11 +4,11 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var HomeworkActions = require('../actions/homework-actions');
-var HomeworkStore = require('../store/homework-store');
+var HomeworkSidebarActions = require('../actions/homework-sidebar-actions');
+var HomeworkSidebarStore = require('../store/homework-sidebar-store');
 
 var HomeworkSidebar = React.createClass({
-  mixins: [Reflux.connect(HomeworkStore)],
+  mixins: [Reflux.connect(HomeworkSidebarStore)],
 
   getInitialState: function () {
     var list = [];
@@ -23,7 +23,7 @@ var HomeworkSidebar = React.createClass({
   },
 
   componentDidMount: function () {
-    HomeworkActions.loadHomeworkStatus();
+    HomeworkSidebarActions.loadHomeworkStatus();
   },
 
   changeIcon: function (state) {
