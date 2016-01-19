@@ -1,58 +1,41 @@
 'use strict';
 
-var ProgrammeController = require('../../controllers/homework-controller');
-var programme = require('../../models/user-homework-quizzes');
-var apiRequest = require('../../services/api-request');
+var HomeworkController = require('../../controllers/homework-controller');
+var homework = require('../../models/user-homework-quizzes');
 
-describe('ProgrammeController', function () {
+describe('HomeworkController', function () {
 
   var controller;
 
   beforeEach(function () {
-    controller = new ProgrammeController();
+    controller = new HomeworkController();
   });
 
   it('should return homeworkQuizzes when receive a request', function (done) {
 
-    spyOn(programme, 'findOne').and.callFake(function (id, done) {
+    spyOn(homework, 'findOne').and.callFake(function (id, done) {
 
       var data = {
         userId: 1,
-        homeworkItems: [
+        quizzes: [
           {
             id: 1,
             locked: false,
             status: 1
+
           }, {
             id: 2,
             locked: true,
             status: 0
           }
-        ]
+        ],
+        save: (done) => {
+          done(null, null);
+        }
       };
 
       done(null, data);
     });
-
-    spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
-
-      var data = {
-        status: 200,
-        homeworkItems: [{
-          id: 1,
-          status: 2
-        }, {
-          id: 2,
-          status: 2
-        }, {
-          id: 3,
-          status: 4
-        }]
-      };
-
-      done(null, data);
-    });
-
 
     controller.getList({
       session: {
@@ -64,13 +47,10 @@ describe('ProgrammeController', function () {
           status: 200,
           homeworkQuizzes: [
             {
-              status: 2
+              status: 1
             },
             {
-              status: 2
-            },
-            {
-              status: 4
+              status: 0
             }
           ]
         });
@@ -83,36 +63,29 @@ describe('ProgrammeController', function () {
 
   it('should active the first homeworkQuiz when receive a request httpCode is 404', function (done) {
 
-    spyOn(programme, 'findOne').and.callFake(function (id, done) {
+    spyOn(homework, 'findOne').and.callFake(function (id, done) {
 
       var data = {
         userId: 1,
-        homeworkItems: [
+        quizzes: [
           {
             id: 1,
             locked: true,
             status: 0
+
           }, {
             id: 2,
             locked: true,
             status: 0
           }
-        ]
+        ],
+        save: (done) => {
+          done(null, null);
+        }
       };
 
       done(null, data);
     });
-
-    spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
-
-      var data = {
-        status: 404,
-        homeworkQuizzes: null
-      };
-
-      done(null, data);
-    });
-
 
     controller.getList({
       session: {
