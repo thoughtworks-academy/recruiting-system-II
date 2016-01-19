@@ -8,7 +8,12 @@ var userHomeworkQuizzesSchema = new Schema({
   homeworkItems: [{
     id: Number,
     locked: Boolean,
-    status: Number
+    status: Number,
+    startTime: Number,
+    userAnswerRepo: String,
+    message: String,
+    branch: String,
+    commitSHA: String
   }]
 });
 
