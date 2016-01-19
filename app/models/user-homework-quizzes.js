@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var userHomeworkQuizzesSchema = new Schema({
   userId: Number,
-  homeworkItems: [{
+  quizzes: [{
     id: Number,
     locked: Boolean,
     status: Number,
@@ -19,13 +19,13 @@ var userHomeworkQuizzesSchema = new Schema({
 
 userHomeworkQuizzesSchema.statics.initUserHomeworkQuizzes = function (userId, idList, callback) {
   this.findOne({userId: userId}, (err, doc) => {
-    if (doc){
+    if (doc) {
       callback(new Error('is exist'), null);
-    }else {
-      var homeworkItems = [];
+    } else {
+      var quizzes = [];
 
       idList.forEach((id) => {
-        homeworkItems.push({
+        quizzes.push({
           id: id,
           locked: true,
           status: 0
@@ -34,7 +34,7 @@ userHomeworkQuizzesSchema.statics.initUserHomeworkQuizzes = function (userId, id
 
       this.create({
         userId: userId,
-        homeworkItems: homeworkItems
+        quizzes: quizzes
       }, callback);
     }
   });
