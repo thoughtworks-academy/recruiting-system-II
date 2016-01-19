@@ -12,6 +12,8 @@ allprojects {
 task(startServer) {
     doFirst {
         println "Starting jetty"
+        project(':api').flywayClean.execute()
+        project(':api').flywayMigrate.execute()
         project(':api').jettyRun.daemon = true
         project(':api').jettyRun.execute()
         println "Jetty started"
@@ -25,5 +27,3 @@ task(startServer) {
         println "Server stoped"
     }
 }
-
-startServer.dependsOn ':api:DBRecovery'

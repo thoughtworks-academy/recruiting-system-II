@@ -1,7 +1,6 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Paper;
-import com.thoughtworks.twars.bean.Section;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.HomeWorkQuizMapper;
 import com.thoughtworks.twars.mapper.PaperMapper;
@@ -14,7 +13,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -72,7 +74,7 @@ public class PaperResource {
                 })
                 .collect(Collectors.toList());
 
-        Map<String, Object> result = new HashMap<>();
+            Map<String, Object> result = new HashMap<>();
         result.put("sections", sectionList);
         result.put("id", id);
         return Response.status(Response.Status.OK).entity(result).build();
