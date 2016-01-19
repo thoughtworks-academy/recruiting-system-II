@@ -57,7 +57,7 @@ var HomeworkSidebar = React.createClass({
     }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (item.mark === this.props.currentHomeworkNumber ? 'selected' : '')
-          + (item.state === 0 ? ' disabled' : '');
+          + (item.state === 'lock' ? ' disabled' : '');
 
       return (
           <button className={classStr} disabled={item.state === 0 ? true : false} key={index}
