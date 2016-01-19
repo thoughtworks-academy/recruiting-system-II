@@ -126,7 +126,6 @@ var UserDetail = React.createClass({
     } else if (this.state.gender === '') {
       return;
     }
-    this.checkInfo();
     UserDetailActions.updateUserDetail(userData);
   },
 
