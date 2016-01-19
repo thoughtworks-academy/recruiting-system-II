@@ -1,6 +1,6 @@
 'use strict';
 
-var ProgrammeController = require('../../controllers/programme-controller');
+var ProgrammeController = require('../../controllers/homework-controller');
 var programme = require('../../models/user-homework-quizzes');
 var apiRequest = require('../../services/api-request');
 
