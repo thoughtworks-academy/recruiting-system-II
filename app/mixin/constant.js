@@ -13,6 +13,13 @@ var constant = {
     MINUTE_PER_HOUR: 60,
     SECONDS_PER_MINUTE: 60,
     MILLISECOND_PER_SECONDS: 1000
+  },
+  homeworkQuizzesStatus:{
+    LOCKED:0,
+    ACTIVE:1,
+    PROGRESS:2,
+    SUCCESS:3,
+    ERROR:4
   }
 };
 
