@@ -3,6 +3,8 @@
 var mongoose = require('mongoose');
 var logicPuzzle = require('../../models/logic-puzzle');
 
+var UserHomeworkQuizzes = require('../../models/user-homework-quizzes');
+
 mongoose.connect('mongodb://localhost/twars');
 var db = mongoose.connection;
 db.once('open', function () {
@@ -484,7 +486,7 @@ db.once('open', function () {
         blankQuizId: 1,
         paperId: 1
 
-      },{
+      }, {
         userId: 6,
         quizItems: [
           {
@@ -582,8 +584,31 @@ db.once('open', function () {
       }
     ], function () {
       console.log('mongo refresh end.');
-      process.exit();
+      //process.exit();
     });
   });
 
+  console.log('mongo insert UserHomeworkQuizzes start...');
+
+  UserHomeworkQuizzes.remove(function () {
+    UserHomeworkQuizzes.create({
+      userId: 1,
+      homeworkItems: [
+        {id: 1, locked: true, status: 0},
+        {id: 2, locked: true, status: 0},
+        {id: 3, locked: true, status: 0},
+        {id: 4, locked: true, status: 0},
+        {id: 5, locked: true, status: 0},
+        {id: 6, locked: true, status: 0},
+        {id: 7, locked: true, status: 0},
+        {id: 8, locked: true, status: 0},
+        {id: 9, locked: true, status: 0},
+        {id: 10, locked: true, status: 0}
+      ]
+    }, function () {
+      console.log('mongo insert userHomeworkQuizzes end');
+      process.exit();
+
+    });
+  });
 });
