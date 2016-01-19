@@ -2,9 +2,12 @@
 
 var React = require('react');
 var markdown = require('markdown').markdown;
+var HomeworkIntroductionStore = require('../store/homework-introduction-store');
 
 
 var HomeworkIntroduction = React.createClass({
+  mixins:[Reflux.connect(HomeworkIntroductionStore)],
+
   getInitialState: function() {
     var content = markdown.toHTML('###题目说明');
 
@@ -14,7 +17,7 @@ var HomeworkIntroduction = React.createClass({
   },
 
   componentDidMount:function() {
-    document.getElementById('introduction').innerHTML = this.state.describe;
+    document.getElementById('introduction').innerHTML = this.state.desc;
   },
 
   render() {
