@@ -25,7 +25,6 @@ function getLockedCount(items) {
   return count;
 }
 
-
 function format(receivedHomeworkItems) {
   var data = [];
   receivedHomeworkItems.homeworkItems.forEach((receivedHomeworkItem)=> {
@@ -36,6 +35,18 @@ function format(receivedHomeworkItems) {
 
   return data;
 }
+
+function formatNew(receivedHomeworkItems) {
+  var data = [];
+  receivedHomeworkItems.newHomeworkItems.forEach((receivedHomeworkItem)=> {
+    data.push({
+      status: receivedHomeworkItem.status
+    });
+  });
+
+  return data;
+}
+
 
 function updateOneStatus(existedOne, receivedOne) {
 
@@ -112,8 +123,10 @@ function updateAllStatus(existed, received, done) {
   }
 
   var combination = {
-    newHomeworkItems: newHomeworkItems,
-    homeworkItems: format(received)
+    //homeworkItems: newHomeworkItems,
+    //homeworkItems: format(received)
+    newHomeworkItems: format(received),
+    homeworkItems: newHomeworkItems
   };
 
   done(null, combination);
@@ -141,16 +154,14 @@ UserHomeworkQuizzesController.prototype.getList = function (req, res) {
     }, (responds, done) => {
 
       if (responds.status === constant.httpCode.NOT_FOUND) {
-
         lockFirst(items);
-
         done(null, items);
       } else {
         updateAllStatus(items, responds, done);
       }
 
     }, function (data, done) {
-      UserHomeworkQuizzes.update({userId: userId}, {homeworkItems: data.existed}, done);
+      UserHomeworkQuizzes.update({userId: userId}, {homeworkItems: data.homeworkItems}, done);
       done(null, data);
     }
 
@@ -161,8 +172,9 @@ UserHomeworkQuizzesController.prototype.getList = function (req, res) {
     } else {
       if (data.status === constant.httpCode.NOT_FOUND) {
         res.send({status: constant.httpCode.OK, homeworkQuizzes: format(data)});
+        return;
       }
-      res.send({status: constant.httpCode.OK, homeworkQuizzes: format(data)});
+      res.send({status: constant.httpCode.OK, homeworkQuizzes: formatNew(data)});
     }
   });
 

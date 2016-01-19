@@ -21,8 +21,8 @@ describe('ProgrammeController', function () {
         homeworkItems: [
           {
             id: 1,
-            locked: true,
-            status: 0
+            locked: false,
+            status: 1
           }, {
             id: 2,
             locked: true,
