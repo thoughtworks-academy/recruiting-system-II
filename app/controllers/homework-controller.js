@@ -132,11 +132,11 @@ function updateAllStatus(existed, received, done) {
   done(null, combination);
 }
 
-function UserHomeworkQuizzesController() {
+function UserHomeworkController() {
 
 }
 
-UserHomeworkQuizzesController.prototype.getList = function (req, res) {
+UserHomeworkController.prototype.getList = function (req, res) {
   var userId = req.session.id;
   var homeworkQuizzesUrl = 'scoresheets';
   var items = {};
@@ -150,7 +150,9 @@ UserHomeworkQuizzesController.prototype.getList = function (req, res) {
         done(null, data);
       });
     }, function (data, done) {
+
       apiRequest.get(homeworkQuizzesUrl, done);
+
     }, (responds, done) => {
 
       if (responds.status === constant.httpCode.NOT_FOUND) {
@@ -180,5 +182,5 @@ UserHomeworkQuizzesController.prototype.getList = function (req, res) {
 
 };
 
-module.exports = UserHomeworkQuizzesController;
+module.exports = UserHomeworkController;
 
