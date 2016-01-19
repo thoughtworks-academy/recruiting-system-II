@@ -34,10 +34,58 @@ describe('ProgrammeController', function () {
       done(null, data);
     });
 
-
     spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
+
       var data = {
-        yy: '12',
+        status: 200,
+        homeworkItems: [{
+          id: 1,
+          status: 2
+        }, {
+          id: 2,
+          status: 2
+        }, {
+          id: 3,
+          status: 4
+        }]
+      };
+
+      done(null, data);
+    });
+
+
+    controller.getList({
+      session: {
+        user: {id: 1}
+      }
+    }, {
+      send: function (data) {
+        expect(data).toEqual({
+          status: 200,
+          homeworkQuizzes: [
+            {
+              status: 2
+            },
+            {
+              status: 2
+            },
+            {
+              status: 4
+            }
+          ]
+        });
+        done();
+      }
+    });
+
+  });
+
+
+  it('should active the first homeworkQuiz when receive a request httpCode is 404', function (done) {
+
+    spyOn(programme, 'findOne').and.callFake(function (id, done) {
+
+      var data = {
         userId: 1,
         homeworkItems: [
           {
@@ -55,22 +103,12 @@ describe('ProgrammeController', function () {
       done(null, data);
     });
 
+    spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
 
-    spyOn(controller, 'updateAllStatus').and.callFake(function (done) {
-      var data = [
-        {
-          topicStatus: 3
-        },
-        {
-          topicStatus: 4
-        },
-        {
-          topicStatus: 3
-        },
-        {
-          topicStatus: 4
-        }
-      ];
+      var data = {
+        status: 404,
+        homeworkQuizzes: null
+      };
 
       done(null, data);
     });
@@ -78,7 +116,7 @@ describe('ProgrammeController', function () {
 
     controller.getList({
       session: {
-        user: {id: 3}
+        user: {id: 1}
       }
     }, {
       send: function (data) {
@@ -86,16 +124,10 @@ describe('ProgrammeController', function () {
           status: 200,
           homeworkQuizzes: [
             {
-              topicStatus: 3
+              status: 1
             },
             {
-              topicStatus: 4
-            },
-            {
-              topicStatus: 3
-            },
-            {
-              topicStatus: 4
+              status: 0
             }
           ]
         });
