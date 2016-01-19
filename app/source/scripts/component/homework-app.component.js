@@ -1,8 +1,7 @@
 'use strict';
 
 var React = require('react');
-var HomeworkSidebar = require('./homework-sidebar.component');
-var Homework = require('./homework.component');
+var HomeworkAction = require('../actions/homework-actions');
 
 var HomeworkApp = React.createClass({
   getInitialState: function () {
@@ -19,20 +18,15 @@ var HomeworkApp = React.createClass({
     };
   },
 
-  changeHomeworkNumber: function (state) {
-    if (state !== this.state.currentHomeworkNumber) {
-      this.setState({currentHomeworkNumber: state});
+  changeHomeworkNumber: function (orderId) {
+    if (orderId !== this.state.currentHomeworkNumber) {
+      this.setState({currentHomeworkNumber: orderId});
+      history.pushState(null, '', '#' + orderId);
     }
   },
 
   render() {
-    return (
-        <div className="row">
-          <HomeworkSidebar currentHomeworkNumber={this.state.currentHomeworkNumber}
-                            onChangeNumber={this.changeHomeworkNumber}/>
-          <Homework />
-        </div>
-    );
+    return this.props.children;
   }
 });
 

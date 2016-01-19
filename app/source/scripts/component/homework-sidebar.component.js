@@ -4,7 +4,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var HomeworkSidebarActions = require('../actions/homework-sidebar-actions');
+var HomeworkActions = require('../actions/homework-actions');
 var HomeworkSidebarStore = require('../store/homework-sidebar-store');
 
 var HomeworkSidebar = React.createClass({
@@ -23,7 +23,7 @@ var HomeworkSidebar = React.createClass({
   },
 
   componentDidMount: function () {
-    HomeworkSidebarActions.loadHomeworkStatus();
+    HomeworkActions.loadHomeworkStatus();
   },
 
   changeIcon: function (state) {
@@ -44,7 +44,6 @@ var HomeworkSidebar = React.createClass({
     if (name.includes('disabled') === false) {
       this.props.onChangeNumber(mark);
     }
-    history.pushState(null, '', '#' + mark);
   },
 
   render() {
@@ -60,7 +59,7 @@ var HomeworkSidebar = React.createClass({
           + (item.state === 'lock' ? ' disabled' : '');
 
       return (
-          <button className={classStr} disabled={item.state === 0 ? true : false} key={index}
+          <button className={classStr} disabled={item.state === 'lock' ? true : false} key={index}
                   onClick={this.handleClick.bind(null, item.mark)}>
             <div className="row">
               <div className="col-xs-9 h4 text-center ">{item.value}</div>

@@ -1,13 +1,13 @@
 'use strict';
 
 var Reflux = require('reflux');
-var HomeworkSidebarActions = require('../actions/homework-sidebar-actions');
+var HomeworkActions = require('../actions/homework-actions');
 var request = require('superagent');
 var constant = require('../../../mixin/constant');
 
 
 var HomeworkSidebarStore = Reflux.createStore({
-  listenables: [HomeworkSidebarActions],
+  listenables: [HomeworkActions],
 
   onLoadHomeworkStatus: function () {
     request.get('/homework/get-list')
