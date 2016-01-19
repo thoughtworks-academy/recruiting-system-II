@@ -11,13 +11,17 @@ var homeworkQuizzesSchema = new Schema({
 
 homeworkQuizzesSchema.statics.getList = function (callback) {
   this.find((err, data) => {
-    var list = [];
+    if (err){
+      callback(err);
+    }else {
+      var list = [];
 
-    data.forEach((item) => {
-      list.push(item.id);
-    });
+      data.forEach((item) => {
+        list.push(item.id);
+      });
 
-    callback(null, list);
+      callback(null, list);
+    }
   });
 };
 
@@ -33,7 +37,7 @@ homeworkQuizzesSchema.statics.upsertData = function (data, callback) {
       }
     });
 
-    callback(null, data);
+    callback(null, 'success');
   });
 };
 

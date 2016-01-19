@@ -136,24 +136,29 @@ describe('UserInitializationController', function () {
         }]
       };
 
+      spyOn(apiRequest, 'get').and.callFake(function (uri, callback) {
+        if (uri === 'papers/enrollment') {
+          callback(null, {body: paperEnrollment});
+        } else if(uri === 'homeworkQuizzes/1/items') {
+          callback(null, {body: {homeworkQuiz}});
+        }
+      });
+
+      spyOn(homeworkQuizzes,'upsertData').and.callFake(function(data, callback){
+        callback(null, null);
+      });
+
+      spyOn(homeworkQuizzes,'getList').and.callFake(function(callback){
+        callback(null, null);
+      });
+
       userInitializationController = new UserInitializationController();
     });
 
     it('should initial user homework quizzes in mongoDB when use is not exist.', function (done) {
-      spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
-        if (uri === 'papers/enrollment') {
-          done(null, {body: paperEnrollment});
-        } else if(uri === 'homeworkQuizzes/1/items') {
-          done(null, {body: {homeworkQuiz}});
-        }
-      });
 
-      spyOn(homeworkQuizzes,'upsertData').and.callFake(function(data, done){
-        done(null, data);
-      });
-
-      spyOn(userHomeworkQuizzes,'initUserHomeworkQuizzes').and.callFake(function(userId, data, done){
-        done(null, null);
+      spyOn(userHomeworkQuizzes,'initUserHomeworkQuizzes').and.callFake(function(userId, data, callback){
+        callback(null, null);
       });
 
       userInitializationController.initialHomeworkQuizzes({
@@ -167,25 +172,17 @@ describe('UserInitializationController', function () {
     });
 
     it('should throw error when user is exist.', function (done) {
-      spyOn(apiRequest, 'get').and.callFake(function (uri, done) {
-        if (uri === 'papers/enrollment') {
-          done(null, {body: paperEnrollment});
-        } else if(uri === 'homeworkQuizzes/1/items') {
-          done(null, {body: {homeworkQuiz}});
-        }
-      });
 
-      spyOn(homeworkQuizzes,'upsertData').and.callFake(function(data, done){
-        done(null, data);
-      });
-
-      spyOn(userHomeworkQuizzes,'initUserHomeworkQuizzes').and.callFake(function(userId, data, done){
-        done(new Error('is exist'));
+      spyOn(userHomeworkQuizzes,'initUserHomeworkQuizzes').and.callFake(function(userId, data, callback){
+        callback(new Error('is exist'));
       });
 
       userInitializationController.initialHomeworkQuizzes({
         session: {user: {id: 1}}
       },{
+        status: function(code){
+          expect(code).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
+        },
         send: function (data) {
           expect(data).toEqual({status: 500, message: 'is exist'});
           done();

@@ -95,12 +95,16 @@ UserInitializationController.prototype.initialHomeworkQuizzes = (req, res) => {
     },
 
     (result, done) => {
+      homeworkQuizzes.getList(done);
+    },
+
+    (result, done) => {
       var userId = req.session.user.id;
       userHomeworkQuizzes.initUserHomeworkQuizzes(userId, result, done);
     }
   ], function (err, data) {
-
     if (err) {
+      res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: 500, message: err.message});
     }else {
       res.send({status: 200});

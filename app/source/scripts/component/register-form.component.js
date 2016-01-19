@@ -9,6 +9,7 @@ var RegisterPassword = require('./register-password.component');
 var constraint = require('../../../mixin/register-constraint');
 var page = require('page');
 var constant = require('../../../mixin/constant');
+var async = require('async');
 
 var asyncContainersFunc = {
   email: function (value, done) {
@@ -51,14 +52,37 @@ function getError(validateInfo, field) {
   return '';
 }
 
-function initialLogicPuzzle() {
-  request.get('/user-initialization/initialLogicPuzzle').
-      set('Content-Type', 'application/json')
-      .end(function (err) {
-        if (err) {
-          console.log(err);
-        }
-      });
+function initialUserQuiz() {
+  async.series({
+    initialLogicPuzzle: (done) => {
+      request.get('/user-initialization/initialLogicPuzzle').
+        set('Content-Type', 'application/json')
+        .end(function (err) {
+          if (err) {
+            done(err);
+          }else {
+            done(null, true);
+          }
+        });
+    },
+    initialHomeworkQuizzes: (done) => {
+      request.get('/user-initialization/initialHomeworkQuizzes').
+        set('Content-Type', 'application/json')
+        .end(function (err) {
+          if (err) {
+            done(err);
+          }else {
+            done(null, true);
+          }
+        });
+    }
+  }, function (err, data) {
+    if (data.initialLogicPuzzle && data.initialLogicPuzzle){
+      page('user-center.html');
+    }else {
+      console.log(err);
+    }
+  });
 }
 
 var RegisterForm = React.createClass({
@@ -94,7 +118,7 @@ var RegisterForm = React.createClass({
 
     this.setState(stateObj);
 
-    if ('' === error) {
+    if ('' === error && name !== 'password') {
       asyncContainersFunc[name](value, (stateObj) => {
         this.setState(stateObj);
       });
@@ -166,9 +190,7 @@ var RegisterForm = React.createClass({
         var info = req.body;
 
         if (info.status === constant.httpCode.OK) {
-          initialLogicPuzzle();
-          page('user-center.html');
-
+          initialUserQuiz();
         } else {
           var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
           var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';

@@ -7,5 +7,6 @@ var UserInitializationController = require('../../controllers/user-initializatio
 var userInitializationController = new UserInitializationController();
 
 router.get('/initialLogicPuzzle', userInitializationController.initialLogicPuzzle);
+router.get('/initialHomeworkQuizzes', userInitializationController.initialHomeworkQuizzes);
 
 module.exports = router;

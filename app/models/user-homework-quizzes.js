@@ -12,16 +12,16 @@ var userHomeworkQuizzesSchema = new Schema({
   }]
 });
 
-userHomeworkQuizzesSchema.statics.initUserHomeworkQuizzes = function (userId, data, callback) {
+userHomeworkQuizzesSchema.statics.initUserHomeworkQuizzes = function (userId, idList, callback) {
   this.findOne({userId: userId}, (err, doc) => {
     if (doc){
       callback(new Error('is exist'), null);
     }else {
       var homeworkItems = [];
 
-      data.forEach((item) => {
+      idList.forEach((id) => {
         homeworkItems.push({
-          id: item.id,
+          id: id,
           locked: true,
           status: 0
         });
