@@ -7,7 +7,11 @@ var ReactDom = require('react-dom');
 var Navigation = require('./component/navigation.component');
 var HomeworkApp = require('./component/homework-app.component');
 var HomeworkSidebar = require('./component/homework-sidebar.component');
-var Homework = require('./component/homework.component');
+var Tabs = require('react-bootstrap/lib/Tabs');
+var Tab = require('react-bootstrap/lib/Tab');
+var HomeworkIntroduction = require('./component/homework-introduction.component');
+var SubmissionIntroduction = require('./component/submission-introduction.component');
+var RunningResult = require('./component/running-result.component');
 var HomeworkAction = require('./actions/homework-actions');
 
 function changeNumber() {
@@ -42,8 +46,16 @@ ReactDom.render(
       </header>
       <HomeworkApp>
         <div className="row">
-          <HomeworkSidebar onAction={onAction} homeworkNumber={changeNumber().currentHomeworkNumber}/>
-          <Homework />
+          <HomeworkSidebar/>
+          <div className="col-md-9 col-sm-9 col-xs-12">
+            <div className="content">
+              <Tabs defaultActiveKey={1} animation={false}>
+                <Tab eventKey={1} title="题目说明"><HomeworkIntroduction /></Tab>
+                <Tab eventKey={2} title="提交说明"><SubmissionIntroduction /></Tab>
+                <Tab eventKey={3} title="运行结果"><RunningResult /></Tab>
+              </Tabs>
+            </div>
+          </div>
         </div>
       </HomeworkApp>
     </div>,

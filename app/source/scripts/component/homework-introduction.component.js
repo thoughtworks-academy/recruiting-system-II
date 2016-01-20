@@ -24,7 +24,7 @@ var HomeworkIntroduction = React.createClass({
   render() {
     return (
         <div id="introduction">
-         
+
         </div>
     );
   }
