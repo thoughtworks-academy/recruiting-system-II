@@ -7,16 +7,13 @@ var Reflux = require('reflux');
 var HomeworkActions = require('../actions/homework-actions');
 var HomeworkSidebarStore = require('../store/homework-sidebar-store');
 var HomeworkAppStore = require('../store/homework-app-store');
+var homeworkQuizzesStatus = require('../../../mixin/constant').homeworkQuizzesStatus;
 
 var HomeworkSidebar = React.createClass({
   mixins: [Reflux.connect(HomeworkSidebarStore), Reflux.connect(HomeworkAppStore)],
 
   getInitialState: function () {
     var list = [];
-
-    for (var i = 0; i < 5; i++) {
-      list.push({homeworkStatus: 'lock'});
-    }
 
     return {
       homeworkStatusList: list,
@@ -32,7 +29,13 @@ var HomeworkSidebar = React.createClass({
   changeIcon: function (state) {
     var icon = 'home-icon h4 fa fa-lg fa-';
     var iconList = ['lock', '', 'clock-o', 'check-circle', 'times-circle'];
-    var statusCode = ['lock', 'active', 'progress', 'success', 'error'];
+    var statusCode = [
+      homeworkQuizzesStatus.LOCKED,
+      homeworkQuizzesStatus.ACTIVE,
+      homeworkQuizzesStatus.PROGRESS,
+      homeworkQuizzesStatus.SUCCESS,
+      homeworkQuizzesStatus.ERROR
+    ];
 
     statusCode.forEach((item, index) => {
       if (state === item) {
@@ -48,10 +51,10 @@ var HomeworkSidebar = React.createClass({
   render() {
     var tags = [];
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < this.state.homeworkStatusList.length; i++) {
       var index = i + 1;
 
-      tags.push({mark: index, value: '第' + index + '题', state: this.state.homeworkStatusList[i].homeworkStatus});
+      tags.push({mark: index, value: '第' + index + '题', state: this.state.homeworkStatusList[i].status});
     }
     var itemHtml = tags.map((item, index) => {
       var classStr = 'list-group-item ' + (this.state.clickNumber === index + 1 ? ' selected' : '');
