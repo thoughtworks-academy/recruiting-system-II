@@ -9,4 +9,8 @@
         VALUES (#{scoreSheetId}, #{blankQuizId})
     </insert>
 
+    <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuizSubmit">
+        SELECT * FROM blankQuizSubmit WHERE scoreSheetId = #{scoreSheetId}
+    </select>
+
 </mapper>
