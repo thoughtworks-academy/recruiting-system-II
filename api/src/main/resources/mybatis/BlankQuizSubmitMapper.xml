@@ -4,12 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.BlankQuizSubmitMapper">
 
+    <resultMap id="blankQuizSubmitListMap" type="com.thoughtworks.twars.bean.BlankQuizSubmit">
+        <id property="id" column="id"></id>
+        <result column="blankQuizId" property="blankQuizId"></result>
+        <result column="scoreSheetId" property="scoreSheetId"></result>
+    </resultMap>
+
     <insert id="insertBlankQuizSubmit" parameterType="com.thoughtworks.twars.bean.BlankQuizSubmit" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO blankQuizSubmit(scoreSheetId,blankQuizId)
         VALUES (#{scoreSheetId}, #{blankQuizId})
     </insert>
 
-    <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuizSubmit">
+    <select id="findByScoreSheetId" resultMap="blankQuizSubmitListMap">
         SELECT * FROM blankQuizSubmit WHERE scoreSheetId = #{scoreSheetId}
     </select>
 
