@@ -1,6 +1,5 @@
 package com.thoughtworks.twars;
 
-import com.thoughtworks.twars.bean.ItemPost;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -39,16 +38,14 @@ public class App extends ResourceConfig {
         final ItemPostMapper itemPostMapper = session
                 .getMapper(ItemPostMapper.class);
 
-        final HomeWorkQuizMapper homeWorkQuizMapper = session
-                .getMapper(HomeWorkQuizMapper.class);
+        final HomeworkQuizMapper homeworkQuizMapper = session
+                .getMapper(HomeworkQuizMapper.class);
 
-        final HomeworkQuizItemMapper homeworkQuizItemMapper = session
-                .getMapper(HomeworkQuizItemMapper.class);
+        final HomeworkSubmitMapper homeworkSubmitMapper = session
+                .getMapper(HomeworkSubmitMapper.class);
 
-        final HomeworkQuizScoreSheetMapper homeworkQuizScoreSheetMapper;
-
-        homeworkQuizScoreSheetMapper = session
-                .getMapper(HomeworkQuizScoreSheetMapper.class);
+        final HomeworkPostHistoryMapper homeworkPostHistoryMapper = session
+                .getMapper(HomeworkPostHistoryMapper.class);
 
         packages("com.thoughtworks.twars.resource")
             .register(new AbstractBinder() {
@@ -62,11 +59,9 @@ public class App extends ResourceConfig {
                     bind(scoreSheetMapper).to(ScoreSheetMapper.class);
                     bind(blankQuizSubmitMapper).to(BlankQuizSubmitMapper.class);
                     bind(itemPostMapper).to(ItemPostMapper.class);
-                    bind(homeWorkQuizMapper).to(HomeWorkQuizMapper.class);
-                    bind(homeworkQuizItemMapper)
-                            .to(HomeworkQuizItemMapper.class);
-                    bind(homeworkQuizScoreSheetMapper)
-                            .to(HomeworkQuizScoreSheetMapper.class);
+                    bind(homeworkQuizMapper).to(HomeworkQuizMapper.class);
+                    bind(homeworkSubmitMapper).to(HomeworkSubmitMapper.class);
+                    bind(homeworkPostHistoryMapper).to(HomeworkPostHistoryMapper.class);
                 }
             });
     }

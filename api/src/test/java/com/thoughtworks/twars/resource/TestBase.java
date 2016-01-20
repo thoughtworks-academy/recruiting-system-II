@@ -20,9 +20,9 @@ public class TestBase extends JerseyTest {
   protected ScoreSheetMapper scoreSheetMapper = mock(ScoreSheetMapper.class);
   protected BlankQuizSubmitMapper blankQuizSubmitMapper = mock(BlankQuizSubmitMapper.class);
   protected ItemPostMapper itemPostMapper = mock(ItemPostMapper.class);
-  protected HomeWorkQuizMapper homeWorkQuizMapper = mock(HomeWorkQuizMapper.class);
-  protected HomeworkQuizItemMapper homeworkQuizItemMapper = mock(HomeworkQuizItemMapper.class);
-  protected HomeworkQuizScoreSheetMapper homeworkQuizScoreSheetMapper = mock(HomeworkQuizScoreSheetMapper.class);
+  protected HomeworkQuizMapper homeworkQuizMapper = mock(HomeworkQuizMapper.class);
+  protected HomeworkSubmitMapper homeworkSubmitMapper = mock(HomeworkSubmitMapper.class);
+  protected HomeworkPostHistoryMapper homeworkPostHistoryMapper = mock(HomeworkPostHistoryMapper.class);
 
   @Override
   protected Application configure() {
@@ -41,9 +41,9 @@ public class TestBase extends JerseyTest {
         bind(scoreSheetMapper).to(ScoreSheetMapper.class);
         bind(blankQuizSubmitMapper).to(BlankQuizSubmitMapper.class);
         bind(itemPostMapper).to(ItemPostMapper.class);
-        bind(homeWorkQuizMapper).to(HomeWorkQuizMapper.class);
-        bind(homeworkQuizItemMapper).to(HomeworkQuizItemMapper.class);
-        bind(homeworkQuizScoreSheetMapper).to(HomeworkQuizScoreSheetMapper.class);
+        bind(homeworkQuizMapper).to(HomeworkQuizMapper.class);
+        bind(homeworkSubmitMapper).to(HomeworkSubmitMapper.class);
+        bind(homeworkPostHistoryMapper).to(HomeworkPostHistoryMapper.class);
       }
     }).packages("com.thoughtworks.twars.resource");
   }

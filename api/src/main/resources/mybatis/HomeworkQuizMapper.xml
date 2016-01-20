@@ -3,14 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.thoughtworks.twars.mapper.HomeWorkQuizMapper">
+<mapper namespace="com.thoughtworks.twars.mapper.HomeworkQuizItemMapper">
 
-    <resultMap id="homeworkQuizListMap" type="com.thoughtworks.twars.bean.HomeworkQuiz">
+    <resultMap id="homeworkQuizItemListMap" type="com.thoughtworks.twars.bean.HomeworkQuizItem">
         <id property="id" column="id"></id>
-        <result column="sectionId" property="sectionId"></result>
+        <result column="description" property="description"></result>
+        <result column="evaluateScript" property="evaluateScript"></result>
+        <result column="evaluateRepository" property="evaluateRepository"></result>
+        <result column="templateRepository" property="templateRepository"></result>
+        <result column="homeworkQuizId" property="homeworkQuizId"></result>
     </resultMap>
 
-    <select id="findBySectionId" resultMap="homeworkQuizListMap">
-        select * from homeworkQuiz where sectionId  = #{sectionId}
+    <select id="findByHomeworkQuizId" resultMap="homeworkQuizItemListMap">
+        select * from homeworkQuizItem where homeworkQuizId = #{homeworkQuizId}
     </select>
 </mapper>

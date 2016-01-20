@@ -24,7 +24,7 @@
         <mapper resource="mybatis/ItemPostMapper.xml"></mapper>
         <mapper resource="mybatis/BlankQuizSubmitMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkQuizMapper.xml"></mapper>
-        <mapper resource="mybatis/HomeworkQuizItemMapper.xml"></mapper>
-        <mapper resource="mybatis/HomeworkQuizScoreSheetMapper.xml"></mapper>
+        <mapper resource="mybatis/HomeworkSubmitMapper.xml"></mapper>
+        <mapper resource="mybatis/HomeworkPostHistoryMapper.xml"></mapper>
     </mappers>
 </configuration>
