@@ -6,6 +6,8 @@ var Schema = mongoose.Schema;
 var homeworkQuizzesSchema = new Schema({
   id: Number,
   desc: String,
+  evaluateScript: String,
+  evaluateRepo: String,
   templateRepo: String
 });
 
@@ -32,6 +34,8 @@ homeworkQuizzesSchema.statics.upsertData = function (data, callback) {
         this.create({
           id: item.id,
           desc: item.description,
+          evaluateScript: item.evaluateScript,
+          evaluateRepo: item.evaluateRepository,
           templateRepo: item.templateRepository
         });
       }
