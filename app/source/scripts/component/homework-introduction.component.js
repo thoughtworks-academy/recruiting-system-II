@@ -18,13 +18,13 @@ var HomeworkIntroduction = React.createClass({
   },
 
   componentDidMount:function() {
-    document.getElementById('introduction').innerHTML = this.state.desc;
+    document.getElementById('introduction').innerHTML = this.state.describe;
   },
 
   render() {
     return (
         <div id="introduction">
-          题目说明
+         
         </div>
     );
   }
