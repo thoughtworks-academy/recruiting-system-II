@@ -584,16 +584,15 @@ db.once('open', function () {
       }
     ], function () {
       console.log('mongo refresh end.');
-      //process.exit();
     });
   });
 
   console.log('mongo insert UserHomeworkQuizzes start...');
 
   UserHomeworkQuizzes.remove(function () {
-    UserHomeworkQuizzes.create({
+    UserHomeworkQuizzes.create([{
       userId: 1,
-      homeworkItems: [
+      quizzes: [
         {id: 1, locked: true, status: 0},
         {id: 2, locked: true, status: 0},
         {id: 3, locked: true, status: 0},
@@ -605,10 +604,65 @@ db.once('open', function () {
         {id: 9, locked: true, status: 0},
         {id: 10, locked: true, status: 0}
       ]
-    }, function () {
+    },{
+      userId: 2,
+      quizzes: [
+        {id: 1, locked: true, status: 0},
+        {id: 2, locked: true, status: 0},
+        {id: 3, locked: true, status: 0},
+        {id: 4, locked: true, status: 0},
+        {id: 5, locked: true, status: 0},
+        {id: 6, locked: true, status: 0},
+        {id: 7, locked: true, status: 0},
+        {id: 8, locked: true, status: 0},
+        {id: 9, locked: true, status: 0},
+        {id: 10, locked: true, status: 0}
+      ]
+    },{
+      userId: 3,
+      quizzes: [
+        {id: 1, locked: true, status: 0},
+        {id: 2, locked: true, status: 0},
+        {id: 3, locked: true, status: 0},
+        {id: 4, locked: true, status: 0},
+        {id: 5, locked: true, status: 0},
+        {id: 6, locked: true, status: 0},
+        {id: 7, locked: true, status: 0},
+        {id: 8, locked: true, status: 0},
+        {id: 9, locked: true, status: 0},
+        {id: 10, locked: true, status: 0}
+      ]
+    },{
+      userId: 4,
+      quizzes: [
+        {id: 1, locked: true, status: 0},
+        {id: 2, locked: true, status: 0},
+        {id: 3, locked: true, status: 0},
+        {id: 4, locked: true, status: 0},
+        {id: 5, locked: true, status: 0},
+        {id: 6, locked: true, status: 0},
+        {id: 7, locked: true, status: 0},
+        {id: 8, locked: true, status: 0},
+        {id: 9, locked: true, status: 0},
+        {id: 10, locked: true, status: 0}
+      ]
+    },{
+      userId: 5,
+      quizzes: [
+        {id: 1, locked: true, status: 0},
+        {id: 2, locked: true, status: 0},
+        {id: 3, locked: true, status: 0},
+        {id: 4, locked: true, status: 0},
+        {id: 5, locked: true, status: 0},
+        {id: 6, locked: true, status: 0},
+        {id: 7, locked: true, status: 0},
+        {id: 8, locked: true, status: 0},
+        {id: 9, locked: true, status: 0},
+        {id: 10, locked: true, status: 0}
+      ]
+    }], function () {
       console.log('mongo insert userHomeworkQuizzes end');
       process.exit();
-
     });
   });
 });
