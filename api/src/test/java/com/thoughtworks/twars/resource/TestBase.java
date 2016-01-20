@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.BlankQuizSubmit;
 import com.thoughtworks.twars.mapper.*;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -17,6 +18,8 @@ public class TestBase extends JerseyTest {
   protected SectionMapper sectionMapper = mock(SectionMapper.class);
   protected BlankQuizMapper blankQuizMapper = mock(BlankQuizMapper.class);
   protected ScoreSheetMapper scoreSheetMapper = mock(ScoreSheetMapper.class);
+  protected BlankQuizSubmitMapper blankQuizSubmitMapper = mock(BlankQuizSubmitMapper.class);
+  protected ItemPostMapper itemPostMapper = mock(ItemPostMapper.class);
   protected HomeWorkQuizMapper homeWorkQuizMapper = mock(HomeWorkQuizMapper.class);
   protected HomeworkQuizItemMapper homeworkQuizItemMapper = mock(HomeworkQuizItemMapper.class);
   protected HomeworkQuizScoreSheetMapper homeworkQuizScoreSheetMapper = mock(HomeworkQuizScoreSheetMapper.class);
@@ -36,6 +39,8 @@ public class TestBase extends JerseyTest {
         bind(sectionMapper).to(SectionMapper.class);
         bind(blankQuizMapper).to(BlankQuizMapper.class);
         bind(scoreSheetMapper).to(ScoreSheetMapper.class);
+        bind(blankQuizSubmitMapper).to(BlankQuizSubmitMapper.class);
+        bind(itemPostMapper).to(ItemPostMapper.class);
         bind(homeWorkQuizMapper).to(HomeWorkQuizMapper.class);
         bind(homeworkQuizItemMapper).to(HomeworkQuizItemMapper.class);
         bind(homeworkQuizScoreSheetMapper).to(HomeworkQuizScoreSheetMapper.class);

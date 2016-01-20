@@ -1,5 +1,6 @@
 package com.thoughtworks.twars;
 
+import com.thoughtworks.twars.bean.ItemPost;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -14,9 +15,12 @@ public class App extends ResourceConfig {
     public App() {
 
         SqlSession session = DBUtil.getSession();
-        final UserMapper userMapper = session.getMapper(UserMapper.class);
+        final UserMapper userMapper = session
+                .getMapper(UserMapper.class);
+
         final PaperMapper paperMapper =
                 session.getMapper(PaperMapper.class);
+
         final BlankQuizMapper blankQuizMapper = session
                 .getMapper(BlankQuizMapper.class);
 
@@ -28,6 +32,12 @@ public class App extends ResourceConfig {
 
         final ScoreSheetMapper scoreSheetMapper = session
                 .getMapper(ScoreSheetMapper.class);
+
+        final BlankQuizSubmitMapper blankQuizSubmitMapper = session
+                .getMapper(BlankQuizSubmitMapper.class);
+
+        final ItemPostMapper itemPostMapper = session
+                .getMapper(ItemPostMapper.class);
 
         final HomeWorkQuizMapper homeWorkQuizMapper = session
                 .getMapper(HomeWorkQuizMapper.class);
@@ -50,6 +60,8 @@ public class App extends ResourceConfig {
                     bind(quizItemMapper).to(QuizItemMapper.class);
                     bind(sectionMapper).to(SectionMapper.class);
                     bind(scoreSheetMapper).to(ScoreSheetMapper.class);
+                    bind(blankQuizSubmitMapper).to(BlankQuizSubmitMapper.class);
+                    bind(itemPostMapper).to(ItemPostMapper.class);
                     bind(homeWorkQuizMapper).to(HomeWorkQuizMapper.class);
                     bind(homeworkQuizItemMapper)
                             .to(HomeworkQuizItemMapper.class);

@@ -21,6 +21,8 @@
         <mapper resource="mybatis/BlankQuizMapper.xml"></mapper>
         <mapper resource="mybatis/SectionMapper.xml"></mapper>
         <mapper resource="mybatis/ScoreSheetMapper.xml"></mapper>
+        <mapper resource="mybatis/ItemPostMapper.xml"></mapper>
+        <mapper resource="mybatis/BlankQuizSubmitMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkQuizMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkQuizItemMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkQuizScoreSheetMapper.xml"></mapper>
