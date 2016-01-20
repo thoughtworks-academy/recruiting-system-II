@@ -41,12 +41,12 @@ public class ScoreSheetMapperTest extends com.thoughtworks.twars.mapper.TestBase
     @Test
     public void should_return_score_sheet_by_examerid_and_paperid(){
         ScoreSheet scoreSheet = new ScoreSheet();
-        scoreSheet.setPaperId(2);
+        scoreSheet.setPaperId(1);
         scoreSheet.setExamerId(2);
 
         ScoreSheet returnScoreSheet = scoreSheetMapper.selectScoreSheet(scoreSheet);
-        assertThat(returnScoreSheet.getId(), is(3));
-        assertThat(returnScoreSheet.getPaperId(), is(2));
+        assertThat(returnScoreSheet.getId(), is(2));
+        assertThat(returnScoreSheet.getPaperId(), is(1));
         assertThat(returnScoreSheet.getExamerId(), is(2));
     }
 
