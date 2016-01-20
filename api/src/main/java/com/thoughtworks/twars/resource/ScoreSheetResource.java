@@ -119,6 +119,10 @@ public class ScoreSheetResource extends Resource {
             @PathParam("id") int id
     ) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
+        Map<String, Object> examerUri = new HashMap<>();
+        Map<String, Object> paperUri = new HashMap<>();
+        examerUri.put("uri", "examer/" + scoreSheet.getExamerId());
+        paperUri.put("uri", "paper/" + scoreSheet.getPaperId());
         List<Map> blankQuizSubmits = blankQuizSubmitMapper.findByScoreSheetId(id)
                 .stream()
                 .map(blankQuizSubmit -> {
@@ -132,8 +136,8 @@ public class ScoreSheetResource extends Resource {
                 .collect(Collectors.toList());
 
         Map map = new HashMap<>();
-        map.put("examer", "examer/" + scoreSheet.getExamerId());
-        map.put("paper", "paper/" + scoreSheet.getPaperId());
+        map.put("examer", examerUri);
+        map.put("paper", paperUri);
         map.put("blankQuizSubmits", blankQuizSubmits);
         return Response.status(Response.Status.OK).entity(map).build();
     }
