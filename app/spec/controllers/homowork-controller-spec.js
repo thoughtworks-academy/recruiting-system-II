@@ -10,8 +10,6 @@ describe('HomeworkController', function () {
 
     beforeEach(function () {
       controller = new HomeworkController();
-
-
     });
 
     it('should return homeworkQuizzes when receive a request', function (done) {
@@ -67,8 +65,7 @@ describe('HomeworkController', function () {
 
     });
 
-
-    it('should active the first homeworkQuiz when receive a request httpCode is 404', function (done) {
+    it('should active the first homeworkQuiz when all homeworkQuizzes is locked ', function (done) {
 
       spyOn(userHomeworkQuizzes, 'unlockNext').and.callFake(function (id, done) {
         var data = {
@@ -213,5 +210,96 @@ describe('HomeworkController', function () {
         }
       });
     });
+  });
+
+  describe('saveGithubUrl', ()=> {
+
+    var controller;
+    beforeEach(()=> {
+      controller = new HomeworkController();
+    });
+
+    it('it should return status 403 when which number in quiz is orderId\'status is locked ', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, callback) {
+        var data = {
+          userId: 1,
+          quizzes: [
+            {
+              id: 1,
+              locked: true,
+              status: 0
+            }, {
+              id: 2,
+              locked: true,
+              status: 0
+            }, {
+              id: 3,
+              locked: true,
+              status: 0
+            }
+          ]
+        };
+
+        callback(null, data);
+      });
+
+      controller.saveGithubUrl({
+        session: {user: {id: 1}},
+        query: {orderId: 1},
+        userAnswerRepo: 'www.github.com'
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: 403
+          });
+          done();
+        }
+      });
+    });
+
+    it('it should return status 200 when save a userAnswerURL is success ', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, callback) {
+        var data = {
+          userId: 1,
+          quizzes: [
+            {
+              id: 1,
+              locked: false,
+              status: 1,
+              userAnswerRepo: '1'
+            }, {
+              id: 2,
+              locked: true,
+              status: 0,
+              userAnswerRepo: '2'
+
+            }, {
+              id: 3,
+              locked: true,
+              status: 0,
+              userAnswerRepo: '3'
+            }
+          ]
+        };
+
+        callback(null, data);
+      });
+
+      controller.saveGithubUrl({
+        session: {user: {id: 1}},
+        query: {orderId: 1},
+        body: {userAnswerRepo: 'www.github.com'}
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: 200
+          });
+          done();
+        }
+      });
+    });
+
   });
 });

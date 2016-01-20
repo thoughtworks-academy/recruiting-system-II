@@ -82,5 +82,40 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   });
 };
 
+HomeworkController.prototype.saveGithubUrl = (req, res) => {
+  var userId = req.session.user.id;
+  var orderId = req.query.orderId;
+
+  async.waterfall([
+    (done)=> {
+      userHomeworkQuizzes.findOne({userId: userId}, done);
+    }, function (data, done) {
+      if (orderId === undefined) {
+        done(new Error('orderId undefined'));
+      } else if (data.quizzes[orderId - 1].locked === true) {
+        done(new Error('is locked'));
+      } else {
+        data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
+        done(null, data);
+      }
+    }
+  ], function (err, data) {
+    if (err) {
+      if (err.message === 'is locked' || err.message === 'orderId undefined') {
+        res.send({
+          status: 403
+        });
+      } else {
+        console.log(err);
+      }
+    } else {
+      res.send({
+        status: 200
+      });
+    }
+  });
+};
+
+
 module.exports = HomeworkController;
 
