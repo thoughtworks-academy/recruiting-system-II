@@ -63,7 +63,7 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
 
         data.save(callback);
       }else {
-        callback(null, null);
+        callback(null, true);
       }
     }
   });
