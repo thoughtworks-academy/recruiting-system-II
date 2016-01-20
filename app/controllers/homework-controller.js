@@ -5,11 +5,11 @@ var homeworkQuizzes = require('../models/homework-quizzes');
 var async = require('async');
 var constant = require('../mixin/constant');
 
-function UserHomeworkController() {
+function HomeworkController() {
 
 }
 
-UserHomeworkController.prototype.getList = function (req, res) {
+HomeworkController.prototype.getList = function (req, res) {
   var userId = req.session.user.id;
   var quizzesStatus = [];
 
@@ -94,5 +94,5 @@ UserHomeworkController.prototype.getQuiz = (req, res) => {
   });
 };
 
-module.exports = UserHomeworkController;
+module.exports = HomeworkController;
 
