@@ -9,5 +9,5 @@ var homeworkController  = new  HomeworkController();
 
 router.get('/get-list', homeworkController.getList);
 router.get('/quiz',homeworkController.getQuiz);
-
+router.post('/save',homeworkController.saveGithubUrl);
 module.exports = router;
