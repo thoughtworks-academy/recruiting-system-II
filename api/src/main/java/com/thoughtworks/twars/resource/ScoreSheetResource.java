@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Path("/scoresheets")
@@ -111,39 +112,45 @@ public class ScoreSheetResource extends Resource {
     }
 
 
-//    @GET
-//    @Path("/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response findOne(
-//            @PathParam("id") int id
-//    ) {
-//        ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
-//
-//        if (scoreSheet == null) {
-//            return Response.status(Response.Status.NOT_FOUND).build();
-//        }
-//
-//        List<Map> itemPosts = new ArrayList<>();
-//        List<Map> blankQuizSubmits = new ArrayList<>();
-//
-//        Map itemPost = new HashMap<>();
-//        Map blankQuizItem = new HashMap<>();
-//
-//        itemPost.put("answer", scoreSheet.getUserAnswer());
-//        itemPost.put("quizItem", "quizItems/" + scoreSheet.getQuizItemId());
-//        itemPosts.add(itemPost);
-//
-//        blankQuizItem.put("blankQuiz",
-//                "blankQuizzes/" + scoreSheet.getBlankQuizId());
-//        blankQuizItem.put("itemPosts", itemPosts);
-//        blankQuizSubmits.add(blankQuizItem);
-//
-//        Map map = new HashMap<>();
-//        map.put("examer", scoreSheet.getExamerId());
-//        map.put("paper", scoreSheet.getPaperId());
-//        map.put("blankQuizSubmits", blankQuizSubmits);
-//        return Response.status(Response.Status.OK).entity(map).build();
-//    }
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findOne(
+            @PathParam("id") int id
+    ) {
+        ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
+        List<Map> blankQuizSubmits = blankQuizSubmitMapper.findByScoreSheetId(id)
+                .stream()
+                .map(blankQuizSubmit -> {
+                    Map<String, Object> blankQuizUri = new HashMap<>();
+                    blankQuizUri.put("uri", "blankQuiz/" + blankQuizSubmit.getBlankQuizId());
+                    Map<String, Object> blankQuizSubmitUri = new HashMap<>();
+                    blankQuizSubmitUri.put("blankQuiz", blankQuizUri);
+                    blankQuizSubmitUri.put("itemPosts", getItemPosts(blankQuizSubmit.getBlankQuizId()));
+                    return blankQuizSubmitUri;
+                })
+                .collect(Collectors.toList());
+
+        Map map = new HashMap<>();
+        map.put("examer", "examer/" + scoreSheet.getExamerId());
+        map.put("paper", "paper/" + scoreSheet.getPaperId());
+        map.put("blankQuizSubmits", blankQuizSubmits);
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+    public List<Map> getItemPosts(int blankQuizSubmitId) {
+        return itemPostMapper.findByBlankQuizSubmit(blankQuizSubmitId)
+                .stream()
+                .map(itemPost -> {
+                    Map<String, Object> quizItemUri = new HashMap<>();
+                    quizItemUri.put("uri", "/quizItem/" + itemPost.getQuizItemId());
+                    Map<String, Object> itemPostContent = new HashMap<>();
+                    itemPostContent.put("answer", itemPost.getAnswer());
+                    itemPostContent.put("quizItem", quizItemUri);
+                    return itemPostContent;
+                })
+                .collect(Collectors.toList());
+    }
 
 //
 //    public List<Map> insertBlankQuizScoreSheet(Map data) {
