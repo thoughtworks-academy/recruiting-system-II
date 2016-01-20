@@ -8,6 +8,6 @@ var HomeworkController  = require('../../controllers/homework-controller');
 var homeworkController  = new  HomeworkController();
 
 router.get('/get-list', homeworkController.getList);
-//router.get('/getContent',homeworkController.getHomeworkQuiz);
+router.get('/quiz',homeworkController.getQuiz);
 
 module.exports = router;

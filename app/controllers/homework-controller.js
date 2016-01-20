@@ -1,6 +1,7 @@
 'use strict';
 
-var UserHomeworkQuizzes = require('../models/user-homework-quizzes');
+var userHomeworkQuizzes = require('../models/user-homework-quizzes');
+var homeworkQuizzes = require('../models/homework-quizzes');
 var async = require('async');
 var constant = require('../mixin/constant');
 
@@ -14,7 +15,7 @@ UserHomeworkController.prototype.getList = function (req, res) {
 
   async.waterfall([
     (done)=> {
-      UserHomeworkQuizzes.findOne({userId: userId}, done);
+      userHomeworkQuizzes.findOne({userId: userId}, done);
     },
     (data, done)=> {
       var locked = 0;
@@ -49,6 +50,45 @@ UserHomeworkController.prototype.getList = function (req, res) {
       res.send({
         status: 200,
         homeworkQuizzes: quizzesStatus
+      });
+    }
+  });
+};
+
+UserHomeworkController.prototype.getQuiz = (req, res) => {
+  var userId = req.session.user.id;
+  var orderId = req.query.orderId;
+
+  async.waterfall([
+    (done) => {
+      userHomeworkQuizzes.unlockNext(userId, done);
+    },
+    (result, done) => {
+      userHomeworkQuizzes.findOne({userId: userId}, done);
+    },
+    (result, done) => {
+      if (result.quizzes[orderId - 1].locked) {
+        done(new Error('is locked'));
+      }else {
+        homeworkQuizzes.findOne({id: result.quizzes[orderId - 1].id}, done);
+      }
+    }
+  ], (err, data) => {
+    if (err) {
+      if (err.message === 'is locked') {
+        res.send({
+          status: 403
+        });
+      } else {
+        console.log(err);
+      }
+    } else {
+      res.send({
+        status: 200,
+        quiz: {
+          desc: data.desc,
+          templateRespos: data.templateRespos
+        }
       });
     }
   });

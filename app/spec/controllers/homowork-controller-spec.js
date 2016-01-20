@@ -1,7 +1,7 @@
 'use strict';
 
 var HomeworkController = require('../../controllers/homework-controller');
-var homework = require('../../models/user-homework-quizzes');
+var userHomeworkQuizzes = require('../../models/user-homework-quizzes');
 var homeworkQuizzes = require('../../models/homework-quizzes');
 
 describe('HomeworkController', function () {
@@ -14,7 +14,7 @@ describe('HomeworkController', function () {
 
     it('should return homeworkQuizzes when receive a request', function (done) {
 
-      spyOn(homework, 'findOne').and.callFake(function (id, done) {
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, done) {
 
         var data = {
           userId: 1,
@@ -64,7 +64,7 @@ describe('HomeworkController', function () {
 
     it('should active the first homeworkQuiz when receive a request httpCode is 404', function (done) {
 
-      spyOn(homework, 'findOne').and.callFake(function (id, done) {
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, done) {
 
         var data = {
           userId: 1,
@@ -117,14 +117,14 @@ describe('HomeworkController', function () {
     beforeEach(function () {
       controller = new HomeworkController();
 
-      spyOn(homework, 'findOne').and.callFake(function (id, done) {
+      spyOn(userHomeworkQuizzes , 'findOne').and.callFake(function (id, done) {
         var data = {
           userId: 1,
           quizzes: [
             {
               id: 1,
-              locked: true,
-              status: 0
+              locked: false,
+              status: 1
             },{
               id: 2,
               locked: true,
@@ -140,20 +140,24 @@ describe('HomeworkController', function () {
         done(null, data);
       });
 
-      spyOn(homeworkQuizzes, 'findOne').and.callFake(function (id, done) {
+      spyOn(userHomeworkQuizzes , 'unlockNext').and.callFake(function (id, done) {
+        done(null, null);
+      });
+
+      spyOn(homeworkQuizzes, 'findOne').and.callFake(function (id, callback) {
         var data = {
           id: 1,
           desc: '这是一道简单的题',
-          templateRepos: 'www.github.com'
+          templateRespos: 'www.github.com'
         };
 
-        done(null, data);
+        callback(null, data);
       });
     });
 
     it('should return quiz and statusCode: 200 when receive a request', (done) => {
 
-      controller.getHomeworkQuiz({
+      controller.getQuiz({
         session: {user: {id: 1}},
         query: {orderId: 1}
       },{
@@ -162,7 +166,7 @@ describe('HomeworkController', function () {
             status: 200,
             quiz: {
               desc: '这是一道简单的题',
-              templateRepos: 'www.github.com'
+              templateRespos: 'www.github.com'
             }
           });
           done();
@@ -172,7 +176,7 @@ describe('HomeworkController', function () {
 
     it('should return statusCode: 403 when request quiz is locked', (done) => {
 
-      controller.getHomeworkQuiz({
+      controller.getQuiz({
         session: {user: {id: 1}},
         query: {orderId: 3}
       },{
