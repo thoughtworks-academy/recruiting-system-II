@@ -9,7 +9,7 @@ var constant = require('../../../mixin/constant');
 var HomeworkSidebarStore = Reflux.createStore({
   listenables: [HomeworkActions],
 
-  onLoadHomeworkStatus: function () {
+  onLoadHomeworkList: function () {
     request.get('/homework/get-list')
         .set('Content-Type', 'application/json')
         .end((err, res) => {

@@ -26,7 +26,7 @@ var HomeworkSidebar = React.createClass({
   },
 
   componentDidMount: function () {
-    HomeworkActions.loadHomeworkStatus();
+    HomeworkActions.loadHomeworkList();
   },
 
   changeIcon: function (state) {
