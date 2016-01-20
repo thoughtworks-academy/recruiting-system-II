@@ -5,14 +5,20 @@ var userHomeworkQuizzes = require('../../models/user-homework-quizzes');
 var homeworkQuizzes = require('../../models/homework-quizzes');
 
 describe('HomeworkController', function () {
-  describe ('getList', () => {
+  describe('getList', () => {
     var controller;
 
     beforeEach(function () {
       controller = new HomeworkController();
+
+
     });
 
     it('should return homeworkQuizzes when receive a request', function (done) {
+
+      spyOn(userHomeworkQuizzes, 'unlockNext').and.callFake(function (id, done) {
+        done(null, null);
+      });
 
       spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, done) {
 
@@ -64,6 +70,25 @@ describe('HomeworkController', function () {
 
     it('should active the first homeworkQuiz when receive a request httpCode is 404', function (done) {
 
+      spyOn(userHomeworkQuizzes, 'unlockNext').and.callFake(function (id, done) {
+        var data = {
+          userId: 1,
+          quizzes: [
+            {
+              id: 1,
+              locked: false,
+              status: 1
+
+            }, {
+              id: 2,
+              locked: true,
+              status: 0
+            }
+          ]
+        };
+        done(null, data);
+      });
+
       spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, done) {
 
         var data = {
@@ -71,8 +96,8 @@ describe('HomeworkController', function () {
           quizzes: [
             {
               id: 1,
-              locked: true,
-              status: 0
+              locked: false,
+              status: 1
 
             }, {
               id: 2,
@@ -117,7 +142,7 @@ describe('HomeworkController', function () {
     beforeEach(function () {
       controller = new HomeworkController();
 
-      spyOn(userHomeworkQuizzes , 'findOne').and.callFake(function (id, done) {
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, done) {
         var data = {
           userId: 1,
           quizzes: [
@@ -125,11 +150,11 @@ describe('HomeworkController', function () {
               id: 1,
               locked: false,
               status: 1
-            },{
+            }, {
               id: 2,
               locked: true,
               status: 0
-            },{
+            }, {
               id: 3,
               locked: true,
               status: 0
@@ -140,7 +165,7 @@ describe('HomeworkController', function () {
         done(null, data);
       });
 
-      spyOn(userHomeworkQuizzes , 'unlockNext').and.callFake(function (id, done) {
+      spyOn(userHomeworkQuizzes, 'unlockNext').and.callFake(function (id, done) {
         done(null, null);
       });
 
@@ -160,7 +185,7 @@ describe('HomeworkController', function () {
       controller.getQuiz({
         session: {user: {id: 1}},
         query: {orderId: 1}
-      },{
+      }, {
         send: function (data) {
           expect(data).toEqual({
             status: 200,
@@ -179,7 +204,7 @@ describe('HomeworkController', function () {
       controller.getQuiz({
         session: {user: {id: 1}},
         query: {orderId: 3}
-      },{
+      }, {
         send: function (data) {
           expect(data).toEqual({
             status: 403

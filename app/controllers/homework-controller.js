@@ -15,32 +15,20 @@ HomeworkController.prototype.getList = function (req, res) {
 
   async.waterfall([
     (done)=> {
+      userHomeworkQuizzes.unlockNext(userId, done);
+    },
+    (data, result, done) => {
+      done = typeof(result) === 'function' ? result : done;
       userHomeworkQuizzes.findOne({userId: userId}, done);
     },
     (data, done)=> {
-      var locked = 0;
-      var success = 0;
-
-      data.quizzes.forEach((quiz) => {
-        if (quiz.locked) {
-          locked++;
-        } else if (quiz.status === constant.homeworkQuizzesStatus.SUCCESS) {
-          success++;
-        }
-      });
-
-      if (data.quizzes.length === (locked + success)) {
-        data.quizzes[success].status = 1;
-        data.quizzes[success].locked = false;
-      }
-
       data.quizzes.forEach((quiz) => {
         quizzesStatus.push({
           status: quiz.status
         });
       });
 
-      data.save(done);
+      done();
     }
   ], (err) => {
     if (err) {
@@ -69,7 +57,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     (result, done) => {
       if (result.quizzes[orderId - 1].locked) {
         done(new Error('is locked'));
-      }else {
+      } else {
         homeworkQuizzes.findOne({id: result.quizzes[orderId - 1].id}, done);
       }
     }
