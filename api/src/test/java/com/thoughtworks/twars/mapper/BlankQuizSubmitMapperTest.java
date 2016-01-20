@@ -5,6 +5,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -33,10 +35,10 @@ public class BlankQuizSubmitMapperTest extends TestBase{
     }
 
     @Test
-    public void should_return_one_blank_quiz_submit() {
-        BlankQuizSubmit blankQuizSubmit = blankQuizSubmitMapper.findOne(1);
+    public void should_return_all_blank_quiz_submits_by_score_sheet_id() {
+        List<BlankQuizSubmit> blankQuizSubmit = blankQuizSubmitMapper.findByScoreSheetId(1);
 
-        assertThat(blankQuizSubmit.getId(), is(1));
-        assertThat(blankQuizSubmit.getBlankQuizId(), is(1));
+        assertThat(blankQuizSubmit.get(0).getId(), is(1));
+        assertThat(blankQuizSubmit.get(0).getBlankQuizId(), is(1));
     }
 }
