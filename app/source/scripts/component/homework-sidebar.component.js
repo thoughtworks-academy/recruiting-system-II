@@ -49,23 +49,18 @@ var HomeworkSidebar = React.createClass({
   },
 
   render() {
-    var tags = [];
+    var list = this.state.homeworkStatusList;
 
-    for (var i = 0; i < this.state.homeworkStatusList.length; i++) {
-      var index = i + 1;
-
-      tags.push({mark: index, value: '第' + index + '题', state: this.state.homeworkStatusList[i].status});
-    }
-    var itemHtml = tags.map((item, index) => {
+    var itemHtml = list.map((item, index) => {
       var classStr = 'list-group-item ' + (this.state.clickNumber === index + 1 ? ' selected' : '');
 
       return (
           <button className={classStr} key={index}
-                  onClick={this.handleClick.bind(null, item.mark)}>
+                  onClick={this.handleClick.bind(null, index + 1)}>
             <div className="row">
-              <div className="col-xs-9 h4 text-center ">{item.value}</div>
+              <div className="col-xs-9 h4 text-center ">{'第' + (index + 1) + '题'}</div>
               <div className='col-xs-3'>
-                <i className={this.changeIcon(item.state)}/></div>
+                <i className={this.changeIcon(item.status)}/></div>
             </div>
           </button>
       );
