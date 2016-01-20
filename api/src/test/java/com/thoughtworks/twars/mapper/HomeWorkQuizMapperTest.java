@@ -24,9 +24,9 @@ public class HomeWorkQuizMapperTest extends TestBase {
         super.tearDown();
     }
 
-    @Test
-    public void should_return_some_home_work_quizzes_by_given_section_id() throws Exception {
-        List<HomeworkQuiz> homeworkQuizzes = homeWorkQuizMapper.findBySectionId(1);
-        assertThat(homeworkQuizzes.size(), is(0));
-    }
+//    @Test
+//    public void should_return_some_home_work_quizzes_by_given_section_id() throws Exception {
+//        List<HomeworkQuiz> homeworkQuizzes = homeWorkQuizMapper.findBySectionId(1);
+//        assertThat(homeworkQuizzes.size(), is(0));
+//    }
 }
