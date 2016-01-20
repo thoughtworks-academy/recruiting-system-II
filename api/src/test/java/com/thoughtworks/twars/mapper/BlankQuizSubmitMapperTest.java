@@ -23,12 +23,20 @@ public class BlankQuizSubmitMapperTest extends TestBase{
     }
 
     @Test
-    public void shoule_return_id_when_insert_blank_quiz_submit(){
+    public void should_return_id_when_insert_blank_quiz_submit(){
         BlankQuizSubmit blankQuizSubmit = new BlankQuizSubmit();
         blankQuizSubmit.setScoreSheetId(1);
         blankQuizSubmit.setBlankQuizId(2);
 
         blankQuizSubmitMapper.insertBlankQuizSubmit(blankQuizSubmit);
         assertThat(blankQuizSubmit.getId(), is(5));
+    }
+
+    @Test
+    public void should_return_one_blank_quiz_submit() {
+        BlankQuizSubmit blankQuizSubmit = blankQuizSubmitMapper.findOne(1);
+
+        assertThat(blankQuizSubmit.getId(), is(1));
+        assertThat(blankQuizSubmit.getBlankQuizId(), is(1));
     }
 }
