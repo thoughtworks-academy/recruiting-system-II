@@ -19,15 +19,14 @@
         SELECT * FROM scoreSheet WHERE id = #{id};
     </select>
 
-    <insert id="insertScoreSheet" parameterType="com.thoughtworks.twars.bean.ScoreSheet" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO scoreSheet(examerId,paperId)
-        VALUES (#{examerId},#{paperId})
+    <insert id="insertScoreSheet" parameterType="com.thoughtworks.twars.bean.ScoreSheet" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO scoreSheet(examerId,paperId) VALUES(#{examerId},#{paperId});
     </insert>
 
     <select id="selectScoreSheet" resultType="com.thoughtworks.twars.bean.ScoreSheet">
         SELECT * FROM scoreSheet WHERE examerId = #{examerId} AND paperId = #{paperId};
     </select>
-
 
 
 </mapper>

@@ -11,5 +11,5 @@ public interface ScoreSheetMapper {
 
     int insertScoreSheet(ScoreSheet scoreSheet);
 
-    int selectScoreSheet(ScoreSheet scoreSheet);
+    ScoreSheet selectScoreSheet(ScoreSheet scoreSheet);
 }

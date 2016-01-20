@@ -61,24 +61,41 @@ public class ScoreSheetResource extends Resource {
     public Response insertScoreSheet(Map data) {
         int examerId = (int) data.get("examerId");
         int paperId = (int) data.get("paperId");
-        int blankQuizSubmitId;
-        int blankQuizId;
-        int quizItemId;
-        String answer;
+        int scoreSheetId;
 
         ScoreSheet scoreSheet = new ScoreSheet();
         scoreSheet.setPaperId(paperId);
         scoreSheet.setExamerId(examerId);
 
-        int scoreSheetId = scoreSheetMapper.selectScoreSheet(scoreSheet);
+        ScoreSheet selectScoreSheet = scoreSheetMapper.selectScoreSheet(scoreSheet);
 
-        if (scoreSheetMapper.selectScoreSheet(scoreSheet) != 0) {
-            scoreSheetId = scoreSheetMapper.insertScoreSheet(scoreSheet);
+        if (selectScoreSheet != null) {
+            scoreSheetId = selectScoreSheet.getId();
+        } else {
+            scoreSheetMapper.insertScoreSheet(scoreSheet);
+            scoreSheetId = scoreSheet.getId();
         }
 
         List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
-        for (int j = 0; j < blankQuizSubmits.size(); j++) {
 
+        if(blankQuizSubmits != null){
+            insertBlankQuizSubmit(blankQuizSubmits, scoreSheetId);
+        }
+
+        Map result = new HashMap<>();
+        result.put("uri", "scoresheets/" + scoreSheetId);
+
+        return Response.status(201).entity(result).build();
+    }
+
+
+    public void insertBlankQuizSubmit(List<Map> blankQuizSubmits, int scoreSheetId) {
+        int blankQuizSubmitId;
+        int blankQuizId;
+        int quizItemId;
+        String answer;
+
+        for (int j = 0; j < blankQuizSubmits.size(); j++) {
             blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
 
             BlankQuizSubmit blankQuizSubmitObj = new BlankQuizSubmit();
@@ -90,7 +107,6 @@ public class ScoreSheetResource extends Resource {
             List<Map> itemPosts = (List) blankQuizSubmits.get(j)
                     .get("itemPosts");
             for (int i = 0; i < itemPosts.size(); i++) {
-
                 Map itemPost = itemPosts.get(i);
                 answer = (String) itemPost.get("answer");
                 quizItemId = (Integer) itemPost.get("quizItemId");
@@ -103,12 +119,6 @@ public class ScoreSheetResource extends Resource {
                 itemPostMapper.insertItemPost(itemPostObj);
             }
         }
-
-        Map result = new HashMap<>();
-        result.put("uri", "scoresheets/" +
-                scoreSheet.getId());
-
-        return Response.status(200).entity(result).build();
     }
 
 
@@ -156,41 +166,6 @@ public class ScoreSheetResource extends Resource {
                 .collect(Collectors.toList());
     }
 
-//
-//    public List<Map> insertBlankQuizScoreSheet(Map data) {
-//        int blankQuizId;
-//        int quizItemId;
-//        String answer;
-//        int examerId = (int) data.get("examerId");
-//        int paperId = (int) data.get("paperId");
-//
-//        List<Map> result = new ArrayList<>();
-//        List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
-//
-//        for (int j = 0; j < blankQuizSubmits.size(); j++) {
-//            blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
-//            List<Map> itemPosts = (List) blankQuizSubmits.get(j)
-//                    .get("itemPosts");
-//            for (int i = 0; i < itemPosts.size(); i++) {
-//                Map blankQuizMap = new HashMap<>();
-//
-//                Map itemPost = itemPosts.get(i);
-//                answer = (String) itemPost.get("answer");
-//                quizItemId = (Integer) itemPost.get("quizItemId");
-//                ScoreSheet sheet = new ScoreSheet();
-//                sheet.setExamerId(examerId);
-//                sheet.setPaperId(paperId);
-//
-//                scoreSheetMapper.insertScoreSheet(sheet);
-//
-//                blankQuizMap.put("uri", "scoresheets/" +
-//                        sheet.getId());
-//                result.add(blankQuizMap);
-//            }
-//        }
-//
-//        return result;
-//    }
 
 //    public Map insertHomeworkQuizScoreSheet(Map data) {
 //        int examerId = (int) data.get("examerId");
@@ -206,7 +181,7 @@ public class ScoreSheetResource extends Resource {
 //        int homeworkQuizItemId = (int) homeworkSubmitPostHistory
 //                .get("homeworkQuizItemId");
 //
-//        HomeworkQuizScoreSheet homeworkQuizScoreSheet =
+//        HomeworkQhuizScoreSheet homeworkQuizScoreSheet =
 //                new HomeworkQuizScoreSheet();
 //
 //        homeworkQuizScoreSheet.setPaperId(paperId);

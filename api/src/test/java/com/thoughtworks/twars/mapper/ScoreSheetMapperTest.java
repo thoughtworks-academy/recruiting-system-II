@@ -38,36 +38,23 @@ public class ScoreSheetMapperTest extends com.thoughtworks.twars.mapper.TestBase
         assertThat(scoreSheet.getId(), is(5));
     }
 
-    //    @Test
-//    public void should_return_one_score_sheet(){
-//        ScoreSheet scoreSheet = scoreSheetMapper.findOne(1);
-//        assertThat(scoreSheet.getId(), is(1));
-//        assertThat(scoreSheet.getUserAnswer(), is("23"));
-//    }
-//
+    @Test
+    public void should_return_score_sheet_by_examerid_and_paperid(){
+        ScoreSheet scoreSheet = new ScoreSheet();
+        scoreSheet.setPaperId(2);
+        scoreSheet.setExamerId(2);
 
-    ////////////////////////////////////////////////////
-//    @Test
-//    public void  should_return_id_when_insert_score_sheet(){
-//        ScoreSheet scoreSheet = new ScoreSheet();
-//        scoreSheet.setExamerId(1);
-//        scoreSheet.setPaperId(1);
-//
-//        scoreSheetMapper.insertScoreSheet(scoreSheet);
-//
-//        List<ScoreSheet> list = scoreSheetMapper.findAll();
-//        assertThat(list.size(), is(5));
-//    }
-//
-//    @Test
-//    public void  should_return_id_when_select_score_sheet(){
-//        ScoreSheet scoreSheet = new ScoreSheet();
-//        scoreSheet.setExamerId(1);
-//        scoreSheet.setPaperId(1);
-//
-//        scoreSheetMapper.selectScoreSheet(scoreSheet);
-//
-//        List<ScoreSheet> list = scoreSheetMapper.findAll();
-//        assertThat(list.size(), is(4));
-//    }
+        ScoreSheet returnScoreSheet = scoreSheetMapper.selectScoreSheet(scoreSheet);
+        assertThat(returnScoreSheet.getId(), is(3));
+        assertThat(returnScoreSheet.getPaperId(), is(2));
+        assertThat(returnScoreSheet.getExamerId(), is(2));
+    }
+
+    @Test
+    public void should_return_score_sheet_by_id(){
+        ScoreSheet scoreSheet = scoreSheetMapper.findOne(2);
+
+        assertThat(scoreSheet.getExamerId(), is(2));
+        assertThat(scoreSheet.getPaperId(), is(1));
+    }
 }
