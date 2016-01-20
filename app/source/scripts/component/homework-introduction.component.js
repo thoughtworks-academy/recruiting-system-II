@@ -14,7 +14,7 @@ var HomeworkIntroduction = React.createClass({
       desc: ''
     };
   },
-  
+
   render() {
     var desc = this.state.desc;
     function content() { return {__html: markdown.toHTML(desc)}}
@@ -26,6 +26,5 @@ var HomeworkIntroduction = React.createClass({
     );
   }
 });
-
 
 module.exports = HomeworkIntroduction;
