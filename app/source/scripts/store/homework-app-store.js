@@ -10,10 +10,8 @@ var HomeworkAppStore = Reflux.createStore({
   listenables: [HomeworkActions],
 
   onGetFocus: function (clickNumber) {
-    //console.log(clickNumber);
     this.trigger({clickNumber: clickNumber});
   }
-
 });
 
 module.exports = HomeworkAppStore;

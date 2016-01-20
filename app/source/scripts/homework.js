@@ -28,7 +28,6 @@ function changeNumber() {
   };
 }
 
-
 window.onpopstate = function () {
   var number = parseInt(location.hash.substr(1));
 
