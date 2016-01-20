@@ -21,7 +21,7 @@ var HomeworkIntroduction = React.createClass({
     return (
         <div>
           <div id="introduction" dangerouslySetInnerHTML={content()}></div>
-          <div id="templateRepo">{this.state.templateRepo}</div>
+          <div className="templateRepo"><span>编程题模板库地址:</span><em>{this.state.templateRepo}</em></div>
         </div>
     );
   }

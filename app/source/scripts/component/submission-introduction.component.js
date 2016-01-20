@@ -1,15 +1,19 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
+var HomeworkIntroductionStore = require('../store/homework-introduction-store');
 
 var SubmissionIntroduction = React.createClass({
+  mixins:[Reflux.connect(HomeworkIntroductionStore)],
+
   render() {
     return (
         <div>
           <div className="row last-time">
             <div className="col-md-12 ">你还有2天10小时完成题目</div>
           </div>
-
+          <div className="templateRepo"><span>编程题模板库地址:</span><em>{this.state.templateRepo}</em></div>
           <div className="form-horizontal">
             <div className="form-group">
               <div className="col-sm-6 col-sm-offset-2 col-xs-6 col-xs-offset-1">
