@@ -18,7 +18,7 @@ var HomeworkIntroductionStore = Reflux.createStore({
           }else {
             this.trigger({
               desc: res.body.desc,
-              templateRespos: res.body.templateRespos
+              templateRepo: res.body.templateRepo
             });
           }
         });

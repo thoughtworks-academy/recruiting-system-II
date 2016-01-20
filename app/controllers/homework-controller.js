@@ -87,7 +87,7 @@ UserHomeworkController.prototype.getQuiz = (req, res) => {
         status: 200,
         quiz: {
           desc: data.desc,
-          templateRespos: data.templateRespos
+          templateRepo: data.templateRepo
         }
       });
     }

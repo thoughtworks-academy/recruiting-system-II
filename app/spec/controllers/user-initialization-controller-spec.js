@@ -132,7 +132,7 @@ describe('UserInitializationController', function () {
         homeworkQuizzes: [{
           id: 1,
           desc: '这是一道比较难的题!',
-          templateRespos: 'github'
+          templateRepo: 'github'
         }]
       };
 

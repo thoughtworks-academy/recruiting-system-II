@@ -148,7 +148,7 @@ describe('HomeworkController', function () {
         var data = {
           id: 1,
           desc: '这是一道简单的题',
-          templateRespos: 'www.github.com'
+          templateRepo: 'www.github.com'
         };
 
         callback(null, data);
@@ -166,7 +166,7 @@ describe('HomeworkController', function () {
             status: 200,
             quiz: {
               desc: '这是一道简单的题',
-              templateRespos: 'www.github.com'
+              templateRepo: 'www.github.com'
             }
           });
           done();

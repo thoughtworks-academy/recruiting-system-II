@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var homeworkQuizzesSchema = new Schema({
   id: Number,
   desc: String,
-  templateRespos: String
+  templateRepo: String
 });
 
 homeworkQuizzesSchema.statics.getList = function (callback) {
@@ -32,7 +32,7 @@ homeworkQuizzesSchema.statics.upsertData = function (data, callback) {
         this.create({
           id: item.id,
           desc: item.description,
-          templateRespos: item.templateRepository
+          templateRepo: item.templateRepository
         });
       }
     });
