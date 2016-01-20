@@ -46,13 +46,13 @@ ReactDom.render(
       </header>
       <HomeworkApp>
         <div className="row">
-          <HomeworkSidebar/>
+          <HomeworkSidebar onAction={onAction} homeworkNumber={changeNumber().currentHomeworkNumber}/>
           <div className="col-md-9 col-sm-9 col-xs-12">
             <div className="content">
-              <Tabs defaultActiveKey={1} animation={false}>
-                <Tab eventKey={1} title="题目说明"><HomeworkIntroduction /></Tab>
-                <Tab eventKey={2} title="提交说明"><SubmissionIntroduction /></Tab>
-                <Tab eventKey={3} title="运行结果"><RunningResult /></Tab>
+              <Tabs defaultActiveKey={0} animation={false}>
+                <Tab eventKey={0} title="题目说明"><HomeworkIntroduction /></Tab>
+                <Tab eventKey={1} title="提交说明"><SubmissionIntroduction /></Tab>
+                <Tab eventKey={2} title="运行结果"><RunningResult /></Tab>
               </Tabs>
             </div>
           </div>
