@@ -150,14 +150,16 @@ baseUri: http://api.bronzesword.com/
                           quizItemId: integer
           [homeworkSubmits]:
             properties:
-              homeworkQuizId: integer
-              homeworkSubmitPostHistory:
+              []:
                 properties:
-                  homeworkURL: string
-                  version: string
-                  branch: string
-                  status: number
-                  timestamp: integer
+                  homeworkQuizId: integer
+                  homeworkSubmitPostHistory:
+                    properties:
+                      homeworkURL: string
+                      version: string
+                      branch: string
+                      status: number
+                      timestamp: integer
 
     responses:
       201:
