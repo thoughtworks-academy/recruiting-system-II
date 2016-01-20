@@ -154,8 +154,11 @@ baseUri: http://api.bronzesword.com/
               homeworkSubmitPostHistory:
                 properties:
                   homeworkURL: string
-                  homeworkQuizItemId: integer
                   version: string
+                  branch: string
+                  status: string
+                  timestamp: integer
+
     responses:
       201:
         body:
@@ -187,7 +190,8 @@ baseUri: http://api.bronzesword.com/
                       properties:
                         answer: string
                         quizItem:
-                        uri: string
+                          properties:
+                            uri: string
                 homeworkSubmits[]:
                   properties:
                     homeworkQuiz:
@@ -318,18 +322,18 @@ baseUri: http://api.bronzesword.com/
                     },
                     {
                       "id": 2,
-                      "desc": "dojo"
+                      "desc": "dojo",
                       "quizzes" : [
-                      {
-                        "id": 1,
-                        "definition": {
-                          "uri": "homeworkQuizzes/2"
-                        },
-                        "items": {
-                          "uri": "homeworkQuizzes/3"
+                        {
+                          "id": 1,
+                          "definition": {
+                            "uri": "homeworkQuizzes/2"
+                          },
+                          "items": {
+                            "uri": "homeworkQuizzes/3"
+                          }
                         }
-                      }
-                      ]
+                      ],
                       "maker": {
                         "uri": "userInfo/3"
                       }
