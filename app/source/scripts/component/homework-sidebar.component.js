@@ -6,9 +6,10 @@ var React = require('react');
 var Reflux = require('reflux');
 var HomeworkActions = require('../actions/homework-actions');
 var HomeworkSidebarStore = require('../store/homework-sidebar-store');
+var HomeworkAppStore = require('../store/homework-app-store');
 
 var HomeworkSidebar = React.createClass({
-  mixins: [Reflux.connect(HomeworkSidebarStore)],
+  mixins: [Reflux.connect(HomeworkSidebarStore), Reflux.connect(HomeworkAppStore)],
 
   getInitialState: function () {
     var list = [];
@@ -18,7 +19,8 @@ var HomeworkSidebar = React.createClass({
     }
 
     return {
-      homeworkStatusList: list
+      homeworkStatusList: list,
+      currentHomeworkNumber: this.props.homeworkNumber
     };
   },
 
@@ -38,12 +40,8 @@ var HomeworkSidebar = React.createClass({
     });
     return icon;
   },
-  handleClick: function (mark, evt) {
-    var name = evt.target.offsetParent.className;
-
-    if (name.includes('disabled') === false) {
-      this.props.onChangeNumber(mark);
-    }
+  handleClick: function (mark) {
+    this.props.onAction(mark);
   },
 
   render() {
@@ -55,11 +53,10 @@ var HomeworkSidebar = React.createClass({
       tags.push({mark: index, value: '第' + index + '题', state: this.state.homeworkStatusList[i].homeworkStatus});
     }
     var itemHtml = tags.map((item, index) => {
-      var classStr = 'list-group-item ' + (item.mark === this.props.currentHomeworkNumber ? 'selected' : '')
-          + (item.state === 'lock' ? ' disabled' : '');
+      var classStr = 'list-group-item ';
 
       return (
-          <button className={classStr} disabled={item.state === 'lock' ? true : false} key={index}
+          <button className={classStr} key={index}
                   onClick={this.handleClick.bind(null, item.mark)}>
             <div className="row">
               <div className="col-xs-9 h4 text-center ">{item.value}</div>
