@@ -30,15 +30,12 @@ function changeNumber() {
 
 window.onpopstate = function () {
   var number = parseInt(location.hash.substr(1));
-
-  HomeworkAction.getFocus(number);
-  HomeworkAction.getContent(number);
+  HomeworkAction.changeOrderId(number);
 };
 
-function onAction(clickNumber) {
-  history.pushState(null, '', '#' + clickNumber);
-  history.pushState(null, '', '#' + clickNumber);
-  history.back();
+function onAction(number) {
+  HomeworkAction.changeOrderId(number);
+  history.pushState(null, '', '#' + number);
 }
 
 ReactDom.render(
