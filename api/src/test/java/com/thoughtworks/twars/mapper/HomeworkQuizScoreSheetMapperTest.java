@@ -23,18 +23,18 @@ public class HomeworkQuizScoreSheetMapperTest extends TestBase {
         super.tearDown();
     }
 
-    @Test
-    public void should_return_influence_line_when_insert_homework_quiz_score_sheet(){
-
-        HomeworkQuizScoreSheet homeworkQuizScoreSheet = new HomeworkQuizScoreSheet();
-        homeworkQuizScoreSheet.setExamerId(1);
-        homeworkQuizScoreSheet.setPaperId(1);
-        homeworkQuizScoreSheet.setHomeworkQuizId(1);
-        homeworkQuizScoreSheet.setHomeworkQuizItemId(1);
-        homeworkQuizScoreSheet.setGithubAddress("github.com/purper/8");
-
-        int result = homeworkQuizScoreSheetMapper.insertHomeworkQuizScoreSheet(homeworkQuizScoreSheet);
-
-        assertThat(result, is(1));
-    }
+//    @Test
+//    public void should_return_influence_line_when_insert_homework_quiz_score_sheet(){
+//
+//        HomeworkQuizScoreSheet homeworkQuizScoreSheet = new HomeworkQuizScoreSheet();
+//        homeworkQuizScoreSheet.setExamerId(1);
+//        homeworkQuizScoreSheet.setPaperId(1);
+//        homeworkQuizScoreSheet.setHomeworkQuizId(1);
+//        homeworkQuizScoreSheet.setHomeworkQuizItemId(1);
+//        homeworkQuizScoreSheet.setGithubAddress("github.com/purper/8");
+//
+//        int result = homeworkQuizScoreSheetMapper.insertHomeworkQuizScoreSheet(homeworkQuizScoreSheet);
+//
+//        assertThat(result, is(1));
+//    }
 }
