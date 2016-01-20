@@ -4,7 +4,7 @@ function jumpControl(isLoged, isPaperCommited, isDetailed){
   return [{
     originPath: [
       'user-center.html',
-      'programme.html',
+      'homework.html',
       'logic-puzzle.html',
       'progress.html',
       'start.html',
@@ -21,7 +21,7 @@ function jumpControl(isLoged, isPaperCommited, isDetailed){
     condition: isLoged && isPaperCommited && isDetailed
   },{
     originPath: [
-      'programme.html',
+      'homework.html',
       'logic-puzzle.html',
       'progress.html',
       'start.html',
