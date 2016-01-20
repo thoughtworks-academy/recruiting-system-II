@@ -55,7 +55,7 @@ HomeworkController.prototype.getList = function (req, res) {
   });
 };
 
-UserHomeworkController.prototype.getQuiz = (req, res) => {
+HomeworkController.prototype.getQuiz = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.query.orderId;
 
