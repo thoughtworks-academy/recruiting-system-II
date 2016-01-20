@@ -8,23 +8,26 @@
     <resultMap id="scoreSheetsMap" type="com.thoughtworks.twars.bean.ScoreSheet">
         <id property="id" column="id"></id>
         <result column="examerId" property="examerId"></result>
-        <result column="blankQuizId" property="blankQuizId"></result>
-        <result column="quizItemId" property="quizItemId"></result>
-        <result column="userAnswer" property="userAnswer"></result>
         <result column="paperId" property="paperId"></result>
-
     </resultMap>
 
     <select id="findAll" resultMap="scoreSheetsMap">
-        select * from blankQuizScoreSheet;
+        SELECT * FROM scoreSheet;
     </select>
 
     <select id="findOne" resultType="com.thoughtworks.twars.bean.ScoreSheet">
-        select * from blankQuizScoreSheet where id = #{id};
+        SELECT * FROM scoreSheet WHERE id = #{id};
     </select>
 
     <insert id="insertScoreSheet" parameterType="com.thoughtworks.twars.bean.ScoreSheet" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO blankQuizScoreSheet(examerId,blankQuizId,quizItemId,paperId,userAnswer)
-        VALUES (#{examerId},#{blankQuizId},#{quizItemId},#{paperId},#{userAnswer})
+        INSERT INTO scoreSheet(examerId,paperId)
+        VALUES (#{examerId},#{paperId})
     </insert>
+
+    <select id="selectScoreSheet" resultType="com.thoughtworks.twars.bean.ScoreSheet">
+        SELECT * FROM scoreSheet WHERE examerId = #{examerId} AND paperId = #{paperId};
+    </select>
+
+
+
 </mapper>

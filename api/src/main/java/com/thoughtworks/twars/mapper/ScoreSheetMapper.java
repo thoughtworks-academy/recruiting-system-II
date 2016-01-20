@@ -5,9 +5,11 @@ import com.thoughtworks.twars.bean.ScoreSheet;
 import java.util.List;
 
 public interface ScoreSheetMapper {
-    int insertScoreSheet(ScoreSheet scoreSheet);
-
     List<ScoreSheet> findAll();
 
     ScoreSheet findOne(int id);
+
+    int insertScoreSheet(ScoreSheet scoreSheet);
+
+    int selectScoreSheet(ScoreSheet scoreSheet);
 }

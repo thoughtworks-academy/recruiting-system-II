@@ -1,19 +1,16 @@
 package com.thoughtworks.twars.bean;
 
 public class ScoreSheet {
-    private int id;
     private int examerId;
-    private int blankQuizId;
-    private int quizItemId;
+    private int id;
     private int paperId;
-    private String userAnswer;
 
-    public int getPaperId() {
-        return paperId;
+    public int getExamerId() {
+        return examerId;
     }
 
-    public void setPaperId(int paperId) {
-        this.paperId = paperId;
+    public void setExamerId(int examerId) {
+        this.examerId = examerId;
     }
 
     public int getId() {
@@ -24,35 +21,11 @@ public class ScoreSheet {
         this.id = id;
     }
 
-    public int getExamerId() {
-        return examerId;
+    public int getPaperId() {
+        return paperId;
     }
 
-    public void setExamerId(int examerId) {
-        this.examerId = examerId;
-    }
-
-    public int getBlankQuizId() {
-        return blankQuizId;
-    }
-
-    public void setBlankQuizId(int blankQuizId) {
-        this.blankQuizId = blankQuizId;
-    }
-
-    public String getUserAnswer() {
-        return userAnswer;
-    }
-
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
-    }
-
-    public int getQuizItemId() {
-        return quizItemId;
-    }
-
-    public void setQuizItemId(int quizItemId) {
-        this.quizItemId = quizItemId;
+    public void setPaperId(int paperId) {
+        this.paperId = paperId;
     }
 }
