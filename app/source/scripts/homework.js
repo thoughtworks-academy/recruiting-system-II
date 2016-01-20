@@ -29,14 +29,17 @@ function changeNumber() {
 }
 
 
-function onAction(clickNumber) {
-  //mixins: [Reflux.connect(HomeworkAppStore)];
-  var orderId = changeNumber();
+window.onpopstate = function () {
+  var number = parseInt(location.hash.substr(1));
 
-  if (orderId.currentHomeworkNumber !== clickNumber) {
-    //HomeworkAction.getFocus(orderId);
-    history.pushState(null, '', '#' + clickNumber);
-  }
+  HomeworkAction.getFocus(number);
+  HomeworkAction.getContent(number);
+};
+
+function onAction(clickNumber) {
+  history.pushState(null, '', '#' + clickNumber);
+  history.pushState(null, '', '#' + clickNumber);
+  history.back();
 }
 
 ReactDom.render(

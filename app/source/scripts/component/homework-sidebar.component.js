@@ -20,7 +20,8 @@ var HomeworkSidebar = React.createClass({
 
     return {
       homeworkStatusList: list,
-      currentHomeworkNumber: this.props.homeworkNumber
+      currentHomeworkNumber: this.props.homeworkNumber,
+      clickNumber: this.props.homeworkNumber
     };
   },
 
@@ -53,7 +54,7 @@ var HomeworkSidebar = React.createClass({
       tags.push({mark: index, value: '第' + index + '题', state: this.state.homeworkStatusList[i].homeworkStatus});
     }
     var itemHtml = tags.map((item, index) => {
-      var classStr = 'list-group-item ';
+      var classStr = 'list-group-item ' + (this.state.clickNumber === index + 1 ? ' selected' : '');
 
       return (
           <button className={classStr} key={index}

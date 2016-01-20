@@ -9,8 +9,9 @@ var constant = require('../../../mixin/constant');
 var HomeworkAppStore = Reflux.createStore({
   listenables: [HomeworkActions],
 
-  onGetFocus: function (orderId) {
-    this.trigger(orderId);
+  onGetFocus: function (clickNumber) {
+    //console.log(clickNumber);
+    this.trigger({clickNumber: clickNumber});
   }
 
 });
