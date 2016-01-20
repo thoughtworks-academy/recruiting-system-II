@@ -29,7 +29,9 @@ function changeNumber() {
 }
 
 window.onpopstate = function () {
+  console.log('onpopstate');
   var number = parseInt(location.hash.substr(1));
+
   HomeworkAction.changeOrderId(number);
 };
 

@@ -8,17 +8,19 @@ var constant = require('../../../mixin/constant');
 var HomeworkIntroductionStore = Reflux.createStore({
   listenables: [HomeworkActions],
 
-  onGetContent: function (orderId) {
-    request.get('homework/getContent')
+  onChangeOrderId: function (orderId) {
+    console.log(orderId)
+    request.get('homework/quiz')
         .set('Content-Type', 'application/json')
         .query({orderId: orderId})
         .end((err, res) => {
           if(err){
             console.log(err);
           }else {
+            console.log(res.body.quiz);
             this.trigger({
-              desc: res.body.desc,
-              templateRepo: res.body.templateRepo
+              desc: res.body.quiz.desc,
+              templateRepo: res.body.quiz.templateRepo
             });
           }
         });

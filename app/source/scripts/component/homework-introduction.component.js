@@ -10,21 +10,23 @@ var HomeworkIntroduction = React.createClass({
   mixins:[Reflux.connect(HomeworkIntroductionStore)],
 
   getInitialState: function() {
-    var content = markdown.toHTML('###题目说明');
-
+    var content = markdown.toHTML(this.state.desc);
     return {
-      describe: content
+      desc: ''
     };
   },
 
   componentDidMount:function() {
     document.getElementById('introduction').innerHTML = this.state.describe;
+
   },
 
   render() {
+    console.log(this);
     return (
-        <div id="introduction">
-
+        <div>
+          <div id="introduction"></div>
+          <div id="templateRepo"></div>
         </div>
     );
   }
