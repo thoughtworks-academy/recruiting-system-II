@@ -1,5 +1,6 @@
 'use strict';
 
+var Reflux = require('reflux');
 var React = require('react');
 var markdown = require('markdown').markdown;
 var HomeworkIntroductionStore = require('../store/homework-introduction-store');
@@ -28,5 +29,6 @@ var HomeworkIntroduction = React.createClass({
     );
   }
 });
+
 
 module.exports = HomeworkIntroduction;
