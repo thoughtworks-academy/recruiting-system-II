@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var logicPuzzle = require('../../models/logic-puzzle');
 
 var UserHomeworkQuizzes = require('../../models/user-homework-quizzes');
+var homeworkQuizzes = require('../../models/homework-quizzes');
 
 mongoose.connect('mongodb://localhost/twars');
 var db = mongoose.connection;
@@ -585,6 +586,10 @@ db.once('open', function () {
     ], function () {
       console.log('mongo refresh end.');
     });
+  });
+
+  homeworkQuizzes.remove({}, () => {
+    console.log('remove all homeworkQuizzes')
   });
 
   console.log('mongo insert UserHomeworkQuizzes start...');
