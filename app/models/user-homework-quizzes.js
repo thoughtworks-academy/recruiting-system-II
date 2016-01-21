@@ -62,7 +62,7 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
         data.quizzes[success].locked = false;
 
         data.save(callback);
-      }else {
+      } else {
         callback(null, true);
       }
     }
@@ -71,9 +71,9 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
 
 userHomeworkQuizzesSchema.statics.findProgressTasks = function (callback) {
   this.find({quizzes: {$elemMatch: {status: 2}}}, 'userId quizzes', (err, doc) => {
-    if (err){
+    if (err) {
       callback(err);
-    }else {
+    } else {
       var result = [];
 
       doc.forEach((item) => {
@@ -91,6 +91,33 @@ userHomeworkQuizzesSchema.statics.findProgressTasks = function (callback) {
         });
       });
 
+      callback(null, result);
+    }
+  });
+};
+
+userHomeworkQuizzesSchema.statics.checkData = function (userId, orderId, callback) {
+  var isValidate;
+  var result = {};
+
+  this.findOne({userId: userId}, (err, data) => {
+
+    if (err || !data) {
+      callback(err || new Error('error'));
+    } else if (orderId < 1 || orderId === undefined || orderId > data.quizzes.length) {
+      isValidate = false;
+      result.data = null;
+      result.isValidate = isValidate;
+      callback(null, result);
+    } else if (data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.ACTIVE || data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.ERROR) {
+      isValidate = true;
+      result.data = data;
+      result.isValidate = isValidate;
+      callback(null, result);
+    } else {
+      isValidate = false;
+      result.data = data;
+      result.isValidate = isValidate;
       callback(null, result);
     }
   });
