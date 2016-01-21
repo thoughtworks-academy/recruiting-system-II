@@ -1,3 +1,5 @@
+'use strict';
+
 var VerEx = require('verbal-expressions');
 
 function isGitHubRepoUrl(TestUrl){
