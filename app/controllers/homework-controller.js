@@ -119,5 +119,41 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
   });
 };
 
-module.exports = HomeworkController;
+HomeworkController.prototype.getProgressTasks = (req, res) => {
+  var progressTasks;
 
+  async.waterfall([
+    (done) => {
+      userHomeworkQuizzes.findProgressTasks(done);
+    },
+    (result, done) => {
+      progressTasks = result;
+      homeworkQuizzes.find({}, done);
+    },
+    (result, done) => {
+
+      progressTasks.forEach((item, i) => {
+        result.forEach((ele, x) => {
+
+          if(item.quizId === ele.id) {
+            progressTasks[i].evaluateScript = ele.evaluateScript;
+            progressTasks[i].evaluateRepo = ele.evaluateRepo;
+          }
+        });
+      });
+      done(null, progressTasks);
+    }
+  ], (err, data) => {
+    if(err){
+      res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
+      res.send({status: 500, message: err.message});
+    }else {
+      res.send({
+        status: data.length === 0 ? constant.httpCode.NOT_FOUND : constant.httpCode.OK,
+        userAnswers: data
+      });
+    }
+  });
+};
+
+module.exports = HomeworkController;
