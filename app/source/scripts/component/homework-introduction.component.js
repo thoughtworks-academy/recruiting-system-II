@@ -17,7 +17,9 @@ var HomeworkIntroduction = React.createClass({
 
   render() {
     var desc = this.state.desc;
-    function content() { return {__html: markdown.toHTML(desc)}}
+    function content() {
+      return {__html: markdown.toHTML(desc)};
+    }
     return (
         <div>
           <div id="introduction" dangerouslySetInnerHTML={content()}></div>

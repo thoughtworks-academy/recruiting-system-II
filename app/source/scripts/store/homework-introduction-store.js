@@ -13,12 +13,12 @@ var HomeworkIntroductionStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .query({orderId: orderId})
         .end((err, res) => {
-          if(res.body.status === 403){
+          if(res.body.status === constant.httpCode.FORBIDDEN){
             this.trigger({
               desc: '##当前题目处于锁定状态!'
-            })
+            });
           }
-          if(res.body.status === 200){
+          if(res.body.status === constant.httpCode.OK){
             this.trigger({
               desc: res.body.quiz.desc,
               templateRepo: res.body.quiz.templateRepo
