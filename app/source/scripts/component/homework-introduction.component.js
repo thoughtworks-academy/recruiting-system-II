@@ -11,7 +11,8 @@ var HomeworkIntroduction = React.createClass({
 
   getInitialState: function() {
     return {
-      desc: ''
+      desc: '',
+      showRepo: true
     };
   },
 
@@ -23,7 +24,7 @@ var HomeworkIntroduction = React.createClass({
     return (
         <div>
           <div id="introduction" dangerouslySetInnerHTML={content()}></div>
-          <div className="templateRepo"><span>编程题模板库地址:</span><em>{this.state.templateRepo}</em></div>
+          <div className={'templateRepo ' + (this.state.showRepo ? '' : ' hide')}><span>编程题模板库地址:</span><em>{this.state.templateRepo}</em></div>
         </div>
     );
   }

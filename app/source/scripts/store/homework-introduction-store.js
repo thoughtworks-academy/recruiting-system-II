@@ -15,13 +15,15 @@ var HomeworkIntroductionStore = Reflux.createStore({
         .end((err, res) => {
           if(res.body.status === constant.httpCode.FORBIDDEN){
             this.trigger({
-              desc: '##当前题目处于锁定状态!'
+              desc: '##当前题目处于锁定状态!',
+              showRepo: false
             });
           }
           if(res.body.status === constant.httpCode.OK){
             this.trigger({
               desc: res.body.quiz.desc,
-              templateRepo: res.body.quiz.templateRepo
+              templateRepo: res.body.quiz.templateRepo,
+              showRepo: true
             });
           }
         });
