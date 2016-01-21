@@ -14,11 +14,11 @@ var SubmissionIntroduction = React.createClass({
   render() {
     console.log(this.state.showRepo);
     return (
-        <div>
+        <div className={(this.state.showRepo ? '' : ' hide')}>
           <div className="row last-time">
             <div className="col-md-12 ">你还有2天10小时完成题目</div>
           </div>
-          <div className={'templateRepo' + (this.state.showRepo ? '' : ' hide')}>
+          <div className="templateRepo">
             <span>编程题模板库地址:</span><em>{this.state.templateRepo}</em></div>
           <div className="form-horizontal">
             <div className="form-group">
