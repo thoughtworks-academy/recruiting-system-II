@@ -22,7 +22,8 @@ var ChangePasswordStore = Reflux.createStore({
             this.trigger({isRespond: false});
             this.trigger({oldPassword:'',newPassword: '', confirmPassword: ''});
           } else if (req.body.status === constant.httpCode.BAD_REQUEST) {
-            this.trigger({oldPasswordError: '旧密码错误'});
+            this.trigger({oldPasswordError: constant.changePassword.ERROR});
+            this.trigger({isRespond: false});
           } else {
             console.log('error');
           }

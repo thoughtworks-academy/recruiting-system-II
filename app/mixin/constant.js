@@ -21,6 +21,9 @@ var constant = {
     PROGRESS:2,
     SUCCESS:3,
     ERROR:4
+  },
+  changePassword: {
+    ERROR: '旧密码错误'
   }
 };
 
