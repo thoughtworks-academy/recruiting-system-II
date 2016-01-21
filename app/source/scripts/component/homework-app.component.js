@@ -7,7 +7,6 @@ var HomeworkApp = React.createClass({
   getInitialState: function() {
     HomeworkAction.changeOrderId(this.props.homeworkNumber);
     return {
-      desc:''
     };
   },
   render() {
