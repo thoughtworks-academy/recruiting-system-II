@@ -51,7 +51,8 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     (done) => {
       userHomeworkQuizzes.unlockNext(userId, done);
     },
-    (result, done) => {
+    (data, result, done) => {
+      done = typeof(result) === 'function' ? result : done;
       userHomeworkQuizzes.findOne({userId: userId}, done);
     },
     (result, done) => {
