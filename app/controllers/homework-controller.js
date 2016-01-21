@@ -56,7 +56,9 @@ HomeworkController.prototype.getQuiz = (req, res) => {
       userHomeworkQuizzes.findOne({userId: userId}, done);
     },
     (result, done) => {
-      if (result.quizzes[orderId - 1].locked) {
+      if (orderId === undefined || orderId > result.quizzes.length || orderId < 1) {
+        done(new Error('orderId error'));
+      } else if (result.quizzes[orderId - 1].locked) {
         done(new Error('is locked'));
       } else {
         homeworkQuizzes.findOne({id: result.quizzes[orderId - 1].id}, done);
@@ -64,7 +66,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     }
   ], (err, data) => {
     if (err) {
-      if (err.message === 'is locked') {
+      if (err.message === 'is locked' || err.message === 'orderId error') {
         res.send({
           status: 403
         });
@@ -91,8 +93,8 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     (done)=> {
       userHomeworkQuizzes.findOne({userId: userId}, done);
     }, function (data, done) {
-      if (orderId === undefined) {
-        done(new Error('orderId undefined'));
+      if (orderId === undefined || orderId > data.quizzes.length || orderId < 1) {
+        done(new Error('orderId error'));
       } else if (data.quizzes[orderId - 1].locked === true) {
         done(new Error('is locked'));
       } else {
@@ -102,7 +104,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     }
   ], function (err, data) {
     if (err) {
-      if (err.message === 'is locked' || err.message === 'orderId undefined') {
+      if (err.message === 'is locked' || err.message === 'orderId error') {
         res.send({
           status: 403
         });
@@ -116,7 +118,6 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     }
   });
 };
-
 
 module.exports = HomeworkController;
 
