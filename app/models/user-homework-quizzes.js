@@ -69,4 +69,31 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
   });
 };
 
+userHomeworkQuizzesSchema.statics.findProgressTasks = function (callback) {
+  this.find({quizzes: {$elemMatch: {status: 2}}}, 'userId quizzes', (err, doc) => {
+    if (err){
+      callback(err);
+    }else {
+      var result = [];
+
+      doc.forEach((item) => {
+        var userAnswerRepo;
+        var quizId;
+        item.quizzes.forEach((quiz) => {
+          userAnswerRepo = quiz.status === 2 ? quiz.userAnswerRepo : userAnswerRepo;
+          quizId = quiz.status === 2 ? quiz.id : quizId;
+        });
+
+        result.push({
+          userId: item.userId,
+          quizId: quizId,
+          userAnswerRepo: userAnswerRepo
+        });
+      });
+
+      callback(null, result);
+    }
+  });
+};
+
 module.exports = mongoose.model('UserHomeworkQuizzes', userHomeworkQuizzesSchema);
