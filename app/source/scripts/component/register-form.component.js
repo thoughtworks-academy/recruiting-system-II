@@ -98,7 +98,15 @@ var RegisterForm = React.createClass({
       password: ''
     };
   },
-
+  componentWillReceiveProps: function() {
+    this.setState({
+      mobilePhoneError: '',
+      emailError: '',
+      passwordError: '',
+      agree: false,
+      isShowToggle: false
+    });
+  },
   stateChange: function () {
     var newState = !this.state.isShowToggle;
     this.setState({isShowToggle: newState});
