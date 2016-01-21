@@ -213,97 +213,6 @@ describe('HomeworkController', function () {
     });
   });
 
-  describe('saveGithubUrl', ()=> {
-
-    var controller;
-    beforeEach(()=> {
-      controller = new HomeworkController();
-    });
-
-    it('it should return status 403 when which number in quiz is orderId\'status is locked ', (done)=> {
-
-      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, callback) {
-        var data = {
-          userId: 1,
-          quizzes: [
-            {
-              id: 1,
-              locked: true,
-              status: 0
-            }, {
-              id: 2,
-              locked: true,
-              status: 0
-            }, {
-              id: 3,
-              locked: true,
-              status: 0
-            }
-          ]
-        };
-
-        callback(null, data);
-      });
-
-      controller.saveGithubUrl({
-        session: {user: {id: 1}},
-        query: {orderId: 1},
-        userAnswerRepo: 'www.github.com'
-      }, {
-        send: function (data) {
-          expect(data).toEqual({
-            status: 403
-          });
-          done();
-        }
-      });
-    });
-
-    it('it should return status 200 when save a userAnswerURL is success ', (done)=> {
-
-      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, callback) {
-        var data = {
-          userId: 1,
-          quizzes: [
-            {
-              id: 1,
-              locked: false,
-              status: 1,
-              userAnswerRepo: '1'
-            }, {
-              id: 2,
-              locked: true,
-              status: 0,
-              userAnswerRepo: '2'
-
-            }, {
-              id: 3,
-              locked: true,
-              status: 0,
-              userAnswerRepo: '3'
-            }
-          ]
-        };
-
-        callback(null, data);
-      });
-
-      controller.saveGithubUrl({
-        session: {user: {id: 1}},
-        query: {orderId: 1},
-        body: {userAnswerRepo: 'www.github.com'}
-      }, {
-        send: function (data) {
-          expect(data).toEqual({
-            status: 200
-          });
-          done();
-        }
-      });
-    });
-
-  });
-
   describe('getProgressTasks', () => {
     var controller;
 
@@ -409,4 +318,309 @@ describe('HomeworkController', function () {
       });
     });
   });
+  
+  describe('saveGithubUrl', ()=> {
+
+    var controller;
+    var lockedData;
+    var activeData;
+    var progressData;
+    var successData;
+    var errorData;
+
+
+    beforeEach(()=> {
+      controller = new HomeworkController();
+      lockedData = {
+        userId: 1,
+        quizzes: [
+          {
+            id: 1,
+            status: 0,
+            userAnswerRepo: 'www.github.com'
+          }
+        ]
+      };
+
+      activeData = {
+        userId: 1,
+        quizzes: [
+          {
+            id: 1,
+            status: 1,
+            userAnswerRepo: 'www.github.com'
+          }
+        ]
+      };
+
+      progressData = {
+        userId: 1,
+        quizzes: [
+          {
+            id: 1,
+            status: 2,
+            userAnswerRepo: 'www.github.com'
+          }
+        ]
+      };
+
+      successData = {
+        userId: 1,
+        quizzes: [
+          {
+            id: 1,
+            status: 3,
+            userAnswerRepo: 'www.github.com'
+          }
+        ]
+      };
+
+      errorData = {
+        userId: 1,
+        quizzes: [
+          {
+            id: 1,
+            status: 4,
+            userAnswerRepo: 'www.github.com'
+          }
+        ]
+      };
+
+    });
+
+
+    it('it should return false when the specific homework is locked ', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (userId, callback) {
+        callback(null, lockedData);
+      });
+
+      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+        expect(result).toEqual({
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 0,
+                userAnswerRepo: 'www.github.com'
+              }]
+          },
+          isValidate: false
+        });
+        done();
+      });
+
+    });
+
+
+    it('it should return true when the specific homework is active ', (done)=> {
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (userId, callback) {
+        callback(null, activeData);
+      });
+
+      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+        expect(result).toEqual({
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 1,
+                userAnswerRepo: 'www.github.com'
+              }]
+          },
+          isValidate: true
+        });
+        done();
+      });
+    });
+
+    it('it should return  false when the specific homework is progress', (done)=> {
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (userId, callback) {
+        callback(null, progressData);
+      });
+
+      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+        expect(result).toEqual({
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 2,
+                userAnswerRepo: 'www.github.com'
+              }]
+          },
+          isValidate: false
+        });
+        done();
+      });
+    });
+
+    it('it should return false when the specific homework is is success', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (userId, callback) {
+        callback(null, successData);
+      });
+
+      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+        expect(result).toEqual({
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 3,
+                userAnswerRepo: 'www.github.com'
+              }]
+          },
+          isValidate: false
+        });
+        done();
+      });
+
+    });
+
+    it('it should return true when the specific homework is error', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (userId, callback) {
+        callback(null, errorData);
+      });
+
+      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+        expect(result).toEqual({
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 4,
+                userAnswerRepo: 'www.github.com'
+              }]
+          },
+          isValidate: true
+        });
+        done();
+      });
+
+    });
+
+    it('it should return status 200 when change status to progress and  save userAnswerUrl success', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'checkData').and.callFake(function (userId, orderId, callback) {
+
+        var result = {
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 1,
+                userAnswerRepo: 'www.repo.com'
+              }],
+            save: (done) => {
+              done(null, true);
+            }
+          },
+          isValidate: true
+        };
+
+        callback(null, result);
+      });
+
+      controller.saveGithubUrl({
+        session: {user: {id: 1}},
+        body: {
+          userAnswerRepo: 'www.repo.com',
+          orderId: 1
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: 200
+          });
+          done();
+        }
+      });
+    });
+
+    it('it should return status 403 when orderId is out of range ', (done)=> {
+      spyOn(userHomeworkQuizzes, 'checkData').and.callFake(function (userId, orderId, callback) {
+
+        var result = {
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 1,
+                userAnswerRepo: 'www.repo.com'
+              }]
+          },
+          isValidate: false,
+          save: (done) => {
+            done(null, true);
+          }
+        };
+        callback(null, result);
+      });
+
+      controller.saveGithubUrl({
+        session: {user: {id: 1}},
+        body: {
+          userAnswerRepo: 'www.repo.com',
+          orderId: 121
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: 403
+          });
+          done();
+        }
+      });
+
+    });
+
+    it('it should return status 403  when do not save userAnswerUrl', (done)=> {
+      spyOn(userHomeworkQuizzes, 'checkData').and.callFake(function (userId, orderId, callback) {
+
+        var data = {
+          data: {
+            userId: 1,
+            quizzes: [
+              {
+                id: 1,
+                status: 1,
+                userAnswerRepo: 'www.repo.com'
+              }]
+          },
+          isValidate: false,
+          save: (done) => {
+            done(null, true);
+          }
+        };
+        callback(null, data);
+      });
+
+      controller.saveGithubUrl({
+        session: {user: {id: 1}},
+        body: {
+          userAnswerRepo: 'www.repo.com',
+          orderId: 2
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: 403
+          });
+          done();
+        }
+      });
+
+    });
+
+  });
+
 });

@@ -87,24 +87,22 @@ HomeworkController.prototype.getQuiz = (req, res) => {
 
 HomeworkController.prototype.saveGithubUrl = (req, res) => {
   var userId = req.session.user.id;
-  var orderId = req.query.orderId;
+  var orderId = req.body.orderId;
 
   async.waterfall([
     (done)=> {
-      userHomeworkQuizzes.findOne({userId: userId}, done);
-    }, function (data, done) {
-      if (orderId === undefined || orderId > data.quizzes.length || orderId < 1) {
-        done(new Error('orderId error'));
-      } else if (data.quizzes[orderId - 1].locked === true) {
-        done(new Error('is locked'));
+      userHomeworkQuizzes.checkData(userId, orderId, done);
+    }, function (result, done) {
+      if (result.isValidate === true) {
+        result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
+        result.data.save(done);
       } else {
-        data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
-        done(null, data);
+        done(new Error('validate error'));
       }
     }
   ], function (err, data) {
     if (err) {
-      if (err.message === 'is locked' || err.message === 'orderId error') {
+      if (err.message === 'validate error') {
         res.send({
           status: 403
         });
@@ -117,6 +115,8 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
       });
     }
   });
+
+
 };
 
 HomeworkController.prototype.getProgressTasks = (req, res) => {
