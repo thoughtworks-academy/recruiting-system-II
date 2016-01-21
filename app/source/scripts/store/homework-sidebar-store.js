@@ -18,6 +18,10 @@ var HomeworkSidebarStore = Reflux.createStore({
           }
           this.trigger({homeworkStatusList:res.body.homeworkQuizzes});
         });
+  },
+  
+  onchangeOrderId: function (clickNumber) {
+    this.trigger({clickNumber: clickNumber});
   }
 });
 

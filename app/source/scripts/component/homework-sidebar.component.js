@@ -14,7 +14,6 @@ var HomeworkSidebar = React.createClass({
 
   getInitialState: function () {
     var list = [];
-
     return {
       homeworkStatusList: list,
       currentHomeworkNumber: this.props.homeworkNumber,
@@ -50,7 +49,6 @@ var HomeworkSidebar = React.createClass({
 
   render() {
     var list = this.state.homeworkStatusList;
-
     var itemHtml = list.map((item, index) => {
       var classStr = 'list-group-item ' + (this.state.clickNumber === index + 1 ? ' selected' : '');
 

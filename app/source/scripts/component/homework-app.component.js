@@ -5,7 +5,7 @@ var HomeworkAction = require('../actions/homework-actions');
 
 var HomeworkApp = React.createClass({
   getInitialState: function() {
-    HomeworkAction.changeOrderId(1);
+    HomeworkAction.changeOrderId(this.props.homeworkNumber);
     return {
       desc:''
     };

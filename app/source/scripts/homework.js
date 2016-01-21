@@ -17,7 +17,6 @@ var HomeworkAction = require('./actions/homework-actions');
 function changeNumber() {
   var homeworkNumber;
   var getNumber = location.hash.substr(1);
-
   if (getNumber === '') {
     homeworkNumber = 1;
   } else {
@@ -29,9 +28,7 @@ function changeNumber() {
 }
 
 window.onpopstate = function () {
-  console.log('onpopstate');
   var number = parseInt(location.hash.substr(1));
-
   HomeworkAction.changeOrderId(number);
 };
 
@@ -45,7 +42,7 @@ ReactDom.render(
       <header>
         <Navigation />
       </header>
-      <HomeworkApp>
+      <HomeworkApp homeworkNumber={changeNumber().currentHomeworkNumber}>
         <div className="row">
           <HomeworkSidebar onAction={onAction} homeworkNumber={changeNumber().currentHomeworkNumber}/>
           <div className="col-md-9 col-sm-9 col-xs-12">
