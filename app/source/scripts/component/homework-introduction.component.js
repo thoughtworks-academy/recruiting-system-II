@@ -7,9 +7,9 @@ var HomeworkIntroductionStore = require('../store/homework-introduction-store');
 
 
 var HomeworkIntroduction = React.createClass({
-  mixins:[Reflux.connect(HomeworkIntroductionStore)],
+  mixins: [Reflux.connect(HomeworkIntroductionStore)],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       desc: '',
       showRepo: true
@@ -18,13 +18,16 @@ var HomeworkIntroduction = React.createClass({
 
   render() {
     var desc = this.state.desc;
+
     function content() {
       return {__html: markdown.toHTML(desc)};
     }
+
     return (
         <div>
           <div id="introduction" dangerouslySetInnerHTML={content()}></div>
-          <div className={'templateRepo ' + (this.state.showRepo ? '' : ' hide')}><span>编程题模板库地址:</span><em>{this.state.templateRepo}</em></div>
+          <div className={'templateRepo ' + (this.state.showRepo ? '' : ' hide')}>
+            <span>编程题模板库地址:</span><em>{this.state.templateRepo}</em></div>
         </div>
     );
   }
