@@ -589,7 +589,7 @@ db.once('open', function () {
   });
 
   homeworkQuizzes.remove({}, () => {
-    console.log('remove all homeworkQuizzes')
+    console.log('remove all homeworkQuizzes');
   });
 
   console.log('mongo insert UserHomeworkQuizzes start...');
