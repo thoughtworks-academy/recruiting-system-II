@@ -589,7 +589,69 @@ db.once('open', function () {
   });
 
   homeworkQuizzes.remove({}, () => {
-    console.log('remove all homeworkQuizzes');
+    homeworkQuizzes.create([{
+      id: 1,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 2,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 3,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 4,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 5,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 6,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 7,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 8,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 9,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    },{
+      id: 10,
+      desc: '这是一道简单的题.',
+      evaluateScript : 'www.baidu.com',
+      evaluateRepo : 'evaluateRepository',
+      templateRepo : 'templateRepository'
+    }], ()=> {
+      console.log('insert homeworkQuizzes success');
+    });
   });
 
   console.log('mongo insert UserHomeworkQuizzes start...');
