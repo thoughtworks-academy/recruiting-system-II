@@ -37,6 +37,11 @@ function onAction(number) {
   history.pushState(null, '', '#' + number);
 }
 
+function getShowStatus() {
+  return {
+    showRepo: true
+  };
+}
 ReactDom.render(
     <div>
       <header>
@@ -47,7 +52,7 @@ ReactDom.render(
           <HomeworkSidebar onAction={onAction} homeworkNumber={changeNumber().currentHomeworkNumber}/>
           <div className="col-md-9 col-sm-9 col-xs-12">
             <div className="content">
-              <Tabs defaultActiveKey={0} animation={false}>
+              <Tabs defaultActiveKey={0} animation={false} getShowStatus={getShowStatus().showRepo}>
                 <Tab eventKey={0} title="题目说明"><HomeworkIntroduction /></Tab>
                 <Tab eventKey={1} title="提交说明"><SubmissionIntroduction /></Tab>
                 <Tab eventKey={2} title="运行结果"><RunningResult /></Tab>

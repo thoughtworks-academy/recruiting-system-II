@@ -12,7 +12,7 @@ var HomeworkIntroduction = React.createClass({
   getInitialState: function () {
     return {
       desc: '',
-      showRepo: true
+      showRepo: this.props.getShowStatus
     };
   },
 
