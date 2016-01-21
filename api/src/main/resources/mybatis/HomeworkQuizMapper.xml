@@ -5,16 +5,16 @@
 
 <mapper namespace="com.thoughtworks.twars.mapper.HomeworkQuizMapper">
 
-    <!--<resultMap id="homeworkQuizItemListMap" type="com.thoughtworks.twars.bean.HomeworkQuiz">-->
-        <!--<id property="id" column="id"></id>-->
-        <!--<result column="description" property="description"></result>-->
-        <!--<result column="evaluateScript" property="evaluateScript"></result>-->
-        <!--<result column="evaluateRepository" property="evaluateRepository"></result>-->
-        <!--<result column="templateRepository" property="templateRepository"></result>-->
-        <!--<result column="homeworkQuizId" property="homeworkQuizId"></result>-->
-    <!--</resultMap>-->
+    <resultMap id="homeworkQuizListMap" type="com.thoughtworks.twars.bean.HomeworkQuiz">
+        <id property="id" column="id"></id>
+        <result column="description" property="description"></result>
+        <result column="evaluateScript" property="evaluateScript"></result>
+        <result column="evaluateRepository" property="evaluateRepository"></result>
+        <result column="templateRepository" property="templateRepository"></result>
+        <result column="sectionId" property="sectionId"></result>
+    </resultMap>
 
-    <!--<select id="findByHomeworkQuizId" resultMap="homeworkQuizItemListMap">-->
-        <!--select * from homeworkQuizItem where homeworkQuizId = #{homeworkQuizId};-->
-    <!--</select>-->
+    <select id="findBySectionId" resultMap="homeworkQuizListMap">
+        select * from homeworkQuiz where  sectionId = #{sectionId};
+    </select>
 </mapper>

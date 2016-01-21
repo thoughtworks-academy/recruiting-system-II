@@ -2,7 +2,7 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
-import com.thoughtworks.twars.mapper.HomeWorkQuizMapper;
+import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
 
@@ -30,7 +30,7 @@ public class PaperResource {
     @Inject
     private BlankQuizMapper blankQuizMapper;
     @Inject
-    private HomeWorkQuizMapper homeWorkQuizMapper;
+    private HomeworkQuizMapper homeworkQuizMapper;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,7 +74,7 @@ public class PaperResource {
                 })
                 .collect(Collectors.toList());
 
-            Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         result.put("sections", sectionList);
         result.put("id", id);
         return Response.status(Response.Status.OK).entity(result).build();
@@ -92,11 +92,12 @@ public class PaperResource {
         if ("blankQuizzes".equals(description)) {
             return getBlankQuizzes(blankQuizMapper, sectionId);
         }
-        return getHomeworkQuizzes(homeWorkQuizMapper, sectionId);
+        return getHomeworkQuizzes(homeworkQuizMapper, sectionId);
     }
 
+
     private List<Map> getHomeworkQuizzes(
-            HomeWorkQuizMapper localHomeWorkQuizMapper, int sectionId) {
+            HomeworkQuizMapper localHomeWorkQuizMapper, int sectionId) {
         String homeworkQuizBasePath = "homeworkQuizzes/";
         return localHomeWorkQuizMapper.findBySectionId(sectionId)
                 .stream()

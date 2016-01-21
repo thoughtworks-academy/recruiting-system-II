@@ -1,5 +1,9 @@
 package com.thoughtworks.twars.mapper;
 
-public interface HomeworkQuizMapper {
+import com.thoughtworks.twars.bean.HomeworkQuiz;
 
+import java.util.List;
+
+public interface HomeworkQuizMapper {
+    List<HomeworkQuiz> findBySectionId(int id);
 }
