@@ -13,7 +13,7 @@ router.get('/remain-time', function (req, res) {
       .then((logicPuzzle) => {
 
         if (!logicPuzzle.startTime) {
-          logicPuzzle.startTime = Date.parse(new Date()) / constant.time.SECONDS_PER_MINUTE;
+          logicPuzzle.startTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
 
           return logicPuzzle.save();
 
@@ -23,7 +23,7 @@ router.get('/remain-time', function (req, res) {
       })
       .then((logicPuzzle) => {
 
-        var now = Date.parse(new Date()) / constant.time.SECONDS_PER_MINUTE;
+        var now = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
         var usedTime = now - logicPuzzle.startTime;
 
         res.send({
