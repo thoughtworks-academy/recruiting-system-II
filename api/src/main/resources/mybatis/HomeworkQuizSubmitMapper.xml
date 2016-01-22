@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thoughtworks.twars.mapper.HomeworkQuizSubmitMapper">
+
+    <resultMap id="homeworkQuizSubmitListMap" type="com.thoughtworks.twars.bean.HomeworkQuizSubmit">
+        <id property="id" column="id"></id>
+        <result column="homeworkQuizId" property="homeworkQuizId"></result>
+        <result column="scoreSheetId" property="scoreSheetId"></result>
+    </resultMap>
+
+    <select id="findByScoreSheetId" resultMap="homeworkQuizSubmitListMap">
+        SELECT * FROM homeworkQuizSubmit WHERE scoreSheetId = #{scoreSheetId}
+    </select>
+
+</mapper>
