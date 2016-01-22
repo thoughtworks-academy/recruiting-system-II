@@ -16,11 +16,11 @@ var constant = {
     MILLISECOND_PER_SECONDS: 1000
   },
   homeworkQuizzesStatus:{
-    LOCKED:0,
-    ACTIVE:1,
-    PROGRESS:2,
-    SUCCESS:3,
-    ERROR:4
+    LOCKED:1,
+    ACTIVE:2,
+    PROGRESS:3,
+    SUCCESS:4,
+    ERROR:5
   },
   changePassword: {
     ERROR: '旧密码错误'
