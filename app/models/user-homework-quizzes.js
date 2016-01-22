@@ -8,7 +8,6 @@ var userHomeworkQuizzesSchema = new Schema({
   userId: Number,
   quizzes: [{
     id: Number,
-    locked: Boolean,
     status: Number,
     startTime: Number,
     userAnswerRepo: String,
@@ -28,7 +27,6 @@ userHomeworkQuizzesSchema.statics.initUserHomeworkQuizzes = function (userId, id
       idList.forEach((id) => {
         quizzes.push({
           id: id,
-          locked: true,
           status: 0
         });
       });
@@ -50,7 +48,7 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
       var success = 0;
 
       data.quizzes.forEach(function (quiz) {
-        if (quiz.locked) {
+        if (quiz.status === constant.homeworkQuizzesStatus.LOCKED) {
           locked++;
         } else if (quiz.status === constant.homeworkQuizzesStatus.SUCCESS) {
           success++;
@@ -59,7 +57,6 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
 
       if (data.quizzes.length === (locked + success)) {
         data.quizzes[success].status = constant.homeworkQuizzesStatus.ACTIVE;
-        data.quizzes[success].locked = false;
         data.save(callback);
       } else {
         callback(null, true);

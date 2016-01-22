@@ -26,12 +26,10 @@ describe('HomeworkController', function () {
           quizzes: [
             {
               id: 1,
-              locked: false,
               status: constant.homeworkQuizzesStatus.ACTIVE
 
             }, {
               id: 2,
-              locked: true,
               status: constant.homeworkQuizzesStatus.LOCKED
             }
           ],
@@ -74,12 +72,10 @@ describe('HomeworkController', function () {
           quizzes: [
             {
               id: 1,
-              locked: false,
               status: constant.homeworkQuizzesStatus.ACTIVE
 
             }, {
               id: 2,
-              locked: true,
               status: constant.homeworkQuizzesStatus.LOCKED
             }
           ]
@@ -94,12 +90,10 @@ describe('HomeworkController', function () {
           quizzes: [
             {
               id: 1,
-              locked: false,
               status: constant.homeworkQuizzesStatus.ACTIVE
 
             }, {
               id: 2,
-              locked: true,
               status: constant.homeworkQuizzesStatus.LOCKED
             }
           ],
@@ -146,15 +140,12 @@ describe('HomeworkController', function () {
           quizzes: [
             {
               id: 1,
-              locked: false,
               status: constant.homeworkQuizzesStatus.ACTIVE
             }, {
               id: 2,
-              locked: true,
               status: constant.homeworkQuizzesStatus.LOCKED
             }, {
               id: 3,
-              locked: true,
               status: constant.homeworkQuizzesStatus.LOCKED
             }
           ]

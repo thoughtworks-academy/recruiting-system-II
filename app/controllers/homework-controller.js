@@ -60,7 +60,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
       var integer = (Number(orderId) === parseInt(orderId, 10));
       if (!integer || orderId === undefined || orderId > result.quizzes.length || orderId < 1) {
         done(new Error('orderId error'));
-      } else if (result.quizzes[orderId - 1].locked) {
+      } else if (result.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.LOCKED) {
         done(new Error('is locked'));
       } else {
         homeworkQuizzes.findOne({id: result.quizzes[orderId - 1].id}, done);

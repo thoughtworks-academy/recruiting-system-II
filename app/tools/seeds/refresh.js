@@ -660,72 +660,72 @@ db.once('open', function () {
     UserHomeworkQuizzes.create([{
       userId: 1,
       quizzes: [
-        {id: 1, locked: true, status: 1},
-        {id: 2, locked: true, status: 1},
-        {id: 3, locked: true, status: 1},
-        {id: 4, locked: true, status: 1},
-        {id: 5, locked: true, status: 1},
-        {id: 6, locked: true, status: 1},
-        {id: 7, locked: true, status: 1},
-        {id: 8, locked: true, status: 1},
-        {id: 9, locked: true, status: 1},
-        {id: 10, locked: true, status: 1}
+        {id: 1, status: 1},
+        {id: 2, status: 1},
+        {id: 3, status: 1},
+        {id: 4, status: 1},
+        {id: 5, status: 1},
+        {id: 6, status: 1},
+        {id: 7, status: 1},
+        {id: 8, status: 1},
+        {id: 9, status: 1},
+        {id: 10, status: 1}
       ]
     }, {
       userId: 2,
       quizzes: [
-        {id: 1, locked: true, status: 4, userAnswerRepo: 'www.github.com'},
-        {id: 2, locked: true, status: 3, userAnswerRepo: 'www.repo.com'},
-        {id: 3, locked: true, status: 1},
-        {id: 4, locked: true, status: 1},
-        {id: 5, locked: true, status: 1},
-        {id: 6, locked: true, status: 1},
-        {id: 7, locked: true, status: 1},
-        {id: 8, locked: true, status: 1},
-        {id: 9, locked: true, status: 1},
-        {id: 10, locked: true, status: 1}
+        {id: 1, status: 4, userAnswerRepo: 'www.github.com'},
+        {id: 2, status: 3, userAnswerRepo: 'www.repo.com'},
+        {id: 3, status: 1},
+        {id: 4, status: 1},
+        {id: 5, status: 1},
+        {id: 6, status: 1},
+        {id: 7, status: 1},
+        {id: 8, status: 1},
+        {id: 9, status: 1},
+        {id: 10, status: 1}
       ]
     }, {
       userId: 3,
       quizzes: [
-        {id: 1, locked: true, status: 4},
-        {id: 2, locked: true, status: 3},
-        {id: 3, locked: true, status: 1},
-        {id: 4, locked: true, status: 1},
-        {id: 5, locked: true, status: 1},
-        {id: 6, locked: true, status: 1},
-        {id: 7, locked: true, status: 1},
-        {id: 8, locked: true, status: 1},
-        {id: 9, locked: true, status: 1},
-        {id: 10, locked: true, status: 1}
+        {id: 1, status: 4},
+        {id: 2, status: 3},
+        {id: 3, status: 1},
+        {id: 4, status: 1},
+        {id: 5, status: 1},
+        {id: 6, status: 1},
+        {id: 7, status: 1},
+        {id: 8, status: 1},
+        {id: 9, status: 1},
+        {id: 10, status: 1}
       ]
     }, {
       userId: 4,
       quizzes: [
-        {id: 1, locked: true, status: 1},
-        {id: 2, locked: true, status: 1},
-        {id: 3, locked: true, status: 1},
-        {id: 4, locked: true, status: 1},
-        {id: 5, locked: true, status: 1},
-        {id: 6, locked: true, status: 1},
-        {id: 7, locked: true, status: 1},
-        {id: 8, locked: true, status: 1},
-        {id: 9, locked: true, status: 1},
-        {id: 10, locked: true, status: 1}
+        {id: 1, status: 1},
+        {id: 2, status: 1},
+        {id: 3, status: 1},
+        {id: 4, status: 1},
+        {id: 5, status: 1},
+        {id: 6, status: 1},
+        {id: 7, status: 1},
+        {id: 8, status: 1},
+        {id: 9, status: 1},
+        {id: 10, status: 1}
       ]
     }, {
       userId: 5,
       quizzes: [
-        {id: 1, locked: true, status: 1},
-        {id: 2, locked: true, status: 1},
-        {id: 3, locked: true, status: 1},
-        {id: 4, locked: true, status: 1},
-        {id: 5, locked: true, status: 1},
-        {id: 6, locked: true, status: 1},
-        {id: 7, locked: true, status: 1},
-        {id: 8, locked: true, status: 1},
-        {id: 9, locked: true, status: 1},
-        {id: 10, locked: true, status: 1}
+        {id: 1, status: 1},
+        {id: 2, status: 1},
+        {id: 3, status: 1},
+        {id: 4, status: 1},
+        {id: 5, status: 1},
+        {id: 6, status: 1},
+        {id: 7, status: 1},
+        {id: 8, status: 1},
+        {id: 9, status: 1},
+        {id: 10, status: 1}
       ]
     }], function () {
       console.log('mongo insert userHomeworkQuizzes end');
