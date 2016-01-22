@@ -58,9 +58,8 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
       });
 
       if (data.quizzes.length === (locked + success)) {
-        data.quizzes[success].status = 1;
+        data.quizzes[success].status = constant.homeworkQuizzesStatus.ACTIVE;
         data.quizzes[success].locked = false;
-
         data.save(callback);
       } else {
         callback(null, true);
@@ -70,7 +69,7 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
 };
 
 userHomeworkQuizzesSchema.statics.findProgressTasks = function (callback) {
-  this.find({quizzes: {$elemMatch: {status: 2}}}, 'userId quizzes', (err, doc) => {
+  this.find({quizzes: {$elemMatch: {status: constant.homeworkQuizzesStatus.PROGRESS}}}, 'userId quizzes', (err, doc) => {
     if (err) {
       callback(err);
     } else {
@@ -80,8 +79,8 @@ userHomeworkQuizzesSchema.statics.findProgressTasks = function (callback) {
         var userAnswerRepo;
         var quizId;
         item.quizzes.forEach((quiz) => {
-          userAnswerRepo = quiz.status === 2 ? quiz.userAnswerRepo : userAnswerRepo;
-          quizId = quiz.status === 2 ? quiz.id : quizId;
+          userAnswerRepo = quiz.status === constant.homeworkQuizzesStatus.PROGRESS ? quiz.userAnswerRepo : userAnswerRepo;
+          quizId = quiz.status === constant.homeworkQuizzesStatus.PROGRESS ? quiz.id : quizId;
         });
 
         result.push({
@@ -99,12 +98,11 @@ userHomeworkQuizzesSchema.statics.findProgressTasks = function (callback) {
 userHomeworkQuizzesSchema.statics.checkData = function (userId, orderId, callback) {
   var isValidate;
   var result = {};
-
   this.findOne({userId: userId}, (err, data) => {
-
+    var integer = (Number(orderId) === parseInt(orderId, 10));
     if (err || !data) {
       callback(err || new Error('error'));
-    } else if (typeof orderId !== 'number' || orderId < 1 || orderId === undefined || orderId > data.quizzes.length) {
+    } else if (!integer || orderId < 1 || orderId === undefined || orderId > data.quizzes.length) {
       isValidate = false;
       result.data = null;
       result.isValidate = isValidate;
@@ -119,7 +117,6 @@ userHomeworkQuizzesSchema.statics.checkData = function (userId, orderId, callbac
     }
 
     callback(null, result);
-
   });
 };
 

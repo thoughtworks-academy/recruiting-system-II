@@ -65,9 +65,9 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
   ], function (err) {
     if (true !== err && err) {
       res.statusCode(constant.httpCode.INTERNAL_SERVER_ERROR);
-      res.send({status: 500, message: '服务器错误'});
+      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: '服务器错误'});
     } else {
-      res.send({status: 200, message: '初始化成功!'});
+      res.send({status: constant.httpCode.OK, message: '初始化成功!'});
     }
   });
 };
@@ -105,9 +105,9 @@ UserInitializationController.prototype.initialHomeworkQuizzes = (req, res) => {
   ], function (err, data) {
     if (err) {
       res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
-      res.send({status: 500, message: err.message});
+      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
     }else {
-      res.send({status: 200});
+      res.send({status: constant.httpCode.OK});
     }
   });
 };

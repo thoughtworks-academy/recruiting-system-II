@@ -27,12 +27,12 @@ describe('HomeworkController', function () {
             {
               id: 1,
               locked: false,
-              status: 1
+              status: constant.homeworkQuizzesStatus.ACTIVE
 
             }, {
               id: 2,
               locked: true,
-              status: 0
+              status: constant.homeworkQuizzesStatus.LOCKED
             }
           ],
           save: (done) => {
@@ -50,13 +50,13 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: 200,
+            status: constant.httpCode.OK,
             homeworkQuizzes: [
               {
-                status: 1
+                status: constant.homeworkQuizzesStatus.ACTIVE
               },
               {
-                status: 0
+                status: constant.homeworkQuizzesStatus.LOCKED
               }
             ]
           });
@@ -75,12 +75,12 @@ describe('HomeworkController', function () {
             {
               id: 1,
               locked: false,
-              status: 1
+              status: constant.homeworkQuizzesStatus.ACTIVE
 
             }, {
               id: 2,
               locked: true,
-              status: 0
+              status: constant.homeworkQuizzesStatus.LOCKED
             }
           ]
         };
@@ -95,12 +95,12 @@ describe('HomeworkController', function () {
             {
               id: 1,
               locked: false,
-              status: 1
+              status: constant.homeworkQuizzesStatus.ACTIVE
 
             }, {
               id: 2,
               locked: true,
-              status: 0
+              status: constant.homeworkQuizzesStatus.LOCKED
             }
           ],
           save: (done) => {
@@ -118,13 +118,13 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: 200,
+            status: constant.httpCode.OK,
             homeworkQuizzes: [
               {
-                status: 1
+                status: constant.homeworkQuizzesStatus.ACTIVE
               },
               {
-                status: 0
+                status: constant.homeworkQuizzesStatus.LOCKED
               }
             ]
           });
@@ -147,15 +147,15 @@ describe('HomeworkController', function () {
             {
               id: 1,
               locked: false,
-              status: 1
+              status: constant.homeworkQuizzesStatus.ACTIVE
             }, {
               id: 2,
               locked: true,
-              status: 0
+              status: constant.homeworkQuizzesStatus.LOCKED
             }, {
               id: 3,
               locked: true,
-              status: 0
+              status: constant.homeworkQuizzesStatus.LOCKED
             }
           ]
         };
@@ -186,7 +186,7 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: 200,
+            status: constant.httpCode.OK,
             quiz: {
               desc: '这是一道简单的题',
               templateRepo: 'www.github.com'
@@ -205,7 +205,7 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: 403
+            status: constant.httpCode.FORBIDDEN
           });
           done();
         }
@@ -226,13 +226,13 @@ describe('HomeworkController', function () {
           templateRepo: 'www.github.com',
           evaluateScript: 'www.baidu.com',
           evaluateRepo: 'evaluateRepository'
-        },{
+        }, {
           id: 2,
           desc: '这是一道简单的题',
           templateRepo: 'www.github.com',
           evaluateScript: 'www.baidu.com',
           evaluateRepo: 'evaluateRepository'
-        },{
+        }, {
           id: 3,
           desc: '这是一道简单的题',
           templateRepo: 'www.github.com',
@@ -258,7 +258,7 @@ describe('HomeworkController', function () {
       controller.getProgressTasks({}, {
         send: function (data) {
           expect(data).toEqual({
-            status: 200,
+            status: constant.httpCode.OK,
             userAnswers: [{
               userId: 1,
               quizId: 1,
@@ -312,13 +312,13 @@ describe('HomeworkController', function () {
           });
           done();
         },
-        status: function(code){
+        status: function (code) {
           expect(code).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
         }
       });
     });
   });
-  
+
   describe('saveGithubUrl', ()=> {
 
     var controller;
@@ -328,7 +328,6 @@ describe('HomeworkController', function () {
     var successData;
     var errorData;
 
-
     beforeEach(()=> {
       controller = new HomeworkController();
       lockedData = {
@@ -336,7 +335,7 @@ describe('HomeworkController', function () {
         quizzes: [
           {
             id: 1,
-            status: 0,
+            status: constant.homeworkQuizzesStatus.LOCKED,
             userAnswerRepo: 'www.github.com'
           }
         ]
@@ -347,7 +346,7 @@ describe('HomeworkController', function () {
         quizzes: [
           {
             id: 1,
-            status: 1,
+            status: constant.homeworkQuizzesStatus.ACTIVE,
             userAnswerRepo: 'www.github.com'
           }
         ]
@@ -358,7 +357,7 @@ describe('HomeworkController', function () {
         quizzes: [
           {
             id: 1,
-            status: 2,
+            status: constant.homeworkQuizzesStatus.PROGRESS,
             userAnswerRepo: 'www.github.com'
           }
         ]
@@ -369,7 +368,7 @@ describe('HomeworkController', function () {
         quizzes: [
           {
             id: 1,
-            status: 3,
+            status: constant.homeworkQuizzesStatus.SUCCESS,
             userAnswerRepo: 'www.github.com'
           }
         ]
@@ -380,7 +379,7 @@ describe('HomeworkController', function () {
         quizzes: [
           {
             id: 1,
-            status: 4,
+            status: constant.homeworkQuizzesStatus.ERROR,
             userAnswerRepo: 'www.github.com'
           }
         ]
@@ -402,7 +401,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 0,
+                status: constant.homeworkQuizzesStatus.LOCKED,
                 userAnswerRepo: 'www.github.com'
               }]
           },
@@ -426,7 +425,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
                 userAnswerRepo: 'www.github.com'
               }]
           },
@@ -448,7 +447,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 2,
+                status: constant.homeworkQuizzesStatus.PROGRESS,
                 userAnswerRepo: 'www.github.com'
               }]
           },
@@ -471,7 +470,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 3,
+                status: constant.homeworkQuizzesStatus.SUCCESS,
                 userAnswerRepo: 'www.github.com'
               }]
           },
@@ -495,7 +494,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 4,
+                status: constant.homeworkQuizzesStatus.ERROR,
                 userAnswerRepo: 'www.github.com'
               }]
           },
@@ -516,7 +515,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
                 userAnswerRepo: 'www.repo.com'
               }],
             save: (done) => {
@@ -525,7 +524,6 @@ describe('HomeworkController', function () {
           },
           isValidate: true
         };
-
         callback(null, result);
       });
 
@@ -538,7 +536,7 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: 200
+            status: constant.httpCode.OK
           });
           done();
         }
@@ -554,7 +552,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
                 userAnswerRepo: 'www.repo.com'
               }]
           },
@@ -575,7 +573,7 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: 403
+            status: constant.httpCode.FORBIDDEN
           });
           done();
         }
@@ -592,7 +590,7 @@ describe('HomeworkController', function () {
             quizzes: [
               {
                 id: 1,
-                status: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
                 userAnswerRepo: 'www.repo.com'
               }]
           },
@@ -613,14 +611,12 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: 403
+            status: constant.httpCode.FORBIDDEN
           });
           done();
         }
       });
-
     });
-
   });
 
 });

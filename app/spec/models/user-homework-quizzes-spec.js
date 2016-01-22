@@ -1,6 +1,7 @@
 'use strict';
 
 var userHomeworkQuizzes = require('../../models/user-homework-quizzes');
+var constant = require('../../mixin/constant');
 
 describe('UserHomeworkQuizzes', () => {
   describe('findProgressTasks', () => {
@@ -8,34 +9,34 @@ describe('UserHomeworkQuizzes', () => {
     it('should return progress tasks when receive a request', function (done) {
       spyOn(userHomeworkQuizzes, 'find').and.callFake((conditions, field, callback) => {
         var data = [{
-          userId : 1,
-          quizzes : [{
-            id : 1,
-            status : 3
+          userId: 1,
+          quizzes: [{
+            id: 1,
+            status: constant.homeworkQuizzesStatus.SUCCESS
           },
             {
-              id : 2,
-              status : 2,
+              id: 2,
+              status: constant.homeworkQuizzesStatus.PROGRESS,
               userAnswerRepo: 'www.github.com'
             },
             {
-              id : 3,
-              status : 0
+              id: 3,
+              status: constant.homeworkQuizzesStatus.LOCKED
             }]
-        },{
-          userId : 1,
-          quizzes : [{
-            id : 1,
-            status : 2,
+        }, {
+          userId: 1,
+          quizzes: [{
+            id: 1,
+            status: constant.homeworkQuizzesStatus.PROGRESS,
             userAnswerRepo: 'www.github.com'
           },
             {
-              id : 2,
-              status : 0
+              id: 2,
+              status: constant.homeworkQuizzesStatus.LOCKED
             },
             {
-              id : 3,
-              status : 0
+              id: 3,
+              status: constant.homeworkQuizzesStatus.LOCKED
             }]
         }];
 

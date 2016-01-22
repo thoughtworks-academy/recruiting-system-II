@@ -33,14 +33,15 @@ HomeworkController.prototype.getList = function (req, res) {
   ], (err) => {
     if (err) {
       res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
-      res.send({status: 500, message: err.message});
+      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
     } else {
       res.send({
-        status: 200,
+        status: constant.httpCode.OK,
         homeworkQuizzes: quizzesStatus
       });
     }
   });
+
 };
 
 HomeworkController.prototype.getQuiz = (req, res) => {
@@ -48,7 +49,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   var orderId = req.query.orderId;
 
   async.waterfall([
-    (done) => { 
+    (done) => {
       userHomeworkQuizzes.unlockNext(userId, done);
     },
     (data, result, done) => {
@@ -69,14 +70,14 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     if (err) {
       if (err.message === 'is locked' || err.message === 'orderId error') {
         res.send({
-          status: 403
+          status: constant.httpCode.FORBIDDEN
         });
       } else {
         console.log(err);
       }
     } else {
       res.send({
-        status: 200,
+        status: constant.httpCode.OK,
         quiz: {
           desc: data.desc,
           templateRepo: data.templateRepo
@@ -84,6 +85,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
       });
     }
   });
+
 };
 
 HomeworkController.prototype.saveGithubUrl = (req, res) => {
@@ -106,18 +108,17 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     if (err) {
       if (err.message === 'validate error') {
         res.send({
-          status: 403
+          status: constant.httpCode.FORBIDDEN
         });
       } else {
         console.log(err);
       }
     } else {
       res.send({
-        status: 200
+        status: constant.httpCode.OK
       });
     }
   });
-
 
 };
 
@@ -135,8 +136,7 @@ HomeworkController.prototype.getProgressTasks = (req, res) => {
     (result, done) => {
 
       progressTasks.forEach((item, i) => {
-        result.forEach((ele, x) => {
-
+        result.forEach((ele) => {
           if (item.quizId === ele.id) {
             progressTasks[i].evaluateScript = ele.evaluateScript;
             progressTasks[i].evaluateRepo = ele.evaluateRepo;
@@ -148,7 +148,7 @@ HomeworkController.prototype.getProgressTasks = (req, res) => {
   ], (err, data) => {
     if (err) {
       res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
-      res.send({status: 500, message: err.message});
+      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
     } else {
       res.send({
         status: data.length === 0 ? constant.httpCode.NOT_FOUND : constant.httpCode.OK,
@@ -156,6 +156,7 @@ HomeworkController.prototype.getProgressTasks = (req, res) => {
       });
     }
   });
+
 };
 
 module.exports = HomeworkController;
