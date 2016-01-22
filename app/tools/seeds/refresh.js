@@ -660,72 +660,72 @@ db.once('open', function () {
     UserHomeworkQuizzes.create([{
       userId: 1,
       quizzes: [
-        {id: 1, locked: true, status: 0},
-        {id: 2, locked: true, status: 0},
-        {id: 3, locked: true, status: 0},
-        {id: 4, locked: true, status: 0},
-        {id: 5, locked: true, status: 0},
-        {id: 6, locked: true, status: 0},
-        {id: 7, locked: true, status: 0},
-        {id: 8, locked: true, status: 0},
-        {id: 9, locked: true, status: 0},
-        {id: 10, locked: true, status: 0}
+        {id: 1, locked: true, status: 1},
+        {id: 2, locked: true, status: 1},
+        {id: 3, locked: true, status: 1},
+        {id: 4, locked: true, status: 1},
+        {id: 5, locked: true, status: 1},
+        {id: 6, locked: true, status: 1},
+        {id: 7, locked: true, status: 1},
+        {id: 8, locked: true, status: 1},
+        {id: 9, locked: true, status: 1},
+        {id: 10, locked: true, status: 1}
       ]
     },{
       userId: 2,
       quizzes: [
-        {id: 1, locked: true, status: 0},
-        {id: 2, locked: true, status: 0},
-        {id: 3, locked: true, status: 0},
-        {id: 4, locked: true, status: 0},
-        {id: 5, locked: true, status: 0},
-        {id: 6, locked: true, status: 0},
-        {id: 7, locked: true, status: 0},
-        {id: 8, locked: true, status: 0},
-        {id: 9, locked: true, status: 0},
-        {id: 10, locked: true, status: 0}
+        {id: 1, locked: true, status: 1},
+        {id: 2, locked: true, status: 1},
+        {id: 3, locked: true, status: 1},
+        {id: 4, locked: true, status: 1},
+        {id: 5, locked: true, status: 1},
+        {id: 6, locked: true, status: 1},
+        {id: 7, locked: true, status: 1},
+        {id: 8, locked: true, status: 1},
+        {id: 9, locked: true, status: 1},
+        {id: 10, locked: true, status: 1}
       ]
     },{
       userId: 3,
       quizzes: [
-        {id: 1, locked: true, status: 0},
-        {id: 2, locked: true, status: 0},
-        {id: 3, locked: true, status: 0},
-        {id: 4, locked: true, status: 0},
-        {id: 5, locked: true, status: 0},
-        {id: 6, locked: true, status: 0},
-        {id: 7, locked: true, status: 0},
-        {id: 8, locked: true, status: 0},
-        {id: 9, locked: true, status: 0},
-        {id: 10, locked: true, status: 0}
+        {id: 1, locked: true, status: 1},
+        {id: 2, locked: true, status: 1},
+        {id: 3, locked: true, status: 1},
+        {id: 4, locked: true, status: 1},
+        {id: 5, locked: true, status: 1},
+        {id: 6, locked: true, status: 1},
+        {id: 7, locked: true, status: 1},
+        {id: 8, locked: true, status: 1},
+        {id: 9, locked: true, status: 1},
+        {id: 10, locked: true, status: 1}
       ]
     },{
       userId: 4,
       quizzes: [
-        {id: 1, locked: true, status: 0},
-        {id: 2, locked: true, status: 0},
-        {id: 3, locked: true, status: 0},
-        {id: 4, locked: true, status: 0},
-        {id: 5, locked: true, status: 0},
-        {id: 6, locked: true, status: 0},
-        {id: 7, locked: true, status: 0},
-        {id: 8, locked: true, status: 0},
-        {id: 9, locked: true, status: 0},
-        {id: 10, locked: true, status: 0}
+        {id: 1, locked: true, status: 1},
+        {id: 2, locked: true, status: 1},
+        {id: 3, locked: true, status: 1},
+        {id: 4, locked: true, status: 1},
+        {id: 5, locked: true, status: 1},
+        {id: 6, locked: true, status: 1},
+        {id: 7, locked: true, status: 1},
+        {id: 8, locked: true, status: 1},
+        {id: 9, locked: true, status: 1},
+        {id: 10, locked: true, status: 1}
       ]
     },{
       userId: 5,
       quizzes: [
-        {id: 1, locked: true, status: 0},
-        {id: 2, locked: true, status: 0},
-        {id: 3, locked: true, status: 0},
-        {id: 4, locked: true, status: 0},
-        {id: 5, locked: true, status: 0},
-        {id: 6, locked: true, status: 0},
-        {id: 7, locked: true, status: 0},
-        {id: 8, locked: true, status: 0},
-        {id: 9, locked: true, status: 0},
-        {id: 10, locked: true, status: 0}
+        {id: 1, locked: true, status: 1},
+        {id: 2, locked: true, status: 1},
+        {id: 3, locked: true, status: 1},
+        {id: 4, locked: true, status: 1},
+        {id: 5, locked: true, status: 1},
+        {id: 6, locked: true, status: 1},
+        {id: 7, locked: true, status: 1},
+        {id: 8, locked: true, status: 1},
+        {id: 9, locked: true, status: 1},
+        {id: 10, locked: true, status: 1}
       ]
     }], function () {
       console.log('mongo insert userHomeworkQuizzes end');
