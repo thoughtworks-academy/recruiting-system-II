@@ -12,12 +12,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BlankQuizScoreSheet implements IQuizScoreSheet {
-
     @Inject
     private BlankQuizSubmitMapper blankQuizSubmitMapper;
 
     @Inject
     private ItemPostMapper itemPostMapper;
+
+    public void setBlankQuizSubmitMapper(BlankQuizSubmitMapper blankQuizSubmitMapper) {
+        this.blankQuizSubmitMapper = blankQuizSubmitMapper;
+    }
+
+    public void setItemPostMapper(ItemPostMapper itemPostMapper) {
+        this.itemPostMapper = itemPostMapper;
+    }
 
     @Override
     public List<Map> getQuizScoreSheet(int scoreSheetId) {
@@ -25,7 +32,7 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
                 .stream()
                 .map(blankQuizSubmit -> {
                     Map<String, Object> blankQuizUri = new HashMap<>();
-                    blankQuizUri.put("uri","/blankQuiz" + blankQuizSubmit.getBlankQuizId());
+                    blankQuizUri.put("uri","/blankQuiz/" + blankQuizSubmit.getBlankQuizId());
                     Map<String, Object> blankQuizSubmitUri = new HashMap<>();
                     blankQuizSubmitUri.put("blankQuiz", blankQuizUri);
                     blankQuizSubmitUri.put("itemPosts",
