@@ -94,7 +94,7 @@ var RegisterForm = React.createClass({
       passwordError: '',
       agree: false,
       isShowToggle: false,
-      disabled: false,
+      clickable: false,
       password: ''
     };
   },
@@ -186,7 +186,7 @@ var RegisterForm = React.createClass({
       return false;
     } else {
       this.setState({
-        disabled: true
+        clickable: true
       });
 
       request.post('/register').set('Content-Type', 'application/json').send({
@@ -207,7 +207,7 @@ var RegisterForm = React.createClass({
             emailError: emailExist
           });
           this.setState({
-            disabled: false
+            clickable: false
           });
         }
       });
@@ -259,8 +259,9 @@ var RegisterForm = React.createClass({
             </div>
 
 
-            <button type="button" id="register-btn" disabled={this.state.disabled}
+            <button type="button" id="register-btn" disabled={this.state.clickable}
                     className="btn btn-lg btn-block btn-primary" ref="register" onClick={this.register}>注册
+              <i className={'fa fa-spinner fa-spin' + (this.state.clickable ? '' : ' hide')}></i>
             </button>
           </form>
         </div>

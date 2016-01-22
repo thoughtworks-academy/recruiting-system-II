@@ -24,7 +24,8 @@ var LoginForm = React.createClass({
     return {
       phoneEmailError: '',
       loginPasswordError: '',
-      loginFailed: false
+      loginFailed: false,
+      clickable: false
     };
   },
 
@@ -51,6 +52,10 @@ var LoginForm = React.createClass({
   },
 
   login: function () {
+    this.setState({
+      clickable: true
+    });
+
     var phoneEmail = ReactDOM.findDOMNode(this.refs.phoneEmail).value;
     var loginPassword = ReactDOM.findDOMNode(this.refs.loginPassword).value;
 
@@ -66,6 +71,10 @@ var LoginForm = React.createClass({
             this.setState({loginFailed : false});
             jumpToDashboard();
           } else {
+            this.setState({
+              clickable: false
+            });
+
             this.setState({loginFailed : true});
           }
         });
@@ -94,7 +103,8 @@ var LoginForm = React.createClass({
                   className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
               </div>
             </div>
-            <button type="button" id="login-btn" className="btn btn-lg btn-block btn-primary" onClick={this.login}>登陆
+            <button type="button" id="login-btn" className="btn btn-lg btn-block btn-primary" onClick={this.login} disabled={this.state.clickable}>登陆
+              <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}></i>
             </button>
           </form>
         </div>
