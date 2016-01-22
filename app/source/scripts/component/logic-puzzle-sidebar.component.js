@@ -4,16 +4,14 @@ var React = require('react');
 var Reflux = require('reflux');
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
-var TimerStore = require('../store/timer-store');
-var TimerActions = require('../actions/timer-action');
+var LogicPuzzleTimer = require('./logic-puzzle-timer.component');
 var Modal = require('react-bootstrap/lib/Modal');
 var _newOrderId;
 var constant = require('../../../mixin/constant');
 var able = false;
 
 var LogicPuzzleSidebar = React.createClass({
-  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(TimerStore)],
-
+  mixins: [Reflux.connect(LogicPuzzleStore)],
 
   submitPaper: function () {
     LogicPuzzleActions.submitPaper();
@@ -33,32 +31,6 @@ var LogicPuzzleSidebar = React.createClass({
     LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
-  componentDidMount: function () {
-    TimerActions.getRemainTime();
-    this.countDown();
-  },
-
-  countDown: function(){
-    setInterval(() => {
-      if(this.state.remainTime){
-        var remainTime = this.state.remainTime - 1;
-
-        if(remainTime <= 0){
-          LogicPuzzleActions.submitPaper();
-          this.props.onTimeOver();
-        }
-
-        this.setState({
-          remainTime: remainTime
-        });
-
-        if(remainTime % (constant.time.SECONDS_PER_MINUTE * 2) === 1){
-          TimerActions.getRemainTime();
-        }
-      }
-    }, constant.time.MILLISECOND_PER_SECONDS);
-  },
-
   render: function () {
 
     var isFirst = this.state.orderId === 0;
@@ -66,9 +38,6 @@ var LogicPuzzleSidebar = React.createClass({
     if(isLast){
       able=true;
     }
-    var minutes = this.state.remainTime > 0 ? Math.floor(this.state.remainTime / constant.time.SECONDS_PER_MINUTE) : 0;
-    var seconds = this.state.remainTime > 0 ? this.state.remainTime % constant.time.MINUTE_PER_HOUR : 0;
-
     return (
 
         <div className="sidebar">
@@ -81,9 +50,8 @@ var LogicPuzzleSidebar = React.createClass({
           </div>
 
           <div className="tip">
-            <p className="remain-time">
-              您还有 {minutes} 分钟 {seconds} 秒
-            </p>
+
+            <LogicPuzzleTimer onTimeOver={this.props.onTimeOver}/>
 
             <p className="finish-rate">
               当前第{this.state.orderId + 1}题共{this.state.itemsCount}题
