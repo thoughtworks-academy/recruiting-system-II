@@ -1,6 +1,8 @@
 package com.thoughtworks.twars;
 
 import com.thoughtworks.twars.mapper.*;
+import com.thoughtworks.twars.service.quiz.quizScoreSheet.BlankQuizScoreSheet;
+import com.thoughtworks.twars.service.quiz.quizScoreSheet.HomeworkQuizScoreSheet;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -47,6 +49,18 @@ public class App extends ResourceConfig {
         final HomeworkPostHistoryMapper homeworkPostHistoryMapper = session
                 .getMapper(HomeworkPostHistoryMapper.class);
 
+        final BlankQuizScoreSheet blankQuizScoreSheet = new BlankQuizScoreSheet();
+
+        blankQuizScoreSheet.setBlankQuizSubmitMapper(blankQuizSubmitMapper);
+
+        blankQuizScoreSheet.setItemPostMapper(itemPostMapper);
+
+        final HomeworkQuizScoreSheet homeworkQuizScoreSheet = new HomeworkQuizScoreSheet();
+
+        homeworkQuizScoreSheet.setHomeworkPostHistoryMapper(homeworkPostHistoryMapper);
+
+        homeworkQuizScoreSheet.setHomeworkSubmitMapper(homeworkSubmitMapper);
+
         packages("com.thoughtworks.twars.resource")
             .register(new AbstractBinder() {
                 @Override
@@ -62,7 +76,10 @@ public class App extends ResourceConfig {
                     bind(homeworkQuizMapper).to(HomeworkQuizMapper.class);
                     bind(homeworkSubmitMapper).to(HomeworkSubmitMapper.class);
                     bind(homeworkPostHistoryMapper).to(HomeworkPostHistoryMapper.class);
+                    bind(blankQuizScoreSheet).to(BlankQuizScoreSheet.class);
+                    bind(homeworkQuizScoreSheet).to(HomeworkQuizScoreSheet.class);
                 }
             });
+
     }
 }
