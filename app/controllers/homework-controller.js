@@ -95,6 +95,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     }, function (result, done) {
       if (result.isValidate === true) {
         result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
+        result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
         result.data.save(done);
       } else {
         done(new Error('validate error'));
@@ -135,7 +136,7 @@ HomeworkController.prototype.getProgressTasks = (req, res) => {
       progressTasks.forEach((item, i) => {
         result.forEach((ele, x) => {
 
-          if(item.quizId === ele.id) {
+          if (item.quizId === ele.id) {
             progressTasks[i].evaluateScript = ele.evaluateScript;
             progressTasks[i].evaluateRepo = ele.evaluateRepo;
           }
@@ -144,10 +145,10 @@ HomeworkController.prototype.getProgressTasks = (req, res) => {
       done(null, progressTasks);
     }
   ], (err, data) => {
-    if(err){
+    if (err) {
       res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: 500, message: err.message});
-    }else {
+    } else {
       res.send({
         status: data.length === 0 ? constant.httpCode.NOT_FOUND : constant.httpCode.OK,
         userAnswers: data
