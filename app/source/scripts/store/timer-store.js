@@ -2,16 +2,15 @@
 
 var Reflux = require('reflux');
 var TimerActions = require('../actions/timer-action');
-var agent = require('superagent-promise')(require('superagent'), Promise);
+var superAgent = require('superagent');
 
 var TimerStore = Reflux.createStore({
   listenables: [TimerActions],
 
   onGetRemainTime: function () {
-    agent.get('/timer/remain-time')
+    superAgent.get('/timer/remain-time')
       .set('Content-Type', 'application/json')
-      .end()
-      .then((res) => {
+      .end((err,res) => {
         this.trigger({
           'remainTime': res.body.remainTime
         });

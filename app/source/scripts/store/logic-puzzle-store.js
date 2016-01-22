@@ -3,7 +3,7 @@
 var Reflux = require('reflux');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var superAgent = require('superagent');
-var agent = require('superagent-promise')(superAgent, Promise);
+var async = require('async');
 var page = require('page');
 var _currentIndex = 0;
 var _answer;
@@ -15,42 +15,58 @@ var LogicPuzzleStore = Reflux.createStore({
 
   onLoadItem: function () {
 
-    this.updateItem()
-        .then((res) => {
-          _answer = res.body.userAnswer;
-          this.trigger({
-            'item': res.body.item,
-            'userAnswer': res.body.userAnswer,
-            'itemsCount': res.body.itemsCount,
-            'orderId': _currentIndex,
-            'isExample': res.body.isExample
-          });
+    async.waterfall([
+      (callback) => {
+        this.updateItem(callback)
+      }, (res, callback) => {
+        console.log(res);
+        _answer = res.body.userAnswer;
+        this.trigger({
+          'item': res.body.item,
+          'userAnswer': res.body.userAnswer,
+          'itemsCount': res.body.itemsCount,
+          'orderId': _currentIndex,
+          'isExample': res.body.isExample
         });
+        callback(null, 'done');
+      }
+    ], function (err, result) {
+      if(err){
+        console.log(err);
+      }
+    });
   },
 
   onSubmitAnswer: function (newOrderId) {
-    this.onSaveUserAnswer()
-        .then(() => {
-          _currentIndex = newOrderId;
-          return this.updateItem();
-        })
-        .then((res) => {
-          _answer = res.body.userAnswer;
-          this.trigger({
-            'item': res.body.item,
-            'userAnswer': res.body.userAnswer,
-            'itemsCount': res.body.itemsCount,
-            'orderId': _currentIndex,
-            'isExample': res.body.isExample
-          });
+    async.waterfall([
+      (callback) => {
+        this.onSaveUserAnswer(callback)
+      },(res,callback) => {
+        _currentIndex = newOrderId;
+        this.updateItem(callback);
+      },(res,callback) => {
+        _answer = res.body.userAnswer;
+        this.trigger({
+          'item': res.body.item,
+          'userAnswer': res.body.userAnswer,
+          'itemsCount': res.body.itemsCount,
+          'orderId': _currentIndex,
+          'isExample': res.body.isExample
         });
+        callback(null,'done');
+      }
+    ],function(err,result){
+      if(err){
+        console.log(err);
+      }
+    });
   },
 
-  onSaveUserAnswer: function () {
-    return agent.post('/logic-puzzle/save')
+  onSaveUserAnswer: function (callback) {
+    superAgent.post('/logic-puzzle/save')
         .set('Content-Type', 'application/json')
         .send({userAnswer: _answer, orderId: _currentIndex})
-        .end();
+        .end(callback);
   },
 
   onChangeAnswer: function (val) {
@@ -61,25 +77,29 @@ var LogicPuzzleStore = Reflux.createStore({
   },
 
   onSubmitPaper: function () {
-    this.onSaveUserAnswer()
-        .then(function (res) {
-          superAgent.post('/logic-puzzle')
-              .set('Content_Type', 'application/json')
-              .end(function (err, res) {
-                if(res.statusCode === constant.httpCode.OK){
-                  page('dashboard.html');
-                }
-              });
-        });
+
+    async.waterfall([
+      (callback) => {
+        this.onSaveUserAnswer(callback)
+      },(res,callback) =>{
+        superAgent.post('/logic-puzzle')
+            .set('Content_Type', 'application/json')
+            .end(callback);
+      }
+    ],function(err,res){
+      if (res.statusCode === constant.httpCode.OK) {
+            page('dashboard.html');
+          }
+    });
   },
 
-  updateItem: function () {
-    return agent.get('/logic-puzzle')
+  updateItem: function (callback) {
+    superAgent.get('/logic-puzzle')
         .set('Content-Type', 'application/json')
         .query({
           orderId: _currentIndex
         })
-        .end();
+        .end(callback);
   }
 
 });
