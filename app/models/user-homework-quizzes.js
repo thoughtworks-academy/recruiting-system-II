@@ -104,22 +104,22 @@ userHomeworkQuizzesSchema.statics.checkData = function (userId, orderId, callbac
 
     if (err || !data) {
       callback(err || new Error('error'));
-    } else if (orderId < 1 || orderId === undefined || orderId > data.quizzes.length) {
+    } else if (typeof orderId !== 'number' || orderId < 1 || orderId === undefined || orderId > data.quizzes.length) {
       isValidate = false;
       result.data = null;
       result.isValidate = isValidate;
-      callback(null, result);
     } else if (data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.ACTIVE || data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.ERROR) {
       isValidate = true;
       result.data = data;
       result.isValidate = isValidate;
-      callback(null, result);
     } else {
       isValidate = false;
       result.data = data;
       result.isValidate = isValidate;
-      callback(null, result);
     }
+
+    callback(null, result);
+
   });
 };
 
