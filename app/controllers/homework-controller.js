@@ -48,7 +48,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   var orderId = req.query.orderId;
 
   async.waterfall([
-    (done) => {
+    (done) => { 
       userHomeworkQuizzes.unlockNext(userId, done);
     },
     (data, result, done) => {
