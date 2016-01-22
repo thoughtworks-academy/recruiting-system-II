@@ -592,63 +592,63 @@ db.once('open', function () {
     homeworkQuizzes.create([{
       id: 1,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 2,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 3,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 4,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 5,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 6,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 7,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 8,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 9,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
-    },{
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
+    }, {
       id: 10,
       desc: '这是一道简单的题.',
-      evaluateScript : 'www.baidu.com',
-      evaluateRepo : 'evaluateRepository',
-      templateRepo : 'templateRepository'
+      evaluateScript: 'www.baidu.com',
+      evaluateRepo: 'evaluateRepository',
+      templateRepo: 'templateRepository'
     }], ()=> {
       console.log('insert homeworkQuizzes success');
     });
@@ -671,11 +671,11 @@ db.once('open', function () {
         {id: 9, locked: true, status: 1},
         {id: 10, locked: true, status: 1}
       ]
-    },{
+    }, {
       userId: 2,
       quizzes: [
-        {id: 1, locked: true, status: 1},
-        {id: 2, locked: true, status: 1},
+        {id: 1, locked: true, status: 4, userAnswerRepo: 'www.github.com'},
+        {id: 2, locked: true, status: 3, userAnswerRepo: 'www.repo.com'},
         {id: 3, locked: true, status: 1},
         {id: 4, locked: true, status: 1},
         {id: 5, locked: true, status: 1},
@@ -685,11 +685,11 @@ db.once('open', function () {
         {id: 9, locked: true, status: 1},
         {id: 10, locked: true, status: 1}
       ]
-    },{
+    }, {
       userId: 3,
       quizzes: [
-        {id: 1, locked: true, status: 1},
-        {id: 2, locked: true, status: 1},
+        {id: 1, locked: true, status: 4},
+        {id: 2, locked: true, status: 3},
         {id: 3, locked: true, status: 1},
         {id: 4, locked: true, status: 1},
         {id: 5, locked: true, status: 1},
@@ -699,7 +699,7 @@ db.once('open', function () {
         {id: 9, locked: true, status: 1},
         {id: 10, locked: true, status: 1}
       ]
-    },{
+    }, {
       userId: 4,
       quizzes: [
         {id: 1, locked: true, status: 1},
@@ -713,7 +713,7 @@ db.once('open', function () {
         {id: 9, locked: true, status: 1},
         {id: 10, locked: true, status: 1}
       ]
-    },{
+    }, {
       userId: 5,
       quizzes: [
         {id: 1, locked: true, status: 1},
