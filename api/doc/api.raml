@@ -60,7 +60,6 @@ baseUri: http://api.bronzesword.com/
                 id: integer
                 email: string
                 mobilePhone: string
-                name: string
 
     /detail:
       get:
@@ -103,6 +102,12 @@ baseUri: http://api.bronzesword.com/
             properties:
               oldPassword: string
               password: string
+        responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  uri: string
 
 /scoresheets:
   get:
@@ -397,7 +402,7 @@ baseUri: http://api.bronzesword.com/
           application/json:
             properties:
               uri: string
-  /{blankQuizId}:
+  /{sectionId}:
     get:
       #  description: 获取一份填空题的定义
       responses:
@@ -432,6 +437,14 @@ baseUri: http://api.bronzesword.com/
                               description: string
                               chartPath: string
                               # 根据前台需要的数据把剩下的补完，不能有正确答案
+                          exampleItem:
+                            properties:
+                              id: integer
+                              initiallizedBox: string
+                              question: string
+                              desciption: string
+                              chartPath: string
+                              answer: string
 
 /quizItems:
   get:
