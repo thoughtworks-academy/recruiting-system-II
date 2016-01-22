@@ -461,10 +461,16 @@ baseUri: http://api.bronzesword.com/
       application/json:
         properties:
           id: integer
-          initialedBox: string
+          initializedBox: string
           question: string
           description: string
+          descriptionZh: string
           chartPath: string
+          stepsString: string
+          count: integer
+          questionZh: string
+          stepsLength: integer
+          maxUpdateTimes: integer
     responses:
       201:
         body:
@@ -480,7 +486,7 @@ baseUri: http://api.bronzesword.com/
             application/json:
               properties:
                 id: integer
-                initialedBox: string
+                initializedBox: string
                 question: string
                 description: string
                 chartPath: string
