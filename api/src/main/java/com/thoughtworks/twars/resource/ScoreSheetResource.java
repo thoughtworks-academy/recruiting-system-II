@@ -95,26 +95,13 @@ public class ScoreSheetResource extends Resource {
         examerUri.put("uri", "examer/" + scoreSheet.getExamerId());
         paperUri.put("uri", "paper/" + scoreSheet.getPaperId());
 
-//        Map<String, IQuizScoreSheet> quizScoreSheets = buildScoreSheet();
         Map map = new HashMap<>();
         map.put("examer", examerUri);
         map.put("paper", paperUri);
         map.put("blankQuizSubmit", blankQuizScoreSheet.getQuizScoreSheet(id));
         map.put("homeworkQuizSubmit", homeworkQuizScoreSheet.getQuizScoreSheet(id));
 
-//        for (Map.Entry<String, IQuizScoreSheet> entry : quizScoreSheets.entrySet()) {
-//            map.put(entry.getKey(), entry.getValue().getQuizScoreSheet(id));
-//        }
-
         return Response.status(Response.Status.OK).entity(map).build();
     }
-
-//    private Map<String,IQuizScoreSheet> buildScoreSheet() {
-//        Map<String, IQuizScoreSheet> result = new HashMap<>();
-//        result.put("blankQuizSubmits", blankQuizScoreSheet);
-//        result.put("homeworkSubmits", homeworkQuizScoreSheet);
-//
-//        return result;
-//    }
 
 }

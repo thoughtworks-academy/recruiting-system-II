@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface IQuizDefinition {
 
-    public void insertQuizDefinition(Map definition);
+    public int insertQuizDefinition(Map definition);
 
     public List<Map> getQuizDefinition(int sectionId);
 }
