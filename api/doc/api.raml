@@ -261,17 +261,11 @@ baseUri: http://api.bronzesword.com/
                       "quizzes": [
                         {
                           "id": 1,
-                          "definition": {
-                            "uri": "blankQuizzes/1"
-                            },
-                          "items":{
-                            "uri": "blankQuizzes/1/items"
-                            }
+                          "definition-uri": "blankQuizzes/1",
+                          "items-uri":"blankQuizzes/1/items"
                         }
                       ],
-                      "maker":{
-                        "uri": "userInfo/2"
-                      }
+                      "maker-uri": "userInfo/2"
                     }
                   ]
                 }
@@ -289,15 +283,9 @@ baseUri: http://api.bronzesword.com/
                             []:
                               properties:
                                 id: integer
-                                definition:
-                                  properties:
-                                    uri: string
-                                items:
-                                  properties:
-                                    uri: string
-                        maker:
-                          properties:
-                            uri: string
+                                definition-uri: string
+                                [items-uri]: string
+                        maker-uri: string
   /enrollment:
     description: 获取固定ID的考卷定义细节
     get:
@@ -317,17 +305,11 @@ baseUri: http://api.bronzesword.com/
                       "quizzes": [
                         {
                           "id": 1,
-                          "definition": {
-                            "uri": "blankQuizzes/1"
-                            },
-                          "items":{
-                            "uri": "blankQuizzes/1/items"
-                            }
+                          "definition-uri": "blankQuizzes/1",
+                          "items-uri": "blankQuizzes/1/items"
                         }
                       ],
-                      "maker":{
-                        "uri": "userInfo/2"
-                      }
+                      "maker-uri": "userInfo/2"
                     },
                     {
                       "id": 2,
@@ -335,17 +317,10 @@ baseUri: http://api.bronzesword.com/
                       "quizzes" : [
                         {
                           "id": 1,
-                          "definition": {
-                            "uri": "homeworkQuizzes/2"
-                          },
-                          "items": {
-                            "uri": "homeworkQuizzes/3"
-                          }
+                          "definition-uri": "homeworkQuizzes/2"
                         }
                       ],
-                      "maker": {
-                        "uri": "userInfo/3"
-                      }
+                      "maker-uri": "userInfo/3"
                     }
                   ]
                 }
@@ -363,15 +338,9 @@ baseUri: http://api.bronzesword.com/
                             []:
                               properties:
                                 id: integer
-                                definition:
-                                  properties:
-                                    uri: string
-                                items:
-                                  properties:
-                                    uri: string
-                        maker:
-                          properties:
-                            uri: string
+                                definition-uri: string
+                                [items-uri]: string
+                        maker-uri: string
 
 /blankQuizzes:
   get:
