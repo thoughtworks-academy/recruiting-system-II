@@ -39,7 +39,7 @@ baseUri: http://api.bronzesword.com/
               userInfo:
                 properties:
                   uri: string
-/user:
+/users:
   get:
     queryParameters:
       field: string
@@ -164,7 +164,6 @@ baseUri: http://api.bronzesword.com/
                       version: string
                       branch: string
                       status: number
-                      timestamp: integer
 
     responses:
       201:
@@ -361,7 +360,6 @@ baseUri: http://api.bronzesword.com/
           id: integer
           sectionId: integer
           type: string
-          count: integer
           hardCount: integer
           normalCount: integer
           easyCount: integer
@@ -371,7 +369,7 @@ baseUri: http://api.bronzesword.com/
           application/json:
             properties:
               uri: string
-  /{sectionId}:
+  /{blankQuizId}:
     get:
       #  description: 获取一份填空题的定义
       responses:
@@ -394,20 +392,20 @@ baseUri: http://api.bronzesword.com/
             body:
               application/json:
                 properties:
-                  type:
-                    properties:
-                      []:
-                        properties:
-                          quizItem:
+                    quizItems:
+                      properties:
+                          []:
                             properties:
                               id: integer
                               initializedBox: string
                               question: string
                               description: string
                               chartPath: string
-                              # 根据前台需要的数据把剩下的补完，不能有正确答案
-                          exampleItem:
-                            properties:
+                            # 根据前台需要的数据把剩下的补完，不能有正确答案
+                    exampleItems:
+                      properties:
+                        []:
+                          properties:
                               id: integer
                               initiallizedBox: string
                               question: string
