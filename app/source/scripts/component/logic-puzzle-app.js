@@ -48,8 +48,7 @@ var LogicPuzzle = React.createClass({
 
         <div className="container-fluid">
           <div className="row">
-            {this.props.children[0]}
-            {this.props.children[1]}
+            {this.props.children}
             <Modal
               show={this.state.showModal}
               dialogClassName="custom-modal"
