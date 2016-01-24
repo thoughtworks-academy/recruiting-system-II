@@ -48,22 +48,8 @@ var LogicPuzzle = React.createClass({
 
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-9 col-sm-8">
-              <LogicPuzzleLeft item={this.state.item}
-                               userAnswer={this.state.userAnswer}
-                               onAnswerChange={this.handleAnswerChange}
-                               itemsCount={this.state.itemsCount}
-                               orderId={this.state.orderId}
-                               isExample={this.state.isExample}/>
-
-            </div>
-
-            <div className="col-md-3 col-sm-4">
-              <LogicPuzzleSidebar orderId={this.state.orderId}
-                                  itemsCount={this.state.itemsCount}
-                                  onTimeOver={this.timeOver}/>
-            </div>
-
+            {this.props.children[0]}
+            {this.props.children[1]}
             <Modal
               show={this.state.showModal}
               dialogClassName="custom-modal"
