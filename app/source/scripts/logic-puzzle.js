@@ -13,7 +13,7 @@ var LogicPuzzleBoxes = require('./component/logic-puzzle-boxes.component');
 var LogicPuzzleChart = require('./component/logic-puzzle-chart.component');
 var LogicPuzzleDescription = require('./component/logic-puzzle-description.component');
 var LogicPuzzleAnswerSubmit = require('./component/logic-puzzle-answer-submit.component');
-
+var LogicPuzzleTimer = require('./component/logic-puzzle-timer.component');
 var Navigation = require('./component/navigation.component');
 var LogicPuzzleActions = require('./actions/logic-puzzle-actions');
 
@@ -22,7 +22,7 @@ $('#submitModal').on('show.bs.modal', function () {
       .css('margin-top', '230px');
 });
 
-function handleAnswerChange(){
+function handleAnswerChange() {
 
 }
 
@@ -40,7 +40,9 @@ ReactDOM.render(
           </LogicPuzzleLeft>
         </div>
         <div className="col-md-3 col-sm-4">
-          <LogicPuzzleSidebar />
+          <LogicPuzzleSidebar>
+            <LogicPuzzleTimer/>
+          </LogicPuzzleSidebar>
         </div>
       </LogicPuzzle>
     </div>,

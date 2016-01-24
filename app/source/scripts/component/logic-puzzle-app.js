@@ -36,12 +36,6 @@ var LogicPuzzle = React.createClass({
     LogicPuzzleActions.changeAnswer(val);
   },
 
-  timeOver: function() {
-    this.setState({
-      showModal: true
-    });
-  },
-
   render: function () {
 
     return (

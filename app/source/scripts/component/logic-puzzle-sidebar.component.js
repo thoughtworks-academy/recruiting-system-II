@@ -4,7 +4,6 @@ var React = require('react');
 var Reflux = require('reflux');
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
-var LogicPuzzleTimer = require('./logic-puzzle-timer.component');
 var Modal = require('react-bootstrap/lib/Modal');
 var _newOrderId;
 var constant = require('../../../mixin/constant');
@@ -51,7 +50,8 @@ var LogicPuzzleSidebar = React.createClass({
 
           <div className="tip">
 
-            <LogicPuzzleTimer onTimeOver={this.props.onTimeOver}/>
+            <LogicPuzzleTimer />
+            {this.props.children}
 
             <p className="finish-rate">
               当前第{this.state.orderId + 1}题共{this.state.itemsCount}题
