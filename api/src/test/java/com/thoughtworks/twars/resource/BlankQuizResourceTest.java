@@ -54,7 +54,6 @@ public class BlankQuizResourceTest extends TestBase {
 
         blankQuiz.setId(5);
         blankQuiz.setSectionId(1);
-        blankQuiz.setCount(10);
         blankQuiz.setHardCount(3);
         blankQuiz.setNormalCount(4);
         blankQuiz.setEasyCount(3);
@@ -73,7 +72,6 @@ public class BlankQuizResourceTest extends TestBase {
         when(blankQuizMapper.findBySectionId(1)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
         when(firstBlankQuiz.getId()).thenReturn(2);
         when(firstBlankQuiz.getType()).thenReturn("singlePuzzle");
-        when(firstBlankQuiz.getCount()).thenReturn(10);
         when(firstBlankQuiz.getEasyCount()).thenReturn(3);
         when(firstBlankQuiz.getNormalCount()).thenReturn(4);
         when(firstBlankQuiz.getHardCount()).thenReturn(3);

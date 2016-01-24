@@ -4,8 +4,9 @@ public class BlankQuiz {
     private int id;
     private int sectionId;
     private String type;
-    private int count;
     private int hardCount;
+    private int normalCount;
+    private int easyCount;
 
     public void setId(int id) {
         this.id = id;
@@ -17,10 +18,6 @@ public class BlankQuiz {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public void setHardCount(int hardCount) {
@@ -35,9 +32,6 @@ public class BlankQuiz {
         this.easyCount = easyCount;
     }
 
-    private int normalCount;
-    private int easyCount;
-
     public int getId() {
         return id;
     }
@@ -48,10 +42,6 @@ public class BlankQuiz {
 
     public String getType() {
         return type;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public int getHardCount() {

@@ -79,7 +79,6 @@ public class BlankQuizResource {
             Map map = new HashMap<>();
             map.put("id", item.getId());
             map.put("type", item.getType());
-            map.put("count", item.getCount());
             map.put("hardCount", item.getHardCount());
             map.put("normalCount", item.getNormalCount());
             map.put("easyCount", item.getEasyCount());
