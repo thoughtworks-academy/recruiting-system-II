@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-@Path("/user")
+@Path("/users")
 public class UserResource extends Resource {
 
     @Inject
@@ -90,7 +90,7 @@ public class UserResource extends Resource {
 
         if (null != user) {
             Map<String, String> map = new HashMap<>();
-            map.put("uri", "user/" + user.getId());
+            map.put("uri", "users/" + user.getId());
 
             return Response.status(Response.Status.OK).entity(map).build();
         }
@@ -113,7 +113,7 @@ public class UserResource extends Resource {
 
         if (1 == result) {
             Map<String, Object> map = new HashMap<>();
-            map.put("uri", "user/" + userId);
+            map.put("uri", "users/" + userId);
 
             return Response.status(Response.Status.OK).entity(map).build();
         }

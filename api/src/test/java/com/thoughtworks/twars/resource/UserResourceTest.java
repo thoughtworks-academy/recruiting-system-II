@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 public class UserResourceTest extends TestBase {
     User user = mock(User.class);
-    String basePath = "/user";
+    String basePath = "/users";
 
     @Test
     public void should_return_user() {
@@ -62,7 +62,7 @@ public class UserResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
 
-        assertThat((String) result.get("uri"), is("user/10"));
+        assertThat((String) result.get("uri"), is("users/10"));
 
     }
 
