@@ -1,17 +1,11 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.*;
+import com.thoughtworks.twars.bean.ScoreSheet;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.service.quiz.quizScoreSheet.BlankQuizScoreSheet;
 import com.thoughtworks.twars.service.quiz.quizScoreSheet.HomeworkQuizScoreSheet;
-import com.thoughtworks.twars.service.quiz.quizScoreSheet.IQuizScoreSheet;
-
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @Path("/scoresheets")
@@ -27,18 +20,9 @@ public class ScoreSheetResource extends Resource {
     @Inject
     private ScoreSheetMapper scoreSheetMapper;
     @Inject
-    private BlankQuizSubmitMapper blankQuizSubmitMapper;
-    @Inject
-    private ItemPostMapper itemPostMapper;
-    @Inject
-    private HomeworkSubmitMapper homeworkSubmitMapper;
-    @Inject
-    private HomeworkPostHistoryMapper homeworkPostHistoryMapper;
-    @Inject
     private BlankQuizScoreSheet blankQuizScoreSheet;
     @Inject
     private HomeworkQuizScoreSheet homeworkQuizScoreSheet;
-
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -83,82 +67,19 @@ public class ScoreSheetResource extends Resource {
             scoreSheetId = scoreSheet.getId();
         }
 
-        List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
-        List<Map> homeworkSubmits = (List) data.get("homeworkQuizSubmits");
+        List<Map> blankQuizSubmits = (List<Map>) data.get("blankQuizSubmits");
+        List<Map> homeworkSubmits = (List<Map>) data.get("homeworkSubmits");
 
         if (blankQuizSubmits != null) {
-            insertBlankQuizSubmit(blankQuizSubmits, scoreSheetId);
+            blankQuizScoreSheet.insertQuizScoreSheet(data, scoreSheetId);
         }
-
         if (homeworkSubmits != null) {
-            insertHomeworkSubmit(homeworkSubmits, scoreSheetId);
+            homeworkQuizScoreSheet.insertQuizScoreSheet(data, scoreSheetId);
         }
-
         Map result = new HashMap<>();
         result.put("uri", "scoresheets/" + scoreSheetId);
 
         return Response.status(201).entity(result).build();
-    }
-
-
-    public void insertBlankQuizSubmit(List<Map> blankQuizSubmits, int scoreSheetId) {
-        int blankQuizSubmitId;
-        int blankQuizId;
-        int quizItemId;
-        String answer;
-
-        for (int j = 0; j < blankQuizSubmits.size(); j++) {
-            blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
-
-            BlankQuizSubmit blankQuizSubmitObj = new BlankQuizSubmit();
-            blankQuizSubmitObj.setBlankQuizId(blankQuizId);
-            blankQuizSubmitObj.setScoreSheetId(scoreSheetId);
-
-            blankQuizSubmitId = blankQuizSubmitMapper.insertBlankQuizSubmit(blankQuizSubmitObj);
-
-            List<Map> itemPosts = (List) blankQuizSubmits.get(j)
-                    .get("itemPosts");
-            for (int i = 0; i < itemPosts.size(); i++) {
-                Map itemPost = itemPosts.get(i);
-                answer = (String) itemPost.get("answer");
-                quizItemId = (Integer) itemPost.get("quizItemId");
-
-                ItemPost itemPostObj = new ItemPost();
-                itemPostObj.setAnswer(answer);
-                itemPostObj.setQuizItemId(quizItemId);
-                itemPostObj.setBlankQuizSubmitsId(blankQuizSubmitId);
-
-                itemPostMapper.insertItemPost(itemPostObj);
-            }
-        }
-    }
-
-
-    public void insertHomeworkSubmit(List<Map> homeworkSubmits, int scoreSheetId) {
-        Map homeworkSubmitPostHishtory;
-        int homeworkQuizId;
-
-        for (int i = 0; i < homeworkSubmits.size(); i++) {
-            homeworkQuizId = (int) homeworkSubmits.get(i).get("homeworkQuizId");
-
-            HomeworkSubmit homeworkSubmit = new HomeworkSubmit();
-            homeworkSubmit.setScoreSheetId(scoreSheetId);
-            homeworkSubmit.setHomeworkQuizId(homeworkQuizId);
-
-            homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
-
-            homeworkSubmitPostHishtory = (Map) homeworkSubmits.get(i).get("homeworkSubmitPostHishtory");
-
-            HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
-            homeworkPostHistory.setBranch((String) homeworkSubmitPostHishtory.get("branch"));
-            homeworkPostHistory.setVersion((String) homeworkSubmitPostHishtory.get("version"));
-            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHishtory.get("homeworkURL"));
-            homeworkPostHistory.setStatus((Integer) homeworkSubmitPostHishtory.get("status"));
-            homeworkPostHistory.setTimestamp((Integer) homeworkSubmitPostHishtory.get("timestamp"));
-            homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
-
-            homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
-        }
     }
 
 

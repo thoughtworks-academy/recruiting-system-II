@@ -1,9 +1,9 @@
 package com.thoughtworks.twars.service.quiz.quizScoreSheet;
 
+import com.thoughtworks.twars.bean.BlankQuizSubmit;
+import com.thoughtworks.twars.bean.ItemPost;
 import com.thoughtworks.twars.mapper.BlankQuizSubmitMapper;
 import com.thoughtworks.twars.mapper.ItemPostMapper;
-import com.thoughtworks.twars.util.DBUtil;
-import org.apache.ibatis.session.SqlSession;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -17,6 +17,12 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
 
     @Inject
     private ItemPostMapper itemPostMapper;
+
+//    @Inject
+//    private BlankQuizSubmit blankQuizSubmitObj;
+
+//    @Inject
+//    private ItemPost itemPostObj;
 
     public void setBlankQuizSubmitMapper(BlankQuizSubmitMapper blankQuizSubmitMapper) {
         this.blankQuizSubmitMapper = blankQuizSubmitMapper;
@@ -32,7 +38,7 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
                 .stream()
                 .map(blankQuizSubmit -> {
                     Map<String, Object> blankQuizUri = new HashMap<>();
-                    blankQuizUri.put("uri","/blankQuiz/" + blankQuizSubmit.getBlankQuizId());
+                    blankQuizUri.put("uri", "/blankQuiz/" + blankQuizSubmit.getBlankQuizId());
                     Map<String, Object> blankQuizSubmitUri = new HashMap<>();
                     blankQuizSubmitUri.put("blankQuiz", blankQuizUri);
                     blankQuizSubmitUri.put("itemPosts",
@@ -58,7 +64,36 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
     }
 
     @Override
-    public int insertQuizScoreSheet(Map data) {
-        return 0;
+    public void insertQuizScoreSheet(Map data, int scoreSheetId) {
+        int blankQuizId;
+        int quizItemId;
+        String answer;
+
+        List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
+
+        for (int j = 0; j < blankQuizSubmits.size(); j++) {
+            blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
+
+            BlankQuizSubmit blankQuizSubmitObj = new BlankQuizSubmit();
+            blankQuizSubmitObj.setBlankQuizId(blankQuizId);
+            blankQuizSubmitObj.setScoreSheetId(scoreSheetId);
+
+            blankQuizSubmitMapper.insertBlankQuizSubmit(blankQuizSubmitObj);
+
+            List<Map> itemPosts = (List) blankQuizSubmits.get(j)
+                    .get("itemPosts");
+            for (int i = 0; i < itemPosts.size(); i++) {
+                Map itemPost = itemPosts.get(i);
+                answer = (String) itemPost.get("answer");
+                quizItemId = (Integer) itemPost.get("quizItemId");
+
+                ItemPost itemPostObj = new ItemPost();
+                itemPostObj.setAnswer(answer);
+                itemPostObj.setQuizItemId(quizItemId);
+                itemPostObj.setBlankQuizSubmitsId(blankQuizSubmitObj.getId());
+
+                itemPostMapper.insertItemPost(itemPostObj);
+            }
+        }
     }
 }

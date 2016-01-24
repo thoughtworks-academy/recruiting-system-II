@@ -69,4 +69,8 @@ public class HomeworkQuizScoreSheetTest {
                         "\"branch\":\"dev\",\"version\":\"ghjkl\",\"status\":7}]"));
     }
 
+    @Test
+    public void insert_homework_score_sheet() {
+
+    }
 }
