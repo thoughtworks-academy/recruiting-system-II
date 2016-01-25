@@ -31,4 +31,14 @@ public class PaperMapperTest extends TestBase{
         assertThat(papers.size(), is(4));
         assertThat(papers.get(0).getMakerId(), is(1));
     }
+
+    @Test
+    public void should_insert_paper(){
+        Paper paper = new Paper();
+        paper.setMakerId(3);
+
+        paperMapper.insertPaper(paper);
+
+        assertThat(paper.getId(),is(5));
+    }
 }

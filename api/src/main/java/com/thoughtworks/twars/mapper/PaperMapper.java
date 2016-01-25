@@ -9,4 +9,6 @@ public interface PaperMapper {
     List<Paper> findAll();
 
     Paper getPaperById(int id);
+
+    int insertPaper(Paper paper);
 }

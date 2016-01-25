@@ -11,11 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -159,4 +158,45 @@ public class PaperResourceTest extends TestBase {
         assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":99,\"quizzes\":[{\"id\":1,\"definition-uri\":\"homeworkQuizzes/1\"},{\"id\":2,\"definition-uri\":\"homeworkQuizzes/2\"}],\"type\":\"homeworkQuizzes\"},{\"id\":100,\"quizzes\":[{\"items-uri\":\"blankQuizzes/1/items\",\"id\":1,\"definition-uri\":\"blankQuizzes/1\"}],\"type\":\"blankQuizzes\"}]}"));
 
     }
+
+
+    @Test
+    public void should_return_uri_when_insert_paper_definition(){
+//        Paper paper = new Paper();
+//        paper.setMakerId(1);
+//        when(paperMapper.insertPaper(paper)).thenReturn(1);
+//        when(paper.getId()).thenReturn(10);
+
+        Map map1 = new HashMap<>();
+        map1.put("quizId", 1);
+        map1.put("quizType", "blankQuizzes");
+        Map map2 = new HashMap<>();
+        map2.put("quizId", 2);
+        map2.put("quizType", "homeworkQuizzes");
+
+        List quizzes = new ArrayList<>();
+        quizzes.add(map1);
+        quizzes.add(map2);
+
+        String decription = "这是一个描述";
+
+        Map section = new HashMap<>();
+        section.put("desc", decription);
+        section.put("quizzes", quizzes);
+
+        List sections = new ArrayList<>();
+        sections.add(section);
+
+        Map map = new HashMap<>();
+        map.put("makerId", 1);
+        map.put("sections", sections);
+
+        Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON_TYPE);
+
+        Response response = target(basePath).request().post(entity);
+        assertThat(response.getStatus(), is(200));
+    }
 }
+
+
+

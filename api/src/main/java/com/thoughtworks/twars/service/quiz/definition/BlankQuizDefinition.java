@@ -29,7 +29,7 @@ public class BlankQuizDefinition implements IQuizDefinition {
 
 
     @Override
-    public String insertQuizDefinition(Map quiz, String decription, int paperId) {
+    public int insertQuizDefinition(Map quiz, String decription, int paperId) {
         Section section = new Section();
         section.setPaperId(paperId);
         section.setDescription(decription);
@@ -39,7 +39,7 @@ public class BlankQuizDefinition implements IQuizDefinition {
 
         blankQuizMapper.updateBlankQuiz((Integer) quiz.get("quizId"),section.getId());
 
-        return "papers/"+paperId;
+        return paperId;
     }
 
     @Override

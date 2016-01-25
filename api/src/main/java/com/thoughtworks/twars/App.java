@@ -12,9 +12,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
 
-//import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
-//import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
-
 @ApplicationPath("resources")
 public class App extends ResourceConfig {
 

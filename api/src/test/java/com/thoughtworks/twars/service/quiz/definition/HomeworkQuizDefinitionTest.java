@@ -61,7 +61,7 @@ public class HomeworkQuizDefinitionTest {
 
         int paperId = 2;
 
-        String result = definition.insertQuizDefinition(quiz, description, paperId);
-        assertThat(result, is("papers/2"));
+        int returnId = definition.insertQuizDefinition(quiz, description, paperId);
+        assertThat(returnId, is(2));
     }
 }

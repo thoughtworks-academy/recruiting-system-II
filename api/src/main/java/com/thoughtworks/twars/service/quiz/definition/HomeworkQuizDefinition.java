@@ -28,7 +28,7 @@ public class HomeworkQuizDefinition implements IQuizDefinition {
     }
 
     @Override
-    public String insertQuizDefinition(Map quiz, String decription, int paperId) {
+    public int insertQuizDefinition(Map quiz, String decription, int paperId) {
 
         Section section = new Section();
         section.setPaperId(paperId);
@@ -39,7 +39,7 @@ public class HomeworkQuizDefinition implements IQuizDefinition {
 
         mapper.updateHomeworkQuiz((Integer) quiz.get("quizId"),section.getId());
 
-        return "papers/" + paperId;
+        return paperId;
     }
 
     @Override

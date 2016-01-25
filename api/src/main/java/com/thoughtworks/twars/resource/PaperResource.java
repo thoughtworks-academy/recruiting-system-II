@@ -10,12 +10,15 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
 @Path("/papers")
-public class PaperResource extends Resource{
+public class PaperResource extends Resource {
 
     @Inject
     private PaperMapper paperMapper;
@@ -25,6 +28,7 @@ public class PaperResource extends Resource{
     private HomeworkQuizDefinition homeworkQuizDefinition;
     @Inject
     private BlankQuizDefinition blankQuizDefinition;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,6 +49,47 @@ public class PaperResource extends Resource{
         }
 
         return Response.status(Response.Status.OK).entity(result).build();
+    }
+
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response insertPaper(Map data) {
+        int makerId = (int) data.get("makerId");
+        List<Map> sections = (List<Map>) data.get("sections");
+
+        Paper paper = new Paper();
+        paper.setMakerId(makerId);
+
+        paperMapper.insertPaper(paper);
+        int paperId = paper.getId();
+
+        List<Map> result = sections.stream()
+                .map(item -> {
+                    Map map = new HashMap();
+                    map.put("uri", insertDefinitionByQuizType(item, paperId));
+                    return map;
+                })
+                .collect(Collectors.toList());
+
+        return Response.status(Response.Status.OK).entity(result.get(0)).build();
+    }
+
+
+    public String insertDefinitionByQuizType(Map item, int paperId) {
+        List<Map> quizzes = (List<Map>) item.get("quizzes");
+        String description = (String) item.get("desc");
+        List list = null;
+
+        for (int i = 0; i < quizzes.size(); i++) {
+            if ("blankQuizzes".equals(quizzes.get(i).get("quizType"))) {
+                blankQuizDefinition.insertQuizDefinition(quizzes.get(i), description, paperId);
+            } else if ("homeworkQuizzes".equals(quizzes.get(i).get("quizType"))) {
+                homeworkQuizDefinition.insertQuizDefinition(quizzes.get(i), description, paperId);
+            }
+        }
+
+        return "papers/"+paperId;
     }
 
 
@@ -72,8 +117,10 @@ public class PaperResource extends Resource{
         Map<String, Object> result = new HashMap<>();
         result.put("sections", sectionList);
         result.put("id", id);
+
         return Response.status(Response.Status.OK).entity(result).build();
     }
+
 
     @GET
     @Path("/enrollment")
@@ -82,11 +129,12 @@ public class PaperResource extends Resource{
         return getOnePaper(1);
     }
 
+
     private List<Map> getQuizzesBySectionId(int sectionId, String type) {
 
         if ("blankQuizzes".equals(type)) {
             return blankQuizDefinition.getQuizDefinition(sectionId);
-        } else if("homeworkQuizzes".equals(type)) {
+        } else if ("homeworkQuizzes".equals(type)) {
             return homeworkQuizDefinition.getQuizDefinition(sectionId);
         }
         return null;
