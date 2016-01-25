@@ -57,12 +57,12 @@ LogicPuzzleController.prototype.submitPaper = function (req, res) {
   async.waterfall([
     function (done) {
       logicPuzzle.findOne({userId: examerId}, done);
-    },(doc,done) => {
+    }, (doc, done) => {
       data = doc;
       LogicPuzzleController.setScoreSheet(data, done);
     },
     function (responds, done) {
-      if(data){
+      if (data) {
         data.endTime = endTime;
         data.isCommited = true;
       }
@@ -73,14 +73,14 @@ LogicPuzzleController.prototype.submitPaper = function (req, res) {
   ], function (err) {
     if (!err) {
       res.sendStatus(constant.httpCode.OK);
-    }else {
+    } else {
       res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     }
   });
 
 };
 
-LogicPuzzleController.setScoreSheet = function (data, done){
+LogicPuzzleController.setScoreSheet = function (data, done) {
   var scoreSheetUri = 'scoresheets';
   var itemPosts = [];
 
@@ -91,12 +91,10 @@ LogicPuzzleController.setScoreSheet = function (data, done){
   var body = {
     examerId: data.userId,
     paperId: data.paperId,
-    blankQuizSubmits: [
-      {
-        blankQuizId: data.blankQuizId,
-        itemPosts: itemPosts
-      }
-    ]
+    blankQuizSubmits: [{
+      blankQuizId: data.blankQuizId,
+      itemPosts: itemPosts
+    }]
   };
   apiRequest.post(scoreSheetUri, body, done);
 };
