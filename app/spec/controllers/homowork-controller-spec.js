@@ -445,12 +445,13 @@ describe('HomeworkController', function () {
                 id: 1,
                 status: constant.homeworkQuizzesStatus.ACTIVE,
                 userAnswerRepo: 'www.repo.com'
-              }]
+              }],
+            save: (done) => {
+              done(null, true);
+            }
           },
           isValidate: false,
-          save: (done) => {
-            done(null, true);
-          }
+          status: constant.httpCode.FORBIDDEN
         };
         callback(null, result);
       });
@@ -483,12 +484,14 @@ describe('HomeworkController', function () {
                 id: 1,
                 status: constant.homeworkQuizzesStatus.ACTIVE,
                 userAnswerRepo: 'www.repo.com'
-              }]
+              }],
+            save: (done) => {
+              done(null, true);
+            }
           },
           isValidate: false,
-          save: (done) => {
-            done(null, true);
-          }
+          status: constant.httpCode.FORBIDDEN
+
         };
         callback(null, data);
       });

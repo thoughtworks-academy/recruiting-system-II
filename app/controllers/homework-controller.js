@@ -31,7 +31,6 @@ HomeworkController.prototype.getList = function (req, res) {
     }
   ], (err) => {
     if (err) {
-      res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
     } else {
       res.send({
@@ -46,7 +45,7 @@ HomeworkController.prototype.getList = function (req, res) {
 HomeworkController.prototype.getQuiz = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.query.orderId;
-
+  var error = {};
   async.waterfall([
     (done) => {
       userHomeworkQuizzes.unlockNext(userId, done);
@@ -58,21 +57,22 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     (result, done) => {
       var integer = (Number(orderId) === parseInt(orderId, 10));
       if (!integer || orderId === undefined || orderId > result.quizzes.length || orderId < 1) {
-        done(new Error('orderId error'));
+        error.status = constant.httpCode.NOT_FOUND;
+        done(true, error);
       } else if (result.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.LOCKED) {
-        done(new Error('is locked'));
+        error.status = constant.httpCode.FORBIDDEN;
+        done(true, error);
       } else {
         homeworkQuizzes.findOne({id: result.quizzes[orderId - 1].id}, done);
       }
     }
   ], (err, data) => {
     if (err) {
-      if (err.message === 'is locked' || err.message === 'orderId error') {
-        res.send({
-          status: constant.httpCode.FORBIDDEN
-        });
-      } else {
-        console.log(err);
+      if (data.status === constant.httpCode.NOT_FOUND) {
+        res.send({status: constant.httpCode.NOT_FOUND});
+      }
+      if (data.status === constant.httpCode.FORBIDDEN) {
+        res.send({status: constant.httpCode.FORBIDDEN});
       }
     } else {
       res.send({
@@ -101,18 +101,20 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
         result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
         result.data.save(done);
       } else {
-        done(new Error('validate error'));
+        done(true, result);
       }
     }
   ], (err, data) => {
     if (err) {
-      if (err.message === 'validate error') {
+      if (data.status === constant.httpCode.FORBIDDEN) {
         res.send({
-          status: constant.httpCode.FORBIDDEN
+          status: data.status
         });
-      } else {
-        console.log(err);
       }
+      if (data.status === constant.httpCode.NOT_FOUND) {
+        res.send({status: data.status});
+      }
+
     } else {
       res.send({
         status: constant.httpCode.OK
