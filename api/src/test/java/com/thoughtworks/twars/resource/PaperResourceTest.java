@@ -3,6 +3,7 @@ package com.thoughtworks.twars.resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.BlankQuiz;
+//import com.thoughtworks.twars.bean.HomeworkQuiz;
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.bean.Section;
 import org.junit.Test;
@@ -86,16 +87,16 @@ public class PaperResourceTest extends TestBase {
 //
 //        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"id\":22,\"quizzes\":[{\"definition\":{\"uri\":\"homeworkQuizzes/3\"},\"id\":3,\"items\":{\"uri\":\"homeworkQuizzes/3/items\"}}],\"desc\":\"dojo题\"}]}"));
 //    }
-//
-//    @Test
-//    public void should_return_404_when_request_one_paper() throws Exception {
-//
-//        when(sectionMapper.getSectionsByPaperId(9)).thenReturn(null);
-//
-//        Response response = target(basePath+"/9").request().get();
-//        assertThat(response.getStatus(), is(404));
-//    }
-//
+
+    @Test
+    public void should_return_404_when_request_one_paper() throws Exception {
+
+        when(sectionMapper.getSectionsByPaperId(9)).thenReturn(null);
+
+        Response response = target(basePath+"/9").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
+
 //    @Test
 //    public void should_return_uri_when_request_enrollment() throws Exception {
 //        Section blankSection = mock(Section.class);

@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,12 +19,17 @@ public class HomeWorkQuizMapperTest extends TestBase {
         super.setUp();
         homeworkQuizMapper = session.getMapper(HomeworkQuizMapper.class);
     }
-
     @Test
     public void should_return_homework_list_when_by_section_id(){
         List<HomeworkQuiz> homeworkQuizList = homeworkQuizMapper.findBySectionId(2);
 
         assertThat(homeworkQuizList.size(), is(5));
     }
+
+
+
+
+
+
 
 }

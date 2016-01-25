@@ -4,6 +4,8 @@ import com.thoughtworks.twars.bean.HomeworkPostHistory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -17,7 +19,7 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_id_when_insert_homework_post_history(){
+    public void should_return_id_when_insert_homework_post_history() {
         HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
         homeworkPostHistory.setHomeworkSubmitId(1);
         homeworkPostHistory.setStatus(3);
@@ -30,4 +32,18 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
 
         assertThat(homeworkPostHistory.getId(), is(5));
     }
+
+
+    @Test
+    public void should_return_all_homework_post_history() {
+        List<HomeworkPostHistory> homeworkPostHistoryList = homeworkPostHistoryMapper.findByHomeworkSubmitId(1);
+
+        assertThat(homeworkPostHistoryList.get(0).getBranch(), is("master"));
+        assertThat(homeworkPostHistoryList.get(0).getVersion(), is("commit d8160f56ebbb5d40368048f271328eefa87cb97d"));
+        assertThat(homeworkPostHistoryList.get(0).getHomeworkURL(), is("github.com/purple/1"));
+        assertThat(homeworkPostHistoryList.get(0).getId(), is(1));
+        assertThat(homeworkPostHistoryList.get(0).getStatus(), is(3));
+        assertThat(homeworkPostHistoryList.get(0).getTimestamp(), is(1453287441));
+    }
+
 }
