@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
 
@@ -21,21 +23,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ScoreSheetResourceTest extends TestBase {
     @Mock
-    HomeworkPostHistoryMapper homeworkPostHistoryMapper;
-
-    @Mock
-    HomeworkSubmitMapper homeworkSubmitMapper;
-
-    @Mock
-    HomeworkPostHistory homeworkPostHistory;
-
-    @Mock
-    HomeworkSubmit homeworkSubmit;
-
-    @Mock
-    BlankQuizSubmitMapper blankQuizSubmitMapper;
-
-    @Mock
     ItemPostMapper itemPostMapper;
 
     @Mock
@@ -43,9 +30,6 @@ public class ScoreSheetResourceTest extends TestBase {
 
     @Mock
     BlankQuizSubmit blankQuizSubmit;
-
-    @Mock
-    ScoreSheetMapper scoreSheetMapper;
 
     @Mock
     ScoreSheet firstScoreSheet;
@@ -99,11 +83,8 @@ public class ScoreSheetResourceTest extends TestBase {
         data.put("blankQuizSubmits", blankQuizSubmits);
     }
 
-
-
-
     @Test
-    public void shoule_return_one_score_sheet_by_id() {
+    public void should_return_one_score_sheet_by_id() {
         when(scoreSheetMapper.findOne(1)).thenReturn(firstScoreSheet);
         when(blankQuizSubmitMapper.findByScoreSheetId(1)).thenReturn(Arrays.asList(blankQuizSubmit));
         when(itemPostMapper.findByBlankQuizSubmit(2)).thenReturn(Arrays.asList(itemPost));
@@ -120,6 +101,38 @@ public class ScoreSheetResourceTest extends TestBase {
 //        Map result = response.readEntity(Map.class);
 //        String str = gson.toJson(result);
 //        assertThat(str, is("[{\"blankQuiz\":\"blankQuizzes/3\",\"itemPosts\":[{\"answer\":\"12345\",\"quizItem\":\"quizItems/4\"}]}]"));
+    }
+
+    @Test
+    public void should_return_score_sheet_uri() {
+        Map homeworkSubmitPostHistory = new HashMap<>();
+        homeworkSubmitPostHistory.put("homeworkURL","fghjk");
+        homeworkSubmitPostHistory.put("version","jkl");
+        homeworkSubmitPostHistory.put("branch","dev");
+        homeworkSubmitPostHistory.put("status", 9);
+        Map homeworkSubmit = new HashMap<>();
+        homeworkSubmit.put("homeworkQuizId", 8);
+        homeworkSubmit.put("homeworkSubmitPostHistory",homeworkSubmitPostHistory);
+        List<Map> homeworkSubmits = new ArrayList<>();
+        homeworkSubmits.add(homeworkSubmit);
+        List<Map> itemPosts = new ArrayList<>();
+        Map itemPost = new HashMap<>();
+        itemPost.put("answer","10");
+        itemPost.put("quizItemId",8);
+        itemPosts.add(itemPost);
+        Map blankQuizSubmit = new HashMap<>();
+        blankQuizSubmit.put("blankQuizId", 9);
+        blankQuizSubmit.put("itemPosts", itemPosts);
+        List<Map> blankQuizSubmits= new ArrayList<>();
+        blankQuizSubmits.add(blankQuizSubmit);
+        Map data = new HashMap<>();
+        data.put("examerId", 2);
+        data.put("paperId", 4);
+        data.put("homeworkSubmits",homeworkSubmits);
+        data.put("blankQuizSubmits",blankQuizSubmits);
+        Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON);
+        Response response = target(basePath).request().post(entity);
+        assertThat(response.getStatus(), is(201));
     }
 //
 //    @Test
