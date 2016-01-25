@@ -9,55 +9,25 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.core.Application;
 
 import static org.mockito.Mockito.mock;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TestBase extends JerseyTest {
-    @Mock
-    protected PaperMapper paperMapper;
-    @Mock
-    protected UserMapper userMapper;
-    @Mock
-    protected QuizItemMapper quizItemMapper;
-    @Mock
-    protected SectionMapper sectionMapper;
-    @Mock
-    protected BlankQuizMapper blankQuizMapper;
-    @Mock
-    protected ScoreSheetMapper scoreSheetMapper;
-    @Mock
-    protected BlankQuizSubmitMapper blankQuizSubmitMapper;
-    @Mock
-    protected ItemPostMapper itemPostMapper;
-    @Mock
-    protected HomeworkQuizMapper homeworkQuizMapper;
-    @Mock
-    protected HomeworkSubmitMapper homeworkSubmitMapper;
-    @Mock
-    protected HomeworkPostHistoryMapper homeworkPostHistoryMapper;
-    @Mock
-    protected BlankQuizScoreSheet blankQuizScoreSheet;
-    @Mock
-    protected HomeworkQuizScoreSheet homeworkQuizScoreSheet;
-//    protected PaperMapper paperMapper = mock(PaperMapper.class);
-//    protected UserMapper userMapper = mock(UserMapper.class);
-//    protected QuizItemMapper quizItemMapper = mock(QuizItemMapper.class);
-//    protected SectionMapper sectionMapper = mock(SectionMapper.class);
-//    protected BlankQuizMapper blankQuizMapper = mock(BlankQuizMapper.class);
-//    protected ScoreSheetMapper scoreSheetMapper = mock(ScoreSheetMapper.class);
-//    protected BlankQuizSubmitMapper blankQuizSubmitMapper = mock(BlankQuizSubmitMapper.class);
-//    protected ItemPostMapper itemPostMapper = mock(ItemPostMapper.class);
-//    protected HomeworkQuizMapper homeworkQuizMapper = mock(HomeworkQuizMapper.class);
-//    protected HomeworkSubmitMapper homeworkSubmitMapper = mock(HomeworkSubmitMapper.class);
-//    protected HomeworkPostHistoryMapper homeworkPostHistoryMapper = mock(HomeworkPostHistoryMapper.class);
-//    protected BlankQuizScoreSheet blankQuizScoreSheet = mock(BlankQuizScoreSheet.class);
-//    protected HomeworkQuizScoreSheet homeworkQuizScoreSheet = mock(HomeworkQuizScoreSheet.class);
+    protected PaperMapper paperMapper = mock(PaperMapper.class);
+    protected UserMapper userMapper = mock(UserMapper.class);
+    protected QuizItemMapper quizItemMapper = mock(QuizItemMapper.class);
+    protected SectionMapper sectionMapper = mock(SectionMapper.class);
+    protected BlankQuizMapper blankQuizMapper = mock(BlankQuizMapper.class);
+    protected ScoreSheetMapper scoreSheetMapper = mock(ScoreSheetMapper.class);
+    protected BlankQuizSubmitMapper blankQuizSubmitMapper = mock(BlankQuizSubmitMapper.class);
+    protected ItemPostMapper itemPostMapper = mock(ItemPostMapper.class);
+    protected HomeworkQuizMapper homeworkQuizMapper = mock(HomeworkQuizMapper.class);
+    protected HomeworkSubmitMapper homeworkSubmitMapper = mock(HomeworkSubmitMapper.class);
+    protected HomeworkPostHistoryMapper homeworkPostHistoryMapper = mock(HomeworkPostHistoryMapper.class);
+    protected BlankQuizScoreSheet blankQuizScoreSheet = mock(BlankQuizScoreSheet.class);
+    protected HomeworkQuizScoreSheet homeworkQuizScoreSheet = mock(HomeworkQuizScoreSheet.class);
 
 
     @Override
