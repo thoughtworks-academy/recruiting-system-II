@@ -98,6 +98,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     }, (result, done) => {
       if (result.isValidate === true) {
         result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
+        result.data.quizzes[orderId - 1].branch = req.body.branch;
         result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
         result.data.save(done);
       } else {

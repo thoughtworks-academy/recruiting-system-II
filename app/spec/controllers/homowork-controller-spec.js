@@ -522,7 +522,8 @@ describe('HomeworkController', function () {
         session: {user: {id: 1}},
         body: {
           userAnswerRepo: 'www.repo.com',
-          orderId: 1
+          orderId: 1,
+          branch: 'dev'
         }
       }, {
         send: function (data) {
