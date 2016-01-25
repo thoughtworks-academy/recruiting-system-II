@@ -2,6 +2,7 @@ package com.thoughtworks.twars.service.quiz.definition;
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
 import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
+import com.thoughtworks.twars.mapper.SectionMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -9,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +30,8 @@ public class HomeworkQuizDefinitionTest {
     @Mock
     HomeworkQuiz secondQuiz;
 
+    @Mock
+    SectionMapper sectionMapper;
 
     @InjectMocks
     HomeworkQuizDefinition definition;
@@ -46,5 +50,18 @@ public class HomeworkQuizDefinitionTest {
 
         assertThat(result.get(1).get("id"), is(2));
         assertThat(result.get(1).get("definition-uri"), is("homeworkQuizzes/2"));
+    }
+
+    @Test
+    public void should_return_uri_when_insert_paper_definition(){
+        Map quiz = new HashMap<>();
+        quiz.put("quizId", 1);
+        quiz.put("quizType", "blankQuizzes");
+        String description = "这是描述";
+
+        int paperId = 2;
+
+        String result = definition.insertQuizDefinition(quiz, description, paperId);
+        assertThat(result, is("papers/2"));
     }
 }

@@ -1,7 +1,9 @@
 package com.thoughtworks.twars.service.quiz.definition;
 
 import com.thoughtworks.twars.bean.BlankQuiz;
+import com.thoughtworks.twars.bean.Section;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
+import com.thoughtworks.twars.mapper.SectionMapper;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -14,13 +16,30 @@ public class BlankQuizDefinition implements IQuizDefinition {
     @Inject
     BlankQuizMapper blankQuizMapper;
 
+    @Inject
+    SectionMapper sectionMapper;
+
     public void setBlankQuizMapper(BlankQuizMapper blankQuizMapper) {
         this.blankQuizMapper = blankQuizMapper;
     }
 
+    public void setSectionMapper(SectionMapper sectionMapper) {
+        this.sectionMapper = sectionMapper;
+    }
+
+
     @Override
-    public int insertQuizDefinition(Map definition) {
-        return 0;
+    public String insertQuizDefinition(Map quiz, String decription, int paperId) {
+        Section section = new Section();
+        section.setPaperId(paperId);
+        section.setDescription(decription);
+        section.setType((String) quiz.get("quizType"));
+
+        sectionMapper.insertSection(section);
+
+        blankQuizMapper.updateBlankQuiz((Integer) quiz.get("quizId"),section.getId());
+
+        return "papers/"+paperId;
     }
 
     @Override
