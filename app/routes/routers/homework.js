@@ -10,6 +10,5 @@ var homeworkController  = new  HomeworkController();
 router.get('/get-list', homeworkController.getList);
 router.get('/quiz',homeworkController.getQuiz);
 router.post('/save',homeworkController.saveGithubUrl);
-router.get('/progress', homeworkController.getProgressTasks);
 router.post('/result',homeworkController.updateResult);
 module.exports = router;
