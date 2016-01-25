@@ -3,6 +3,8 @@ package com.thoughtworks.twars.bean;
 public class Section {
     private int id;
     private int paperId;
+    private String description;
+    private String type;
 
     public int getPaperId() {
         return paperId;
@@ -11,8 +13,6 @@ public class Section {
     public void setPaperId(int paperId) {
         this.paperId = paperId;
     }
-
-    private String description;
 
     public int getId() {
         return id;
@@ -29,4 +29,8 @@ public class Section {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 }

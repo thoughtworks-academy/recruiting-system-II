@@ -14,4 +14,10 @@
     <select id="getSectionsByPaperId" resultMap="sectionListMap">
         select * from section where paperId = #{paperId};
     </select>
+
+    <insert id="insertSection" parameterType="com.thoughtworks.twars.bean.Section" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO section(paperId,description,type) VALUES(#{paperId},#{description},#{type});
+    </insert>
+
 </mapper>
