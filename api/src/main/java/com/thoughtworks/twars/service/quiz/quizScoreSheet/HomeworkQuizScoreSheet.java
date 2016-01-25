@@ -61,7 +61,7 @@ public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
     @Override
     public void insertQuizScoreSheet(Map data, int scoreSheetId) {
 
-        Map homeworkSubmitPostHishtory;
+        Map homeworkSubmitPostHistory;
         int homeworkQuizId;
         List<Map> homeworkSubmits = (List<Map>) data.get("homeworkSubmits");
 
@@ -74,14 +74,13 @@ public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
 
             homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
 
-            homeworkSubmitPostHishtory = (Map) homeworkSubmits.get(i).get("homeworkSubmitPostHishtory");
+            homeworkSubmitPostHistory = (Map) homeworkSubmits.get(i).get("homeworkSubmitPostHistory");
 
             HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
-            homeworkPostHistory.setBranch((String) homeworkSubmitPostHishtory.get("branch"));
-            homeworkPostHistory.setVersion((String) homeworkSubmitPostHishtory.get("version"));
-            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHishtory.get("homeworkURL"));
-            homeworkPostHistory.setStatus((Integer) homeworkSubmitPostHishtory.get("status"));
-            homeworkPostHistory.setTimestamp((Integer) homeworkSubmitPostHishtory.get("timestamp"));
+            homeworkPostHistory.setBranch((String) homeworkSubmitPostHistory.get("branch"));
+            homeworkPostHistory.setVersion((String) homeworkSubmitPostHistory.get("version"));
+            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHistory.get("homeworkURL"));
+            homeworkPostHistory.setStatus((Integer) homeworkSubmitPostHistory.get("status"));
             homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
 
             homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
