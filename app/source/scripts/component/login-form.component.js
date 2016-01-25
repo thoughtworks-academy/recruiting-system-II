@@ -3,7 +3,9 @@
 var React = global.React = require('react');
 var validate = require('validate.js');
 var ReactDOM = require('react-dom');
-var request = require('superagent');
+var LoginActions = require('../actions/login-actions');
+var LoginStore = require('../store/login-store');
+var Reflux = require('reflux');
 var constraint = require('../../../mixin/login-constraint');
 var page = require('page');
 var constant = require('../../../mixin/constant');
@@ -15,11 +17,9 @@ function getError(validateInfo, field) {
   return '';
 }
 
-function jumpToDashboard() {
-  page('dashboard.html');
-}
-
 var LoginForm = React.createClass({
+  mixins: Reflux.connect(LoginStore),
+
   getInitialState: function () {
     return {
       phoneEmailError: '',
@@ -58,26 +58,7 @@ var LoginForm = React.createClass({
 
     var phoneEmail = ReactDOM.findDOMNode(this.refs.phoneEmail).value;
     var loginPassword = ReactDOM.findDOMNode(this.refs.loginPassword).value;
-
-    request.get('/login')
-        .set('Content-Type', 'application/json')
-        .query({
-          account: phoneEmail,
-          password: loginPassword
-        })
-        .end((err, req) => {
-          var data = JSON.parse(req.text);
-          if (data.status === constant.httpCode.OK) {
-            this.setState({loginFailed : false});
-            jumpToDashboard();
-          } else {
-            this.setState({
-              clickable: false
-            });
-
-            this.setState({loginFailed : true});
-          }
-        });
+    LoginActions.login(phoneEmail, loginPassword);
   },
 
   render: function () {
