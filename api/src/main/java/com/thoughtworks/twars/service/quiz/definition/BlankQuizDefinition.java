@@ -20,7 +20,6 @@ public class BlankQuizDefinition implements IQuizDefinition {
 
     @Override
     public int insertQuizDefinition(Map definition) {
-
         return 0;
     }
 

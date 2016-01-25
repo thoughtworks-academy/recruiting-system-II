@@ -1,36 +1,30 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.Paper;
-import com.thoughtworks.twars.mapper.BlankQuizMapper;
-import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
+import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
+import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Path("/papers")
-public class PaperResource {
+public class PaperResource extends Resource{
 
     @Inject
     private PaperMapper paperMapper;
     @Inject
     private SectionMapper sectionMapper;
     @Inject
-    private BlankQuizMapper blankQuizMapper;
+    private HomeworkQuizDefinition homeworkQuizDefinition;
     @Inject
-    private HomeworkQuizMapper homeworkQuizMapper;
+    private BlankQuizDefinition blankQuizDefinition;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -53,6 +47,7 @@ public class PaperResource {
         return Response.status(Response.Status.OK).entity(result).build();
     }
 
+
     @GET
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,9 +62,9 @@ public class PaperResource {
                 .map(item -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", item.getId());
-                    map.put("desc", item.getDescription());
+                    map.put("type", item.getType());
                     map.put("quizzes", getQuizzesBySectionId(item.getId(),
-                            item.getDescription()));
+                            item.getType()));
                     return map;
                 })
                 .collect(Collectors.toList());
@@ -83,59 +78,18 @@ public class PaperResource {
     @GET
     @Path("/enrollment")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOnePaper() {
+    public Response getEnrollmentPaper() {
         return getOnePaper(1);
     }
 
-    private List<Map> getQuizzesBySectionId(int sectionId, String description) {
+    private List<Map> getQuizzesBySectionId(int sectionId, String type) {
 
-        if ("blankQuizzes".equals(description)) {
-            return getBlankQuizzes(blankQuizMapper, sectionId);
+        if ("blankQuizzes".equals(type)) {
+            return blankQuizDefinition.getQuizDefinition(sectionId);
+        } else if("homeworkQuizzes".equals(type)) {
+            return homeworkQuizDefinition.getQuizDefinition(sectionId);
         }
-        return getHomeworkQuizzes(homeworkQuizMapper, sectionId);
-    }
-
-
-    private List<Map> getHomeworkQuizzes(
-            HomeworkQuizMapper localHomeWorkQuizMapper, int sectionId) {
-        String homeworkQuizBasePath = "homeworkQuizzes/";
-        return localHomeWorkQuizMapper.findBySectionId(sectionId)
-                .stream()
-                .map(h -> {
-                    HashMap<String, Object> homeworkItem = new HashMap<>();
-                    homeworkItem.put("id", h.getId());
-                    homeworkItem.put("definition", buildURIMap(
-                            homeworkQuizBasePath + h.getId()));
-                    homeworkItem.put("items", buildURIMap(
-                            homeworkQuizBasePath + h.getId() +
-                                    "/items"));
-                    return homeworkItem;
-                })
-                .collect(Collectors.toList());
-    }
-
-    private List<Map> getBlankQuizzes(BlankQuizMapper localBlankQuizMapper,
-                                      int sectionId) {
-        String blankQuizBasePath = "blankQuizzes/";
-        return localBlankQuizMapper.findBySectionId(sectionId)
-                .stream()
-                .map(b -> {
-                    HashMap<String, Object> item = new HashMap<>();
-                    item.put("id", b.getId());
-
-                    item.put("definition", buildURIMap(blankQuizBasePath +
-                            b.getId()));
-                    item.put("items", buildURIMap(blankQuizBasePath +
-                            b.getId() + "/items"));
-                    return item;
-                })
-                .collect(Collectors.toList());
-    }
-
-    private Map<String, String> buildURIMap(String uri) {
-        Map<String, String> result = new HashMap<>();
-        result.put("uri", uri);
-        return result;
+        return null;
     }
 }
 

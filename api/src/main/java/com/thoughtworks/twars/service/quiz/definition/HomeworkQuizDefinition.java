@@ -1,7 +1,6 @@
 package com.thoughtworks.twars.service.quiz.definition;
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
-import com.thoughtworks.twars.bean.Section;
 import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
 
@@ -24,9 +23,6 @@ public class HomeworkQuizDefinition implements IQuizDefinition {
 
     @Override
     public int insertQuizDefinition(Map item) {
-        Section section = new Section();
-       // section.setPaperId(item.get(""));
-     //   sectionMapper.insertSection()
         return 0;
     }
 
