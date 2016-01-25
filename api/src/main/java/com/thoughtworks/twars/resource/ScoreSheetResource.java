@@ -79,7 +79,7 @@ public class ScoreSheetResource extends Resource {
         Map result = new HashMap<>();
         result.put("uri", "scoresheets/" + scoreSheetId);
 
-        return Response.status(201).entity(result).build();
+        return Response.status(Response.Status.CREATED).entity(result).build();
     }
 
 
@@ -105,3 +105,4 @@ public class ScoreSheetResource extends Resource {
     }
 
 }
+
