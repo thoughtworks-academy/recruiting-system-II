@@ -23,7 +23,7 @@ router.get('/', function (req, res) {
   var userId = req.session.user.id;
   var result;
 
-  agent.get(apiServer + 'user/' + userId)
+  agent.get(apiServer + 'users/' + userId)
       .set('Content-Type', 'application/json')
       .end()
       .then(function (resp) {
@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
         return result;
       })
       .then(function () {
-        return agent.get(apiServer + 'user/' + userId + '/detail')
+        return agent.get(apiServer + 'users/' + userId + '/detail')
             .set('Content-Type', 'application/json')
             .end();
       })
@@ -65,7 +65,7 @@ router.put('/update', function (req, res) {
   var result = _.assign({userId: userId}, userInfo);
 
   if (checkInfo(result, userConstraint) && result.gender !== '') {
-    agent.put(apiServer + 'user/' + userId + '/detail')
+    agent.put(apiServer + 'users/' + userId + '/detail')
         .set('Content-Type', 'application/json')
         .send(result)
         .end()
@@ -99,7 +99,7 @@ router.put('/change-password', function (req, res) {
     partResult.oldPassword = md5(passwordInfo.oldPassword);
     partResult.password = md5(passwordInfo.password);
 
-    agent.put(apiServer + 'user/' + userId + '/password')
+    agent.put(apiServer + 'users/' + userId + '/password')
         .set('Content-Type', 'application/json')
         .send(partResult)
         .end()

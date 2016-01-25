@@ -58,7 +58,7 @@ module.exports = function (req, res, next) {
       if (!userId) {
         done(null, false);
       }else {
-        superagent.get(apiServer + 'user/' + userId + '/detail')
+        superagent.get(apiServer + 'users/' + userId + '/detail')
           .set('Content-Type', 'application/json')
           .end(function (err) {
             if (err) {
