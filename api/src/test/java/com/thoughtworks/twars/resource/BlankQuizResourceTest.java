@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 public class BlankQuizResourceTest extends TestBase {
 
-    String basePath = "blankQuizzes";
+    String basePath = "/blankQuizzes";
     BlankQuiz firstBlankQuiz = mock(BlankQuiz.class);
     BlankQuiz secondBlankQuiz = mock(BlankQuiz.class);
 
@@ -68,7 +68,7 @@ public class BlankQuizResourceTest extends TestBase {
     
 
     @Test
-    public void shoud_return_blank_quizzes_by_section_id() {
+    public void should_return_blank_quizzes_by_section_id() {
         when(blankQuizMapper.findBySectionId(1)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
         when(firstBlankQuiz.getId()).thenReturn(2);
         when(firstBlankQuiz.getType()).thenReturn("singlePuzzle");

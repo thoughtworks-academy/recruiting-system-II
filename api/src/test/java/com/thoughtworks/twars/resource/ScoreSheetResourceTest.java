@@ -59,30 +59,6 @@ public class ScoreSheetResourceTest extends TestBase {
         assertThat(response.getStatus(), is(404));
     }
 
-
-    @Test
-    public void should_return_uri_when_insert_user_answer() {
-
-        Map itemPost = new HashMap<>();
-        itemPost.put("answer", "10");
-        itemPost.put("quizItemId", 3);
-
-        List<Map> itemPosts = new ArrayList<>();
-        itemPosts.add(itemPost);
-
-        Map blankQuizSubmit = new HashMap<>();
-        blankQuizSubmit.put("blankQuizId", 1);
-        blankQuizSubmit.put("itemPosts", itemPosts);
-
-        List<Map> blankQuizSubmits = new ArrayList<>();
-        blankQuizSubmits.add(blankQuizSubmit);
-
-        Map data = new HashMap<>();
-        data.put("examerId", 2);
-        data.put("paperId", 2);
-        data.put("blankQuizSubmits", blankQuizSubmits);
-    }
-
     @Test
     public void should_return_one_score_sheet_by_id() {
         when(scoreSheetMapper.findOne(1)).thenReturn(firstScoreSheet);
