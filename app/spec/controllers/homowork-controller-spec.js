@@ -385,7 +385,7 @@ describe('HomeworkController', function () {
         callback(null, lockedData);
       });
 
-      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+      userHomeworkQuizzes.checkDataForSubmit(1, 1, function (err, result) {
         expect(result).toEqual({
           data: {
             userId: 1,
@@ -396,6 +396,7 @@ describe('HomeworkController', function () {
                 userAnswerRepo: 'www.github.com'
               }]
           },
+          status: constant.httpCode.FORBIDDEN,
           isValidate: false
         });
         done();
@@ -409,7 +410,7 @@ describe('HomeworkController', function () {
         callback(null, activeData);
       });
 
-      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+      userHomeworkQuizzes.checkDataForSubmit(1, 1, function (err, result) {
         expect(result).toEqual({
           data: {
             userId: 1,
@@ -420,6 +421,7 @@ describe('HomeworkController', function () {
                 userAnswerRepo: 'www.github.com'
               }]
           },
+          status: constant.httpCode.OK,
           isValidate: true
         });
         done();
@@ -431,7 +433,7 @@ describe('HomeworkController', function () {
         callback(null, progressData);
       });
 
-      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+      userHomeworkQuizzes.checkDataForSubmit(1, 1, function (err, result) {
         expect(result).toEqual({
           data: {
             userId: 1,
@@ -442,6 +444,7 @@ describe('HomeworkController', function () {
                 userAnswerRepo: 'www.github.com'
               }]
           },
+          status: constant.httpCode.FORBIDDEN,
           isValidate: false
         });
         done();
@@ -454,7 +457,7 @@ describe('HomeworkController', function () {
         callback(null, successData);
       });
 
-      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+      userHomeworkQuizzes.checkDataForSubmit(1, 1, function (err, result) {
         expect(result).toEqual({
           data: {
             userId: 1,
@@ -465,6 +468,7 @@ describe('HomeworkController', function () {
                 userAnswerRepo: 'www.github.com'
               }]
           },
+          status: constant.httpCode.FORBIDDEN,
           isValidate: false
         });
         done();
@@ -478,7 +482,7 @@ describe('HomeworkController', function () {
         callback(null, errorData);
       });
 
-      userHomeworkQuizzes.checkData(1, 1, function (err, result) {
+      userHomeworkQuizzes.checkDataForSubmit(1, 1, function (err, result) {
         expect(result).toEqual({
           data: {
             userId: 1,
@@ -489,6 +493,7 @@ describe('HomeworkController', function () {
                 userAnswerRepo: 'www.github.com'
               }]
           },
+          status: constant.httpCode.OK,
           isValidate: true
         });
         done();
@@ -498,7 +503,7 @@ describe('HomeworkController', function () {
 
     it('it should return status 200 when change status to progress and  save userAnswerUrl success', (done)=> {
 
-      spyOn(userHomeworkQuizzes, 'checkData').and.callFake(function (userId, orderId, callback) {
+      spyOn(userHomeworkQuizzes, 'checkDataForSubmit').and.callFake(function (userId, orderId, callback) {
 
         var result = {
           data: {
@@ -536,7 +541,7 @@ describe('HomeworkController', function () {
     });
 
     it('it should return status 403 when orderId is out of range ', (done)=> {
-      spyOn(userHomeworkQuizzes, 'checkData').and.callFake(function (userId, orderId, callback) {
+      spyOn(userHomeworkQuizzes, 'checkDataForSubmit').and.callFake(function (userId, orderId, callback) {
 
         var result = {
           data: {
@@ -574,7 +579,7 @@ describe('HomeworkController', function () {
     });
 
     it('it should return status 403  when do not save userAnswerUrl', (done)=> {
-      spyOn(userHomeworkQuizzes, 'checkData').and.callFake(function (userId, orderId, callback) {
+      spyOn(userHomeworkQuizzes, 'checkDataForSubmit').and.callFake(function (userId, orderId, callback) {
 
         var data = {
           data: {
@@ -611,4 +616,213 @@ describe('HomeworkController', function () {
     });
   });
 
+  describe('updateResult', ()=> {
+    var controller;
+
+    beforeEach(()=> {
+      controller = new HomeworkController();
+    });
+
+    it('should return 200 when save the result success', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'checkDataForUpdate').and.callFake(function (userId, orderId, callback) {
+        var result = {
+          data: {
+            userId: 2,
+            quizzes: [
+              {
+                id: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
+                userAnswerRepo: 'www.repo.com'
+              }],
+            save: (done) => {
+              done(null, true);
+            }
+          },
+          isValidate: true,
+          status: constant.httpCode.OK
+
+        };
+        callback(null, result);
+      });
+
+      controller.updateResult({
+        body: {
+          userId: 2,
+          orderId: 1,
+          status: 5,
+          resultPath: 'error'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.OK
+          });
+          done();
+        }
+      });
+
+    });
+
+    it('should return 404 when the userId is not existed', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'checkDataForUpdate').and.callFake(function (userId, orderId, callback) {
+        var result = {
+          data: {
+            userId: 12,
+            quizzes: [
+              {
+                id: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
+                userAnswerRepo: 'www.repo.com'
+              }]
+          },
+          isValidate: false,
+          status: constant.httpCode.NOT_FOUND,
+          save: (done) => {
+            done(null, true);
+          }
+        };
+        callback(null, result);
+      });
+
+      controller.updateResult({
+        body: {
+          userId: 12,
+          orderId: 1,
+          status: 5,
+          resultPath: 'error'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.NOT_FOUND
+          });
+          done();
+        }
+      });
+    });
+
+    it('should return 404 when the specific homework\'s  orderId is illegal', (done)=> {
+      spyOn(userHomeworkQuizzes, 'checkDataForUpdate').and.callFake(function (userId, orderId, callback) {
+        var result = {
+          data: {
+            userId: 2,
+            quizzes: [
+              {
+                id: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
+                userAnswerRepo: 'www.repo.com'
+              }]
+          },
+          isValidate: false,
+          status: constant.httpCode.NOT_FOUND,
+          save: (done) => {
+            done(null, true);
+          }
+        };
+        callback(null, result);
+      });
+
+      controller.updateResult({
+        body: {
+          userId: 2,
+          orderId: 112,
+          status: 5,
+          resultPath: 'error'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.NOT_FOUND
+          });
+          done();
+        }
+      });
+    });
+
+    it('should return 400 and the real status when specific homework\'s status is  success', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'checkDataForUpdate').and.callFake(function (userId, orderId, callback) {
+        var result = {
+          data: {
+            userId: 2,
+            quizzes: [
+              {
+                id: 1,
+                status: constant.homeworkQuizzesStatus.SUCCESS,
+                userAnswerRepo: 'www.repo.com'
+              }]
+          },
+          isValidate: false,
+          homeworkStatus: constant.homeworkQuizzesStatus.SUCCESS,
+          status: constant.httpCode.BAD_REQUEST,
+          save: (done) => {
+            done(null, true);
+          }
+        };
+        callback(null, result);
+      });
+
+      controller.updateResult({
+        body: {
+          userId: 2,
+          orderId: 112,
+          status: 5,
+          resultPath: 'error'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.BAD_REQUEST,
+            homeworkStatus: constant.homeworkQuizzesStatus.SUCCESS
+          });
+          done();
+        }
+      });
+    });
+
+    it('should return 400 and the real status when specific homework\'s status is  active', (done)=> {
+
+      spyOn(userHomeworkQuizzes, 'checkDataForUpdate').and.callFake(function (userId, orderId, callback) {
+        var result = {
+          data: {
+            userId: 2,
+            quizzes: [
+              {
+                id: 1,
+                status: constant.homeworkQuizzesStatus.ACTIVE,
+                userAnswerRepo: 'www.repo.com'
+              }]
+          },
+          isValidate: false,
+          homeworkStatus: constant.homeworkQuizzesStatus.ACTIVE,
+          status: constant.httpCode.BAD_REQUEST,
+          save: (done) => {
+            done(null, true);
+            done(null, true);
+          }
+        };
+        callback(null, result);
+      });
+
+      controller.updateResult({
+        body: {
+          userId: 2,
+          orderId: 2,
+          status: 5,
+          resultPath: 'error'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.BAD_REQUEST,
+            homeworkStatus: constant.homeworkQuizzesStatus.ACTIVE
+          });
+          done();
+        }
+      });
+    });
+
+  });
 });

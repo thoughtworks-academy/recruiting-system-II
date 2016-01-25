@@ -88,41 +88,6 @@ HomeworkController.prototype.getQuiz = (req, res) => {
 
 };
 
-HomeworkController.prototype.saveGithubUrl = (req, res) => {
-  var userId = req.session.user.id;
-  var orderId = req.body.orderId;
-
-  async.waterfall([
-    (done)=> {
-      userHomeworkQuizzes.checkData(userId, orderId, done);
-    }, (result, done) => {
-      if (result.isValidate === true) {
-        result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
-        result.data.quizzes[orderId - 1].branch = req.body.branch;
-        result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
-        result.data.save(done);
-      } else {
-        done(new Error('validate error'));
-      }
-    }
-  ], (err, data) => {
-    if (err) {
-      if (err.message === 'validate error') {
-        res.send({
-          status: constant.httpCode.FORBIDDEN
-        });
-      } else {
-        console.log(err);
-      }
-    } else {
-      res.send({
-        status: constant.httpCode.OK
-      });
-    }
-  });
-
-};
-
 HomeworkController.prototype.getProgressTasks = (req, res) => {
   var progressTasks;
 
@@ -159,5 +124,77 @@ HomeworkController.prototype.getProgressTasks = (req, res) => {
   });
 
 };
+
+HomeworkController.prototype.saveGithubUrl = (req, res) => {
+  var userId = req.session.user.id;
+  var orderId = req.body.orderId;
+
+  async.waterfall([
+    (done)=> {
+      userHomeworkQuizzes.checkDataForSubmit(userId, orderId, done);
+    }, (result, done) => {
+      if (result.isValidate === true) {
+        result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
+        result.data.quizzes[orderId - 1].branch = req.body.branch;
+        result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
+        result.data.save(done);
+      } else {
+        done(new Error('validate error'));
+      }
+    }
+  ], (err, data) => {
+    if (err) {
+      if (err.message === 'validate error') {
+        res.send({
+          status: constant.httpCode.FORBIDDEN
+        });
+      } else {
+        console.log(err);
+      }
+    } else {
+      res.send({
+        status: constant.httpCode.OK
+      });
+    }
+  });
+
+};
+
+
+HomeworkController.prototype.updateResult = (req, res)=> {
+  var userId = req.body.userId;
+  var orderId = req.body.orderId;
+  var resultPath = req.body.resultPath;
+  var resultStatus = req.body.status;
+
+  async.waterfall([
+    (done)=> {
+      userHomeworkQuizzes.checkDataForUpdate(userId, orderId, done);
+    }, (result, done)=> {
+      if (result.isValidate === true) {
+        result.data.quizzes[orderId - 1].status = resultStatus;
+        result.data.quizzes[orderId - 1].resultPath = resultPath;
+        result.data.save(done);
+      } else {
+        done(true, result);
+      }
+    }
+  ], (err, data)=> {
+    if (err) {
+      if (data.status === constant.httpCode.BAD_REQUEST) {
+        res.send({
+          status: data.status,
+          homeworkStatus: data.homeworkStatus
+        });
+      }
+      if (data.status === constant.httpCode.NOT_FOUND) {
+        res.send({status: data.status});
+      }
+    } else {
+      res.send({status: constant.httpCode.OK});
+    }
+  });
+};
+
 
 module.exports = HomeworkController;
