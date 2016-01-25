@@ -90,6 +90,9 @@ public class ScoreSheetResource extends Resource {
             @PathParam("id") int id
     ) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
+        if (scoreSheet == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         Map<String, Object> examerUri = new HashMap<>();
         Map<String, Object> paperUri = new HashMap<>();
         examerUri.put("uri", "examer/" + scoreSheet.getExamerId());
