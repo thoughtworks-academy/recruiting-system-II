@@ -1,16 +1,19 @@
 package com.thoughtworks.twars;
 
 import com.thoughtworks.twars.mapper.*;
+import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
+import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
 import com.thoughtworks.twars.service.quiz.quizScoreSheet.BlankQuizScoreSheet;
 import com.thoughtworks.twars.service.quiz.quizScoreSheet.HomeworkQuizScoreSheet;
-//import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
-//import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
 import com.thoughtworks.twars.util.DBUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
+
+//import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
+//import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
 
 @ApplicationPath("resources")
 public class App extends ResourceConfig {
@@ -59,11 +62,11 @@ public class App extends ResourceConfig {
         homeworkQuizScoreSheet.setHomeworkPostHistoryMapper(homeworkPostHistoryMapper);
         homeworkQuizScoreSheet.setHomeworkSubmitMapper(homeworkSubmitMapper);
 
-//        final HomeworkQuizDefinition homeworkQuizDefinition = new HomeworkQuizDefinition();
-//        homeworkQuizDefinition.setMapper(homeworkQuizMapper);
-//
-//        final BlankQuizDefinition blankQuizDefinition = new BlankQuizDefinition();
-//        blankQuizDefinition.setBlankQuizMapper(blankQuizMapper);
+        final HomeworkQuizDefinition homeworkQuizDefinition = new HomeworkQuizDefinition();
+        homeworkQuizDefinition.setMapper(homeworkQuizMapper);
+
+        final BlankQuizDefinition blankQuizDefinition = new BlankQuizDefinition();
+        blankQuizDefinition.setBlankQuizMapper(blankQuizMapper);
 
 
         packages("com.thoughtworks.twars.resource")
@@ -83,8 +86,8 @@ public class App extends ResourceConfig {
                         bind(homeworkPostHistoryMapper).to(HomeworkPostHistoryMapper.class);
                         bind(blankQuizScoreSheet).to(BlankQuizScoreSheet.class);
                         bind(homeworkQuizScoreSheet).to(HomeworkQuizScoreSheet.class);
-//                        bind(homeworkQuizDefinition).to(HomeworkQuizDefinition.class);
-//                        bind(blankQuizDefinition).to(BlankQuizDefinition.class);
+                        bind(homeworkQuizDefinition).to(HomeworkQuizDefinition.class);
+                        bind(blankQuizDefinition).to(BlankQuizDefinition.class);
                     }
                 });
     }
