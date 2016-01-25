@@ -13,7 +13,7 @@
     </resultMap>
     <insert id="insertHomeworkPostHistory" parameterType="com.thoughtworks.twars.bean.HomeworkPostHistory" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO homeworkPostHistory(homeworkSubmitId,homeworkURL,branch,version,status,timestamp)
-        VALUES (#{homeworkSubmitId},#{homeworkURL},#{branch},#{version},#{status},#{timestamp});
+        VALUES (#{homeworkSubmitId},#{homeworkURL},#{branch},#{version},#{status},UNIX_TIMESTAMP());
     </insert>
 
     <select id="findByHomeworkSubmitId" resultMap="homeworkPostHistoryListMap">
