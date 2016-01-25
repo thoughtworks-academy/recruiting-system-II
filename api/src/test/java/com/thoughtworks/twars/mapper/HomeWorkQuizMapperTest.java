@@ -24,4 +24,15 @@ public class HomeWorkQuizMapperTest extends TestBase {
 
         assertThat(homeworkQuizList.size(), is(5));
     }
+
+    @Test
+    public void should_return_one_homework_quiz_when_by_id() {
+        HomeworkQuiz homeworkQuiz = homeworkQuizMapper.findById(1);
+
+        assertThat(homeworkQuiz.getDescription(), is("这是一道比较简单的题目"));
+        assertThat(homeworkQuiz.getEvaluateRepository(), is("evaluateRepository"));
+        assertThat(homeworkQuiz.getEvaluateScript(), is("www.baidu.com"));
+        assertThat(homeworkQuiz.getTemplateRepository(), is("templateRepository"));
+        assertThat(homeworkQuiz.getSectionId(), is(2));
+    }
 }
