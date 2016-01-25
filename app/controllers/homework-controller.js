@@ -27,7 +27,6 @@ HomeworkController.prototype.getList = function (req, res) {
           status: quiz.status
         });
       });
-
       done();
     }
   ], (err) => {
@@ -88,43 +87,6 @@ HomeworkController.prototype.getQuiz = (req, res) => {
 
 };
 
-HomeworkController.prototype.getProgressTasks = (req, res) => {
-  var progressTasks;
-
-  async.waterfall([
-    (done) => {
-      userHomeworkQuizzes.findProgressTasks(done);
-    },
-    (result, done) => {
-      progressTasks = result;
-      homeworkQuizzes.find({}, done);
-    },
-    (result, done) => {
-
-      progressTasks.forEach((item, i) => {
-        result.forEach((ele) => {
-          if (item.quizId === ele.id) {
-            progressTasks[i].evaluateScript = ele.evaluateScript;
-            progressTasks[i].evaluateRepo = ele.evaluateRepo;
-          }
-        });
-      });
-      done(null, progressTasks);
-    }
-  ], (err, data) => {
-    if (err) {
-      res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
-      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
-    } else {
-      res.send({
-        status: data.length === 0 ? constant.httpCode.NOT_FOUND : constant.httpCode.OK,
-        userAnswers: data
-      });
-    }
-  });
-
-};
-
 HomeworkController.prototype.saveGithubUrl = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.body.orderId;
@@ -159,7 +121,6 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
   });
 
 };
-
 
 HomeworkController.prototype.updateResult = (req, res)=> {
   var userId = req.body.userId;

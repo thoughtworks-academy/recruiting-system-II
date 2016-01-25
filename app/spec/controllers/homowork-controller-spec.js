@@ -128,7 +128,7 @@ describe('HomeworkController', function () {
     });
   });
 
-  describe('getHomworkQuiz', () => {
+  describe('getQuiz', () => {
     var controller;
 
     beforeEach(function () {
@@ -199,112 +199,6 @@ describe('HomeworkController', function () {
             status: constant.httpCode.FORBIDDEN
           });
           done();
-        }
-      });
-    });
-  });
-
-  describe('getProgressTasks', () => {
-    var controller;
-
-    beforeEach(() => {
-      controller = new HomeworkController();
-
-      spyOn(homeworkQuizzes, 'find').and.callFake(function (id, callback) {
-        var data = [{
-          id: 1,
-          desc: '这是一道简单的题',
-          templateRepo: 'www.github.com',
-          evaluateScript: 'www.baidu.com',
-          evaluateRepo: 'evaluateRepository'
-        }, {
-          id: 2,
-          desc: '这是一道简单的题',
-          templateRepo: 'www.github.com',
-          evaluateScript: 'www.baidu.com',
-          evaluateRepo: 'evaluateRepository'
-        }, {
-          id: 3,
-          desc: '这是一道简单的题',
-          templateRepo: 'www.github.com',
-          evaluateScript: 'www.baidu.com',
-          evaluateRepo: 'evaluateRepository'
-        }];
-
-        callback(null, data);
-      });
-    });
-
-    it('should return progress tasks and statusCode: 200 when receive a request', (done) => {
-
-      spyOn(userHomeworkQuizzes, 'findProgressTasks').and.callFake(function (done) {
-        var data = [
-          {userId: 1, quizId: 1, userAnswerRepo: 'www.github.com'},
-          {userId: 2, quizId: 1, userAnswerRepo: 'www.github.com'}
-        ];
-
-        done(null, data);
-      });
-
-      controller.getProgressTasks({}, {
-        send: function (data) {
-          expect(data).toEqual({
-            status: constant.httpCode.OK,
-            userAnswers: [{
-              userId: 1,
-              quizId: 1,
-              userAnswerRepo: 'www.github.com',
-              evaluateScript: 'www.baidu.com',
-              evaluateRepo: 'evaluateRepository'
-            }, {
-              userId: 2,
-              quizId: 1,
-              userAnswerRepo: 'www.github.com',
-              evaluateScript: 'www.baidu.com',
-              evaluateRepo: 'evaluateRepository'
-            }]
-          });
-          done();
-        }
-      });
-    });
-
-    it('should return statusCode: 404 when no user progress need test', (done) => {
-
-      spyOn(userHomeworkQuizzes, 'findProgressTasks').and.callFake(function (done) {
-        var data = [];
-
-        done(null, data);
-      });
-
-      controller.getProgressTasks({}, {
-        send: function (data) {
-          expect(data).toEqual({
-            status: constant.httpCode.NOT_FOUND,
-            userAnswers: []
-          });
-          done();
-        }
-      });
-    });
-
-    it('should return statusCode: 500 when mongoose was wrong', (done) => {
-
-      spyOn(userHomeworkQuizzes, 'findProgressTasks').and.callFake(function (done) {
-
-        done(new Error('err'));
-      });
-
-      controller.getProgressTasks({}, {
-        send: function (data) {
-          expect(data).toEqual({
-            status: constant.httpCode.INTERNAL_SERVER_ERROR,
-            message: 'err'
-          });
-          done();
-        },
-        status: function (code) {
-          expect(code).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
         }
       });
     });
