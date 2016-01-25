@@ -12,9 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -71,6 +69,21 @@ public class HomeworkQuizScoreSheetTest {
 
     @Test
     public void insert_homework_score_sheet() {
-
+        Map homeworkSubmitPostHistory = new HashMap<>();
+        homeworkSubmitPostHistory.put("homeworkURL","fghjk");
+        homeworkSubmitPostHistory.put("version","jkl");
+        homeworkSubmitPostHistory.put("branch","dev");
+        homeworkSubmitPostHistory.put("status", 9);
+//        homeworkSubmitPostHistory.put("timestamp",56789);
+        Map homeworkSubmit = new HashMap<>();
+        homeworkSubmit.put("homeworkQuizId", 8);
+        homeworkSubmit.put("homeworkSubmitPostHistory",homeworkSubmitPostHistory);
+        List<Map> homeworkSubmits = new ArrayList<>();
+        homeworkSubmits.add(homeworkSubmit);
+        Map data = new HashMap<>();
+        data.put("examerId", 2);
+        data.put("paperId", 4);
+        data.put("homeworkSubmits",homeworkSubmits);
+        homeworkQuizScoreSheet.insertQuizScoreSheet(data, 3);
     }
 }

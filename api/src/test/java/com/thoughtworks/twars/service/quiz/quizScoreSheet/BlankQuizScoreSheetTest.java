@@ -12,9 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -61,6 +59,26 @@ public class BlankQuizScoreSheetTest {
         List<Map> itemPosts = blankQuizScoreSheet.getByBlankQuizSubmitId(1);
         String itemPostStr = gson.toJson(itemPosts);
         assertThat(itemPostStr, is("[{\"answer\":\"success\",\"quizItem\":{\"uri\":\"quizItem/3\"}}]"));
+
+    }
+
+    @Test
+    public void should_return_score_sheet_uri() {
+        List<Map> itemPosts = new ArrayList<>();
+        Map itemPost = new HashMap<>();
+        itemPost.put("answer","10");
+        itemPost.put("quizItemId",8);
+        itemPosts.add(itemPost);
+        Map blankQuizSubmit = new HashMap<>();
+        blankQuizSubmit.put("blankQuizId", 9);
+        blankQuizSubmit.put("itemPosts", itemPosts);
+        List<Map> blankQuizSubmits= new ArrayList<>();
+        blankQuizSubmits.add(blankQuizSubmit);
+        Map data = new HashMap<>();
+        data.put("examerId", 2);
+        data.put("paperId", 4);
+        data.put("blankQuizSubmits",blankQuizSubmits);
+        blankQuizScoreSheet.insertQuizScoreSheet(data,2);
 
     }
 }
