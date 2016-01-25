@@ -15,16 +15,11 @@ var LogicPuzzleDescription = require('./component/logic-puzzle-description.compo
 var LogicPuzzleAnswerSubmit = require('./component/logic-puzzle-answer-submit.component');
 var LogicPuzzleTimer = require('./component/logic-puzzle-timer.component');
 var Navigation = require('./component/navigation.component');
-var LogicPuzzleActions = require('./actions/logic-puzzle-actions');
 
 $('#submitModal').on('show.bs.modal', function () {
   $('.modal-content')
       .css('margin-top', '230px');
 });
-
-function handleAnswerChange() {
-
-}
 
 
 ReactDOM.render(
