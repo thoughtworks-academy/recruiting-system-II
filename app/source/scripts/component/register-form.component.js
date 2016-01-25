@@ -1,47 +1,24 @@
 'use strict';
 
 var React = global.React = require('react');
+var Reflux = require('reflux');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
-var request = require('superagent');
 var validate = require('validate.js');
 var RegisterPassword = require('./register-password.component');
 var constraint = require('../../../mixin/register-constraint');
 var page = require('page');
 var constant = require('../../../mixin/constant');
 var async = require('async');
+var RegisterActions = require('../actions/register-actions');
+var RegisterStore = require('../store/register-store');
 
 var asyncContainersFunc = {
-  email: function (value, done) {
-    return request
-        .get('/register/validate-email')
-        .set('Content-Type', 'application/json')
-        .query({
-          email: value
-        })
-        .end((err, req) => {
-          var error = '';
-          if (req.body.status === constant.httpCode.OK) {
-            error = '该邮箱已被注册';
-          }
-          done({emailError: error});
-        });
+  email: function (value, done){
+    RegisterActions.checkEmail(value, done);
   },
-
-  mobilePhone: function (value, done) {
-    return request
-        .get('/register/validate-mobile-phone')
-        .set('Content-Type', 'application/json')
-        .query({
-          mobilePhone: value
-        })
-        .end((err, req) => {
-          var error = '';
-          if (req.body.status === constant.httpCode.OK) {
-            error = '该手机号已被注册';
-          }
-          done({mobilePhoneError: error});
-        });
+  mobilePhone: function (value, done){
+    RegisterActions.checkMobilePhone(value,done);
   }
 };
 
@@ -52,40 +29,9 @@ function getError(validateInfo, field) {
   return '';
 }
 
-function initialUserQuiz() {
-  async.series({
-    initialLogicPuzzle: (done) => {
-      request.get('/user-initialization/initialLogicPuzzle').
-        set('Content-Type', 'application/json')
-        .end(function (err) {
-          if (err) {
-            done(err);
-          }else {
-            done(null, true);
-          }
-        });
-    },
-    initialHomeworkQuizzes: (done) => {
-      request.get('/user-initialization/initialHomeworkQuizzes').
-        set('Content-Type', 'application/json')
-        .end(function (err) {
-          if (err) {
-            done(err);
-          }else {
-            done(null, true);
-          }
-        });
-    }
-  }, function (err, data) {
-    if (data.initialLogicPuzzle && data.initialLogicPuzzle){
-      page('user-center.html');
-    }else {
-      console.log(err);
-    }
-  });
-}
 
 var RegisterForm = React.createClass({
+  mixins: Reflux.connect(RegisterStore),
 
   getInitialState: function () {
     return {
@@ -188,29 +134,7 @@ var RegisterForm = React.createClass({
       this.setState({
         clickable: true
       });
-
-      request.post('/register').set('Content-Type', 'application/json').send({
-        mobilePhone: mobilePhone.value,
-        email: email.value,
-        password: password.value
-
-      }).end((err, req) => {
-        var info = req.body;
-
-        if (info.status === constant.httpCode.OK) {
-          initialUserQuiz();
-        } else {
-          var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
-          var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
-          this.setState({
-            mobilePhoneError: mobilePhoneExist,
-            emailError: emailExist
-          });
-          this.setState({
-            clickable: false
-          });
-        }
-      });
+      RegisterActions.register(mobilePhone.value, email.value, password.value)
     }
   },
 
