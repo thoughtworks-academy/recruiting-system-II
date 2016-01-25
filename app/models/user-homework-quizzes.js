@@ -11,7 +11,7 @@ var userHomeworkQuizzesSchema = new Schema({
     status: Number,
     startTime: Number,
     userAnswerRepo: String,
-    message: String,
+    resultPath: String,
     branch: String,
     commitSHA: String
   }]
@@ -92,7 +92,7 @@ userHomeworkQuizzesSchema.statics.findProgressTasks = function (callback) {
   });
 };
 
-userHomeworkQuizzesSchema.statics.checkData = function (userId, orderId, callback) {
+userHomeworkQuizzesSchema.statics.checkDataForSubmit = function (userId, orderId, callback) {
   var isValidate;
   var result = {};
   this.findOne({userId: userId}, (err, data) => {
@@ -102,14 +102,50 @@ userHomeworkQuizzesSchema.statics.checkData = function (userId, orderId, callbac
     } else if (!integer || orderId < 1 || orderId === undefined || orderId > data.quizzes.length) {
       isValidate = false;
       result.data = null;
+      result.status = constant.httpCode.NOT_FOUND;
       result.isValidate = isValidate;
     } else if (data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.ACTIVE || data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.ERROR) {
       isValidate = true;
       result.data = data;
+      result.status = constant.httpCode.OK;
       result.isValidate = isValidate;
     } else {
       isValidate = false;
       result.data = data;
+      result.status = constant.httpCode.FORBIDDEN;
+      result.isValidate = isValidate;
+    }
+
+    callback(null, result);
+  });
+};
+
+
+userHomeworkQuizzesSchema.statics.checkDataForUpdate = function (userId, orderId, callback) {
+  var isValidate;
+  var result = {};
+  this.findOne({userId: userId}, (err, data) => {
+    var integer = (Number(orderId) === parseInt(orderId, 10));
+    if (err || !data) {
+      result.isValidate = false;
+      result.status = constant.httpCode.NOT_FOUND;
+      result.data = null;
+      callback(true, result);
+    } else if (!integer || orderId < 1 || orderId === undefined || orderId > data.quizzes.length) {
+      isValidate = false;
+      result.data = null;
+      result.status = constant.httpCode.NOT_FOUND;
+      result.isValidate = isValidate;
+    } else if (data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.PROGRESS || data.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.ERROR) {
+      isValidate = true;
+      result.data = data;
+      result.status = constant.httpCode.OK;
+      result.isValidate = isValidate;
+    } else {
+      isValidate = false;
+      result.data = data;
+      result.status = constant.httpCode.BAD_REQUEST;
+      result.homeworkStatus = data.quizzes[orderId - 1].status;
       result.isValidate = isValidate;
     }
 
