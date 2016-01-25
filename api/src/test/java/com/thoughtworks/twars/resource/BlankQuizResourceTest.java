@@ -83,7 +83,6 @@ public class BlankQuizResourceTest extends TestBase {
 
         assertThat(blankQuizzes.get(0).get("id"), is(2));
         assertThat(blankQuizzes.get(0).get("type"), is("singlePuzzle"));
-        assertThat(blankQuizzes.get(0).get("count"), is(10));
         assertThat(blankQuizzes.get(0).get("hardCount"), is(3));
         assertThat(blankQuizzes.get(0).get("normalCount"), is(4));
         assertThat(blankQuizzes.get(0).get("easyCount"), is(3));
