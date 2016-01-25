@@ -17,4 +17,8 @@
     <select id="findBySectionId" resultMap="homeworkQuizListMap">
         select * from homeworkQuiz where  sectionId = #{sectionId};
     </select>
+
+    <select id="findById" resultType="com.thoughtworks.twars.bean.HomeworkQuiz">
+        SELECT * FROM homeworkQuiz WHERE id = #{id};
+    </select>
 </mapper>
