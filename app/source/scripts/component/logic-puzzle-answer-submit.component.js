@@ -1,20 +1,22 @@
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
+var Reflux = require('reflux');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
+var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var $ = global.jQuery = require('jquery');
 require('bootstrap');
 
 
 var LogicPuzzleAnswerSubmit = React.createClass({
+  mixins: [Reflux.connect(LogicPuzzleStore)],
 
   submitAnswer: function () {
-    var answer = this.props.userAnswer;
+    var answer = this.state.userAnswer;
     if (answer !== null && answer !== '') {
-      var newOrderId = this.props.orderId < this.props.itemsCount -1 ?
-                       this.props.orderId + 1:
-                       this.props.orderId;
+      var newOrderId = this.state.orderId < this.state.itemsCount -1 ?
+                       this.state.orderId + 1:
+                       this.state.orderId;
       LogicPuzzleActions.submitAnswer( newOrderId );
     } else {
       $('#warningModal').modal('show');
@@ -23,7 +25,7 @@ var LogicPuzzleAnswerSubmit = React.createClass({
 
   handleAnswerChange: function(evt) {
     var val = evt.target.value;
-    this.props.onAnswerChange(val);
+    LogicPuzzleActions.changeAnswer(val);
   },
 
 
@@ -37,12 +39,12 @@ var LogicPuzzleAnswerSubmit = React.createClass({
               </div>
               <div className="col-md-4 col-sm-4 col-xs-4">
                 <input type="number" className="form-control" id="result" ref="answer"
-                       disabled={this.props.isExample ? 'disabled' : ''}
-                       value={this.props.userAnswer} onChange={this.handleAnswerChange}/>
+                       disabled={this.state.isExample ? 'disabled' : ''}
+                       value={this.state.userAnswer} onChange={this.handleAnswerChange}/>
               </div>
               <div className="col-md-4 col-sm-4 col-xs-4">
                 <button type="text" className="btn btn-danger"
-                        disabled={this.props.isExample ? 'disabled' : ''}
+                        disabled={this.state.isExample ? 'disabled' : ''}
                         onClick={this.submitAnswer}>提交</button>
               </div>
             </div>

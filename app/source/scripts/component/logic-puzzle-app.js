@@ -5,10 +5,6 @@ var Reflux = require('reflux');
 
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
-
-var LogicPuzzleLeft = require('./logic-puzzle-left.component');
-var LogicPuzzleSidebar = require('./logic-puzzle-sidebar.component');
-
 var TimerStore = require('../store/timer-store');
 
 var Modal = require('react-bootstrap/lib/Modal');
@@ -19,21 +15,12 @@ var LogicPuzzle = React.createClass({
 
   getInitialState: function () {
     return {
-      item: {
-        initializedBox: [],
-        chartPath: '',
-        description: []
-      },
       showModal: false
     };
   },
 
   componentDidMount: function () {
     LogicPuzzleActions.loadItem();
-  },
-
-  handleAnswerChange: function (val) {
-    LogicPuzzleActions.changeAnswer(val);
   },
 
   render: function () {

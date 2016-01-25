@@ -17,7 +17,7 @@ var LogicPuzzleStore = Reflux.createStore({
 
     async.waterfall([
       (callback) => {
-        this.updateItem(callback)
+        this.updateItem(callback);
       }, (res, callback) => {
         console.log(res);
         _answer = res.body.userAnswer;
@@ -40,7 +40,7 @@ var LogicPuzzleStore = Reflux.createStore({
   onSubmitAnswer: function (newOrderId) {
     async.waterfall([
       (callback) => {
-        this.onSaveUserAnswer(callback)
+        this.onSaveUserAnswer(callback);
       },(res,callback) => {
         _currentIndex = newOrderId;
         this.updateItem(callback);
@@ -80,7 +80,7 @@ var LogicPuzzleStore = Reflux.createStore({
 
     async.waterfall([
       (callback) => {
-        this.onSaveUserAnswer(callback)
+        this.onSaveUserAnswer(callback);
       },(res,callback) =>{
         superAgent.post('/logic-puzzle')
             .set('Content_Type', 'application/json')
@@ -88,8 +88,8 @@ var LogicPuzzleStore = Reflux.createStore({
       }
     ],function(err,res){
       if (res.statusCode === constant.httpCode.OK) {
-            page('dashboard.html');
-          }
+        page('dashboard.html');
+      }
     });
   },
 

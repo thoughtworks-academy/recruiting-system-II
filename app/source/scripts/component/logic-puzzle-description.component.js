@@ -1,14 +1,25 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
+var LogicPuzzleStore = require('../store/logic-puzzle-store');
 
 var LogicPuzzleDescription = React.createClass({
+  mixins: [Reflux.connect(LogicPuzzleStore)],
+
+  getInitialState: function () {
+    return {
+      item: {
+        description: []
+      }
+    };
+  },
 
   render: function () {
     return (
         <div className="right-description">
           <ol>
-            {this.props.description.filter((val) => {
+            {this.state.item.description.filter((val) => {
               return val !== '';
             }).map((description, idx) => {
               return (
@@ -19,7 +30,7 @@ var LogicPuzzleDescription = React.createClass({
             })}
           </ol>
           {
-              this.props.isExample ?
+              this.state.isExample ?
                   <ul className="example">
                     <li>此</li>
                     <li>题</li>

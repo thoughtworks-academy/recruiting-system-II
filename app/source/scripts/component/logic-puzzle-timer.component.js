@@ -3,7 +3,6 @@
 var React = require('react');
 var Reflux = require('reflux');
 var TimerStore = require('../store/timer-store');
-var TimerActions = require('../actions/timer-action');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var constant = require('../../../mixin/constant');
@@ -12,7 +11,7 @@ var LogicPuzzleTimer = React.createClass({
   mixins: [Reflux.connect(TimerStore)],
 
   componentDidMount: function () {
-    TimerActions.getRemainTime();
+    LogicPuzzleActions.getRemainTime();
     this.countDown();
   },
 
@@ -23,7 +22,7 @@ var LogicPuzzleTimer = React.createClass({
 
         if(remainTime <= 0){
           LogicPuzzleActions.submitPaper();
-          this.props.onTimeOver();
+          LogicPuzzleActions.timeOver();
         }
 
         this.setState({
@@ -31,7 +30,7 @@ var LogicPuzzleTimer = React.createClass({
         });
 
         if(remainTime % (constant.time.SECONDS_PER_MINUTE * 2) === 1){
-          TimerActions.getRemainTime();
+          LogicPuzzleActions.getRemainTime();
         }
       }
     }, constant.time.MILLISECOND_PER_SECONDS);

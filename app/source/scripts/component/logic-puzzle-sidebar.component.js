@@ -50,7 +50,6 @@ var LogicPuzzleSidebar = React.createClass({
 
           <div className="tip">
 
-            <LogicPuzzleTimer />
             {this.props.children}
 
             <p className="finish-rate">
