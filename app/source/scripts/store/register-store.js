@@ -45,26 +45,26 @@ var RegisterStore = Reflux.createStore({
   },
 
   onRegister: function (mobilePhone, email, password) {
-      request.post('/register').set('Content-Type', 'application/json').send({
-        mobilePhone: mobilePhone,
-        email: email,
-        password: password
+    request.post('/register').set('Content-Type', 'application/json').send({
+      mobilePhone: mobilePhone,
+      email: email,
+      password: password
 
-      }).end((err, req) => {
-        var info = req.body;
-        if (info.status === constant.httpCode.OK) {
-          this.onInitialUserQuiz();
-        } else {
-          var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
-          var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
+    }).end((err, req) => {
+      var info = req.body;
+      if (info.status === constant.httpCode.OK) {
+        this.onInitialUserQuiz();
+      } else {
+        var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
+        var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
 
-          this.trigger({
-            mobilePhoneError: mobilePhoneExist,
-            emailError: emailExist,
-            clickable: false
-          })
-        }
-      });
+        this.trigger({
+          mobilePhoneError: mobilePhoneExist,
+          emailError: emailExist,
+          clickable: false
+        });
+      }
+    });
   },
 
   onInitialUserQuiz: function () {
@@ -75,7 +75,7 @@ var RegisterStore = Reflux.createStore({
             .end(function (err) {
               if (err) {
                 done(err);
-              }else {
+              } else {
                 done(null, true);
               }
             });
@@ -86,19 +86,31 @@ var RegisterStore = Reflux.createStore({
             .end(function (err) {
               if (err) {
                 done(err);
-              }else {
+              } else {
                 done(null, true);
               }
             });
       }
     }, function (err, data) {
-      if (data.initialLogicPuzzle && data.initialLogicPuzzle){
+      if (data.initialLogicPuzzle && data.initialLogicPuzzle) {
         page('user-center.html');
-      }else {
+      } else {
         console.log(err);
       }
     });
-  }
+  },
+
+  onChangeState: function (isShowToggle) {
+    this.trigger({
+      isShowToggle: !isShowToggle
+    });
+  },
+
+  onInputPassword: function (password) {
+    this.trigger({
+      password: password
+    });
+  },
 });
 
 module.exports = RegisterStore;

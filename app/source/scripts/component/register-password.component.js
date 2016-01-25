@@ -3,7 +3,27 @@
 'use strict';
 
 var React = require('react');
-var ReactDom = require('react-dom');
+var RegisterStore = require('../store/register-store');
+var RegisterActions = require('../actions/register-actions');
+var Reflux = require('reflux');
+var constraint = require('../../../mixin/register-constraint');
+var validate = require('validate.js');
+
+var asyncContainersFunc = {
+  email: function (value, done){
+    RegisterActions.checkEmail(value, done);
+  },
+  mobilePhone: function (value, done){
+    RegisterActions.checkMobilePhone(value,done);
+  }
+};
+
+function getError(validateInfo, field) {
+  if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
+    return validateInfo[field][0];
+  }
+  return '';
+}
 
 function passwordSafe(val) {
   if (val === ''){
@@ -33,15 +53,28 @@ function getPosition(level) {
   }
 }
 var RegisterPassword = React.createClass({
+  mixins: [Reflux.connect(RegisterStore)],
+
   getInitialState: function () {
     return {
+      passwordError: '',
+      isShowToggle: false,
       passwordSafeLevel: '',
       passwordSafeStyle: ''
     };
   },
 
+  componentWillReceiveProps: function() {
+    this.setState({
+      passwordError: '',
+      isShowToggle: false,
+      passwordSafeLevel: '',
+      passwordSafeStyle: ''
+    });
+  },
+
   toggleState: function () {
-    this.props.onStateChange();
+    RegisterActions.changeState(this.state.isShowToggle);
   },
 
   checkPasswordSafe: function (event) {
@@ -50,18 +83,40 @@ var RegisterPassword = React.createClass({
     var levelGrade = ['danger', 'general', 'safe'];
     var position = getPosition(level);
 
-    this.props.onInputPassword(value);
+    RegisterActions.inputPassword(value);
     this.setState({passwordSafeStyle: levelGrade[position]});
     this.setState({passwordSafeLevel: level});
   },
 
+  validate: function (event) {
+    var target = event.target;
+    var value = target.value;
+    var name = target.name;
+    var valObj = {};
+    valObj[name] = value;
+
+    var result = validate(valObj, constraint);
+    var error = getError(result, name);
+    var stateObj = {};
+    stateObj[name + 'Error'] = error;
+
+    this.setState(stateObj);
+
+    if ('' === error && name !== 'password') {
+      asyncContainersFunc[name](value, (stateObj) => {
+        this.setState(stateObj);
+      });
+    }
+  },
+
   render: function () {
+
     return (
         <div>
-          <input className="form-control" type={(this.props.isShowToggle === false ? 'password' : 'text')}
+          <input className="form-control" type={(this.state.isShowToggle === false ? 'password' : 'text')}
                  placeholder="请输入8~16位密码" name="password" ref="password"
-                 id="register-password" onBlur={this.props.onBlur} onChange={this.checkPasswordSafe}/>
-          <div className={'lose' + (this.props.passwordError === '' ? ' hide' : '')}>{this.props.passwordError}
+                 id="register-password" onBlur={this.validate} onChange={this.checkPasswordSafe}/>
+          <div className={'lose' + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
           </div>
           <ul className="passport-safely">
             <li className={this.state.passwordSafeLevel >= 1 ? this.state.passwordSafeStyle : ''}>弱</li>
@@ -70,8 +125,8 @@ var RegisterPassword = React.createClass({
             &nbsp;
             <li className={this.state.passwordSafeLevel === 3 ? this.state.passwordSafeStyle : ''}>强</li>
             &nbsp;
-            <li className="toggle" onClick={this.toggleState} isShowToggle={this.props.isShowToggle}>
-              {this.props.isShowToggle ? '隐藏密码' : '显示密码'}</li>
+            <li className="toggle" onClick={this.toggleState} isShowToggle={this.state.isShowToggle}>
+              {this.state.isShowToggle ? '隐藏密码' : '显示密码'}</li>
           </ul>
         </div>
     );

@@ -6,7 +6,9 @@ var RegisterActions = Reflux.createActions([
   'register',
   'initialUserQuiz',
   'checkEmail',
-  'checkMobilePhone'
+  'checkMobilePhone',
+  'changeState',
+  'inputPassword'
 ]);
 
 module.exports = RegisterActions;

@@ -18,10 +18,11 @@ function getError(validateInfo, field) {
 }
 
 var LoginForm = React.createClass({
-  mixins: Reflux.connect(LoginStore),
+  mixins: [Reflux.connect(LoginStore)],
 
   getInitialState: function () {
     return {
+      isLoginState: false,
       phoneEmailError: '',
       loginPasswordError: '',
       loginFailed: false,
@@ -62,8 +63,7 @@ var LoginForm = React.createClass({
   },
 
   render: function () {
-
-    var classString = 'col-md-7 logon-form-container' + (this.props.isLoginState ? '' : ' hide');
+    var classString = 'col-md-7 logon-form-container' + (this.state.isLoginState ? '' : ' hide');
 
     return (
         <div id="logon" className={classString}>

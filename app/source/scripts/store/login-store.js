@@ -30,6 +30,12 @@ var LoginStore = Reflux.createStore({
             });
           }
         });
+  },
+
+  onChangeState: function (isLoginState){
+    this.trigger({
+      isLoginState: !isLoginState
+    });
   }
 
 });

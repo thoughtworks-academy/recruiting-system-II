@@ -5,13 +5,13 @@ var Reflux = require('reflux');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
 var validate = require('validate.js');
-var RegisterPassword = require('./register-password.component');
 var constraint = require('../../../mixin/register-constraint');
 var page = require('page');
 var constant = require('../../../mixin/constant');
 var async = require('async');
 var RegisterActions = require('../actions/register-actions');
 var RegisterStore = require('../store/register-store');
+var LoginStore = require('../store/login-store');
 
 var asyncContainersFunc = {
   email: function (value, done){
@@ -31,15 +31,14 @@ function getError(validateInfo, field) {
 
 
 var RegisterForm = React.createClass({
-  mixins: Reflux.connect(RegisterStore),
+  mixins: [Reflux.connect(RegisterStore),Reflux.connect(LoginStore)],
 
   getInitialState: function () {
     return {
+      isLoginState: false,
       mobilePhoneError: '',
       emailError: '',
-      passwordError: '',
       agree: false,
-      isShowToggle: false,
       clickable: false,
       password: ''
     };
@@ -48,15 +47,11 @@ var RegisterForm = React.createClass({
     this.setState({
       mobilePhoneError: '',
       emailError: '',
-      passwordError: '',
       agree: false,
       isShowToggle: false
     });
   },
-  stateChange: function () {
-    var newState = !this.state.isShowToggle;
-    this.setState({isShowToggle: newState});
-  },
+
 
   validate: function (event) {
     var target = event.target;
@@ -134,19 +129,12 @@ var RegisterForm = React.createClass({
       this.setState({
         clickable: true
       });
-      RegisterActions.register(mobilePhone.value, email.value, password.value)
+      RegisterActions.register(mobilePhone.value, email.value, password.value);
     }
   },
 
-  inputPassword: function (password) {
-    this.setState({
-      password: password
-    });
-  },
-
   render: function () {
-
-    var classString = 'col-md-7 logon-form-container' + (this.props.isLoginState ? ' hide' : '');
+    var classString = 'col-md-7 logon-form-container' + (this.state.isLoginState ? ' hide' : '');
 
     return (
         <div id="register" className={classString}>
@@ -170,9 +158,7 @@ var RegisterForm = React.createClass({
             </div>
 
             <div className="form-group">
-              <RegisterPassword isShowToggle={this.state.isShowToggle} onStateChange={this.stateChange}
-                                passwordError={this.state.passwordError} onBlur={this.validate}
-                                onInputPassword={this.inputPassword}/>
+              {this.props.children}
             </div>
 
             <div className="checkbox">
@@ -181,7 +167,6 @@ var RegisterForm = React.createClass({
               </label>
               <a id="agreement" data-toggle="modal" data-target="#agreementModal">协议</a>
             </div>
-
 
             <button type="button" id="register-btn" disabled={this.state.clickable}
                     className="btn btn-lg btn-block btn-primary" ref="register" onClick={this.register}>注册
