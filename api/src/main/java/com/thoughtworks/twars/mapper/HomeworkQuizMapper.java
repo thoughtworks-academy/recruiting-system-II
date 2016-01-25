@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface HomeworkQuizMapper {
     List<HomeworkQuiz> findBySectionId(int id);
+    HomeworkQuiz findById(int id);
 }
