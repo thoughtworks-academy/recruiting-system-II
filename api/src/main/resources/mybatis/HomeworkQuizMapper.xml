@@ -21,4 +21,8 @@
     <select id="findById" resultType="com.thoughtworks.twars.bean.HomeworkQuiz">
         SELECT * FROM homeworkQuiz WHERE id = #{id};
     </select>
+
+    <update id="updateHomeworkQuiz">
+        UPDATE homeworkQuiz SET sectionId = #{sectionId} WHERE id = #{id};
+    </update>
 </mapper>

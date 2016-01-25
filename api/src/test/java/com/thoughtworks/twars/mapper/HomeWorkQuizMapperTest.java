@@ -18,8 +18,9 @@ public class HomeWorkQuizMapperTest extends TestBase {
         super.setUp();
         homeworkQuizMapper = session.getMapper(HomeworkQuizMapper.class);
     }
+
     @Test
-    public void should_return_homework_list_when_by_section_id(){
+    public void should_return_homework_list_when_by_section_id() {
         List<HomeworkQuiz> homeworkQuizList = homeworkQuizMapper.findBySectionId(2);
 
         assertThat(homeworkQuizList.size(), is(5));
@@ -34,5 +35,12 @@ public class HomeWorkQuizMapperTest extends TestBase {
         assertThat(homeworkQuiz.getEvaluateScript(), is("www.baidu.com"));
         assertThat(homeworkQuiz.getTemplateRepository(), is("templateRepository"));
         assertThat(homeworkQuiz.getSectionId(), is(2));
+    }
+
+    @Test
+    public void should_update_homework_quiz() {
+        homeworkQuizMapper.updateHomeworkQuiz(1, 3);
+
+        assertThat(homeworkQuizMapper.findById(1).getSectionId(), is(3));
     }
 }
