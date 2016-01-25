@@ -58,4 +58,10 @@ public class BlankQuizMapperTest extends TestBase {
         assertThat(blankQuiz.getHardCount(), is(3));
         assertThat(blankQuiz.getEasyCount(), is(3));
     }
+
+    @Test
+    public void should_insert_section_id_when_update_blank_quiz(){
+        blankQuizMapper.updateBlankQuiz(1, 3);
+        assertThat(blankQuizMapper.findOne(1).getSectionId(), is(3));
+    }
 }

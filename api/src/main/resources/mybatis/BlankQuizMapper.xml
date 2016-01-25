@@ -20,15 +20,19 @@
     </select>
 
     <select id="findBySectionId" resultMap="blankQuizListMap">
-        select * from blankQuiz where sectionId  = #{sectionId}
+        select * from blankQuiz where sectionId  = #{sectionId};
     </select>
 
     <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuiz">
-        select * from blankQuiz where id = #{id}
+        select * from blankQuiz where id = #{id};
     </select>
 
     <insert id="insertBlankQuiz" parameterType="com.thoughtworks.twars.bean.BlankQuiz" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO blankQuiz(sectionId,type,hardCount,normalCount,easyCount)
-        VALUES (#{sectionId},#{type},#{hardCount},#{normalCount},#{easyCount})
+        VALUES (#{sectionId},#{type},#{hardCount},#{normalCount},#{easyCount});
     </insert>
+
+    <update id="updateBlankQuiz">
+        UPDATE blankQuiz SET sectionId = #{sectionId} WHERE id = #{id};
+    </update>
 </mapper>

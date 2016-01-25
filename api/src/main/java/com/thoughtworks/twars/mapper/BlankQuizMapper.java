@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.BlankQuiz;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,4 +15,7 @@ public interface BlankQuizMapper {
 
     int insertBlankQuiz(BlankQuiz blankQuiz);
 
+    int updateBlankQuiz(
+            @Param("id") int id,
+            @Param("sectionId") int sectionId);
 }
