@@ -47,8 +47,8 @@ public class ScoreSheetResourceTest extends TestBase {
         Response response = target(basePath).request().get();
         assertThat(response.getStatus(), is(200));
 
-//        List<Map> result = response.readEntity(List.class);
-//        assertThat(result.get(0).get("uri"), is("scoresheets/3"));
+        List<Map> result = response.readEntity(List.class);
+        assertThat(result.get(0).get("uri"), is("scoresheets/3"));
     }
 
     @Test
@@ -134,12 +134,12 @@ public class ScoreSheetResourceTest extends TestBase {
         Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(), is(201));
     }
-//
-//    @Test
-//    public void should_return_404_when_not_find_score_sheet_by_id() {
-//        when(scoreSheetMapper.findOne(1)).thenReturn(null);
-//
-//        Response response = target(basePath + "/1").request().get();
-//        assertThat(response.getStatus(), is(404));
-//    }
+
+    @Test
+    public void should_return_404_when_not_find_score_sheet_by_id() {
+        when(scoreSheetMapper.findOne(1)).thenReturn(null);
+
+        Response response = target(basePath + "/1").request().get();
+        assertThat(response.getStatus(), is(404));
+    }
 }
