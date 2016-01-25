@@ -17,7 +17,7 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
 
   async.waterfall([
 
-    function (done) {
+    (done)=> {
 
       logicPuzzle.findOne({userId: userId}, (err, data) => {
         if (err) {
@@ -26,11 +26,11 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
           done(!!data, data);
         }
       });
-    }, function (data, done) {
+    }, (data, done)=> {
 
       apiRequest.get(logicPuzzleUrl, done);
 
-    }, function (responds, done) {
+    }, (responds, done)=> {
 
       var quizzes = responds.body.sections[0].quizzes[0];
       blankQuizId = quizzes.id;
@@ -39,11 +39,11 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
 
       done(null, itemsUri);
 
-    }, function (itemsUri, done) {
+    }, (itemsUri, done) => {
 
       apiRequest.get(itemsUri, done);
 
-    }, function (responds, done) {
+    }, (responds, done) => {
 
       quizItems = responds.body.quizItems;
       quizExamples = responds.body.exampleItems;
@@ -51,7 +51,7 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
       var isNotExist = true;
 
       done(null, isNotExist);
-    }, function (isNotExist, done) {
+    }, (isNotExist, done) => {
 
       logicPuzzle.create({
         userId: userId,
@@ -62,7 +62,7 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
       }, done);
 
     }
-  ], function (err) {
+  ], (err) => {
     if (true !== err && err) {
       res.statusCode(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: '服务器错误'});
@@ -79,13 +79,13 @@ UserInitializationController.prototype.initialHomeworkQuizzes = (req, res) => {
     },
 
     (response, done) => {
-      if(!!response.body.sections) {
+      if (!!response.body.sections) {
         var result;
         response.body.sections.forEach((element, i) => {
           result = element.desc === 'homeworkQuizzes' ? element.quizzes : result;
         });
         apiRequest.get(result[0].items.uri, done);
-      }else {
+      } else {
         done(new Error(''));
       }
     },
@@ -102,11 +102,11 @@ UserInitializationController.prototype.initialHomeworkQuizzes = (req, res) => {
       var userId = req.session.user.id;
       userHomeworkQuizzes.initUserHomeworkQuizzes(userId, result, done);
     }
-  ], function (err, data) {
+  ], (err, data) => {
     if (err) {
       res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
-    }else {
+    } else {
       res.send({status: constant.httpCode.OK});
     }
   });

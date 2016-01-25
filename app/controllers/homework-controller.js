@@ -95,7 +95,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
   async.waterfall([
     (done)=> {
       userHomeworkQuizzes.checkData(userId, orderId, done);
-    }, function (result, done) {
+    }, (result, done) => {
       if (result.isValidate === true) {
         result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
         result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
@@ -104,7 +104,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
         done(new Error('validate error'));
       }
     }
-  ], function (err, data) {
+  ], (err, data) => {
     if (err) {
       if (err.message === 'validate error') {
         res.send({
