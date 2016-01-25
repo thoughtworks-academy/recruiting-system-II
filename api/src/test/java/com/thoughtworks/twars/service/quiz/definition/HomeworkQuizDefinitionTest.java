@@ -46,10 +46,10 @@ public class HomeworkQuizDefinitionTest {
         List<Map> result = definition.getQuizDefinition(1);
 
         assertThat(result.get(0).get("id"), is(1));
-        assertThat(result.get(0).get("definition-uri"), is("homeworkQuizzes/1"));
+        assertThat(result.get(0).get("definition_uri"), is("homeworkQuizzes/1"));
 
         assertThat(result.get(1).get("id"), is(2));
-        assertThat(result.get(1).get("definition-uri"), is("homeworkQuizzes/2"));
+        assertThat(result.get(1).get("definition_uri"), is("homeworkQuizzes/2"));
     }
 
     @Test

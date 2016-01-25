@@ -50,7 +50,7 @@ public class HomeworkQuizDefinition implements IQuizDefinition {
                 .map(v -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", v.getId());
-                    map.put("definition-uri", "homeworkQuizzes/" + v.getId());
+                    map.put("definition_uri", "homeworkQuizzes/" + v.getId());
                     return map;
                 })
                 .collect(Collectors.toList());

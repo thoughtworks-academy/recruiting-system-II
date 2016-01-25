@@ -228,13 +228,14 @@ baseUri: http://api.bronzesword.com/
     body:
       application/json:
         properties:
+          makerId: integer
           sections[]:
             properties:
               desc: string
                 # description: Markdown String to discribe what happen in the future
               quizzes[]:
                 properties:
-                  id: integer
+                  quizId: integer
                   quizType: string
     responses:
       201:
@@ -260,11 +261,11 @@ baseUri: http://api.bronzesword.com/
                       "quizzes": [
                         {
                           "id": 1,
-                          "definition-uri": "blankQuizzes/1",
-                          "items-uri":"blankQuizzes/1/items"
+                          "definition_uri": "blankQuizzes/1",
+                          "items_uri":"blankQuizzes/1/items"
                         }
                       ],
-                      "maker-uri": "userInfo/2"
+                      "maker_uri": "userInfo/2"
                     }
                   ]
                 }
@@ -282,9 +283,9 @@ baseUri: http://api.bronzesword.com/
                             []:
                               properties:
                                 id: integer
-                                definition-uri: string
-                                [items-uri]: string
-                        maker-uri: string
+                                definition_uri: string
+                                [items_uri]: string
+                        maker_uri: string
   /enrollment:
     description: 获取固定ID的考卷定义细节
     get:
@@ -304,11 +305,11 @@ baseUri: http://api.bronzesword.com/
                       "quizzes": [
                         {
                           "id": 1,
-                          "definition-uri": "blankQuizzes/1",
-                          "items-uri": "blankQuizzes/1/items"
+                          "definition_uri": "blankQuizzes/1",
+                          "items_uri": "blankQuizzes/1/items"
                         }
                       ],
-                      "maker-uri": "userInfo/2"
+                      "maker_uri": "userInfo/2"
                     },
                     {
                       "id": 2,
@@ -316,10 +317,10 @@ baseUri: http://api.bronzesword.com/
                       "quizzes" : [
                         {
                           "id": 1,
-                          "definition-uri": "homeworkQuizzes/2"
+                          "definition_uri": "homeworkQuizzes/2"
                         }
                       ],
-                      "maker-uri": "userInfo/3"
+                      "maker_uri": "userInfo/3"
                     }
                   ]
                 }
@@ -337,9 +338,9 @@ baseUri: http://api.bronzesword.com/
                             []:
                               properties:
                                 id: integer
-                                definition-uri: string
-                                [items-uri]: string
-                        maker-uri: string
+                                definition_uri: string
+                                [items_uri]: string
+                        maker_uri: string
 
 /blankQuizzes:
   get:
@@ -357,7 +358,6 @@ baseUri: http://api.bronzesword.com/
     body:
       application/json:
         properties:
-          id: integer
           sectionId: integer
           type: string
           hardCount: integer
@@ -368,6 +368,7 @@ baseUri: http://api.bronzesword.com/
         body:
           application/json:
             properties:
+              id: integer
               uri: string
   /{blankQuizId}:
     get:

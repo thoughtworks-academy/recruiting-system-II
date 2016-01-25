@@ -51,8 +51,8 @@ public class BlankQuizDefinition implements IQuizDefinition {
                 .map(b -> {
                     HashMap<String, Object> item = new HashMap<>();
                     item.put("id", b.getId());
-                    item.put("definition-uri", "blankQuizzes/"+b.getId());
-                    item.put("items-uri", "blankQuizzes/"+b.getId()+"/items");
+                    item.put("definition_uri", "blankQuizzes/"+b.getId());
+                    item.put("items_uri", "blankQuizzes/"+b.getId()+"/items");
                     return item;
                 })
                 .collect(Collectors.toList());

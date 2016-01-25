@@ -47,13 +47,13 @@ public class BlankQuizDefinitionTest {
         List<Map> result = definition.getQuizDefinition(1);
 
         assertThat(result.get(0).get("id"), is(1));
-        assertThat(result.get(0).get("definition-uri"), is("blankQuizzes/1"));
-        assertThat(result.get(0).get("items-uri"), is("blankQuizzes/1/items"));
+        assertThat(result.get(0).get("definition_uri"), is("blankQuizzes/1"));
+        assertThat(result.get(0).get("items_uri"), is("blankQuizzes/1/items"));
 
 
         assertThat(result.get(1).get("id"), is(2));
-        assertThat(result.get(1).get("definition-uri"), is("blankQuizzes/2"));
-        assertThat(result.get(1).get("items-uri"), is("blankQuizzes/2/items"));
+        assertThat(result.get(1).get("definition_uri"), is("blankQuizzes/2"));
+        assertThat(result.get(1).get("items_uri"), is("blankQuizzes/2/items"));
     }
 
     @Test
