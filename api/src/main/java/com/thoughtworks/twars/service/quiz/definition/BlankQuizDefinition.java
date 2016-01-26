@@ -5,11 +5,13 @@ import com.thoughtworks.twars.bean.Section;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
+
+
 
 public class BlankQuizDefinition implements IQuizDefinition {
 
@@ -37,7 +39,7 @@ public class BlankQuizDefinition implements IQuizDefinition {
 
         sectionMapper.insertSection(section);
 
-        blankQuizMapper.updateBlankQuiz((Integer) quiz.get("quizId"),section.getId());
+        blankQuizMapper.updateBlankQuiz((Integer) quiz.get("quizId"), section.getId());
 
         return paperId;
     }
@@ -51,8 +53,8 @@ public class BlankQuizDefinition implements IQuizDefinition {
                 .map(b -> {
                     HashMap<String, Object> item = new HashMap<>();
                     item.put("id", b.getId());
-                    item.put("definition_uri", "blankQuizzes/"+b.getId());
-                    item.put("items_uri", "blankQuizzes/"+b.getId()+"/items");
+                    item.put("definition_uri", "blankQuizzes/" + b.getId());
+                    item.put("items_uri", "blankQuizzes/" + b.getId() + "/items");
                     return item;
                 })
                 .collect(Collectors.toList());
