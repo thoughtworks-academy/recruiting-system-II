@@ -5,11 +5,11 @@ import com.thoughtworks.twars.bean.ItemPost;
 import com.thoughtworks.twars.mapper.BlankQuizSubmitMapper;
 import com.thoughtworks.twars.mapper.ItemPostMapper;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
 
 public class BlankQuizScoreSheet implements IQuizScoreSheet {
     @Inject
@@ -28,6 +28,7 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
 
     @Override
     public List<Map> getQuizScoreSheet(int scoreSheetId) {
+
         return blankQuizSubmitMapper.findByScoreSheetId(scoreSheetId)
                 .stream()
                 .map(blankQuizSubmit -> {
@@ -44,6 +45,7 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
     }
 
     public List<Map> getByBlankQuizSubmitId(int blankQuizSubmitId) {
+
         return itemPostMapper.findByBlankQuizSubmit(blankQuizSubmitId)
                 .stream()
                 .map(itemPost -> {
@@ -60,8 +62,6 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
     @Override
     public void insertQuizScoreSheet(Map data, int scoreSheetId) {
         int blankQuizId;
-        int quizItemId;
-        String answer;
 
         List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
 
@@ -76,10 +76,10 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
 
             List<Map> itemPosts = (List) blankQuizSubmits.get(j)
                     .get("itemPosts");
-            for (int i = 0; i < itemPosts.size(); i++) {
-                Map itemPost = itemPosts.get(i);
-                answer = (String) itemPost.get("answer");
-                quizItemId = (Integer) itemPost.get("quizItemId");
+
+            itemPosts.forEach(item -> {
+                String answer = (String) item.get("answer");
+                int quizItemId = (Integer) item.get("quizItemId");
 
                 ItemPost itemPostObj = new ItemPost();
                 itemPostObj.setAnswer(answer);
@@ -87,7 +87,7 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
                 itemPostObj.setBlankQuizSubmitsId(blankQuizSubmitObj.getId());
 
                 itemPostMapper.insertItemPost(itemPostObj);
-            }
+            });
         }
     }
 }

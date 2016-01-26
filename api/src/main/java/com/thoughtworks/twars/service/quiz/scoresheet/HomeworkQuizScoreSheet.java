@@ -5,11 +5,11 @@ import com.thoughtworks.twars.bean.HomeworkSubmit;
 import com.thoughtworks.twars.mapper.HomeworkPostHistoryMapper;
 import com.thoughtworks.twars.mapper.HomeworkSubmitMapper;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
 
 public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
     @Inject
@@ -61,12 +61,10 @@ public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
     @Override
     public void insertQuizScoreSheet(Map data, int scoreSheetId) {
 
-        Map homeworkSubmitPostHistory;
-        int homeworkQuizId;
         List<Map> homeworkSubmits = (List<Map>) data.get("homeworkSubmits");
 
-        for (int i = 0; i < homeworkSubmits.size(); i++) {
-            homeworkQuizId = (int) homeworkSubmits.get(i).get("homeworkQuizId");
+        homeworkSubmits.forEach(item -> {
+            int homeworkQuizId = (int) item.get("homeworkQuizId");
 
             HomeworkSubmit homeworkSubmit = new HomeworkSubmit();
             homeworkSubmit.setScoreSheetId(scoreSheetId);
@@ -74,7 +72,7 @@ public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
 
             homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
 
-            homeworkSubmitPostHistory = (Map) homeworkSubmits.get(i)
+            Map homeworkSubmitPostHistory = (Map) item
                     .get("homeworkSubmitPostHistory");
 
             HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
@@ -86,7 +84,9 @@ public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
             homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
 
             homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
-        }
+        });
+
+
 
     }
 
