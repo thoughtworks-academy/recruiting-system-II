@@ -28,8 +28,8 @@
     </select>
 
     <insert id="insertBlankQuiz" parameterType="com.thoughtworks.twars.bean.BlankQuiz" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO blankQuiz(sectionId,type,hardCount,normalCount,easyCount)
-        VALUES (#{sectionId},#{type},#{hardCount},#{normalCount},#{easyCount});
+        INSERT INTO blankQuiz(type,hardCount,normalCount,easyCount)
+        VALUES (#{type},#{hardCount},#{normalCount},#{easyCount});
     </insert>
 
     <update id="updateBlankQuiz">
