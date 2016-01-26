@@ -72,11 +72,11 @@ var SubmissionIntroduction = React.createClass({
     }
 
     var branches = this.state.branches.map((branch, index)=> {
-      return (<option key={index}>{branch}</option>)
+      return (<option key={index}>{branch}</option>);
     });
     return (
         <div className="container-fluid">
-          <div>
+          <div className={(this.state.showRepo ? '' : ' hide')}>
             <div className="row last-time">
               <div className="col-md-12 ">你还有2天10小时完成题目</div>
             </div>
