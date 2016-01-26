@@ -46,6 +46,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.query.orderId;
   var error = {};
+  var quizStatus;
   async.waterfall([
     (done) => {
       userHomeworkQuizzes.unlockNext(userId, done);
@@ -56,6 +57,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     },
     (result, done) => {
       var integer = (Number(orderId) === parseInt(orderId, 10));
+      quizStatus = result.quizzes[orderId - 1].status;
       if (!integer || orderId === undefined || orderId > result.quizzes.length || orderId < 1) {
         error.status = constant.httpCode.NOT_FOUND;
         done(true, error);
@@ -78,6 +80,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
       res.send({
         status: constant.httpCode.OK,
         quiz: {
+          quizStatus: quizStatus,
           desc: data.desc,
           templateRepo: data.templateRepo
         }

@@ -54,7 +54,7 @@ ReactDom.render(
             <div className="content">
               <Tabs defaultActiveKey={0} animation={false} getShowStatus={getShowStatus().showRepo}>
                 <Tab eventKey={0} title="题目说明"><HomeworkIntroduction /></Tab>
-                <Tab eventKey={1} title="提交说明"><SubmissionIntroduction /></Tab>
+                <Tab eventKey={1} title="提交说明"><SubmissionIntroduction homeworkNumber={changeNumber().currentHomeworkNumber}/></Tab>
                 <Tab eventKey={2} title="运行结果"><RunningResult /></Tab>
               </Tabs>
             </div>

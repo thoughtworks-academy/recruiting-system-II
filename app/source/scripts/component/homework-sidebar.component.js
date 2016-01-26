@@ -17,7 +17,8 @@ var HomeworkSidebar = React.createClass({
     return {
       homeworkStatusList: list,
       currentHomeworkNumber: this.props.homeworkNumber,
-      clickNumber: this.props.homeworkNumber
+      clickNumber: this.props.homeworkNumber,
+      waitingNumber: null
     };
   },
 
@@ -58,7 +59,7 @@ var HomeworkSidebar = React.createClass({
             <div className="row">
               <div className="col-xs-9 h4 text-center ">{'第' + (index + 1) + '题'}</div>
               <div className='col-xs-3'>
-                <i className={this.changeIcon(item.status)}/></div>
+                <i className={index + 1 === this.state.waitingNumber ? this.changeIcon(homeworkQuizzesStatus.PROGRESS):this.changeIcon(item.status)}/></div>
             </div>
           </button>
       );

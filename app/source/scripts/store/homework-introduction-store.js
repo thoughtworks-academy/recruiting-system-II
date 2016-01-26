@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 var HomeworkActions = require('../actions/homework-actions');
 var request = require('superagent');
 var constant = require('../../../mixin/constant');
+var homeworkQuizzesStatus = require('../../../mixin/constant').homeworkQuizzesStatus;
 
 var HomeworkIntroductionStore = Reflux.createStore({
   listenables: [HomeworkActions],
@@ -18,6 +19,8 @@ var HomeworkIntroductionStore = Reflux.createStore({
               desc: '##当前题目处于锁定状态!',
               showRepo: false
             });
+          } else if(res.body.quiz.quizStatus === homeworkQuizzesStatus.PROGRESS){
+            this.trigger({submited:true});
           }
           if(res.body.status === constant.httpCode.OK){
             this.trigger({

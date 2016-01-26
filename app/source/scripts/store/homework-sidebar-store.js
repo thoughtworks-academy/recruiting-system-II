@@ -22,6 +22,10 @@ var HomeworkSidebarStore = Reflux.createStore({
   
   onchangeOrderId: function (clickNumber) {
     this.trigger({clickNumber: clickNumber});
+  },
+
+  onSubmited: function (orderId) {
+    this.trigger({waitingNumber: orderId});
   }
 });
 
