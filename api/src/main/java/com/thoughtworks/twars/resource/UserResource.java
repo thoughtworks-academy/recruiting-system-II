@@ -5,18 +5,11 @@ import com.thoughtworks.twars.bean.UserDetail;
 import com.thoughtworks.twars.mapper.UserMapper;
 
 import javax.inject.Inject;
-import javax.ws.rs.PUT;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
-
 
 @Path("/users")
 public class UserResource extends Resource {
@@ -30,6 +23,7 @@ public class UserResource extends Resource {
     public Response getUser(@PathParam("param") int userId) {
 
         User user = userMapper.getUserById(userId);
+
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -115,6 +109,7 @@ public class UserResource extends Resource {
     ) {
         String oldPassword = (String) userPasswordMap.get("oldPassword");
         String password = (String) userPasswordMap.get("password");
+
         int result = userMapper
                 .updatePassword(userId, oldPassword, password);
 
