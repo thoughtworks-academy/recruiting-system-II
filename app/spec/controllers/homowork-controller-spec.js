@@ -140,7 +140,9 @@ describe('HomeworkController', function () {
           quizzes: [
             {
               id: 1,
-              status: constant.homeworkQuizzesStatus.ACTIVE
+              status: constant.homeworkQuizzesStatus.ACTIVE,
+              userAnswerRepo: 'w',
+              branch: 'dev'
             }, {
               id: 2,
               status: constant.homeworkQuizzesStatus.LOCKED
@@ -164,7 +166,6 @@ describe('HomeworkController', function () {
           desc: '这是一道简单的题',
           templateRepo: 'www.github.com'
         };
-
         callback(null, data);
       });
     });
@@ -179,8 +180,11 @@ describe('HomeworkController', function () {
           expect(data).toEqual({
             status: constant.httpCode.OK,
             quiz: {
+              quizStatus: constant.homeworkQuizzesStatus.ACTIVE,
               desc: '这是一道简单的题',
-              templateRepo: 'www.github.com'
+              templateRepo: 'www.github.com',
+              userAnswerRepo: 'w',
+              branch: 'dev'
             }
           });
           done();

@@ -47,6 +47,8 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   var orderId = req.query.orderId;
   var error = {};
   var quizStatus;
+  var userAnswerRepo;
+  var branch;
   async.waterfall([
     (done) => {
       userHomeworkQuizzes.unlockNext(userId, done);
@@ -57,7 +59,6 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     },
     (result, done) => {
       var integer = (Number(orderId) === parseInt(orderId, 10));
-      quizStatus = result.quizzes[orderId - 1].status;
       if (!integer || orderId === undefined || orderId > result.quizzes.length || orderId < 1) {
         error.status = constant.httpCode.NOT_FOUND;
         done(true, error);
@@ -65,6 +66,9 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         error.status = constant.httpCode.FORBIDDEN;
         done(true, error);
       } else {
+        userAnswerRepo = result.quizzes[orderId - 1].userAnswerRepo;
+        quizStatus = result.quizzes[orderId - 1].status;
+        branch = result.quizzes[orderId - 1].branch;
         homeworkQuizzes.findOne({id: result.quizzes[orderId - 1].id}, done);
       }
     }
@@ -82,7 +86,9 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         quiz: {
           quizStatus: quizStatus,
           desc: data.desc,
-          templateRepo: data.templateRepo
+          templateRepo: data.templateRepo,
+          userAnswerRepo: userAnswerRepo,
+          branch: branch
         }
       });
     }
