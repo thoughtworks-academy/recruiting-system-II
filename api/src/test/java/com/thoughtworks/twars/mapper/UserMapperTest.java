@@ -2,7 +2,6 @@ package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,11 +19,6 @@ public class UserMapperTest extends TestBase {
     public void setUp() throws Exception {
         super.setUp();
         userMapper = session.getMapper(UserMapper.class);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
     }
 
     @Test

@@ -1,7 +1,6 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.Section;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,11 +17,6 @@ public class SectionMapperTest extends TestBase{
     public void setUp() throws Exception {
         super.setUp();
         sectionMapper = session.getMapper(SectionMapper.class);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
     }
 
     @Test

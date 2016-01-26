@@ -1,16 +1,14 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.QuizItem;
-import com.thoughtworks.twars.tasks.DBRecovery;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.number.OrderingComparison.lessThan;
+import static org.junit.Assert.assertThat;
 
 public class QuizItemMapperTest extends TestBase {
     private QuizItemMapper quizItemMapper;
@@ -19,11 +17,6 @@ public class QuizItemMapperTest extends TestBase {
     public void setUp() throws Exception {
         super.setUp();
         quizItemMapper = session.getMapper(QuizItemMapper.class);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
     }
 
     @Test

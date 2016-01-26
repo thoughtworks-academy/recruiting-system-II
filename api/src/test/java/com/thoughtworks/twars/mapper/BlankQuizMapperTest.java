@@ -2,7 +2,6 @@ package com.thoughtworks.twars.mapper;
 
 
 import com.thoughtworks.twars.bean.BlankQuiz;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,11 +18,6 @@ public class BlankQuizMapperTest extends TestBase {
     public void setUp() throws Exception {
         super.setUp();
         blankQuizMapper = session.getMapper(BlankQuizMapper.class);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        super.tearDown();
     }
 
     @Test
