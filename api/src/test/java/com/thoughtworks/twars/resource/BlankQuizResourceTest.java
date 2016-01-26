@@ -49,7 +49,7 @@ public class BlankQuizResourceTest extends TestBase {
 
 
     @Test
-    public void should_return_blankQuiz_uri(){
+    public void should_return_blankQuiz_uri() {
         BlankQuiz blankQuiz = new BlankQuiz();
 
         blankQuiz.setId(5);
@@ -60,12 +60,12 @@ public class BlankQuizResourceTest extends TestBase {
         blankQuiz.setType("quizItem");
 
         Response response = target(basePath).request().post(Entity.entity(blankQuiz, MediaType.APPLICATION_JSON_TYPE));
-        assertThat(response.getStatus(),is(201));
+        assertThat(response.getStatus(), is(201));
 
         Map map = response.readEntity(Map.class);
-        assertThat(map.get("uri"),is("blankQuizzes/5"));
+        assertThat(map.get("uri"), is("blankQuizzes/5"));
     }
-    
+
 
     @Test
     public void should_return_blank_quizzes_by_section_id() {
@@ -155,7 +155,7 @@ public class BlankQuizResourceTest extends TestBase {
         when(firstExampleItems.getChartPath()).thenReturn("ChartPath 88");
         when(firstExampleItems.getDescriptionZh()).thenReturn("Description 88");
         when(firstExampleItems.getAnswer()).thenReturn("3");
-        when(quizItemMapper.getExampleItems()).thenReturn(Arrays.asList(firstExampleItems,secondExampleItems));
+        when(quizItemMapper.getExampleItems()).thenReturn(Arrays.asList(firstExampleItems, secondExampleItems));
 
         Response response = target(basePath + "/1/items").request().get();
 
@@ -171,7 +171,7 @@ public class BlankQuizResourceTest extends TestBase {
         assertThat(quizItems.get(0).get("question"), is("Question 88"));
         assertThat(quizItems.get(0).get("chartPath"), is("ChartPath 88"));
         assertThat(quizItems.get(0).get("initializedBox"), is("InitializedBox 88"));
-        assertThat(quizItems.get(0).get("answer"),is("3"));
+        assertThat(quizItems.get(0).get("answer"), is("3"));
 
     }
 

@@ -1,7 +1,6 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
-import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,7 +13,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HomeworkQuizResourceTest extends TestBase{
+public class HomeworkQuizResourceTest extends TestBase {
     @Mock
     HomeworkQuiz homeworkQuiz;
 

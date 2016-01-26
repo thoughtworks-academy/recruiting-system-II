@@ -45,7 +45,6 @@ public class BlankQuizResource {
     }
 
 
-
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertBlankQuiz(BlankQuiz blankQuiz) {

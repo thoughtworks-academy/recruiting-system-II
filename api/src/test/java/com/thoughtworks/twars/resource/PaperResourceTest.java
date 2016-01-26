@@ -44,7 +44,6 @@ public class PaperResourceTest extends TestBase {
     HomeworkQuiz firstHomeworkQuiz;
 
 
-
     @Test
     public void should_list_all_papers() throws Exception {
 
@@ -114,7 +113,7 @@ public class PaperResourceTest extends TestBase {
 
         when(sectionMapper.getSectionsByPaperId(9)).thenReturn(null);
 
-        Response response = target(basePath+"/9").request().get();
+        Response response = target(basePath + "/9").request().get();
         assertThat(response.getStatus(), is(404));
     }
 
@@ -161,7 +160,7 @@ public class PaperResourceTest extends TestBase {
 
 
     @Test
-    public void should_return_uri_when_insert_paper_definition(){
+    public void should_return_uri_when_insert_paper_definition() {
 //        Paper paper = new Paper();
 //        paper.setMakerId(1);
 //        when(paperMapper.insertPaper(paper)).thenReturn(1);

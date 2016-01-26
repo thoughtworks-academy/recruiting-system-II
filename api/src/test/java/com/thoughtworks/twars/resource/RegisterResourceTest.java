@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
-public class RegisterResourceTest extends TestBase{
+public class RegisterResourceTest extends TestBase {
 
     @Test
     public void should_create_user_when_register() throws Exception {
@@ -32,8 +32,8 @@ public class RegisterResourceTest extends TestBase{
 
         Map result = response.readEntity(Map.class);
 
-        String userUri = (String) ((Map)result.get("user")).get("uri");
-        String userInfoUri = (String) ((Map)result.get("userInfo")).get("uri");
+        String userUri = (String) ((Map) result.get("user")).get("uri");
+        String userInfoUri = (String) ((Map) result.get("userInfo")).get("uri");
 
         assertThat(userUri, is("user/108"));
         assertThat(userInfoUri, is("userInfo/108"));

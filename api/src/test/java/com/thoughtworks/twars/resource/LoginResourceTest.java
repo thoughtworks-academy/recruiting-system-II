@@ -12,8 +12,9 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class LoginResourceTest extends TestBase{
+public class LoginResourceTest extends TestBase {
     String basePath = "/login";
+
     @Test
     public void should_create_user_when_login() throws Exception {
 

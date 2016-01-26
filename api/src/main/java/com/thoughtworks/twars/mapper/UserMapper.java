@@ -21,7 +21,7 @@ public interface UserMapper {
     public int updateUserDetail(UserDetail detail);
 
     public int updatePassword(
-            @Param("id")int id,
-            @Param("oldPassword")String oldPassword,
-            @Param("password")String password);
+            @Param("id") int id,
+            @Param("oldPassword") String oldPassword,
+            @Param("password") String password);
 }

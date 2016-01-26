@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 @Path("/users")
 public class UserResource extends Resource {
 

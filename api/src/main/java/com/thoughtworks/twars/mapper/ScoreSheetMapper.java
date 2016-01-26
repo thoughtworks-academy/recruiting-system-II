@@ -5,6 +5,7 @@ import com.thoughtworks.twars.bean.ScoreSheet;
 import java.util.List;
 
 public interface ScoreSheetMapper {
+
     List<ScoreSheet> findAll();
 
     ScoreSheet findOne(int id);
