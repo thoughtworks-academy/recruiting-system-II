@@ -8,11 +8,11 @@ require('bootstrap');
 require('../less/start.less');
 
 ReactDom.render(
-    <StartInfo />,
+    <div>
+      <header>
+        <Navigation />
+      </header>
+      <StartInfo />
+    </div>,
     document.getElementById('start-container')
-);
-
-ReactDom.render(
-    <Navigation />,
-    document.getElementById('navigation')
 );

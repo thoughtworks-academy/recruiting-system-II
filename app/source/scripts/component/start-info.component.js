@@ -1,7 +1,6 @@
 'use strict';
 
 var React = global.React = require('react');
-var request = require('superagent');
 
 var StartInfo = React.createClass({
   getInitialState: function () {
