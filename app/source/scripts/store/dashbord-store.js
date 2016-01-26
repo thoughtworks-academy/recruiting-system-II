@@ -15,9 +15,31 @@ var DashbordStore = Reflux.createStore({
             puzzleEnabled: res.body.isPaperCommited ? false : true,
             homeworkEnabled: res.body.isPaperCommited
           });
-        })
+        });
+  },
 
+  onShowPrompt: function (puzzleEnabled, homeworkEnabled, event) {
+    var iconName = event.target.parentNode.getAttribute('name');
+    if (iconName === 'logic' && puzzleEnabled === false) {
+      this.trigger({
+        isTip: true,
+        tipContent: '您的逻辑题已经完成'
+      });
+    }
 
+    if (iconName === 'homework' && homeworkEnabled === false) {
+      this.trigger({
+        isTip: true,
+        tipContent: puzzleEnabled === true ? '请先完成逻辑题' : '您的编程题已完成'
+      });
+    }
+
+  },
+
+  onHidePrompt: function () {
+    this.trigger({
+      isTip: false
+    });
   }
 
 });

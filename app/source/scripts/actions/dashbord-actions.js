@@ -3,7 +3,9 @@
 var Reflux = require('reflux');
 
 var DashbordActions = Reflux.createActions([
-    'getStatus'
+  'getStatus',
+  'showPrompt',
+  'hidePrompt'
 ]);
 
 module.exports = DashbordActions;
