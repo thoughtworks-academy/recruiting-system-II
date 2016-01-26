@@ -1,14 +1,32 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
+var UserCenterActions = require('../actions/user-center-actions');
+var UserCenterStore = require('../store/user-center-store');
 
 var UserCenterGender = React.createClass({
-  genderChange: function (evt) {
-    this.props.onGenderChange(evt);
+  mixins: [Reflux.connect(UserCenterStore)],
+
+  getInitialState: function(){
+    return {
+      gender: '',
+      genderError: false
+    };
   },
 
-  genderValidate: function () {
-    this.props.onValidate();
+  componentWillReceiveProps: function() {
+    this.setState({
+      genderError: false
+    });
+  },
+
+  genderChange: function (evt) {
+    UserCenterActions.changeGender(evt);
+  },
+
+  genderValidate: function (genderError) {
+    UserCenterActions.validateGender(genderError);
   },
 
   render: function () {
@@ -23,15 +41,15 @@ var UserCenterGender = React.createClass({
               return (
                   <div key={index}>
                     <input type="radio" name={item.mark} className="gender" onChange={this.genderChange}
-                           checked={this.props.gender === item.mark ? 'checked' : ''} id={item.genderName}
-                           onClick={this.genderValidate}/>
+                           checked={this.state.gender === item.mark ? 'checked' : ''} id={item.genderName}
+                           onClick={this.genderValidate(this.state.genderError)}/>
                     <label htmlFor={item.genderName}>{item.label}</label>
                   </div>
               );
             })}
 
           </div>
-          <div className={'error alert alert-danger' + (this.props.genderError === true ? '' : ' hide')} role="alert">
+          <div className={'error alert alert-danger' + (this.state.genderError === true ? '' : ' hide')} role="alert">
             <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             请选择性别
           </div>

@@ -1,17 +1,17 @@
 'use strict';
 
 var React = require('react');
-var ReactDom = require('react-dom');
 var validate = require('validate.js');
 var constraint = require('../../../mixin/password-constraint');
 var getError = require('../../../mixin/get-error');
 var ChangePasswordActions = require('../actions/change-password-actions');
 var ChangePasswordStore = require('../store/change-password-store');
+var UserCenterStore = require('../store/user-center-store');
 var Reflux = require('reflux');
 var _  = require('lodash');
 
 var ChangePassword = React.createClass({
-  mixins: [Reflux.connect(ChangePasswordStore)],
+  mixins: [Reflux.connect(ChangePasswordStore),Reflux.connect(UserCenterStore)],
 
   getInitialState: function () {
     return {
@@ -22,7 +22,8 @@ var ChangePassword = React.createClass({
       newPasswordError: '',
       confirmPasswordError: '',
       success: false,
-      isRespond: false
+      isRespond: false,
+      currentState: 'userDetail'
     };
   },
 
@@ -111,7 +112,7 @@ var ChangePassword = React.createClass({
   },
 
   render: function () {
-    var classString = (this.props.currentState === 'password' ? '' : ' hide');
+    var classString = (this.state.currentState === 'password' ? '' : ' hide');
 
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>

@@ -1,16 +1,25 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var Nav = require('react-bootstrap/lib/Nav');
 var NavItem = require('react-bootstrap/lib/NavItem');
-var UserDetailActions = require('../actions/user-detail-actions');
+var UserCenterActions = require('../actions/user-center-actions');
+var UserCenterStore = require('../store/user-center-store');
 
 var UserCenterSide = React.createClass({
+  mixins: [Reflux.connect(UserCenterStore)],
 
-  handleClick: function (mark) {
-    this.props.onChangeState(mark);
+  getInitialState: function(){
+    return {
+      currentState: 'userDetail'
+    };
+  },
+
+  handleClick: function (mark, currentState) {
+    UserCenterActions.changeState(mark,currentState);
     if(mark === 'userDetail') {
-      UserDetailActions.loadUserDetail();
+      UserCenterActions.loadUserDetail();
     }
   },
 
@@ -21,10 +30,11 @@ var UserCenterSide = React.createClass({
     ];
 
     var itemHtml = tags.map((item, index) => {
-      var classStr = 'list-group-item ' + (item.mark === this.props.currentState ? 'selected' : '');
+      var classStr = 'list-group-item ' + (item.mark === this.state.currentState ? 'selected' : '');
 
       return (
-          <a className={classStr} href="javascript:void(0)" key={index} onClick={this.handleClick.bind(null, item.mark)}>
+          <a className={classStr} href="javascript:void(0)" key={index}
+             onClick={this.handleClick.bind(null, item.mark, this.state.currentState)}>
             <div className="row">
               <div className="col-xs-9 h4 text-center">{item.value}</div>
               <div className="col-xs-3"></div>

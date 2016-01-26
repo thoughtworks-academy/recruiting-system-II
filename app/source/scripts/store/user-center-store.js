@@ -1,13 +1,13 @@
 'use strict';
 
 var Reflux = require('reflux');
-var UserDetailActions = require('../actions/user-detail-actions');
+var UserCenterActions = require('../actions/user-center-actions');
 var request = require('superagent');
 var page = require('page');
 var constant = require('../../../mixin/constant');
 
 var UserDetailStore = Reflux.createStore({
-  listenables: [UserDetailActions],
+  listenables: [UserCenterActions],
 
   onLoadUserDetail: function () {
     request.get('/user-detail')
@@ -35,6 +35,22 @@ var UserDetailStore = Reflux.createStore({
             console.log('update error');
           }
         });
+  },
+
+  onChangeState: function (state, currentState){
+    if(state !== currentState) {
+      this.trigger({currentState: state});
+    }
+  },
+
+  onChangeGender: function (evt){
+    this.trigger({gender: evt.target.name});
+  },
+
+  onValidateGender: function (genderError){
+    if (genderError === true) {
+      this.trigger({genderError: false});
+    }
   }
 });
 

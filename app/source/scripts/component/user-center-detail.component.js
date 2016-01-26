@@ -1,18 +1,16 @@
 'use strict';
 
 var React = global.React = require('react');
-var ReactDom = require('react-dom');
 var Input = require('react-bootstrap/lib/Input');
-var UserDetailActions = require('../actions/user-detail-actions');
-var UserDetailStore = require('../store/user-detail-store');
+var UserCenterActions = require('../actions/user-center-actions');
+var UserCenterStore = require('../store/user-center-store');
 var Reflux = require('reflux');
 var validate = require('validate.js');
 var constraint = require('../../../mixin/user-detail-constraint');
-var UserCenterGender = require('./user-center-gender.component');
 var getError = require('../../../mixin/get-error');
 
 var UserDetail = React.createClass({
-  mixins: [Reflux.connect(UserDetailStore)],
+  mixins: [Reflux.connect(UserCenterStore)],
 
   getInitialState: function () {
     return {
@@ -27,12 +25,13 @@ var UserDetail = React.createClass({
       nameError: '',
       majorError: '',
       genderError: false,
-      degreeError: ''
+      degreeError: '',
+      currentState: 'userDetail'
     };
   },
 
   componentDidMount: function () {
-    UserDetailActions.loadUserDetail();
+    UserCenterActions.loadUserDetail();
   },
 
   componentWillReceiveProps: function() {
@@ -52,12 +51,6 @@ var UserDetail = React.createClass({
     this.setState({[stateName]: newState});
   },
 
-  genderChange: function (evt) {
-    var newState = evt.target.name;
-
-    this.setState({gender: newState});
-  },
-
   validate: function (event) {
     var target = event.target;
     var value = target.value;
@@ -72,12 +65,6 @@ var UserDetail = React.createClass({
 
     stateObj[name + 'Error'] = error;
     this.setState(stateObj);
-  },
-
-  genderValidate: function () {
-    if (this.state.genderError === true) {
-      this.setState({genderError: false});
-    }
   },
 
   checkInfo: function () {
@@ -126,11 +113,11 @@ var UserDetail = React.createClass({
     } else if (this.state.gender === '') {
       return;
     }
-    UserDetailActions.updateUserDetail(userData);
+    UserCenterActions.updateUserDetail(userData);
   },
 
   render: function () {
-    var classString = (this.props.currentState === 'userDetail' ? '' : '  hide');
+    var classString = (this.state.currentState === 'userDetail' ? '' : '  hide');
 
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
@@ -185,8 +172,7 @@ var UserDetail = React.createClass({
 
                 <label htmlFor='inputGender' className='col-sm-4 col-md-4 control-label'>性别</label>
                 <div className='form-group'>
-                  <UserCenterGender gender={this.state.gender} genderError={this.state.genderError}
-                                    onGenderChange={this.genderChange} onValidate={this.genderValidate} ref='gender'/>
+                  {this.props.children}
                 </div>
 
                 <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业</label>
