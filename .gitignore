@@ -135,3 +135,4 @@ app/public/assets
 app/public/css
 app/.gitignore
 mongodb.conf
+app/config/github-user.json
