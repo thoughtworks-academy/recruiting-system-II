@@ -19,8 +19,12 @@ var HomeworkIntroductionStore = Reflux.createStore({
               desc: '##当前题目处于锁定状态!',
               showRepo: false
             });
-          } else if(res.body.quiz.quizStatus === homeworkQuizzesStatus.PROGRESS){
-            this.trigger({submited:true});
+          } else if((res.body.quiz.quizStatus === homeworkQuizzesStatus.PROGRESS) || (res.body.quiz.quizStatus === homeworkQuizzesStatus.SUCCESS)){
+            this.trigger({
+              submited:true,
+              githubUrl:res.body.quiz.userAnswerRepo,
+              branches:[res.body.quiz.branch]
+            });
           }
           if(res.body.status === constant.httpCode.OK){
             this.trigger({
