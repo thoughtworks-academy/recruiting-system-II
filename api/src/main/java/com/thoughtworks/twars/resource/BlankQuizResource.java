@@ -29,17 +29,21 @@ public class BlankQuizResource {
     public Response getAllBlankQuizzes() {
 
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findAll();
+
         if (blankQuizzes == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        List<Map> result = new ArrayList<>();
 
-        for (int i = 0; i < blankQuizzes.size(); i++) {
-            BlankQuiz item = blankQuizzes.get(i);
-            Map<String, String> map = new HashMap<>();
-            map.put("uri", "blankQuizzes/" + item.getId());
-            result.add(map);
-        }
+        List<Map> result = blankQuizzes
+                .stream()
+                .map(item -> {
+                    Map map = new HashMap();
+
+                    map.put("uri", "blankQuizzes/" + item.getId());
+
+                    return map;
+                })
+                .collect(Collectors.toList());
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
@@ -50,7 +54,6 @@ public class BlankQuizResource {
     public Response insertBlankQuiz(BlankQuiz blankQuiz) {
 
         blankQuizMapper.insertBlankQuiz(blankQuiz);
-
 
         Map map = new HashMap<>();
         map.put("uri", "blankQuizzes/" + blankQuiz.getId());
@@ -67,22 +70,24 @@ public class BlankQuizResource {
     ) {
         List<BlankQuiz> blankQuizzes = blankQuizMapper
                 .findBySectionId(sectionId);
+
         if (blankQuizzes == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        List<Map> result = new ArrayList<>();
+        List<Map> result = blankQuizzes.stream()
+                .map(item -> {
+                    Map map = new HashMap();
 
-        for (int i = 0; i < blankQuizzes.size(); i++) {
-            BlankQuiz item = blankQuizzes.get(i);
-            Map map = new HashMap<>();
-            map.put("id", item.getId());
-            map.put("type", item.getType());
-            map.put("hardCount", item.getHardCount());
-            map.put("normalCount", item.getNormalCount());
-            map.put("easyCount", item.getEasyCount());
-            result.add(map);
-        }
+                    map.put("id", item.getId());
+                    map.put("type", item.getType());
+                    map.put("hardCount", item.getHardCount());
+                    map.put("normalCount", item.getNormalCount());
+                    map.put("easyCount", item.getEasyCount());
+
+                    return map;
+                })
+                .collect(Collectors.toList());
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
@@ -92,45 +97,55 @@ public class BlankQuizResource {
     @Path("/{param}/items")
     public Response getItems(@PathParam("param") int blankQuizId) {
 
-
         BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizId);
 
         if (blankQuiz == null) {
             Map errorInfo = new HashMap<>();
             errorInfo.put("errorInfo", "findBlankQuizError");
+
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(errorInfo).build();
         }
 
         List<QuizItem> easyItems = quizItemMapper
                 .getEasyItems(blankQuiz.getEasyCount());
+
         if (easyItems == null) {
             Map errorInfo = new HashMap<>();
             errorInfo.put("errorInfo", "getEasyItems");
+
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(errorInfo).build();
         }
+
         List<QuizItem> normalItems = quizItemMapper.getNormalItems(blankQuiz
                 .getNormalCount());
+
         if (normalItems == null) {
             Map errorInfo = new HashMap<>();
             errorInfo.put("errorInfo", "getNormalItems");
+
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(errorInfo).build();
         }
+
         List<QuizItem> hardItems = quizItemMapper.getHardItems(blankQuiz
                 .getHardCount());
+
         if (hardItems == null) {
             Map errorInfo = new HashMap<>();
             errorInfo.put("errorInfo", "getHardItems");
+
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(errorInfo).build();
         }
+
         List<QuizItem> exampleItems = quizItemMapper.getExampleItems();
 
         if (exampleItems == null) {
             Map errorInfo = new HashMap<>();
             errorInfo.put("errorInfo", "getExampleItems");
+
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(errorInfo).build();
         }
@@ -145,6 +160,7 @@ public class BlankQuizResource {
                 .stream()
                 .map(BlankQuizResource::buildItemMap)
                 .collect(Collectors.toList());
+
         List exampleList = exampleItems
                 .stream()
                 .map(BlankQuizResource::buildExampleMap)
@@ -158,23 +174,29 @@ public class BlankQuizResource {
     }
 
     private static Map buildItemMap(QuizItem quizItem) {
+
         Map<String, Object> result = new HashMap<>();
+
         result.put("id", quizItem.getId());
         result.put("initializedBox", quizItem.getInitializedBox());
         result.put("question", quizItem.getQuestionZh());
         result.put("chartPath", quizItem.getChartPath());
         result.put("description", quizItem.getDescriptionZh());
+
         return result;
     }
 
     private static Map buildExampleMap(QuizItem quizItem) {
+
         Map<String, Object> result = new HashMap<>();
+
         result.put("id", quizItem.getId());
         result.put("initializedBox", quizItem.getInitializedBox());
         result.put("question", quizItem.getQuestionZh());
         result.put("chartPath", quizItem.getChartPath());
         result.put("description", quizItem.getDescriptionZh());
         result.put("answer", quizItem.getAnswer());
+
         return result;
     }
 
