@@ -591,22 +591,22 @@ db.once('open', function () {
   homeworkQuizzes.remove({}, () => {
     homeworkQuizzes.create([{
       id: 1,
-      desc: '这是一道简单的题.',
+      desc: '这是一道迷之题目',
       evaluateScript: 'www.baidu.com',
       evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
+      templateRepo: 'https://github.com/JiangHaHa/templateRepo'
     }, {
       id: 2,
-      desc: '这是一道简单的题.',
+      desc: '这是一道第二题的题目',
       evaluateScript: 'www.baidu.com',
       evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
+      templateRepo: 'https://github.com/JayChow/templateRepo'
     }, {
       id: 3,
-      desc: '这是一道简单的题.',
+      desc: '这是一道笨蛋出的题目',
       evaluateScript: 'www.baidu.com',
       evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
+      templateRepo: 'https://github.com/EvanLee/templateRepo'
     }, {
       id: 4,
       desc: '这是一道简单的题.',
