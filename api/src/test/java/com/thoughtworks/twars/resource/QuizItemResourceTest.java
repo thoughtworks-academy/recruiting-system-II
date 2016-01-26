@@ -16,11 +16,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class QuizItemResourceTest extends TestBase {
+
     QuizItem firstQuizItem = mock(QuizItem.class);
     QuizItem secondQuizItem = mock(QuizItem.class);
 
     String basePath = "quizItems";
-
 
     @Test
     public void should_return_all_quizItems() {
