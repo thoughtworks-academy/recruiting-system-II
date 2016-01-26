@@ -17,7 +17,8 @@ var submissionIntroductionStore = Reflux.createStore({
       defaultBranch: '',
       githubUrl: '',
       githubBranch: '',
-      submited: false
+      submited: false,
+      showIcon: false
     });
   },
 
@@ -35,6 +36,7 @@ var submissionIntroductionStore = Reflux.createStore({
   },
 
   onGetBranches: function (url) {
+    this.trigger({showIcon:true});
     superAgent.get('/homework/get-branches')
         .set('Content-Type', 'application/json')
         .query({url: url})
@@ -51,8 +53,11 @@ var submissionIntroductionStore = Reflux.createStore({
               branches.splice(index,1);
               branches.unshift('master');
             }
-            this.trigger({branches: branches});
-            this.trigger({defaultBranch: branches[0]});
+            this.trigger({
+              branches: branches,
+              defaultBranch: branches[0],
+              showIcon:false
+            });
           }
         });
   }

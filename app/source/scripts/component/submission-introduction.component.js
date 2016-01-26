@@ -28,7 +28,8 @@ var SubmissionIntroduction = React.createClass({
       defaultBranch: '',
       githubUrl: '',
       githubBranch: '',
-      submited: false
+      submited: false,
+      showIcon: false
     };
   },
   clickBranch: function () {
@@ -106,6 +107,7 @@ var SubmissionIntroduction = React.createClass({
                   <button className="btn btn-default btn-block"
                           disabled={(this.state.disableBranches || this.state.submited) === true ? 'disabled':''}
                           onClick={this.clickBranch}>获取分支
+                    <i className={'fa fa-spinner fa-spin loading' + (this.state.showIcon ? '' : ' hide')}></i>
                   </button>
                 </div>
               </div>
