@@ -79,15 +79,14 @@ public class PaperResource extends Resource {
     public String insertDefinitionByQuizType(Map item, int paperId) {
         List<Map> quizzes = (List<Map>) item.get("quizzes");
         String description = (String) item.get("desc");
-        List list = null;
 
-        for (int i = 0; i < quizzes.size(); i++) {
-            if ("blankQuizzes".equals(quizzes.get(i).get("quizType"))) {
-                blankQuizDefinition.insertQuizDefinition(quizzes.get(i), description, paperId);
-            } else if ("homeworkQuizzes".equals(quizzes.get(i).get("quizType"))) {
-                homeworkQuizDefinition.insertQuizDefinition(quizzes.get(i), description, paperId);
+        quizzes.forEach(h -> {
+            if ("blankQuizzes".equals(h.get("quizType"))) {
+                blankQuizDefinition.insertQuizDefinition(h, description, paperId);
+            } else if ("homeworkQuizzes".equals(h.get("quizType"))) {
+                homeworkQuizDefinition.insertQuizDefinition(h, description, paperId);
             }
-        }
+        });
 
         return "papers/" + paperId;
     }

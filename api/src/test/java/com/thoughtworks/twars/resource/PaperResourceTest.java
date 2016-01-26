@@ -161,10 +161,7 @@ public class PaperResourceTest extends TestBase {
 
     @Test
     public void should_return_uri_when_insert_paper_definition() {
-//        Paper paper = new Paper();
-//        paper.setMakerId(1);
-//        when(paperMapper.insertPaper(paper)).thenReturn(1);
-//        when(paper.getId()).thenReturn(10);
+        Gson gson = new GsonBuilder().create();
 
         Map map1 = new HashMap<>();
         map1.put("quizId", 1);
@@ -195,6 +192,7 @@ public class PaperResourceTest extends TestBase {
         Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(), is(200));
     }
+
 }
 
 
