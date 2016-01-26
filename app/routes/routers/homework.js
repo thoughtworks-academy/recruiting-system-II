@@ -13,7 +13,6 @@ router.get('/get-list', homeworkController.getList);
 router.get('/quiz',homeworkController.getQuiz);
 router.post('/save',homeworkController.saveGithubUrl);
 router.post('/result',homeworkController.updateResult);
-router.get('/progress', homeworkController.getProgressTasks);
 router.get('/get-branches',vendor.getBranches);
 
 module.exports = router;
