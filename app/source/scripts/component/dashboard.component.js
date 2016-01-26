@@ -1,13 +1,17 @@
 'use strict';
 
 var React = global.React = require('react');
+var Reflux = require('reflux');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Alertcontent = require('./alert-content.component');
-var agent = require('superagent-promise')(require('superagent'), Promise);
+var DashbordActions = require('../actions/dashbord-actions');
+var DashbordStore = require('../store/dashbord-store');
 var DashboardIcon = require('./dashboard-icon.component');
 
 var Dashboard = React.createClass({
+
+  mixins: [Reflux.connect(DashbordStore)],
 
   getInitialState: function () {
     return {
@@ -19,16 +23,7 @@ var Dashboard = React.createClass({
   },
 
   componentDidMount: function () {
-
-    agent.get('/dashboard')
-      .set('Content-Type', 'application/json')
-      .end()
-      .then((res) => {
-        this.setState({
-          puzzleEnabled: res.body.isPaperCommited ? false : true,
-          homeworkEnabled: res.body.isPaperCommited
-        });
-      });
+    DashbordActions.getStatus();
   },
 
   showPrompt: function (event) {

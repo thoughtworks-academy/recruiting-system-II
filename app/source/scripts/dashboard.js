@@ -6,11 +6,11 @@ var Navigation = require('./component/navigation.component');
 require('../less/dashboard.less');
 
 ReactDom.render(
-    <DashBoard />,
+    <div>
+      <header>
+        <Navigation/>
+      </header>
+      <DashBoard />
+    </div>,
     document.getElementById('dashboard-container')
-);
-
-ReactDom.render(
-    <Navigation />,
-    document.getElementById('navigation')
 );
