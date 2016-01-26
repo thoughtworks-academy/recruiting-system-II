@@ -4,12 +4,12 @@ import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
 import com.thoughtworks.twars.mapper.UserMapper;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
-import java.util.Map;
 
 @Path("/users")
 public class UserResource extends Resource {

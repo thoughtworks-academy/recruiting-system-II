@@ -6,15 +6,15 @@ import com.thoughtworks.twars.mapper.SectionMapper;
 import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
 import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
 
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Path("/papers")

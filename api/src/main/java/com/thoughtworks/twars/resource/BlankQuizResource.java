@@ -5,18 +5,18 @@ import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
 
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/blankQuizzes")
+
 public class BlankQuizResource {
     @Inject
     private BlankQuizMapper blankQuizMapper;
@@ -48,13 +48,13 @@ public class BlankQuizResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertBlankQuiz(BlankQuiz blankQuiz){
+    public Response insertBlankQuiz(BlankQuiz blankQuiz) {
 
         blankQuizMapper.insertBlankQuiz(blankQuiz);
 
 
         Map map = new HashMap<>();
-        map.put("uri", "blankQuizzes/"+blankQuiz.getId());
+        map.put("uri", "blankQuizzes/" + blankQuiz.getId());
 
         return Response.status(Response.Status.CREATED).entity(map).build();
     }

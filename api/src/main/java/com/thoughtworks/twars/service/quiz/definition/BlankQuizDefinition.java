@@ -5,11 +5,11 @@ import com.thoughtworks.twars.bean.Section;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
 
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.inject.Inject;
 
 public class BlankQuizDefinition implements IQuizDefinition {
 

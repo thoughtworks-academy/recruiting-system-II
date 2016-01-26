@@ -18,6 +18,7 @@ public class App extends ResourceConfig {
     public App() {
 
         SqlSession session = DBUtil.getSession();
+
         final UserMapper userMapper = session
                 .getMapper(UserMapper.class);
 

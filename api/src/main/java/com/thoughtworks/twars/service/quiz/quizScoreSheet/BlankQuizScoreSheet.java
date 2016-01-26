@@ -5,11 +5,11 @@ import com.thoughtworks.twars.bean.ItemPost;
 import com.thoughtworks.twars.mapper.BlankQuizSubmitMapper;
 import com.thoughtworks.twars.mapper.ItemPostMapper;
 
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.inject.Inject;
 
 public class BlankQuizScoreSheet implements IQuizScoreSheet {
     @Inject
@@ -17,12 +17,6 @@ public class BlankQuizScoreSheet implements IQuizScoreSheet {
 
     @Inject
     private ItemPostMapper itemPostMapper;
-
-//    @Inject
-//    private BlankQuizSubmit blankQuizSubmitObj;
-
-//    @Inject
-//    private ItemPost itemPostObj;
 
     public void setBlankQuizSubmitMapper(BlankQuizSubmitMapper blankQuizSubmitMapper) {
         this.blankQuizSubmitMapper = blankQuizSubmitMapper;

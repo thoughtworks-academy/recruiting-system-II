@@ -5,11 +5,11 @@ import com.thoughtworks.twars.bean.HomeworkSubmit;
 import com.thoughtworks.twars.mapper.HomeworkPostHistoryMapper;
 import com.thoughtworks.twars.mapper.HomeworkSubmitMapper;
 
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.inject.Inject;
 
 public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
     @Inject
@@ -32,8 +32,8 @@ public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
                 .stream()
                 .map(homeworkQuizSubmit -> {
                     Map<String, Object> homeworkQuizUri = new HashMap<>();
-                    homeworkQuizUri.put("uri", "homeworkQuiz/" +
-                            homeworkQuizSubmit.getHomeworkQuizId());
+                    homeworkQuizUri.put("uri", "homeworkQuiz/"
+                            + homeworkQuizSubmit.getHomeworkQuizId());
                     Map<String, Object> homeworkQuizSubmitUri = new HashMap<>();
                     homeworkQuizSubmitUri.put("homeworkQuiz", homeworkQuizUri);
                     homeworkQuizSubmitUri.put("homeworkQuizSubmit",
@@ -74,12 +74,14 @@ public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
 
             homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
 
-            homeworkSubmitPostHistory = (Map) homeworkSubmits.get(i).get("homeworkSubmitPostHistory");
+            homeworkSubmitPostHistory = (Map) homeworkSubmits.get(i)
+                    .get("homeworkSubmitPostHistory");
 
             HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
             homeworkPostHistory.setBranch((String) homeworkSubmitPostHistory.get("branch"));
             homeworkPostHistory.setVersion((String) homeworkSubmitPostHistory.get("version"));
-            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHistory.get("homeworkURL"));
+            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHistory
+                    .get("homeworkURL"));
             homeworkPostHistory.setStatus((Integer) homeworkSubmitPostHistory.get("status"));
             homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
 

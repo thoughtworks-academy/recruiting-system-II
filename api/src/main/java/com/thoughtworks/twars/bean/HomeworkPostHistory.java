@@ -48,6 +48,7 @@ public class HomeworkPostHistory {
     public void setBranch(String branch) {
         this.branch = branch;
     }
+
     public int getStatus() {
         return status;
     }
