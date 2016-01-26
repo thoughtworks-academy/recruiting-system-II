@@ -6,18 +6,13 @@ import com.thoughtworks.twars.service.quiz.scoresheet.BlankQuizScoreSheet;
 import com.thoughtworks.twars.service.quiz.scoresheet.HomeworkQuizScoreSheet;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Path("/scoresheets")
@@ -33,19 +28,19 @@ public class ScoreSheetResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         List<ScoreSheet> scoreSheets = scoreSheetMapper.findAll();
-        List result = new ArrayList<>();
 
         if (scoreSheets == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        for (int i = 0; i < scoreSheets.size(); i++) {
-            ScoreSheet scoreSheet = scoreSheets.get(i);
-            Map<String, String> map = new HashMap<>();
-            map.put("uri", "scoresheets/" + scoreSheet.getId());
+        List result = scoreSheets.stream()
+                .map(item -> {
+                    Map map = new HashMap();
+                    map.put("uri", "scoresheets/" + item.getId());
 
-            result.add(map);
-        }
+                    return map;
+                })
+                .collect(Collectors.toList());
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
@@ -78,9 +73,11 @@ public class ScoreSheetResource extends Resource {
         if (blankQuizSubmits != null) {
             blankQuizScoreSheet.insertQuizScoreSheet(data, scoreSheetId);
         }
+
         if (homeworkSubmits != null) {
             homeworkQuizScoreSheet.insertQuizScoreSheet(data, scoreSheetId);
         }
+
         Map result = new HashMap<>();
         result.put("uri", "scoresheets/" + scoreSheetId);
 
@@ -95,9 +92,11 @@ public class ScoreSheetResource extends Resource {
             @PathParam("id") int id
     ) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
+
         if (scoreSheet == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+
         Map<String, Object> examerUri = new HashMap<>();
         Map<String, Object> paperUri = new HashMap<>();
         examerUri.put("uri", "examer/" + scoreSheet.getExamerId());
