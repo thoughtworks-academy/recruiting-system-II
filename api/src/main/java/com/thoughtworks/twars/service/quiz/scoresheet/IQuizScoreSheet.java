@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.service.quiz.quizScoreSheet;
+package com.thoughtworks.twars.service.quiz.scoresheet;
 
 import java.util.List;
 import java.util.Map;

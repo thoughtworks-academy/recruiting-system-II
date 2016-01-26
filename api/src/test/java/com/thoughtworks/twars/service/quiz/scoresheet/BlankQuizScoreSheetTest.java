@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.service.quiz.quizScoreSheet;
+package com.thoughtworks.twars.service.quiz.scoresheet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,7 +16,6 @@ import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
