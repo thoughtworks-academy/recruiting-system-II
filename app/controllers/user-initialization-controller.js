@@ -35,7 +35,7 @@ UserInitializationController.prototype.initialLogicPuzzle = function (req, res) 
       var quizzes = responds.body.sections[0].quizzes[0];
       blankQuizId = quizzes.id;
       paperId = responds.body.id;
-      var itemsUri = quizzes.items.uri;
+      var itemsUri = quizzes.items_uri;
 
       done(null, itemsUri);
 
