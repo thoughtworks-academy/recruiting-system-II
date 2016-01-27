@@ -14,17 +14,15 @@ var SubmissionIntroduction = require('./component/submission-introduction.compon
 var RunningResult = require('./component/running-result.component');
 var HomeworkAction = require('./actions/homework-actions');
 
-function changeNumber() {
-  var homeworkNumber;
-  var getNumber = location.hash.substr(1);
-  if (getNumber === '') {
-    homeworkNumber = 1;
+function changeId() {
+  var orderId;
+  var getId = location.hash.substr(1);
+  if (getId === '') {
+    orderId = 1;
   } else {
-    homeworkNumber = parseInt(getNumber);
+    orderId = parseInt(getId);
   }
-  return {
-    currentHomeworkNumber: homeworkNumber
-  };
+  return  orderId;
 }
 
 window.onpopstate = function () {
@@ -37,24 +35,19 @@ function onAction(number) {
   history.pushState(null, '', '#' + number);
 }
 
-function getShowStatus() {
-  return {
-    showRepo: true
-  };
-}
 ReactDom.render(
     <div>
       <header>
         <Navigation />
       </header>
-      <HomeworkApp homeworkNumber={changeNumber().currentHomeworkNumber}>
+      <HomeworkApp orderId={changeId()}>
         <div className="row">
-          <HomeworkSidebar onAction={onAction} homeworkNumber={changeNumber().currentHomeworkNumber}/>
+          <HomeworkSidebar onAction={onAction} orderId={changeId()}/>
           <div className="col-md-9 col-sm-9 col-xs-12">
             <div className="content">
-              <Tabs defaultActiveKey={0} animation={false} getShowStatus={getShowStatus().showRepo}>
+              <Tabs defaultActiveKey={0} animation={false} getShowStatus={true}>
                 <Tab eventKey={0} title="题目说明"><HomeworkIntroduction /></Tab>
-                <Tab eventKey={1} title="提交说明"><SubmissionIntroduction homeworkNumber={changeNumber().currentHomeworkNumber}/></Tab>
+                <Tab eventKey={1} title="提交说明"><SubmissionIntroduction orderId={changeId()}/></Tab>
                 <Tab eventKey={2} title="运行结果"><RunningResult /></Tab>
               </Tabs>
             </div>

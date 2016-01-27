@@ -6,7 +6,7 @@ var HomeworkAction = require('../actions/homework-actions');
 var HomeworkApp = React.createClass({
 
   componentDidMount: function () {
-    HomeworkAction.changeOrderId(this.props.homeworkNumber);
+    HomeworkAction.changeOrderId(this.props.orderId);
   },
   render() {
 

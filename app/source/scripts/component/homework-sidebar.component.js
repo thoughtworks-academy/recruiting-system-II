@@ -16,8 +16,8 @@ var HomeworkSidebar = React.createClass({
     var list = [];
     return {
       homeworkStatusList: list,
-      currentHomeworkNumber: this.props.homeworkNumber,
-      clickNumber: this.props.homeworkNumber,
+      currentHomeworkNumber: this.props.orderId,
+      clickNumber: this.props.orderId,
       waitingNumber: null
     };
   },
