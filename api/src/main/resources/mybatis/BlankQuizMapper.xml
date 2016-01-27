@@ -21,7 +21,7 @@
     </select>
 
     <select id="findBySectionId" resultMap="blankQuizListMap">
-        select * from blankQuiz where sectionId  = #{sectionId};
+        select a.* from blankQuiz a , sectionQuiz b where a.id = b.quizId AND b.sectionId  = #{sectionId};
     </select>
 
     <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuiz">

@@ -15,7 +15,7 @@
     </resultMap>
 
     <select id="findBySectionId" resultMap="homeworkQuizListMap">
-        select * from homeworkQuiz where  sectionId = #{sectionId};
+        select a.* from homeworkQuiz a, sectionQuiz b where a.id = b.quizId AND b.sectionId = #{sectionId};
     </select>
 
     <select id="findById" resultType="com.thoughtworks.twars.bean.HomeworkQuiz">
