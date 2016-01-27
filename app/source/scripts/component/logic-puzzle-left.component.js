@@ -4,11 +4,7 @@ var React = require('react');
 
 
 var LogicPuzzleLeft = React.createClass({
-
-  handleAnswerChange: function(val) {
-    this.props.onAnswerChange(val);
-  },
-
+  
   render: function () {
     return (
         <div id="logic-puzzle">
