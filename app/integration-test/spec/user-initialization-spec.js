@@ -4,6 +4,7 @@ var express = require('express');
 var session = require('supertest-session');
 var app = require('../../app');
 var request = require('superagent');
+var httpStatusCode = require('../../mixin/constant').httpCode;
 
 var testSession = null;
 
@@ -23,11 +24,11 @@ describe('GET /LogicPuzzle', function(){
         },
         end: function(fn) {
           fn(null, {
-            body:{ userInfo: { uri: 'user/2' }, id: 2 },
-            status:200
-          })
+            body:{userInfo:{uri: 'user/2'}, id: 2},
+            status:httpStatusCode.OK
+          });
         }
-      }
+      };
     });
 
     testSession.get('/login')
@@ -36,7 +37,7 @@ describe('GET /LogicPuzzle', function(){
           account: 'test2@qq.com',
           password: '12345678'
         })
-        .expect(200)
+        .expect(httpStatusCode.OK)
         .end(function(err, res) {
           if (err) {
             done.fail(err);
@@ -54,7 +55,7 @@ describe('GET /LogicPuzzle', function(){
         .query({
           orderId: 1
         })
-        .expect(200)
+        .expect(httpStatusCode.OK)
         .end(function(err, res) {
           if (err) {
             done.fail(err);

@@ -61,7 +61,7 @@ var env;
 if(process.env.NODE_ENV !== 'test'){
   env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 } else {
-  env = process.env.NODE_ENV
+  env = process.env.NODE_ENV;
 }
 
 if (env === 'development' || env === 'test') {
