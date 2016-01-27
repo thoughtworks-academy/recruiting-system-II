@@ -231,7 +231,7 @@ baseUri: http://api.bronzesword.com/
           makerId: integer
           sections[]:
             properties:
-              desc: string
+              description: string
                 # description: Markdown String to discribe what happen in the future
               quizzes[]:
                 properties:
@@ -257,7 +257,7 @@ baseUri: http://api.bronzesword.com/
                   "sections": [
                     {
                       "id": 1,
-                      "desc": "逻辑题",
+                      "description": "逻辑题",
                       "quizzes": [
                         {
                           "id": 1,
@@ -276,7 +276,7 @@ baseUri: http://api.bronzesword.com/
                     []:
                       properties:
                         id: integer
-                        desc: string
+                        description: string
                           # description: Markdown String to discribe what happen in the future
                         quizzes:
                           properties:
@@ -301,7 +301,7 @@ baseUri: http://api.bronzesword.com/
                   "sections": [
                     {
                       "id": 1,
-                      "desc": "逻辑题",
+                      "description": "逻辑题",
                       "quizzes": [
                         {
                           "id": 1,
@@ -313,7 +313,7 @@ baseUri: http://api.bronzesword.com/
                     },
                     {
                       "id": 2,
-                      "desc": "dojo",
+                      "description": "dojo",
                       "quizzes" : [
                         {
                           "id": 1,
@@ -331,7 +331,7 @@ baseUri: http://api.bronzesword.com/
                     []:
                       properties:
                         id: integer
-                        desc: string
+                        description: string
                           # description: Markdown String to discribe what happen in the future
                         quizzes:
                           properties:
@@ -429,8 +429,6 @@ baseUri: http://api.bronzesword.com/
         properties:
           id: integer
           initializedBox: string
-          question: string
-          description: string
           descriptionZh: string
           chartPath: string
           stepsString: string
@@ -491,7 +489,7 @@ baseUri: http://api.bronzesword.com/
             application/json:
               properties:
                 id: integer
-                desc: string
+                description: string
                   # description: Markdown String to discribe homework requirement
                 evaluateScript: string
                 evaluateRepository: string

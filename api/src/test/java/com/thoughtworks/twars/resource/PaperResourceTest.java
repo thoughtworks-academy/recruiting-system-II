@@ -177,7 +177,7 @@ public class PaperResourceTest extends TestBase {
         String decription = "这是一个描述";
 
         Map section = new HashMap<>();
-        section.put("desc", decription);
+        section.put("description", decription);
         section.put("quizzes", quizzes);
 
         List sections = new ArrayList<>();
