@@ -15,11 +15,15 @@ var LogicPuzzleSidebar = React.createClass({
   getInitialState: function(){
     return {
       lastLoad: false,
-      nextLoad: false
-    };
+      nextLoad: false,
+      loading: false
+    }
   },
 
   submitPaper: function () {
+    this.setState({
+      loading: true
+    });
     LogicPuzzleActions.submitPaper();
   },
 
@@ -101,7 +105,9 @@ var LogicPuzzleSidebar = React.createClass({
                   <b>您确定要交卷么?一旦提交将无法继续修改!</b>
 
                   <div className="modal-footer">
-                    <a className="btn btn-danger submit" onClick={this.submitPaper}>确认提交</a>
+                    <a className="btn btn-danger submit" onClick={this.submitPaper}>确认提交
+                      <i className={'fa fa-spinner fa-spin' + (this.state.loading ? '' : ' hide')}/>
+                    </a>
                     <a className="btn btn-default" data-dismiss="modal">关闭</a>
                   </div>
                 </div>

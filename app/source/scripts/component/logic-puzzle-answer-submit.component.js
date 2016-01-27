@@ -11,12 +11,21 @@ require('bootstrap');
 var LogicPuzzleAnswerSubmit = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore)],
 
+  getInitialState: function(){
+    return {
+      submitLoad: false
+    };
+  },
+
   submitAnswer: function () {
     var answer = this.state.userAnswer;
     if (answer !== null && answer !== '') {
       var newOrderId = this.state.orderId < this.state.itemsCount -1 ?
                        this.state.orderId + 1:
                        this.state.orderId;
+      this.setState({
+        submitLoad: true
+      });
       LogicPuzzleActions.submitAnswer( newOrderId );
     } else {
       $('#warningModal').modal('show');
@@ -44,8 +53,10 @@ var LogicPuzzleAnswerSubmit = React.createClass({
               </div>
               <div className="col-md-4 col-sm-4 col-xs-4">
                 <button type="text" className="btn btn-danger"
-                        disabled={this.state.isExample ? 'disabled' : ''}
-                        onClick={this.submitAnswer}>提交</button>
+                        disabled={this.state.isExample || this.state.submitLoad ? 'disabled' : ''}
+                        onClick={this.submitAnswer}>提交
+                  <i className={'fa fa-spinner fa-spin' + (this.state.submitLoad ? '' : ' hide')}/>
+                </button>
               </div>
             </div>
           </div>
