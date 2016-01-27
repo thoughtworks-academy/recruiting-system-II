@@ -29,6 +29,7 @@ var SubmissionIntroduction = React.createClass({
       githubUrl: '',
       githubBranch: '',
       submited: false,
+      checked: false,
       showIcon: false
     };
   },
@@ -71,7 +72,7 @@ var SubmissionIntroduction = React.createClass({
     HomeworkActions.changeGithubUrl(val);
   },
   render() {
-    if (this.state.submited) {
+    if (this.state.submited && !this.state.checked) {
       HomeworkActions.submited(this.state.currentHomeworkNumber);
     }
 

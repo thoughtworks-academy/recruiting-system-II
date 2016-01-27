@@ -19,6 +19,7 @@ var submissionIntroductionStore = Reflux.createStore({
       githubUrl: '',
       githubBranch: '',
       submited: false,
+      checked: false,
       showIcon: false
     });
   },
