@@ -50,19 +50,21 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-global.apiServer = 'http://localhost:8080/api/';
-
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
 app.use(bodyParser.json());
 
+var env;
 
-var env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+if(process.env.NODE_ENV !== 'test'){
+  env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+} else {
+  env = process.env.NODE_ENV
+}
 
-if (env === 'development') {
+if (env === 'development' || env === 'test') {
   var compile = webpack(require('./webpack.config'));
   app.use(webpackDevMiddleware(compile, {
     publicPath: '/assets/',   // 以/assets/作为请求的公共目录
@@ -81,7 +83,18 @@ app.use(express.static('public'));
 route.setRoutes(app);
 
 var port = 3000;
+var testPort = 5000;
 
-app.listen(port, function () {
-  console.log('App listening at http://localhost:3000');
-});
+if(env === 'test'){
+  app.listen(testPort, function () {
+    console.log('App listening at http://localhost:' + testPort);
+  });
+} else {
+  app.listen(port, function () {
+    console.log('App listening at http://localhost:' + port);
+  });
+}
+
+
+
+module.exports = app;
