@@ -73,16 +73,16 @@ public class Section {
     }
 
     private String getItemsUri(Integer id) {
-        if("blankQuizzes".equals(type)) {
+        if ("blankQuizzes".equals(type)) {
             return "blankQuizzes/" + id + "/items";
         }
         return null;
     }
 
     private String getDefinition(Integer id) {
-        if("blankQuizzes".equals(type) ) {
+        if ("blankQuizzes".equals(type)) {
             return "blankQuizzes/" + id;
-        } else if("homeworkQuizzes".equals(type)) {
+        } else if ("homeworkQuizzes".equals(type)) {
             return "homeworkQuizzes/" + id;
         }
         return null;

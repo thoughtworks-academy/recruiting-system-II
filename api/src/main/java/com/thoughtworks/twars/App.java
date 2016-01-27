@@ -59,11 +59,13 @@ public class App extends ResourceConfig {
         blankQuizScoreSheet.setBlankQuizSubmitMapper(blankQuizSubmitMapper);
         blankQuizScoreSheet.setItemPostMapper(itemPostMapper);
 
-        final HomeworkQuizScoreSheetService homeworkQuizScoreSheet = new HomeworkQuizScoreSheetService();
+        final HomeworkQuizScoreSheetService homeworkQuizScoreSheet =
+                new HomeworkQuizScoreSheetService();
         homeworkQuizScoreSheet.setHomeworkPostHistoryMapper(homeworkPostHistoryMapper);
         homeworkQuizScoreSheet.setHomeworkSubmitMapper(homeworkSubmitMapper);
 
-        final HomeworkQuizDefinitionService homeworkQuizDefinition = new HomeworkQuizDefinitionService();
+        final HomeworkQuizDefinitionService homeworkQuizDefinition =
+                new HomeworkQuizDefinitionService();
         homeworkQuizDefinition.setMapper(homeworkQuizMapper);
         homeworkQuizDefinition.setSectionMapper(sectionMapper);
         homeworkQuizDefinition.setSectionQuizMapper(sectionQuizMapper);
