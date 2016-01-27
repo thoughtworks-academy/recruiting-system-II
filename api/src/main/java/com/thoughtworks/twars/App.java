@@ -34,6 +34,9 @@ public class App extends ResourceConfig {
         final SectionMapper sectionMapper = session
                 .getMapper(SectionMapper.class);
 
+        final SectionQuizMapper sectionQuizMapper = session
+                .getMapper(SectionQuizMapper.class);
+
         final ScoreSheetMapper scoreSheetMapper = session
                 .getMapper(ScoreSheetMapper.class);
 
@@ -78,6 +81,7 @@ public class App extends ResourceConfig {
                         bind(blankQuizMapper).to(BlankQuizMapper.class);
                         bind(quizItemMapper).to(QuizItemMapper.class);
                         bind(sectionMapper).to(SectionMapper.class);
+                        bind(sectionQuizMapper).to(SectionQuizMapper.class);
                         bind(scoreSheetMapper).to(ScoreSheetMapper.class);
                         bind(blankQuizSubmitMapper).to(BlankQuizSubmitMapper.class);
                         bind(itemPostMapper).to(ItemPostMapper.class);
