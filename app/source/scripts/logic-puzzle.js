@@ -14,6 +14,7 @@ var LogicPuzzleChart = require('./component/logic-puzzle-chart.component');
 var LogicPuzzleDescription = require('./component/logic-puzzle-description.component');
 var LogicPuzzleAnswerSubmit = require('./component/logic-puzzle-answer-submit.component');
 var LogicPuzzleTimer = require('./component/logic-puzzle-timer.component');
+var LogicPuzzleActions = require('./actions/logic-puzzle-actions');
 var Navigation = require('./component/navigation.component');
 
 $('#submitModal').on('show.bs.modal', function () {
@@ -21,6 +22,9 @@ $('#submitModal').on('show.bs.modal', function () {
       .css('margin-top', '230px');
 });
 
+function handleTimeOver(){
+  LogicPuzzleActions.timeOver();
+}
 
 ReactDOM.render(
     <div>
@@ -38,7 +42,7 @@ ReactDOM.render(
         </div>
         <div className="col-md-3 col-sm-4">
           <LogicPuzzleSidebar>
-            <LogicPuzzleTimer/>
+            <LogicPuzzleTimer onTimeOver={handleTimeOver}/>
           </LogicPuzzleSidebar>
         </div>
       </LogicPuzzle>

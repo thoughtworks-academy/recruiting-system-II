@@ -3,7 +3,6 @@
 var React = require('react');
 var Reflux = require('reflux');
 var TimerStore = require('../store/timer-store');
-var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var TimerActions = require('../actions/timer-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var constant = require('../../../mixin/constant');
@@ -22,7 +21,7 @@ var LogicPuzzleTimer = React.createClass({
         var remainTime = this.state.remainTime - 1;
 
         if(remainTime <= 0){
-          LogicPuzzleActions.timeOver();
+          this.props.onTimeOver();
         }
 
         this.setState({
