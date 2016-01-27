@@ -21,8 +21,8 @@
     <resultMap id="SectionResultMap" type="com.thoughtworks.twars.bean.Section" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <!--        one to many     -->
-        <!--<collection property="sections" column="id" javaType="ArrayList" ofType="com.thoughtworks.twars.bean.Section"-->
-                    <!--select="selectPaperFromSection"/>-->
+        <collection property="quizzes" column="id" javaType="ArrayList" ofType="com.thoughtworks.twars.bean.SectionQuiz"
+                    select="selectQuizFromSectionQuiz"/>
     </resultMap>
 
     <select id="findAll" resultMap="paperListMap">
@@ -36,6 +36,12 @@
     <select id="selectPaperFromSection" parameterType="java.lang.Integer" resultMap="SectionResultMap">
         SELECT * FROM section WHERE paperId=#{paperId}
     </select>
+
+    <select id="selectQuizFromSectionQuiz" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT quizId  FROM sectionQuiz WHERE sectionId=#{sectionId}
+    </select>
+
+
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO paper(makerId)

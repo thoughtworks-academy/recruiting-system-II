@@ -32,7 +32,9 @@ public class PaperMapperTest extends TestBase {
 
         assertThat(paper.getId(), is(1));
         assertThat(paper.getMakerId(), is(1));
+        paper.getResponseInfo();
         assertThat(paper.getSections().size(), is(2));
+
     }
 
     @Test
