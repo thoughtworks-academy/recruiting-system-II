@@ -13,6 +13,7 @@
         <result column="hardCount" property="hardCount"></result>
         <result column="normalCount" property="normalCount"></result>
         <result column="easyCount" property="easyCount"></result>
+        <result column="exampleCount" property="exampleCount"></result>
     </resultMap>
 
     <select id="findAll" resultMap="blankQuizListMap">
@@ -28,8 +29,8 @@
     </select>
 
     <insert id="insertBlankQuiz" parameterType="com.thoughtworks.twars.bean.BlankQuiz" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO blankQuiz(type,hardCount,normalCount,easyCount)
-        VALUES (#{type},#{hardCount},#{normalCount},#{easyCount});
+        INSERT INTO blankQuiz(type,hardCount,normalCount,easyCount,exampleCount)
+        VALUES (#{type},#{hardCount},#{normalCount},#{easyCount},#{exampleCount});
     </insert>
 
     <update id="updateBlankQuiz">

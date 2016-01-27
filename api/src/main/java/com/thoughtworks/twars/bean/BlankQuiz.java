@@ -8,6 +8,16 @@ public class BlankQuiz {
     private int normalCount;
     private int easyCount;
 
+    public void setExampleCount(int exampleCount) {
+        this.exampleCount = exampleCount;
+    }
+
+    private int exampleCount;
+
+    public int getExampleCount() {
+        return exampleCount;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

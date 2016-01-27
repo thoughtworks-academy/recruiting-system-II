@@ -33,6 +33,7 @@ public class BlankQuizMapperTest extends TestBase {
         blankQuiz.setHardCount(3);
         blankQuiz.setNormalCount(4);
         blankQuiz.setEasyCount(3);
+        blankQuiz.setExampleCount(2);
 
         blankQuizMapper.insertBlankQuiz(blankQuiz);
 
@@ -48,9 +49,10 @@ public class BlankQuizMapperTest extends TestBase {
     @Test
     public void should_return_count_object_by_given_id() throws Exception {
         BlankQuiz blankQuiz = blankQuizMapper.findOne(1);
-        assertThat(blankQuiz.getNormalCount(), is(4));
+        assertThat(blankQuiz.getNormalCount(), is(3));
         assertThat(blankQuiz.getHardCount(), is(3));
-        assertThat(blankQuiz.getEasyCount(), is(3));
+        assertThat(blankQuiz.getEasyCount(), is(4));
+        assertThat(blankQuiz.getExampleCount(), is(2));
     }
 
     @Test

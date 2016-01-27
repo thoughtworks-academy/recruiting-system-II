@@ -148,6 +148,7 @@ public class BlankQuizResourceTest extends TestBase {
         QuizItem secondExampleItems = mock(QuizItem.class);
 
         when(blankQuizMapper.findOne(anyInt())).thenReturn(firstBlankQuiz);
+        when(firstBlankQuiz.getExampleCount()).thenReturn(2);
         when(firstExampleItems.getId()).thenReturn(88);
         when(secondExampleItems.getId()).thenReturn(99);
         when(firstExampleItems.getInitializedBox()).thenReturn("InitializedBox 88");
@@ -155,7 +156,7 @@ public class BlankQuizResourceTest extends TestBase {
         when(firstExampleItems.getChartPath()).thenReturn("ChartPath 88");
         when(firstExampleItems.getDescriptionZh()).thenReturn("Description 88");
         when(firstExampleItems.getAnswer()).thenReturn("3");
-        when(quizItemMapper.getExampleItems()).thenReturn(Arrays.asList(firstExampleItems, secondExampleItems));
+        when(quizItemMapper.getExampleItems(2)).thenReturn(Arrays.asList(firstExampleItems, secondExampleItems));
 
         Response response = target(basePath + "/1/items").request().get();
 
@@ -209,7 +210,7 @@ public class BlankQuizResourceTest extends TestBase {
 
     @Test
     public void should_return_error_info_when_get_example_items() {
-        when(quizItemMapper.getExampleItems()).thenReturn(null);
+        when(quizItemMapper.getExampleItems(2)).thenReturn(null);
 
         Response response = target(basePath + "/2/items").request().get();
         assertThat(response.getStatus(), is(404));

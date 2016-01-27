@@ -67,7 +67,7 @@ public class QuizItemMapperTest extends TestBase {
     @Test
     public void should_return_example_item() throws Exception {
 
-        List<QuizItem> exampleItems = quizItemMapper.getExampleItems();
+        List<QuizItem> exampleItems = quizItemMapper.getExampleItems(2);
         assertThat(exampleItems.size(), is(2));
         assertThat(exampleItems.size(), is(lessThan(15)));
     }

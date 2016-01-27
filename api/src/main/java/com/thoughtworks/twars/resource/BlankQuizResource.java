@@ -140,7 +140,8 @@ public class BlankQuizResource {
                     .entity(errorInfo).build();
         }
 
-        List<QuizItem> exampleItems = quizItemMapper.getExampleItems();
+        List<QuizItem> exampleItems = quizItemMapper
+                .getExampleItems(blankQuiz.getExampleCount());
 
         if (exampleItems == null) {
             Map errorInfo = new HashMap<>();
