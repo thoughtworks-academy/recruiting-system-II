@@ -100,6 +100,10 @@ var LogicPuzzleStore = Reflux.createStore({
           orderId: _currentIndex
         })
         .end(callback);
+  },
+
+  onTimeOver: function (){
+    this.onSubmitPaper();
   }
 
 });

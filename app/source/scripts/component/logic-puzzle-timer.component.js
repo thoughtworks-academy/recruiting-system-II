@@ -21,7 +21,6 @@ var LogicPuzzleTimer = React.createClass({
         var remainTime = this.state.remainTime - 1;
 
         if(remainTime <= 0){
-          LogicPuzzleActions.submitPaper();
           LogicPuzzleActions.timeOver();
         }
 
