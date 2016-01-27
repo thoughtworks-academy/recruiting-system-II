@@ -66,10 +66,12 @@ public class App extends ResourceConfig {
         final HomeworkQuizDefinitionService homeworkQuizDefinition = new HomeworkQuizDefinitionService();
         homeworkQuizDefinition.setMapper(homeworkQuizMapper);
         homeworkQuizDefinition.setSectionMapper(sectionMapper);
+        homeworkQuizDefinition.setSectionQuizMapper(sectionQuizMapper);
 
         final BlankQuizDefinitionService blankQuizDefinition = new BlankQuizDefinitionService();
         blankQuizDefinition.setBlankQuizMapper(blankQuizMapper);
         blankQuizDefinition.setSectionMapper(sectionMapper);
+        blankQuizDefinition.setSectionQuizMapper(sectionQuizMapper);
 
 
         packages("com.thoughtworks.twars.resource")

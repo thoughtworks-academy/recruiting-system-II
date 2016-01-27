@@ -2,8 +2,10 @@ package com.thoughtworks.twars.service.quiz.definition;
 
 import com.thoughtworks.twars.bean.BlankQuiz;
 import com.thoughtworks.twars.bean.Section;
+import com.thoughtworks.twars.bean.SectionQuiz;
 import com.thoughtworks.twars.mapper.BlankQuizMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
+import com.thoughtworks.twars.mapper.SectionQuizMapper;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -20,6 +22,9 @@ public class BlankQuizDefinitionService implements IDefinitionService {
     @Inject
     SectionMapper sectionMapper;
 
+    @Inject
+    SectionQuizMapper sectionQuizMapper;
+
     public void setBlankQuizMapper(BlankQuizMapper blankQuizMapper) {
         this.blankQuizMapper = blankQuizMapper;
     }
@@ -28,6 +33,9 @@ public class BlankQuizDefinitionService implements IDefinitionService {
         this.sectionMapper = sectionMapper;
     }
 
+    public void setSectionQuizMapper(SectionQuizMapper sectionQuizMapper) {
+        this.sectionQuizMapper = sectionQuizMapper;
+    }
 
     @Override
     public int insertQuizDefinition(Map quiz, String decription, int paperId) {
@@ -38,7 +46,11 @@ public class BlankQuizDefinitionService implements IDefinitionService {
 
         sectionMapper.insertSection(section);
 
-        blankQuizMapper.updateBlankQuiz((Integer) quiz.get("quizId"), section.getId());
+        SectionQuiz sectionQuiz = new SectionQuiz();
+        sectionQuiz.setQuizId((Integer) quiz.get("quizId"));
+        sectionQuiz.setSectionId(section.getId());
+
+        sectionQuizMapper.insertSectionQuiz(sectionQuiz);
 
         return paperId;
     }

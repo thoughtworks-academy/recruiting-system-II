@@ -15,4 +15,8 @@
         SELECT * FROM sectionQuiz WHERE sectionId = #{sectionId};
     </select>
 
+    <insert id="insertSectionQuiz"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sectionQuiz(sectionId,quizId)
+        VALUES (#{sectionId},#{quizId});
+    </insert>
 </mapper>

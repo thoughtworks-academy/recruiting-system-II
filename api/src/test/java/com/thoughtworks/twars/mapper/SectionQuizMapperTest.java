@@ -25,4 +25,15 @@ public class SectionQuizMapperTest extends TestBase{
 
         assertThat(sectionQuizs.size(), is(2));
     }
+
+    @Test
+    public void should_return_id_when_insert_section_quiz(){
+        SectionQuiz sectionQuiz = new SectionQuiz();
+        sectionQuiz.setQuizId(1);
+        sectionQuiz.setSectionId(2);
+
+        sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+
+        assertThat(sectionQuiz.getId(), is(7));
+    }
 }
