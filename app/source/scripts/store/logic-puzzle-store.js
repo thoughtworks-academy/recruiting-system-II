@@ -104,6 +104,9 @@ var LogicPuzzleStore = Reflux.createStore({
 
   onTimeOver: function (){
     this.onSubmitPaper();
+    this.trigger({
+      'showModal': true
+    });
   }
 
 });

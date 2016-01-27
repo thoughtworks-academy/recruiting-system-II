@@ -8,7 +8,6 @@ var LogicPuzzleActions = Reflux.createActions([
   'saveUserAnswer',
   'changeAnswer',
   'submitPaper',
-  'getRemainTime',
   'timeOver'
 ]);
 

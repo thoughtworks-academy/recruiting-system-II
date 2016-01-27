@@ -2,11 +2,9 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-
+var TimerStore = require('../store/timer-store');
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
-var TimerStore = require('../store/timer-store');
-
 var Modal = require('react-bootstrap/lib/Modal');
 var Button = require('react-bootstrap/lib/Button');
 
