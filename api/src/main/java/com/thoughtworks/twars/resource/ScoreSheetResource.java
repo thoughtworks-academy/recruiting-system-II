@@ -2,8 +2,8 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.ScoreSheet;
 import com.thoughtworks.twars.mapper.ScoreSheetMapper;
-import com.thoughtworks.twars.service.quiz.scoresheet.BlankQuizScoreSheet;
-import com.thoughtworks.twars.service.quiz.scoresheet.HomeworkQuizScoreSheet;
+import com.thoughtworks.twars.service.quiz.scoresheet.BlankQuizScoreSheetService;
+import com.thoughtworks.twars.service.quiz.scoresheet.HomeworkQuizScoreSheetService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -20,9 +20,9 @@ public class ScoreSheetResource extends Resource {
     @Inject
     private ScoreSheetMapper scoreSheetMapper;
     @Inject
-    private BlankQuizScoreSheet blankQuizScoreSheet;
+    private BlankQuizScoreSheetService blankQuizScoreSheet;
     @Inject
-    private HomeworkQuizScoreSheet homeworkQuizScoreSheet;
+    private HomeworkQuizScoreSheetService homeworkQuizScoreSheet;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

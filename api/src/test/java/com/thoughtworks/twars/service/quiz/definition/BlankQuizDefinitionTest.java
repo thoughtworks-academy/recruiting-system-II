@@ -34,7 +34,7 @@ public class BlankQuizDefinitionTest {
     SectionMapper sectionMapper;
 
     @InjectMocks
-    BlankQuizDefinition definition;
+    BlankQuizDefinitionService definition;
 
 
     @Test

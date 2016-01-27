@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 public class BlankQuizResourceTest extends TestBase {
 
-    String basePath = "/blankQuizzes";
+    String basePath = "blankQuizzes";
     BlankQuiz firstBlankQuiz = mock(BlankQuiz.class);
     BlankQuiz secondBlankQuiz = mock(BlankQuiz.class);
 

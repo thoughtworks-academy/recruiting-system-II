@@ -35,7 +35,7 @@ public class HomeworkQuizScoreSheetTest {
     HomeworkSubmit homeworkSubmit;
 
     @InjectMocks
-    HomeworkQuizScoreSheet homeworkQuizScoreSheet;
+    HomeworkQuizScoreSheetService homeworkQuizScoreSheet;
 
     @Test
     public void should_return_homework_list() {

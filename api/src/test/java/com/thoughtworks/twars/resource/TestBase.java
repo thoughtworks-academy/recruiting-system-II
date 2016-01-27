@@ -1,10 +1,10 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.mapper.*;
-import com.thoughtworks.twars.service.quiz.scoresheet.BlankQuizScoreSheet;
-import com.thoughtworks.twars.service.quiz.scoresheet.HomeworkQuizScoreSheet;
-import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
-import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
+import com.thoughtworks.twars.service.quiz.scoresheet.BlankQuizScoreSheetService;
+import com.thoughtworks.twars.service.quiz.scoresheet.HomeworkQuizScoreSheetService;
+import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinitionService;
+import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinitionService;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -27,10 +27,10 @@ public class TestBase extends JerseyTest {
     protected HomeworkQuizMapper homeworkQuizMapper = mock(HomeworkQuizMapper.class);
     protected HomeworkSubmitMapper homeworkSubmitMapper = mock(HomeworkSubmitMapper.class);
     protected HomeworkPostHistoryMapper homeworkPostHistoryMapper = mock(HomeworkPostHistoryMapper.class);
-    protected HomeworkQuizDefinition homeworkQuizDefinition = mock(HomeworkQuizDefinition.class);
-    protected BlankQuizDefinition blankQuizDefinition = mock(BlankQuizDefinition.class);
-    protected BlankQuizScoreSheet blankQuizScoreSheet = mock(BlankQuizScoreSheet.class);
-    protected HomeworkQuizScoreSheet homeworkQuizScoreSheet = mock(HomeworkQuizScoreSheet.class);
+    protected HomeworkQuizDefinitionService homeworkQuizDefinition = mock(HomeworkQuizDefinitionService.class);
+    protected BlankQuizDefinitionService blankQuizDefinition = mock(BlankQuizDefinitionService.class);
+    protected BlankQuizScoreSheetService blankQuizScoreSheet = mock(BlankQuizScoreSheetService.class);
+    protected HomeworkQuizScoreSheetService homeworkQuizScoreSheet = mock(HomeworkQuizScoreSheetService.class);
 
 
     @Override
@@ -53,10 +53,10 @@ public class TestBase extends JerseyTest {
                 bind(homeworkQuizMapper).to(HomeworkQuizMapper.class);
                 bind(homeworkSubmitMapper).to(HomeworkSubmitMapper.class);
                 bind(homeworkPostHistoryMapper).to(HomeworkPostHistoryMapper.class);
-                bind(homeworkQuizDefinition).to(HomeworkQuizDefinition.class);
-                bind(blankQuizDefinition).to(BlankQuizDefinition.class);
-                bind(blankQuizScoreSheet).to(BlankQuizScoreSheet.class);
-                bind(homeworkQuizScoreSheet).to(HomeworkQuizScoreSheet.class);
+                bind(homeworkQuizDefinition).to(HomeworkQuizDefinitionService.class);
+                bind(blankQuizDefinition).to(BlankQuizDefinitionService.class);
+                bind(blankQuizScoreSheet).to(BlankQuizScoreSheetService.class);
+                bind(homeworkQuizScoreSheet).to(HomeworkQuizScoreSheetService.class);
             }
         }).packages("com.thoughtworks.twars.resource");
     }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BlankQuizScoreSheet implements IQuizScoreSheet {
+public class BlankQuizScoreSheetService implements IScoreSheetService {
     @Inject
     private BlankQuizSubmitMapper blankQuizSubmitMapper;
 

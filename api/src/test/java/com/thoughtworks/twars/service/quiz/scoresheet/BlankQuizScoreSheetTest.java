@@ -34,7 +34,7 @@ public class BlankQuizScoreSheetTest {
     BlankQuizSubmit blankQuizSubmit;
 
     @InjectMocks
-    BlankQuizScoreSheet blankQuizScoreSheet;
+    BlankQuizScoreSheetService blankQuizScoreSheet;
 
     @Test
     public void should_return_blank_quiz_list() {
@@ -78,6 +78,5 @@ public class BlankQuizScoreSheetTest {
         data.put("paperId", 4);
         data.put("blankQuizSubmits",blankQuizSubmits);
         blankQuizScoreSheet.insertQuizScoreSheet(data,2);
-
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HomeworkQuizScoreSheet implements IQuizScoreSheet {
+public class HomeworkQuizScoreSheetService implements IScoreSheetService {
     @Inject
     private HomeworkSubmitMapper homeworkSubmitMapper;
 

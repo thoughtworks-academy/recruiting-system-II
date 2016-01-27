@@ -3,8 +3,8 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
-import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinition;
-import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinition;
+import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinitionService;
+import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinitionService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -25,9 +25,9 @@ public class PaperResource extends Resource {
     @Inject
     private SectionMapper sectionMapper;
     @Inject
-    private HomeworkQuizDefinition homeworkQuizDefinition;
+    private HomeworkQuizDefinitionService homeworkQuizDefinition;
     @Inject
-    private BlankQuizDefinition blankQuizDefinition;
+    private BlankQuizDefinitionService blankQuizDefinition;
 
 
     @GET

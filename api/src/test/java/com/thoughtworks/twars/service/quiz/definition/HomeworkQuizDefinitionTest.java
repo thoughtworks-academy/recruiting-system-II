@@ -34,7 +34,7 @@ public class HomeworkQuizDefinitionTest {
     SectionMapper sectionMapper;
 
     @InjectMocks
-    HomeworkQuizDefinition definition;
+    HomeworkQuizDefinitionService definition;
 
     @Test
     public void should_return_correct_uri_list() throws Exception {
