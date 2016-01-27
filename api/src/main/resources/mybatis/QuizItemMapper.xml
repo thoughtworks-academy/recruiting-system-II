@@ -17,8 +17,8 @@
     </select>
 
     <insert id="insertQuizItem" parameterType="com.thoughtworks.twars.bean.QuizItem" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO quizItem(initializedBox,stepsString,count,question,questionZh,stepsLength,answer,maxUpdateTimes,description,descriptionZh,chartPath,infoPath)
-        VALUES (#{initializedBox},#{stepsString},#{count},"",#{questionZh},#{stepsLength},#{answer},#{maxUpdateTimes},"",#{descriptionZh},#{chartPath},#{infoPath})
+        INSERT INTO quizItem(initializedBox,stepsString,count,questionZh,stepsLength,answer,maxUpdateTimes,descriptionZh,chartPath,infoPath)
+        VALUES (#{initializedBox},#{stepsString},#{count},#{questionZh},#{stepsLength},#{answer},#{maxUpdateTimes},#{descriptionZh},#{chartPath},#{infoPath})
     </insert>
 
     <select id="getQuizItemById" resultType="com.thoughtworks.twars.bean.QuizItem" >
