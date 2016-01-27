@@ -85,7 +85,7 @@ var LoginForm = React.createClass({
               </div>
             </div>
             <button type="button" id="login-btn" className="btn btn-lg btn-block btn-primary" onClick={this.login} disabled={this.state.clickable}>登陆
-              <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}></i>
+              <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
             </button>
           </form>
         </div>

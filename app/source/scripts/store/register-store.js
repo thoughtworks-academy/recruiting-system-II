@@ -110,7 +110,7 @@ var RegisterStore = Reflux.createStore({
     this.trigger({
       password: password
     });
-  },
+  }
 });
 
 module.exports = RegisterStore;
