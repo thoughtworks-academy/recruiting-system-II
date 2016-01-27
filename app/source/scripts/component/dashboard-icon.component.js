@@ -5,11 +5,11 @@
 var React = global.React = require('react');
 var Col = require('react-bootstrap/lib/Col');
 var Reflux = require('reflux');
-var DashbordActions = require('../actions/dashbord-actions');
-var DashbordStore = require('../store/dashbord-store');
+var DashboardActions = require('../actions/dashboard-actions');
+var DashboardStore = require('../store/dashboard-store');
 
 var DashboardIcon = React.createClass({
-  mixins: [Reflux.connect(DashbordStore)],
+  mixins: [Reflux.connect(DashboardStore)],
 
   getInitialState: function(){
     return {
@@ -19,11 +19,11 @@ var DashboardIcon = React.createClass({
   },
 
   showPrompt: function (puzzleEnabled, homeworkEnabled, event){
-    DashbordActions.showPrompt(puzzleEnabled, homeworkEnabled, event);
+    DashboardActions.showPrompt(puzzleEnabled, homeworkEnabled, event);
   },
 
   hidePrompt: function (){
-    DashbordActions.hidePrompt();
+    DashboardActions.hidePrompt();
   },
 
   render() {

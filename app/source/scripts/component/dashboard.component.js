@@ -3,15 +3,15 @@
 var React = global.React = require('react');
 var Reflux = require('reflux');
 
-var DashbordActions = require('../actions/dashbord-actions');
-var DashbordStore = require('../store/dashbord-store');
+var DashboardActions = require('../actions/dashboard-actions');
+var DashboardStore = require('../store/dashboard-store');
 
 var Dashboard = React.createClass({
 
-  mixins: [Reflux.connect(DashbordStore)],
+  mixins: [Reflux.connect(DashboardStore)],
 
   componentDidMount: function () {
-    DashbordActions.getStatus();
+    DashboardActions.getStatus();
   },
 
   render() {

@@ -1,11 +1,11 @@
 'use strict';
 
 var Reflux = require('reflux');
-var DashbordActions = require('../actions/dashbord-actions');
+var DashboardActions = require('../actions/dashboard-actions');
 var request = require('superagent');
 
-var DashbordStore = Reflux.createStore({
-  listenables: DashbordActions,
+var DashboardStore = Reflux.createStore({
+  listenables: DashboardActions,
 
   onGetStatus: function () {
     request.get('/dashboard')
@@ -44,4 +44,4 @@ var DashbordStore = Reflux.createStore({
 
 });
 
-module.exports = DashbordStore;
+module.exports = DashboardStore;
