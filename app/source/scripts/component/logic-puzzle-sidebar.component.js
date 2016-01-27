@@ -12,6 +12,13 @@ var able = false;
 var LogicPuzzleSidebar = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore)],
 
+  getInitialState: function(){
+    return {
+      lastLoad: false,
+      nextLoad: false
+    }
+  },
+
   submitPaper: function () {
     LogicPuzzleActions.submitPaper();
   },
@@ -20,6 +27,9 @@ var LogicPuzzleSidebar = React.createClass({
     if(this.state.orderId > 0 ){
       _newOrderId = this.state.orderId - 1;
     }
+    this.setState({
+      lastLoad: true
+    });
     LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
@@ -27,6 +37,9 @@ var LogicPuzzleSidebar = React.createClass({
     if(this.state.orderId < this.state.itemsCount - 1 ){
       _newOrderId = this.state.orderId + 1;
     }
+    this.setState({
+      nextLoad: true
+    });
     LogicPuzzleActions.submitAnswer(_newOrderId);
   },
 
@@ -59,10 +72,12 @@ var LogicPuzzleSidebar = React.createClass({
 
           <div className="select">
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={isFirst ? 'disabled' : ''} onClick={isFirst? '' : this.previous}>上一题
+                    disabled={isFirst || this.state.lastLoad ? 'disabled' : ''} onClick={isFirst? '' : this.previous}>上一题
+              <i className={'fa fa-spinner fa-spin' + (this.state.lastLoad ? '' : ' hide')}/>
             </button>
             <button type="button" className="btn btn-warning" name="button"
-                    disabled={isLast ? 'disabled' : ''} onClick={isLast ? '' : this.next}>下一题
+                    disabled={isLast || this.state.nextLoad ? 'disabled' : ''} onClick={isLast ? '' : this.next}>下一题
+              <i className={'fa fa-spinner fa-spin' + (this.state.nextLoad ? '' : ' hide')}/>
             </button>
           </div>
           <hr/>

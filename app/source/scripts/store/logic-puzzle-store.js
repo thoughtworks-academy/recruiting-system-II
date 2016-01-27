@@ -22,11 +22,11 @@ var LogicPuzzleStore = Reflux.createStore({
         console.log(res);
         _answer = res.body.userAnswer;
         this.trigger({
-          'item': res.body.item,
-          'userAnswer': res.body.userAnswer,
-          'itemsCount': res.body.itemsCount,
-          'orderId': _currentIndex,
-          'isExample': res.body.isExample
+          item: res.body.item,
+          userAnswer: res.body.userAnswer,
+          itemsCount: res.body.itemsCount,
+          orderId: _currentIndex,
+          isExample: res.body.isExample
         });
         callback(null, 'done');
       }
@@ -47,11 +47,13 @@ var LogicPuzzleStore = Reflux.createStore({
       },(res,callback) => {
         _answer = res.body.userAnswer;
         this.trigger({
-          'item': res.body.item,
-          'userAnswer': res.body.userAnswer,
-          'itemsCount': res.body.itemsCount,
-          'orderId': _currentIndex,
-          'isExample': res.body.isExample
+          item: res.body.item,
+          userAnswer: res.body.userAnswer,
+          itemsCount: res.body.itemsCount,
+          orderId: _currentIndex,
+          isExample: res.body.isExample,
+          lastLoad: false,
+          nextLoad: false
         });
         callback(null,'done');
       }
@@ -72,7 +74,7 @@ var LogicPuzzleStore = Reflux.createStore({
   onChangeAnswer: function (val) {
     _answer = val;
     this.trigger({
-      'userAnswer': _answer
+      userAnswer: _answer
     });
   },
 
@@ -105,7 +107,7 @@ var LogicPuzzleStore = Reflux.createStore({
   onTimeOver: function (){
     this.onSubmitPaper();
     this.trigger({
-      'showModal': true
+      showModal: true
     });
   }
 
