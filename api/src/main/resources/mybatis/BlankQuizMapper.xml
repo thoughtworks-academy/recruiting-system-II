@@ -33,7 +33,4 @@
         VALUES (#{type},#{hardCount},#{normalCount},#{easyCount},#{exampleCount});
     </insert>
 
-    <update id="updateBlankQuiz">
-        UPDATE blankQuiz SET sectionId = #{sectionId} WHERE id = #{id};
-    </update>
 </mapper>
