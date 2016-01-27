@@ -10,7 +10,7 @@ var async = require('async');
 function UserInitializationController() {
 }
 
-UserInitializationController.prototype.initialLogicPuzzle = function (req, res) {
+UserInitializationController.prototype.initialLogicPuzzle = (req, res) => {
   var userId = req.session.user.id;
   var quizItems, quizExamples, blankQuizId, paperId;
   var logicPuzzleUrl = 'papers/enrollment';

@@ -9,7 +9,7 @@ function HomeworkController() {
 
 }
 
-HomeworkController.prototype.getList = function (req, res) {
+HomeworkController.prototype.getList = (req, res) => {
   var userId = req.session.user.id;
   var quizzesStatus = [];
 
