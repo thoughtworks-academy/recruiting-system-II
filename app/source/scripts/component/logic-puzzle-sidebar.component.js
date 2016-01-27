@@ -17,7 +17,7 @@ var LogicPuzzleSidebar = React.createClass({
       lastLoad: false,
       nextLoad: false,
       loading: false
-    }
+    };
   },
 
   submitPaper: function () {
