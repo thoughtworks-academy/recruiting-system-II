@@ -43,7 +43,7 @@ public class BlankQuizMapperTest extends TestBase {
     @Test
     public void should_return_some_blank_quizzes_by_given_section_id() throws Exception {
         List<BlankQuiz> blankQuizzes = blankQuizMapper.findBySectionId(1);
-        assertThat(blankQuizzes.size(), is(3));
+        assertThat(blankQuizzes.size(), is(2));
     }
 
     @Test
@@ -55,9 +55,4 @@ public class BlankQuizMapperTest extends TestBase {
         assertThat(blankQuiz.getExampleCount(), is(2));
     }
 
-    @Test
-    public void should_insert_section_id_when_update_blank_quiz(){
-        blankQuizMapper.updateBlankQuiz(1, 3);
-        assertThat(blankQuizMapper.findOne(1).getSectionId(), is(3));
-    }
 }

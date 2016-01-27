@@ -3,6 +3,7 @@ package com.thoughtworks.twars.service.quiz.definition;
 import com.thoughtworks.twars.bean.HomeworkQuiz;
 import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
+import com.thoughtworks.twars.mapper.SectionQuizMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,6 +33,9 @@ public class HomeworkQuizDefinitionTest {
 
     @Mock
     SectionMapper sectionMapper;
+
+    @Mock
+    SectionQuizMapper sectionQuizMapper;
 
     @InjectMocks
     HomeworkQuizDefinitionService definition;
