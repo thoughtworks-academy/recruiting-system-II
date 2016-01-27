@@ -10,5 +10,7 @@ public interface PaperMapper {
 
     Paper getPaperById(int id);
 
+    Paper getOnePaper(int id);
+
     int insertPaper(Paper paper);
 }

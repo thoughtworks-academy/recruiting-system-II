@@ -1,10 +1,13 @@
 package com.thoughtworks.twars.bean;
 
+import java.util.List;
+
 public class Section {
     private int id;
     private int paperId;
     private String description;
     private String type;
+    private List<Integer> quizId;
 
     public int getPaperId() {
         return paperId;
@@ -36,5 +39,13 @@ public class Section {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<Integer> getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(List<Integer> quizId) {
+        this.quizId = quizId;
     }
 }
