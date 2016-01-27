@@ -8,7 +8,7 @@ var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require('validate.js');
 var md5 = require('js-md5');
 var constraint = require('../../mixin/register-constraint');
-var apiServer = require('../../configuration').apiServer;
+var apiServer = require('../../config/configuration').apiServer;
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;

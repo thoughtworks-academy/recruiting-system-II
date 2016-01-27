@@ -1,7 +1,7 @@
 'use strict';
 
 var superAgent = require('superagent');
-var apiServer = require('../configuration').apiServer;
+var apiServer = require('../config/configuration').apiServer;
 
 var apiRequest = {
   get: function (url, query, callback) {

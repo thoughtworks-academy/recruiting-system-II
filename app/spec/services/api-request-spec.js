@@ -2,7 +2,7 @@
 
 var apiRequest = require('../../services/api-request');
 var superAgent = require('superagent');
-var apiServer = require('../../configuration').apiServer;
+var apiServer = require('../../config/configuration').apiServer;
 
 describe('apiRequest', function () {
 
