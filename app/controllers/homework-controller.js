@@ -73,7 +73,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         userAnswerRepo = quiz.userAnswerRepo;
         quizStatus = quiz.status;
         branch = quiz.branch;
-        homeworkQuizzes.findOne({id: quiz.id}, done)
+        homeworkQuizzes.findOne({id: quiz.id}, done);
       }
     },
     (doc,done) => {
