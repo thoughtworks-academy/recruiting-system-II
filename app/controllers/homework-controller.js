@@ -54,10 +54,6 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   var quiz;
   async.waterfall([
     (done) => {
-      userHomeworkQuizzes.unlockNext(userId, done);
-    },
-    (data, result, done) => {
-      done = typeof(result) === 'function' ? result : done;
       userHomeworkQuizzes.findOne({userId: userId}, done);
     },
     (result, done) => {
