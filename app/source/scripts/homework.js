@@ -3,7 +3,6 @@
 require('../less/homework.less');
 var ReactDom = require('react-dom');
 var Navigation = require('./component/navigation.component');
-var HomeworkApp = require('./component/homework-app.component');
 var HomeworkSidebar = require('./component/homework-sidebar.component');
 var HomeworkContent = require('./component/homework-content.component');
 var HomeworkIntroduction = require('./component/homework-introduction.component');
@@ -32,12 +31,13 @@ function onAction(number) {
   history.pushState(null, '', '#' + number);
 }
 
+HomeworkAction.changeOrderId(changeId());
+
 ReactDom.render(
     <div>
       <header>
         <Navigation />
       </header>
-      <HomeworkApp orderId={changeId()}>
         <div className="row">
           <HomeworkSidebar onAction={onAction} orderId={changeId()}/>
           <HomeworkContent>
@@ -46,7 +46,6 @@ ReactDom.render(
             <RunningResult />
           </HomeworkContent>
         </div>
-      </HomeworkApp>
     </div>,
     document.getElementById('homework')
 );
