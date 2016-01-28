@@ -72,14 +72,14 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         homeworkQuizzes.findOne({id: quiz.id}, done);
       }
     },
-    (doc,done) => {
-      if(doc){
-        done('break',doc);
+    (doc, done) => {
+      if (doc) {
+        done('break', doc);
       } else {
-        apiRequest.get(quiz.uri,done);
+        apiRequest.get(quiz.uri, done);
       }
     },
-    (res,done) => {
+    (res, done) => {
       homeworkQuizzes.create({
         id: res.body.id,
         desc: res.body.description,
