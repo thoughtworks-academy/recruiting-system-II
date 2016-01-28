@@ -4,6 +4,8 @@ var userHomeworkQuizzes = require('../models/user-homework-quizzes');
 var homeworkQuizzes = require('../models/homework-quizzes');
 var async = require('async');
 var constant = require('../mixin/constant');
+var apiRequest = require('../services/api-request');
+
 
 function HomeworkController() {
 
@@ -49,6 +51,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   var quizStatus;
   var userAnswerRepo;
   var branch;
+  var quiz;
   async.waterfall([
     (done) => {
       userHomeworkQuizzes.unlockNext(userId, done);
@@ -59,21 +62,38 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     },
     (result, done) => {
       var integer = (Number(orderId) === parseInt(orderId, 10));
+      quiz = result.quizzes[orderId - 1];
       if (!integer || orderId === undefined || orderId > result.quizzes.length || orderId < 1) {
         error.status = constant.httpCode.NOT_FOUND;
         done(true, error);
-      } else if (result.quizzes[orderId - 1].status === constant.homeworkQuizzesStatus.LOCKED) {
+      } else if (quiz.status === constant.homeworkQuizzesStatus.LOCKED) {
         error.status = constant.httpCode.FORBIDDEN;
         done(true, error);
       } else {
-        userAnswerRepo = result.quizzes[orderId - 1].userAnswerRepo;
-        quizStatus = result.quizzes[orderId - 1].status;
-        branch = result.quizzes[orderId - 1].branch;
-        homeworkQuizzes.findOne({id: result.quizzes[orderId - 1].id}, done);
+        userAnswerRepo = quiz.userAnswerRepo;
+        quizStatus = quiz.status;
+        branch = quiz.branch;
+        homeworkQuizzes.findOne({id: quiz.id}, done)
       }
+    },
+    (doc,done) => {
+      if(doc){
+        done(true,doc);
+      } else {
+        apiRequest.get(quiz.uri,done);
+      }
+    },
+    (res,done) => {
+      homeworkQuizzes.create({
+        id: res.body.id,
+        desc: res.body.description,
+        evaluateScript: res.body.evaluateScript,
+        evaluateRepo: res.body.evaluateRepository,
+        templateRepo: res.body.templateRepository
+      }, done);
     }
   ], (err, data) => {
-    if (err) {
+    if (err && (err !== true)) {
       if (data.status === constant.httpCode.NOT_FOUND) {
         res.send({status: constant.httpCode.NOT_FOUND});
       }

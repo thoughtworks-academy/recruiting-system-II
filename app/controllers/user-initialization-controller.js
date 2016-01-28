@@ -2,7 +2,6 @@
 
 var apiRequest = require('../services/api-request');
 var logicPuzzle = require('../models/logic-puzzle');
-var homeworkQuizzes = require('../models/homework-quizzes');
 var userHomeworkQuizzes = require('../models/user-homework-quizzes');
 var constant = require('../mixin/constant');
 var async = require('async');
@@ -10,10 +9,11 @@ var async = require('async');
 function UserInitializationController() {
 }
 
-UserInitializationController.prototype.initialLogicPuzzle = (req, res) => {
+UserInitializationController.prototype.initializeQuizzes = (req, res) => {
   var userId = req.session.user.id;
   var quizItems, quizExamples, blankQuizId, paperId;
   var logicPuzzleUrl = 'papers/enrollment';
+  var enrollment;
 
   async.waterfall([
 
@@ -32,6 +32,7 @@ UserInitializationController.prototype.initialLogicPuzzle = (req, res) => {
 
     }, (responds, done)=> {
 
+      enrollment = responds.body;
       var quizzes = responds.body.sections[0].quizzes[0];
       blankQuizId = quizzes.id;
       paperId = responds.body.id;
@@ -61,48 +62,12 @@ UserInitializationController.prototype.initialLogicPuzzle = (req, res) => {
         paperId: paperId
       }, done);
 
+    }, (doc,done) => {
+
+      userHomeworkQuizzes.initUserHomeworkQuizzes(userId, enrollment.sections[1].quizzes , done);
+
     }
   ], (err) => {
-    if (true !== err && err) {
-      res.statusCode(constant.httpCode.INTERNAL_SERVER_ERROR);
-      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: '服务器错误'});
-    } else {
-      res.send({status: constant.httpCode.OK, message: '初始化成功!'});
-    }
-  });
-};
-
-UserInitializationController.prototype.initialHomeworkQuizzes = (req, res) => {
-  async.waterfall([
-    (done) => {
-      apiRequest.get('papers/enrollment', done);
-    },
-
-    (response, done) => {
-      if (!!response.body.sections) {
-        var result;
-        response.body.sections.forEach((element, i) => {
-          result = element.desc === 'homeworkQuizzes' ? element.quizzes : result;
-        });
-        apiRequest.get(result[0].items.uri, done);
-      } else {
-        done(new Error(''));
-      }
-    },
-
-    (result, done) => {
-      homeworkQuizzes.upsertData(result.body.homeworkQuizItems, done);
-    },
-
-    (result, done) => {
-      homeworkQuizzes.getList(done);
-    },
-
-    (result, done) => {
-      var userId = req.session.user.id;
-      userHomeworkQuizzes.initUserHomeworkQuizzes(userId, result, done);
-    }
-  ], (err, data) => {
     if (err) {
       res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});

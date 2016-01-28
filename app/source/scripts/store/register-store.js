@@ -69,19 +69,8 @@ var RegisterStore = Reflux.createStore({
 
   onInitialUserQuiz: function () {
     async.series({
-      initialLogicPuzzle: (done) => {
-        request.get('/user-initialization/initialLogicPuzzle').
-            set('Content-Type', 'application/json')
-            .end(function (err) {
-              if (err) {
-                done(err);
-              } else {
-                done(null, true);
-              }
-            });
-      },
-      initialHomeworkQuizzes: (done) => {
-        request.get('/user-initialization/initialHomeworkQuizzes').
+      initializeQuizzes: (done) => {
+        request.get('/user-initialization/initializeQuizzes').
             set('Content-Type', 'application/json')
             .end(function (err) {
               if (err) {
@@ -92,7 +81,7 @@ var RegisterStore = Reflux.createStore({
             });
       }
     }, function (err, data) {
-      if (data.initialLogicPuzzle && data.initialLogicPuzzle) {
+      if (data.initializeQuizzes) {
         page('user-center.html');
       } else {
         console.log(err);

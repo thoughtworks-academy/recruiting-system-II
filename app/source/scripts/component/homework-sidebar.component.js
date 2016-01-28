@@ -71,7 +71,7 @@ var HomeworkSidebar = React.createClass({
             <div className="list-group-item active">
               <div className="row">
                 <div className="col-xs-9 h3 text-center">编程题</div>
-                <div className="col-xs-3"><i className='homework-nav-icon h3 fa fa-pencil-square-o'></i></div>
+                <div className="col-xs-3"><i className='homework-nav-icon h3 fa fa-pencil-square-o'/></div>
               </div>
             </div>
             {itemHtml}

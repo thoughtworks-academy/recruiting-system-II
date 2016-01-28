@@ -11,29 +11,32 @@ var userHomeworkQuizzesSchema = new Schema({
     status: Number,
     startTime: Number,
     userAnswerRepo: String,
-    resultPath: String,
+    uri: String,
     branch: String,
     commitSHA: String
   }]
 });
 
-userHomeworkQuizzesSchema.statics.initUserHomeworkQuizzes = function (userId, idList, callback) {
+userHomeworkQuizzesSchema.statics.initUserHomeworkQuizzes = function (userId, quizzes, callback) {
   this.findOne({userId: userId}, (err, doc) => {
     if (doc) {
       callback(new Error('is exist'), null);
     } else {
-      var quizzes = [];
+      var _quizzes = [];
 
-      idList.forEach((id) => {
-        quizzes.push({
-          id: id,
-          status: 0
+      quizzes.forEach((quiz) => {
+        _quizzes.push({
+          id: quiz.id,
+          uri: quiz.definition_uri,
+          status: constant.homeworkQuizzesStatus.LOCKED
         });
       });
 
+      _quizzes[0].status = constant.homeworkQuizzesStatus.ACTIVE;
+
       this.create({
         userId: userId,
-        quizzes: quizzes
+        quizzes: _quizzes
       }, callback);
     }
   });
