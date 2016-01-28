@@ -589,69 +589,7 @@ db.once('open', function () {
   });
 
   homeworkQuizzes.remove({}, () => {
-    homeworkQuizzes.create([{
-      id: 1,
-      desc: '这是一道迷之题目',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'https://github.com/JiangHaHa/templateRepo'
-    }, {
-      id: 2,
-      desc: '这是一道第二题的题目',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'https://github.com/JayChow/templateRepo'
-    }, {
-      id: 3,
-      desc: '这是一道笨蛋出的题目',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'https://github.com/EvanLee/templateRepo'
-    }, {
-      id: 4,
-      desc: '这是一道简单的题.',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
-    }, {
-      id: 5,
-      desc: '这是一道简单的题.',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
-    }, {
-      id: 6,
-      desc: '这是一道简单的题.',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
-    }, {
-      id: 7,
-      desc: '这是一道简单的题.',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
-    }, {
-      id: 8,
-      desc: '这是一道简单的题.',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
-    }, {
-      id: 9,
-      desc: '这是一道简单的题.',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
-    }, {
-      id: 10,
-      desc: '这是一道简单的题.',
-      evaluateScript: 'www.baidu.com',
-      evaluateRepo: 'evaluateRepository',
-      templateRepo: 'templateRepository'
-    }], ()=> {
-      console.log('insert homeworkQuizzes success');
-    });
+    console.log('remove homeworkQuizzes success');
   });
 
   console.log('mongo insert UserHomeworkQuizzes start...');
@@ -660,72 +598,72 @@ db.once('open', function () {
     UserHomeworkQuizzes.create([{
       userId: 1,
       quizzes: [
-        {id: 1, status: 1},
-        {id: 2, status: 1},
-        {id: 3, status: 1},
-        {id: 4, status: 1},
-        {id: 5, status: 1},
-        {id: 6, status: 1},
-        {id: 7, status: 1},
-        {id: 8, status: 1},
-        {id: 9, status: 1},
-        {id: 10, status: 1}
+        {id: 1, status: 2,uri: 'homeworkQuizzes/1'},
+        {id: 2, status: 1,uri: 'homeworkQuizzes/2'},
+        {id: 3, status: 1,uri: 'homeworkQuizzes/3'},
+        {id: 4, status: 1,uri: 'homeworkQuizzes/4'},
+        {id: 5, status: 1,uri: 'homeworkQuizzes/5'},
+        {id: 6, status: 1,uri: 'homeworkQuizzes/6'},
+        {id: 7, status: 1,uri: 'homeworkQuizzes/7'},
+        {id: 8, status: 1,uri: 'homeworkQuizzes/8'},
+        {id: 9, status: 1,uri: 'homeworkQuizzes/9'},
+        {id: 10, status: 1,uri: 'homeworkQuizzes/10'}
       ]
     }, {
       userId: 2,
       quizzes: [
         {id: 1, status: 4, userAnswerRepo: 'www.github.com'},
         {id: 2, status: 3, userAnswerRepo: 'www.repo.com'},
-        {id: 3, status: 1},
-        {id: 4, status: 1},
-        {id: 5, status: 1},
-        {id: 6, status: 1},
-        {id: 7, status: 1},
-        {id: 8, status: 1},
-        {id: 9, status: 1},
-        {id: 10, status: 1}
+        {id: 3, status: 1,uri: 'homeworkQuizzes/3'},
+        {id: 4, status: 1,uri: 'homeworkQuizzes/4'},
+        {id: 5, status: 1,uri: 'homeworkQuizzes/5'},
+        {id: 6, status: 1,uri: 'homeworkQuizzes/6'},
+        {id: 7, status: 1,uri: 'homeworkQuizzes/7'},
+        {id: 8, status: 1,uri: 'homeworkQuizzes/8'},
+        {id: 9, status: 1,uri: 'homeworkQuizzes/9'},
+        {id: 10, status: 1,uri: 'homeworkQuizzes/10'}
       ]
     }, {
       userId: 3,
       quizzes: [
-        {id: 1, status: 4},
-        {id: 2, status: 3},
-        {id: 3, status: 1},
-        {id: 4, status: 1},
-        {id: 5, status: 1},
-        {id: 6, status: 1},
-        {id: 7, status: 1},
-        {id: 8, status: 1},
-        {id: 9, status: 1},
-        {id: 10, status: 1}
+        {id: 1, status: 4,uri: 'homeworkQuizzes/1'},
+        {id: 2, status: 3,uri: 'homeworkQuizzes/2'},
+        {id: 3, status: 1,uri: 'homeworkQuizzes/3'},
+        {id: 4, status: 1,uri: 'homeworkQuizzes/4'},
+        {id: 5, status: 1,uri: 'homeworkQuizzes/5'},
+        {id: 6, status: 1,uri: 'homeworkQuizzes/6'},
+        {id: 7, status: 1,uri: 'homeworkQuizzes/7'},
+        {id: 8, status: 1,uri: 'homeworkQuizzes/8'},
+        {id: 9, status: 1,uri: 'homeworkQuizzes/9'},
+        {id: 10, status: 1,uri: 'homeworkQuizzes/10'}
       ]
     }, {
       userId: 4,
       quizzes: [
-        {id: 1, status: 1},
-        {id: 2, status: 1},
-        {id: 3, status: 1},
-        {id: 4, status: 1},
-        {id: 5, status: 1},
-        {id: 6, status: 1},
-        {id: 7, status: 1},
-        {id: 8, status: 1},
-        {id: 9, status: 1},
-        {id: 10, status: 1}
+        {id: 1, status: 1,uri: 'homeworkQuizzes/1'},
+        {id: 2, status: 1,uri: 'homeworkQuizzes/2'},
+        {id: 3, status: 1,uri: 'homeworkQuizzes/3'},
+        {id: 4, status: 1,uri: 'homeworkQuizzes/4'},
+        {id: 5, status: 1,uri: 'homeworkQuizzes/5'},
+        {id: 6, status: 1,uri: 'homeworkQuizzes/6'},
+        {id: 7, status: 1,uri: 'homeworkQuizzes/7'},
+        {id: 8, status: 1,uri: 'homeworkQuizzes/8'},
+        {id: 9, status: 1,uri: 'homeworkQuizzes/9'},
+        {id: 10, status: 1,uri: 'homeworkQuizzes/10'}
       ]
     }, {
       userId: 5,
       quizzes: [
-        {id: 1, status: 1},
-        {id: 2, status: 1},
-        {id: 3, status: 1},
-        {id: 4, status: 1},
-        {id: 5, status: 1},
-        {id: 6, status: 1},
-        {id: 7, status: 1},
-        {id: 8, status: 1},
-        {id: 9, status: 1},
-        {id: 10, status: 1}
+        {id: 1, status: 1,uri: 'homeworkQuizzes/1'},
+        {id: 2, status: 1,uri: 'homeworkQuizzes/2'},
+        {id: 3, status: 1,uri: 'homeworkQuizzes/3'},
+        {id: 4, status: 1,uri: 'homeworkQuizzes/4'},
+        {id: 5, status: 1,uri: 'homeworkQuizzes/5'},
+        {id: 6, status: 1,uri: 'homeworkQuizzes/6'},
+        {id: 7, status: 1,uri: 'homeworkQuizzes/7'},
+        {id: 8, status: 1,uri: 'homeworkQuizzes/8'},
+        {id: 9, status: 1,uri: 'homeworkQuizzes/9'},
+        {id: 10, status: 1,uri: 'homeworkQuizzes/10'}
       ]
     }], function () {
       console.log('mongo insert userHomeworkQuizzes end');
