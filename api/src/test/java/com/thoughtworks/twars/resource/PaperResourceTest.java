@@ -72,9 +72,9 @@ public class PaperResourceTest extends TestBase {
     @Test
     public void should_return_404_when_request_one_paper() throws Exception {
 
-        when(sectionMapper.getSectionsByPaperId(9)).thenReturn(null);
+        when(paperMapper.getOnePaper(3)).thenReturn(null);
 
-        Response response = target(basePath + "/9").request().get();
+        Response response = target(basePath + "/3").request().get();
         assertThat(response.getStatus(), is(404));
     }
 

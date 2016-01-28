@@ -96,8 +96,10 @@ public class PaperResource extends Resource {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(@PathParam("param") int id) {
-        Paper paper;
-        paper = paperMapper.getOnePaper(id);
+        Paper paper = paperMapper.getOnePaper(id);
+        if (paper == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
         return Response.status(Response.Status.OK)
                 .entity(paper.getResponseInfo()).build();
