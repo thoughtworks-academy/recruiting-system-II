@@ -53,11 +53,9 @@ public class BlankQuizResourceTest extends TestBase {
         BlankQuiz blankQuiz = new BlankQuiz();
 
         blankQuiz.setId(5);
-        blankQuiz.setSectionId(1);
         blankQuiz.setHardCount(3);
         blankQuiz.setNormalCount(4);
         blankQuiz.setEasyCount(3);
-        blankQuiz.setType("quizItem");
 
         Response response = target(basePath).request().post(Entity.entity(blankQuiz, MediaType.APPLICATION_JSON_TYPE));
         assertThat(response.getStatus(), is(201));
@@ -71,7 +69,6 @@ public class BlankQuizResourceTest extends TestBase {
     public void should_return_blank_quizzes_by_section_id() {
         when(blankQuizMapper.findBySectionId(1)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
         when(firstBlankQuiz.getId()).thenReturn(2);
-        when(firstBlankQuiz.getType()).thenReturn("singlePuzzle");
         when(firstBlankQuiz.getEasyCount()).thenReturn(3);
         when(firstBlankQuiz.getNormalCount()).thenReturn(4);
         when(firstBlankQuiz.getHardCount()).thenReturn(3);
@@ -82,7 +79,6 @@ public class BlankQuizResourceTest extends TestBase {
         List<Map> blankQuizzes = response.readEntity(List.class);
 
         assertThat(blankQuizzes.get(0).get("id"), is(2));
-        assertThat(blankQuizzes.get(0).get("type"), is("singlePuzzle"));
         assertThat(blankQuizzes.get(0).get("hardCount"), is(3));
         assertThat(blankQuizzes.get(0).get("normalCount"), is(4));
         assertThat(blankQuizzes.get(0).get("easyCount"), is(3));
