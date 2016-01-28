@@ -78,7 +78,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     },
     (doc,done) => {
       if(doc){
-        done(true,doc);
+        done('break',doc);
       } else {
         apiRequest.get(quiz.uri,done);
       }
@@ -93,7 +93,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
       }, done);
     }
   ], (err, data) => {
-    if (err && (err !== true)) {
+    if (err && (err !== 'break')) {
       if (data.status === constant.httpCode.NOT_FOUND) {
         res.send({status: constant.httpCode.NOT_FOUND});
       }
