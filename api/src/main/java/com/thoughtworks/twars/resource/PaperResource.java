@@ -96,28 +96,11 @@ public class PaperResource extends Resource {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(@PathParam("param") int id) {
+        Paper paper;
+        paper = paperMapper.getOnePaper(id);
 
-        if (sectionMapper.getSectionsByPaperId(id) == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        List<Map> sectionList = sectionMapper.getSectionsByPaperId(id)
-                .stream()
-                .map(item -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", item.getId());
-                    map.put("type", item.getType());
-                    map.put("quizzes", getQuizzesBySectionId(item.getId(),
-                            item.getType()));
-                    return map;
-                })
-                .collect(Collectors.toList());
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("sections", sectionList);
-        result.put("id", id);
-
-        return Response.status(Response.Status.OK).entity(result).build();
+        return Response.status(Response.Status.OK)
+                .entity(paper.getResponseInfo()).build();
     }
 
 
