@@ -6,11 +6,10 @@ var React = require('react');
 var Reflux = require('reflux');
 var HomeworkActions = require('../actions/homework-actions');
 var HomeworkSidebarStore = require('../store/homework-sidebar-store');
-var HomeworkAppStore = require('../store/homework-app-store');
 var homeworkQuizzesStatus = require('../../../mixin/constant').homeworkQuizzesStatus;
 
 var HomeworkSidebar = React.createClass({
-  mixins: [Reflux.connect(HomeworkSidebarStore), Reflux.connect(HomeworkAppStore)],
+  mixins: [Reflux.connect(HomeworkSidebarStore)],
 
   getInitialState: function () {
     var list = [];

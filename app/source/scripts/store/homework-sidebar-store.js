@@ -20,7 +20,7 @@ var HomeworkSidebarStore = Reflux.createStore({
         });
   },
   
-  onchangeOrderId: function (clickNumber) {
+  onChangeOrderId: function (clickNumber) {
     this.trigger({clickNumber: clickNumber});
   },
 
