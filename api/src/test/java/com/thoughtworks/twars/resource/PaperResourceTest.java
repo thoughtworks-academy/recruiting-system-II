@@ -69,41 +69,6 @@ public class PaperResourceTest extends TestBase {
         assertThat(response.getStatus(), is(404));
     }
 
-
-    @Test
-    public void should_return_detail_when_request_a_specified_paper() throws Exception {
-        Gson gson = new GsonBuilder().create();
-        Paper paper = new Paper();
-        when(paperMapper.getOnePaper(1)).thenReturn(paper);
-
-        List<Integer> quizzes = new ArrayList<>();
-        quizzes.add(1);
-        quizzes.add(2);
-        Section section = new Section();
-        section.setId(3);
-        section.setDescription("it is a description!");
-        section.setPaperId(1);
-        section.setQuizzes(quizzes);
-        section.setType("blankQuizzes");
-
-        List<Section> sections = new ArrayList<>();
-        sections.add(section);
-        paper.setId(1);
-        paper.setMakerId(2);
-        paper.setSections(sections);
-        Map responseInfoSections = new HashMap<>();
-        responseInfoSections.put("sections", sections);
-
-        Response response = target(basePath + "/enrollment").request().get();
-
-        assertThat(response.getStatus(), is(200));
-        Map result = response.readEntity(Map.class);
-        String jsonStr = gson.toJson(result);
-
-        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"description\":\"it is a description!\",\"id\":3,\"quizzes\":[{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,\"items_uri\":\"blankQuizzes/1/items\"},{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,\"items_uri\":\"blankQuizzes/2/items\"}],\"type\":\"blankQuizzes\"}]}"));
-
-    }
-
     @Test
     public void should_return_404_when_request_one_paper() throws Exception {
 
@@ -165,10 +130,8 @@ public class PaperResourceTest extends TestBase {
         quizzes.add(map1);
         quizzes.add(map2);
 
-        String decription = "这是一个描述";
-
         Map section = new HashMap<>();
-        section.put("description", decription);
+        section.put("description", "这是一个描述");
         section.put("quizzes", quizzes);
 
         List sections = new ArrayList<>();
