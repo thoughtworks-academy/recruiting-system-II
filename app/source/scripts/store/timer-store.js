@@ -1,12 +1,11 @@
 'use strict';
 
 var Reflux = require('reflux');
-var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var TimerActions = require('../actions/timer-actions');
 var superAgent = require('superagent');
 
 var TimerStore = Reflux.createStore({
-  listenables: [LogicPuzzleActions, TimerActions],
+  listenables: [TimerActions],
 
   onGetRemainTime: function () {
     superAgent.get('/timer/remain-time')

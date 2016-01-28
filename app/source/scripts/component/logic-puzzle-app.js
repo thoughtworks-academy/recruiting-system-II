@@ -2,14 +2,13 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var TimerStore = require('../store/timer-store');
 var LogicPuzzleStore = require('../store/logic-puzzle-store');
 var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var Button = require('react-bootstrap/lib/Button');
 
 var LogicPuzzle = React.createClass({
-  mixins: [Reflux.connect(LogicPuzzleStore), Reflux.connect(TimerStore)],
+  mixins: [Reflux.connect(LogicPuzzleStore)],
 
   getInitialState: function () {
     return {
