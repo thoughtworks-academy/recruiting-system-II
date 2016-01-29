@@ -15,11 +15,10 @@ var GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 var constant = require('./mixin/constant');
+var yaml_config = require('node-yaml-config');
+var config = yaml_config.load(__dirname + '/config/config.yml');
 
-mongoose.connect('mongodb://localhost/twars');
-
-var GITHUB_CLIENT_ID = '3d1ce4b21c72eed40be3';
-var GITHUB_CLIENT_SECRET = 'fe406b1fdc3f386871979976e244e01224c933ac';
+mongoose.connect(config.database);
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -30,9 +29,9 @@ passport.deserializeUser(function (obj, done) {
 });
 
 passport.use(new GitHubStrategy({
-  clientID: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_CLIENT_SECRET,
-  callbackURL: 'http://localhost:3000/login/github/callback'
+  clientID: config.githubClientId,
+  clientSecret: config.githubClientSecret,
+  callbackURL: config.callbackUrl
 }, function (accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
     return done(null, profile);
@@ -43,8 +42,8 @@ app.use(cookieParser());
 app.use(session({
   secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false,
   store: new MongoStore({
-    url: 'mongodb://localhost/twars',
-    ttl: constant.time.MINUTE_PER_HOUR * constant.time.SECONDS_PER_MINUTE
+    url: config.database,
+    ttl: config.sessionTtl
   })
 }));
 app.use(passport.initialize());
@@ -58,7 +57,7 @@ app.use(bodyParser.json());
 
 var env;
 
-if(process.env.NODE_ENV !== 'test'){
+if (process.env.NODE_ENV !== 'test') {
   env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 } else {
   env = process.env.NODE_ENV;
@@ -82,19 +81,8 @@ app.use(express.static('public'));
 
 route.setRoutes(app);
 
-var port = 3000;
-var testPort = 5000;
-
-if(env === 'test'){
-  app.listen(testPort, function () {
-    console.log('App listening at http://localhost:' + testPort);
-  });
-} else {
-  app.listen(port, function () {
-    console.log('App listening at http://localhost:' + port);
-  });
-}
-
-
+app.listen(function () {
+  console.log('App listening at http://localhost:' + config.port);
+});
 
 module.exports = app;

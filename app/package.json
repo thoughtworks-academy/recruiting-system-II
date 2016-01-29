@@ -43,6 +43,7 @@
     "jest-cli": "^0.8.2",
     "kerberos": "0.0.17",
     "less-loader": "^2.2.2",
+    "node-yaml-config": "0.0.3",
     "passport": "^0.3.2",
     "pm2": "^1.0.0",
     "promise": "^7.1.1",
