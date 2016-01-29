@@ -5,7 +5,7 @@ var homeworkQuizzes = require('../models/homework-quizzes');
 var async = require('async');
 var constant = require('../mixin/constant');
 var apiRequest = require('../services/api-request');
-
+var request = require('superagent');
 
 function HomeworkController() {
 
@@ -115,6 +115,9 @@ HomeworkController.prototype.getQuiz = (req, res) => {
 HomeworkController.prototype.saveGithubUrl = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.body.orderId;
+  var quizId;
+  var task = {};
+  task.USER_ID = userId;
 
   async.waterfall([
     (done)=> {
@@ -123,11 +126,35 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
       if (result.isValidate === true) {
         result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
         result.data.quizzes[orderId - 1].branch = req.body.branch;
-        result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
+        result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.ACTIVE;
+        quizId = result.data.quizzes[orderId - 1].id;
+
+        task.USER_ANSWER_REPO = result.data.quizzes[orderId - 1].userAnswerRepo;
+        task.BRANCH = result.data.quizzes[orderId - 1].branch;
+        task.QUIZ_ID = quizId;
+
         result.data.save(done);
       } else {
         done(true, result);
       }
+    }, function (product, numAffected, done) {
+      homeworkQuizzes.findOne({id: quizId}, done);
+    }, (result, done) => {
+
+      task.EVALUATE_REPO = result.evaluateRepo;
+      task.EVALUATE_SCRIPT = result.evaluateScript;
+
+      request
+          .post('http://localhost:4000/task')
+          .send(task)
+          .set('content-type', 'application/json')
+          .end((err, res) => {
+            if (err) {
+              done(err);
+            } else {
+              done();
+            }
+          });
     }
   ], (err, data) => {
     if (err) {
@@ -146,14 +173,14 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
       });
     }
   });
-
 };
 
 HomeworkController.prototype.updateResult = (req, res)=> {
   var userId = req.body.userId;
   var orderId = req.body.orderId;
   var resultPath = req.body.resultPath;
-  var resultStatus = req.body.status;
+  var resultStatus = req.body.resultStatus;
+
   async.waterfall([
     (done)=> {
       userHomeworkQuizzes.checkDataForUpdate(userId, orderId, done);

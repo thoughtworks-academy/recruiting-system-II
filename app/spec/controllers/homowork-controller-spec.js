@@ -4,6 +4,7 @@ var HomeworkController = require('../../controllers/homework-controller');
 var userHomeworkQuizzes = require('../../models/user-homework-quizzes');
 var homeworkQuizzes = require('../../models/homework-quizzes');
 var constant = require('../../mixin/constant');
+var request = require('superagent');
 
 describe('HomeworkController', function () {
   describe('getList', () => {
@@ -413,12 +414,36 @@ describe('HomeworkController', function () {
                 userAnswerRepo: 'www.repo.com'
               }],
             save: (done) => {
-              done(null, true);
+              done(null, 1, true);
             }
           },
           isValidate: true
         };
         callback(null, result);
+      });
+
+      spyOn(request, 'post').and.callFake(function () {
+        return {
+          set: function () {
+            return this;
+          },
+          send: function () {
+            return this;
+          },
+          end: function (fn) {
+            fn(null, {
+              status: constant.httpCode.OK
+            });
+          }
+        };
+      });
+
+      spyOn(homeworkQuizzes, 'findOne').and.callFake(function (useid, callback) {
+        var data = {
+          evaluateRepo: 'github.com/sialvsic',
+          evaluateScript: './index.js'
+        };
+        callback(null, data);
       });
 
       controller.saveGithubUrl({
