@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.service.quiz.scoresheet;
+package com.thoughtworks.twars.resource.quiz.scoresheet;
 
 import com.thoughtworks.twars.bean.HomeworkPostHistory;
 import com.thoughtworks.twars.bean.HomeworkSubmit;

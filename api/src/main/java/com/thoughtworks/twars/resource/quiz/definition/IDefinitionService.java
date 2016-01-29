@@ -1,4 +1,4 @@
-package com.thoughtworks.twars.service.quiz.definition;
+package com.thoughtworks.twars.resource.quiz.definition;
 
 import java.util.List;
 import java.util.Map;
