@@ -154,12 +154,14 @@ HomeworkController.prototype.updateResult = (req, res)=> {
   var orderId = req.body.orderId;
   var resultPath = req.body.resultPath;
   var resultStatus = req.body.status;
-
   async.waterfall([
     (done)=> {
       userHomeworkQuizzes.checkDataForUpdate(userId, orderId, done);
     }, (result, done)=> {
       if (result.isValidate === true) {
+        if (resultStatus === constant.homeworkQuizzesStatus.SUCCESS && orderId < result.data.quizzes.length) {
+          result.data.quizzes[orderId].status = constant.homeworkQuizzesStatus.ACTIVE;
+        }
         result.data.quizzes[orderId - 1].status = resultStatus;
         result.data.quizzes[orderId - 1].resultPath = resultPath;
         result.data.save(done);
