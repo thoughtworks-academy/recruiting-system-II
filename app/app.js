@@ -18,7 +18,7 @@ var constant = require('./mixin/constant');
 var yaml_config = require('node-yaml-config');
 var config = yaml_config.load(__dirname + '/config/config.yml');
 
-mongoose.connect(config.database);
+mongoose.connect('mongodb://localhost/twars');
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -29,9 +29,9 @@ passport.deserializeUser(function (obj, done) {
 });
 
 passport.use(new GitHubStrategy({
-  clientID: config.githubClientId,
-  clientSecret: config.githubClientSecret,
-  callbackURL: config.callbackUrl
+  clientID: '3d1ce4b21c72eed40be3',
+  clientSecret: 'fe406b1fdc3f386871979976e244e01224c933ac',
+  callbackURL: 'http://localhost:3000/login/github/callback'
 }, function (accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
     return done(null, profile);
@@ -42,8 +42,8 @@ app.use(cookieParser());
 app.use(session({
   secret: 'RECRUITING_SYSTEM', resave: false, saveUninitialized: false,
   store: new MongoStore({
-    url: config.database,
-    ttl: config.sessionTtl
+    url: 'mongodb://localhost/twars',
+    ttl: constant.time.MINUTE_PER_HOUR * constant.time.SECONDS_PER_MINUTE
   })
 }));
 app.use(passport.initialize());
@@ -80,9 +80,18 @@ app.use(sessionCheck);
 app.use(express.static('public'));
 
 route.setRoutes(app);
+var port = 3000;
+var testPort = 5000;
+if(env !== 'test'){
+  app.listen(port,function () {
+    console.log('App listening at http://localhost:' + port);
+  });
+}else {
+  app.listen(testPort,function () {
+    console.log('App listening at http://localhost:' + testPort);
+  });
+}
 
-app.listen(function () {
-  console.log('App listening at http://localhost:' + config.port);
-});
+
 
 module.exports = app;
