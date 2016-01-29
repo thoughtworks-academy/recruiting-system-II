@@ -41,6 +41,7 @@ public class BlankQuizDefinitionTest {
     BlankQuizDefinitionService definition;
 
 
+
     @Test
     public void should_return_correct_uri_list() throws Exception {
         when(mapper.findBySectionId(1)).thenReturn(Arrays.asList(firstQuiz, secondQuiz));
@@ -60,6 +61,7 @@ public class BlankQuizDefinitionTest {
         assertThat(result.get(1).get("items_uri"), is("blankQuizzes/2/items"));
     }
 
+
     @Test
     public void should_update_blank_quiz() {
         Map quiz = new HashMap<>();
@@ -69,7 +71,7 @@ public class BlankQuizDefinitionTest {
 
         int paperId = 2;
 
-        int returnId = definition.insertQuizDefinition(quiz, description, paperId);
-        assertThat(returnId, is(2));
+        int result = definition.insertQuizDefinition(quiz, description, paperId);
+        assertThat(result, is("paper/2"));
     }
 }
