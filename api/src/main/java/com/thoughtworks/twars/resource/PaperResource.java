@@ -3,8 +3,8 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
-import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinitionService;
-import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinitionService;
+import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
+import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

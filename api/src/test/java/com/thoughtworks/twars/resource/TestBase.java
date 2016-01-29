@@ -1,10 +1,10 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.mapper.*;
-import com.thoughtworks.twars.service.quiz.definition.BlankQuizDefinitionService;
-import com.thoughtworks.twars.service.quiz.definition.HomeworkQuizDefinitionService;
-import com.thoughtworks.twars.service.quiz.scoresheet.BlankQuizScoreSheetService;
-import com.thoughtworks.twars.service.quiz.scoresheet.HomeworkQuizScoreSheetService;
+import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
+import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
+import com.thoughtworks.twars.resource.quiz.scoresheet.BlankQuizScoreSheetService;
+import com.thoughtworks.twars.resource.quiz.scoresheet.HomeworkQuizScoreSheetService;
 import org.apache.ibatis.session.SqlSessionManager;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;

@@ -2,8 +2,8 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.ScoreSheet;
 import com.thoughtworks.twars.mapper.ScoreSheetMapper;
-import com.thoughtworks.twars.service.quiz.scoresheet.BlankQuizScoreSheetService;
-import com.thoughtworks.twars.service.quiz.scoresheet.HomeworkQuizScoreSheetService;
+import com.thoughtworks.twars.resource.quiz.scoresheet.BlankQuizScoreSheetService;
+import com.thoughtworks.twars.resource.quiz.scoresheet.HomeworkQuizScoreSheetService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
