@@ -18,8 +18,7 @@ var submissionIntroductionStore = Reflux.createStore({
       defaultBranch: '',
       githubUrl: '',
       githubBranch: '',
-      submited: false,
-      checked: false,
+      quizStatus: 0,
       showIcon: false
     });
   },
@@ -32,7 +31,7 @@ var submissionIntroductionStore = Reflux.createStore({
           if (res.body.status === constant.httpCode.FORBIDDEN) {
           }
           if (res.body.status === constant.httpCode.OK) {
-            this.trigger({submited: true});
+            this.trigger({quizStatus: constant.homeworkQuizzesStatus.PROGRESS});
           }
         });
   },

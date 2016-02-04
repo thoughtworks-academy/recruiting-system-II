@@ -2,9 +2,9 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var superAgent = require('superagent');
 var validate = require('validate.js');
 var constraint = require('../../../mixin/url-constraint');
+var homeworkQuizzesStatus = require('../../../mixin/constant').homeworkQuizzesStatus;
 var HomeworkActions = require('../actions/homework-actions');
 var HomeworkIntroductionStore = require('../store/homework-introduction-store');
 var SubmissionIntroductionStore = require('../store/submission-introduction-store');
@@ -28,8 +28,7 @@ var SubmissionIntroduction = React.createClass({
       defaultBranch: '',
       githubUrl: '',
       githubBranch: '',
-      submited: false,
-      checked: false,
+      quizStatus: 0,
       showIcon: false
     };
   },
@@ -72,9 +71,10 @@ var SubmissionIntroduction = React.createClass({
     HomeworkActions.changeGithubUrl(val);
   },
   render() {
-    if (this.state.submited && !this.state.checked) {
+    if (this.state.quizStatus === homeworkQuizzesStatus.PROGRESS) {
       HomeworkActions.submited(this.state.currentHomeworkNumber);
     }
+    var isSubmitted = this.state.quizStatus === homeworkQuizzesStatus.PROGRESS || this.state.quizStatus === homeworkQuizzesStatus.SUCCESS;
 
     var branches = this.state.branches.map((branch, index)=> {
       return (<option key={index}>{branch}</option>);
@@ -97,7 +97,7 @@ var SubmissionIntroduction = React.createClass({
                 <div className="col-sm-9">
                   <input type="text" className="form-control" id="githubUrl" name="githubUrl" ref="githubUrl"
                          onChange={this.handleChange} value={this.state.githubUrl}
-                         onBlur={this.onUrlBlur} placeholder="https://github.com/用户名/仓库名" disabled={this.state.submited ? 'disabled':''}/>
+                         onBlur={this.onUrlBlur} placeholder="https://github.com/用户名/仓库名" disabled={isSubmitted ? 'disabled':''}/>
                   <div
                       className={'lose' + (this.state.githubUrlError === '' ? ' hide' : '')}>{this.state.githubUrlError}</div>
                 </div>
@@ -105,13 +105,13 @@ var SubmissionIntroduction = React.createClass({
               <div className="form-group">
                 <label className="col-sm-2 control-label">github仓库分支</label>
                 <div className="col-sm-7">
-                  <select className="form-control" disabled={this.state.submited ? 'disabled':''} onChange={this.onBranchChange}>
+                  <select className="form-control" disabled={isSubmitted ? 'disabled':''} onChange={this.onBranchChange}>
                     {branches}
                   </select>
                 </div>
                 <div className="col-sm-2">
                   <button className="btn btn-default btn-block"
-                          disabled={(this.state.disableBranches || this.state.submited) === true ? 'disabled':''}
+                          disabled={(this.state.disableBranches || isSubmitted) === true ? 'disabled':''}
                           onClick={this.clickBranch}>获取分支
                     <i className={'fa fa-spinner fa-spin loading' + (this.state.showIcon ? '' : ' hide')}/>
                   </button>
@@ -119,7 +119,7 @@ var SubmissionIntroduction = React.createClass({
               </div>
               <div className="col-sm-2 col-sm-offset-2">
                 <button className="btn btn-default btn-block"
-                        disabled={(this.state.branches.length === 0) || this.state.submited ? 'disabled':''}
+                        disabled={(this.state.branches.length === 0) || isSubmitted ? 'disabled':''}
                         onClick={this.clickSubmit}>提交地址
                 </button>
               </div>
