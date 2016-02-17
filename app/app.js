@@ -15,8 +15,8 @@ var GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 var constant = require('./mixin/constant');
-var yaml_config = require('node-yaml-config');
-var config = yaml_config.load(__dirname + '/config/config.yml');
+var yamlConfig = require('node-yaml-config');
+var config = yamlConfig.load(__dirname + '/config/config.yml');
 
 mongoose.connect('mongodb://localhost/twars');
 
