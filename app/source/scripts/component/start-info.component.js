@@ -16,7 +16,7 @@ var StartInfo = React.createClass({
 
   render() {
     return (
-        <div>
+        <div className="container-fluid">
           <section className="title">
             <p>逻辑题</p>
           </section>

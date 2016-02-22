@@ -5,7 +5,7 @@ var UserCenterApp = React.createClass({
 
   render() {
     return (
-        <div className="row">
+        <div className="row container-fluid">
           {this.props.children}
         </div>
     );

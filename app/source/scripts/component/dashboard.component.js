@@ -18,7 +18,7 @@ var Dashboard = React.createClass({
 
     return (
 
-      <div className="app-list">
+      <div className="app-list container-fluid">
         {this.props.children}
       </div>
 
