@@ -21,9 +21,3 @@ jenkins:
   environment:
     - LANG=C.UTF-8
     - TERM=dumb
-rabbitmq:
-  image: rabbitmq:3.6.0
-  environment:
-      - LANG=C.UTF-8
-      - TERM=dumb
-
