@@ -11,32 +11,15 @@ var session = require('express-session');
 var sessionCheck = require('./middleware/session-check');
 var passport = require('passport');
 var util = require('util');
-var GitHubStrategy = require('passport-github').Strategy;
 var mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 var constant = require('./mixin/constant');
 var yamlConfig = require('node-yaml-config');
+
 var config = yamlConfig.load(__dirname + '/config/config.yml');
+var env = process.env.NODE_ENV || 'development';
 
 mongoose.connect(config.database);
-
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-  done(null, obj);
-});
-
-passport.use(new GitHubStrategy({
-  clientID: config.githubClientId,
-  clientSecret: config.githubClientSecret,
-  callbackURL: config.callbackUrl
-}, function (accessToken, refreshToken, profile, done) {
-  process.nextTick(function () {
-    return done(null, profile);
-  });
-}));
 
 app.use(cookieParser());
 app.use(session({
@@ -54,14 +37,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-
-var env;
-
-if (process.env.NODE_ENV !== 'test') {
-  env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
-} else {
-  env = process.env.NODE_ENV;
-}
 
 if (env === 'development' || env === 'test') {
   var compile = webpack(require('./webpack.config'));
