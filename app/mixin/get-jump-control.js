@@ -1,6 +1,6 @@
 'use strict';
 
-function jumpControl(isLoged, isPaperCommited, isDetailed){
+function jumpControl(isLoged, isPaperCommited, isDetailed) {
   return [{
     originPath: [
       'user-center.html',
@@ -12,14 +12,14 @@ function jumpControl(isLoged, isPaperCommited, isDetailed){
     ],
     targetPath: '/register.html',
     condition: !isLoged
-  },{
+  }, {
     originPath: [
       'logic-puzzle.html',
       'start.html'
     ],
     targetPath: '/dashboard.html',
     condition: isLoged && isPaperCommited && isDetailed
-  },{
+  }, {
     originPath: [
       'homework.html',
       'logic-puzzle.html',
@@ -29,6 +29,13 @@ function jumpControl(isLoged, isPaperCommited, isDetailed){
     ],
     targetPath: '/user-center.html',
     condition: isLoged && !isDetailed
-  }];
+  }, {
+    originPath: [
+      'homework.html'
+    ],
+    targetPath: 'dashboard.html',
+    condition: !isPaperCommited
+  }
+  ];
 }
 module.exports = jumpControl;
