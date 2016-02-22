@@ -33,7 +33,7 @@ function checkRegisterInfo(registerInfo) {
 }
 
 function checkMobilePhoneExist(mobilePhone){
-  return agent('GET', apiServer + 'user')
+  return agent('GET', apiServer + 'users')
       .set('Content-Type', 'application/json')
       .query({
         field: 'mobilePhone',
@@ -43,7 +43,7 @@ function checkMobilePhoneExist(mobilePhone){
 }
 
 function checkEmailExist(email){
-  return agent('GET', apiServer + 'user')
+  return agent('GET', apiServer + 'users')
       .set('Content-Type', 'application/json')
       .query({
         field: 'email',
@@ -119,7 +119,7 @@ router.post('/', function(req, res) {
 });
 
 router.get('/validate-mobile-phone', function(req, res) {
-  request.get(apiServer + 'user')
+  request.get(apiServer + 'users')
       .set('Content-Type', 'application/json')
       .query({
         field: 'mobilePhone',
@@ -139,7 +139,7 @@ router.get('/validate-mobile-phone', function(req, res) {
 });
 
 router.get('/validate-email', function(req, res) {
-  request.get(apiServer + 'user')
+  request.get(apiServer + 'users')
       .set('Content-Type', 'application/json')
       .query({
         field: 'email',
