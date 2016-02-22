@@ -9,7 +9,6 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var sessionCheck = require('./middleware/session-check');
-var passport = require('passport');
 var util = require('util');
 var mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
@@ -29,8 +28,6 @@ app.use(session({
     ttl: config.sessionTtl
   })
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(bodyParser.urlencoded({
   extended: false
