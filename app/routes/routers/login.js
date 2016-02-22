@@ -8,7 +8,8 @@ var md5 = require('js-md5');
 var validate = require('validate.js');
 var constraint = require('../../mixin/login-constraint');
 var passport = require('passport');
-var apiServer = require('../../config/configuration').apiServer;
+var yamlConfig = require('node-yaml-config');
+var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 
 function checkLoginInfo(account, password) {
   var pass = true;

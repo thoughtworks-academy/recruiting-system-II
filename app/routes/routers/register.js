@@ -8,7 +8,8 @@ var agent = require('superagent-promise')(require('superagent'), Promise);
 var validate = require('validate.js');
 var md5 = require('js-md5');
 var constraint = require('../../mixin/register-constraint');
-var apiServer = require('../../config/configuration').apiServer;
+var yamlConfig = require('node-yaml-config');
+var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;

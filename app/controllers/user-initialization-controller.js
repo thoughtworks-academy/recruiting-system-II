@@ -68,7 +68,7 @@ UserInitializationController.prototype.initializeQuizzes = (req, res) => {
 
     }
   ], (err) => {
-    if (err) {
+    if (err && err !== true) {
       res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
     } else {

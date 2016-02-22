@@ -3,7 +3,8 @@
 var getJumpControl = require('../mixin/get-jump-control');
 var logicPuzzle = require('../models/logic-puzzle');
 var superagent = require('superagent');
-var apiServer = require('../config/configuration').apiServer;
+var yamlConfig = require('node-yaml-config');
+var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 var async = require('async');
 
 function pathControl (req, res, next, jumpControl) {

@@ -1,7 +1,8 @@
 'use strict';
 
 var superAgent = require('superagent');
-var apiServer = require('../config/configuration').apiServer;
+var yamlConfig = require('node-yaml-config');
+var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 
 var apiRequest = {
   get: function (url, query, callback) {

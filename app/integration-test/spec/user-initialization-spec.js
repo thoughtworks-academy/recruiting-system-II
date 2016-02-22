@@ -48,7 +48,6 @@ describe('GET /initializeQuizzes', function(){
   });
 
   it('can initialize quizzes', function (done) {
-
     testSession
         .get('/user-initialization/initializeQuizzes')
         .set('Content-Type', 'application/json')

@@ -9,7 +9,8 @@ var validate = require('validate.js');
 var userConstraint = require('../../mixin/user-detail-constraint');
 var passwordConstraint = require('../../mixin/password-constraint');
 var md5 = require('js-md5');
-var apiServer = require('../../config/configuration').apiServer;
+var yamlConfig = require('node-yaml-config');
+var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 var constant = require('../../mixin/constant');
 
 function checkInfo(info, constraint) {
