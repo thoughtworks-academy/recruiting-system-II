@@ -2,12 +2,12 @@
 
 var React = global.React = require('react');
 var Input = require('react-bootstrap/lib/Input');
-var UserCenterActions = require('../actions/user-center-actions');
-var UserCenterStore = require('../store/user-center-store');
+var UserCenterActions = require('../../actions/user-center-actions');
+var UserCenterStore = require('../../store/user-center/user-center-store');
 var Reflux = require('reflux');
 var validate = require('validate.js');
-var constraint = require('../../../mixin/user-detail-constraint');
-var getError = require('../../../mixin/get-error');
+var constraint = require('../../../../mixin/user-detail-constraint');
+var getError = require('../../../../mixin/get-error');
 
 var UserDetail = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],

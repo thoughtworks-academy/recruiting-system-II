@@ -1,10 +1,10 @@
 'use strict';
 
 var Reflux = require('reflux');
-var UserCenterActions = require('../actions/user-center-actions');
+var UserCenterActions = require('../../actions/user-center-actions');
 var request = require('superagent');
 var page = require('page');
-var constant = require('../../../mixin/constant');
+var constant = require('../../../../mixin/constant');
 
 var UserDetailStore = Reflux.createStore({
   listenables: [UserCenterActions],

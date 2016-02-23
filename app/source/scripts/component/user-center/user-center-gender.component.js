@@ -2,8 +2,8 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var UserCenterActions = require('../actions/user-center-actions');
-var UserCenterStore = require('../store/user-center-store');
+var UserCenterActions = require('../../actions/user-center-actions');
+var UserCenterStore = require('../../store/user-center/user-center-store');
 
 var UserCenterGender = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],

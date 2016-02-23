@@ -4,8 +4,8 @@ var React = require('react');
 var Reflux = require('reflux');
 var Nav = require('react-bootstrap/lib/Nav');
 var NavItem = require('react-bootstrap/lib/NavItem');
-var UserCenterActions = require('../actions/user-center-actions');
-var UserCenterStore = require('../store/user-center-store');
+var UserCenterActions = require('../../actions/user-center-actions');
+var UserCenterStore = require('../../store/user-center/user-center-store');
 
 var UserCenterSide = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],

@@ -2,11 +2,11 @@
 
 var React = require('react');
 var validate = require('validate.js');
-var constraint = require('../../../mixin/password-constraint');
-var getError = require('../../../mixin/get-error');
-var ChangePasswordActions = require('../actions/change-password-actions');
-var ChangePasswordStore = require('../store/change-password-store');
-var UserCenterStore = require('../store/user-center-store');
+var constraint = require('../../../../mixin/password-constraint');
+var getError = require('../../../../mixin/get-error');
+var ChangePasswordActions = require('../../actions/change-password-actions');
+var ChangePasswordStore = require('../../store/user-center/change-password-store');
+var UserCenterStore = require('../../store/user-center/user-center-store');
 var Reflux = require('reflux');
 var _  = require('lodash');
 
