@@ -75,18 +75,22 @@ router.put('/update', function (req, res) {
             res.send({
               status: constant.httpCode.OK
             });
+          }else if(resp.status === constant.httpCode.NOT_FOUND){
+            res.send({
+              status: constant.httpCode.NOT_FOUND
+            });
           } else {
             throw new Error();
           }
         })
         .catch(function () {
-          res.status(constant.httpCode.NOT_FOUND);
+          res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
           res.send({
-            status: constant.httpCode.NOT_FOUND
+            status: constant.httpCode.INTERNAL_SERVER_ERROR
           });
         });
   } else {
-    res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR});
+    res.send({status: constant.httpCode.BAD_REQUEST});
   }
 });
 
@@ -109,19 +113,23 @@ router.put('/change-password', function (req, res) {
             res.send({
               status: constant.httpCode.OK
             });
-          }else {
+          }else if(resp.status === constant.httpCode.BAD_REQUEST){
+            res.send({
+              status:constant.httpCode.BAD_REQUEST
+            });
+          } else {
             throw new Error();
           }
         })
         .catch(function() {
-          res.status(constant.httpCode.BAD_REQUEST);
+          res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
           res.send({
-            status: constant.httpCode.BAD_REQUEST
+            status: constant.httpCode.INTERNAL_SERVER_ERROR
           });
         });
   }else {
     res.send({
-      status: constant.httpCode.INTERNAL_SERVER_ERROR
+      status: constant.httpCode.BAD_REQUEST
     });
   }
 });
