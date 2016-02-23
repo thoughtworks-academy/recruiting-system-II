@@ -15,7 +15,7 @@ var LogicPuzzleDescription = require('./component/logic-puzzle/logic-puzzle-desc
 var LogicPuzzleAnswerSubmit = require('./component/logic-puzzle/logic-puzzle-answer-submit.component');
 var LogicPuzzleTimer = require('./component/logic-puzzle/logic-puzzle-timer.component');
 var LogicPuzzleActions = require('./actions/logic-puzzle/logic-puzzle-actions');
-var Navigation = require('./component/navigation.component');
+var Navigation = require('./component/navigation/navigation.component');
 
 $('#submitModal').on('show.bs.modal', function () {
   $('.modal-content')
