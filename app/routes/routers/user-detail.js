@@ -12,11 +12,13 @@ var md5 = require('js-md5');
 var yamlConfig = require('node-yaml-config');
 var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 var constant = require('../../mixin/constant');
+var apiRequest = require('../../services/api-request');
 
 function checkInfo(info, constraint) {
   var result = validate(info, constraint);
 
-  if(result === undefined) {}
+  if (result === undefined) {
+  }
   return true;
 }
 
@@ -66,29 +68,28 @@ router.put('/update', function (req, res) {
   var result = _.assign({userId: userId}, userInfo);
 
   if (checkInfo(result, userConstraint) && result.gender !== '') {
-    agent.put(apiServer + 'users/' + userId + '/detail')
-        .set('Content-Type', 'application/json')
-        .send(result)
-        .end()
-        .then(function (resp) {
-          if (resp.status === constant.httpCode.OK) {
-            res.send({
-              status: constant.httpCode.OK
-            });
-          }else if(resp.status === constant.httpCode.NOT_FOUND){
-            res.send({
-              status: constant.httpCode.NOT_FOUND
-            });
-          } else {
-            throw new Error();
-          }
-        })
-        .catch(function () {
-          res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
-          res.send({
-            status: constant.httpCode.INTERNAL_SERVER_ERROR
-          });
+    var url = 'users/' + userId + '/detail';
+
+    apiRequest.put(url, result, function (resp) {
+      if (resp === undefined) {
+        res.send({
+          status: constant.httpCode.INTERNAL_SERVER_ERROR
         });
+      }else if (resp.status === constant.httpCode.OK) {
+        res.send({
+          status: constant.httpCode.OK
+        });
+      } else if (resp.status === constant.httpCode.NOT_FOUND) {
+        res.send({
+          status: constant.httpCode.NOT_FOUND
+        });
+      } else {
+        res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
+        res.send({
+          status: constant.httpCode.INTERNAL_SERVER_ERROR
+        });
+      }
+    });
   } else {
     res.send({status: constant.httpCode.BAD_REQUEST});
   }
@@ -98,36 +99,34 @@ router.put('/change-password', function (req, res) {
   var userId = req.session.user.id;
   var passwordInfo = req.body.data;
 
-  if(checkInfo(passwordInfo, passwordConstraint) && passwordInfo.password === passwordInfo.confirmPassword) {
+  if (checkInfo(passwordInfo, passwordConstraint) && passwordInfo.password === passwordInfo.confirmPassword) {
     var partResult = {};
 
     partResult.oldPassword = md5(passwordInfo.oldPassword);
     partResult.password = md5(passwordInfo.password);
+    var url = 'users/' + userId + '/password';
 
-    agent.put(apiServer + 'users/' + userId + '/password')
-        .set('Content-Type', 'application/json')
-        .send(partResult)
-        .end()
-        .then(function (resp) {
-          if(resp.status === constant.httpCode.OK) {
-            res.send({
-              status: constant.httpCode.OK
-            });
-          }else if(resp.status === constant.httpCode.BAD_REQUEST){
-            res.send({
-              status:constant.httpCode.BAD_REQUEST
-            });
-          } else {
-            throw new Error();
-          }
-        })
-        .catch(function() {
-          res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
-          res.send({
-            status: constant.httpCode.INTERNAL_SERVER_ERROR
-          });
+    apiRequest.put(url, partResult, function (err, resp) {
+      if (resp === undefined) {
+        res.send({
+          status: constant.httpCode.INTERNAL_SERVER_ERROR
         });
-  }else {
+      } else if (resp.status === constant.httpCode.OK) {
+        res.send({
+          status: constant.httpCode.OK
+        });
+      } else if (resp.status === constant.httpCode.BAD_REQUEST) {
+        res.send({
+          status: constant.httpCode.BAD_REQUEST
+        });
+      } else {
+        res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
+        res.send({
+          status: constant.httpCode.INTERNAL_SERVER_ERROR
+        });
+      }
+    });
+  } else {
     res.send({
       status: constant.httpCode.BAD_REQUEST
     });
