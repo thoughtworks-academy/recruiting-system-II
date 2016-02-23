@@ -1,7 +1,7 @@
 'use strict';
 
 var Reflux = require('reflux');
-var ChangePasswordActions = require('../../actions/change-password-actions');
+var ChangePasswordActions = require('../../actions/user-center/change-password-actions');
 var request = require('superagent');
 var page = require('page');
 var constant = require('../../../../mixin/constant');

@@ -2,7 +2,7 @@
 
 var React = global.React = require('react');
 var Input = require('react-bootstrap/lib/Input');
-var UserCenterActions = require('../../actions/user-center-actions');
+var UserCenterActions = require('../../actions/user-center/user-center-actions');
 var UserCenterStore = require('../../store/user-center/user-center-store');
 var Reflux = require('reflux');
 var validate = require('validate.js');
