@@ -5,7 +5,7 @@ var Reflux = require('reflux');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/url-constraint');
 var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
-var HomeworkActions = require('../../actions/homework-actions');
+var HomeworkActions = require('../../actions/homework/homework-actions');
 var HomeworkIntroductionStore = require('../../store/homework/homework-introduction-store');
 var SubmissionIntroductionStore = require('../../store/homework/submission-introduction-store');
 

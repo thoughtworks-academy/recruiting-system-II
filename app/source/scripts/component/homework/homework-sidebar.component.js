@@ -4,7 +4,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var HomeworkActions = require('../../actions/homework-actions');
+var HomeworkActions = require('../../actions/homework/homework-actions');
 var HomeworkSidebarStore = require('../../store/homework/homework-sidebar-store');
 var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
 

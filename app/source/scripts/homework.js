@@ -8,7 +8,7 @@ var HomeworkContent = require('./component/homework/homework-content.component')
 var HomeworkIntroduction = require('./component/homework/homework-introduction.component');
 var SubmissionIntroduction = require('./component/homework/submission-introduction.component');
 var RunningResult = require('./component/homework/running-result.component');
-var HomeworkAction = require('./actions/homework-actions');
+var HomeworkAction = require('./actions/homework/homework-actions');
 
 function changeId() {
   var orderId;
