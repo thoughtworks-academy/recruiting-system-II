@@ -89,11 +89,9 @@ var RegisterStore = Reflux.createStore({
     });
   },
 
-  onChangeState: function () {
+  onChangeState: function (isShowToggle) {
     this.trigger({
-      isShowToggle: false,
-      passwordSafeLevel: '',
-      passwordSafeStyle: ''
+      isShowToggle: !isShowToggle
     });
   },
 
@@ -101,6 +99,10 @@ var RegisterStore = Reflux.createStore({
     this.trigger({
       password: password
     });
+  },
+
+  onChangeValue: function (name, value) {
+    this.trigger({[name]: value});
   }
 });
 

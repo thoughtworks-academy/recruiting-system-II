@@ -44,6 +44,12 @@ var RegisterForm = React.createClass({
     };
   },
 
+  handleChange: function (event) {
+    var value = event.target.value;
+    var name = event.target.name;
+    RegisterActions.changeValue(name, value);
+  },
+
   validate: function (event) {
     var target = event.target;
     var value = target.value;
@@ -134,7 +140,7 @@ var RegisterForm = React.createClass({
           <form action="">
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
-                     onBlur={this.validate}/>
+                     onBlur={this.validate} onChange={this.handleChange} value={this.state.mobilePhone}/>
 
               <div
                   className={'lose' + (this.state.mobilePhoneError === '' ? ' hide' : '')}>{this.state.mobilePhoneError}</div>
@@ -142,7 +148,7 @@ var RegisterForm = React.createClass({
 
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱" name="email" ref="email"
-                     onBlur={this.validate}/>
+                     onBlur={this.validate} onChange={this.handleChange} value={this.state.email}/>
 
               <div
                   className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>

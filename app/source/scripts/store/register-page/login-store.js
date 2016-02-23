@@ -40,8 +40,20 @@ var LoginStore = Reflux.createStore({
       mobilePhoneError: '',
       emailError: '',
       passwordError: '',
-      agree: false
+      agree: false,
+      passwordSafeStyle: '',
+      passwordSafeLevel: '',
+      password: '',
+      email: '',
+      mobilePhone: '',
+      phoneEmail: '',
+      loginPassword: '',
+      isShowToggle: false
     });
+  },
+
+  onChangeValue: function (name, value){
+    this.trigger({[name]: value});
   }
 
 });

@@ -26,8 +26,16 @@ var LoginForm = React.createClass({
       phoneEmailError: '',
       loginPasswordError: '',
       loginFailed: false,
-      clickable: false
+      clickable: false,
+      phoneMail: '',
+      loginPassword: ''
     };
+  },
+
+  handleChange: function (event){
+    var value = event.target.value;
+    var name = event.target.name;
+    LoginActions.changeValue(name, value);
   },
 
   validate: function (event) {
@@ -65,14 +73,14 @@ var LoginForm = React.createClass({
           <form action="">
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱" name="phoneEmail" onBlur={this.validate}
-                     ref="phoneEmail"/>
+                     ref="phoneEmail" onChange={this.handleChange} value={this.state.phoneEmail}/>
               <div
                   className={'lose' + (this.state.phoneEmailError === '' ? ' hide' : '')}>{this.state.phoneEmailError}
               </div>
             </div>
             <div className="form-group">
               <input className="form-control" type="password" placeholder="请输入密码" name="loginPassword"
-                     ref="loginPassword" onBlur={this.validate}/>
+                     ref="loginPassword" onBlur={this.validate} onChange={this.handleChange} value={this.state.loginPassword}/>
               <div
                   className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
               </div>
