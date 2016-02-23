@@ -25,9 +25,9 @@ public class TestBase {
         }
 
         flyway.setDataSource(
-                pps.getProperty("dbUrl"),
-                pps.getProperty("user"),
-                pps.getProperty("password")
+                pps.getProperty("jdbc.url"),
+                pps.getProperty("jdbc.user"),
+                pps.getProperty("jdbc.password")
         );
 
         flyway.setEncoding("UTF-8");
