@@ -24,6 +24,14 @@ var apiRequest = {
         .set('Content-Type', 'application/json')
         .send(body)
         .end(callback);
+  },
+
+  put: function (url, data ,callback) {
+
+    superAgent.get(apiServer + url)
+        .set('Content-Type', 'application/json')
+        .send(data)
+        .end(callback);
   }
 };
 
