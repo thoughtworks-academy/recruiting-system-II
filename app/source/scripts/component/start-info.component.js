@@ -28,10 +28,13 @@ var StartInfo = React.createClass({
               <div className="col-md-4 col-md-offset-4">
                 <ol>
                   <li>
-                    本套逻辑题有10道小题共分为4种类型
+                    本套逻辑题共有12道小题,前两道为2条参考例题
                   </li>
                   <li>
                     您共有90分钟时间，请认真答题
+                  </li>
+                  <li>
+                    答题前，建议您先阅读例题
                   </li>
                   <li>
                     答题前，请确保网络条件畅通，无异常
