@@ -3,6 +3,7 @@
 'use strict';
 
 var React = require('react');
+var LoginStore = require('../store/login-store');
 var RegisterStore = require('../store/register-store');
 var RegisterActions = require('../actions/register-actions');
 var Reflux = require('reflux');
@@ -53,7 +54,7 @@ function getPosition(level) {
   }
 }
 var RegisterPassword = React.createClass({
-  mixins: [Reflux.connect(RegisterStore)],
+  mixins: [Reflux.connect(RegisterStore),Reflux.connect(LoginStore)],
 
   getInitialState: function () {
     return {
@@ -64,17 +65,8 @@ var RegisterPassword = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function() {
-    this.setState({
-      passwordError: '',
-      isShowToggle: false,
-      passwordSafeLevel: '',
-      passwordSafeStyle: ''
-    });
-  },
-
   toggleState: function () {
-    RegisterActions.changeState(this.state.isShowToggle);
+    RegisterActions.changeState();
   },
 
   checkPasswordSafe: function (event) {

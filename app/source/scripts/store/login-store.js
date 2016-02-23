@@ -34,7 +34,13 @@ var LoginStore = Reflux.createStore({
 
   onChangeState: function (isLoginState){
     this.trigger({
-      isLoginState: !isLoginState
+      isLoginState: !isLoginState,
+      phoneEmailError: '',
+      loginPasswordError: '',
+      mobilePhoneError: '',
+      emailError: '',
+      passwordError: '',
+      agree: false
     });
   }
 

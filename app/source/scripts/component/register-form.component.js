@@ -43,15 +43,6 @@ var RegisterForm = React.createClass({
       password: ''
     };
   },
-  componentWillReceiveProps: function() {
-    this.setState({
-      mobilePhoneError: '',
-      emailError: '',
-      agree: false,
-      isShowToggle: false
-    });
-  },
-
 
   validate: function (event) {
     var target = event.target;

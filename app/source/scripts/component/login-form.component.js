@@ -30,13 +30,6 @@ var LoginForm = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function() {
-    this.setState({
-      phoneEmailError: '',
-      loginPasswordError: ''
-    });
-  },
-
   validate: function (event) {
     var target = event.target;
     var value = target.value;
