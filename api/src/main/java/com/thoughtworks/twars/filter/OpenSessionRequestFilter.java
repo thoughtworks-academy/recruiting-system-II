@@ -7,7 +7,7 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import java.io.IOException;
 
-public class OpenSessionRequestFilter  implements ContainerRequestFilter{
+public class OpenSessionRequestFilter  implements ContainerRequestFilter {
     @Inject
     SqlSessionManager sqlSessionManager;
 
