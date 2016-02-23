@@ -5,6 +5,7 @@ var ReactDOM = require('react-dom');
 
 require('../less/logic-puzzle.less');
 require('bootstrap');
+require('lightbox');
 
 var LogicPuzzle = require('./component/logic-puzzle/logic-puzzle-app');
 var LogicPuzzleLeft = require('./component/logic-puzzle/logic-puzzle-left.component');

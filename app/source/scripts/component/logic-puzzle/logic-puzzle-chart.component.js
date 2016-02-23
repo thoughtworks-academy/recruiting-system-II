@@ -18,7 +18,9 @@ var LogicPuzzleChart = React.createClass({
   render: function () {
     return (
         <div className="left-chart">
-          <img src={this.state.item.chartPath} alt="逻辑题图片"/>
+          <a href={this.state.item.chartPath} data-lightbox="image">
+            <img src={this.state.item.chartPath} alt="逻辑题图片"/>
+          </a>
         </div>
     );
   }
