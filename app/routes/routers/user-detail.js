@@ -70,12 +70,12 @@ router.put('/update', function (req, res) {
   if (checkInfo(result, userConstraint) && result.gender !== '') {
     var url = 'users/' + userId + '/detail';
 
-    apiRequest.put(url, result, function (resp) {
+    apiRequest.put(url, result, function (err, resp) {
       if (resp === undefined) {
         res.send({
           status: constant.httpCode.INTERNAL_SERVER_ERROR
         });
-      }else if (resp.status === constant.httpCode.OK) {
+      } else if (resp.status === constant.httpCode.OK) {
         res.send({
           status: constant.httpCode.OK
         });
