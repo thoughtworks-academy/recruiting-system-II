@@ -2,8 +2,7 @@
 
 var React = global.React = require('react');
 var Reflux = require('reflux');
-var DashboardActions = require('../actions/dashboard-actions');
-var DashboardStore = require('../store/dashboard-store');
+var DashboardStore = require('../../store/dashboard-store');
 
 
 var Alertcontent = React.createClass({

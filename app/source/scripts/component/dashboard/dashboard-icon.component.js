@@ -5,8 +5,8 @@
 var React = global.React = require('react');
 var Col = require('react-bootstrap/lib/Col');
 var Reflux = require('reflux');
-var DashboardActions = require('../actions/dashboard-actions');
-var DashboardStore = require('../store/dashboard-store');
+var DashboardActions = require('../../actions/dashboard-actions');
+var DashboardStore = require('../../store/dashboard-store');
 
 var DashboardIcon = React.createClass({
   mixins: [Reflux.connect(DashboardStore)],
