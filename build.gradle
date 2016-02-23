@@ -10,8 +10,11 @@ allprojects {
 }
 
 task(startserver) {
-    println("startserver deprecated")
-    println("please use task 'startApp' & 'startApi'")
+    doFirst{
+        println("The task 'startserver' was deprecated")
+        println("please use new task 'startApp' & 'startApi'")
+    }
+
 }
 
 task(startApi) {
@@ -20,7 +23,6 @@ task(startApi) {
         project(':api').flywayClean.execute()
         project(':api').flywayMigrate.execute()
         println "start jetty server..."
-        project(':api').jettyRun.daemon = true
         project(':api').jettyRun.execute()
     }
 }
