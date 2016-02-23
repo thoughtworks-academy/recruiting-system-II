@@ -68,11 +68,11 @@ baseUri: http://api.bronzesword.com/
           application/json:
             properties:
               userId: integer
-              name: string
               school: string
+              name: string
+              gender: string
               major: string
               degree: string
-              gender: string
       put:
         description: 提交用户的详细信息
         body:
@@ -80,11 +80,10 @@ baseUri: http://api.bronzesword.com/
             properties:
               userId: integer
               school: string
-              mobilePhone: string
-              email: string
+              name: string
+              gender: string
               major: string
-              class: string
-              birthday: integer
+              degree: string
         responses:
           200:
             body:
