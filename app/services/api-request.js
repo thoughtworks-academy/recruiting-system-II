@@ -28,7 +28,7 @@ var apiRequest = {
 
   put: function (url, data ,callback) {
 
-    superAgent.get(apiServer + url)
+    superAgent.put(apiServer + url)
         .set('Content-Type', 'application/json')
         .send(data)
         .end(callback);
