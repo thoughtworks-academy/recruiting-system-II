@@ -3,11 +3,11 @@
 require('../less/homework.less');
 var ReactDom = require('react-dom');
 var Navigation = require('./component/navigation.component');
-var HomeworkSidebar = require('./component/homework-sidebar.component');
-var HomeworkContent = require('./component/homework-content.component');
-var HomeworkIntroduction = require('./component/homework-introduction.component');
-var SubmissionIntroduction = require('./component/submission-introduction.component');
-var RunningResult = require('./component/running-result.component');
+var HomeworkSidebar = require('./component/homework/homework-sidebar.component');
+var HomeworkContent = require('./component/homework/homework-content.component');
+var HomeworkIntroduction = require('./component/homework/homework-introduction.component');
+var SubmissionIntroduction = require('./component/homework/submission-introduction.component');
+var RunningResult = require('./component/homework/running-result.component');
 var HomeworkAction = require('./actions/homework-actions');
 
 function changeId() {

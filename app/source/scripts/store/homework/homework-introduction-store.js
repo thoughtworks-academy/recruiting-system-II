@@ -1,10 +1,10 @@
 'use strict';
 
 var Reflux = require('reflux');
-var HomeworkActions = require('../actions/homework-actions');
+var HomeworkActions = require('../../actions/homework-actions');
 var request = require('superagent');
-var constant = require('../../../mixin/constant');
-var homeworkQuizzesStatus = require('../../../mixin/constant').homeworkQuizzesStatus;
+var constant = require('../../../../mixin/constant');
+var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
 
 var HomeworkIntroductionStore = Reflux.createStore({
   listenables: [HomeworkActions],

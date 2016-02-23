@@ -3,11 +3,11 @@
 var React = require('react');
 var Reflux = require('reflux');
 var validate = require('validate.js');
-var constraint = require('../../../mixin/url-constraint');
-var homeworkQuizzesStatus = require('../../../mixin/constant').homeworkQuizzesStatus;
-var HomeworkActions = require('../actions/homework-actions');
-var HomeworkIntroductionStore = require('../store/homework-introduction-store');
-var SubmissionIntroductionStore = require('../store/submission-introduction-store');
+var constraint = require('../../../../mixin/url-constraint');
+var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
+var HomeworkActions = require('../../actions/homework-actions');
+var HomeworkIntroductionStore = require('../../store/homework/homework-introduction-store');
+var SubmissionIntroductionStore = require('../../store/homework/submission-introduction-store');
 
 function getError(validateInfo, field) {
   if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {

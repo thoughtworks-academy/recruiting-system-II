@@ -2,9 +2,9 @@
 'use strict';
 
 var Reflux = require('reflux');
-var HomeworkActions = require('../actions/homework-actions');
+var HomeworkActions = require('../../actions/homework-actions');
 var superAgent = require('superagent');
-var constant = require('../../../mixin/constant');
+var constant = require('../../../../mixin/constant');
 
 var submissionIntroductionStore = Reflux.createStore({
   listenables: [HomeworkActions],

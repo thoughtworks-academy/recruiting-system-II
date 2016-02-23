@@ -4,9 +4,9 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var HomeworkActions = require('../actions/homework-actions');
-var HomeworkSidebarStore = require('../store/homework-sidebar-store');
-var homeworkQuizzesStatus = require('../../../mixin/constant').homeworkQuizzesStatus;
+var HomeworkActions = require('../../actions/homework-actions');
+var HomeworkSidebarStore = require('../../store/homework/homework-sidebar-store');
+var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
 
 var HomeworkSidebar = React.createClass({
   mixins: [Reflux.connect(HomeworkSidebarStore)],
