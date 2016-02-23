@@ -17,7 +17,12 @@ var ChangePasswordStore = Reflux.createStore({
           data: passwordInfo
         })
         .end((err, req) => {
-          if (req.body.status === constant.httpCode.OK) {
+          if(req === undefined){
+            this.trigger({
+              isRespond: false,
+              oldPasswordError: constant.changePassword.SERVERERROR
+            });
+          } else if (req.body.status === constant.httpCode.OK) {
             this.trigger({
               success: true,
               isRespond: false,
@@ -31,7 +36,10 @@ var ChangePasswordStore = Reflux.createStore({
               oldPasswordError: constant.changePassword.ERROR
             });
           } else {
-            console.log('error');
+            this.trigger({
+              isRespond: false,
+              oldPasswordError: constant.changePassword.SERVERERROR
+            });
           }
         });
   }
