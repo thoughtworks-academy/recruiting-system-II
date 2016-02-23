@@ -2,8 +2,8 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var LogicPuzzleActions = require('../../actions/logic-puzzle-actions');
-var LogicPuzzleStore = require('../../store/logic-puzzle-store');
+var LogicPuzzleActions = require('../../actions/logic-puzzle/logic-puzzle-actions');
+var LogicPuzzleStore = require('../../store/logic-puzzle/logic-puzzle-store');
 var $ = global.jQuery = require('jquery');
 require('bootstrap');
 

@@ -1,13 +1,13 @@
 'use strict';
 
 var Reflux = require('reflux');
-var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
+var LogicPuzzleActions = require('../../actions/logic-puzzle/logic-puzzle-actions');
 var superAgent = require('superagent');
 var async = require('async');
 var page = require('page');
 var _currentIndex = 0;
 var _answer;
-var constant = require('../../../mixin/constant');
+var constant = require('../../../../mixin/constant');
 
 
 var LogicPuzzleStore = Reflux.createStore({

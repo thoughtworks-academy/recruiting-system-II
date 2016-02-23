@@ -1,7 +1,7 @@
 'use strict';
 
 var Reflux = require('reflux');
-var TimerActions = require('../actions/timer-actions');
+var TimerActions = require('../../actions/logic-puzzle/timer-actions');
 var superAgent = require('superagent');
 
 var TimerStore = Reflux.createStore({

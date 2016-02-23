@@ -14,7 +14,7 @@ var LogicPuzzleChart = require('./component/logic-puzzle/logic-puzzle-chart.comp
 var LogicPuzzleDescription = require('./component/logic-puzzle/logic-puzzle-description.component');
 var LogicPuzzleAnswerSubmit = require('./component/logic-puzzle/logic-puzzle-answer-submit.component');
 var LogicPuzzleTimer = require('./component/logic-puzzle/logic-puzzle-timer.component');
-var LogicPuzzleActions = require('./actions/logic-puzzle-actions');
+var LogicPuzzleActions = require('./actions/logic-puzzle/logic-puzzle-actions');
 var Navigation = require('./component/navigation.component');
 
 $('#submitModal').on('show.bs.modal', function () {

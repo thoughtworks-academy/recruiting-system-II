@@ -2,8 +2,8 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var TimerStore = require('../../store/timer-store');
-var TimerActions = require('../../actions/timer-actions');
+var TimerStore = require('../../store/logic-puzzle/timer-store');
+var TimerActions = require('../../actions/logic-puzzle/timer-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var constant = require('../../../../mixin/constant');
 
