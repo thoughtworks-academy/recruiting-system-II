@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionManager;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 public final class DBUtil {
 
