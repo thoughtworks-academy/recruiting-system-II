@@ -3,8 +3,8 @@
 var React = global.React = require('react');
 var Reflux = require('reflux');
 
-var DashboardActions = require('../../actions/dashboard-actions');
-var DashboardStore = require('../../store/dashboard-store');
+var DashboardActions = require('../../actions/dashboard/dashboard-actions');
+var DashboardStore = require('../../store/dashboard/dashboard-store');
 
 var Dashboard = React.createClass({
 

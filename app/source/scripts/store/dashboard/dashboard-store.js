@@ -1,7 +1,7 @@
 'use strict';
 
 var Reflux = require('reflux');
-var DashboardActions = require('../actions/dashboard-actions');
+var DashboardActions = require('../../actions/dashboard/dashboard-actions');
 var request = require('superagent');
 
 var DashboardStore = Reflux.createStore({
