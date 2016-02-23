@@ -9,21 +9,29 @@ allprojects {
     apply plugin: "idea"
 }
 
-task(startServer) {
+task(startserver) {
+    println("startserver deprecated")
+    println("please use task 'startApp' & 'startApi'")
+}
+
+task(startApi) {
     doFirst {
-        println "Starting jetty"
+        println "migrate database..."
         project(':api').flywayClean.execute()
         project(':api').flywayMigrate.execute()
-//        project(':api').jettyRun.daemon = true
+        println "start jetty server..."
+        project(':api').jettyRun.daemon = true
         project(':api').jettyRun.execute()
-        println "Jetty started"
-
-        project(':app').mongoRefresh.execute()
-        project(':app').startNodemon.execute()
     }
+}
 
-    doLast {
-        project(':api').jettyStop.execute()
-        println "Server stoped"
+task(startApp) {
+    doFirst {
+        println "install npm dependencies"
+        project(':app').npmInstall.execute()
+        println "refresh mongodb"
+        project(':app').mongoRefresh.execute()
+        println "start nodemon"
+        project(':app').startNodemon.execute()
     }
 }
