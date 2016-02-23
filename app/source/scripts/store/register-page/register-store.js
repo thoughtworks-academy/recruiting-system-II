@@ -1,7 +1,7 @@
 'use strict';
 
 var Reflux = require('reflux');
-var RegisterActions = require('../../actions/register-actions');
+var RegisterActions = require('../../actions/register-page/register-actions');
 var page = require('page');
 var validate = require('validate.js');
 var request = require('superagent');

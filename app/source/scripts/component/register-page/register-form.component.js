@@ -9,7 +9,7 @@ var constraint = require('../../../../mixin/register-constraint');
 var page = require('page');
 var constant = require('../../../../mixin/constant');
 var async = require('async');
-var RegisterActions = require('../../actions/register-actions');
+var RegisterActions = require('../../actions/register-page/register-actions');
 var RegisterStore = require('../../store/register-page/register-store');
 var LoginStore = require('../../store/register-page/login-store');
 
