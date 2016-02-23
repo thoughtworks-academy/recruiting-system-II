@@ -1,8 +1,8 @@
 'use strict';
 
 var React = require('react');
-var LoginActions = require('../actions/login-actions');
-var LoginStore = require('../store/login-store');
+var LoginActions = require('../../actions/login-actions');
+var LoginStore = require('../../store/register-page/login-store');
 var Reflux = require('reflux');
 
 var LoginInfo = React.createClass({

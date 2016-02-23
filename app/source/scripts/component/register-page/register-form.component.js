@@ -5,13 +5,13 @@ var Reflux = require('reflux');
 var $ = require('jquery');
 var ReactDOM = require('react-dom');
 var validate = require('validate.js');
-var constraint = require('../../../mixin/register-constraint');
+var constraint = require('../../../../mixin/register-constraint');
 var page = require('page');
-var constant = require('../../../mixin/constant');
+var constant = require('../../../../mixin/constant');
 var async = require('async');
-var RegisterActions = require('../actions/register-actions');
-var RegisterStore = require('../store/register-store');
-var LoginStore = require('../store/login-store');
+var RegisterActions = require('../../actions/register-actions');
+var RegisterStore = require('../../store/register-page/register-store');
+var LoginStore = require('../../store/register-page/login-store');
 
 var asyncContainersFunc = {
   email: function (value, done){

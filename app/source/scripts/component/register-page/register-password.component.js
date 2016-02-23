@@ -3,11 +3,11 @@
 'use strict';
 
 var React = require('react');
-var LoginStore = require('../store/login-store');
-var RegisterStore = require('../store/register-store');
-var RegisterActions = require('../actions/register-actions');
+var LoginStore = require('../../store/register-page/login-store');
+var RegisterStore = require('../../store/register-page/register-store');
+var RegisterActions = require('../../actions/register-actions');
 var Reflux = require('reflux');
-var constraint = require('../../../mixin/register-constraint');
+var constraint = require('../../../../mixin/register-constraint');
 var validate = require('validate.js');
 
 var asyncContainersFunc = {

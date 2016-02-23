@@ -1,12 +1,12 @@
 'use strict';
 
 var Reflux = require('reflux');
-var RegisterActions = require('../actions/register-actions');
+var RegisterActions = require('../../actions/register-actions');
 var page = require('page');
 var validate = require('validate.js');
 var request = require('superagent');
-var constant = require('../../../mixin/constant');
-var constraint = require('../../../mixin/register-constraint');
+var constant = require('../../../../mixin/constant');
+var constraint = require('../../../../mixin/register-constraint');
 var async = require('async');
 
 var RegisterStore = Reflux.createStore({
