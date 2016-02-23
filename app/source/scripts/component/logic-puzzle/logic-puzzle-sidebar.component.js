@@ -2,11 +2,11 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var LogicPuzzleStore = require('../store/logic-puzzle-store');
-var LogicPuzzleActions = require('../actions/logic-puzzle-actions');
+var LogicPuzzleStore = require('../../store/logic-puzzle-store');
+var LogicPuzzleActions = require('../../actions/logic-puzzle-actions');
 var Modal = require('react-bootstrap/lib/Modal');
 var _newOrderId;
-var constant = require('../../../mixin/constant');
+var constant = require('../../../../mixin/constant');
 var able = false;
 
 var LogicPuzzleSidebar = React.createClass({

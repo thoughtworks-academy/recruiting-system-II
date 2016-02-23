@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var LogicPuzzleStore = require('../store/logic-puzzle-store');
+var LogicPuzzleStore = require('../../store/logic-puzzle-store');
 
 var LogicPuzzleDescription = React.createClass({
   mixins: [Reflux.connect(LogicPuzzleStore)],

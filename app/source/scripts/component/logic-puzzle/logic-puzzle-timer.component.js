@@ -2,10 +2,10 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var TimerStore = require('../store/timer-store');
-var TimerActions = require('../actions/timer-actions');
+var TimerStore = require('../../store/timer-store');
+var TimerActions = require('../../actions/timer-actions');
 var Modal = require('react-bootstrap/lib/Modal');
-var constant = require('../../../mixin/constant');
+var constant = require('../../../../mixin/constant');
 
 var LogicPuzzleTimer = React.createClass({
   mixins: [Reflux.connect(TimerStore)],
