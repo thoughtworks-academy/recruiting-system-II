@@ -39,6 +39,16 @@ baseUri: http://api.bronzesword.com/
               userInfo:
                 properties:
                   uri: string
+
+/logout:
+  put:
+    body:
+      application/json:
+        properties:
+          userId: number
+    responses:
+      204:
+
 /users:
   get:
     queryParameters:
