@@ -28,6 +28,7 @@ public class RegisterResource extends Resource {
             return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
         }
         userMapper.insertUser(user);
+        session.commit();
 
         Map<String, Object> map = new HashMap<>();
         Map<String, String> userInfo = new HashMap<>();
