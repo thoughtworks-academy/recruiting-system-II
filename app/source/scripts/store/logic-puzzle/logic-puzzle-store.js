@@ -8,6 +8,8 @@ var page = require('page');
 var _currentIndex = 0;
 var _answer;
 var constant = require('../../../../mixin/constant');
+var errorHandler = require('../../../../tools/error-handler');
+
 
 
 var LogicPuzzleStore = Reflux.createStore({
@@ -68,6 +70,7 @@ var LogicPuzzleStore = Reflux.createStore({
     superAgent.post('/logic-puzzle/save')
         .set('Content-Type', 'application/json')
         .send({userAnswer: _answer, orderId: _currentIndex})
+        .use(errorHandler)
         .end(callback);
   },
 
@@ -86,6 +89,7 @@ var LogicPuzzleStore = Reflux.createStore({
       },(res,callback) =>{
         superAgent.post('/logic-puzzle')
             .set('Content_Type', 'application/json')
+            .use(errorHandler)
             .end(callback);
       }
     ],function(err,res){
@@ -101,6 +105,7 @@ var LogicPuzzleStore = Reflux.createStore({
         .query({
           orderId: _currentIndex
         })
+        .use(errorHandler)
         .end(callback);
   },
 
