@@ -463,9 +463,8 @@ describe('HomeworkController', function () {
       });
     });
 
-    it('it should return status 403 when orderId is out of range ', (done)=> {
+    it('it should return status 404 when orderId is out of range ', (done)=> {
       spyOn(userHomeworkQuizzes, 'checkDataForSubmit').and.callFake(function (userId, orderId, callback) {
-
         var result = {
           data: {
             userId: 1,
@@ -480,7 +479,7 @@ describe('HomeworkController', function () {
             }
           },
           isValidate: false,
-          status: constant.httpCode.FORBIDDEN
+          status: constant.httpCode.NOT_FOUND
         };
         callback(null, result);
       });
@@ -494,7 +493,7 @@ describe('HomeworkController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: constant.httpCode.FORBIDDEN
+            status: constant.httpCode.NOT_FOUND
           });
           done();
         }
