@@ -103,6 +103,10 @@ var RegisterStore = Reflux.createStore({
 
   onChangeValue: function (name, value) {
     this.trigger({[name]: value});
+  },
+
+  onCheckData: function (stateObj) {
+    this.trigger(stateObj);
   }
 });
 

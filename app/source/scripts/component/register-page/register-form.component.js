@@ -100,7 +100,7 @@ var RegisterForm = React.createClass({
       }
 
       stateObj[name + 'Error'] = error;
-      this.setState(stateObj);
+      RegisterActions.checkData(stateObj);
     });
 
     return passCheck;
