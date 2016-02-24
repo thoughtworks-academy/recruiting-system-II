@@ -14,11 +14,11 @@ var TimerStore = Reflux.createStore({
         .get('/timer/remain-time')
         .set('Content-Type', 'application/json')
         .use(errorHandler)
-        .end((err,res) => {
-        this.trigger({
-          'remainTime': res.body.remainTime
+        .end((err, res) => {
+          this.trigger({
+            'remainTime': res.body.remainTime
+          });
         });
-      });
   }
 });
 
