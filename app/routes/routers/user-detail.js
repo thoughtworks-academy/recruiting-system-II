@@ -108,6 +108,7 @@ router.put('/change-password', function (req, res) {
 
     apiRequest.put(url, partResult, function (err, resp) {
       if (resp === undefined) {
+        res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
         res.send({
           status: constant.httpCode.INTERNAL_SERVER_ERROR
         });

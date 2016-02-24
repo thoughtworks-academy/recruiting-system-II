@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 var ChangePasswordActions = require('../../actions/user-center/change-password-actions');
 var request = require('superagent');
 var page = require('page');
+var errorHandler = require('../../../../tools/error-handler');
 var constant = require('../../../../mixin/constant');
 
 var ChangePasswordStore = Reflux.createStore({
@@ -16,30 +17,23 @@ var ChangePasswordStore = Reflux.createStore({
         .send({
           data: passwordInfo
         })
-        .end((err, req) => {
-          if(req === undefined){
-            this.trigger({
-              isRespond: false,
-              oldPasswordError: constant.changePassword.SERVERERROR
-            });
-          } else if (req.body.status === constant.httpCode.OK) {
-            this.trigger({
-              success: true,
-              isRespond: false,
-              oldPassword: '',
-              newPassword: '',
-              confirmPassword: ''
-            });
-          } else if (req.body.status === constant.httpCode.BAD_REQUEST) {
-            this.trigger({
-              isRespond: false,
-              oldPasswordError: constant.changePassword.ERROR
-            });
-          } else {
-            this.trigger({
-              isRespond: false,
-              oldPasswordError: constant.changePassword.SERVERERROR
-            });
+        .use(errorHandler)
+        .end((err, res) => {
+          if (res) {
+            if (res.body.status === constant.httpCode.OK) {
+              this.trigger({
+                success: true,
+                isRespond: false,
+                oldPassword: '',
+                newPassword: '',
+                confirmPassword: ''
+              });
+            } else if (res.body.status === constant.httpCode.BAD_REQUEST) {
+              this.trigger({
+                isRespond: false,
+                oldPasswordError: constant.changePassword.ERROR
+              });
+            }
           }
         });
   }
