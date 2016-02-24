@@ -8,6 +8,8 @@ var request = require('superagent');
 var constant = require('../../../../mixin/constant');
 var constraint = require('../../../../mixin/register-constraint');
 var async = require('async');
+var errorHandler = require('../../../../tools/error-handler');
+
 
 var RegisterStore = Reflux.createStore({
   listenables: RegisterActions,
@@ -19,6 +21,7 @@ var RegisterStore = Reflux.createStore({
         .query({
           email: value
         })
+        .use(errorHandler)
         .end((err, req) => {
           var error = '';
           if (req.body.status === constant.httpCode.OK) {
@@ -35,6 +38,7 @@ var RegisterStore = Reflux.createStore({
         .query({
           mobilePhone: value
         })
+        .use(errorHandler)
         .end((err, req) => {
           var error = '';
           if (req.body.status === constant.httpCode.OK) {
@@ -45,33 +49,38 @@ var RegisterStore = Reflux.createStore({
   },
 
   onRegister: function (mobilePhone, email, password) {
-    request.post('/register').set('Content-Type', 'application/json').send({
-      mobilePhone: mobilePhone,
-      email: email,
-      password: password
+    request
+        .post('/register')
+        .set('Content-Type', 'application/json')
+        .send({
+          mobilePhone: mobilePhone,
+          email: email,
+          password: password
+        })
+        .use(errorHandler)
+        .end((err, req) => {
+          var info = req.body;
+          if (info.status === constant.httpCode.OK) {
+            this.onInitialUserQuiz();
+          } else {
+            var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
+            var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
 
-    }).end((err, req) => {
-      var info = req.body;
-      if (info.status === constant.httpCode.OK) {
-        this.onInitialUserQuiz();
-      } else {
-        var emailExist = info.data.isEmailExist ? '该邮箱已被注册' : '';
-        var mobilePhoneExist = info.data.isMobilePhoneExist ? '该手机号已被注册' : '';
-
-        this.trigger({
-          mobilePhoneError: mobilePhoneExist,
-          emailError: emailExist,
-          clickable: false
+            this.trigger({
+              mobilePhoneError: mobilePhoneExist,
+              emailError: emailExist,
+              clickable: false
+            });
+          }
         });
-      }
-    });
   },
 
   onInitialUserQuiz: function () {
     async.series({
       initializeQuizzes: (done) => {
-        request.get('/user-initialization/initializeQuizzes').
-            set('Content-Type', 'application/json')
+        request.get('/user-initialization/initializeQuizzes')
+            .set('Content-Type', 'application/json')
+            .use(errorHandler)
             .end(function (err) {
               if (err) {
                 done(err);

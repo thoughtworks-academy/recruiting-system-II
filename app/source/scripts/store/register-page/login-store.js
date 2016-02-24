@@ -5,6 +5,8 @@ var LoginActions = require('../../actions/register-page/login-actions');
 var request = require('superagent');
 var constant = require('../../../../mixin/constant');
 var page = require('page');
+var errorHandler = require('../../../../tools/error-handler');
+
 
 var LoginStore = Reflux.createStore({
   listenables: LoginActions,
@@ -16,6 +18,7 @@ var LoginStore = Reflux.createStore({
           account: phoneEmail,
           password: loginPassword
         })
+        .use(errorHandler)
         .end((err, req) => {
           var data = JSON.parse(req.text);
           if (data.status === constant.httpCode.OK) {
