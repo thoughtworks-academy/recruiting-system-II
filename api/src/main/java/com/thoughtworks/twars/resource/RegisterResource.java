@@ -23,8 +23,8 @@ public class RegisterResource extends Resource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {
-        if ((user.getEmail() == null) || (user.getMobilePhone() ==null) ||
-                (user.getPassword() == null)) {
+        if (user == null || (user.getEmail() == null) || (user.getMobilePhone() == null)
+                || (user.getPassword() == null)) {
             return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
         }
         userMapper.insertUser(user);
