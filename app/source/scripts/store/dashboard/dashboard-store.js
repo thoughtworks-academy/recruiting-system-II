@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 var DashboardActions = require('../../actions/dashboard/dashboard-actions');
 var request = require('superagent');
+var errorHandler = require('../../../../tools/error-handler');
 
 var DashboardStore = Reflux.createStore({
   listenables: DashboardActions,
@@ -10,6 +11,7 @@ var DashboardStore = Reflux.createStore({
   onGetStatus: function () {
     request.get('/dashboard')
         .set('Content-Type', 'application/json')
+        .use(errorHandler)
         .end((err, res) => {
           this.trigger({
             puzzleEnabled: res.body.isPaperCommited ? false : true,
