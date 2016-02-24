@@ -5,6 +5,7 @@ var Reflux = require('reflux');
 var HomeworkActions = require('../../actions/homework/homework-actions');
 var superAgent = require('superagent');
 var constant = require('../../../../mixin/constant');
+var errorHandler = require('../../../../tools/error-handler');
 
 var submissionIntroductionStore = Reflux.createStore({
   listenables: [HomeworkActions],
@@ -27,6 +28,7 @@ var submissionIntroductionStore = Reflux.createStore({
     superAgent.post('homework/save')
         .set('Content-Type', 'application/json')
         .send({orderId: orderId, userAnswerRepo: url, branch: branch})
+        .use(errorHandler)
         .end((err, res) => {
           if (res.body.status === constant.httpCode.FORBIDDEN) {
           }
@@ -44,6 +46,7 @@ var submissionIntroductionStore = Reflux.createStore({
     superAgent.get('/homework/get-branches')
         .set('Content-Type', 'application/json')
         .query({url: url})
+        .use(errorHandler)
         .end((err, res)=> {
           if (res.body.message === 'Not Found') {
             alert('repo or user not found! PLZ check ur url!');

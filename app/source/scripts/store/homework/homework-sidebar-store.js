@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 var HomeworkActions = require('../../actions/homework/homework-actions');
 var superAgent = require('superagent');
 var constant = require('../../../../mixin/constant');
+var errorHandler = require('../../../../tools/error-handler');
 
 
 var HomeworkSidebarStore = Reflux.createStore({
@@ -12,6 +13,7 @@ var HomeworkSidebarStore = Reflux.createStore({
   onLoadHomeworkList: function () {
     superAgent.get('/homework/get-list')
         .set('Content-Type', 'application/json')
+        .use(errorHandler)
         .end((err, res) => {
           if (err || res.status !== constant.httpCode.OK) {
             return;
