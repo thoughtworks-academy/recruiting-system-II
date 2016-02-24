@@ -44,4 +44,12 @@ public class RegisterResourceTest extends TestBase {
         Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(), is(415));
     }
+
+    @Test
+    public void should_return_415_when_register_param_is_wrong() throws Exception {
+        User newUser = new User();
+        Entity entity = Entity.entity(newUser, MediaType.APPLICATION_JSON);
+        Response response = target(basePath).request().post(entity);
+        assertThat(response.getStatus(), is(415));
+    }
 }
