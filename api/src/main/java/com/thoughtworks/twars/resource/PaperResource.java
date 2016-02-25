@@ -58,21 +58,27 @@ public class PaperResource extends Resource {
         int makerId = (int) data.get("makerId");
         List<Map> sections = (List<Map>) data.get("sections");
 
-        Paper paper = new Paper();
-        paper.setMakerId(makerId);
+        try {
+            Paper paper = new Paper();
+            paper.setMakerId(makerId);
 
-        paperMapper.insertPaper(paper);
-        int paperId = paper.getId();
+            paperMapper.insertPaper(paper);
+            int paperId = paper.getId();
 
-        List<Map> result = sections.stream()
-                .map(item -> {
-                    Map map = new HashMap();
-                    map.put("uri", insertDefinitionByQuizType(item, paperId));
-                    return map;
-                })
-                .collect(Collectors.toList());
+            List<Map> result = sections.stream()
+                    .map(item -> {
+                        Map map = new HashMap();
+                        map.put("uri", insertDefinitionByQuizType(item, paperId));
+                        return map;
+                    })
+                    .collect(Collectors.toList());
+            session.commit();
 
-        return Response.status(Response.Status.OK).entity(result.get(0)).build();
+            return Response.status(Response.Status.OK).entity(result.get(0)).build();
+        } catch (Exception e) {
+            session.rollback();
+        }
+        return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
     }
 
 
