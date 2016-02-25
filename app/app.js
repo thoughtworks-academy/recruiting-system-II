@@ -16,7 +16,9 @@ var constant = require('./mixin/constant');
 var yamlConfig = require('node-yaml-config');
 
 var config = yamlConfig.load(__dirname + '/config/config.yml');
-var env = process.env.NODE_ENV || 'development';
+console.log(process.env.NODE_ENV);
+
+var env = ['product', 'test'].indexOf(process.env.NODE_ENV) === -1 ? 'development': process.env.NODE_ENV;
 
 mongoose.connect(config.database);
 
@@ -35,7 +37,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-if (env === 'development' || env === 'test') {
+if (env === 'development') {
   var compile = webpack(require('./webpack.config'));
   app.use(webpackDevMiddleware(compile, {
     publicPath: '/assets/',   // 以/assets/作为请求的公共目录
