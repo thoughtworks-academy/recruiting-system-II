@@ -67,22 +67,22 @@ describe('LogicPuzzleController', function () {
       });
 
       controller.saveAnswer({
-        body: {
-          orderId: 4, userAnswer: '1'
-        },
-        session: {
-          user: {
-            id: 1
-          }
-        }
-      },
-        {
-          sendStatus: function (data) {
-            expect(data).toEqual(constant.httpCode.OK);
-            expect(quiz[1].userAnswer).toEqual('1');
-            done();
-          }
-        });
+            body: {
+              orderId: 4, userAnswer: '1'
+            },
+            session: {
+              user: {
+                id: 1
+              }
+            }
+          },
+          {
+            sendStatus: function (data) {
+              expect(data).toEqual(constant.httpCode.OK);
+              expect(quiz[1].userAnswer).toEqual('1');
+              done();
+            }
+          });
     });
 
     it('should ignore when it is example', function (done) {
@@ -123,12 +123,12 @@ describe('LogicPuzzleController', function () {
       });
 
       controller.saveAnswer({body: {orderId: 4, userAnswer: '1'}, session: {user: {id: 1}}},
-        {
-          sendStatus: function (data) {
-            expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
-            done();
-          }
-        });
+          {
+            sendStatus: function (data) {
+              expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
+              done();
+            }
+          });
     });
 
   });
@@ -144,23 +144,23 @@ describe('LogicPuzzleController', function () {
           },
           paperId: 1,
           blankQuizId: 1,
-          quizItems:[{id:3,userAnswer:'10'}]
+          quizItems: [{id: 3, userAnswer: '10'}]
         });
       });
 
-      spyOn(LogicPuzzleController, 'setScoreSheet').and.callFake(function(data,done){
-        done(null,'OK!');
+      spyOn(LogicPuzzleController, 'setScoreSheet').and.callFake(function (data, done) {
+        done(null, 'OK!');
       });
 
 
       controller.submitPaper({session: {user: {id: 1}}},
-        {
-          sendStatus: function(data){
-            expect(data).toEqual(constant.httpCode.OK);
-            expect(doc.isCommited).toEqual(true);
-            done();
-          }
-        });
+          {
+            sendStatus: function (data) {
+              expect(data).toEqual(constant.httpCode.OK);
+              expect(doc.isCommited).toEqual(true);
+              done();
+            }
+          });
     });
 
     it('can\'t find the userPuzzle when submit paper ', function (done) {
@@ -168,18 +168,46 @@ describe('LogicPuzzleController', function () {
         done('error', {});
       });
 
-      spyOn(LogicPuzzleController, 'setScoreSheet').and.callFake(function(data,done){
-        done(null,'OK!');
+      spyOn(LogicPuzzleController, 'setScoreSheet').and.callFake(function (data, done) {
+        done(null, 'OK!');
       });
 
       controller.submitPaper({session: {user: {id: 1}}},
-        {
-          sendStatus: function(data){
-            expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
-            done();
-          }
-        });
+          {
+            sendStatus: function (data) {
+              expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
+              done();
+            }
+          });
     });
   });
 
+  describe('dealAgree', function () {
+    it('should save the information about agreeing deal', function (done) {
+
+      spyOn(logicPuzzle, 'findOne').and.callFake(function (id, done) {
+        done(null, {
+          save: function (done) {
+            done(null);
+          }
+        })
+      });
+
+      controller.dealAgree({
+        session: {
+          user: {
+            id: 1
+          }
+        },
+        body: {
+          dealAgree: true
+        }
+      }, {
+        send: function(data) {
+          expect(data).toEqual({status: constant.httpCode.OK});
+          done();
+        }
+      })
+    });
+  });
 });
