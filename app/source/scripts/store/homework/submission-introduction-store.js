@@ -30,8 +30,6 @@ var submissionIntroductionStore = Reflux.createStore({
         .send({orderId: orderId, userAnswerRepo: url, branch: branch})
         .use(errorHandler)
         .end((err, res) => {
-          if (res.body.status === constant.httpCode.NOT_FOUND) {
-          }
           if (res.body.status === constant.httpCode.OK) {
             this.trigger({quizStatus: constant.homeworkQuizzesStatus.PROGRESS});
           }
