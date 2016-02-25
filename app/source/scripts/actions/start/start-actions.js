@@ -1,3 +1,9 @@
-/**
- * Created by Jessica on 2/25/16.
- */
+'use strict';
+
+var Reflux = require('reflux');
+
+var StartActions = Reflux.createActions([
+  'agreeDeal'
+]);
+
+module.exports = StartActions;
