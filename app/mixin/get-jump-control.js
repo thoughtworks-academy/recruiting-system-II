@@ -1,6 +1,10 @@
 'use strict';
 
-function jumpControl(isLoged, isPaperCommited, isDetailed) {
+function jumpControl(data) {
+  var isLoged = data.isLoged;
+  var isPaperCommited = data.isPaperCommited;
+  var isDetailed = data.isDetailed;
+
   return [{
     originPath: [
       'user-center.html',

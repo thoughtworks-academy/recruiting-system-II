@@ -71,7 +71,7 @@ module.exports = function (req, res, next) {
       }
     }
   }, function (err, data) {
-    var jumpControl = getJumpControl(data.isLoged, data.isPaperCommited, data.isDetailed);
+    var jumpControl = getJumpControl(data);
 
     pathControl(req, res, next, jumpControl);
   });
