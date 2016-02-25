@@ -117,8 +117,8 @@ public class ScoreSheetResource extends Resource {
         Map map = new HashMap<>();
         map.put("examer", examerUri);
         map.put("paper", paperUri);
-        map.put("blankQuizSubmit", blankQuizScoreSheet.getQuizScoreSheet(id));
-        map.put("homeworkQuizSubmit", homeworkQuizScoreSheet.getQuizScoreSheet(id));
+        map.put("blankQuizSubmits", blankQuizScoreSheet.getQuizScoreSheet(id));
+        map.put("homeworkSubmits", homeworkQuizScoreSheet.getQuizScoreSheet(id));
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
