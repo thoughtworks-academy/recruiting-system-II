@@ -19,4 +19,8 @@
         UPDATE loginDetail SET flag = 0, logoutDate =UNIX_TIMESTAMP()  WHERE token = #{token};
     </update>
 
+    <select id="getLoginDetailByToken" resultType="com.thoughtworks.twars.bean.LoginDetail">
+        SELECT * FROM loginDetail WHERE token = #{token};
+    </select>
+
 </mapper>

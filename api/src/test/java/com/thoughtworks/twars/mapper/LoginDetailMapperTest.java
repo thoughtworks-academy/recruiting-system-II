@@ -44,6 +44,13 @@ public class LoginDetailMapperTest extends TestBase {
         assertThat(loginDetails.size(), is(2));
     }
 
+    @Test
+    public void should_return_login_detail_by_token() {
+        LoginDetail loginDetails = loginDetailMapper.getLoginDetailByToken("e652621b9bd77a2ea4a4495ab03e3cc8");
+
+        assertThat(loginDetails.getUserId(), is(1));
+    }
+
 }
 
 

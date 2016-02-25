@@ -12,4 +12,6 @@ public interface LoginDetailMapper {
 
     int updateLoginDetail(String token);
 
+    LoginDetail getLoginDetailByToken(String token);
+
 }
