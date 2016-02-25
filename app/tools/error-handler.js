@@ -13,7 +13,7 @@ var errorHandler = function(req) {
 };
 
 function addErrorMessage() {
-  var errorMessageBlock = document.createElement("DIV");
+  var errorMessageBlock = document.createElement('DIV');
   errorMessageBlock.setAttribute('id','alert');
   errorMessageBlock.style.marginBottom = 0;
   errorMessageBlock.style.position = 'absolute';
@@ -28,7 +28,7 @@ function addErrorMessage() {
         <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <strong>哦!糟了!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;看起来我们的服务器出了一些问题!
       </div>,
-      document.getElementById("alert")
+      document.getElementById('alert')
   );
 }
 
