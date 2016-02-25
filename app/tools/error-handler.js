@@ -1,6 +1,7 @@
 'use strict';
 
 var constant = require('../mixin/constant');
+var ReactDom = require('react-dom');
 
 var errorHandler = function(req) {
   req.on('response', function (res) {
@@ -12,34 +13,23 @@ var errorHandler = function(req) {
 };
 
 function addErrorMessage() {
-  var errorMessageBlock = document.createElement('DIV');
-  errorMessageBlock.setAttribute('class','alert alert-danger alert-dismissible');
+  var errorMessageBlock = document.createElement("DIV");
   errorMessageBlock.setAttribute('id','alert');
-  errorMessageBlock.setAttribute('role','alert');
   errorMessageBlock.style.marginBottom = 0;
+  errorMessageBlock.style.position = 'absolute';
+  errorMessageBlock.style.top = 0;
+  errorMessageBlock.style.left = 0;
+  errorMessageBlock.style.width = '100%';
 
-  var closeButton = document.createElement('BUTTON');
-  closeButton.setAttribute('class','close');
-  closeButton.setAttribute('type','button');
-  closeButton.setAttribute('data-dismiss','alert');
-  closeButton.setAttribute('aria-label','Close');
+  document.body.appendChild(errorMessageBlock);
 
-  var span = document.createElement('SPAN');
-  span.setAttribute('aria-hidden','true');
-
-  var textNode = document.createTextNode('×');
-  
-  var warningMessage = document.createTextNode('Server connect error!');
-
-  span.appendChild(textNode);
-  closeButton.appendChild(span);
-  errorMessageBlock.appendChild(closeButton);
-  errorMessageBlock.appendChild(warningMessage);
-  
-
-  document.body.insertBefore(errorMessageBlock,document.body.childNodes[0]);
-
-  console.log(errorMessageBlock);
+  ReactDom.render(
+      <div className="alert alert-danger alert-dismissible text-center fade in" id="alert" role="alert">
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>哦!糟了!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;看起来我们的服务器出了一些问题!
+      </div>,
+      document.getElementById("alert")
+  );
 }
 
 module.exports = errorHandler;

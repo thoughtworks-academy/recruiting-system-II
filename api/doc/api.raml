@@ -32,6 +32,8 @@ baseUri: http://api.bronzesword.com/
           password: string
     responses:
       200:
+        headers:
+          token: string
         body:
           application/json:
             properties:
@@ -41,13 +43,15 @@ baseUri: http://api.bronzesword.com/
                   uri: string
 
 /logout:
-  put:
+  post:
+    headers:
+      token: string
     body:
       application/json:
         properties:
           userId: number
     responses:
-      204:
+      201:
 
 /users:
   get:
