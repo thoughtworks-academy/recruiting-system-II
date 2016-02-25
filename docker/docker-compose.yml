@@ -34,3 +34,11 @@ nginx:
   volumes:
     - ./nginx/conf.d:/etc/nginx/conf.d
     - /Users/Thoughtworks/works/docker-cached/nginx_fs:/var/fs
+
+task-queue-node:
+  image: node:5.7.0-wheezy
+  ports:
+    - "4000:4000"
+  volumes:
+    - /Users/Thoughtworks/works/recruiting-system/task-queue:/var/task-queue
+  command: bash -c "cd /var/task-queue/ && npm install && node app"
