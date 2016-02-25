@@ -16,7 +16,6 @@ var constant = require('./mixin/constant');
 var yamlConfig = require('node-yaml-config');
 
 var config = yamlConfig.load(__dirname + '/config/config.yml');
-console.log(process.env.NODE_ENV);
 
 var env = ['product', 'test'].indexOf(process.env.NODE_ENV) < 0 ? 'development': process.env.NODE_ENV;
 
