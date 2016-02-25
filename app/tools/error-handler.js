@@ -5,7 +5,6 @@ var ReactDom = require('react-dom');
 
 var errorHandler = function(req) {
   req.on('response', function (res) {
-    console.log(res);
     if(res.statusCode === constant.httpCode.INTERNAL_SERVER_ERROR || res.status === constant.httpCode.INTERNAL_SERVER_ERROR){
       addErrorMessage();
     }
