@@ -14,6 +14,7 @@
         SELECT * FROM loginDetail WHERE userId = #{userId};
     </select>
 
+
     <update id="updateLoginDetail" parameterType="string" useGeneratedKeys="true"
             keyProperty="id">
         UPDATE loginDetail SET flag = 0, logoutDate =UNIX_TIMESTAMP()  WHERE token = #{token};

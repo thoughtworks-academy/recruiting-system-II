@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.LoginDetail;
 import com.thoughtworks.twars.mapper.LoginDetailMapper;
 
 import javax.inject.Inject;
@@ -19,6 +20,11 @@ public class LogoutResource extends Resource {
     public Response logoutUser(@Context HttpHeaders headers) {
 
         String token = headers.getRequestHeaders().getFirst("token");
+        LoginDetail loginDetail = loginDetailMapper.getLoginDetailByToken(token);
+
+        if (token == null || loginDetail == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
         loginDetailMapper.updateLoginDetail(token);
 
