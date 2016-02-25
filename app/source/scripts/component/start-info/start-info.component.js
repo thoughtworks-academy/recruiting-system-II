@@ -1,8 +1,13 @@
 'use strict';
 
 var React = global.React = require('react');
+var Reflux = require('reflux');
+var StartActions = require('../../actions/start/start-actions');
+var StartStore = require('../../store/start/start-store');
 
 var StartInfo = React.createClass({
+  mixins: [Reflux.connect(StartStore)],
+
   getInitialState: function () {
     return {
       agree: false
@@ -12,6 +17,10 @@ var StartInfo = React.createClass({
   changeAgreeState() {
     var newState = !(this.state.agree);
     this.setState({agree: newState});
+  },
+
+  start:function() {
+    StartActions.agreeDeal(this.state.agree);
   },
 
   render() {
@@ -62,8 +71,8 @@ var StartInfo = React.createClass({
             </div>
           </section>
           <section className="start-button">
-            <a href={this.state.agree ? 'logic-puzzle.html' : '#'} type="submit" className="btn btn-info btn-lg btn-block"
-               disabled={this.state.agree ? '' : 'disabled'}>开始</a>
+            <a type="submit" className="btn btn-info btn-lg btn-block"
+               disabled={this.state.agree ? '' : 'disabled'} onClick={this.start}>开始</a>
           </section>
         </div>
     );
