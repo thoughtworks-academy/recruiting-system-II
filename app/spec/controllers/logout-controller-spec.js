@@ -27,7 +27,7 @@ describe('LogoutController', function () {
             id: 1
           },
           destroy: function (callback) {
-            callback()
+            callback();
           }
         }
       }, {
@@ -37,6 +37,6 @@ describe('LogoutController', function () {
         }
       });
 
-    })
-  })
+    });
+  });
 });

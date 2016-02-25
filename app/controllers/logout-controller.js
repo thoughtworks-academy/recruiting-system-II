@@ -20,7 +20,7 @@ LogoutController.prototype.logout = (req, res)=> {
         } else {
           done(null, null);
         }
-      })
+      });
     }, (data, done) => {
       apiRequest.post(logoutUri, body, function (err, resp) {
         done(null, resp);
