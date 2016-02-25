@@ -89,11 +89,7 @@ LogicPuzzleController.prototype.dealAgree = (req, res) => {
       logicPuzzle.findOne({userId: userId}, done);
     }, (data, done) => {
       data.isAgree = isAgree;
-      data.save((err, doc)=> {
-        done(err, doc);
-      });
-    }, (responds, done) => {
-      done();
+      data.save(done);
     }
   ], (err) => {
     if (!err) {
