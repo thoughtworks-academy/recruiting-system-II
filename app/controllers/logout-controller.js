@@ -23,20 +23,16 @@ LogoutController.prototype.logout = (req, res)=> {
       });
     }, (data, done) => {
       apiRequest.post(logoutUri, body, function (err, resp) {
-        done(null, resp);
+        done(err, resp);
       });
     }
   ], (err, data) => {
-    if (err) {
-      res.status(constant.httpCode.INTERNAL_SERVER_ERROR).send({message: err.message});
+    if (data.status === constant.httpCode.CREATED) {
+      res.redirect('/register.html');
     } else {
-      if (data.status === constant.httpCode.CREATED) {
-        res.redirect('/register.html');
-      }
+      res.sendStatus(constant.httpCode.UNAUTHORIZED);
     }
   });
-
 };
-
 
 module.exports = LogoutController;
