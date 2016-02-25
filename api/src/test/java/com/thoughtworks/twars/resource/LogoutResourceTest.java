@@ -27,9 +27,9 @@ public class LogoutResourceTest extends TestBase {
     }
 
     @Test
-    public void should_return_404_when_not_found_token(){
+    public void should_return_401_when_not_found_token(){
 
         Response response = target(basePath).request().header("token", null).post(null);
-        assertThat(response.getStatus(), is(404));
+        assertThat(response.getStatus(), is(401));
     }
 }

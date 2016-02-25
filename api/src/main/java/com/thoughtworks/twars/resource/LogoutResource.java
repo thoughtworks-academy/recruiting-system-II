@@ -23,7 +23,7 @@ public class LogoutResource extends Resource {
         LoginDetail loginDetail = loginDetailMapper.getLoginDetailByToken(token);
 
         if (token == null || loginDetail == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
         loginDetailMapper.updateLoginDetail(token);
