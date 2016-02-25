@@ -27,3 +27,7 @@ redis:
     - "6379:6379"
   volumes:
     - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+nginx:
+  build: ./nginx
+  ports: "80:80"
+
