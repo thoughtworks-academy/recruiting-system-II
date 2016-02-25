@@ -67,22 +67,22 @@ describe('LogicPuzzleController', function () {
       });
 
       controller.saveAnswer({
-            body: {
-              orderId: 4, userAnswer: '1'
-            },
-            session: {
-              user: {
-                id: 1
-              }
-            }
-          },
-          {
-            sendStatus: function (data) {
-              expect(data).toEqual(constant.httpCode.OK);
-              expect(quiz[1].userAnswer).toEqual('1');
-              done();
-            }
-          });
+        body: {
+          orderId: 4, userAnswer: '1'
+        },
+        session: {
+          user: {
+            id: 1
+          }
+        }
+      },
+        {
+          sendStatus: function (data) {
+            expect(data).toEqual(constant.httpCode.OK);
+            expect(quiz[1].userAnswer).toEqual('1');
+            done();
+          }
+        });
     });
 
     it('should ignore when it is example', function (done) {
@@ -123,12 +123,12 @@ describe('LogicPuzzleController', function () {
       });
 
       controller.saveAnswer({body: {orderId: 4, userAnswer: '1'}, session: {user: {id: 1}}},
-          {
-            sendStatus: function (data) {
-              expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
-              done();
-            }
-          });
+        {
+          sendStatus: function (data) {
+            expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
+            done();
+          }
+        });
     });
 
   });
@@ -154,13 +154,13 @@ describe('LogicPuzzleController', function () {
 
 
       controller.submitPaper({session: {user: {id: 1}}},
-          {
-            sendStatus: function (data) {
-              expect(data).toEqual(constant.httpCode.OK);
-              expect(doc.isCommited).toEqual(true);
-              done();
-            }
-          });
+        {
+          sendStatus: function (data) {
+            expect(data).toEqual(constant.httpCode.OK);
+            expect(doc.isCommited).toEqual(true);
+            done();
+          }
+        });
     });
 
     it('can\'t find the userPuzzle when submit paper ', function (done) {
@@ -173,12 +173,12 @@ describe('LogicPuzzleController', function () {
       });
 
       controller.submitPaper({session: {user: {id: 1}}},
-          {
-            sendStatus: function (data) {
-              expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
-              done();
-            }
-          });
+        {
+          sendStatus: function (data) {
+            expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
+            done();
+          }
+        });
     });
   });
 
@@ -190,7 +190,7 @@ describe('LogicPuzzleController', function () {
           save: function (done) {
             done(null);
           }
-        })
+        });
       });
 
       controller.dealAgree({
@@ -203,11 +203,11 @@ describe('LogicPuzzleController', function () {
           dealAgree: true
         }
       }, {
-        send: function(data) {
+        send: function (data) {
           expect(data).toEqual({status: constant.httpCode.OK});
           done();
         }
-      })
+      });
     });
   });
 });
