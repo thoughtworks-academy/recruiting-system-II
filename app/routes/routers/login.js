@@ -42,7 +42,7 @@ router.get('/', function (req, res) {
   } else {
     password = md5(password);
 
-    apiRequest.post('login', {email: account, password: password}, function (err, result) {
+    apiRequest.post(req,'login', {email: account, password: password}, function (err, result) {
       if (result.body.id && result.headers) {
         req.session.user = {
           id: result.body.id,

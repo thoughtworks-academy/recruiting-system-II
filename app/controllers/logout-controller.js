@@ -22,7 +22,7 @@ LogoutController.prototype.logout = (req, res)=> {
         }
       });
     }, (data, done) => {
-      apiRequest.post(logoutUri, body, function (err, resp) {
+      apiRequest.post(req,logoutUri, body, function (err, resp) {
         done(err, resp);
       });
     }

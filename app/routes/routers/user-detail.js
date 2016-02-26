@@ -25,7 +25,7 @@ router.get('/', function (req, res) {
 
   async.waterfall([
     (done) => {
-      apiRequest.get('users/' + userId, done);
+      apiRequest.get(req, 'users/' + userId, done);
     },
     (resp, done) => {
       if (resp.status === constant.httpCode.OK) {
@@ -36,7 +36,7 @@ router.get('/', function (req, res) {
       done(null, result);
     },
     (result, done) => {
-      apiRequest.get('users/' + userId + '/detail', done);
+      apiRequest.get(req, 'users/' + userId + '/detail', done);
     },
     (resp, done) => {
       result = _.assign(result, resp.body);
@@ -67,7 +67,7 @@ router.put('/update', function (req, res) {
   if (checkInfo(result, userConstraint) && result.gender !== '') {
     var url = 'users/' + userId + '/detail';
 
-    apiRequest.put(url, result, function (err, resp) {
+    apiRequest.put(req,url, result, function (err, resp) {
       if (resp === undefined) {
         res.send({
           status: constant.httpCode.INTERNAL_SERVER_ERROR
@@ -103,7 +103,7 @@ router.put('/change-password', function (req, res) {
     partResult.password = md5(passwordInfo.password);
     var url = 'users/' + userId + '/password';
 
-    apiRequest.put(url, partResult, function (err, resp) {
+    apiRequest.put(req,url, partResult, function (err, resp) {
       if (resp === undefined) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
         res.send({

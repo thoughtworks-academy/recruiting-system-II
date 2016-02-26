@@ -59,7 +59,7 @@ LogicPuzzleController.prototype.submitPaper = (req, res) => {
       logicPuzzle.findOne({userId: examerId}, done);
     }, (doc, done) => {
       data = doc;
-      LogicPuzzleController.setScoreSheet(data, done);
+      LogicPuzzleController.setScoreSheet(req,data, done);
     },
     (responds, done) => {
       if (data) {
@@ -100,7 +100,7 @@ LogicPuzzleController.prototype.dealAgree = (req, res) => {
   });
 };
 
-LogicPuzzleController.setScoreSheet = (data, done) => {
+LogicPuzzleController.setScoreSheet = (req,data, done) => {
   var scoreSheetUri = 'scoresheets';
   var itemPosts = [];
 
@@ -116,7 +116,7 @@ LogicPuzzleController.setScoreSheet = (data, done) => {
       itemPosts: itemPosts
     }]
   };
-  apiRequest.post(scoreSheetUri, body, done);
+  apiRequest.post(req,scoreSheetUri, body, done);
 };
 
 module.exports = LogicPuzzleController;

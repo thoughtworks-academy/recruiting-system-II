@@ -42,7 +42,7 @@ router.post('/', function (req, res) {
 
     async.waterfall([
       (done)=> {
-        apiRequest.get('users', {field: 'mobilePhone', value: registerInfo.mobilePhone}, function (err, resp) {
+        apiRequest.get(req,'users', {field: 'mobilePhone', value: registerInfo.mobilePhone}, function (err, resp) {
           if (!err) {
             isMobilePhoneExist = true;
           }
@@ -50,7 +50,7 @@ router.post('/', function (req, res) {
         });
       },
       (data, done) => {
-        apiRequest.get('users', {field: 'email', value: registerInfo.email}, function (err, resp) {
+        apiRequest.get(req,'users', {field: 'email', value: registerInfo.email}, function (err, resp) {
           if (!err) {
             isEmailExist = true;
           }
@@ -62,10 +62,10 @@ router.post('/', function (req, res) {
       },
       (data, done)=> {
         registerInfo.password = md5(registerInfo.password);
-        apiRequest.post('register', registerInfo, done);
+        apiRequest.post(req,'register', registerInfo, done);
       },
       (data, done)=> {
-        apiRequest.post('login',{email:registerInfo.email,password:registerInfo.password},done);
+        apiRequest.post(req,'login',{email:registerInfo.email,password:registerInfo.password},done);
       },
       (data, done)=> {
         if (data.body.id && data.headers) {
@@ -103,7 +103,7 @@ router.post('/', function (req, res) {
 });
 
 router.get('/validate-mobile-phone', function (req, res) {
-  apiRequest.get('users', {field: 'mobilePhone', value: req.query.mobilePhone}, function (err, result) {
+  apiRequest.get(req,'users', {field: 'mobilePhone', value: req.query.mobilePhone}, function (err, result) {
     if (result.body.uri) {
       res.send({
         status: constant.SUCCESSFUL_STATUS
@@ -117,7 +117,7 @@ router.get('/validate-mobile-phone', function (req, res) {
 });
 
 router.get('/validate-email', function (req, res) {
-  apiRequest.get('users', {field: 'email', value: req.query.email}, function (err, result) {
+  apiRequest.get(req,'users', {field: 'email', value: req.query.email}, function (err, result) {
     if (result.body.uri) {
       res.send({
         status: constant.SUCCESSFUL_STATUS
