@@ -46,7 +46,7 @@ router.post('/', function (req, res) {
           if (!err) {
             isMobilePhoneExist = true;
           }
-          done(null, resp)
+          done(null, resp);
         });
       },
       (data, done) => {
@@ -55,7 +55,7 @@ router.post('/', function (req, res) {
             isEmailExist = true;
           }
           if (isMobilePhoneExist || isEmailExist) {
-            done(true, resp)
+            done(true, resp);
           }
           done(null, resp);
         });
