@@ -3,5 +3,7 @@ default:
   database: 'mongodb://localhost/twars'
   apiServer: 'http://localhost:8080/api/'
   sessionTtl: 3600 # 60(MINUTE_PER_HOUR) * 60(SECONDS_PER_MINUTE)
+  staticFileServer: 'http://10.29.3.221:8888/fs/'
 test:
   port: 5000
+

@@ -2,9 +2,10 @@
 
 var mongoose = require('mongoose');
 var constant = require('../mixin/constant');
+var yamlConfig = require('node-yaml-config');
+var config = yamlConfig.load(__dirname + '../../config/config.yml');
 
 var _timeBase = 90;
-
 var Schema = mongoose.Schema;
 
 var logicPuzzleSchema = new Schema({
@@ -78,7 +79,7 @@ logicPuzzleSchema.statics.getLogicPuzzle = function (orderId, userId) {
             initializedBox: JSON.parse(quizAll[orderId].initializedBox),
             question: quizAll[orderId].question,
             description: JSON.parse(quizAll[orderId].description),
-            chartPath: quizAll[orderId].chartPath
+            chartPath: config.staticFileServer + quizAll[orderId].chartPath
           },
           userAnswer: userAnswer,
           itemsCount: itemsCount,
