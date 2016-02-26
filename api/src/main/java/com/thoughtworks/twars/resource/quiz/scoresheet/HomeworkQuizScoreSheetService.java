@@ -36,7 +36,7 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                             + homeworkQuizSubmit.getHomeworkQuizId());
                     Map<String, Object> homeworkQuizSubmitUri = new HashMap<>();
                     homeworkQuizSubmitUri.put("homeworkQuiz", homeworkQuizUri);
-                    homeworkQuizSubmitUri.put("homeworkQuizSubmit",
+                    homeworkQuizSubmitUri.put("homeworkSubmitPostHistory",
                             findByHomeworkSubmitId(homeworkQuizSubmit.getId()));
                     return homeworkQuizSubmitUri;
                 })

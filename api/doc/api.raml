@@ -382,7 +382,7 @@ baseUri: http://api.bronzesword.com/
             properties:
               id: integer
               uri: string
-  /{blankQuizId}:
+  /{sectionId}:
     get:
       #  description: 获取一份填空题的定义
       responses:
@@ -392,39 +392,38 @@ baseUri: http://api.bronzesword.com/
               properties:
                 id: integer
                   # description: class name of generator
-                count: integer
                 hardCount: integer
                 normalCount: integer
                 easyCount: integer
                 exampleCount: integer
-    /items:
-      get:
-        # description: 获取一组题目的内容
-        responses:
-          200:
-            body:
-              application/json:
-                properties:
-                    quizItems:
-                      properties:
-                          []:
-                            properties:
-                              id: integer
-                              initializedBox: string
-                              question: string
-                              description: string
-                              chartPath: string
-                            # 根据前台需要的数据把剩下的补完，不能有正确答案
-                    exampleItems:
-                      properties:
+  /{blankQuizId}/items:
+    get:
+      # description: 获取一组题目的内容
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                  quizItems:
+                    properties:
                         []:
                           properties:
-                              id: integer
-                              initiallizedBox: string
-                              question: string
-                              desciption: string
-                              chartPath: string
-                              answer: string
+                            id: integer
+                            initializedBox: string
+                            question: string
+                            description: string
+                            chartPath: string
+                          # 根据前台需要的数据把剩下的补完，不能有正确答案
+                  exampleItems:
+                    properties:
+                        []:
+                          properties:
+                            id: integer
+                            initiallizedBox: string
+                            question: string
+                            desciption: string
+                            chartPath: string
+                            answer: string
 
 /quizItems:
   get:

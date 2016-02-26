@@ -1,6 +1,11 @@
 'use strict';
 
-function jumpControl(isLoged, isPaperCommited, isDetailed) {
+function jumpControl(data) {
+  var isLoged = data.isLoged;
+  var isPaperCommited = data.isPaperCommited;
+  var isDetailed = data.isDetailed;
+  var isAgreed = data.isAgreed;
+
   return [{
     originPath: [
       'user-center.html',
@@ -35,6 +40,18 @@ function jumpControl(isLoged, isPaperCommited, isDetailed) {
     ],
     targetPath: 'dashboard.html',
     condition: !isPaperCommited
+  }, {
+    originPath: [
+      'logic-puzzle.html'
+    ],
+    targetPath: 'start.html',
+    condition: !isAgreed
+  }, {
+    originPath: [
+      'start.html'
+    ],
+    targetPath: 'dashboard.html',
+    condition: isAgreed
   }
   ];
 }

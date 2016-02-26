@@ -45,7 +45,7 @@ public class HomeworkQuizScoreSheetTest {
         when(homeworkSubmit.getHomeworkQuizId()).thenReturn(3);
         List<Map> homeworkList = homeworkQuizScoreSheet.getQuizScoreSheet(1);
         String str = gson.toJson(homeworkList);
-        assertThat(str, is("[{\"homeworkQuizSubmit\":[],\"homeworkQuiz\":{\"uri\":\"homeworkQuiz/3\"}}]"));
+        assertThat(str, is("[{\"homeworkQuiz\":{\"uri\":\"homeworkQuiz/3\"},\"homeworkSubmitPostHistory\":[]}]"));
     }
 
     @Test

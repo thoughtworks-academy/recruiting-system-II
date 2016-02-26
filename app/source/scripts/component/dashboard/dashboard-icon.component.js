@@ -28,7 +28,7 @@ var DashboardIcon = React.createClass({
 
   render() {
 
-    var PuzzleHref = (this.state.puzzleEnabled===true ? 'start.html':'#');
+    var PuzzleHref = (this.state.puzzleEnabled===true ? 'logic-puzzle.html':'#');
     var homeworkHref = (this.state.homeworkEnabled===true ? 'homework.html':'#');
 
     var puzzleDisable = (this.state.puzzleEnabled === true ? 'enable' : 'disable');

@@ -118,17 +118,6 @@ public class PaperResource extends Resource {
     public Response getEnrollmentPaper() {
         return getOnePaper(1);
     }
-
-
-    private List<Map> getQuizzesBySectionId(int sectionId, String type) {
-
-        if ("blankQuizzes".equals(type)) {
-            return blankQuizDefinition.getQuizDefinition(sectionId);
-        } else if ("homeworkQuizzes".equals(type)) {
-            return homeworkQuizDefinition.getQuizDefinition(sectionId);
-        }
-        return null;
-    }
 }
 
 
