@@ -71,7 +71,7 @@ module.exports = function (req, res, next) {
       }
     },
 
-    isAgree: function (done) {
+    isAgreed: function (done) {
       logicPuzzle.isDealAgree(userId, (data) => {
         done(null, data);
       });

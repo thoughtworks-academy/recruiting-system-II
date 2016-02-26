@@ -4,7 +4,7 @@ function jumpControl(data) {
   var isLoged = data.isLoged;
   var isPaperCommited = data.isPaperCommited;
   var isDetailed = data.isDetailed;
-  var isAgree = data.isAgree;
+  var isAgreed = data.isAgreed;
 
   return [{
     originPath: [
@@ -45,13 +45,13 @@ function jumpControl(data) {
       'logic-puzzle.html'
     ],
     targetPath: 'start.html',
-    condition: !isAgree
+    condition: !isAgreed
   }, {
     originPath: [
       'start.html'
     ],
     targetPath: 'dashboard.html',
-    condition: isAgree
+    condition: isAgreed
   }
   ];
 }
