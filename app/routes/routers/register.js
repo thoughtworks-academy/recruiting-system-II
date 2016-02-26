@@ -65,10 +65,14 @@ router.post('/', function (req, res) {
         apiRequest.post('register', registerInfo, done);
       },
       (data, done)=> {
-        if (data.body.id) {
+        apiRequest.post('login',{email:registerInfo.email,password:registerInfo.password},done);
+      },
+      (data, done)=> {
+        if (data.body.id && data.headers) {
           req.session.user = {
             id: data.body.id,
-            userInfo: data.body.userInfo
+            userInfo: data.body.userInfo,
+            token: data.headers.token
           };
         }
         done(null, data);

@@ -43,10 +43,11 @@ router.get('/', function (req, res) {
     password = md5(password);
 
     apiRequest.post('login', {email: account, password: password}, function (err, result) {
-      if (result.body.id) {
+      if (result.body.id && result.headers) {
         req.session.user = {
           id: result.body.id,
-          userInfo: result.body.userInfo
+          userInfo: result.body.userInfo,
+          token: result.headers.token
         };
       }
       res.send({
