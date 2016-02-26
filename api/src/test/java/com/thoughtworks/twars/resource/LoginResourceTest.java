@@ -31,7 +31,6 @@ public class LoginResourceTest extends TestBase {
 
         loginDetail.setId(1);
         loginDetail.setUserId(1);
-        loginDetail.setToken("123456");
 
         List<LoginDetail> loginDetails = new ArrayList<>();
         loginDetails.add(loginDetail);
@@ -51,11 +50,9 @@ public class LoginResourceTest extends TestBase {
 
         int userId = (int) result.get("id");
         String userInfoUri = (String) ((Map) result.get("userInfo")).get("uri");
-        String token = (String) result.get("token");
 
         assertThat(userId, is(1));
         assertThat(userInfoUri, is("users/1"));
-        assertThat(token, is("123456"));
     }
 
     @Test

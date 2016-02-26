@@ -21,12 +21,9 @@ public class LoginDetailMapperTest extends TestBase {
 
     @Test
     public void should_insert_login_detail() {
-        LoginDetail loginDetail = new LoginDetail();
-        loginDetail.setUserId(5);
+        int id = loginDetailMapper.insertLoginDetail(3);
 
-        loginDetailMapper.insertLoginDetail(loginDetail);
-
-        assertThat(loginDetail.getUserId(), is(5));
+        assertThat(id, is(1));
     }
 
     @Test
