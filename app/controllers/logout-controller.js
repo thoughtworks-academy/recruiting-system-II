@@ -27,11 +27,7 @@ LogoutController.prototype.logout = (req, res)=> {
       });
     }
   ], (err, data) => {
-    if (data.status === constant.httpCode.CREATED) {
-      res.redirect('/register.html');
-    } else {
-      res.sendStatus(constant.httpCode.UNAUTHORIZED);
-    }
+    res.redirect('/register.html');
   });
 };
 
