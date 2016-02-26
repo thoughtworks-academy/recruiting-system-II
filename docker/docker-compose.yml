@@ -31,6 +31,9 @@ nginx:
   build: ./nginx
   ports:
     - "80:80"
+  environment:
+    - LANG=C.UTF-8
+    - TERM=dumb
   volumes:
     - ./nginx/conf.d:/etc/nginx/conf.d
     - /Users/Thoughtworks/works/docker-cached/nginx_fs:/var/fs
