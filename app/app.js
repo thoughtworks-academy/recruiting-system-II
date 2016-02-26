@@ -17,7 +17,7 @@ var yamlConfig = require('node-yaml-config');
 
 var config = yamlConfig.load(__dirname + '/config/config.yml');
 
-var env = ['product', 'test'].indexOf(process.env.NODE_ENV) < 0 ? 'development': process.env.NODE_ENV;
+var env = ['production', 'test'].indexOf(process.env.NODE_ENV) < 0 ? 'development': process.env.NODE_ENV;
 
 mongoose.connect(config.database);
 
