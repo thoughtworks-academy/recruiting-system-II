@@ -2,15 +2,12 @@
 
 var express = require('express');
 var router = express.Router();
-var superAgent = require('superagent');
-var agent = require('superagent-promise')(superAgent, Promise);
+var async = require('async');
 var _ = require('lodash');
 var validate = require('validate.js');
 var userConstraint = require('../../mixin/user-detail-constraint');
 var passwordConstraint = require('../../mixin/password-constraint');
 var md5 = require('js-md5');
-var yamlConfig = require('node-yaml-config');
-var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 var constant = require('../../mixin/constant');
 var apiRequest = require('../../services/api-request');
 
@@ -26,40 +23,40 @@ router.get('/', function (req, res) {
   var userId = req.session.user.id;
   var result;
 
-  agent.get(apiServer + 'users/' + userId)
-      .set('Content-Type', 'application/json')
-      .end()
-      .then(function (resp) {
-        if (resp.status === constant.httpCode.OK) {
-          result = _.assign(resp.body);
-        } else {
-          throw new Error();
-        }
-        return result;
-      })
-      .then(function () {
-        return agent.get(apiServer + 'users/' + userId + '/detail')
-            .set('Content-Type', 'application/json')
-            .end();
-      })
-      .then(function (resp) {
-        result = _.assign(result, resp.body);
-        return result;
-      }, function () {
-        return result;
-      })
-      .then(function (result) {
-        res.send({
-          status: constant.httpCode.OK,
-          data: result
-        });
-      })
-      .catch(function () {
-        res.status(constant.httpCode.NOT_FOUND);
-        res.send({
-          status: constant.httpCode.NOT_FOUND
-        });
+  async.waterfall([
+    (done) => {
+      apiRequest.get('users/' + userId, done);
+    },
+    (resp, done) => {
+      if (resp.status === constant.httpCode.OK) {
+        result = _.assign(resp.body);
+      } else {
+        throw new Error();
+      }
+      done(null, result);
+    },
+    (result, done) => {
+      apiRequest.get('users/' + userId + '/detail', done);
+    },
+    (resp, done) => {
+      result = _.assign(result, resp.body);
+      done(null, result);
+    }
+  ],(err) => {
+    if(err){
+      res.status(constant.httpCode.NOT_FOUND);
+      res.send({
+        status: constant.httpCode.NOT_FOUND
       });
+    }else{
+      res.send({
+        status: constant.httpCode.OK,
+        data: result
+      });
+    }
+  });
+
+
 });
 
 router.put('/update', function (req, res) {
