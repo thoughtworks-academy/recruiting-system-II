@@ -30,7 +30,7 @@ var logicPuzzleSchema = new Schema({
   paperId: Number,
   isCommited: Boolean,
   endTime: String,
-  isAgree: Boolean
+  isAgreed: Boolean
 });
 
 logicPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
@@ -91,10 +91,10 @@ logicPuzzleSchema.statics.isDealAgree = function (userId, callback) {
   var isDealAgree;
 
   this.findOne({userId: userId}, (err, logicPuzzle) => {
-    if (err || !logicPuzzle || !logicPuzzle.isAgree) {
+    if (err || !logicPuzzle || !logicPuzzle.isAgreed) {
       isDealAgree = false;
     } else {
-      isDealAgree = logicPuzzle.isAgree;
+      isDealAgree = logicPuzzle.isAgreed;
     }
     callback(isDealAgree);
   });

@@ -10,11 +10,11 @@ var constant = require('../../../../mixin/constant');
 var StartStore = Reflux.createStore({
   listenables: [StartActions],
 
-  onAgreeDeal:function(isAgree) {
+  onAgreeDeal:function(isAgreed) {
     superAgent.put('/logic-puzzle/dealAgree')
       .set('Content-type', 'application/json')
       .send({
-        dealAgree: isAgree
+        dealAgree: isAgreed
       })
       .use(errorHandler)
       .end((err, req) => {

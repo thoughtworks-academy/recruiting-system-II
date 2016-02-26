@@ -82,13 +82,13 @@ LogicPuzzleController.prototype.submitPaper = (req, res) => {
 
 LogicPuzzleController.prototype.dealAgree = (req, res) => {
   var userId = req.session.user.id;
-  var isAgree = req.body.dealAgree;
+  var isAgreed = req.body.dealAgree;
 
   async.waterfall([
     (done) => {
       logicPuzzle.findOne({userId: userId}, done);
     }, (data, done) => {
-      data.isAgree = isAgree;
+      data.isAgreed = isAgreed;
       data.save(done);
     }
   ], (err) => {
