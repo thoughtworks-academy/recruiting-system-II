@@ -76,7 +76,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
       if (doc) {
         done('break', doc);
       } else {
-        apiRequest.get(req,quiz.uri, done);
+        apiRequest.get(quiz.uri, done);
       }
     },
     (res, done) => {

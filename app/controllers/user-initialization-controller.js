@@ -28,7 +28,7 @@ UserInitializationController.prototype.initializeQuizzes = (req, res) => {
       });
     }, (data, done)=> {
 
-      apiRequest.get(req,logicPuzzleUrl, done);
+      apiRequest.get(logicPuzzleUrl, done);
 
     }, (responds, done)=> {
 
@@ -42,7 +42,7 @@ UserInitializationController.prototype.initializeQuizzes = (req, res) => {
 
     }, (itemsUri, done) => {
 
-      apiRequest.get(req,itemsUri, done);
+      apiRequest.get(itemsUri, done);
 
     }, (responds, done) => {
 
