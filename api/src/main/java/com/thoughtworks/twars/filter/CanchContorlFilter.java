@@ -10,7 +10,8 @@ import java.util.Date;
 public class CanchContorlFilter implements ContainerResponseFilter {
 
     @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext,
+                       ContainerResponseContext responseContext) throws IOException {
 
         Date expirationDate = new Date(System.currentTimeMillis() - 1);
         responseContext.getHeaders().putSingle(HttpHeaders.CACHE_CONTROL, expirationDate);
