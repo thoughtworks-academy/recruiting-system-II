@@ -16,6 +16,8 @@ public interface UserMapper {
 
     public User getUserByEmailAndPassWord(User user);
 
+    public User getUserByMobilePhoneAndPassWord(User user);
+
     public UserDetail getUserDetailById(int userId);
 
     public int updateUserDetail(UserDetail detail);
