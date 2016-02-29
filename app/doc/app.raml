@@ -101,3 +101,66 @@ baseUri: http://api.bronzesword.com/
         description: 修改同意协议状态成功
       500:
         description: 服务器错误
+
+  /homework/get-list:
+    get:
+      queryParameters:
+        userId: integer
+      responses:
+        200:
+          description: 获取题目列表成功
+        500:
+          description: 服务器错误
+
+  /homework/quiz:
+    get:
+      queryParameters:
+        userId: integer
+        orderId: integer
+      responses:
+        200:
+          description: 成功获取题目
+        403:
+          description: 题目处于锁住状态
+        404:
+          description: 题目超出范围或者不符合规则
+
+  /homework/save:
+    post:
+      body:
+        application/json:
+          properties:
+            userId: integer
+            orderId: integer
+      responses:
+        200:
+          description: 当题目的状态是可提交或者错误时
+        403:
+          description: 别的情况
+        404:
+          description: 服务器错误
+
+  /homework/result:
+    post:
+      body:
+        application/json:
+          properties:
+            userId: integer
+            orderId: integer
+            resultPath: string
+            resultStatus: integer
+      responses:
+        200:
+          description: 当题目状态是跑测试或者错误时
+        400:
+          description: 别的情况
+        404:
+          description: 服务器错误
+
+  /homework/get-branches:
+    get:
+      queryParameters:
+        apiUrl: string
+      responses:
+        200:
+          description: 服务器正常
