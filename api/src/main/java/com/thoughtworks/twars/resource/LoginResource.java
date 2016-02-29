@@ -46,7 +46,7 @@ public class LoginResource extends Resource {
             resultUser = userMapper.getUserByEmailAndPassWord(user);
         }
 
-        if (resultUser == null) {
+        if ((resultUser == null) || (resultUser.getId() == 0)) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
