@@ -7,11 +7,13 @@ baseUri: http://api.bronzesword.com/
 /register:
   post:
     body:
-      application/x-www-form-urlencoded:
+      application/json:
         properties:
-          mobilePhone: string
-          email: string
-          password: string
+          registerInfo:
+            properties:
+              mobilePhone: string
+              email: string
+              password: string
     responses:
       200:
         description: 注册成功
@@ -42,23 +44,6 @@ baseUri: http://api.bronzesword.com/
       404:
         description: 邮箱已经存在
 
-/login:
-  get:
-    
-
-/logicPuzzle/save:
-  post:
-    body:
-      application/json:
-        properties:
-          orderId: number
-          userAnswer: number
-          userId: number
-
-    responses:
-      200:
-        body:
-
 /logic-puzzle:
   get:
     description: 获取logic-puzzle题
@@ -78,3 +63,41 @@ baseUri: http://api.bronzesword.com/
                       chartPath: string
               userAnswer: number
               itemsCount: number
+  post:
+    body:
+      application/json:
+        properties:
+          examerId: integer
+    responses:
+      200:
+        description: 提交试卷成功
+      500:
+        description: 服务器错误
+
+/logic-puzzle/save:
+  post:
+    body:
+      application/json:
+        properties:
+          orderId: integer
+          userAnswer: string
+          userId: integer
+    responses:
+      200:
+        description: 保存试卷成功
+      500:
+        description: 服务器错误
+
+
+/logic-puzzle/dealAgree:
+  put:
+    body:
+      application/json:
+        properties:
+          userId: integer
+          isAgreed: string
+    responses:
+      200:
+        description: 修改同意协议状态成功
+      500:
+        description: 服务器错误
