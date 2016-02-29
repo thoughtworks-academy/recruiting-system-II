@@ -189,7 +189,8 @@ describe('HomeworkController', function () {
             }
           });
           done();
-        }
+        },
+        status: function(data){}
       });
     });
 
@@ -204,7 +205,8 @@ describe('HomeworkController', function () {
             status: constant.httpCode.FORBIDDEN
           });
           done();
-        }
+        },
+        status: function(data){}
       });
     });
   });
@@ -459,7 +461,8 @@ describe('HomeworkController', function () {
             status: constant.httpCode.OK
           });
           done();
-        }
+        },
+        status: function(){}
       });
     });
 
@@ -496,7 +499,8 @@ describe('HomeworkController', function () {
             status: constant.httpCode.NOT_FOUND
           });
           done();
-        }
+        },
+        status: function(){}
       });
 
     });
@@ -536,7 +540,8 @@ describe('HomeworkController', function () {
             status: constant.httpCode.FORBIDDEN
           });
           done();
-        }
+        },
+        status: function(){}
       });
     });
   });
