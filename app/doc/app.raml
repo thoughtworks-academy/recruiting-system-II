@@ -231,3 +231,29 @@ baseUri: http://api.bronzesword.com/
         description: 没有找到这个用户
       400:
         description: 输入不符合条件
+
+/logout:
+  get:
+    queryParameters:
+      logoutUrl: string
+    responses:
+      301:
+        description: 成功登出，重定向到注册页面
+
+/timer/remain-timer:
+  get:
+    queryParameters:
+      userId: integer
+    responses:
+      200:
+        description: 逻辑题成功开始计时
+
+/user-initialization:
+  get:
+    queryParameters:
+      userId: integer
+    responses:
+      200:
+        description: 成功初始化
+      500:
+        description: 服务器错误
