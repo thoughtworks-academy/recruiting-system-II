@@ -16,11 +16,14 @@ function checkLoginInfo(account, password) {
   var pass = true;
   var valObj = {};
 
-  valObj.phoneEmail = account;
+  valObj.email = account;
+  valObj.mobilePhone = account;
   valObj.loginPassword = password;
   var result = validate(valObj, constraint);
 
-  if (result !== undefined) {
+  console.log(result);
+
+  if (!(result.email || result.mobilePhone)) {
     pass = false;
   }
 

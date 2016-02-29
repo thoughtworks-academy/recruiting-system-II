@@ -32,7 +32,7 @@ var LoginForm = React.createClass({
     };
   },
 
-  handleChange: function (event){
+  handleChange: function (event) {
     var value = event.target.value;
     var name = event.target.name;
     LoginActions.changeValue(name, value);
@@ -43,12 +43,22 @@ var LoginForm = React.createClass({
     var value = target.value;
     var name = target.name;
     var valObj = {};
-    valObj[name] = value;
-
-    var result = validate(valObj, constraint);
-    var error = getError(result, name);
+    var result;
+    var error;
     var stateObj = {};
-
+    if (name === 'phoneEmail') {
+      valObj.email = value;
+      valObj.mobilePhone = value;
+      result = validate(valObj, constraint);
+      error = getError(result, 'email');
+      if(error){
+        error = getError(result, 'mobilePhone');
+      }
+    } else {
+      valObj[name] = value;
+      result = validate(valObj, constraint);
+      error = getError(result, name);
+    }
     stateObj[name + 'Error'] = error;
     this.setState(stateObj);
   },
@@ -72,7 +82,8 @@ var LoginForm = React.createClass({
           <div className={'lose' + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
           <form action="">
             <div className="form-group">
-              <input className="form-control" type="text" placeholder="请输入邮箱" name="phoneEmail" onBlur={this.validate}
+              <input className="form-control" type="text" placeholder="请输入邮箱或手机号" name="phoneEmail"
+                     onBlur={this.validate}
                      ref="phoneEmail" onChange={this.handleChange} value={this.state.phoneEmail}/>
               <div
                   className={'lose' + (this.state.phoneEmailError === '' ? ' hide' : '')}>{this.state.phoneEmailError}
@@ -80,12 +91,14 @@ var LoginForm = React.createClass({
             </div>
             <div className="form-group">
               <input className="form-control" type="password" placeholder="请输入密码" name="loginPassword"
-                     ref="loginPassword" onBlur={this.validate} onChange={this.handleChange} value={this.state.loginPassword}/>
+                     ref="loginPassword" onBlur={this.validate} onChange={this.handleChange}
+                     value={this.state.loginPassword}/>
               <div
                   className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
               </div>
             </div>
-            <button type="button" id="login-btn" className="btn btn-lg btn-block btn-primary" onClick={this.login} disabled={this.state.clickable}>登陆
+            <button type="button" id="login-btn" className="btn btn-lg btn-block btn-primary" onClick={this.login}
+                    disabled={this.state.clickable}>登陆
               <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
             </button>
           </form>
