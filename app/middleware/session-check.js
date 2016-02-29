@@ -7,8 +7,8 @@ var yamlConfig = require('node-yaml-config');
 var apiServer = yamlConfig.load('./config/config.yml').apiServer;
 var async = require('async');
 
-function pathControl(req, res, next, jumpControl) {
-  var arr = req.url.split('/');
+function pathControl(url, data) {
+  var arr = url.split('/');
 
   arr.forEach(function (item, i) {
     arr[i] = item.split('?')[0];
@@ -18,6 +18,7 @@ function pathControl(req, res, next, jumpControl) {
 
   var redirectionAddress;
   var needRedirect = false;
+  var jumpControl = getJumpControl(data);
 
   jumpControl.forEach((item) => {
     if (~item.originPath.indexOf(lastElement) && item.condition) {
@@ -26,11 +27,10 @@ function pathControl(req, res, next, jumpControl) {
     }
   });
 
-  if (needRedirect) {
-    res.redirect(redirectionAddress);
-  } else {
-    next();
-  }
+  return {
+    needRedirect: needRedirect,
+    targetPath: redirectionAddress
+  };
 }
 
 module.exports = function (req, res, next) {
@@ -78,8 +78,12 @@ module.exports = function (req, res, next) {
     }
 
   }, function (err, data) {
-    var jumpControl = getJumpControl(data);
+    var result = pathControl(req.url, data);
 
-    pathControl(req, res, next, jumpControl);
+    if (result.needRedirect) {
+      res.redirect(result.targetPath);
+    } else {
+      next();
+    }
   });
 };
