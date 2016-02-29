@@ -43,7 +43,7 @@ router.get('/', function (req, res) {
       done(null, result);
     }
   ],(err) => {
-    if(err){
+    if(err && err.status !== constant.httpCode.NOT_FOUND){
       res.status(err.status);
       res.send({
         status: err.status
