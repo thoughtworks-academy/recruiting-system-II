@@ -8,7 +8,8 @@ var async = require('async');
 var validate = require('validate.js');
 var md5 = require('js-md5');
 var constraint = require('../../mixin/register-constraint');
-var apiRequest = require('../../services/api-request');
+var httpStatus = require('../../mixin/constant').httpCode;
+;var apiRequest = require('../../services/api-request');
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
@@ -93,6 +94,7 @@ router.post('/', function (req, res) {
           message: constant.REGISTER_SUCCESS
         });
       } else {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR);
         res.send({
           message: constant.REGISTER_FAILED,
           status: constant.SERVER_ERROR
@@ -104,6 +106,11 @@ router.post('/', function (req, res) {
 
 router.get('/validate-mobile-phone', function (req, res) {
   apiRequest.get('users', {field: 'mobilePhone', value: req.query.mobilePhone}, function (err, result) {
+    if(!result){
+      res.status(httpStatus.INTERNAL_SERVER_ERROR);
+      res.send();
+      return;
+    }
     if (result.body.uri) {
       res.send({
         status: constant.SUCCESSFUL_STATUS
@@ -118,6 +125,11 @@ router.get('/validate-mobile-phone', function (req, res) {
 
 router.get('/validate-email', function (req, res) {
   apiRequest.get('users', {field: 'email', value: req.query.email}, function (err, result) {
+    if(!result){
+      res.status(httpStatus.INTERNAL_SERVER_ERROR);
+      res.send();
+      return;
+    }
     if (result.body.uri) {
       res.send({
         status: constant.SUCCESSFUL_STATUS

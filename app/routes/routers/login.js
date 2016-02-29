@@ -9,6 +9,7 @@ var validate = require('validate.js');
 var constraint = require('../../mixin/login-constraint');
 var passport = require('passport');
 var apiRequest = require('../../services/api-request');
+var httpStatus = require('../../mixin/constant').httpCode;
 
 
 function checkLoginInfo(account, password) {
@@ -43,6 +44,11 @@ router.get('/', function (req, res) {
     password = md5(password);
 
     apiRequest.post('login', {email: account, password: password}, function (err, result) {
+      if(!result){
+        res.status(httpStatus.INTERNAL_SERVER_ERROR);
+        res.send();
+        return;
+      }
       if (result.body.id && result.headers) {
         req.session.user = {
           id: result.body.id,
