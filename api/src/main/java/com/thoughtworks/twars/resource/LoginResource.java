@@ -33,9 +33,11 @@ public class LoginResource extends Resource {
     public Response createUser(User user) {
 
         Pattern mobilePhoneMatches = Pattern
-                .compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+                .compile("^1([3|4|5|8])[0-9]\\d{8}$");
         Matcher mobilePhoneMatcher = mobilePhoneMatches.matcher(user.getEmail());
-        String emailMatches = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+        String emailMatches = "^[a-z0-9\\u007F-\\uffff!#$%&'*+\\/=?^_`{|}~-]"
+                + "+(?:\\.[a-z0-9\\u007F-\\uffff!#$%&'*+\\/=?^_`{|}~-]+)"
+                + "*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,}";
 
         User resultUser = new User();
 
