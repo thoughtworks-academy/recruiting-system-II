@@ -44,9 +44,9 @@ router.get('/', function (req, res) {
     }
   ],(err) => {
     if(err){
-      res.status(constant.httpCode.NOT_FOUND);
+      res.status(err.status);
       res.send({
-        status: constant.httpCode.NOT_FOUND
+        status: err.status
       });
     }else{
       res.send({

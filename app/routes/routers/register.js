@@ -9,7 +9,7 @@ var validate = require('validate.js');
 var md5 = require('js-md5');
 var constraint = require('../../mixin/register-constraint');
 var httpStatus = require('../../mixin/constant').httpCode;
-;var apiRequest = require('../../services/api-request');
+var apiRequest = require('../../services/api-request');
 
 function checkRegisterInfo(registerInfo) {
   var pass = true;
@@ -44,7 +44,7 @@ router.post('/', function (req, res) {
     async.waterfall([
       (done)=> {
         apiRequest.get('users', {field: 'mobilePhone', value: registerInfo.mobilePhone}, function (err, resp) {
-          if (result.body.uri) {
+          if (resp.body.uri) {
             isMobilePhoneExist = true;
           }
           done(err, resp);
@@ -52,7 +52,7 @@ router.post('/', function (req, res) {
       },
       (data, done) => {
         apiRequest.get('users', {field: 'email', value: registerInfo.email}, function (err, resp) {
-          if (result.body.uri) {
+          if (resp.body.uri) {
             isEmailExist = true;
           }
           if (isMobilePhoneExist || isEmailExist) {
