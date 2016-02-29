@@ -160,3 +160,14 @@ baseUri: http://api.bronzesword.com/
     responses:
       200:
         description: 逻辑题已经做完
+
+/login:
+  get:
+    queryParameters:
+      account: string
+      password: string
+    responses:
+      200:
+        description: 成功登陆
+      500:
+        description: 服务器错误
