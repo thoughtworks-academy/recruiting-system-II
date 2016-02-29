@@ -171,3 +171,63 @@ baseUri: http://api.bronzesword.com/
         description: 成功登陆
       500:
         description: 服务器错误
+
+/start:
+  get:
+    responses:
+      200:
+        description: 跳转到开始页面
+
+/user-detail:
+  get:
+    queryParameters:
+      userId: integer
+    responses:
+      200:
+        description: 获取到用户信息
+      404:
+        description: 没有找到这个用户
+
+/user-detail/update:
+  put:
+    body:
+      application/json:
+        properties:
+          userId: integer
+          userInfo:
+            properties:
+              school: string
+              name: string
+              gender: string
+              major: string
+              degree: string
+    responses:
+      200:
+        description: 成功更新用户信息
+      500:
+        description: 服务器错误
+      404:
+        description: 没有找到这个用户
+      400:
+        description: 输入不符合条件
+
+/user-detail/change-password:
+  put:
+    body:
+      application/json:
+        properties:
+          userId: integer
+          passwordInfo:
+            properties:
+              oldPassword: string
+              password: string
+              confirmPassword: string
+    responses:
+      200:
+        description: 成功修改密码
+      500:
+        description: 服务器错误
+      404:
+        description: 没有找到这个用户
+      400:
+        description: 输入不符合条件
