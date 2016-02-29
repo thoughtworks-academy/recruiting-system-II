@@ -5,6 +5,7 @@ import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.servlet.annotation.ServletSecurity;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +48,13 @@ public class UserMapperTest extends TestBase {
 
         User resultUser = userMapper.getUserByEmailAndPassWord(user);
         assertThat(resultUser.getMobilePhone(), is("12345678901"));
+    }
+
+    @Test
+    public void should_return_user_by_mobile_phone_and_password() throws Exception {
+        User user = new User();
+        user.setMobilePhone("12345678901");
+        user.setPassword("25d55ad283aa400af464c76d713c07ad");
     }
 
     @Test
@@ -127,8 +135,6 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_update_password() throws Exception {
-
-        Map<String, Object> passwordMap = new HashMap();
 
         int id = 1;
         String oldPassword = "25d55ad283aa400af464c76d713c07ad";
