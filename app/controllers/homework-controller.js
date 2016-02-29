@@ -33,6 +33,7 @@ HomeworkController.prototype.getList = (req, res) => {
     }
   ], (err) => {
     if (err) {
+      res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR, message: err.message});
     } else {
       res.send({
@@ -90,12 +91,11 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     }
   ], (err, data) => {
     if (err && (err !== 'break')) {
-      if (data.status === constant.httpCode.NOT_FOUND) {
-        res.send({status: constant.httpCode.NOT_FOUND});
+      if(!data){
+        res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       }
-      if (data.status === constant.httpCode.FORBIDDEN) {
-        res.send({status: constant.httpCode.FORBIDDEN});
-      }
+        res.status(data.status);
+        res.send({status: data.status});
     } else {
       res.send({
         status: constant.httpCode.OK,
@@ -135,13 +135,11 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     }
   ], (err, data) => {
     if (err) {
-      if (data.status === constant.httpCode.FORBIDDEN) {
-        res.send({status: data.status});
+      if(!data){
+        res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       }
-      if (data.status === constant.httpCode.NOT_FOUND) {
-        res.send({status: data.status});
-      }
-
+      res.status(data.status);
+      res.send({status: data.status});
     } else {
       res.send({
         status: constant.httpCode.OK
@@ -173,6 +171,9 @@ HomeworkController.prototype.updateResult = (req, res)=> {
     }
   ], (err, data)=> {
     if (err) {
+      if(!data){
+        res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
+      }
       if (data.status === constant.httpCode.BAD_REQUEST) {
         res.send({
           status: data.status,
