@@ -152,3 +152,11 @@ baseUri: http://api.bronzesword.com/
       responses:
         200:
           description: 服务器正常
+
+/dashboard:
+  get:
+    queryParameters:
+      userId: integer
+    responses:
+      200:
+        description: 逻辑题已经做完
