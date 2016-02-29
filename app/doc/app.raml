@@ -46,23 +46,12 @@ baseUri: http://api.bronzesword.com/
 
 /logic-puzzle:
   get:
-    description: 获取logic-puzzle题
     queryParameters:
-      orderId: number
+      userId: integer
+      orderId: integer
     responses:
       200:
-        body:
-          application/json:
-            properties:
-              item:
-                properties:
-                      id: number
-                      initializedBox: string
-                      question: string
-                      descriptinon: string
-                      chartPath: string
-              userAnswer: number
-              itemsCount: number
+        description: 成功获取逻辑题
   post:
     body:
       application/json:
@@ -87,7 +76,6 @@ baseUri: http://api.bronzesword.com/
         description: 保存试卷成功
       500:
         description: 服务器错误
-
 
 /logic-puzzle/dealAgree:
   put:
