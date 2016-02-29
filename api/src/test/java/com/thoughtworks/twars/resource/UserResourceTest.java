@@ -83,7 +83,7 @@ public class UserResourceTest extends TestBase {
                 .queryParam("value", "abc@test.com")
                 .request().get();
 
-        assertThat(response.getStatus(), is(404));
+        assertThat(response.getStatus(), is(200));
     }
 
     @Test
