@@ -50,7 +50,7 @@ logicPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
       isPaperCommited = logicPuzzle.isCommited || parseInt(TOTAL_TIME - usedTime) <= 0 ? true : false;
     }
 
-    callback(isPaperCommited);
+    callback(err,isPaperCommited);
   });
 };
 
