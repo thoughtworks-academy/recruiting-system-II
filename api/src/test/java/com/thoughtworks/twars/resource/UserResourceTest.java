@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -75,7 +76,7 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
-    public void should_return_404_when_not_found() throws Exception {
+    public void should_return_200_when_not_found() throws Exception {
         when(userMapper.getUserByEmail(anyString())).thenReturn(null);
 
         Response response = target(basePath)
@@ -83,11 +84,14 @@ public class UserResourceTest extends TestBase {
                 .queryParam("value", "abc@test.com")
                 .request().get();
 
+        Map result = response.readEntity(Map.class);
+
         assertThat(response.getStatus(), is(200));
+        assertEquals(result.get("uri"), null);
     }
 
     @Test
-    public void should_404_when_get_user_by_email() {
+    public void should_200_when_get_user_by_email() {
         when(userMapper.getUserByEmail(anyString())).thenReturn(null);
 
         Response response = target(basePath)
@@ -95,7 +99,10 @@ public class UserResourceTest extends TestBase {
                 .queryParam("value", "abc@test.com")
                 .request().get();
 
-        assertThat(response.getStatus(), is(404));
+        Map result = response.readEntity(Map.class);
+
+        assertThat(response.getStatus(), is(200));
+        assertEquals(result.get("uri"), null);
     }
 
     @Test
