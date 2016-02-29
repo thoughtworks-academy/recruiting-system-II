@@ -89,14 +89,18 @@ public class UserResource extends Resource {
             user = userMapper.getUserByMobilePhone(value);
         }
 
+        Map<String, String> map = new HashMap<>();
+
         if (null != user) {
-            Map<String, String> map = new HashMap<>();
+
             map.put("uri", "users/" + user.getId());
 
             return Response.status(Response.Status.OK).entity(map).build();
         }
 
-        return Response.status(Response.Status.NOT_FOUND).build();
+        map.put("uri", null);
+
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 
     @PUT

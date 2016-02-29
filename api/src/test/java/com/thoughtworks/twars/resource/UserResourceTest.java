@@ -76,21 +76,6 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
-    public void should_return_200_when_not_found() throws Exception {
-        when(userMapper.getUserByEmail(anyString())).thenReturn(null);
-
-        Response response = target(basePath)
-                .queryParam("field", "email")
-                .queryParam("value", "abc@test.com")
-                .request().get();
-
-        Map result = response.readEntity(Map.class);
-
-        assertThat(response.getStatus(), is(200));
-        assertEquals(result.get("uri"), null);
-    }
-
-    @Test
     public void should_200_when_get_user_by_email() {
         when(userMapper.getUserByEmail(anyString())).thenReturn(null);
 
@@ -106,7 +91,7 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
-    public void should_404_when_get_user_by_mobile_phone() {
+    public void should_200_when_get_user_by_mobile_phone() {
         when(userMapper.getUserByMobilePhone(anyString())).thenReturn(null);
 
         Response response = target(basePath)
@@ -114,7 +99,10 @@ public class UserResourceTest extends TestBase {
                 .queryParam("value", "4585295152")
                 .request().get();
 
-        assertThat(response.getStatus(), is(404));
+        Map result = response.readEntity(Map.class);
+
+        assertThat(response.getStatus(), is(200));
+        assertEquals(result.get("uri"), null);
     }
 
     @Test
