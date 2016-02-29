@@ -25,18 +25,18 @@ public class UserMapperTest extends TestBase {
     @Test
     public void should_return_user_by_id() throws Exception {
         User user = userMapper.getUserById(1);
-        assertThat(user.getMobilePhone(), is("12345678901"));
+        assertThat(user.getMobilePhone(), is("18798037893"));
     }
 
     @Test
     public void should_return_user_by_email() throws Exception {
         User user = userMapper.getUserByEmail("test@163.com");
-        assertThat(user.getMobilePhone(), is("12345678901"));
+        assertThat(user.getMobilePhone(), is("18798037893"));
     }
 
     @Test
     public void should_return_user_by_mobile_phone() throws Exception {
-        User user = userMapper.getUserByMobilePhone("12345678901");
+        User user = userMapper.getUserByMobilePhone("18798037893");
         assertThat(user.getEmail(), is("test@163.com"));
     }
 
@@ -47,7 +47,7 @@ public class UserMapperTest extends TestBase {
         user.setPassword("25d55ad283aa400af464c76d713c07ad");
 
         User resultUser = userMapper.getUserByEmailAndPassWord(user);
-        assertThat(resultUser.getMobilePhone(), is("12345678901"));
+        assertThat(resultUser.getMobilePhone(), is("18798037893"));
     }
 
     @Test
