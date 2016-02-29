@@ -24,7 +24,7 @@ public class LoginResourceTest extends TestBase {
     String basePath = "/login";
 
     @Test
-    public void should_create_user_when_login() throws Exception {
+    public void should_create_user_when_login_with_email() throws Exception {
 
         User loginUser = new User();
         LoginDetail loginDetail = new LoginDetail();
@@ -53,6 +53,25 @@ public class LoginResourceTest extends TestBase {
 
         assertThat(userId, is(1));
         assertThat(userInfoUri, is("users/1"));
+    }
+
+    @Test
+    public void should_create_user_when_login_with_mobilePhone() throws Exception {
+
+        User loginResult = new User();
+        User loginUser = new User();
+
+        loginUser.setMobilePhone("13572164226");
+        loginUser.setPassword("25d55ad283aa400af464c76d713c07ad");
+
+        when(userMapper.getUserByMobilePhoneAndPassWord(loginUser)).thenReturn(loginResult);
+
+        loginResult.setMobilePhone("13572164226");
+        loginResult.setEmail("test@163.com");
+        loginResult.setPassword("25d55ad283aa400af464c76d713c07ad");
+        loginResult.setId(1);
+
+
     }
 
     @Test

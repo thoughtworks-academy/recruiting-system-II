@@ -15,6 +15,8 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Path("/login")
 public class LoginResource extends Resource {
@@ -30,7 +32,19 @@ public class LoginResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {
 
-        User resultUser = userMapper.getUserByEmailAndPassWord(user);
+        Pattern mobilePhoneMatches = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher mobilePhoneMatcher = mobilePhoneMatches.matcher(user.getEmail());
+        String emailMatches = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+
+        User resultUser = new User();
+
+        if (mobilePhoneMatcher.matches()) {
+            resultUser = userMapper.getUserByMobilePhoneAndPassWord(user);
+        }
+        else if (user.getEmail().matches(emailMatches)) {
+
+            resultUser = userMapper.getUserByEmailAndPassWord(user);
+        }
 
         if (resultUser == null) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
