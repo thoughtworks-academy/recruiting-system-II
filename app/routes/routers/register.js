@@ -44,21 +44,21 @@ router.post('/', function (req, res) {
     async.waterfall([
       (done)=> {
         apiRequest.get('users', {field: 'mobilePhone', value: registerInfo.mobilePhone}, function (err, resp) {
-          if (!err) {
+          if (result.body.uri) {
             isMobilePhoneExist = true;
           }
-          done(null, resp);
+          done(err, resp);
         });
       },
       (data, done) => {
         apiRequest.get('users', {field: 'email', value: registerInfo.email}, function (err, resp) {
-          if (!err) {
+          if (result.body.uri) {
             isEmailExist = true;
           }
           if (isMobilePhoneExist || isEmailExist) {
             done(true, resp);
           }
-          done(null, resp);
+          done(err, resp);
         });
       },
       (data, done)=> {
