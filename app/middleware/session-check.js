@@ -49,7 +49,7 @@ module.exports = function (req, res, next) {
       if (!userId) {
         done(null, false);
       } else {
-        logicPuzzle.isPaperCommited(userId, (data) => {
+        logicPuzzle.isPaperCommited(userId, (err,data) => {
           done(null, data);
         });
       }
