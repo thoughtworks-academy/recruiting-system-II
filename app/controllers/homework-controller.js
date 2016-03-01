@@ -5,7 +5,6 @@ var homeworkQuizzes = require('../models/homework-quizzes');
 var async = require('async');
 var constant = require('../mixin/constant');
 var apiRequest = require('../services/api-request');
-var request = require('superagent');
 
 function HomeworkController() {
 
