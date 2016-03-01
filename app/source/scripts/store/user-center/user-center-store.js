@@ -24,7 +24,6 @@ var UserDetailStore = Reflux.createStore({
   },
 
   onUpdateUserDetail: function (userData) {
-
     request.put('/user-detail/update')
         .set('Content-Type', 'application/json')
         .send({
@@ -41,6 +40,7 @@ var UserDetailStore = Reflux.createStore({
   },
 
   onChangeState: function (state, currentState){
+
     if(state !== currentState) {
       this.trigger({
         currentState: state,
@@ -55,12 +55,15 @@ var UserDetailStore = Reflux.createStore({
         nameError: '',
         majorError: '',
         genderError: false,
-        degreeError: ''
+        degreeError: '',
+        birthday: '',
+        birthdayError: ''
       });
     }
   },
 
   onChangeGender: function (evt){
+
     this.trigger({gender: evt.target.name});
   },
 
@@ -72,6 +75,23 @@ var UserDetailStore = Reflux.createStore({
 
   onChangeBirthday: function (time) {
     this.trigger({birthday: time});
+  },
+
+  onCheckGender: function (gender) {
+    if (gender === '') {
+      this.trigger({genderError: true});
+    } else {
+      this.trigger({genderError: false});
+    }
+  },
+
+  onCheckBirthday: function (birthday) {
+    if(birthday === '' || birthday === null) {
+      this.trigger({birthdayError: '请选择生日'});
+    }else {
+      this.trigger({birthdayError: ''});
+    }
+
   }
 });
 
