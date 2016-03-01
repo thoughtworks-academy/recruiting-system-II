@@ -114,4 +114,91 @@ describe('PasswordController', function () {
     });
 
   });
+
+
+  describe('reset', ()=> {
+    var controller;
+
+    beforeEach(()=> {
+      controller = new PasswordController();
+    });
+
+    it('should return status 200 when reset password success  ', (done)=> {
+
+      spyOn(apiRequest, 'post').and.callFake(function (url, body, callback) {
+        callback(null, {
+          body: {
+            status: constant.httpCode.OK
+          }
+        });
+      });
+
+      controller.reset({
+        body: {
+          newPassword: '22457714',
+          token: 'fjewjwoifjsafjekwlfrhjwi'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.OK
+          });
+          done();
+        }
+      });
+
+    });
+
+    it('should return status 403 when verify user is not exist ', (done)=> {
+
+      spyOn(apiRequest, 'post').and.callFake(function (url, body, callback) {
+        callback(null, {
+          body: {
+            status: constant.httpCode.FORBIDDEN
+          }
+        });
+      });
+
+      controller.reset({
+        body: {
+          newPassword: '22457714',
+          token: 'fjewjwoifjsafjekwlfrhjwi'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.FORBIDDEN
+          });
+          done();
+        }
+      });
+    });
+
+    it('should return status 412 when submit is time out ', (done)=> {
+
+      spyOn(apiRequest, 'post').and.callFake(function (url, body, callback) {
+        callback(null, {
+          body: {
+            status: constant.httpCode.TIME_OUT
+          }
+        });
+      });
+
+      controller.reset({
+        body: {
+          newPassword: '22457714',
+          token: 'fjewjwoifjsafjekwlfrhjwi'
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.TIME_OUT
+          });
+          done();
+        }
+      });
+    });
+
+  });
+
 });

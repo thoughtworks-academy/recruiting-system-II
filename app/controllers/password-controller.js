@@ -7,7 +7,7 @@ var constant = require('../mixin/constant');
 var yamlConfig = require('node-yaml-config');
 var domainName = yamlConfig.load('./config/config.yml').domainName;
 var port = yamlConfig.load('./config/config.yml').port;
-
+var md5 = require('js-md5');
 function PasswordController() {
 
 }
@@ -26,6 +26,7 @@ PasswordController.prototype.retrieve = (req, res)=> {
       apiRequest.get(retrieveUrl, query, done);
     },
     (resq, done)=> {
+
       if (resq.body.status === constant.httpCode.OK) {
         var token = resq.body.token;
         var linkAddress = domainName + port + '/password/retrieve?token=' + token;
@@ -34,6 +35,7 @@ PasswordController.prototype.retrieve = (req, res)=> {
           if (err) {
             done(true, null);
           } else {
+
             done(null, null);
           }
         });
@@ -54,6 +56,22 @@ PasswordController.prototype.retrieve = (req, res)=> {
 
 PasswordController.prototype.reset = (req, res)=> {
 
+  var retrieveUrl = 'password/reset';
+  var newPassword = md5(req.body.newPassword);
+
+  var token = req.body.token;
+  var query = {
+    newPassword: newPassword,
+    token: token
+  };
+
+  apiRequest.post(retrieveUrl, query, function (err, resq) {
+    if (err) {
+      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR});
+    } else {
+      res.send({status: resq.body.status});
+    }
+  });
 
 };
 
