@@ -68,7 +68,12 @@ var UserDetailStore = Reflux.createStore({
     if (genderError === true) {
       this.trigger({genderError: false});
     }
+  },
+
+  onChangeBirthday: function (time) {
+      this.trigger({birthday: time});
   }
 });
+
 
 module.exports = UserDetailStore;
