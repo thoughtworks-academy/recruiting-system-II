@@ -121,31 +121,32 @@ baseUri: http://api.bronzesword.com/
               application/json:
                 properties:
                   uri: string
-      /retrieve:
-        get:
-          queryParameters:
-            field: string
-            value: string
-          responses:
-            200:
-             body:
-               application/json:
-                 properties:
-                   status: number
-                   token: string
-      /reset:
-        post:
-          body:
-            application/json:
-              properties:
-                newPassword: string
-                token: string
-          responses:
-            201:
-              body:
-                application/json:
-                  properties:
-                    status: number
+  /password:
+    /retrieve:
+      get:
+        queryParameters:
+          field: string
+          value: string
+        responses:
+          200:
+           body:
+             application/json:
+               properties:
+                 status: number
+                 token: string
+    /reset:
+      post:
+        body:
+          application/json:
+            properties:
+              newPassword: string
+              token: string
+        responses:
+          201:
+            body:
+              application/json:
+                properties:
+                  status: number
 
 /scoresheets:
   get:
