@@ -15,18 +15,9 @@ var UserCenterGender = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function() {
-    this.setState({
-      genderError: false
-    });
-  },
-
   genderChange: function (evt) {
     UserCenterActions.changeGender(evt);
-  },
-
-  genderValidate: function (genderError) {
-    UserCenterActions.validateGender(genderError);
+    UserCenterActions.validateGender(this.state.genderError);
   },
 
   render: function () {
@@ -34,6 +25,7 @@ var UserCenterGender = React.createClass({
       {mark: 'M', genderName: 'male', label: '男'},
       {mark: 'F', genderName: 'female', label: '女'}
     ];
+
     return (
         <div>
           <div className="col-sm-4 col-md-4">
@@ -41,8 +33,7 @@ var UserCenterGender = React.createClass({
               return (
                   <div key={index}>
                     <input type="radio" name={item.mark} className="gender" onChange={this.genderChange}
-                           checked={this.state.gender === item.mark ? 'checked' : ''} id={item.genderName}
-                           onClick={this.genderValidate(this.state.genderError)}/>
+                           checked={this.state.gender === item.mark ? 'checked' : ''} id={item.genderName}/>
                     <label htmlFor={item.genderName}>{item.label}</label>
                   </div>
               );
