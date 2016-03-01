@@ -35,6 +35,11 @@ var constraint = {
 
   degree: {
     presence: {message: '^请选择学历'}
+  },
+
+  birthday: {
+    presence: {message:'^请选择生日'}
   }
+
 };
 module.exports = constraint;
