@@ -26,7 +26,9 @@ var UserDetail = React.createClass({
       majorError: '',
       genderError: false,
       degreeError: '',
-      currentState: 'userDetail'
+      currentState: 'userDetail',
+      birthday: '',
+      birthdayError: ''
     };
   },
 
@@ -40,7 +42,8 @@ var UserDetail = React.createClass({
       nameError: '',
       majorError: '',
       genderError: false,
-      degreeError: ''
+      degreeError: '',
+      birthdayError: ''
     });
   },
 
@@ -72,9 +75,10 @@ var UserDetail = React.createClass({
     var name = {name: this.state.name};
     var major = {major: this.state.major};
     var degree = {degree: this.state.degree};
+    var birthday = {birthday: this.state.birthday};
     var userInfo = [];
 
-    userInfo.push(school, name, major, degree);
+    userInfo.push(school, name, major, degree, birthday);
     var pass = false;
     var stateObj = {};
 
@@ -105,7 +109,8 @@ var UserDetail = React.createClass({
       name: this.state.name,
       gender: this.state.gender,
       major: this.state.major,
-      degree: this.state.degree
+      degree: this.state.degree,
+      birthday: this.state.birthday
     };
 
     if (this.checkInfo()) {
@@ -177,9 +182,7 @@ var UserDetail = React.createClass({
 
                 <label htmlFor='inputBirthday' className='col-sm-4 col-md-4 control-label'>生日</label>
                 <div className='form-group'>
-                  <div className='col-sm-4 col-md-4'>
                     {this.props.children[1]}
-                  </div>
                 </div>
 
                 <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业</label>
