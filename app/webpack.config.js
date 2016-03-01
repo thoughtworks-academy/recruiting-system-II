@@ -11,7 +11,8 @@ module.exports = {
         "register": "./source/scripts/register.js",
         "start": "./source/scripts/start.js",
         "user-center": './source/scripts/user-center.js',
-        "dashboard":'./source/scripts/dashboard.js'
+        "dashboard":'./source/scripts/dashboard.js',
+        "password-retrieve":'./source/scripts/password-retrieve.js'
     },
     output: {
         path: __dirname + '/public/assets/',
