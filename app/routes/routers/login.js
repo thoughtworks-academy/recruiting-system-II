@@ -3,7 +3,8 @@
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
-var constant = require('../../mixin/back-constant');
+var constant = require('../../mixin/constant').backConstant;
+var promot = require('../../mixin/promot-message/chinese');
 var md5 = require('js-md5');
 var validate = require('validate.js');
 var constraint = require('../../mixin/login-constraint');
@@ -38,7 +39,7 @@ router.get('/', function (req, res) {
 
   if (!checkLoginInfo(account, password)) {
     res.send({
-      message: constant.LOGIN_FAILED,
+      message: promot.LOGIN_FAILED,
       status: 403
     });
   } else {

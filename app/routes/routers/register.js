@@ -3,7 +3,8 @@
 var express = require('express');
 var router = express.Router();
 var request = require('superagent');
-var constant = require('../../mixin/back-constant');
+var promot = require('../../mixin/promot-message/chinese');
+var constant = require('../../mixin/constant').backConstant
 var async = require('async');
 var validate = require('validate.js');
 var md5 = require('js-md5');
@@ -82,7 +83,7 @@ router.post('/', function (req, res) {
       if (err === true) {
         res.send({
           status: constant.FAILING_STATUS,
-          message: constant.EXIST,
+          message: promot.EXIST,
           data: {
             isEmailExist: isEmailExist,
             isMobilePhoneExist: isMobilePhoneExist
@@ -91,12 +92,12 @@ router.post('/', function (req, res) {
       } else if (!err) {
         res.send({
           status: data.status,
-          message: constant.REGISTER_SUCCESS
+          message: promot.REGISTER_SUCCESS
         });
       } else {
         res.status(httpStatus.INTERNAL_SERVER_ERROR);
         res.send({
-          message: constant.REGISTER_FAILED,
+          message: promot.REGISTER_FAILED,
           status: constant.SERVER_ERROR
         });
       }

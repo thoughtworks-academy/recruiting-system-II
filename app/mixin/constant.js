@@ -22,9 +22,13 @@ var constant = {
     SUCCESS:4,
     ERROR:5
   },
-  changePassword: {
-    ERROR: '旧密码错误',
-    SERVERERROR: '服务器错误'
+  backConstant: {
+    MOBILE_PHONE_LENGTH: 11,
+    PASSWORD_MIN_LENGTH: 8,
+    PASSWORD_MAX_LENGTH: 16,
+    SUCCESSFUL_STATUS: 200,
+    FAILING_STATUS: 404,
+    SERVER_ERROR:500
   }
 };
 
