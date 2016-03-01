@@ -12,7 +12,6 @@ var UserCenterBirthday = React.createClass({
         <div>
           <Calendar
               format="DD/MM/YYYY"
-              date="1-1-2016"
           />
         </div>
 
