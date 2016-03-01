@@ -9,7 +9,9 @@ var UserCenterActions = Reflux.createActions([
   'changeState',
   'changeGender',
   'validateGender',
-  'changeBirthday'
+  'changeBirthday',
+  'checkGender',
+  'checkBirthday'
 ]);
 
 module.exports = UserCenterActions;
