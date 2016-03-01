@@ -172,7 +172,14 @@ var UserDetail = React.createClass({
 
                 <label htmlFor='inputGender' className='col-sm-4 col-md-4 control-label'>性别</label>
                 <div className='form-group'>
-                  {this.props.children}
+                  {this.props.children[0]}
+                </div>
+
+                <label htmlFor='inputBirthday' className='col-sm-4 col-md-4 control-label'>生日</label>
+                <div className='form-group'>
+                  <div className='col-sm-4 col-md-4'>
+                    {this.props.children[1]}
+                  </div>
                 </div>
 
                 <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业</label>
