@@ -5,8 +5,8 @@ default:
   sessionTtl: 3600 # 60(MINUTE_PER_HOUR) * 60(SECONDS_PER_MINUTE)
   staticFileServer: 'http://10.29.3.221:8888/fs/'
   domainName: 'localhost:'
-  emailAccount: 'sialvsic@163.com'
-  emailPassword: 'lyy68210'
+  emailAccount: 'twarss@163.com'
+  emailPassword: 'ssww123456'
 test:
   port: 5000
 
