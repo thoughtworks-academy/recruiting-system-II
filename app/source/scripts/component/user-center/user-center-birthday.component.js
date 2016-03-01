@@ -22,7 +22,7 @@ var UserCenterBirthday = React.createClass({
   },
 
   changeBirthday: function (time) {
-    if(typeof (time) === 'string') {
+    if(time !== null) {
       this.setState({birthdayError: ''});
     }
     UserCenterActions.changeBirthday(time);
@@ -56,7 +56,7 @@ var UserCenterBirthday = React.createClass({
           <div className={'error alert alert-danger' + (this.state.birthdayError === '' ? ' hide' : '')}
                role='alert'>
             <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-            请选择生日
+            {this.state.birthdayError}
           </div>
         </div>
 
