@@ -7,7 +7,8 @@ var constant = {
     NOT_FOUND: 404,
     UNAUTHORIZED: 401,
     BAD_REQUEST: 400,
-    FORBIDDEN:403,
+    TIME_OUT: 412,
+    FORBIDDEN: 403,
     INTERNAL_SERVER_ERROR: 500
   },
   time: {
@@ -15,12 +16,12 @@ var constant = {
     SECONDS_PER_MINUTE: 60,
     MILLISECOND_PER_SECONDS: 1000
   },
-  homeworkQuizzesStatus:{
-    LOCKED:1,
-    ACTIVE:2,
-    PROGRESS:3,
-    SUCCESS:4,
-    ERROR:5
+  homeworkQuizzesStatus: {
+    LOCKED: 1,
+    ACTIVE: 2,
+    PROGRESS: 3,
+    SUCCESS: 4,
+    ERROR: 5
   },
   backConstant: {
     MOBILE_PHONE_LENGTH: 11,
@@ -28,7 +29,7 @@ var constant = {
     PASSWORD_MAX_LENGTH: 16,
     SUCCESSFUL_STATUS: 200,
     FAILING_STATUS: 404,
-    SERVER_ERROR:500
+    SERVER_ERROR: 500
   }
 };
 
