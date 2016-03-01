@@ -1,7 +1,9 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.PasswordRetrieveDetail;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
+import com.thoughtworks.twars.mapper.PasswordRetrieveDetailMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 
 import javax.inject.Inject;
@@ -16,6 +18,9 @@ public class UserResource extends Resource {
 
     @Inject
     private UserMapper userMapper;
+
+    @Inject
+    private PasswordRetrieveDetailMapper passwordRetrieveDetailMapper;
 
     @GET
     @Path("/{param}")
@@ -126,4 +131,42 @@ public class UserResource extends Resource {
 
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
+    @GET
+    @Path("/password/retrieve")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findUserByField(
+            @QueryParam("field") String field,
+            @QueryParam("value") String value
+    ) {
+        User user = userMapper.getUserByEmail(value);
+        Map<String, String> map = new HashMap<>();
+        String token = null;
+
+        if (null == user) {
+            map.put("status", "404");
+            map.put("token", token);
+
+            return Response.status(Response.Status.OK).entity(map).build();
+        }
+
+        PasswordRetrieveDetail passwordRetrieveDetail =
+                passwordRetrieveDetailMapper.getDetailByEmail(value);
+
+        if (passwordRetrieveDetail != null) {
+            token = passwordRetrieveDetail.getToken();
+            map.put("status", "200");
+            map.put("token", token);
+
+            return Response.status(Response.Status.OK).entity(map).build();
+        } else {
+            passwordRetrieveDetailMapper.updateDetailByEmail(value);
+            token = passwordRetrieveDetailMapper.getDetailByEmail(value).getToken();
+            map.put("status", "200");
+            map.put("token", token);
+
+            return Response.status(Response.Status.OK).entity(map).build();
+        }
+    }
+
 }

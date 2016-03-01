@@ -30,5 +30,6 @@
         <mapper resource="mybatis/HomeworkSubmitMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkPostHistoryMapper.xml"></mapper>
         <mapper resource="mybatis/LoginDetailMapper.xml"></mapper>
+        <mapper resource="mybatis/PasswordRetrieveDetailMapper.xml"></mapper>
     </mappers>
 </configuration>

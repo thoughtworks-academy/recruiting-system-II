@@ -198,4 +198,17 @@ public class UserResourceTest extends TestBase {
 
         assertThat(response.getStatus(), is(200));
     }
+
+    @Test
+    public void should_retrieve_password() throws Exception{
+
+        Response response = target(basePath+"/password/retrieve")
+                .queryParam("field", "email")
+                .queryParam("value", "test@163.com")
+                .request().get();
+
+        Map result = response.readEntity(Map.class);
+
+        assertThat(response.getStatus(), is(200));
+    }
 }

@@ -61,6 +61,9 @@ public class App extends ResourceConfig {
         final LoginDetailMapper loginDetailMapper = session
                 .getMapper(LoginDetailMapper.class);
 
+        final PasswordRetrieveDetailMapper passwordRetrieveDetailMapper = session
+                .getMapper(PasswordRetrieveDetailMapper.class);
+
         final BlankQuizScoreSheetService blankQuizScoreSheet = new BlankQuizScoreSheetService();
         blankQuizScoreSheet.setBlankQuizSubmitMapper(blankQuizSubmitMapper);
         blankQuizScoreSheet.setItemPostMapper(itemPostMapper);
@@ -106,6 +109,7 @@ public class App extends ResourceConfig {
                         bind(homeworkQuizScoreSheet).to(HomeworkQuizScoreSheetService.class);
                         bind(homeworkQuizDefinition).to(HomeworkQuizDefinitionService.class);
                         bind(blankQuizDefinition).to(BlankQuizDefinitionService.class);
+                        bind(passwordRetrieveDetailMapper).to(PasswordRetrieveDetailMapper.class);
                         bind(session).to(SqlSessionManager.class);
                     }
                 });

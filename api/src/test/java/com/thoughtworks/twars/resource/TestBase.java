@@ -30,12 +30,12 @@ public class TestBase extends JerseyTest {
     protected HomeworkQuizMapper homeworkQuizMapper = mock(HomeworkQuizMapper.class);
     protected HomeworkSubmitMapper homeworkSubmitMapper = mock(HomeworkSubmitMapper.class);
     protected LoginDetailMapper loginDetailMapper = mock(LoginDetailMapper.class);
+    protected PasswordRetrieveDetailMapper passwordRetrieveDetailMapper = mock(PasswordRetrieveDetailMapper.class);
     protected HomeworkPostHistoryMapper homeworkPostHistoryMapper = mock(HomeworkPostHistoryMapper.class);
     protected HomeworkQuizDefinitionService homeworkQuizDefinition = mock(HomeworkQuizDefinitionService.class);
     protected BlankQuizDefinitionService blankQuizDefinition = mock(BlankQuizDefinitionService.class);
     protected BlankQuizScoreSheetService blankQuizScoreSheet = mock(BlankQuizScoreSheetService.class);
     protected HomeworkQuizScoreSheetService homeworkQuizScoreSheet = mock(HomeworkQuizScoreSheetService.class);
-
 
     @Override
     protected Application configure() {
@@ -59,6 +59,7 @@ public class TestBase extends JerseyTest {
                 bind(homeworkSubmitMapper).to(HomeworkSubmitMapper.class);
                 bind(homeworkPostHistoryMapper).to(HomeworkPostHistoryMapper.class);
                 bind(loginDetailMapper).to(LoginDetailMapper.class);
+                bind(passwordRetrieveDetailMapper).to(PasswordRetrieveDetailMapper.class);
                 bind(homeworkQuizDefinition).to(HomeworkQuizDefinitionService.class);
                 bind(blankQuizDefinition).to(BlankQuizDefinitionService.class);
                 bind(blankQuizScoreSheet).to(BlankQuizScoreSheetService.class);
