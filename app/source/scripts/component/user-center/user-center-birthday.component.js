@@ -18,7 +18,7 @@ var UserCenterBirthday = React.createClass({
     return {
       birthday: '',
       birthdayError:''
-    }
+    };
   },
 
   changeBirthday: function (time) {

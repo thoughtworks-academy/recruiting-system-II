@@ -71,7 +71,7 @@ var UserDetailStore = Reflux.createStore({
   },
 
   onChangeBirthday: function (time) {
-      this.trigger({birthday: time});
+    this.trigger({birthday: time});
   }
 });
 
