@@ -22,6 +22,9 @@ var UserCenterBirthday = React.createClass({
   },
 
   changeBirthday: function (time) {
+    if(typeof (time) === 'string') {
+      this.setState({birthdayError: ''});
+    }
     UserCenterActions.changeBirthday(time);
   },
 
