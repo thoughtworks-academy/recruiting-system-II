@@ -20,9 +20,7 @@ function checkLoginInfo(account, password) {
   valObj.mobilePhone = account;
   valObj.loginPassword = password;
   var result = validate(valObj, constraint);
-
-  console.log(result);
-
+  
   if (!(result.email || result.mobilePhone)) {
     pass = false;
   }
