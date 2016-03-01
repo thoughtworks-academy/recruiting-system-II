@@ -24,27 +24,14 @@ var UserDetail = React.createClass({
       schoolError: '',
       nameError: '',
       majorError: '',
-      genderError: false,
       degreeError: '',
       currentState: 'userDetail',
-      birthday: '',
-      birthdayError: ''
+      birthday: ''
     };
   },
 
   componentDidMount: function () {
     UserCenterActions.loadUserDetail();
-  },
-
-  componentWillReceiveProps: function() {
-    this.setState({
-      schoolError: '',
-      nameError: '',
-      majorError: '',
-      genderError: false,
-      degreeError: '',
-      birthdayError: ''
-    });
   },
 
   handleChange: function (evt) {
@@ -97,12 +84,8 @@ var UserDetail = React.createClass({
 
   update: function (evt) {
     evt.preventDefault();
-
-    if (this.state.gender === '') {
-      this.setState({genderError: true});
-    } else {
-      this.setState({genderError: false});
-    }
+    UserCenterActions.checkBirthday(this.state.birthday);
+    UserCenterActions.checkGender(this.state.gender);
 
     var userData = {
       school: this.state.school,
@@ -123,7 +106,6 @@ var UserDetail = React.createClass({
 
   render: function () {
     var classString = (this.state.currentState === 'userDetail' ? '' : '  hide');
-
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className='content'>
@@ -182,7 +164,7 @@ var UserDetail = React.createClass({
 
                 <label htmlFor='inputBirthday' className='col-sm-4 col-md-4 control-label'>生日</label>
                 <div className='form-group'>
-                    {this.props.children[1]}
+                  {this.props.children[1]}
                 </div>
 
                 <label htmlFor='inputMajor' className='col-sm-4 col-md-4 control-label'>专业</label>
