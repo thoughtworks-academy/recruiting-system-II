@@ -29,7 +29,7 @@ PasswordController.prototype.retrieve = (req, res)=> {
 
       if (resq.body.status === constant.httpCode.OK) {
         var token = resq.body.token;
-        var linkAddress = domainName + port + '/password/retrieve?token=' + token;
+        var linkAddress = domainName + port + '/password-reset?token=' + token;
 
         emailServer.sendEmail(email, linkAddress, (err, status)=> {
           if (err) {
