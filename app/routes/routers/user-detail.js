@@ -70,7 +70,6 @@ router.put('/update', function (req, res) {
 
   var result = _.assign({userId: userId}, userInfo);
 
-  console.log(result);
   if (!checkInfo(result, userConstraint) && result.gender !== '') {
     var url = 'users/' + userId + '/detail';
     apiRequest.put(url, result, function (err, resp) {
