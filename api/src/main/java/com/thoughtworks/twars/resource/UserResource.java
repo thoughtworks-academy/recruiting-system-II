@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -168,5 +169,44 @@ public class UserResource extends Resource {
             return Response.status(Response.Status.OK).entity(map).build();
         }
     }
+
+
+    @POST
+    @Path("/password/reset")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response resetPassword(Map data) {
+        String newPasword = (String) data.get("newPassword");
+        String token = (String) data.get("token");
+        int timeLimit = 86400;
+
+        Map map = new HashMap<>();
+
+        PasswordRetrieveDetail passwordRetrieveDetail =
+                passwordRetrieveDetailMapper.getDetailByToken(token);
+
+        if (passwordRetrieveDetail == null) {
+            map.put("status", "403");
+            return Response.status(Response.Status.OK).entity(map).build();
+        }
+
+        long timeInterval = Calendar.getInstance().getTimeInMillis()/1000 - passwordRetrieveDetail.getRetrieveDate();
+
+        System.out.println(passwordRetrieveDetail.getToken());
+        System.out.println(timeInterval);
+
+        if (timeLimit > timeInterval) {
+            User user = new User();
+            user.setEmail(passwordRetrieveDetail.getEmail());
+            user.setPassword(newPasword);
+
+            userMapper.resetPassword(user);
+            map.put("status", "201");
+        }else{
+            map.put("status", "412");
+        }
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
 
 }

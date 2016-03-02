@@ -4,7 +4,7 @@ public class PasswordRetrieveDetail {
     private int id;
     private String email;
     private String token;
-    private int retrieveData;
+    private int retrieveDate;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class PasswordRetrieveDetail {
         this.token = token;
     }
 
-    public int getRetrieveData() {
-        return retrieveData;
+    public int getRetrieveDate() {
+        return retrieveDate;
     }
 
-    public void setRetrieveData(int retrieveData) {
-        this.retrieveData = retrieveData;
+    public void setRetrieveDate(int retrieveDate) {
+        this.retrieveDate = retrieveDate;
     }
 }

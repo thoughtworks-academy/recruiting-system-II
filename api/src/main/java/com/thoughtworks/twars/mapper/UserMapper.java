@@ -6,24 +6,26 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
 
-    public int insertUser(User user);
+    int insertUser(User user);
 
-    public User getUserById(int id);
+    User getUserById(int id);
 
-    public User getUserByEmail(String email);
+    User getUserByEmail(String email);
 
-    public User getUserByMobilePhone(String mobilePhone);
+    User getUserByMobilePhone(String mobilePhone);
 
-    public User getUserByEmailAndPassWord(User user);
+    User getUserByEmailAndPassWord(User user);
 
-    public User getUserByMobilePhoneAndPassWord(User user);
+    User getUserByMobilePhoneAndPassWord(User user);
 
-    public UserDetail getUserDetailById(int userId);
+    UserDetail getUserDetailById(int userId);
 
-    public int updateUserDetail(UserDetail detail);
+    int updateUserDetail(UserDetail detail);
 
-    public int updatePassword(
+    int updatePassword(
             @Param("id") int id,
             @Param("oldPassword") String oldPassword,
             @Param("password") String password);
+
+    int resetPassword(User user);
 }

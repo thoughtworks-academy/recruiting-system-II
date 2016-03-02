@@ -5,10 +5,6 @@ import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.servlet.annotation.ServletSecurity;
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -146,5 +142,20 @@ public class UserMapperTest extends TestBase {
 
         assertThat(result, is(1));
         assertThat(resultUser.getPassword(), is("202cb962ac59075b964b07152d234b70"));
+    }
+
+    @Test
+    public void should_reset_password() throws Exception {
+
+        User user = new User();
+        user.setPassword("1bbd886460827015e5d605ed44252251");
+        user.setEmail("test@163.com");
+
+        int result = userMapper.resetPassword(user);
+
+        User resultUser = userMapper.getUserById(1);
+
+        assertThat(result, is(1));
+        assertThat(resultUser.getPassword(), is("d0521106f6ba7f9ac0a7370fb28d0ec6"));
     }
 }

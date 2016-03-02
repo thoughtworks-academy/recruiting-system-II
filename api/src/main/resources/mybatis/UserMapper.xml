@@ -15,11 +15,13 @@
         select * from users where mobilePhone = #{mobilePhone} LIMIT 1
     </select>
 
-    <select id="getUserByEmailAndPassWord" parameterType="com.thoughtworks.twars.bean.User" resultType="com.thoughtworks.twars.bean.User">
+    <select id="getUserByEmailAndPassWord" parameterType="com.thoughtworks.twars.bean.User"
+            resultType="com.thoughtworks.twars.bean.User">
         SELECT * FROM users WHERE email = #{email} AND password = MD5(#{password}) LIMIT 1
     </select>
 
-    <select id="getUserByMobilePhoneAndPassWord" parameterType="com.thoughtworks.twars.bean.User" resultType="com.thoughtworks.twars.bean.User">
+    <select id="getUserByMobilePhoneAndPassWord" parameterType="com.thoughtworks.twars.bean.User"
+            resultType="com.thoughtworks.twars.bean.User">
         SELECT * FROM users WHERE mobilePhone = #{email} AND password = MD5(#{password}) LIMIT 1
     </select>
 
@@ -28,7 +30,8 @@
         VALUES (#{email}, #{mobilePhone}, MD5(#{password}), UNIX_TIMESTAMP())
     </insert>
 
-    <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true" keyProperty="userId">
+    <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true"
+            keyProperty="userId">
        REPLACE INTO userDetail(userId,name,major,school,gender,degree,birthday) values(#{userId}, #{name},#{major}, #{school}, #{gender}, #{degree}, #{birthday})
     </insert>
 
@@ -38,5 +41,9 @@
 
     <update id="updatePassword">
         UPDATE users SET password=MD5(#{password}) WHERE id = #{id} AND password=MD5(#{oldPassword});
+    </update>
+
+    <update id="resetPassword" parameterType="com.thoughtworks.twars.bean.User">
+        UPDATE users SET password=MD5(#{password}) WHERE email= #{email};
     </update>
 </mapper>
