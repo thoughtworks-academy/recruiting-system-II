@@ -60,6 +60,7 @@ public class UserResource extends Resource {
         map.put("degree", detail.getDegree());
         map.put("name", detail.getName());
         map.put("gender", detail.getGender());
+        map.put("birthday", detail.getBirthday());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
