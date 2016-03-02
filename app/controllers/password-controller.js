@@ -28,7 +28,9 @@ PasswordController.prototype.retrieve = (req, res)=> {
     },
     (resq, done)=> {
 
-      if (resq.body.status == constant.httpCode.OK) {
+      var status = parseInt(resq.body.status);
+
+      if (status === constant.httpCode.OK) {
         var token = resq.body.token;
         var linkAddress = domainName + port + '/password-reset?token=' + token;
 
