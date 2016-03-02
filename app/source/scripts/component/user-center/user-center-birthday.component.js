@@ -6,7 +6,6 @@ var Calendar = require('react-input-calendar');
 var UserCenterActions = require('../../actions/user-center/user-center-actions');
 var UserCenterStore = require('../../store/user-center/user-center-store');
 var validate = require('validate.js');
-
 var constraint = require('../../../../mixin/user-detail-constraint');
 var getError = require('../../../../mixin/get-error');
 
@@ -46,6 +45,7 @@ var UserCenterBirthday = React.createClass({
           <div className='col-sm-4 col-md-4'>
 
           <Calendar
+              inputFieldClass={this.state.birthdayError === '' ? '' : 'calendar'}
               format="DD/MM/YYYY"
               onChange={this.changeBirthday}
               date={this.state.birthday}
