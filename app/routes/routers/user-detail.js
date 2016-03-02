@@ -10,13 +10,14 @@ var passwordConstraint = require('../../mixin/password-constraint');
 var md5 = require('js-md5');
 var constant = require('../../mixin/constant');
 var apiRequest = require('../../services/api-request');
+var timeTurner = require('../../mixin/time-turner');
 
 function checkInfo(info, constraint) {
   var result = validate(info, constraint);
 
-  if (result === undefined) {
+  if (result !== undefined) {
+    return ;
   }
-  return true;
 }
 
 router.get('/', function (req, res) {
@@ -40,6 +41,8 @@ router.get('/', function (req, res) {
     },
     (resp, done) => {
       result = _.assign(result, resp.body);
+      result.birthday = timeTurner.stampToTime(result.birthday);
+
       done(null, result);
     }
   ],(err) => {
@@ -62,11 +65,14 @@ router.get('/', function (req, res) {
 router.put('/update', function (req, res) {
   var userId = req.session.user.id;
   var userInfo = req.body.data;
+
+  userInfo.birthday = timeTurner.timeToStamp(userInfo.birthday);
+
   var result = _.assign({userId: userId}, userInfo);
 
-  if (checkInfo(result, userConstraint) && result.gender !== '') {
+  console.log(result);
+  if (!checkInfo(result, userConstraint) && result.gender !== '') {
     var url = 'users/' + userId + '/detail';
-
     apiRequest.put(url, result, function (err, resp) {
       if (resp === undefined) {
         res.send({
