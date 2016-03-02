@@ -4,7 +4,6 @@ var Reflux = require('reflux');
 var passwordRetrieveActions = require('../../actions/password-retrieve/password-retrieve-actions');
 var request = require('superagent');
 var constant = require('../../../../mixin/constant');
-var page = require('page');
 var errorHandler = require('../../../../tools/error-handler');
 
 
