@@ -8,13 +8,14 @@ var yamlConfig = require('node-yaml-config');
 var domainName = yamlConfig.load('./config/config.yml').domainName;
 var port = yamlConfig.load('./config/config.yml').port;
 var md5 = require('js-md5');
+
 function PasswordController() {
 
 }
 
 PasswordController.prototype.retrieve = (req, res)=> {
 
-  var retrieveUrl = 'password/retrieve';
+  var retrieveUrl = 'users/password/retrieve';
   var email = req.query.email;
   var query = {
     field: 'email',
@@ -27,7 +28,7 @@ PasswordController.prototype.retrieve = (req, res)=> {
     },
     (resq, done)=> {
 
-      if (resq.body.status === constant.httpCode.OK) {
+      if (resq.body.status == constant.httpCode.OK) {
         var token = resq.body.token;
         var linkAddress = domainName + port + '/password-reset?token=' + token;
 
@@ -53,10 +54,9 @@ PasswordController.prototype.retrieve = (req, res)=> {
 
 };
 
-
 PasswordController.prototype.reset = (req, res)=> {
 
-  var retrieveUrl = 'password/reset';
+  var retrieveUrl = 'user/password/reset';
   var newPassword = md5(req.body.newPassword);
 
   var token = req.body.token;
@@ -74,6 +74,5 @@ PasswordController.prototype.reset = (req, res)=> {
   });
 
 };
-
 
 module.exports = PasswordController;
