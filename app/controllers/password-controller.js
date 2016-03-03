@@ -58,7 +58,7 @@ PasswordController.prototype.retrieve = (req, res)=> {
 
 PasswordController.prototype.reset = (req, res)=> {
 
-  var retrieveUrl = 'user/password/reset';
+  var retrieveUrl = 'users/password/reset';
   var newPassword = md5(req.body.newPassword);
 
   var token = req.body.token;
@@ -71,7 +71,7 @@ PasswordController.prototype.reset = (req, res)=> {
     if (err) {
       res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     } else {
-      res.send({status: resq.body.status});
+      res.send({status: parseInt(resq.body.status)});
     }
   });
 

@@ -12,7 +12,8 @@ module.exports = {
         "start": "./source/scripts/start.js",
         "user-center": './source/scripts/user-center.js',
         "dashboard":'./source/scripts/dashboard.js',
-        "password-retrieve":'./source/scripts/password-retrieve.js'
+        "password-retrieve":'./source/scripts/password-retrieve.js',
+        "password-reset": './source/scripts/password-reset.js'
     },
     output: {
         path: __dirname + '/public/assets/',
