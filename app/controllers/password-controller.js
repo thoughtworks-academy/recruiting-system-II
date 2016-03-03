@@ -32,7 +32,7 @@ PasswordController.prototype.retrieve = (req, res)=> {
 
       if (status === constant.httpCode.OK) {
         var token = resq.body.token;
-        var linkAddress = domainName + port + '/password-reset?token=' + token;
+        var linkAddress = domainName + port + '/password-reset.html?token=' + token;
 
         emailServer.sendEmail(email, linkAddress, (err, status)=> {
           if (err) {
@@ -69,7 +69,7 @@ PasswordController.prototype.reset = (req, res)=> {
 
   apiRequest.post(retrieveUrl, query, function (err, resq) {
     if (err) {
-      res.send({status: constant.httpCode.INTERNAL_SERVER_ERROR});
+      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     } else {
       res.send({status: resq.body.status});
     }
