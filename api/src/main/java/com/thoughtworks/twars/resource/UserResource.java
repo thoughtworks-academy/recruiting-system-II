@@ -190,10 +190,8 @@ public class UserResource extends Resource {
             return Response.status(Response.Status.OK).entity(map).build();
         }
 
-        long timeInterval = Calendar.getInstance().getTimeInMillis()/1000 - passwordRetrieveDetail.getRetrieveDate();
-
-        System.out.println(passwordRetrieveDetail.getToken());
-        System.out.println(timeInterval);
+        long timeInterval = Calendar.getInstance().getTimeInMillis() / 1000
+                - passwordRetrieveDetail.getRetrieveDate();
 
         if (timeLimit > timeInterval) {
             User user = new User();
@@ -202,7 +200,7 @@ public class UserResource extends Resource {
 
             userMapper.resetPassword(user);
             map.put("status", "201");
-        }else{
+        } else {
             map.put("status", "412");
         }
 
