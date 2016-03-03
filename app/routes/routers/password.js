@@ -7,6 +7,6 @@ var PasswordController = require('../../controllers/password-controller');
 var passwordController = new PasswordController();
 
 router.get('/retrieve', passwordController.retrieve);
-router.get('/reset', passwordController.reset);
+router.post('/reset', passwordController.reset);
 
 module.exports = router;
