@@ -6,7 +6,7 @@ var request = require('superagent');
 var page = require('page');
 var errorHandler = require('../../../../tools/error-handler');
 var constant = require('../../../../mixin/constant');
-var promot = require('../../../../mixin/promot-message/chinese');
+var promot = require('../../../../mixin/lang-message/chinese');
 
 var ChangePasswordStore = Reflux.createStore({
   listenables: [ChangePasswordActions],

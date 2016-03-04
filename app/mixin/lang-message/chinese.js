@@ -1,6 +1,6 @@
 'use strict';
 
-var promot = {
+var lang = {
   ERROR: '旧密码错误',
   REGISTER_SUCCESS: '注册成功！5秒后跳转至答题页面。',
   REGISTER_FAILED: '注册失败,注册信息有误。',
@@ -8,5 +8,5 @@ var promot = {
   LOGIN_FAILED: '登录失败'
 };
 
-module.exports = promot;
+module.exports = lang;
 

@@ -46,7 +46,7 @@ if (env === 'development') {
       colors: true
     }
   }));
-} 
+}
 
 app.use(sessionCheck);
 
