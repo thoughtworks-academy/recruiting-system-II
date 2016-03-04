@@ -13,6 +13,7 @@ var ChangePassword = require('./component/user-center/change-password.component'
 var UserCenterSidebar = require('./component/user-center/user-center-sidebar.component');
 var UserCenterGender = require('./component/user-center/user-center-gender.component');
 var UserCenterBirthday = require('./component/user-center/user-center-birthday.component');
+var NewPassword = require('./component/reuse/new-password.component');
 
 ReactDom.render(
     <div>
@@ -25,7 +26,9 @@ ReactDom.render(
           <UserCenterGender/>
           <UserCenterBirthday/>
         </UserDetail>
-        <ChangePassword/>
+        <ChangePassword>
+          <NewPassword/>
+        </ChangePassword>
       </UserCenterApp>
     </div>,
     document.getElementById('user-center')
