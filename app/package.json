@@ -75,6 +75,7 @@
     "lightbox2": "^2.8.2",
     "lodash": "^3.10.1",
     "markdown": "^0.5.0",
+    "moment": "^2.11.2",
     "mongoose": "^4.3.3",
     "nodemailer": "^2.2.1",
     "page": "^1.6.4",
