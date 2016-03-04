@@ -47,8 +47,7 @@ router.get('/', function (req, res) {
 
     apiRequest.post('login', {email: account, password: password}, function (err, result) {
       if(!result){
-        res.status(httpStatus.INTERNAL_SERVER_ERROR);
-        res.send();
+        res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
         return;
       }
       if (result.body.id && result.headers) {
