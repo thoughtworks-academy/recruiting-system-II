@@ -7,7 +7,7 @@ import javax.ws.rs.core.HttpHeaders;
 import java.io.IOException;
 import java.util.Date;
 
-public class CanchContorlFilter implements ContainerResponseFilter {
+public class CacheContorlFilter implements ContainerResponseFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext,

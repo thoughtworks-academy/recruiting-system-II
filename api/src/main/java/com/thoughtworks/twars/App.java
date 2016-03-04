@@ -1,6 +1,6 @@
 package com.thoughtworks.twars;
 
-import com.thoughtworks.twars.filter.CanchContorlFilter;
+import com.thoughtworks.twars.filter.CacheContorlFilter;
 import com.thoughtworks.twars.filter.CloseSessionResponseFilter;
 import com.thoughtworks.twars.filter.OpenSessionRequestFilter;
 import com.thoughtworks.twars.mapper.*;
@@ -86,7 +86,7 @@ public class App extends ResourceConfig {
 
         register(OpenSessionRequestFilter.class);
         register(CloseSessionResponseFilter.class);
-        register(CanchContorlFilter.class);
+        register(CacheContorlFilter.class);
 
         packages("com.thoughtworks.twars.resource")
                 .register(new AbstractBinder() {
