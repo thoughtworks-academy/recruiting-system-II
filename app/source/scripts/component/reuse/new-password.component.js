@@ -19,7 +19,7 @@ var NewPassword = React.createClass({
       newPasswordError:'',
       confirmPassword: '',
       confirmPasswordError: ''
-    }
+    };
   },
 
   validate: function (evt) {
