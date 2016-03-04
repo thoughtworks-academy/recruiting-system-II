@@ -27,7 +27,7 @@ var passwordResetStore = Reflux.createStore({
               resetFailed : false,
               showMessage : true
             });
-          } else if(res.body.status === constant.httpCode.TIME_OUT){
+          } else if(res.body.status === constant.httpCode.PRECONDITION_FAILED){
             this.trigger({
               clickable: false,
               resetFailed : 'timeOut',

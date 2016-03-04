@@ -179,7 +179,7 @@ describe('PasswordController', function () {
       spyOn(apiRequest, 'post').and.callFake(function (url, body, callback) {
         callback(null, {
           body: {
-            status: constant.httpCode.TIME_OUT
+            status: constant.httpCode.PRECONDITION_FAILED
           }
         });
       });
@@ -192,7 +192,7 @@ describe('PasswordController', function () {
       }, {
         send: function (data) {
           expect(data).toEqual({
-            status: constant.httpCode.TIME_OUT
+            status: constant.httpCode.PRECONDITION_FAILED
           });
           done();
         }
