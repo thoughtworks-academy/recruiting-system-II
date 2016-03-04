@@ -11,13 +11,13 @@ var session = require('express-session');
 var sessionCheck = require('./middleware/session-check');
 var util = require('util');
 var mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
+var MongoStore = require('connect-mongo')(session);
 var constant = require('./mixin/constant');
 var yamlConfig = require('node-yaml-config');
 
 var config = yamlConfig.load(__dirname + '/config/config.yml');
 
-var env = ['production', 'test'].indexOf(process.env.NODE_ENV) < 0 ? 'development': process.env.NODE_ENV;
+var env = ['production', 'test', 'staging'].indexOf(process.env.NODE_ENV) < 0 ? 'development': process.env.NODE_ENV;
 
 mongoose.connect(config.database);
 
