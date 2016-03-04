@@ -12,14 +12,6 @@ var constant = require('../../mixin/constant');
 var apiRequest = require('../../services/api-request');
 var timeTurner = require('../../mixin/time-turner');
 
-function checkInfo(info, constraint) {
-  var result = validate(info, constraint);
-
-  if (result !== undefined) {
-    return ;
-  }
-}
-
 router.get('/', function (req, res) {
   var userId = req.session.user.id;
   var result;
@@ -70,7 +62,7 @@ router.put('/update', function (req, res) {
 
   var result = _.assign({userId: userId}, userInfo);
 
-  if (!checkInfo(result, userConstraint) && result.gender !== '') {
+  if (validate(result, userConstraint) === undefined && result.gender !== '') {
     var url = 'users/' + userId + '/detail';
     apiRequest.put(url, result, function (err, resp) {
       if (resp === undefined) {
@@ -101,7 +93,7 @@ router.put('/change-password', function (req, res) {
   var userId = req.session.user.id;
   var passwordInfo = req.body.data;
 
-  if (checkInfo(passwordInfo, passwordConstraint) && passwordInfo.password === passwordInfo.confirmPassword) {
+  if (validate(passwordInfo, passwordConstraint) === undefined && passwordInfo.password === passwordInfo.confirmPassword) {
     var partResult = {};
 
     partResult.oldPassword = md5(passwordInfo.oldPassword);
