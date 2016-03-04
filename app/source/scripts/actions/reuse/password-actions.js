@@ -1,3 +1,10 @@
-/**
- * Created by Jessica on 3/4/16.
- */
+'use strict';
+
+var Reflux = require('reflux');
+
+var PasswordActions = Reflux.createActions([
+  'changeNewPassword',
+  'getPasswordError'
+]);
+
+module.exports = PasswordActions;
