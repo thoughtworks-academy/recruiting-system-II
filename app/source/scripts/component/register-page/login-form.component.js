@@ -23,11 +23,11 @@ var LoginForm = React.createClass({
   getInitialState: function () {
     return {
       isLoginState: false,
-      phoneEmailError: '',
+      emailError: '',
       loginPasswordError: '',
       loginFailed: false,
       clickable: false,
-      phoneMail: '',
+      email: '',
       loginPassword: ''
     };
   },
@@ -46,7 +46,7 @@ var LoginForm = React.createClass({
     var result;
     var error;
     var stateObj = {};
-    if (name === 'phoneEmail') {
+    if (name === 'email') {
       valObj.email = value;
       valObj.mobilePhone = value;
       result = validate(valObj, constraint);
@@ -82,11 +82,11 @@ var LoginForm = React.createClass({
           <div className={'lose' + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
           <form action="">
             <div className="form-group">
-              <input className="form-control" type="text" placeholder="请输入邮箱或手机号" name="phoneEmail"
+              <input className="form-control" type="text" placeholder="请输入邮箱或手机号" name="email"
                      onBlur={this.validate}
-                     ref="phoneEmail" onChange={this.handleChange} value={this.state.phoneEmail}/>
+                     ref="email" onChange={this.handleChange} value={this.state.email}/>
               <div
-                  className={'lose' + (this.state.phoneEmailError === '' ? ' hide' : '')}>{this.state.phoneEmailError}
+                  className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}
               </div>
             </div>
             <div className="form-group">
