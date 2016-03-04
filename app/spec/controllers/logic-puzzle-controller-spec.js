@@ -210,7 +210,7 @@ describe('LogicPuzzleController', function () {
       });
     });
 
-    it('should return error', function(done) {
+    it('should return 500 when not find the data', function(done) {
 
       spyOn(logicPuzzle, 'findOne').and.callFake(function (id, done) {
         done('not find');
