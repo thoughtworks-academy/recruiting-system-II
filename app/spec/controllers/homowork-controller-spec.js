@@ -6,6 +6,8 @@ var homeworkQuizzes = require('../../models/homework-quizzes');
 var constant = require('../../mixin/constant');
 var request = require('superagent');
 
+var noop = function(){};
+
 describe('HomeworkController', function () {
   describe('getList', () => {
     var controller;
@@ -190,7 +192,7 @@ describe('HomeworkController', function () {
           });
           done();
         },
-        status: function(data){}
+        status: noop
       });
     });
 
@@ -206,7 +208,8 @@ describe('HomeworkController', function () {
           });
           done();
         },
-        status: function(data){}
+        status: noop
+
       });
     });
   });
@@ -462,7 +465,7 @@ describe('HomeworkController', function () {
           });
           done();
         },
-        status: function(){}
+        status: noop
       });
     });
 
@@ -500,7 +503,7 @@ describe('HomeworkController', function () {
           });
           done();
         },
-        status: function(){}
+        status: noop
       });
 
     });
@@ -541,7 +544,7 @@ describe('HomeworkController', function () {
           });
           done();
         },
-        status: function(){}
+        status: noop
       });
     });
   });
