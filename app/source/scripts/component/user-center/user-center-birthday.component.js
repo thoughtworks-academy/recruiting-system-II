@@ -8,6 +8,7 @@ var UserCenterStore = require('../../store/user-center/user-center-store');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/user-detail-constraint');
 var getError = require('../../../../mixin/get-error');
+var moment = require('moment');
 
 
 var UserCenterBirthday = React.createClass({
@@ -37,8 +38,6 @@ var UserCenterBirthday = React.createClass({
   },
 
   render: function () {
-    var data = new Date();
-    var today = (data.getMonth() + 1) + '/' + data.getDate() + '/' + data.getFullYear();
 
     return (
         <div>
@@ -49,7 +48,7 @@ var UserCenterBirthday = React.createClass({
               format="DD/MM/YYYY"
               onChange={this.changeBirthday}
               date={this.state.birthday}
-              maxDate={today}
+              maxDate={moment().format('L')}
               onBlur={this.validate}
           />
             </div>
