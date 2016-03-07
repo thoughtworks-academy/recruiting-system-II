@@ -14,16 +14,13 @@ var userHomeworkQuizzesSchema = new Schema({
     userAnswerRepo: String,
     uri: String,
     branch: String,
-    commitSHA: String,
-    resultPath: String,
     homeworkSubmitPostHistory: [{
       homeworkURL: String,
       status: Number,
       version: String,
       branch: String,
-      timestamp: Number,
-      jobName: String,
-      buildNumber: Number
+      timestamp: String,
+      resultPath: String
     }]
   }]
 });
