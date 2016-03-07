@@ -55,7 +55,7 @@ public class HomeworkQuizScoreSheetTest {
         when(homeworkPostHistory.getBranch()).thenReturn("dev");
         when(homeworkPostHistory.getVersion()).thenReturn("ghjkl");
         when(homeworkPostHistory.getStatus()).thenReturn(7);
-        when(homeworkPostHistory.getTimestamp()).thenReturn(5678);
+        when(homeworkPostHistory.getCommitTime()).thenReturn(5678);
         when(homeworkPostHistory.getHomeworkURL())
                 .thenReturn("github.com/jingjing");
         Gson gson = new GsonBuilder().create();
@@ -63,7 +63,7 @@ public class HomeworkQuizScoreSheetTest {
                 .findByHomeworkSubmitId(1);
         String homeworkPostHistoryStr = gson.toJson(homeworkPostHistoryList);
         assertThat(homeworkPostHistoryStr,
-                is("[{\"timeStamp\":5678,\"homeworkURL\":\"github.com/jingjing\"," +
+                is("[{\"commitTime\":5678,\"homeworkURL\":\"github.com/jingjing\"," +
                         "\"branch\":\"dev\",\"version\":\"ghjkl\",\"status\":7}]"));
     }
 
@@ -74,7 +74,8 @@ public class HomeworkQuizScoreSheetTest {
         homeworkSubmitPostHistory.put("version","jkl");
         homeworkSubmitPostHistory.put("branch","dev");
         homeworkSubmitPostHistory.put("status", 9);
-//        homeworkSubmitPostHistory.put("timestamp",56789);
+        homeworkSubmitPostHistory.put("commitTime", 56789);
+        homeworkSubmitPostHistory.put("startTime", 123456);
         Map homeworkSubmit = new HashMap<>();
         homeworkSubmit.put("homeworkQuizId", 8);
         homeworkSubmit.put("homeworkSubmitPostHistory",homeworkSubmitPostHistory);

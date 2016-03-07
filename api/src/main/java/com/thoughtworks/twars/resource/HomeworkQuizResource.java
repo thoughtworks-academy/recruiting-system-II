@@ -25,7 +25,7 @@ public class HomeworkQuizResource {
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-    @ApiResponse(code = 404, message = "not found")})
+            @ApiResponse(code = 404, message = "not found")})
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOneHomeworkQuiz(

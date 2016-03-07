@@ -31,7 +31,7 @@ public class UserResource extends Resource {
             @ApiResponse(code = 404, message = "get one user failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(
-            @ApiParam(name = "userId", value = "int",required = true)
+            @ApiParam(name = "userId", value = "int", required = true)
             @PathParam("param") int userId) {
 
         User user = userMapper.getUserById(userId);
@@ -54,7 +54,7 @@ public class UserResource extends Resource {
     @Path("/{param}/detail")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetail(
-            @ApiParam(name = "userId", value = "int",required = true)
+            @ApiParam(name = "userId", value = "int", required = true)
             @PathParam("param") int userId) {
 
         UserDetail detail = userMapper.getUserDetailById(userId);
@@ -78,10 +78,10 @@ public class UserResource extends Resource {
     @PUT
     @Path("/{param}/detail")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "update one userDetail successful")})
-            @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUserDetail(
-            @ApiParam(name = "userId", value = "int",required = true)
+            @ApiParam(name = "userId", value = "int", required = true)
             @PathParam("param") int userId,
             UserDetail userDetail
     ) {
@@ -95,7 +95,8 @@ public class UserResource extends Resource {
 
 
     @GET
-    @ApiImplicitParams(value = {@ApiImplicitParam(name = "field", value = "field name", required = true),
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "field", value = "field name", required = true),
             @ApiImplicitParam(name = "value", value = "field value", required = true)})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful")})
     @Produces(MediaType.APPLICATION_JSON)
@@ -156,7 +157,8 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/password/retrieve")
-    @ApiImplicitParams(value = {@ApiImplicitParam(name = "field", value = "field name", required = true),
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "field", value = "field name", required = true),
             @ApiImplicitParam(name = "value", value = "field value", required = true)})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful")})
     @Produces(MediaType.APPLICATION_JSON)

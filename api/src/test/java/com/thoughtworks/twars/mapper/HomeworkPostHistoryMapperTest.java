@@ -26,7 +26,8 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
         homeworkPostHistory.setHomeworkURL("github.com/anlihuer/1");
         homeworkPostHistory.setVersion("d8160f56ebbb5d40368048f271328eefa87cb");
         homeworkPostHistory.setBranch("master");
-        homeworkPostHistory.setTimestamp(1453287441);
+        homeworkPostHistory.setCommitTime(1453287441);
+        homeworkPostHistory.setStartTime(12345634);
 
         homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
 
@@ -43,7 +44,7 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
         assertThat(homeworkPostHistoryList.get(0).getHomeworkURL(), is("github.com/purple/1"));
         assertThat(homeworkPostHistoryList.get(0).getId(), is(1));
         assertThat(homeworkPostHistoryList.get(0).getStatus(), is(3));
-        assertThat(homeworkPostHistoryList.get(0).getTimestamp(), is(1453287441));
+        assertThat(homeworkPostHistoryList.get(0).getCommitTime(), is(1453287441));
     }
 
 }

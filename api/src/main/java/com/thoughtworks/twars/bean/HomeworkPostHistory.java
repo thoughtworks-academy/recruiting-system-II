@@ -3,11 +3,12 @@ package com.thoughtworks.twars.bean;
 public class HomeworkPostHistory {
     private int id;
     private int status;
-    private int timestamp;
     private String homeworkURL;
     private int homeworkSubmitId;
     private String version;
     private String branch;
+    private int startTime;
+    private int commitTime;
 
     public int getId() {
         return id;
@@ -15,6 +16,14 @@ public class HomeworkPostHistory {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getHomeworkURL() {
@@ -49,19 +58,19 @@ public class HomeworkPostHistory {
         this.branch = branch;
     }
 
-    public int getStatus() {
-        return status;
+    public int getStartTime() {
+        return startTime;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
     }
 
-    public int getTimestamp() {
-        return timestamp;
+    public int getCommitTime() {
+        return commitTime;
     }
 
-    public void setTimestamp(int timestamp) {
-        this.timestamp = timestamp;
+    public void setCommitTime(int commitTime) {
+        this.commitTime = commitTime;
     }
 }
