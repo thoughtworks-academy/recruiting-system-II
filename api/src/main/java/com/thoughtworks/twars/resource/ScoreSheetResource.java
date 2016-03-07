@@ -99,7 +99,6 @@ public class ScoreSheetResource extends Resource {
 
         } catch (Exception e) {
             if (session != null) {
-                System.out.println("事务回滚");
                 session.rollback();
             }
         }

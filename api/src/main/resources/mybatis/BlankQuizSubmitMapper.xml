@@ -11,12 +11,12 @@
     </resultMap>
 
     <insert id="insertBlankQuizSubmit" parameterType="com.thoughtworks.twars.bean.BlankQuizSubmit" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO blankQuizSubmit(scoreSheetId,blankQuizId)
-        VALUES (#{scoreSheetId}, #{blankQuizId})
+        INSERT INTO blankQuizSubmit(scoreSheetId,blankQuizId,startTime,endTime)
+        VALUES (#{scoreSheetId}, #{blankQuizId}, #{startTime}, #{endTime});
     </insert>
 
     <select id="findByScoreSheetId" resultMap="blankQuizSubmitListMap">
-        SELECT * FROM blankQuizSubmit WHERE scoreSheetId = #{scoreSheetId}
+        SELECT * FROM blankQuizSubmit WHERE scoreSheetId = #{scoreSheetId};
     </select>
 
 </mapper>

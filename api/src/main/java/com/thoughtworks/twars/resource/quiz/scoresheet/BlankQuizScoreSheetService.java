@@ -62,15 +62,22 @@ public class BlankQuizScoreSheetService implements IScoreSheetService {
     @Override
     public void insertQuizScoreSheet(Map data, int scoreSheetId) {
         int blankQuizId;
+        int startTime;
+        int endTime;
+
 
         List<Map> blankQuizSubmits = (List) data.get("blankQuizSubmits");
 
         for (int j = 0; j < blankQuizSubmits.size(); j++) {
             blankQuizId = (int) blankQuizSubmits.get(j).get("blankQuizId");
+            startTime = (int) blankQuizSubmits.get(j).get("startTime");
+            endTime = (int) blankQuizSubmits.get(j).get("endTime");
 
             BlankQuizSubmit blankQuizSubmitObj = new BlankQuizSubmit();
             blankQuizSubmitObj.setBlankQuizId(blankQuizId);
             blankQuizSubmitObj.setScoreSheetId(scoreSheetId);
+            blankQuizSubmitObj.setStartTime(startTime);
+            blankQuizSubmitObj.setEndTime(endTime);
 
             blankQuizSubmitMapper.insertBlankQuizSubmit(blankQuizSubmitObj);
 

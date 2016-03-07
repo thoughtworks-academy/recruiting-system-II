@@ -166,9 +166,12 @@ baseUri: http://api.bronzesword.com/
           {
             "examerId": 1,
             "paperId": 2,
+
             "blankQuizSubmits": [
               {
                 "blankQuizId": 1,
+                "startTime": 140345676,
+                "endTime": 142345632,
                 "itemPosts": [
                   {
                     "answer": "10",
@@ -186,6 +189,8 @@ baseUri: http://api.bronzesword.com/
               []:
                 properties:
                   blankQuizId: integer
+                  startTime: integer
+                  endTime: integer
                   itemPosts:
                     properties:
                       []:
@@ -199,6 +204,8 @@ baseUri: http://api.bronzesword.com/
                   homeworkQuizId: integer
                   homeworkSubmitPostHistory:
                     properties:
+                      startTime: integer
+                      commitTime: integer
                       homeworkURL: string
                       version: string
                       branch: string
