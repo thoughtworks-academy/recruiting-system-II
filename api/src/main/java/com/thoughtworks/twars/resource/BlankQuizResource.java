@@ -30,8 +30,8 @@ public class BlankQuizResource {
     private QuizItemMapper quizItemMapper;
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "all blankQuizzes not found")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get all blankQuizzes successful"),
+            @ApiResponse(code = 404, message = "get all blankQuizzes failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllBlankQuizzes() {
 
@@ -57,7 +57,7 @@ public class BlankQuizResource {
 
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "successful")})
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "insert blankQuiz successful")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertBlankQuiz(
             @ApiParam(name = "blankQuiz", value = "BlankQuiz example",required = true)
