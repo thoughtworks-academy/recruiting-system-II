@@ -6,7 +6,7 @@ var request = require('superagent');
 var page = require('page');
 var errorHandler = require('../../../../tools/error-handler');
 var constant = require('../../../../mixin/constant');
-var promot = require('../../../../mixin/lang-message/chinese');
+var lang = require('../../../../mixin/lang-message/chinese');
 
 var ChangePasswordStore = Reflux.createStore({
   listenables: [ChangePasswordActions],
@@ -34,7 +34,7 @@ var ChangePasswordStore = Reflux.createStore({
           } else if (res.body.status === constant.httpCode.BAD_REQUEST) {
             this.trigger({
               isRespond: false,
-              oldPasswordError: promot.ERROR
+              oldPasswordError: lang.ERROR
             });
           }
         });
