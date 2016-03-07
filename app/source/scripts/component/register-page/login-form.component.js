@@ -68,9 +68,9 @@ var LoginForm = React.createClass({
       clickable: true
     });
 
-    var phoneEmail = ReactDOM.findDOMNode(this.refs.phoneEmail).value;
+    var email = ReactDOM.findDOMNode(this.refs.email).value;
     var loginPassword = ReactDOM.findDOMNode(this.refs.loginPassword).value;
-    LoginActions.login(phoneEmail, loginPassword);
+    LoginActions.login(email, loginPassword);
   },
 
   render: function () {

@@ -47,8 +47,7 @@ var submissionIntroductionStore = Reflux.createStore({
         .use(errorHandler)
         .end((err, res)=> {
           if (res.body.message === 'Not Found') {
-            alert('repo or user not found! PLZ check ur url!');
-            this.trigger({branches: [],showIcon:false});
+            this.trigger({githubUrlError: '仓库不存在',branches: [],showIcon:false});
           } else {
             var branches = res.body.data.map((branch)=>{
               return branch.name;
