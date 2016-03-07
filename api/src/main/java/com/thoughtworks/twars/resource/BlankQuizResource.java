@@ -57,8 +57,11 @@ public class BlankQuizResource {
 
 
     @POST
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "successful")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertBlankQuiz(BlankQuiz blankQuiz) {
+    public Response insertBlankQuiz(
+            @ApiParam(value = "BlankQuiz example",allowableValues = "BlankQuiz",required = true)
+            BlankQuiz blankQuiz) {
 
         blankQuizMapper.insertBlankQuiz(blankQuiz);
 
@@ -106,8 +109,12 @@ public class BlankQuizResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
+            @ApiResponse(code = 404, message = "not found")})
     @Path("/{param}/items")
-    public Response getItems(@PathParam("param") int blankQuizId) {
+    public Response getItems(
+            @ApiParam(value = "blankQuizId",allowableValues = "int",required = true)
+            @PathParam("param") int blankQuizId) {
 
         BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizId);
 
