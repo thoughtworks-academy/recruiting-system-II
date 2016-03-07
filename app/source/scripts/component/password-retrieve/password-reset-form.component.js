@@ -6,6 +6,7 @@ var validate = require('validate.js');
 var passwordResetActions = require('../../actions/password-retrieve/password-reset-actions');
 var passwordResetStore = require('../../store/password-retrieve/password-reset-store');
 var Reflux = require('reflux');
+var PasswordStore = require('../../store/reuse/password-store');
 var constraint = require('../../../../mixin/password-retrieve-constraint');
 var page = require('page');
 var constant = require('../../../../mixin/constant');
@@ -18,7 +19,7 @@ function getError(validateInfo, field) {
 }
 
 var passwordResetForm = React.createClass({
-  mixins: [Reflux.connect(passwordResetStore)],
+  mixins: [Reflux.connect(passwordResetStore), Reflux.connect(PasswordStore)],
 
   getInitialState: function () {
     return {
@@ -38,44 +39,14 @@ var passwordResetForm = React.createClass({
     passwordResetActions.changeValue(name, value);
   },
 
-  validate: function (event) {
-    var target = event.target;
-    var value = target.value;
-    var name = target.name;
-    var valObj = {};
-    var result;
-    var error;
-    var stateObj = {};
-    if(name === 'confirmPassword'){
-      valObj.newPassword = this.state.newPassword;
-    }
-    valObj[name] = value;
-    result = validate(valObj, constraint);
-    error = getError(result, name);
-    stateObj[name + 'Error'] = error;
-    this.setState(stateObj);
-  },
-
   reset: function () {
-    if (!this.state.newPassword || !this.state.confirmPassword || this.state.newPasswordError || this.state.confirmPasswordError) {
-
-      var valObj = {};
-      var stateObj = {};
-
-      valObj.newPassword = ReactDOM.findDOMNode(this.refs.newPassword).value;
-      valObj.confirmPassword = ReactDOM.findDOMNode(this.refs.confirmPassword).value;
-      stateObj.newPasswordError = getError(validate(valObj, constraint), 'newPassword');
-      stateObj.confirmPasswordError = getError(validate(valObj, constraint), 'confirmPassword');
-
-      this.setState(stateObj);
-
+    if (this.state.newPasswordError !== '' || this.state.confirmPasswordError !== '') {
+      return ;
     } else {
-
       this.setState({
         clickable: true
       });
-
-      var newPassword = ReactDOM.findDOMNode(this.refs.newPassword).value;
+      var newPassword = this.state.newPassword;
       var currentUrl = window.location.href;
       var token = currentUrl.split('=')[1];
 
