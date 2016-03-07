@@ -5,6 +5,7 @@ import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
 import com.thoughtworks.twars.mapper.PasswordRetrieveDetailMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
+import io.swagger.annotations.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Path("/users")
+@Api
 public class UserResource extends Resource {
 
     @Inject
@@ -25,8 +27,12 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/{param}")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful"),
+            @ApiResponse(code = 404, message = "get one user failed")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("param") int userId) {
+    public Response getUser(
+            @ApiParam(name = "userId", value = "int",required = true)
+            @PathParam("param") int userId) {
 
         User user = userMapper.getUserById(userId);
 
@@ -43,9 +49,13 @@ public class UserResource extends Resource {
     }
 
     @GET
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one userDetail successful"),
+            @ApiResponse(code = 404, message = "get one userDetail user failed")})
     @Path("/{param}/detail")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserDetail(@PathParam("param") int userId) {
+    public Response getUserDetail(
+            @ApiParam(name = "userId", value = "int",required = true)
+            @PathParam("param") int userId) {
 
         UserDetail detail = userMapper.getUserDetailById(userId);
 
@@ -67,9 +77,11 @@ public class UserResource extends Resource {
 
     @PUT
     @Path("/{param}/detail")
-    @Produces(MediaType.APPLICATION_JSON)
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "update one userDetail successful")})
+            @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUserDetail(
+            @ApiParam(name = "userId", value = "int",required = true)
             @PathParam("param") int userId,
             UserDetail userDetail
     ) {
@@ -83,6 +95,9 @@ public class UserResource extends Resource {
 
 
     @GET
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "field", value = "field name", required = true),
+            @ApiImplicitParam(name = "value", value = "field value", required = true)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserByField(
             @QueryParam("field") String field,
@@ -112,6 +127,11 @@ public class UserResource extends Resource {
 
     @PUT
     @Path("/{param}/password")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "userId", value = "int", required = true),
+            @ApiImplicitParam(name = "userPasswordMap",
+                    value = "include all info when update user password", required = true)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "update user password successful"),
+            @ApiResponse(code = 400, message = "update user password failed")})
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUserPassword(
@@ -136,6 +156,9 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/password/retrieve")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "field", value = "field name", required = true),
+            @ApiImplicitParam(name = "value", value = "field value", required = true)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response findUserByField(
             @QueryParam("field") String field,
@@ -173,9 +196,13 @@ public class UserResource extends Resource {
 
 
     @POST
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "reset password successful")})
     @Path("/password/reset")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response resetPassword(Map data) {
+    public Response resetPassword(
+            @ApiParam(name = "data", value = "include all info when reset password",
+                    required = true)
+            Map data) {
         String newPasword = (String) data.get("newPassword");
         String token = (String) data.get("token");
         int timeLimit = 86400;
