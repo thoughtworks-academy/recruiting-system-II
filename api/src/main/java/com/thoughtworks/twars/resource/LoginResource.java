@@ -4,6 +4,7 @@ import com.thoughtworks.twars.bean.LoginDetail;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.mapper.LoginDetailMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
+import io.swagger.annotations.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -19,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Path("/login")
+@Api
 public class LoginResource extends Resource {
 
     @Inject
@@ -28,9 +30,15 @@ public class LoginResource extends Resource {
     private LoginDetailMapper loginDetailMapper;
 
     @POST
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "successful",
+            responseHeaders = @ResponseHeader(name = "token", description = "login token",
+                    response = String.class)),
+            @ApiResponse(code = 401, message = "login failed")})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(User user) {
+    public Response createUser(
+            @ApiParam(name = "user",value = "User example", required = true)
+            User user) {
 
         Pattern mobilePhoneMatches = Pattern
                 .compile("^1([3|4|5|8])[0-9]\\d{8}$");

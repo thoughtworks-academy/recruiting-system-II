@@ -31,7 +31,7 @@ public class BlankQuizResource {
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-    @ApiResponse(code = 404, message = "not found")})
+    @ApiResponse(code = 404, message = "all blankQuizzes not found")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllBlankQuizzes() {
 
@@ -75,7 +75,7 @@ public class BlankQuizResource {
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "not found")})
+            @ApiResponse(code = 404, message = "blankQuiz not found")})
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{param}")
     public Response getBlankQuizzesBySectionId(
@@ -110,7 +110,7 @@ public class BlankQuizResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "not found")})
+            @ApiResponse(code = 404, message = "blankQuizItems not found")})
     @Path("/{param}/items")
     public Response getItems(
             @ApiParam(value = "blankQuizId",allowableValues = "int",required = true)
