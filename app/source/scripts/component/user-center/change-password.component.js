@@ -65,7 +65,7 @@ var ChangePassword = React.createClass({
 
     var passwordData = {
       oldPassword: this.state.oldPassword,
-      password: this.state.newPassword,
+      newPassword: this.state.newPassword,
       confirmPassword: this.state.confirmPassword
     };
 
@@ -77,7 +77,6 @@ var ChangePassword = React.createClass({
 
   render: function () {
     var classString = (this.state.currentState === 'password' ? '' : ' hide');
-
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className="content">
