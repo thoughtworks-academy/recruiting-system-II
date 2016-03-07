@@ -60,7 +60,7 @@ public class BlankQuizResource {
     @ApiResponses(value = {@ApiResponse(code = 201, message = "successful")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertBlankQuiz(
-            @ApiParam(value = "BlankQuiz example",allowableValues = "BlankQuiz",required = true)
+            @ApiParam(name = "blankQuiz", value = "BlankQuiz example",required = true)
             BlankQuiz blankQuiz) {
 
         blankQuizMapper.insertBlankQuiz(blankQuiz);
