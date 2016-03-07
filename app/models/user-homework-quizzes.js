@@ -19,7 +19,7 @@ var userHomeworkQuizzesSchema = new Schema({
       status: Number,
       version: String,
       branch: String,
-      timestamp: String,
+      timestamp: Number,
       resultPath: String
     }]
   }]
