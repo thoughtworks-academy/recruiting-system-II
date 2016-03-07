@@ -2,6 +2,10 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.mapper.UserMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,15 +18,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/register")
+@Api
+
 public class RegisterResource extends Resource {
 
     @Inject
     private UserMapper userMapper;
 
     @POST
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "register successfully")})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(User user) {
+    public Response createUser(
+            @ApiParam(name = "user", value = "User example",required = true)
+            User user) {
         userMapper.insertUser(user);
         session.commit();
 
