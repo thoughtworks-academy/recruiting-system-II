@@ -597,6 +597,7 @@ db.once('open', function () {
   UserHomeworkQuizzes.remove(function () {
     UserHomeworkQuizzes.create([{
       userId: 1,
+      paperId: 1,
       quizzes: [
         {id: 1, status: 2,uri: 'homeworkQuizzes/1'},
         {id: 2, status: 1,uri: 'homeworkQuizzes/2'},
@@ -611,6 +612,7 @@ db.once('open', function () {
       ]
     }, {
       userId: 2,
+      paperId: 1,
       quizzes: [
         {id: 1, status: 4, userAnswerRepo: 'www.github.com',uri: 'homeworkQuizzes/1'},
         {id: 2, status: 3, userAnswerRepo: 'www.repo.com',uri: 'homeworkQuizzes/2'},
@@ -625,6 +627,7 @@ db.once('open', function () {
       ]
     }, {
       userId: 3,
+      paperId: 1,
       quizzes: [
         {id: 1, status: 4,uri: 'homeworkQuizzes/1'},
         {id: 2, status: 3,uri: 'homeworkQuizzes/2'},
@@ -639,6 +642,7 @@ db.once('open', function () {
       ]
     }, {
       userId: 4,
+      paperId: 1,
       quizzes: [
         {id: 1, status: 1,uri: 'homeworkQuizzes/1'},
         {id: 2, status: 1,uri: 'homeworkQuizzes/2'},
@@ -653,6 +657,7 @@ db.once('open', function () {
       ]
     }, {
       userId: 5,
+      paperId: 1,
       quizzes: [
         {id: 1, status: 1,uri: 'homeworkQuizzes/1'},
         {id: 2, status: 1,uri: 'homeworkQuizzes/2'},
