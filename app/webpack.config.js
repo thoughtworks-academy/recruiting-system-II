@@ -5,6 +5,7 @@ var webpack = require("webpack");
 
 module.exports = {
     entry: {
+        "404": "./source/scripts/404.js",
         "index": "./source/scripts/index.js",
         "logic-puzzle": "./source/scripts/logic-puzzle",
         "homework": "./source/scripts/homework.js",

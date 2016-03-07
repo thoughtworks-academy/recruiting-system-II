@@ -9,6 +9,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var sessionCheck = require('./middleware/session-check');
+var errRequestHandler = require('./middleware/errorRequestHandler');
 var util = require('util');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
@@ -53,6 +54,8 @@ app.use(sessionCheck);
 app.use(express.static('public'));
 
 route.setRoutes(app);
+
+app.all('*', errRequestHandler);
 
 app.listen(config.port,function () {
   console.log('App listening at http://localhost:' + config.port);
