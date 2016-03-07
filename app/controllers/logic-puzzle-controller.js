@@ -112,6 +112,8 @@ LogicPuzzleController.setScoreSheet = (data, done) => {
     examerId: data.userId,
     paperId: data.paperId,
     blankQuizSubmits: [{
+      startTime: data.startTime,
+      endTime: data.endTime,
       blankQuizId: data.blankQuizId,
       itemPosts: itemPosts
     }]
