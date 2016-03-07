@@ -30,7 +30,7 @@ var logicPuzzleSchema = new Schema({
   blankQuizId: Number,
   paperId: Number,
   isCommited: Boolean,
-  endTime: String,
+  endTime: Number,
   isAgreed: Boolean
 });
 
@@ -51,7 +51,7 @@ logicPuzzleSchema.statics.isPaperCommited = function (userId, callback) {
       isPaperCommited = logicPuzzle.isCommited || parseInt(TOTAL_TIME - usedTime) <= 0 ? true : false;
     }
 
-    callback(err,isPaperCommited);
+    callback(err, isPaperCommited);
   });
 };
 
