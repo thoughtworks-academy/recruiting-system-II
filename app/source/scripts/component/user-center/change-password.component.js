@@ -9,10 +9,10 @@ var ChangePasswordStore = require('../../store/user-center/change-password-store
 var UserCenterStore = require('../../store/user-center/user-center-store');
 var PasswordStore = require('../../store/reuse/password-store');
 var Reflux = require('reflux');
-var _  = require('lodash');
+var _ = require('lodash');
 
 var ChangePassword = React.createClass({
-  mixins: [Reflux.connect(ChangePasswordStore),Reflux.connect(UserCenterStore),Reflux.connect(PasswordStore)],
+  mixins: [Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore), Reflux.connect(PasswordStore)],
 
   getInitialState: function () {
     return {
@@ -54,7 +54,7 @@ var ChangePassword = React.createClass({
     var oldPassword = {oldPassword: this.state.oldPassword};
     var result = validate(oldPassword, constraint);
 
-    if(result === undefined && this.state.newPasswordError === '' && this.state.confirmPasswordError === '') {
+    if (result === undefined && this.state.newPasswordError === '' && this.state.confirmPasswordError === '') {
       return true;
     }
     return false;
@@ -81,7 +81,7 @@ var ChangePassword = React.createClass({
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className="content">
-            <form className="form-horizontal form-top-height">
+            <form className="form-horizontal form-top-height col-sm-8 col-md-8 col-sm-offset-3 col-md-offset-3">
               <div className={this.state.success ? '' : 'hide'}>
                 <div className={"success-prompt alert alert-success"}>
                   <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
@@ -90,18 +90,21 @@ var ChangePassword = React.createClass({
               </div>
 
               <div id="change-password">
-                <label htmlFor="oldPassword" className="col-sm-4 col-md-4 control-label">旧密码</label>
-                <div className={'form-group has-' + (this.state.oldPasswordError === '' ? '' : 'error')}>
-                  <div className="col-sm-4 col-md-4">
+                <div className="oldPassword col-sm-12 col-md-12">
+                  <label htmlFor="oldPassword" className="col-sm-3 col-md-3 control-label">旧密码</label>
+                  <div
+                      className={'form-group col-sm-6 col-md-6 has-' + (this.state.oldPasswordError === '' ? '' : 'error')}>
                     <input type="password" className="form-control" aria-describedby="helpBlock2"
-                           name="oldPassword" id="oldPassword" onChange={this.handleChange}
-                           placeholder="请输入旧密码" onBlur={this.validate} value={this.state.oldPassword}/>
+                           name="oldPassword" id="oldPassword"
+                           placeholder="请输入旧密码" onBlur={this.validate}
+                           onChange={this.handleChange} value={this.state.oldPassword}/>
                   </div>
-                  <div className={'error alert alert-danger' + (this.state.oldPasswordError === '' ? ' hide' : '')}
-                       role="alert">
-                    <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
+                  <span
+                      className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.oldPasswordError === '' ? ' hide' : '')}
+                      aria-hidden="true" role="alert">
+                    <i className="glyphicon glyphicon-exclamation-sign"/>
                     {this.state.oldPasswordError}
-                  </div>
+                  </span>
                 </div>
 
                 {this.props.children}

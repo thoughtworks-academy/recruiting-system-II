@@ -11,12 +11,12 @@ var ChangePasswordStore = require('../../store/user-center/change-password-store
 var UserCenterStore = require('../../store/user-center/user-center-store');
 
 var NewPassword = React.createClass({
-  mixins: [Reflux.connect(PasswordStore),Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore)],
+  mixins: [Reflux.connect(PasswordStore), Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore)],
 
   getInitialState: function () {
     return {
       newPassword: '',
-      newPasswordError:'',
+      newPasswordError: '',
       confirmPassword: '',
       confirmPasswordError: ''
     };
@@ -51,36 +51,38 @@ var NewPassword = React.createClass({
 
   render: function () {
     return (
-        <div>
-          <label htmlFor="newPassword" className="col-sm-4 col-md-4 control-label">新密码</label>
-          <div className={'form-group has-' + (this.state.newPasswordError === '' ? '' : 'error')}>
-            <div className="col-sm-4 col-md-4">
+        <div className="new-password ">
+          <div className="col-sm-12 col-md-12">
+            <label htmlFor="newPassword" className="col-sm-3 col-md-3 control-label">新密码</label>
+            <div className={'form-group col-sm-6 col-md-6 has-' + (this.state.newPasswordError === '' ? '' : 'error')}>
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="newPassword" id="newPassword"
                      placeholder="请输入新密码" onBlur={this.validate}
                      onChange={this.handleChange} value={this.state.newPassword}/>
             </div>
-            <div className={'error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
-                 role="alert">
-              <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
+            <span
+                className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
+                aria-hidden="true" role="alert">
+                  <i className="glyphicon glyphicon-exclamation-sign"/>
               {this.state.newPasswordError}
-            </div>
+            </span>
           </div>
-
-          <label htmlFor="confirmPassword" className="col-sm-4 col-md-4 control-label">确认密码</label>
-          <div className={'form-group has-' + (this.state.confirmPasswordError === '' ? '' : 'error')}>
-            <div className="col-sm-4 col-md-4">
+          <div className="col-sm-12 col-md-12">
+            <label htmlFor="confirmPassword" className="col-sm-3 col-md-3 control-label">确认密码</label>
+            <div className={'form-group col-sm-6 col-md-6 has-' + (this.state.confirmPasswordError === '' ? '' : 'error')}>
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="confirmPassword" id="confirmPassword"
                      placeholder="请再次确认新密码" onBlur={this.validate}
                      onChange={this.handleChange} value={this.state.confirmPassword}/>
             </div>
-            <div className={'error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
-                 role="alert">
-              <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
-              {this.state.confirmPasswordError}
-            </div>
+          <span
+              className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
+              aria-hidden="true" role="alert">
+            <i className="glyphicon glyphicon-exclamation-sign"/>
+            {this.state.confirmPasswordError}
+          </span>
           </div>
+
         </div>
     );
   }

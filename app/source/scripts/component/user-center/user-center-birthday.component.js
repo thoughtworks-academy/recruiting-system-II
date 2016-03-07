@@ -51,7 +51,7 @@ var UserCenterBirthday = React.createClass({
               maxDate={moment().format('L')}
               onBlur={this.validate}
           />
-            </div>
+          </div>
           <div className={'error alert alert-danger' + (this.state.birthdayError === '' ? ' hide' : '')}
                role='alert'>
             <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>

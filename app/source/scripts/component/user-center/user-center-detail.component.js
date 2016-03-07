@@ -184,10 +184,10 @@ var UserDetail = React.createClass({
 
                 <label htmlFor='inputDegree' className='col-sm-4 col-md-4 control-label'>学历学位</label>
                 <div className='form-group'>
-                  <div className='col-sm-4 col-md-4 degree' onBlur={this.validate}>
+                  <div className='col-sm-4 col-md-4' onBlur={this.validate}>
                     <select ref='degree' placeholder='学历学位' name='degree' value={this.state.degree}
                             onChange={this.handleChange}
-                            className={'form-control size' + (this.state.degreeError === '' ? '' : ' select')}>
+                            className={'form-control' + (this.state.degreeError === '' ? '' : ' select')}>
                       <option value=''>请选择</option>
                       <option value='专科'>专科及以下</option>
                       <option value='本科'>本科</option>

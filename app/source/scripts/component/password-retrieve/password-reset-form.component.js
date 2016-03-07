@@ -100,18 +100,7 @@ var passwordResetForm = React.createClass({
             </div>
             <form action="">
               <div className="form-group">
-                <input className="form-control" type="password" placeholder="请输入新密码" name="newPassword"
-                       onBlur={this.validate}
-                       ref="newPassword" autoComplete="off" onChange={this.handleChange} value={this.state.newPassword}/>
-                <div
-                    className={'lose' + (this.state.newPasswordError === '' ? ' hide' : '')}>{this.state.newPasswordError}
-                </div>
-                <input id="confirmPassword" className="form-control" type="password" placeholder="请确认新密码" name="confirmPassword"
-                       onBlur={this.validate}
-                       ref="confirmPassword" autoComplete="off" onChange={this.handleChange} value={this.state.confirmPassword}/>
-                <div
-                    className={'lose' + (this.state.confirmPasswordError === '' ? ' hide' : '')}>{this.state.confirmPasswordError}
-                </div>
+                {this.props.children}
               </div>
               <button type="button" id="reset-btn" className="btn btn-lg btn-block btn-primary col-md-offset-4"
                       onClick={this.reset}
