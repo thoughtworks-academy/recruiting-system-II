@@ -5,6 +5,10 @@ import com.thoughtworks.twars.mapper.PaperMapper;
 import com.thoughtworks.twars.mapper.SectionMapper;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
 
 
 @Path("/papers")
+@Api
 public class PaperResource extends Resource {
 
     @Inject
@@ -32,6 +37,8 @@ public class PaperResource extends Resource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
+            @ApiResponse(code = 404, message = "get all papers failed")})
     public Response getAllPapers() {
 
         List<Paper> papers = paperMapper.findAll();
@@ -53,8 +60,12 @@ public class PaperResource extends Resource {
 
 
     @POST
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "insert paper successfully"),
+            @ApiResponse(code = 415, message = "insert paper failed")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertPaper(Map data) {
+    public Response insertPaper(
+            @ApiParam(name = "data", value = "include all info when insert paper", required = true)
+            Map data) {
         int makerId = (int) data.get("makerId");
         List<Map> sections = (List<Map>) data.get("sections");
 
@@ -99,9 +110,13 @@ public class PaperResource extends Resource {
 
 
     @GET
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one paper successfully"),
+            @ApiResponse(code = 404, message = "get one paper failed")})
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOnePaper(@PathParam("param") int id) {
+    public Response getOnePaper(
+            @ApiParam(name = "id", value = "paperId", required = true)
+            @PathParam("param") int id) {
         Paper paper = paperMapper.getOnePaper(id);
         if (paper == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -113,6 +128,8 @@ public class PaperResource extends Resource {
 
 
     @GET
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get enrollment paper successfully"),
+            @ApiResponse(code = 404, message = "get enrollment paper failed")})
     @Path("/enrollment")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEnrollmentPaper() {

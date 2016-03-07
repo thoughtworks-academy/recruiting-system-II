@@ -31,7 +31,7 @@ public class BlankQuizResource {
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-    @ApiResponse(code = 404, message = "all blankQuizzes not found")})
+            @ApiResponse(code = 404, message = "all blankQuizzes not found")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllBlankQuizzes() {
 
