@@ -13,6 +13,7 @@ var ChangePasswordStore = Reflux.createStore({
 
   onChangePassword: function (passwordInfo) {
     this.trigger({isRespond: true});
+
     request.put('/user-detail/change-password')
         .set('Content-Type', 'application/json')
         .send({
@@ -33,7 +34,7 @@ var ChangePasswordStore = Reflux.createStore({
             });
           } else if (res.body.status === constant.httpCode.BAD_REQUEST) {
             this.trigger({
-              isRespond: false,
+              isRespond: true,
               oldPasswordError: lang.ERROR
             });
           }
