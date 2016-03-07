@@ -7,6 +7,7 @@ var _ = require('lodash');
 var validate = require('validate.js');
 var userConstraint = require('../../mixin/user-detail-constraint');
 var passwordConstraint = require('../../mixin/password-constraint');
+var newPasswordConstraint = require('../../mixin/confirm-password-constraint');
 var md5 = require('js-md5');
 var constant = require('../../mixin/constant');
 var apiRequest = require('../../services/api-request');
@@ -37,13 +38,13 @@ router.get('/', function (req, res) {
 
       done(null, result);
     }
-  ],(err) => {
-    if(err && err.status !== constant.httpCode.NOT_FOUND){
+  ], (err) => {
+    if (err && err.status !== constant.httpCode.NOT_FOUND) {
       res.status(err.status);
       res.send({
         status: err.status
       });
-    }else{
+    } else {
       res.send({
         status: constant.httpCode.OK,
         data: result
@@ -89,16 +90,21 @@ router.put('/update', function (req, res) {
   }
 });
 
+
 router.put('/change-password', function (req, res) {
   var userId = req.session.user.id;
   var passwordInfo = req.body.data;
 
-  if (validate(passwordInfo, passwordConstraint) === undefined && passwordInfo.password === passwordInfo.confirmPassword) {
+  if (validate(passwordInfo, passwordConstraint) === undefined
+      && validate(passwordInfo, newPasswordConstraint) === undefined
+      && passwordInfo.newPassword === passwordInfo.confirmPassword) {
     var partResult = {};
 
     partResult.oldPassword = md5(passwordInfo.oldPassword);
-    partResult.password = md5(passwordInfo.password);
+    partResult.password = md5(passwordInfo.newPassword);
     var url = 'users/' + userId + '/password';
+
+
 
     apiRequest.put(url, partResult, function (err, resp) {
       if (resp === undefined) {
