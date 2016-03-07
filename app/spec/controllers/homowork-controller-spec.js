@@ -416,7 +416,8 @@ describe('HomeworkController', function () {
               {
                 id: 1,
                 status: constant.homeworkQuizzesStatus.ACTIVE,
-                userAnswerRepo: 'www.repo.com'
+                userAnswerRepo: 'www.repo.com',
+                homeworkSubmitPostHistory: []
               }],
             save: (done) => {
               done(null, 1, true);

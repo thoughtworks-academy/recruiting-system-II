@@ -114,23 +114,34 @@ HomeworkController.prototype.getQuiz = (req, res) => {
 HomeworkController.prototype.saveGithubUrl = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.body.orderId;
-  var quizId;
-
+  var homeworkId;
   async.waterfall([
-    (done)=> {
+    (done) => {
       userHomeworkQuizzes.checkDataForSubmit(userId, orderId, done);
-    }, (result, done) => {
+    },
+    (result, done) => {
       if (result.isValidate === true) {
+        var submitInfo = {
+          homeworkURL: req.body.userAnswerRepo,
+          status: constant.homeworkQuizzesStatus.PROGRESS,
+          version: req.body.commitSHA,
+          branch: req.body.branch,
+          timestamp: Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS,
+        };
+
         result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
         result.data.quizzes[orderId - 1].branch = req.body.branch;
         result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
-        quizId = result.data.quizzes[orderId - 1].id;
+        result.data.quizzes[orderId - 1].homeworkSubmitPostHistory.push(submitInfo);
+
+        homeworkId = result.data.quizzes[orderId - 1].id;
         result.data.save(done);
       } else {
         done(true, result);
       }
-    }, function (product, numAffected, done) {
-      homeworkQuizzes.findOne({id: quizId}, done);
+    },
+    (product, numAffected, done) => {
+      homeworkQuizzes.findOne({id: homeworkId}, done);
     }
   ], (err, data) => {
     if (err) {

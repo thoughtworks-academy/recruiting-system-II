@@ -29,7 +29,8 @@ var SubmissionIntroduction = React.createClass({
       githubUrl: '',
       githubBranch: '',
       quizStatus: 0,
-      showIcon: false
+      showIcon: false,
+      branchesDetail: []
     };
   },
   clickBranch: function () {
@@ -39,7 +40,16 @@ var SubmissionIntroduction = React.createClass({
     if (!this.state.githubBranch) {
       this.state.githubBranch = this.state.defaultBranch;
     }
-    HomeworkActions.submitUrl(this.state.githubUrl, this.state.githubBranch, this.state.currentHomeworkNumber);
+
+    var commitSHA;
+
+    this.state.branchesDetail.forEach((item) => {
+      if(item.name === this.state.githubBranch) {
+        commitSHA = item.commit.sha;
+      }
+    });
+
+    HomeworkActions.submitUrl(this.state.githubUrl, this.state.githubBranch, commitSHA, this.state.currentHomeworkNumber);
   },
   onUrlBlur: function (event) {
     var target = event.target;

@@ -24,10 +24,10 @@ var submissionIntroductionStore = Reflux.createStore({
     });
   },
 
-  onSubmitUrl: function (url, branch, orderId) {
+  onSubmitUrl: function (url, branch, commitSHA, orderId) {
     superAgent.post('homework/save')
         .set('Content-Type', 'application/json')
-        .send({orderId: orderId, userAnswerRepo: url, branch: branch})
+        .send({orderId: orderId, userAnswerRepo: url, branch: branch, commitSHA: commitSHA})
         .use(errorHandler)
         .end((err, res) => {
           if (res.body.status === constant.httpCode.OK) {
@@ -60,7 +60,8 @@ var submissionIntroductionStore = Reflux.createStore({
             this.trigger({
               branches: branches,
               defaultBranch: branches[0],
-              showIcon:false
+              showIcon:false,
+              branchesDetail: res.body.data
             });
           }
         });
