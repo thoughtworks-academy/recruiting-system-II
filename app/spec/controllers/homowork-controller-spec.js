@@ -6,7 +6,8 @@ var homeworkQuizzes = require('../../models/homework-quizzes');
 var constant = require('../../mixin/constant');
 var request = require('superagent');
 
-var noop = function(){};
+var noop = function () {
+};
 
 describe('HomeworkController', function () {
   describe('getList', () => {
@@ -140,6 +141,8 @@ describe('HomeworkController', function () {
       spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, done) {
         var data = {
           userId: 1,
+          save: function () {
+          },
           quizzes: [
             {
               id: 1,
@@ -174,7 +177,7 @@ describe('HomeworkController', function () {
     });
 
     it('should return quiz and statusCode: 200 when receive a request', (done) => {
-
+      
       controller.getQuiz({
         session: {user: {id: 1}},
         query: {orderId: 1}

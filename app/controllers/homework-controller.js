@@ -52,6 +52,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
   var userAnswerRepo;
   var branch;
   var quiz;
+
   async.waterfall([
     (done) => {
       userHomeworkQuizzes.findOne({userId: userId}, done);
@@ -69,6 +70,10 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         userAnswerRepo = quiz.userAnswerRepo;
         quizStatus = quiz.status;
         branch = quiz.branch;
+        if (!quiz.startTime) {
+          quiz.startTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
+          result.save();
+        }
         homeworkQuizzes.findOne({id: quiz.id}, done);
       }
     },
@@ -90,7 +95,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
     }
   ], (err, data) => {
     if (err && (err !== 'break')) {
-      if(!data){
+      if (!data) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       }
       res.status(data.status);
@@ -145,7 +150,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     }
   ], (err, data) => {
     if (err) {
-      if(!data){
+      if (!data) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       }
       res.status(data.status);
@@ -181,7 +186,7 @@ HomeworkController.prototype.updateResult = (req, res)=> {
     }
   ], (err, data)=> {
     if (err) {
-      if(!data){
+      if (!data) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       }
       if (data.status === constant.httpCode.BAD_REQUEST) {
