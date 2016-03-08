@@ -58,8 +58,9 @@ router.post('/', function (req, res) {
           }
           if (isMobilePhoneExist || isEmailExist) {
             done(true, resp);
+          } else {
+            done(err, resp);
           }
-          done(err, resp);
         });
       },
       (data, done)=> {
