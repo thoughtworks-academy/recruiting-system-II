@@ -65,6 +65,7 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
 
         homeworkSubmits.forEach(item -> {
             int homeworkQuizId = (int) item.get("homeworkQuizId");
+            int startTime = (int) item.get("startTime");
 
             HomeworkSubmit homeworkSubmit = new HomeworkSubmit();
             homeworkSubmit.setScoreSheetId(scoreSheetId);
@@ -84,7 +85,7 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                         .get("homeworkURL"));
                 homeworkPostHistory.setStatus((Integer) h.get("status"));
                 homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
-                homeworkPostHistory.setStartTime((Integer) h.get("startTime"));
+                homeworkPostHistory.setStartTime(startTime);
                 homeworkPostHistory.setCommitTime(
                         (Integer) h.get("commitTime"));
 
