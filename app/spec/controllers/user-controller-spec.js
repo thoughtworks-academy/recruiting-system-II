@@ -1,3 +1,4 @@
+/*eslint no-magic-numbers: 0 */
 'use strict';
 
 var UserController = require('../../controllers/user-controller');
@@ -24,37 +25,36 @@ describe('UserController', function () {
             startTime: 75,
             endTime: 98
           }
-        })
+        });
       });
-
 
       spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (id, done) {
 
         var data = {
           quizzes: [
             {
-              startTime: 876,
+              startTime: 10,
               status: constant.homeworkQuizzesStatus.SUCCESS,
               homeworkSubmitPostHistory: [{
                 status: constant.homeworkQuizzesStatus.ERROR,
-                timestamp: 865
+                timestamp: 11
               }, {
                 status: constant.homeworkQuizzesStatus.SUCCESS,
-                timestamp: 865
+                timestamp: 12
               }]
 
             }, {
-              startTime: 876,
+              startTime: 13,
               status: constant.homeworkQuizzesStatus.SUCCESS,
               homeworkSubmitPostHistory: [{
                 status: constant.homeworkQuizzesStatus.ERROR,
-                timestamp: 865
+                timestamp: 14
               }, {
                 status: constant.homeworkQuizzesStatus.SUCCESS,
-                timestamp: 865
+                timestamp: 15
               }]
             }, {
-              startTime: 876,
+              startTime: 16,
               status: constant.homeworkQuizzesStatus.ACTIVE
             }
           ]
@@ -76,9 +76,9 @@ describe('UserController', function () {
         homework: {
           correctNumber: 2,
           quizzes: [
-            {startTime: 876, commitTimes: {commitTime: [865, 865]}},
-            {startTime: 876, commitTimes: {commitTime: [865, 865]}},
-            {startTime: 876, commitTimes: {commitTime: []}}]
+            {startTime: 10, commitTimes: {commitTime: [11, 12]}},
+            {startTime: 13, commitTimes: {commitTime: [14, 15]}},
+            {startTime: 16, commitTimes: {commitTime: []}}]
         }
       };
 
@@ -91,9 +91,8 @@ describe('UserController', function () {
           expect(data).toEqual(result);
           done();
         }
-
       });
-
+      
     });
   });
 });
