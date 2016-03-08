@@ -77,8 +77,13 @@ public class HomeworkQuizScoreSheetTest {
         homeworkSubmitPostHistory.put("commitTime", 56789);
         homeworkSubmitPostHistory.put("startTime", 123456);
         Map homeworkSubmit = new HashMap<>();
+
+        List homeworkPostHistoryList = new ArrayList<>();
+        homeworkPostHistoryList.add(homeworkSubmitPostHistory);
+
         homeworkSubmit.put("homeworkQuizId", 8);
-        homeworkSubmit.put("homeworkSubmitPostHistory",homeworkSubmitPostHistory);
+        homeworkSubmit.put("homeworkSubmitPostHistory",homeworkPostHistoryList);
+
         List<Map> homeworkSubmits = new ArrayList<>();
         homeworkSubmits.add(homeworkSubmit);
         Map data = new HashMap<>();

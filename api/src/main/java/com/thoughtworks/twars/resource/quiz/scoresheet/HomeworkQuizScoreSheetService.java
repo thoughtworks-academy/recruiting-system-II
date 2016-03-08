@@ -90,24 +90,7 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
 
                 homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
             });
-//            Map homeworkSubmitPostHistory = (Map) item
-//                    .get("homeworkSubmitPostHistory");
-//
-//            HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
-//            homeworkPostHistory.setBranch((String) homeworkSubmitPostHistory.get("branch"));
-//            homeworkPostHistory.setVersion((String) homeworkSubmitPostHistory.get("version"));
-//            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHistory
-//                    .get("homeworkURL"));
-//            homeworkPostHistory.setStatus((Integer) homeworkSubmitPostHistory.get("status"));
-//            homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
-//            homeworkPostHistory.setStartTime((Integer) homeworkSubmitPostHistory.get("startTime"));
-//            homeworkPostHistory.setCommitTime(
-//                    (Integer) homeworkSubmitPostHistory.get("commitTime"));
-//
-//            homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
         });
-
-
     }
 
 }
