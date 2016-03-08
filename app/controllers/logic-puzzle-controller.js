@@ -52,16 +52,12 @@ LogicPuzzleController.prototype.saveAnswer = (req, res) => {
 LogicPuzzleController.prototype.submitPaper = (req, res) => {
   var examerId = req.session.user.id;
   var endTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
-  var data;
 
   async.waterfall([
     (done) => {
       logicPuzzle.findOne({userId: examerId}, done);
-    }, (doc, done) => {
-      data = doc;
-      LogicPuzzleController.setScoreSheet(data, done);
     },
-    (responds, done) => {
+    (data, done) => {
       if (data) {
         data.endTime = endTime;
         data.isCommited = true;
@@ -69,6 +65,9 @@ LogicPuzzleController.prototype.submitPaper = (req, res) => {
       data.save((err, doc)=> {
         done(err, doc);
       });
+    },
+    (data, done) => {
+      LogicPuzzleController.setScoreSheet(data, done);
     }
   ], (err) => {
     if (!err) {
@@ -118,6 +117,7 @@ LogicPuzzleController.setScoreSheet = (data, done) => {
       itemPosts: itemPosts
     }]
   };
+  console.log(body);
   apiRequest.post(scoreSheetUri, body, done);
 };
 
