@@ -72,21 +72,39 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
 
             homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
 
-            Map homeworkSubmitPostHistory = (Map) item
-                    .get("homeworkSubmitPostHistory");
+            List<Map> homeworkSubmitPostHistoryList =
+                    (List<Map>) item.get("homeworkSubmitPostHistory");
 
-            HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
-            homeworkPostHistory.setBranch((String) homeworkSubmitPostHistory.get("branch"));
-            homeworkPostHistory.setVersion((String) homeworkSubmitPostHistory.get("version"));
-            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHistory
-                    .get("homeworkURL"));
-            homeworkPostHistory.setStatus((Integer) homeworkSubmitPostHistory.get("status"));
-            homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
-            homeworkPostHistory.setStartTime((Integer) homeworkSubmitPostHistory.get("startTime"));
-            homeworkPostHistory.setCommitTime(
-                    (Integer) homeworkSubmitPostHistory.get("commitTime"));
+            homeworkSubmitPostHistoryList.forEach(h -> {
+                HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
 
-            homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
+                homeworkPostHistory.setBranch((String) h.get("branch"));
+                homeworkPostHistory.setVersion((String) h.get("version"));
+                homeworkPostHistory.setHomeworkURL((String) h
+                        .get("homeworkURL"));
+                homeworkPostHistory.setStatus((Integer) h.get("status"));
+                homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
+                homeworkPostHistory.setStartTime((Integer) h.get("startTime"));
+                homeworkPostHistory.setCommitTime(
+                        (Integer) h.get("commitTime"));
+
+                homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
+            });
+//            Map homeworkSubmitPostHistory = (Map) item
+//                    .get("homeworkSubmitPostHistory");
+//
+//            HomeworkPostHistory homeworkPostHistory = new HomeworkPostHistory();
+//            homeworkPostHistory.setBranch((String) homeworkSubmitPostHistory.get("branch"));
+//            homeworkPostHistory.setVersion((String) homeworkSubmitPostHistory.get("version"));
+//            homeworkPostHistory.setHomeworkURL((String) homeworkSubmitPostHistory
+//                    .get("homeworkURL"));
+//            homeworkPostHistory.setStatus((Integer) homeworkSubmitPostHistory.get("status"));
+//            homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
+//            homeworkPostHistory.setStartTime((Integer) homeworkSubmitPostHistory.get("startTime"));
+//            homeworkPostHistory.setCommitTime(
+//                    (Integer) homeworkSubmitPostHistory.get("commitTime"));
+//
+//            homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
         });
 
 
