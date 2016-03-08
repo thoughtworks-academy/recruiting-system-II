@@ -117,7 +117,6 @@ LogicPuzzleController.setScoreSheet = (data, done) => {
       itemPosts: itemPosts
     }]
   };
-  console.log(body);
   apiRequest.post(scoreSheetUri, body, done);
 };
 
