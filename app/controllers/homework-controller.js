@@ -5,6 +5,9 @@ var homeworkQuizzes = require('../models/homework-quizzes');
 var async = require('async');
 var constant = require('../mixin/constant');
 var apiRequest = require('../services/api-request');
+var request = require('superagent');
+var yamlConfig = require('node-yaml-config');
+var config = yamlConfig.load('./config/config.yml');
 
 function HomeworkController() {
 
@@ -147,6 +150,21 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     },
     (product, numAffected, done) => {
       homeworkQuizzes.findOne({id: homeworkId}, done);
+    },
+    (result, done) => {
+      console.log(result);
+      request
+        .post(config.taskServer + 'tasks')
+        .set('Content-Type', 'application/json')
+        .send({
+          userId: userId,
+          homeworkId: homeworkId,
+          userAnswerRepo: req.body.userAnswerRepo,
+          evaluateScript: result.evaluateScript,
+          callbackURL: config.appServer + 'homework/result',
+          branch: req.body.branch
+        })
+        .end(done);
     }
   ], (err, data) => {
     if (err) {
