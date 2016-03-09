@@ -1,9 +1,11 @@
+/*eslint no-magic-numbers: 2*/
 'use strict';
+
 var apiRequest = require('../services/api-request');
 var constant = require('../mixin/constant');
 var async = require('async');
 var userHomeworkQuizzes = require('../models/user-homework-quizzes');
-
+var _percentage = 100;
 function UserController() {
 
 }
@@ -28,7 +30,7 @@ UserController.prototype.answer = (req, res)=> {
       var correctNumber = result.body[0].correctNumber;
 
       if (correctNumber !== 0) {
-        accuracy = ((correctNumber / itemNumber) * 100).toFixed(2);
+        accuracy = ((correctNumber / itemNumber) * _percentage).toFixed(2);
       }
 
       logicPuzzle.correctNumber = correctNumber;
@@ -58,10 +60,8 @@ UserController.prototype.answer = (req, res)=> {
             commit.commitTime = log.commitTime;
             commit.resultURL = log.resultURL;
 
-
             commitHistory.push(commit);
           });
-
         }
 
         if (!(result.homeworkSubmitPostHistory === undefined) && result.homeworkSubmitPostHistory[homeworkSubmitPostHistoryLength].status === constant.homeworkQuizzesStatus.SUCCESS) {
@@ -81,8 +81,7 @@ UserController.prototype.answer = (req, res)=> {
         homework.quizzes.push(quiz);
       });
 
-
-      var completion = (correctNumber / results.quizzes.length) * 100;
+      var completion = (correctNumber / results.quizzes.length) * _percentage;
 
       homework.elapsedTime = 123;
       homework.completion = completion.toFixed(2) + '%';
@@ -102,64 +101,7 @@ UserController.prototype.answer = (req, res)=> {
     } else {
       res.send(data);
     }
-
   });
 };
 
 module.exports = UserController;
-
-
-//var userHomeworkQuizzesSchema = new Schema({
-//  userId: Number,
-//  paperId: Number,
-//  quizzes: [{
-//    id: Number,
-//    status: Number,
-//    startTime: Number,
-//    uri: String,
-//    homeworkSubmitPostHistory: [{
-//      homeworkURL: String,
-//      status: Number,
-//      version: String,
-//      branch: String,
-//      commitTime: Number,
-//      resultURL: String
-//    }]
-//  }]
-//});
-
-
-//var result = {
-//  userDetailUrl: 'users/' + userId + '/detail',
-//  logicPuzzle: {
-//    correctNumber: 6,
-//    itemNumber: 10,
-//    startTime: 75,
-//    endTime: 98,
-//    accuracy: 0.65
-//  },
-//  homework: {
-//    correctNumber: 2,
-//    elapsedTime: 123,
-//    completion: 0.65,
-//    quizzes: [
-//      {
-//        startTime: 10,
-//        homeworkDesc: json,
-//        elapsedTime: 20,
-//        commitHistory: [{
-//          githubUrl: string,
-//          branch: string,
-//          commitTime: interger,
-//          resultUrl: url
-//        }, {
-//          githubUrl: string,
-//          branch: string,
-//          commitTime: interger,
-//          resultUrl: url
-//        }]
-//      }]
-//  }
-//};
-
-
