@@ -553,4 +553,83 @@ describe('HomeworkController', function () {
       });
     });
   });
+
+  describe('updateResult', () => {
+    var controller;
+
+    beforeEach(()=> {
+      controller = new HomeworkController();
+
+      spyOn(apiRequest, 'post').and.callFake(function (url, data, callback) {
+        callback(null);
+      });
+
+      spyOn(userHomeworkQuizzes, 'checkDataForUpdate').and.callFake(function (userId, homeworkId, callback) {
+        callback(null, true);
+      });
+
+      spyOn(userHomeworkQuizzes, 'updateQuizzesStatus').and.callFake(function (data, callback) {
+        callback(null, true, true);
+      });
+
+      spyOn(userHomeworkQuizzes, 'unlockNext').and.callFake(function (userId, callback) {
+        callback(null, true, true);
+      });
+    });
+
+    it('should return 200 when save the result success', (done) => {
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (data, selecter, callback) {
+        callback(null, {
+          paperId: 1,
+          quizzes: [{
+            startTime: '11111111',
+            homeworkSubmitPostHistory: {}
+          }]
+        });
+      });
+
+      controller.updateResult({
+        body: {
+          userId: 2,
+          homeworkId: 1,
+          resultStatus: 5
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.OK
+          });
+          done();
+        }
+      });
+    });
+
+    it('should return 500 when something was wrong', (done) => {
+      spyOn(userHomeworkQuizzes, 'findOne').and.callFake(function (data, selecter, callback) {
+        callback(true, {
+          paperId: 1,
+          quizzes: [{
+            startTime: '11111111',
+            homeworkSubmitPostHistory: {}
+          }]
+        });
+      });
+
+      controller.updateResult({
+        body: {
+          userId: 2,
+          homeworkId: 1,
+          resultStatus: 5
+        }
+      }, {
+        send: function (data) {
+          expect(data).toEqual({
+            status: constant.httpCode.INTERNAL_SERVER_ERROR
+          });
+          done();
+        }
+      });
+    });
+
+  });
 });
