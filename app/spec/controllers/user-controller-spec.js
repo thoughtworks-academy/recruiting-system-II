@@ -19,12 +19,12 @@ describe('UserController', function () {
 
       spyOn(apiRequest, 'get').and.callFake(function (url, callback) {
         callback(null, {
-          body: {
+          body: [{
             correctNumber: 6,
             itemNumber: 10,
             startTime: 75,
             endTime: 98
-          }
+          }]
         });
       });
 
@@ -35,26 +35,40 @@ describe('UserController', function () {
             {
               startTime: 10,
               status: constant.homeworkQuizzesStatus.SUCCESS,
+              uri: 'homework/1',
               homeworkSubmitPostHistory: [{
                 status: constant.homeworkQuizzesStatus.ERROR,
-                timestamp: 11
+                commitTime: 1000,
+                branch: 'master',
+                resultURL: 'job/task/1',
+                homeworkURL: 'https:www.github.com/1'
               }, {
                 status: constant.homeworkQuizzesStatus.SUCCESS,
-                timestamp: 12
+                commitTime: 1001,
+                branch: 'master',
+                resultURL: 'job/task/2',
+                homeworkURL: 'https:www.github.com/2'
               }]
-
             }, {
               startTime: 13,
               status: constant.homeworkQuizzesStatus.SUCCESS,
+              uri: 'homework/2',
               homeworkSubmitPostHistory: [{
                 status: constant.homeworkQuizzesStatus.ERROR,
-                timestamp: 14
+                commitTime: 2000,
+                branch: 'master',
+                resultURL: 'job/task/3',
+                homeworkURL: 'https:www.github.com/3'
               }, {
                 status: constant.homeworkQuizzesStatus.SUCCESS,
-                timestamp: 15
+                commitTime: 2001,
+                branch: 'master',
+                resultURL: 'job/task/4',
+                homeworkURL: 'https:www.github.com/4'
               }]
             }, {
               startTime: 16,
+              uri: 'homework/3',
               status: constant.homeworkQuizzesStatus.ACTIVE
             }
           ]
@@ -66,19 +80,55 @@ describe('UserController', function () {
       var userId = 1;
 
       var result = {
-        userDetailUrl: 'users/' + userId + '/detail',
+        userDetailURL: 'users/' + userId + '/detail',
         logicPuzzle: {
           correctNumber: 6,
           itemNumber: 10,
           startTime: 75,
-          endTime: 98
+          endTime: 98,
+          accuracy: '60.00%'
         },
         homework: {
-          correctNumber: 2,
           quizzes: [
-            {startTime: 10, commitTimes: {commitTime: [11, 12]}},
-            {startTime: 13, commitTimes: {commitTime: [14, 15]}},
-            {startTime: 16, commitTimes: {commitTime: []}}]
+            {
+              startTime: 10,
+              homeworkDesc: 'homework/1',
+              elapsedTime: 991,
+              commitHistory: [{
+                githubURL: 'https:www.github.com/1',
+                branch: 'master',
+                commitTime: 1000,
+                resultURL: 'job/task/1'
+              }, {
+                githubURL: 'https:www.github.com/2',
+                branch: 'master',
+                commitTime: 1001,
+                resultURL: 'job/task/2'
+              }]
+            }, {
+              startTime: 13,
+              homeworkDesc: 'homework/2',
+              elapsedTime: 1988,
+              commitHistory: [{
+                githubURL: 'https:www.github.com/3',
+                branch: 'master',
+                commitTime: 2000,
+                resultURL: 'job/task/3'
+              }, {
+                githubURL: 'https:www.github.com/4',
+                branch: 'master',
+                commitTime: 2001,
+                resultURL: 'job/task/4'
+              }]
+            }, {
+              startTime: 16,
+              homeworkDesc: 'homework/3',
+              elapsedTime: 0,
+              commitHistory: []
+            }],
+          elapsedTime: 123,
+          completion: '66.67%',
+          correctNumber: 2
         }
       };
 
@@ -92,7 +142,7 @@ describe('UserController', function () {
           done();
         }
       });
-      
+
     });
   });
 });
