@@ -4,6 +4,7 @@ import com.thoughtworks.twars.bean.LoginDetail;
 import com.thoughtworks.twars.bean.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
@@ -17,12 +18,15 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginResourceTest extends TestBase {
     String basePath = "/login";
+    @Mock
+    User resultUser;
 
     @Test
     public void should_create_user_when_login_with_email() throws Exception {
@@ -92,11 +96,15 @@ public class LoginResourceTest extends TestBase {
         map.put("email","jingjing@test.com");
         map.put("password","25d55ad283aa400af464c76d713c07ad");
         map.put("mobilePhone", "13572186283");
-        //2016年03月09日17:37:09
+
+        when(userMapper.insertUser(resultUser)).thenReturn(1);
+        when(resultUser.getId()).thenReturn(2);
 
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/github").request().post(entity);
+        Map result = response.readEntity(Map.class);
         assertThat(response.getStatus(), is(201));
+
     }
 
 }
