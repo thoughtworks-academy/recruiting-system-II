@@ -9,6 +9,7 @@ public class HomeworkPostHistory {
     private String branch;
     private int startTime;
     private int commitTime;
+    private String resultURL;
 
     public int getId() {
         return id;
@@ -72,5 +73,13 @@ public class HomeworkPostHistory {
 
     public void setCommitTime(int commitTime) {
         this.commitTime = commitTime;
+    }
+
+    public String getResultURL() {
+        return resultURL;
+    }
+
+    public void setResultURL(String resultURL) {
+        this.resultURL = resultURL;
     }
 }

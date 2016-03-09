@@ -53,6 +53,8 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                     homeworkPostHistoryUri.put("version", homeworkPostHistory.getVersion());
                     homeworkPostHistoryUri.put("commitTime", homeworkPostHistory.getCommitTime());
                     homeworkPostHistoryUri.put("status", homeworkPostHistory.getStatus());
+                    homeworkPostHistoryUri.put("resultURL", homeworkPostHistory.getResultURL());
+                    homeworkPostHistoryUri.put("startTime", homeworkPostHistory.getStartTime());
                     return homeworkPostHistoryUri;
                 })
                 .collect(Collectors.toList());
@@ -88,6 +90,7 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                 homeworkPostHistory.setStartTime(startTime);
                 homeworkPostHistory.setCommitTime(
                         (Integer) h.get("commitTime"));
+                homeworkPostHistory.setResultURL((String) h.get("resultURL"));
 
                 homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
             });
