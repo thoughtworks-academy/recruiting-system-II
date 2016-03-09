@@ -228,9 +228,7 @@ HomeworkController.prototype.updateResult = (req, res)=> {
       }
     }], (err, data) => {
     if(err) {
-      res.send({
-        status: constant.httpCode.INTERNAL_SERVER_ERROR
-      });
+      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     }else {
       res.send({
         status: constant.httpCode.OK

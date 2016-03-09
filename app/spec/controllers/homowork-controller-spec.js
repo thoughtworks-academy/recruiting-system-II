@@ -622,10 +622,8 @@ describe('HomeworkController', function () {
           resultStatus: 5
         }
       }, {
-        send: function (data) {
-          expect(data).toEqual({
-            status: constant.httpCode.INTERNAL_SERVER_ERROR
-          });
+        sendStatus: function (data) {
+          expect(data).toEqual(constant.httpCode.INTERNAL_SERVER_ERROR);
           done();
         }
       });
