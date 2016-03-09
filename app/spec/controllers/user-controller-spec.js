@@ -69,7 +69,8 @@ describe('UserController', function () {
             }, {
               startTime: 16,
               uri: 'homework/3',
-              status: constant.homeworkQuizzesStatus.ACTIVE
+              status: constant.homeworkQuizzesStatus.ACTIVE,
+              homeworkSubmitPostHistory: []
             }
           ]
         };
@@ -126,9 +127,10 @@ describe('UserController', function () {
               elapsedTime: 0,
               commitHistory: []
             }],
-          elapsedTime: 123,
+          elapsedTime: 2979,
           completion: '66.67%',
-          correctNumber: 2
+          correctNumber: 2,
+          quizNumber: 3
         }
       };
 

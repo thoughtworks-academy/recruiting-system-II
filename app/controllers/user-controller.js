@@ -42,16 +42,16 @@ UserController.prototype.answer = (req, res)=> {
       userHomeworkQuizzes.findOne({userId: userId}, done);
 
     }, (results, done)=> {
+
       var correctNumber = 0;
       var sumTime = 0;
       results.quizzes.forEach(function (result) {
         var commitHistory = [];
 
         var elapsedTime = 0;
-        if (!(result.homeworkSubmitPostHistory === undefined)) {
+        if (result.homeworkSubmitPostHistory.length !== 0) {
 
           var homeworkSubmitPostHistoryLength = result.homeworkSubmitPostHistory.length - 1;
-
           result.homeworkSubmitPostHistory.forEach(function (log) {
 
             var commit = {};
@@ -59,13 +59,13 @@ UserController.prototype.answer = (req, res)=> {
             commit.branch = log.branch;
             commit.commitTime = log.commitTime;
             commit.resultURL = log.resultURL;
-
             commitHistory.push(commit);
           });
+
+          elapsedTime = result.homeworkSubmitPostHistory[homeworkSubmitPostHistoryLength].commitTime - result.startTime;
         }
 
-        if (!(result.homeworkSubmitPostHistory === undefined) && result.homeworkSubmitPostHistory[homeworkSubmitPostHistoryLength].status === constant.homeworkQuizzesStatus.SUCCESS) {
-          elapsedTime = result.homeworkSubmitPostHistory[homeworkSubmitPostHistoryLength].commitTime - result.startTime;
+        if ((result.homeworkSubmitPostHistory.length !== 0) && result.homeworkSubmitPostHistory[homeworkSubmitPostHistoryLength].status === constant.homeworkQuizzesStatus.SUCCESS) {
           correctNumber++;
         }
 
@@ -82,10 +82,10 @@ UserController.prototype.answer = (req, res)=> {
       });
 
       var completion = (correctNumber / results.quizzes.length) * _percentage;
-
-      homework.elapsedTime = 123;
+      homework.elapsedTime = sumTime;
       homework.completion = completion.toFixed(2) + '%';
       homework.correctNumber = correctNumber;
+      homework.quizNumber = results.quizzes.length;
 
       var response = {
         userDetailURL: userDetailURL,
