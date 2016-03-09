@@ -162,7 +162,7 @@ userHomeworkQuizzesSchema.statics.updateQuizzesStatus = function (data, callback
           var status = data.resultStatus ? constant.homeworkQuizzesStatus.SUCCESS : constant.homeworkQuizzesStatus.ERROR;
           doc.quizzes[i].status = status;
           doc.quizzes[i].homeworkSubmitPostHistory[doc.quizzes[i].homeworkSubmitPostHistory.length - 1].status = status;
-          doc.quizzes[i].resultURL = data.resultURL;
+          doc.quizzes[i].homeworkSubmitPostHistory[doc.quizzes[i].homeworkSubmitPostHistory.length - 1].resultURL = data.resultURL;
         }
       });
       doc.save(callback);
