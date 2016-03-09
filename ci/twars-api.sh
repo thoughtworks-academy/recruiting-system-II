@@ -8,6 +8,8 @@ cd api
 
 ./gradlew checkstyleMain
 
+./gradlew flywayMigrate
+
 ./gradlew jacoco test
 
 ./gradlew createCoberturaReport
