@@ -21,7 +21,7 @@ function checkLoginInfo(account, password) {
   valObj.mobilePhone = account;
   valObj.loginPassword = password;
   var result = validate(valObj, constraint);
-  
+
   if (!(result.email || result.mobilePhone)) {
     pass = false;
   }
@@ -46,7 +46,7 @@ router.post('/', function (req, res) {
     password = md5(password);
 
     apiRequest.post('login', {email: account, password: password}, function (err, result) {
-      if(!result){
+      if (!result) {
         res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
         return;
       }
@@ -64,4 +64,16 @@ router.post('/', function (req, res) {
   }
 });
 
+router.get('/github',
+    passport.authenticate('github'),
+    function (req, res) {
+
+    });
+
+
+router.get('/github/callback',
+    passport.authenticate('github', {failureRedirect: '/'}),
+    function (req, res) {
+      res.redirect('dashboard.html');
+    });
 module.exports = router;
