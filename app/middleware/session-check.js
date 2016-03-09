@@ -75,11 +75,13 @@ module.exports = function (req, res, next) {
       logicPuzzle.isDealAgree(userId, (data) => {
         done(null, data);
       });
+    },
+
+    isThirdParty: function(done) {
+      done(null, Boolean(req.session.passport));
     }
 
   }, function (err, data) {
-    var result = pathControl(req.url, data);
-
     if (result.needRedirect) {
       res.redirect(result.targetPath);
     } else {
