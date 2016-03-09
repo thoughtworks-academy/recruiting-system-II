@@ -12,9 +12,9 @@ var LoginStore = Reflux.createStore({
   listenables: LoginActions,
 
   onLogin: function (phoneEmail, loginPassword){
-    request.get('/login')
+    request.post('/login')
         .set('Content-Type', 'application/json')
-        .query({
+        .send({
           account: phoneEmail,
           password: loginPassword
         })

@@ -33,9 +33,9 @@ function checkLoginInfo(account, password) {
   return pass;
 }
 
-router.get('/', function (req, res) {
-  var account = req.query.account;
-  var password = req.query.password;
+router.post('/', function (req, res) {
+  var account = req.body.account;
+  var password = req.body.password;
 
   if (!checkLoginInfo(account, password)) {
     res.send({
