@@ -10,6 +10,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,6 +84,19 @@ public class LoginResourceTest extends TestBase {
         Entity entity = Entity.entity(loginUser, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(), is(401));
+    }
+
+    @Test
+    public void should_return_201_when_request_login_github() {
+        Map map = new HashMap<>();
+        map.put("email","jingjing@test.com");
+        map.put("password","25d55ad283aa400af464c76d713c07ad");
+        map.put("mobilePhone", "13572186283");
+        //2016年03月09日17:37:09
+
+        Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/github").request().post(entity);
+        assertThat(response.getStatus(), is(201));
     }
 
 }
