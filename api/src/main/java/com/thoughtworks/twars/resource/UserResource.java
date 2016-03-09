@@ -1,19 +1,14 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.PasswordRetrieveDetail;
-import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.bean.UserDetail;
-import com.thoughtworks.twars.mapper.PasswordRetrieveDetailMapper;
-import com.thoughtworks.twars.mapper.UserMapper;
+import com.thoughtworks.twars.bean.*;
+import com.thoughtworks.twars.mapper.*;
 import io.swagger.annotations.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Path("/users")
 @Api
@@ -24,6 +19,22 @@ public class UserResource extends Resource {
 
     @Inject
     private PasswordRetrieveDetailMapper passwordRetrieveDetailMapper;
+
+    @Inject
+    private ScoreSheetMapper scoreSheetMapper;
+
+    @Inject
+    private BlankQuizSubmitMapper blankQuizSubmitMapper;
+
+    @Inject
+    private BlankQuizMapper blankQuizMapper;
+
+    @Inject
+    private ItemPostMapper itemPostMapper;
+
+    @Inject
+    private QuizItemMapper quizItemMapper;
+
 
     @GET
     @Path("/{param}")
@@ -46,6 +57,55 @@ public class UserResource extends Resource {
         map.put("mobilePhone", user.getMobilePhone());
 
         return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+    @GET
+    @Path("/{param}/logicPuzzle")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful"),
+            @ApiResponse(code = 404, message = "get one user failed")})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserLogicPuzzle(
+            @ApiParam(name = "id", value = "userId", required = true)
+            @PathParam("param") int userId) {
+
+        ScoreSheet scoreSheet = scoreSheetMapper.findOneByUserId(userId);
+
+        if (scoreSheet == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        List<BlankQuizSubmit> blankQuizSubmitList =
+                blankQuizSubmitMapper.findByScoreSheetId(scoreSheet.getId());
+
+        List<Map> result = new ArrayList<>();
+
+        blankQuizSubmitList.forEach(item -> {
+            List<ItemPost> itemPostList = itemPostMapper.findByBlankQuizSubmit(item.getId());
+
+            Map map = new HashMap();
+            map.put("startTime", item.getStartTime());
+            map.put("endTime", item.getEndTime());
+            map.put("itemNumber", itemPostList.size());
+            map.put("correctNumber", calculateCorrectNumber(itemPostList));
+
+            result.add(map);
+        });
+
+        return Response.status(Response.Status.OK).entity(result).build();
+    }
+
+    public int calculateCorrectNumber(List<ItemPost> itemPostList) {
+        int count = 0;
+
+        for (int i = 0; i < itemPostList.size(); i++) {
+            String userAnswer = itemPostList.get(i).getAnswer();
+            int quizItemId = itemPostList.get(i).getQuizItemId();
+
+            if (quizItemMapper.getQuizItemById(quizItemId).getAnswer().equals(userAnswer)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @GET

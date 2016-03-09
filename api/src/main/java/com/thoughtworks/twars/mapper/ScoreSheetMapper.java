@@ -13,4 +13,6 @@ public interface ScoreSheetMapper {
     int insertScoreSheet(ScoreSheet scoreSheet);
 
     ScoreSheet selectScoreSheet(ScoreSheet scoreSheet);
+
+    ScoreSheet findOneByUserId(int userId);
 }

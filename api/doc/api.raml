@@ -74,7 +74,17 @@ baseUri: http://api.bronzesword.com/
                 id: integer
                 email: string
                 mobilePhone: string
-
+    /logicPuzzle:
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  correctNumber: integer
+                  itemNumber: integer
+                  startTime: integer
+                  endTime: integer
     /detail:
       get:
         description: 获取用户信息
@@ -541,4 +551,4 @@ baseUri: http://api.bronzesword.com/
                 evaluateRepository: string
                   # description: git url, contain dockerFile in repository
                 templateRepository: string
-                  # description: git url, contain dockerFile in repository
+                  # description: git url, contain dockerFile in repositor

@@ -1,12 +1,15 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.bean.UserDetail;
+import com.thoughtworks.twars.bean.*;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,8 +21,25 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserResourceTest extends TestBase {
+
     User user = mock(User.class);
+
+//    BlankQuizSubmit blankQuizSubmit = mock(BlankQuizSubmit.class);
+//    ItemPost itemPost = mock(ItemPost.class);
+//    ScoreSheet scoreSheet = mock(ScoreSheet.class);
+//    QuizItem quizItem = mock(QuizItem.class);
+
+    @Mock
+    ScoreSheet scoreSheet;
+    @Mock
+    BlankQuizSubmit blankQuizSubmit;
+    @Mock
+    ItemPost itemPost;
+    @Mock
+    QuizItem quizItem;
+
     String basePath = "/users";
 
     @Test
@@ -200,15 +220,47 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
-    public void should_retrieve_password() throws Exception{
+    public void should_retrieve_password() throws Exception {
 
-        Response response = target(basePath+"/password/retrieve")
+        Response response = target(basePath + "/password/retrieve")
                 .queryParam("field", "email")
                 .queryParam("value", "test@163.com")
                 .request().get();
 
         Map result = response.readEntity(Map.class);
 
+        assertThat(response.getStatus(), is(200));
+    }
+
+    @Test
+    public void should_return_logic_puzzle_result() throws Exception {
+
+        ScoreSheet scoreSheet = new ScoreSheet();
+        scoreSheet.setExamerId(1);
+        scoreSheet.setId(2);
+        when(scoreSheetMapper.findOneByUserId(1)).thenReturn(scoreSheet);
+
+        BlankQuizSubmit blankQuizSubmit = new BlankQuizSubmit();
+        blankQuizSubmit.setId(4);
+        blankQuizSubmit.setBlankQuizId(5);
+        blankQuizSubmit.setEndTime(123456);
+        blankQuizSubmit.setStartTime(123456);
+        blankQuizSubmit.setScoreSheetId(2);
+        when(blankQuizSubmitMapper.findByScoreSheetId(2)).thenReturn(Arrays.asList(blankQuizSubmit));
+
+        ItemPost itemPost = new ItemPost();
+        itemPost.setId(6);
+        itemPost.setBlankQuizSubmitsId(4);
+        itemPost.setAnswer("111");
+        itemPost.setQuizItemId(7);
+        when(itemPostMapper.findByBlankQuizSubmit(4)).thenReturn(Arrays.asList(itemPost));
+
+        QuizItem quizItem = new QuizItem();
+        quizItem.setId(7);
+        quizItem.setAnswer("111");
+        when(quizItemMapper.getQuizItemById(7)).thenReturn(quizItem);
+
+        Response response = target(basePath + "/1/logicPuzzle").request().get();
         assertThat(response.getStatus(), is(200));
     }
 }
