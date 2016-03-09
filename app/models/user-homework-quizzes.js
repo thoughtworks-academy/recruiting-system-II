@@ -19,8 +19,8 @@ var userHomeworkQuizzesSchema = new Schema({
       status: Number,
       version: String,
       branch: String,
-      timestamp: Number,
-      resultPath: String
+      commitTime: Number,
+      resultURL: String
     }]
   }]
 });
@@ -159,9 +159,10 @@ userHomeworkQuizzesSchema.statics.updateQuizzesStatus = function (data, callback
     } else {
       doc.quizzes.forEach((item, i) => {
         if (item.id === data.homeworkId){
-          doc.quizzes[i].status = data.Status ? constant.homeworkQuizzesStatus.SUCCESS : constant.homeworkQuizzesStatus.ERROR;
-          doc.quizzes[i].jobName = data.jobName;
-          doc.quizzes[i].buildNumber = data.buildNumber;
+          var status = data.resultStatus ? constant.homeworkQuizzesStatus.SUCCESS : constant.homeworkQuizzesStatus.ERROR;
+          doc.quizzes[i].status = status;
+          doc.quizzes[i].homeworkSubmitPostHistory[doc.quizzes[i].homeworkSubmitPostHistory.length - 1].status = status;
+          doc.quizzes[i].resultURL = data.resultURL;
         }
       });
       doc.save(callback);

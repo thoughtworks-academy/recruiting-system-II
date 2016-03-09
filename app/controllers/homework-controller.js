@@ -134,7 +134,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
           status: constant.homeworkQuizzesStatus.PROGRESS,
           version: req.body.commitSHA,
           branch: req.body.branch,
-          timestamp: Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS,
+          commitTime: Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS,
         };
 
         result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
@@ -152,7 +152,6 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
       homeworkQuizzes.findOne({id: homeworkId}, done);
     },
     (result, done) => {
-      console.log(result);
       request
         .post(config.taskServer + 'tasks')
         .set('Content-Type', 'application/json')
@@ -183,41 +182,57 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
 
 HomeworkController.prototype.updateResult = (req, res)=> {
   var userId = req.body.userId;
-  var orderId = req.body.orderId;
-  var resultPath = req.body.resultPath;
+  var homeworkId = req.body.homeworkId;
   var resultStatus = req.body.resultStatus;
 
   async.waterfall([
-    (done)=> {
-      userHomeworkQuizzes.checkDataForUpdate(userId, orderId, done);
-    }, (result, done)=> {
-      if (result.isValidate === true) {
-        if (resultStatus === constant.homeworkQuizzesStatus.SUCCESS && orderId < result.data.quizzes.length) {
-          result.data.quizzes[orderId].status = constant.homeworkQuizzesStatus.ACTIVE;
-        }
-        result.data.quizzes[orderId - 1].status = resultStatus;
-        result.data.quizzes[orderId - 1].resultPath = resultPath;
-        result.data.save(done);
-      } else {
-        done(true, result);
+    (done) => {
+      userHomeworkQuizzes.checkDataForUpdate(userId, homeworkId, done);
+    },
+    (result, done) => {
+      userHomeworkQuizzes.updateQuizzesStatus(req.body, done);
+    },
+    (result, numAffected, done) => {
+      userHomeworkQuizzes.unlockNext(userId, done);
+    },
+    (data, result, done) => {
+      done = typeof(result) === 'function' ? result : done;
+      if(!resultStatus){
+        done(null, false);
+      }else {
+        userHomeworkQuizzes.findOne({
+          userId: userId,
+          quizzes: {$elemMatch: {id: homeworkId}}
+        }, {
+          userId: 1,
+          paperId: 1,
+          quizzes: {$elemMatch: {id: homeworkId}}
+        }, done);
       }
-    }
-  ], (err, data)=> {
-    if (err) {
-      if (!data) {
-        res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
+    },
+    (data, done) => {
+      if(data){
+        var homeworkQuiz = data.quizzes.pop();
+
+        apiRequest.post('scoresheets', {
+          examerId: userId,
+          paperId: data.paperId,
+          homeworkSubmits:[{
+            homeworkQuizId: homeworkId,
+            startTime: homeworkQuiz.startTime,
+            homeworkSubmitPostHistory: homeworkQuiz.homeworkSubmitPostHistory
+          }]
+        }, done);
+      }else {
+        done(null);
       }
-      if (data.status === constant.httpCode.BAD_REQUEST) {
-        res.send({
-          status: data.status,
-          homeworkStatus: data.homeworkStatus
-        });
-      }
-      if (data.status === constant.httpCode.NOT_FOUND) {
-        res.send({status: data.status});
-      }
-    } else {
-      res.send({status: constant.httpCode.OK});
+    }], (err, data) => {
+    if(err) {
+      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
+    }else {
+      res.send({
+        status: constant.httpCode.OK
+      });
     }
   });
 };
