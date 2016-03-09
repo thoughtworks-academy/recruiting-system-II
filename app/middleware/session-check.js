@@ -82,6 +82,8 @@ module.exports = function (req, res, next) {
     }
 
   }, function (err, data) {
+    var result = pathControl(req.url, data);
+
     if (result.needRedirect) {
       res.redirect(result.targetPath);
     } else {
