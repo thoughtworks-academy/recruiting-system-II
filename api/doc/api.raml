@@ -212,14 +212,16 @@ baseUri: http://api.bronzesword.com/
               []:
                 properties:
                   homeworkQuizId: integer
+                  startTime: integer
                   homeworkSubmitPostHistory:
                     properties:
-                      startTime: integer
-                      commitTime: integer
-                      homeworkURL: string
-                      version: string
-                      branch: string
-                      status: number
+                      []:
+                        properties:
+                          commitTime: integer
+                          homeworkURL: string
+                          version: string
+                          branch: string
+                          status: number
 
     responses:
       201:
@@ -248,6 +250,8 @@ baseUri: http://api.bronzesword.com/
                     blankQuiz:
                       properties:
                        uri: string
+                    startTime: integer
+                    endTime: integer
                     itemPosts[]:
                       properties:
                         answer: string
@@ -259,6 +263,7 @@ baseUri: http://api.bronzesword.com/
                     homeworkQuiz:
                       properties:
                         uri: string
+                    startTime: integer
                     homeworkSubmitPostHistory[]:
                       properties:
                         homeworkURL: string
@@ -266,7 +271,6 @@ baseUri: http://api.bronzesword.com/
                         version: string
                         status: number
                         commitTime: integer
-                        startTime: integer
 
 /papers:
   get:
