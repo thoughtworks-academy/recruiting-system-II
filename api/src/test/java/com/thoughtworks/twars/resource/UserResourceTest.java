@@ -26,11 +26,6 @@ public class UserResourceTest extends TestBase {
 
     User user = mock(User.class);
 
-//    BlankQuizSubmit blankQuizSubmit = mock(BlankQuizSubmit.class);
-//    ItemPost itemPost = mock(ItemPost.class);
-//    ScoreSheet scoreSheet = mock(ScoreSheet.class);
-//    QuizItem quizItem = mock(QuizItem.class);
-
     @Mock
     ScoreSheet scoreSheet;
     @Mock
