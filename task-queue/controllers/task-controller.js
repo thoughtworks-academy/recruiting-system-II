@@ -55,9 +55,10 @@ TaskController.prototype.result = (req, res) => {
         .post(userHomeworkQuiz.callbackURL)
         .set('Content-Type', 'application/json')
         .send({
-          result: req.body.result,
-          jobName: req.body.jobName,
-          buildNumber: req.body.buildNumber
+          userId: userHomeworkQuiz.userId,
+          homeworkId: userHomeworkQuiz.homeworkId,
+          resultStatus: req.body.result,
+          resultURL: req.body.resultURL
         })
         .end(done);
     }
