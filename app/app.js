@@ -63,9 +63,9 @@ if (env === 'development') {
 }
 
 passport.use(new GithubStrategy({
-  clientID: "3d1ce4b21c72eed40be3",
-  clientSecret: "fe406b1fdc3f386871979976e244e01224c933ac",
-  callbackURL: "http://localhost:3000/login/github/callback"
+  clientID: '3d1ce4b21c72eed40be3',
+  clientSecret: 'fe406b1fdc3f386871979976e244e01224c933ac',
+  callbackURL: 'http://localhost:3000/login/github/callback'
 }, function(accessToken, refreshToken, profile, done) {
   done(null, profile);
 }));
