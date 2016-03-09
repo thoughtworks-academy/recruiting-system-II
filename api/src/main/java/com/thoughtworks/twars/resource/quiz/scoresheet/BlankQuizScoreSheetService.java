@@ -36,12 +36,13 @@ public class BlankQuizScoreSheetService implements IScoreSheetService {
                     blankQuizUri.put("uri", "/blankQuiz/" + blankQuizSubmit.getBlankQuizId());
                     Map<String, Object> blankQuizSubmitUri = new HashMap<>();
                     blankQuizSubmitUri.put("blankQuiz", blankQuizUri);
+                    blankQuizSubmitUri.put("startTime", blankQuizSubmit.getStartTime());
+                    blankQuizSubmitUri.put("endTime", blankQuizSubmit.getEndTime());
                     blankQuizSubmitUri.put("itemPosts",
                             getByBlankQuizSubmitId(blankQuizSubmit.getBlankQuizId()));
                     return blankQuizSubmitUri;
                 })
                 .collect(Collectors.toList());
-
     }
 
     public List<Map> getByBlankQuizSubmitId(int blankQuizSubmitId) {

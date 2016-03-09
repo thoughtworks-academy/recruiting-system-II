@@ -42,9 +42,11 @@ public class BlankQuizScoreSheetTest {
         when(blankQuizSubmitMapper.findByScoreSheetId(1))
                 .thenReturn(Arrays.asList(blankQuizSubmit));
         when(blankQuizSubmit.getBlankQuizId()).thenReturn(2);
+        when(blankQuizSubmit.getStartTime()).thenReturn(123456);
+        when(blankQuizSubmit.getEndTime()).thenReturn(123456);
         List<Map> blankQuizList = blankQuizScoreSheet.getQuizScoreSheet(1);
         String str = gson.toJson(blankQuizList);
-        assertThat(str, is("[{\"blankQuiz\":{\"uri\":\"/blankQuiz/2\"},\"itemPosts\":[]}]"));
+        assertThat(str, is("[{\"blankQuiz\":{\"uri\":\"/blankQuiz/2\"},\"startTime\":123456,\"endTime\":123456,\"itemPosts\":[]}]"));
     }
 
     @Test

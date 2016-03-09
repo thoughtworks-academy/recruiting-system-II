@@ -8,6 +8,8 @@
         <id property="id" column="id"></id>
         <result column="blankQuizId" property="blankQuizId"></result>
         <result column="scoreSheetId" property="scoreSheetId"></result>
+        <result column="startTime" property="startTime"></result>
+        <result column="endTime" property="endTime"></result>
     </resultMap>
 
     <insert id="insertBlankQuizSubmit" parameterType="com.thoughtworks.twars.bean.BlankQuizSubmit" useGeneratedKeys="true" keyProperty="id">
