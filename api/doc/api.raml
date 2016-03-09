@@ -41,6 +41,22 @@ baseUri: http://api.bronzesword.com/
               userInfo:
                 properties:
                   uri: string
+  /github:
+    post:
+      body:
+        application/x-www-form-urlencoded:
+          properties:
+            email: string
+            mobilePhone: string
+            password: string
+            githubId: integer
+      responses:
+        201:
+          body:
+            application/json:
+              properties:
+                userId: number
+
 
 /logout:
   post:
