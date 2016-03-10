@@ -43,7 +43,7 @@ ReactDom.render(
           <HomeworkContent>
             <HomeworkIntroduction />
             <SubmissionIntroduction orderId={changeId()}/>
-            <RunningResult />
+            <RunningResult orderId={changeId()}/>
           </HomeworkContent>
         </div>
     </div>,

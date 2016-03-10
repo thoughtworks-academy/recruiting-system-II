@@ -3,8 +3,9 @@
 var React = require('react');
 var Reflux = require('reflux');
 var RunningResultStore = require('../../store/homework/running-result-store');
-var RunningResult = React.createClass({
+var HomeworkActions = require('../../actions/homework/homework-actions');
 
+var RunningResult = React.createClass({
   mixins: [Reflux.connect(RunningResultStore)],
   getInitialState: function () {
     return {
@@ -14,11 +15,15 @@ var RunningResult = React.createClass({
     }
   },
 
+  componentDidMount: function () {
+    HomeworkActions.getRunningResult(this.props.orderId);
+  },
+
   render() {
     return (
         <div>
           {
-              this.state.isCommited ?
+              this.state.isSubmited ?
                   <div className="prompt">
                     <strong>正在进行测试,请稍候 ... ...</strong>
                   </div>
