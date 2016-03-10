@@ -64,6 +64,9 @@ public class App extends ResourceConfig {
         final PasswordRetrieveDetailMapper passwordRetrieveDetailMapper = session
                 .getMapper(PasswordRetrieveDetailMapper.class);
 
+        final GithubUserMapper githubUserMapper = session
+                .getMapper(GithubUserMapper.class);
+
         final BlankQuizScoreSheetService blankQuizScoreSheet = new BlankQuizScoreSheetService();
         blankQuizScoreSheet.setBlankQuizSubmitMapper(blankQuizSubmitMapper);
         blankQuizScoreSheet.setItemPostMapper(itemPostMapper);
@@ -110,6 +113,7 @@ public class App extends ResourceConfig {
                         bind(homeworkQuizDefinition).to(HomeworkQuizDefinitionService.class);
                         bind(blankQuizDefinition).to(BlankQuizDefinitionService.class);
                         bind(passwordRetrieveDetailMapper).to(PasswordRetrieveDetailMapper.class);
+                        bind(githubUserMapper).to(GithubUserMapper.class);
                         bind(session).to(SqlSessionManager.class);
                     }
                 });
