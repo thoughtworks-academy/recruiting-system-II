@@ -96,12 +96,13 @@ public class LoginResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUserWithGithub(Map map) {
         User user = new User();
-        GithubUser githubUser = new GithubUser();
 
         user.setMobilePhone((String) map.get("mobilePhone"));
         user.setEmail((String) map.get("email"));
         user.setPassword((String) map.get("password"));
         userMapper.insertUser(user);
+
+        GithubUser githubUser = new GithubUser();
 
         githubUser.setUserId(user.getId());
         githubUser.setGithubId((Integer) map.get("githubId"));
