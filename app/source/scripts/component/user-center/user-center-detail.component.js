@@ -104,7 +104,7 @@ var UserDetail = React.createClass({
     } else if (this.state.gender === '') {
       return;
     }
-      UserCenterActions.updateUserDetail(userData);
+    UserCenterActions.updateUserDetail(userData);
   },
 
   render: function () {
