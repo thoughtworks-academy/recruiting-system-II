@@ -10,8 +10,7 @@ var RunningResult = React.createClass({
   getInitialState: function () {
     return {
       isSubmited: false,
-      resultText: '',
-      resultStatus: ''
+      resultText: ''
     }
   },
 
@@ -24,7 +23,7 @@ var RunningResult = React.createClass({
         <div>
           {
               this.state.isSubmited ?
-                  <div className="prompt">
+                  <div className={'prompt' + (this.state.resultText ? 'hide': '')}>
                     <strong>正在进行测试,请稍候 ... ...</strong>
                   </div>
                 :

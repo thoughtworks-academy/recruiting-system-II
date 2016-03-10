@@ -242,5 +242,39 @@ HomeworkController.prototype.updateResult = (req, res)=> {
   });
 };
 
+HomeworkController.prototype.getResult = (req, res) => {
+  var userId = req.session.user.id;
+  var orderId = req.query.orderId;
+  var history, isSubmited, resultURL, resultText;
+
+  async.waterfall([
+    (done) => {
+      userHomeworkQuizzes.findOne({userId: userId}, done);
+    },
+    (data, done) => {
+      history = data.quizzes[orderId - 1].homeworkSubmitPostHistory;
+      isSubmited = history.length > 0;
+      if(isSubmited){
+        resultURL = history[history.length - 1].resultURL;
+        request.get(resultURL)
+            .end((err, res) => {
+              resultText = res.text;
+              console.log(res)
+              done(err,null)
+            });
+      }
+    }
+  ],function(err){
+    if(err){
+      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
+    }else{
+      res.send({
+        isSubmited: isSubmited,
+        resultText: resultText
+      })
+    }
+  });
+};
+
 
 module.exports = HomeworkController;
