@@ -94,27 +94,4 @@ public class LoginResourceTest extends TestBase {
         Response response = target(basePath).request().post(entity);
         assertThat(response.getStatus(), is(401));
     }
-
-    @Test
-    public void should_return_201_when_request_login_github() {
-        Map map = new HashMap<>();
-        map.put("email","jingjing@test.com");
-        map.put("password","25d55ad283aa400af464c76d713c07ad");
-        map.put("mobilePhone", "13572186283");
-        map.put("githubId",3);
-
-        when(userMapper.insertUser(resultUser)).thenReturn(1);
-        when(githubUserMapper.insertGithubUser(githubUser)).thenReturn(1);
-        when(resultUser.getId()).thenReturn(2);
-        when(githubUser.getId()).thenReturn(3);
-
-        Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/github").request().post(entity);
-        Map result = response.readEntity(Map.class);
-        assertThat(response.getStatus(), is(201));
-//        assertThat((Integer) result.get("userId"), is(2));
-//        assertThat((Integer) result.get("githubUserId"), is(3));
-
-    }
-
 }

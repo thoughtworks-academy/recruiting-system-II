@@ -90,27 +90,4 @@ public class LoginResource extends Resource {
         return Response.ok(map).header("token", token).build();
     }
 
-    @POST
-    @Path("/github")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response createUserWithGithub(Map map) {
-        User user = new User();
-
-        user.setMobilePhone((String) map.get("mobilePhone"));
-        user.setEmail((String) map.get("email"));
-        user.setPassword((String) map.get("password"));
-        userMapper.insertUser(user);
-
-        GithubUser githubUser = new GithubUser();
-
-        githubUser.setUserId(user.getId());
-        githubUser.setGithubId((Integer) map.get("githubId"));
-        githubUserMapper.insertGithubUser(githubUser);
-        Map result = new HashMap<>();
-        result.put("userId", user.getId());
-        result.put("githubUserId", githubUser.getId());
-        return Response.status(Response.Status.CREATED).entity(result).build();
-    }
-
 }
