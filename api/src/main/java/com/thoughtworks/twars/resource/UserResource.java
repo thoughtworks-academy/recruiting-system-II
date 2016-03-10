@@ -118,8 +118,9 @@ public class UserResource extends Resource {
             @PathParam("param") int userId) {
 
         UserDetail detail = userMapper.getUserDetailById(userId);
+        User user = userMapper.getUserById(userId);
 
-        if (null == detail) {
+        if (null == user || null == detail) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
@@ -131,6 +132,8 @@ public class UserResource extends Resource {
         map.put("name", detail.getName());
         map.put("gender", detail.getGender());
         map.put("birthday", detail.getBirthday());
+        map.put("email", user.getEmail());
+        map.put("mobilePhone", user.getMobilePhone());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }

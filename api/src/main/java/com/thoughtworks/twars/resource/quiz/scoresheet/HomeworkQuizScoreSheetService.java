@@ -39,7 +39,8 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                     homeworkQuizSubmitUri.put("homeworkSubmitPostHistory",
                             findByHomeworkSubmitId(homeworkQuizSubmit.getId()));
                     homeworkQuizSubmitUri.put("startTime", homeworkPostHistoryMapper
-                            .findByHomeworkSubmitId(homeworkQuizSubmit.getId()).get(0).getStartTime());
+                            .findByHomeworkSubmitId(homeworkQuizSubmit.getId())
+                            .get(0).getStartTime());
                     return homeworkQuizSubmitUri;
                 })
                 .collect(Collectors.toList());

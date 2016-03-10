@@ -3,7 +3,6 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
@@ -25,15 +24,6 @@ import static org.mockito.Mockito.when;
 public class UserResourceTest extends TestBase {
 
     User user = mock(User.class);
-
-    @Mock
-    ScoreSheet scoreSheet;
-    @Mock
-    BlankQuizSubmit blankQuizSubmit;
-    @Mock
-    ItemPost itemPost;
-    @Mock
-    QuizItem quizItem;
 
     String basePath = "/users";
 
@@ -126,6 +116,10 @@ public class UserResourceTest extends TestBase {
         UserDetail theDetail = mock(UserDetail.class);
 
         when(userMapper.getUserDetailById(1)).thenReturn(theDetail);
+        when(userMapper.getUserById(1)).thenReturn(user);
+        when(user.getMobilePhone()).thenReturn("123456");
+        when(user.getEmail()).thenReturn("11@qq.com");
+
         when(theDetail.getUserId()).thenReturn(1);
         when(theDetail.getSchool()).thenReturn("哈佛");
         when(theDetail.getMajor()).thenReturn("宗教");
@@ -145,6 +139,8 @@ public class UserResourceTest extends TestBase {
         assertThat(result.get("degree"), is("博士"));
         assertThat(result.get("name"), is("狗剩"));
         assertThat(result.get("gender"), is("男"));
+        assertThat(result.get("mobilePhone"), is("123456"));
+        assertThat(result.get("email"), is("11@qq.com"));
     }
 
     @Test
