@@ -14,44 +14,47 @@ var apiRequest = require('../../services/api-request');
 var timeTurner = require('../../mixin/time-turner');
 
 router.get('/', function (req, res) {
-  var userId = req.session.user.id;
-  var result;
+  if(req.session.user) {
+    var userId = req.session.user.id;
+    var result;
 
-  async.waterfall([
-    (done) => {
-      apiRequest.get('users/' + userId, done);
-    },
-    (resp, done) => {
-      if (resp.status === constant.httpCode.OK) {
-        result = _.assign(resp.body);
-      } else {
-        throw new Error();
+    async.waterfall([
+      (done) => {
+        apiRequest.get('users/' + userId, done);
+      },
+      (resp, done) => {
+        if (resp.status === constant.httpCode.OK) {
+          result = _.assign(resp.body);
+        } else {
+          throw new Error();
+        }
+        done(null, result);
+      },
+      (result, done) => {
+        apiRequest.get('users/' + userId + '/detail', done);
+      },
+      (resp, done) => {
+        result = _.assign(result, resp.body);
+        result.birthday = timeTurner.stampToTime(result.birthday);
+
+        done(null, result);
       }
-      done(null, result);
-    },
-    (result, done) => {
-      apiRequest.get('users/' + userId + '/detail', done);
-    },
-    (resp, done) => {
-      result = _.assign(result, resp.body);
-      result.birthday = timeTurner.stampToTime(result.birthday);
-
-      done(null, result);
-    }
-  ], (err) => {
-    if (err && err.status !== constant.httpCode.NOT_FOUND) {
-      res.status(err.status);
-      res.send({
-        status: err.status
-      });
-    } else {
-      res.send({
-        status: constant.httpCode.OK,
-        data: result
-      });
-    }
-  });
-
+    ], (err) => {
+      if (err && err.status !== constant.httpCode.NOT_FOUND) {
+        res.status(err.status);
+        res.send({
+          status: err.status
+        });
+      } else {
+        res.send({
+          status: constant.httpCode.OK,
+          data: result
+        });
+      }
+    });
+  }else {
+    res.send({status:constant.httpCode.ACCEPTED});
+  }
 
 });
 
