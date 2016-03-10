@@ -75,6 +75,14 @@ var RegisterStore = Reflux.createStore({
         });
   },
 
+  onThirdPartyRegister: function (data, extraData) {
+    request
+        .post('/register/third-party')
+        .set('Content-Type', 'application/json')
+        .send({
+
+        })
+  },
   onInitialUserQuiz: function () {
     async.series({
       initializeQuizzes: (done) => {
