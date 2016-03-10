@@ -1,6 +1,9 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.GithubUser;
 import com.thoughtworks.twars.bean.User;
+import com.thoughtworks.twars.bean.UserDetail;
+import com.thoughtworks.twars.mapper.GithubUserMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -25,6 +28,9 @@ public class RegisterResource extends Resource {
     @Inject
     private UserMapper userMapper;
 
+    @Inject
+    private GithubUserMapper githubUserMapper;
+
     @POST
     @ApiResponses(value = {@ApiResponse(code = 200, message = "register successfully")})
     @Consumes(MediaType.APPLICATION_JSON)
@@ -47,5 +53,40 @@ public class RegisterResource extends Resource {
         map.put("user", theUser);
 
         return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces()
+    public Response createUser(Map info) {
+        User user = new User();
+
+        user.setPassword((String) info.get("password"));
+        user.setMobilePhone((String) info.get("mobilePhone"));
+        user.setEmail((String) info.get("email"));
+        userMapper.insertUser(user);
+        session.commit();
+
+//        UserDetail userDetail = new UserDetail();
+//        userDetail.setBirthday((Integer) info.get("birthday"));
+//        userDetail.setDegree((String) info.get("degree"));
+//        userDetail.setGender((String) info.get("gender"));
+//        userDetail.setUserId(user.getId());
+//        userDetail.setSchool((String) info.get("school"));
+//        userDetail.setName((String) info.get("name"));
+//        userDetail.setMajor((String) info.get("major"));
+//        userMapper.updateUserDetail(userDetail);
+//        session.commit();
+//
+//        GithubUser githubUser = new GithubUser();
+//        githubUser.setGithubId((Integer) info.get("thirdPartId"));
+//        githubUser.setUserId(user.getId());
+//
+//        githubUserMapper.insertGithubUser(githubUser);
+
+        Map result = new HashMap<>();
+        result.put("userId", user.getId());
+//        result.put("githubUserId", githubUser.getId());
+        return Response.status(Response.Status.CREATED).entity(result).build();
     }
 }
