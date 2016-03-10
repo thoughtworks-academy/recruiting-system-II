@@ -20,7 +20,7 @@ function createUserDetail(data) {
     name: data.name,
     mobilePhone: data.mobilePhone,
     email: data.email
-  }
+  };
 }
 
 function createLogicPuzzle(data) {
@@ -40,7 +40,7 @@ function createLogicPuzzle(data) {
     startTime: logicPuzzle.startTime,
     endTime: logicPuzzle.endTime,
     accuracy: accuracy + '%'
-  }
+  };
 }
 
 function createHomework(data) {
@@ -112,14 +112,14 @@ function getUserDataByUserId(userId, callback) {
     if (err) {
       callback({
         httpCode: constant.httpCode.NOT_FOUND
-      })
+      });
     } else {
       callback({
         result: result,
         httpCode: constant.httpCode.OK
       });
     }
-  })
+  });
 }
 
 
@@ -154,13 +154,13 @@ function createCSV(userInfo) {
   var fields = ['name', 'mobilePhone', 'email', 'accuracy', 'homeworkAddress', 'homeworkElapsedTime', 'log'];
 
   var user = [{
-    "name": userDetail.name,
-    "mobilePhone": userDetail.mobilePhone,
-    "email": userDetail.email,
-    "accuracy": logicPuzzle.accuracy,
-    "homeworkAddress": 'url',
-    "homeworkElapsedTime": homework.elapsedTime + '分钟',
-    "log": 'url'
+    name: userDetail.name,
+    mobilePhone: userDetail.mobilePhone,
+    email: userDetail.email,
+    accuracy: logicPuzzle.accuracy,
+    homeworkAddress: 'url',
+    homeworkElapsedTime: homework.elapsedTime + '分钟',
+    log: 'url'
   }];
 
   json2csv({data: user, fields: fields, fieldNames: fieldNames}, function (err, csv) {
