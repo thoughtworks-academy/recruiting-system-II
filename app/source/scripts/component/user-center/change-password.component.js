@@ -9,7 +9,6 @@ var ChangePasswordStore = require('../../store/user-center/change-password-store
 var UserCenterStore = require('../../store/user-center/user-center-store');
 var PasswordStore = require('../../store/reuse/password-store');
 var Reflux = require('reflux');
-var _ = require('lodash');
 
 var ChangePassword = React.createClass({
   mixins: [Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore), Reflux.connect(PasswordStore)],
