@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var constant = require('../mixin/constant');
 var yamlConfig = require('node-yaml-config');
-var config = yamlConfig.load(__dirname + '../../config/config.yml');
+var config = yamlConfig.load('./config/config.yml');
 
 var _timeBase = 90;
 var Schema = mongoose.Schema;
