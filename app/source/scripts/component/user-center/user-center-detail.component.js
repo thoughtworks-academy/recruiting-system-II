@@ -27,7 +27,7 @@ var UserDetail = React.createClass({
       majorError: '',
       degreeError: '',
       mobilePhoneError: '',
-      emailError:'',
+      emailError: '',
       currentState: 'userDetail',
       birthday: ''
     };
@@ -46,7 +46,7 @@ var UserDetail = React.createClass({
         degree: '',
         degreeError: '',
         birthday: ''
-      })
+      });
     }
   },
 
@@ -164,7 +164,7 @@ var UserDetail = React.createClass({
 
                 <label htmlFor='inputMobilePhone' className='col-sm-4 col-md-4 control-label'>手机</label>
                 <div className='form-group'>
-                <div className='col-sm-4 col-md-4'>
+                  <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputMobilePhone' placeholder='手机'
                            disabled="disabled" value={this.state.mobilePhone}/>
                   </div>
@@ -172,9 +172,9 @@ var UserDetail = React.createClass({
 
                 <label htmlFor='inputEmail' className='col-sm-4 col-md-4 control-label'>邮箱</label>
                 <div className='form-group'>
-                <div className='col-sm-4 col-md-4'>
+                  <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputEmail' placeholder='邮箱'
-                           disabled="disabled" value={this.state.email} />
+                           disabled="disabled" value={this.state.email}/>
                   </div>
                 </div>
 

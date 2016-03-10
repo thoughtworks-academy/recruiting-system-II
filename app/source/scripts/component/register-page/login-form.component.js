@@ -51,7 +51,7 @@ var LoginForm = React.createClass({
       valObj.mobilePhone = value;
       result = validate(valObj, constraint);
       error = getError(result, 'email');
-      if(error){
+      if (error) {
         error = getError(result, 'mobilePhone');
       }
     } else {
@@ -60,18 +60,18 @@ var LoginForm = React.createClass({
       error = getError(result, name);
     }
     stateObj[name + 'Error'] = error;
-    this.setState(stateObj);0
+    this.setState(stateObj);
   },
 
-  componentDidUpdate:function(prevProps, prevState){
-    if(this.state.isLoginState && !prevState.isLoginState) {
+  componentDidUpdate: function (prevProps, prevState) {
+    if (this.state.isLoginState && !prevState.isLoginState) {
       this.refs.email.value = '';
       this.refs.loginPassword.value = '';
       this.setState({
         emailError: '',
         loginPasswordError: ''
       });
-    };
+    }
   },
 
 
@@ -103,7 +103,7 @@ var LoginForm = React.createClass({
             </div>
             <div className="form-group">
               <input className="form-control" type="password" placeholder="请输入密码" name="loginPassword"
-                     ref="loginPassword" onBlur={this.validate} />
+                     ref="loginPassword" onBlur={this.validate}/>
               <div
                   className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
               </div>

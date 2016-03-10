@@ -40,15 +40,14 @@ var NewPassword = React.createClass({
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-    console.log(prevState)
-    if (prevState.initialStatus !== this.state.currentState){
+    if (prevState.initialStatus !== this.state.currentState) {
       this.setState({
         newPassword: '',
         newPasswordError: '',
         confirmPassword: '',
         confirmPasswordError: '',
         initialStatus: this.state.currentState
-      })
+      });
     }
   },
 
@@ -72,7 +71,8 @@ var NewPassword = React.createClass({
           </div>
           <div className="col-sm-12 col-md-12">
             <label htmlFor="confirmPassword" className="col-sm-3 col-md-3 control-label">确认密码</label>
-            <div className={'form-group col-sm-6 col-md-6 has-' + (this.state.confirmPasswordError === '' ? '' : 'error')}>
+            <div
+                className={'form-group col-sm-6 col-md-6 has-' + (this.state.confirmPasswordError === '' ? '' : 'error')}>
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="confirmPassword" id="confirmPassword"
                      placeholder="请再次确认新密码" onBlur={this.validate}

@@ -21,7 +21,7 @@ var UserCenterGender = React.createClass({
         gender: '',
         genderError: false
 
-      })
+      });
     }
   },
   genderChange: function (evt) {

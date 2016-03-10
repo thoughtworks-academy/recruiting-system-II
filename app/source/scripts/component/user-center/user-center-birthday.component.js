@@ -26,7 +26,7 @@ var UserCenterBirthday = React.createClass({
       this.setState({
         birthday: '',
         birthdayError: ''
-      })
+      });
     }
   },
 

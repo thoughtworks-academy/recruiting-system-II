@@ -6,7 +6,7 @@ var request = require('../../services/api-request');
 var httpStatusCode = require('../../mixin/constant').httpCode;
 var json2csv = require('json2csv');
 var UserController = require('../../controllers/user-controller');
-var fs = require("fs");
+var fs = require('fs');
 
 var testSession = null;
 
@@ -48,7 +48,7 @@ describe('GET /user/:userid/csv', function () {
 
 
     fs.stat('file.csv', function (err, stat) {
-      if (err == null && stat.isFile()) {
+      if (err === null && stat.isFile()) {
         fs.unlink('file.csv', function () {
           createCsvFile(done);
         });
@@ -56,7 +56,7 @@ describe('GET /user/:userid/csv', function () {
         createCsvFile(done);
       }
     });
-  })
+  });
 });
 
 
@@ -74,7 +74,7 @@ function createCsvFile(done) {
       })
       .end(function (err, res) {
 
-        fs.readFile("file.csv", "utf8", function (error, data) {
+        fs.readFile('file.csv', 'utf8', function (error, data) {
           if (error) {
             throw error;
           }
