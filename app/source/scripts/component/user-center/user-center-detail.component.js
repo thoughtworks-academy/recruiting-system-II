@@ -8,6 +8,10 @@ var Reflux = require('reflux');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/user-detail-constraint');
 var getError = require('../../../../mixin/get-error');
+var registerConstraint = require('../../../../mixin/register-constraint');
+var RegisterActions = require('../../actions/register-page/register-actions');
+var _ = require('lodash');
+
 
 var UserDetail = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],
@@ -25,8 +29,11 @@ var UserDetail = React.createClass({
       nameError: '',
       majorError: '',
       degreeError: '',
+      mobilePhoneError: '',
+      emailError:'',
       currentState: 'userDetail',
-      birthday: ''
+      birthday: '',
+      isThirdParty: false
     };
   },
 
@@ -48,8 +55,10 @@ var UserDetail = React.createClass({
     var valObj = {};
 
     valObj[name] = value;
-
     var result = validate(valObj, constraint);
+    var extraResult = validate(valObj, registerConstraint);
+
+    result = _.assign(result, extraResult);
     var error = getError(result, name);
     var stateObj = {};
 
@@ -63,14 +72,20 @@ var UserDetail = React.createClass({
     var major = {major: this.state.major};
     var degree = {degree: this.state.degree};
     var birthday = {birthday: this.state.birthday};
+    var mobilePhone = {mobilePhone: this.state.mobilePhone};
+    var email= {email: this.state.email};
+
     var userInfo = [];
 
-    userInfo.push(school, name, major, degree, birthday);
+    userInfo.push(school, name, major, degree, birthday, mobilePhone, email);
     var pass = false;
     var stateObj = {};
 
     userInfo.forEach((item) => {
       var result = validate(item, constraint);
+      var extraResult = validate(item, registerConstraint);
+      result = _.assign(result, extraResult);
+
       var error = getError(result, Object.keys(item));
 
       if (error !== '') {
@@ -95,17 +110,26 @@ var UserDetail = React.createClass({
       degree: this.state.degree,
       birthday: this.state.birthday
     };
+    var extraData = {
+      mobilePhone: this.state.mobilePhone,
+      email: this.state.email
+    };
 
     if (this.checkInfo()) {
       return;
     } else if (this.state.gender === '') {
       return;
     }
-    UserCenterActions.updateUserDetail(userData);
+    if(this.state.isThirdParty === false) {
+      UserCenterActions.updateUserDetail(userData);
+    }else {
+      RegisterActions.thirdPartyRegister(userData, extraData);
+    }
   },
 
   render: function () {
     var classString = (this.state.currentState === 'userDetail' ? '' : '  hide');
+
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className='content'>
@@ -142,18 +166,30 @@ var UserDetail = React.createClass({
                 </div>
 
                 <label htmlFor='inputMobilePhone' className='col-sm-4 col-md-4 control-label'>手机</label>
-                <div className='form-group'>
-                  <div className='col-sm-4 col-md-4'>
+                <div className={'form-group has-' + (this.state.mobilePhoneError === '' ? '' : 'error')}>
+                <div className='col-sm-4 col-md-4'>
                     <input type='text' className='form-control' id='inputMobilePhone' placeholder='手机'
-                           disabled='disabled' value={this.state.mobilePhone}/>
+                           disabled={this.state.isThirdParty === true ? false : true} onBlur={this.validate}
+                           name="mobilePhone" value={this.state.mobilePhone} onChange={this.handleChange}/>
+                  </div>
+                  <div className={'error alert alert-danger' + (this.state.mobilePhoneError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+                    {this.state.mobilePhoneError}
                   </div>
                 </div>
 
                 <label htmlFor='inputEmail' className='col-sm-4 col-md-4 control-label'>邮箱</label>
-                <div className='form-group'>
-                  <div className='col-sm-4 col-md-4'>
-                    <input type='text' className='form-control' id='inputEmail' placeholder='邮箱' disabled='disabled'
-                           value={this.state.email}/>
+                <div className={'form-group has-' + (this.state.emailError === '' ? '' : 'error')}>
+                <div className='col-sm-4 col-md-4'>
+                    <input type='text' className='form-control' id='inputEmail' placeholder='邮箱'
+                           disabled={this.state.isThirdParty === true ? false : true} onBlur={this.validate}
+                           value={this.state.email} name="email" onChange={this.handleChange}/>
+                  </div>
+                  <div className={'error alert alert-danger' + (this.state.emailError === '' ? ' hide' : '')}
+                       role='alert'>
+                    <span className='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
+                    {this.state.emailError}
                   </div>
                 </div>
 
