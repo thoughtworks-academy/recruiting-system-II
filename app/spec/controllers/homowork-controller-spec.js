@@ -148,8 +148,11 @@ describe('HomeworkController', function () {
             {
               id: 1,
               status: constant.homeworkQuizzesStatus.ACTIVE,
-              userAnswerRepo: 'w',
-              branch: 'dev'
+              homeworkSubmitPostHistory: [{
+                status: constant.homeworkQuizzesStatus.ACTIVE,
+                homeworkURL: 'w',
+                branch: 'dev'
+              }]
             }, {
               id: 2,
               status: constant.homeworkQuizzesStatus.LOCKED

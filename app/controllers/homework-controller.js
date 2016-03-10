@@ -70,9 +70,15 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         error.status = constant.httpCode.FORBIDDEN;
         done(true, error);
       } else {
-        userAnswerRepo = quiz.userAnswerRepo;
-        quizStatus = quiz.status;
-        branch = quiz.branch;
+        if(quiz.homeworkSubmitPostHistory.length){
+          var userSubmitInfo = quiz.homeworkSubmitPostHistory.pop();
+
+          userAnswerRepo = userSubmitInfo.homeworkURL;
+          quizStatus = userSubmitInfo.status;
+          branch = userSubmitInfo.branch;
+        }else {
+          quizStatus = quiz.status;
+        }
         if (!quiz.startTime) {
           quiz.startTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
           result.save();
