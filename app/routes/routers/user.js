@@ -6,6 +6,6 @@ var router = express.Router();
 var UserController = require('../../controllers/user-controller');
 var userController = new UserController();
 
-router.get('/answer', userController.answer);
+router.get('/:userId/csv', userController.exportCsv);
 
 module.exports = router;
