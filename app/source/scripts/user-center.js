@@ -27,7 +27,7 @@ ReactDom.render(
           <UserCenterBirthday/>
         </UserDetail>
         <ChangePassword>
-          <NewPassword/>
+          <NewPassword initialStatus="userDetail"/>
         </ChangePassword>
       </UserCenterApp>
     </div>,

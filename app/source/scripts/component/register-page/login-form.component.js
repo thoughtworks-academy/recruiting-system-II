@@ -60,8 +60,20 @@ var LoginForm = React.createClass({
       error = getError(result, name);
     }
     stateObj[name + 'Error'] = error;
-    this.setState(stateObj);
+    this.setState(stateObj);0
   },
+
+  componentDidUpdate:function(prevProps, prevState){
+    if(this.state.isLoginState && !prevState.isLoginState) {
+      this.refs.email.value = '';
+      this.refs.loginPassword.value = '';
+      this.setState({
+        emailError: '',
+        loginPasswordError: ''
+      });
+    };
+  },
+
 
   login: function () {
     this.setState({
@@ -75,7 +87,7 @@ var LoginForm = React.createClass({
 
   render: function () {
     var classString = 'col-md-7 logon-form-container' + (this.state.isLoginState ? '' : ' hide');
-
+    var emailValue = this.state.email;
     return (
         <div id="logon" className={classString}>
           <h4 className="welcome">欢迎登陆思沃学院</h4>
@@ -84,15 +96,14 @@ var LoginForm = React.createClass({
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱或手机号" name="email"
                      onBlur={this.validate}
-                     ref="email" onChange={this.handleChange} value={this.state.email}/>
+                     ref="email"/>
               <div
                   className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}
               </div>
             </div>
             <div className="form-group">
               <input className="form-control" type="password" placeholder="请输入密码" name="loginPassword"
-                     ref="loginPassword" onBlur={this.validate} onChange={this.handleChange}
-                     value={this.state.loginPassword}/>
+                     ref="loginPassword" onBlur={this.validate} />
               <div
                   className={'lose' + (this.state.loginPasswordError === '' ? ' hide' : '')}>{this.state.loginPasswordError}
               </div>

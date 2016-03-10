@@ -44,6 +44,18 @@ var RegisterForm = React.createClass({
     };
   },
 
+  componentDidUpdate:function(prevProps, prevState){
+    if(!this.state.isLoginState && prevState.isLoginState) {
+      this.setState({
+        mobilePhoneError: '',
+        emailError: ''
+      });
+      this.refs.mobilePhone.value = '';
+      this.refs.email.value = '';
+
+    };
+  },
+
   handleChange: function (event) {
     var value = event.target.value;
     var name = event.target.name;
@@ -140,7 +152,7 @@ var RegisterForm = React.createClass({
           <form action="">
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入手机号" name="mobilePhone" ref="mobilePhone"
-                     onBlur={this.validate} onChange={this.handleChange} value={this.state.mobilePhone}/>
+                     onBlur={this.validate} />
 
               <div
                   className={'lose' + (this.state.mobilePhoneError === '' ? ' hide' : '')}>{this.state.mobilePhoneError}</div>
@@ -148,7 +160,7 @@ var RegisterForm = React.createClass({
 
             <div className="form-group">
               <input className="form-control" type="text" placeholder="请输入邮箱" name="email" ref="email"
-                     onBlur={this.validate} onChange={this.handleChange} value={this.state.email}/>
+                     onBlur={this.validate} />
 
               <div
                   className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}</div>

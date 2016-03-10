@@ -62,7 +62,20 @@ var RegisterPassword = React.createClass({
       passwordError: '',
       isShowToggle: false,
       passwordSafeLevel: '',
-      passwordSafeStyle: ''
+      passwordSafeStyle: '',
+      isLoginState: false
+    };
+  },
+
+  componentDidUpdate:function(prevProps, prevState){
+    if(!this.state.isLoginState && prevState.isLoginState) {
+      this.refs.password.value = '';
+      this.setState({
+        password: '',
+        passwordError: '',
+        passwordSafeLevel: '',
+        passwordSafeStyle: ''
+      })
     };
   },
 
@@ -109,7 +122,7 @@ var RegisterPassword = React.createClass({
           <input className="form-control" type={(this.state.isShowToggle === false ? 'password' : 'text')}
                  placeholder="请输入8~16位密码" name="password" ref="password"
                  id="register-password" onBlur={this.validate} onChange={this.checkPasswordSafe}
-                 value={this.state.password}/>
+                 />
           <div className={'lose' + (this.state.passwordError === '' ? ' hide' : '')}>{this.state.passwordError}
           </div>
           <ul className="passport-safely">

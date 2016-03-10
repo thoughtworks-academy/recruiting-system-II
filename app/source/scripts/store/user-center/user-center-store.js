@@ -45,29 +45,10 @@ var UserDetailStore = Reflux.createStore({
   },
 
   onChangeState: function (state, currentState) {
-
     if (state !== currentState) {
       this.trigger({
-        currentState: state,
-        oldPassword: '',
-        newPassword: '',
-        confirmPassword: '',
-        oldPasswordError: '',
-        newPasswordError: '',
-        confirmPasswordError: '',
-        success: false,
-        school: '',
-        schoolError: '',
-        name: '',
-        nameError: '',
-        major: '',
-        majorError: '',
-        gender: '',
-        genderError: false,
-        degree: '',
-        degreeError: '',
-        birthday: '',
-        birthdayError: ''
+        currentState: state
+
       });
     }
   },

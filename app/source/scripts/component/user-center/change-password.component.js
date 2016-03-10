@@ -27,6 +27,16 @@ var ChangePassword = React.createClass({
     };
   },
 
+  componentDidUpdate: function (prevProps, prevState) {
+    if (prevState.currentState === 'userDetail') {
+      this.setState({
+        oldPassword: '',
+        oldPasswordError: '',
+        success: false
+      });
+    }
+  },
+
   validate: function (evt) {
     var target = evt.target;
     var name = target.name;

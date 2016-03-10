@@ -14,21 +14,30 @@ var moment = require('moment');
 var UserCenterBirthday = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       birthday: '',
-      birthdayError:''
+      birthdayError: ''
     };
   },
 
+  componentDidUpdate: function (prevPorps, prevState) {
+    if (prevState.currentState === 'password') {
+      this.setState({
+        birthday: '',
+        birthdayError: ''
+      })
+    }
+  },
+
   changeBirthday: function (time) {
-    if(time !== null) {
+    if (time !== null) {
       this.setState({birthdayError: ''});
     }
     UserCenterActions.changeBirthday(time);
   },
 
-  validate: function(evt) {
+  validate: function (evt) {
     var value = evt.target.value;
     var valObj = {birthday: value};
     var result = validate(valObj, constraint);
@@ -43,14 +52,14 @@ var UserCenterBirthday = React.createClass({
         <div>
           <div className='col-sm-4 col-md-4'>
 
-          <Calendar
-              inputFieldClass={this.state.birthdayError === '' ? '' : 'calendar'}
-              format="DD/MM/YYYY"
-              onChange={this.changeBirthday}
-              date={this.state.birthday}
-              maxDate={moment().format('L')}
-              onBlur={this.validate}
-          />
+            <Calendar
+                inputFieldClass={this.state.birthdayError === '' ? '' : 'calendar'}
+                format="DD/MM/YYYY"
+                onChange={this.changeBirthday}
+                date={this.state.birthday}
+                maxDate={moment().format('L')}
+                onBlur={this.validate}
+            />
           </div>
           <div className={'error alert alert-danger' + (this.state.birthdayError === '' ? ' hide' : '')}
                role='alert'>

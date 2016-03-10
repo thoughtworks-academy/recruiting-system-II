@@ -33,6 +33,23 @@ var UserDetail = React.createClass({
     };
   },
 
+  componentDidUpdate: function (prevProps, prevState) {
+    if (prevState.currentState === 'password') {
+      this.setState({
+        school: '',
+        schoolError: '',
+        name: '',
+        nameError: '',
+        major: '',
+        majorError: '',
+        gender: '',
+        degree: '',
+        degreeError: '',
+        birthday: ''
+      })
+    }
+  },
+
   componentDidMount: function () {
     UserCenterActions.loadUserDetail();
   },

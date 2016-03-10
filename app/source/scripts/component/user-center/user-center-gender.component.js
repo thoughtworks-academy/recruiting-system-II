@@ -8,13 +8,22 @@ var UserCenterStore = require('../../store/user-center/user-center-store');
 var UserCenterGender = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],
 
-  getInitialState: function(){
+  getInitialState: function () {
     return {
       gender: '',
-      genderError: false
+      genderError: false,
+      currentState: 'userDetail',
     };
   },
+  componentDidUpdate: function (prevProps, prevState) {
+    if (prevState.currentState === 'userDetail') {
+      this.setState({
+        gender: '',
+        genderError: false
 
+      })
+    }
+  },
   genderChange: function (evt) {
     UserCenterActions.changeGender(evt);
     UserCenterActions.validateGender(this.state.genderError);
@@ -40,7 +49,8 @@ var UserCenterGender = React.createClass({
             })}
 
           </div>
-          <div className={'error alert alert-danger' + (this.state.genderError === true ? '' : ' hide')} role="alert">
+          <div className={'error alert alert-danger' + (this.state.genderError === true ? '' : ' hide')}
+               role="alert">
             <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             请选择性别
           </div>

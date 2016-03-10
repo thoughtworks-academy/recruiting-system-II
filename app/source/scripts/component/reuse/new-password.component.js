@@ -18,7 +18,8 @@ var NewPassword = React.createClass({
       newPassword: '',
       newPasswordError: '',
       confirmPassword: '',
-      confirmPasswordError: ''
+      confirmPasswordError: '',
+      initialStatus: this.props.initialStatus
     };
   },
 
@@ -36,17 +37,19 @@ var NewPassword = React.createClass({
     stateObj[name + 'Error'] = error;
     this.setState(stateObj);
 
-    PasswordActions.getPasswordError(stateObj);
-
   },
 
-  handleChange: function (evt) {
-    var newState = evt.target.value;
-    var stateName = evt.target.name;
-
-    this.setState({[stateName]: newState});
-
-    PasswordActions.changeNewPassword({[stateName]: newState});
+  componentDidUpdate: function (prevProps, prevState) {
+    console.log(prevState)
+    if (prevState.initialStatus !== this.state.currentState){
+      this.setState({
+        newPassword: '',
+        newPasswordError: '',
+        confirmPassword: '',
+        confirmPasswordError: '',
+        initialStatus: this.state.currentState
+      })
+    }
   },
 
   render: function () {
@@ -58,7 +61,7 @@ var NewPassword = React.createClass({
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="newPassword" id="newPassword"
                      placeholder="请输入新密码" onBlur={this.validate}
-                     onChange={this.handleChange} value={this.state.newPassword}/>
+                     refs="newpassword"/>
             </div>
             <span
                 className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
