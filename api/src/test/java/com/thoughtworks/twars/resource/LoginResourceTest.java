@@ -112,7 +112,6 @@ public class LoginResourceTest extends TestBase {
         Response response = target(basePath + "/github").request().post(entity);
         Map result = response.readEntity(Map.class);
         assertThat(response.getStatus(), is(201));
-//        assertEquals(result.get("userId"), 2);
 //        assertThat((Integer) result.get("userId"), is(2));
 //        assertThat((Integer) result.get("githubUserId"), is(3));
 
