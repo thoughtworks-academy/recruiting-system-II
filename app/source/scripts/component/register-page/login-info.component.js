@@ -33,16 +33,6 @@ var LoginInfo = React.createClass({
           <div className={passwordRetrieve}>
             忘记密码?<a href="password-retrieve.html">立即找回</a>
           </div>
-
-          <div className="third-party">
-            <div className="title">合作方账号登录</div>
-            <ul className="third-party-entry">
-              <li className="qq"><a href="#"><img src="" alt=""/></a></li>
-              <li className="weibo"><a href="#"><img src="" alt=""/></a></li>
-              <li className="weixin"><a href="#"><img src="" alt=""/></a></li>
-              <li className="github"><a href="/login/github"><img src="" alt=""/></a></li>
-            </ul>
-          </div>
         </div>
     );
   }

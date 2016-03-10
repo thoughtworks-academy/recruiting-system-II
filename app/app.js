@@ -15,12 +15,10 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var constant = require('./mixin/constant');
 var yamlConfig = require('node-yaml-config');
-var passport = require('passport');
-var GithubStrategy = require('passport-github').Strategy;
 
 var config = yamlConfig.load(__dirname + '/config/config.yml');
 
-var env = ['production', 'test', 'staging'].indexOf(process.env.NODE_ENV) < 0 ? 'development': process.env.NODE_ENV;
+var env = ['production', 'test', 'staging'].indexOf(process.env.NODE_ENV) < 0 ? 'development' : process.env.NODE_ENV;
 
 mongoose.connect(config.database);
 
@@ -39,16 +37,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
 
 if (env === 'development') {
   var compile = webpack(require('./webpack.config'));
@@ -62,14 +50,6 @@ if (env === 'development') {
   }));
 }
 
-passport.use(new GithubStrategy({
-  clientID: '3d1ce4b21c72eed40be3',
-  clientSecret: 'fe406b1fdc3f386871979976e244e01224c933ac',
-  callbackURL: 'http://localhost:3000/login/github/callback'
-}, function(accessToken, refreshToken, profile, done) {
-  done(null, profile);
-}));
-
 app.use(sessionCheck);
 
 app.use(express.static('public'));
@@ -78,7 +58,7 @@ route.setRoutes(app);
 
 app.all('*', errRequestHandler);
 
-app.listen(config.port,function () {
+app.listen(config.port, function () {
   console.log('App listening at http://localhost:' + config.port);
 });
 

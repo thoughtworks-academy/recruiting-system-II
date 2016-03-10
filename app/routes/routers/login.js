@@ -8,7 +8,6 @@ var lang = require('../../mixin/lang-message/chinese');
 var md5 = require('js-md5');
 var validate = require('validate.js');
 var constraint = require('../../mixin/login-constraint');
-var passport = require('passport');
 var apiRequest = require('../../services/api-request');
 var httpStatus = require('../../mixin/constant').httpCode;
 
@@ -64,16 +63,4 @@ router.post('/', function (req, res) {
   }
 });
 
-router.get('/github',
-    passport.authenticate('github'),
-    function (req, res) {
-
-    });
-
-
-router.get('/github/callback',
-    passport.authenticate('github', {failureRedirect: '/'}),
-    function (req, res) {
-      res.redirect('/user-center.html');
-    });
 module.exports = router;

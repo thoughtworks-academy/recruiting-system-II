@@ -14,7 +14,6 @@ LogoutController.prototype.logout = (req, res)=> {
 
   async.waterfall([
     (done)=> {
-      req.logout();
       req.session.destroy(function (err) {
         if (err) {
           done(err, null);

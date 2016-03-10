@@ -10,7 +10,6 @@ var constraint = require('../../../../mixin/register-constraint');
 var async = require('async');
 var errorHandler = require('../../../../tools/error-handler');
 
-
 var RegisterStore = Reflux.createStore({
   listenables: RegisterActions,
 
@@ -75,14 +74,7 @@ var RegisterStore = Reflux.createStore({
         });
   },
 
-  onThirdPartyRegister: function (data, extraData) {
-    request
-        .post('/register/third-party')
-        .set('Content-Type', 'application/json')
-        .send({
 
-        })
-  },
   onInitialUserQuiz: function () {
     async.series({
       initializeQuizzes: (done) => {
