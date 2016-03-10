@@ -1,11 +1,13 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.GithubUser;
 import com.thoughtworks.twars.bean.User;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,5 +38,21 @@ public class RegisterResourceTest extends TestBase {
 
         assertThat(userUri, is("user/108"));
         assertThat(userInfoUri, is("userInfo/108"));
+    }
+
+    @Test
+    public void should_create_user_when_register_with_third_part_user() throws Exception {
+        GithubUser githubUser = new GithubUser();
+
+        when(githubUserMapper.insertGithubUser(githubUser)).thenReturn(1);
+        githubUser.setGithubId(2);
+        githubUser.setUserId(4);
+        githubUser.setId(3);
+
+        Entity entity = Entity.entity(githubUser, MediaType.APPLICATION_JSON);
+        Response response = target(basePath + "/third-part").request().post(entity);
+        Map result = response.readEntity(Map.class);
+        assertThat(response.getStatus(), is(201));
+        assertThat(result.get("thirdPartyId"), is(3));
     }
 }
