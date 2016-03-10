@@ -259,9 +259,10 @@ HomeworkController.prototype.getResult = (req, res) => {
         request.get(resultURL)
             .end((err, res) => {
               resultText = res.text;
-              console.log(res)
-              done(err,null)
+              done(err,null);
             });
+      }else{
+        done(null,null);
       }
     }
   ],function(err){

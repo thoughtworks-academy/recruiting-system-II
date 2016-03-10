@@ -9,17 +9,17 @@ var RunningResult = React.createClass({
   mixins: [Reflux.connect(RunningResultStore)],
   getInitialState: function () {
     return {
+      orderId: this.props.orderId,
       isSubmited: false,
       resultText: ''
     }
   },
 
-  componentDidMount: function () {
-    HomeworkActions.getRunningResult(this.props.orderId);
-  },
-
   render() {
+
     return (
+        console.log(this.state.orderId), console.log(this.state.isSubmited),
+
         <div className="runningResult">
           {
               this.state.isSubmited ?

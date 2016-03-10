@@ -12,10 +12,10 @@ var RunningResultStore = Reflux.createStore({
     this.trigger({isSubmited: true});
   },
 
-  onGetRunningResult: function (orderId) {
+  onChangeOrderId: function (Number) {
     superAgent.get('homework/getResult')
         .set('Content-Type', 'application/json')
-        .query({orderId: orderId})
+        .query({orderId: Number})
         .use(errorHandler)
         .end((err,res) => {
           this.trigger({
