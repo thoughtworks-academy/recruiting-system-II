@@ -23,23 +23,15 @@ baseUri: http://api.bronzesword.com/
               userInfo:
                 properties:
                   uri: string
-  /third-part:
+  /third-party:
     post:
       description: |
         the third part register
       body:
         application/json:
           properties:
-            school: string
-            name: string
-            major: string
-            degree: string
-            birthday: integer
-            gender: string
             thirdPartId: integer
-            password: string
-            email: string
-            mobilePhone: string
+            userId: integer
       responses:
         201:
           body:
