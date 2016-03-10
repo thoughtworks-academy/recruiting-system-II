@@ -113,6 +113,7 @@ baseUri: http://api.bronzesword.com/
               gender: string
               major: string
               degree: string
+              birthday: integer
               email: string
               mobilePhone: string
       put:
@@ -337,6 +338,7 @@ baseUri: http://api.bronzesword.com/
                     {
                       "id": 1,
                       "description": "逻辑题",
+                      "type": "blankQuiz",
                       "quizzes": [
                         {
                           "id": 1,
@@ -357,6 +359,7 @@ baseUri: http://api.bronzesword.com/
                         id: integer
                         description: string
                           # description: Markdown String to discribe what happen in the future
+                        type: string
                         quizzes:
                           properties:
                             []:
@@ -381,6 +384,7 @@ baseUri: http://api.bronzesword.com/
                     {
                       "id": 1,
                       "description": "逻辑题",
+                      "type": "blankQuiz",
                       "quizzes": [
                         {
                           "id": 1,
@@ -393,6 +397,7 @@ baseUri: http://api.bronzesword.com/
                     {
                       "id": 2,
                       "description": "dojo",
+                      "type": "homeworkQuiz",
                       "quizzes" : [
                         {
                           "id": 1,
@@ -412,6 +417,7 @@ baseUri: http://api.bronzesword.com/
                         id: integer
                         description: string
                           # description: Markdown String to discribe what happen in the future
+                        type: string
                         quizzes:
                           properties:
                             []:
