@@ -23,6 +23,30 @@ baseUri: http://api.bronzesword.com/
               userInfo:
                 properties:
                   uri: string
+  /third-part:
+    post:
+      description: |
+        the third part register
+      body:
+        application/json:
+          properties:
+            school: string
+            name: string
+            major: string
+            degree: string
+            birthday: integer
+            gender: string
+            thirdPartId: integer
+            password: string
+            email: string
+            mobilePhone: string
+      responses:
+        201:
+          body:
+            application/json:
+              properties:
+                userId: integer
+                thirdPartUserId: integer
 /login:
   post:
     body:
@@ -41,22 +65,6 @@ baseUri: http://api.bronzesword.com/
               userInfo:
                 properties:
                   uri: string
-  /github:
-    post:
-      body:
-        application/x-www-form-urlencoded:
-          properties:
-            email: string
-            mobilePhone: string
-            password: string
-            githubId: integer
-      responses:
-        201:
-          body:
-            application/json:
-              properties:
-                userId: number
-
 
 /logout:
   post:
