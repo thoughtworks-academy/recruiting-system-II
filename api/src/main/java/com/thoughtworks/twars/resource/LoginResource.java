@@ -1,6 +1,5 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.GithubUser;
 import com.thoughtworks.twars.bean.LoginDetail;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.mapper.GithubUserMapper;

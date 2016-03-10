@@ -1,6 +1,6 @@
 package com.thoughtworks.twars.mapper;
 
-import com.thoughtworks.twars.bean.GithubUser;
+import com.thoughtworks.twars.bean.ThirdParty;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,9 +17,9 @@ public class GithubUserMapperTest extends TestBase{
 
     @Test
     public void shoule_add_github_user() throws Exception {
-        GithubUser githubUser = new GithubUser();
+        ThirdParty githubUser = new ThirdParty();
 
-        githubUser.setGithubId(1);
+        githubUser.setThirdPartyId(1);
         githubUser.setUserId(2);
 
         githubUserMapper.insertGithubUser(githubUser);

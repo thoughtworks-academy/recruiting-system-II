@@ -2,7 +2,7 @@ package com.thoughtworks.twars.bean;
 
 public class ThirdParty {
     int id;
-    int githubId;
+    int thirdPartyId;
     int userId;
 
     public int getId() {
@@ -13,12 +13,12 @@ public class ThirdParty {
         this.id = id;
     }
 
-    public int getGithubId() {
-        return githubId;
+    public int getThirdPartyId() {
+        return thirdPartyId;
     }
 
-    public void setGithubId(int githubId) {
-        this.githubId = githubId;
+    public void setThirdPartyId(int thirdPartyId) {
+        this.thirdPartyId = thirdPartyId;
     }
 
     public int getUserId() {

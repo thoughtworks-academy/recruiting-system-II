@@ -1,6 +1,6 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.GithubUser;
+import com.thoughtworks.twars.bean.ThirdParty;
 import com.thoughtworks.twars.bean.LoginDetail;
 import com.thoughtworks.twars.bean.User;
 import org.junit.Test;
@@ -12,7 +12,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class LoginResourceTest extends TestBase {
     User resultUser;
 
     @Mock
-    GithubUser githubUser;
+    ThirdParty githubUser;
 
     @Test
     public void should_create_user_when_login_with_email() throws Exception {

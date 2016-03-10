@@ -1,6 +1,5 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.GithubUser;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
