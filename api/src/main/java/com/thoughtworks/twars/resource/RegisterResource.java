@@ -56,37 +56,14 @@ public class RegisterResource extends Resource {
     }
 
     @POST
+    @Path("/third-party")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces()
-    public Response createUser(Map info) {
-        User user = new User();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createUser(GithubUser githubUser) {
 
-        user.setPassword((String) info.get("password"));
-        user.setMobilePhone((String) info.get("mobilePhone"));
-        user.setEmail((String) info.get("email"));
-        userMapper.insertUser(user);
-        session.commit();
-
-//        UserDetail userDetail = new UserDetail();
-//        userDetail.setBirthday((Integer) info.get("birthday"));
-//        userDetail.setDegree((String) info.get("degree"));
-//        userDetail.setGender((String) info.get("gender"));
-//        userDetail.setUserId(user.getId());
-//        userDetail.setSchool((String) info.get("school"));
-//        userDetail.setName((String) info.get("name"));
-//        userDetail.setMajor((String) info.get("major"));
-//        userMapper.updateUserDetail(userDetail);
-//        session.commit();
-//
-//        GithubUser githubUser = new GithubUser();
-//        githubUser.setGithubId((Integer) info.get("thirdPartId"));
-//        githubUser.setUserId(user.getId());
-//
-//        githubUserMapper.insertGithubUser(githubUser);
-
+        githubUserMapper.insertGithubUser(githubUser);
         Map result = new HashMap<>();
-        result.put("userId", user.getId());
-//        result.put("githubUserId", githubUser.getId());
+        result.put("thirdPartyId", githubUser.getId());
         return Response.status(Response.Status.CREATED).entity(result).build();
     }
 }
