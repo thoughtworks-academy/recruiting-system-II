@@ -1,6 +1,6 @@
 package com.thoughtworks.twars.bean;
 
-public class GithubUser {
+public class ThirdParty {
     int id;
     int githubId;
     int userId;
