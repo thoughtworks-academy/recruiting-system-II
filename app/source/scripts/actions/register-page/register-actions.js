@@ -10,7 +10,8 @@ var RegisterActions = Reflux.createActions([
   'changeState',
   'inputPassword',
   'changeValue',
-  'checkData'
+  'checkData',
+  'thirdPartyRegister'
 ]);
 
 module.exports = RegisterActions;
