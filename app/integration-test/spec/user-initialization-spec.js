@@ -1,6 +1,5 @@
 'use strict';
 
-var express = require('express');
 var session = require('supertest-session');
 var app = require('../../app');
 var request = require('../../services/api-request');
