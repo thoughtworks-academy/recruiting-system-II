@@ -1,3 +1,10 @@
+mongodb:
+  build: ./mongodb
+  ports:
+    - "27017:27017"
+    - "28017:28017"
+  volumes:
+    - /home/ubuntu/works/recruiting-system/mongodb/data-db:/data/db
 node-app:
   build: ./nodejs
   ports:
@@ -7,13 +14,7 @@ node-app:
   command: bash -c "cd /var/app && node app.js"
   links:
     - mongodb
-mongodb:
-  build: ./mongodb
-  ports:
-    - "27017:27017"
-    - "28017:28017"
-  volumes:
-    - /home/ubuntu/works/recruiting-system/mongodb/data-db:/data/db
+
 #mysql:
 #  build: ./mysql
 #  ports:
