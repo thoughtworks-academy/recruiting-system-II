@@ -35,6 +35,14 @@ public class LoginDetailMapperTest extends TestBase {
     }
 
     @Test
+    public void should_update_login_detail_by_Id() {
+
+        int result = loginDetailMapper.updateLoginDetailById(2);
+
+        assertThat(result, is(1));
+    }
+
+    @Test
     public void should_return_login_detail_by_user_id() {
         List<LoginDetail> loginDetails = loginDetailMapper.getLoginDetailByUserId(1);
 

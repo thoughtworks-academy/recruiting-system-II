@@ -10,7 +10,9 @@ function LogoutController() {
 LogoutController.prototype.logout = (req, res)=> {
 
   var logoutUri = 'logout';
-  var body = {};
+  var body = {
+    userId: req.session.user.id
+  };
 
   async.waterfall([
     (done)=> {

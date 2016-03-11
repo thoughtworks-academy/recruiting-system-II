@@ -14,10 +14,14 @@
         SELECT * FROM loginDetail WHERE userId = #{userId};
     </select>
 
-
     <update id="updateLoginDetail" parameterType="string" useGeneratedKeys="true"
             keyProperty="id">
         UPDATE loginDetail SET flag = 0, logoutDate =UNIX_TIMESTAMP()  WHERE token = #{token};
+    </update>
+
+    <update id="updateLoginDetailById" parameterType="int" useGeneratedKeys="true"
+            keyProperty="id">
+        UPDATE loginDetail SET flag = 0, logoutDate =UNIX_TIMESTAMP()  WHERE id = #{id};
     </update>
 
     <select id="getLoginDetailByToken" resultType="com.thoughtworks.twars.bean.LoginDetail">
