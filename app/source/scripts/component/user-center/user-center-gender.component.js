@@ -11,12 +11,12 @@ var UserCenterGender = React.createClass({
   getInitialState: function () {
     return {
       gender: '',
-      genderError: false,
-      currentState: 'userDetail',
+      genderError: false
     };
   },
   componentDidUpdate: function (prevProps, prevState) {
-    if (prevState.currentState === 'userDetail') {
+
+    if (prevState.currentState !== this.state.currentState) {
       this.setState({
         gender: '',
         genderError: false

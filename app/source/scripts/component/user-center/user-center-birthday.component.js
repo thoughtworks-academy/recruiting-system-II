@@ -22,7 +22,8 @@ var UserCenterBirthday = React.createClass({
   },
 
   componentDidUpdate: function (prevPorps, prevState) {
-    if (prevState.currentState === 'password') {
+
+    if (prevState.currentState !== this.state.currentState) {
       this.setState({
         birthday: '',
         birthdayError: ''

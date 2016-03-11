@@ -28,7 +28,8 @@ var ChangePassword = React.createClass({
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-    if (prevState.currentState === 'userDetail') {
+
+    if (prevState.currentState !== this.state.currentState) {
       this.setState({
         oldPassword: '',
         oldPasswordError: '',

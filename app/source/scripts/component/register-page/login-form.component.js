@@ -87,7 +87,6 @@ var LoginForm = React.createClass({
 
   render: function () {
     var classString = 'col-md-7 logon-form-container' + (this.state.isLoginState ? '' : ' hide');
-    var emailValue = this.state.email;
     return (
         <div id="logon" className={classString}>
           <h4 className="welcome">欢迎登陆思沃学院</h4>

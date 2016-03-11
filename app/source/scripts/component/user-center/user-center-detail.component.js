@@ -34,7 +34,8 @@ var UserDetail = React.createClass({
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-    if (prevState.currentState === 'password') {
+
+    if (prevState.currentState !== this.state.currentState) {
       this.setState({
         school: '',
         schoolError: '',
@@ -126,7 +127,6 @@ var UserDetail = React.createClass({
 
   render: function () {
     var classString = (this.state.currentState === 'userDetail' ? '' : '  hide');
-
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className='content'>

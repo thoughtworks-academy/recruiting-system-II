@@ -24,6 +24,7 @@ var NewPassword = React.createClass({
   },
 
   validate: function (evt) {
+
     var target = evt.target;
     var name = target.name;
     var valObj = {
@@ -51,6 +52,15 @@ var NewPassword = React.createClass({
     }
   },
 
+  handleChange: function (evt) {
+    var newState = evt.target.value;
+    var stateName = evt.target.name;
+
+    this.setState({[stateName]: newState});
+
+    PasswordActions.changeNewPassword({[stateName]: newState});
+  },
+
   render: function () {
     return (
         <div className="new-password ">
@@ -60,7 +70,7 @@ var NewPassword = React.createClass({
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="newPassword" id="newPassword"
                      placeholder="请输入新密码" onBlur={this.validate}
-                     refs="newpassword"/>
+                     ref="newpassword" onChange={this.handleChange}/>
             </div>
             <span
                 className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
@@ -76,7 +86,7 @@ var NewPassword = React.createClass({
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="confirmPassword" id="confirmPassword"
                      placeholder="请再次确认新密码" onBlur={this.validate}
-                     onChange={this.handleChange} value={this.state.confirmPassword}/>
+                     ref="confirmPassword" onChange={this.handleChange}/>
             </div>
           <span
               className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
