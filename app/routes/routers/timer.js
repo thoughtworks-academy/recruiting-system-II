@@ -20,7 +20,7 @@ router.get('/remain-time', function (req, res) {
       }
     },
     (logicPuzzle, done) => {
-      if (!logicPuzzle.startTime) {
+      if (logicPuzzle && !logicPuzzle.startTime) {
         logicPuzzle.startTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
 
         logicPuzzle.save(done);
