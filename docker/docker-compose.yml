@@ -1,7 +1,7 @@
 mysql:
   build: ./mysql
   ports:
-    - "13306:3306"
+    - "3306:3306"
   env_file: test.env
   environment:
     - LANG=C.UTF-8
