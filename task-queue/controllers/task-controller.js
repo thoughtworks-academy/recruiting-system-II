@@ -73,4 +73,29 @@ TaskController.prototype.result = (req, res) => {
   });
 };
 
+TaskController.prototype.status = (req, res) => {
+  async.series({
+    awaitTask: (done) => {
+      request
+        .get(config.CIServer + '/queue/api/json')
+        .end(done);
+    },
+    ExecutorStatus: (done) => {
+      request
+        .get(config.CIServer + '/api/json?depth=1&tree=assignedLabels[busyExecutors,idleExecutors,totalExecutors]')
+        .end(done);
+    }
+  }, (err, data) => {
+    if(err) {
+
+      res.sendStatus(httpCode.INTERNAL_SERVER_ERROR);
+    }else {
+      var result = data.ExecutorStatus.body.assignedLabels.pop();
+      result.awaitTask = data.awaitTask.body.items.length;
+
+      res.send(result);
+    }
+  });
+};
+
 module.exports = TaskController;

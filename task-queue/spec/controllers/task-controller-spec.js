@@ -57,8 +57,6 @@ describe('TaskController', function () {
           done();
         }
       });
-
-      expect(foo.setBar).toHaveBeenCalled();
     });
 
     it('return 500 when something was wrong', function (done) {
@@ -98,8 +96,6 @@ describe('TaskController', function () {
           done();
         }
       });
-
-      expect(foo.setBar).toHaveBeenCalled();
     });
 
   });
@@ -207,9 +203,73 @@ describe('TaskController', function () {
           done();
         }
       });
-
-      expect(foo.setBar).toHaveBeenCalled();
     });
 
+  });
+
+  describe('status', function () {
+    var taskController;
+
+    beforeEach(function() {
+      taskController = new TaskController();
+    });
+    
+    it('should return 200 when everythins is ok', function (done) {
+      spyOn(request, 'get').and.callFake(function () {
+        return {
+          end: function (callback) {
+            var result = {
+              body :{
+                discoverableItems: [],
+                items: [],
+                assignedLabels: [{
+                  busyExecutors: 0,
+                  idleExecutors: 8,
+                  totalExecutors: 8
+                }]
+              }
+            };
+
+            callback(null, result);
+          }
+        };
+      });
+
+      taskController.status({}, {
+        sendStatus: function(status) {
+          done();
+        },
+        send: function(data) {
+          expect(data).toEqual({
+            busyExecutors: 0,
+            idleExecutors: 8,
+            totalExecutors: 8,
+            awaitTask: 0
+          });
+          done();
+        }
+      });
+    });
+    it('should return 500 when CI has error', function (done) {
+      spyOn(request, 'get').and.callFake(function () {
+        return {
+          end: function (callback) {
+            callback(true);
+          }
+        };
+      });
+
+      taskController.status({}, {
+        sendStatus: function(status) {
+          done();
+        },
+        send: function(data) {
+          expect(data).toEqual({
+            status: httpCode.OK
+          });
+          done();
+        }
+      });
+    });
   });
 });
