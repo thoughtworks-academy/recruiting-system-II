@@ -13,8 +13,8 @@ var DashboardIcon = React.createClass({
 
   getInitialState: function(){
     return {
-      puzzleEnabled: false,
-      homeworkEnabled: false
+      puzzleEnabled: true,
+      homeworkEnabled: true
     };
   },
 
