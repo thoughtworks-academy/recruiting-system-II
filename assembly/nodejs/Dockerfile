@@ -5,5 +5,6 @@ FROM ubuntu:14.04
 RUN apt-get update \
     && apt-get install -y wget \
     && wget -qO- https://deb.nodesource.com/setup_5.x | sudo bash - \
-    && apt-get install -y nodejs
-    && node install -g pm2
+    && apt-get install -y nodejs \
+    && npm install -g pm2
+

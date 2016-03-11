@@ -4,7 +4,7 @@ node-app:
     - "3000:3000"
   volumes:
     - /home/ubuntu/works/recruiting-system/app:/var/app
-  command: bash -c "cd /var/app && npm install && pm2 app"
+  command: bash -c "cd /var/app && node app.js"
 #mysql:
 #  build: ./mysql
 #  ports:
