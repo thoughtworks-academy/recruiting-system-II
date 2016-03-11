@@ -69,7 +69,8 @@ var LoginForm = React.createClass({
       this.refs.loginPassword.value = '';
       this.setState({
         emailError: '',
-        loginPasswordError: ''
+        loginPasswordError: '',
+        loginFailed: false
       });
     }
   },
