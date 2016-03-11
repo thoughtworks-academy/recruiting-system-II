@@ -27,6 +27,7 @@ var NewPassword = React.createClass({
 
     var target = evt.target;
     var name = target.name;
+    this.state[name] = target.value;
     var valObj = {
       newPassword: this.state.newPassword,
       confirmPassword: this.state.confirmPassword
@@ -37,15 +38,17 @@ var NewPassword = React.createClass({
 
     stateObj[name + 'Error'] = error;
     this.setState(stateObj);
-
+    PasswordActions.changeNewPassword({[name]: target.value});
   },
 
   componentDidUpdate: function (prevProps, prevState) {
+    console.log('pre-initial: ' + prevState.initialStatus);
+    console.log('current-initial: '+ this.state.initialStatus);
     if (prevState.initialStatus !== this.state.currentState) {
+      this.refs.newPassword.value = '';
+      this.refs.confirmPassword.value = '';
       this.setState({
-        newPassword: '',
         newPasswordError: '',
-        confirmPassword: '',
         confirmPasswordError: '',
         initialStatus: this.state.currentState
       });
@@ -58,7 +61,7 @@ var NewPassword = React.createClass({
 
     this.setState({[stateName]: newState});
 
-    PasswordActions.changeNewPassword({[stateName]: newState});
+
   },
 
   render: function () {
@@ -70,7 +73,7 @@ var NewPassword = React.createClass({
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="newPassword" id="newPassword"
                      placeholder="请输入新密码" onBlur={this.validate}
-                     ref="newpassword" onChange={this.handleChange}/>
+                     ref="newPassword" />
             </div>
             <span
                 className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
@@ -86,7 +89,7 @@ var NewPassword = React.createClass({
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="confirmPassword" id="confirmPassword"
                      placeholder="请再次确认新密码" onBlur={this.validate}
-                     ref="confirmPassword" onChange={this.handleChange}/>
+                     ref="confirmPassword" />
             </div>
           <span
               className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}
