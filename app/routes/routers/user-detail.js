@@ -11,7 +11,7 @@ var newPasswordConstraint = require('../../mixin/confirm-password-constraint');
 var md5 = require('js-md5');
 var constant = require('../../mixin/constant');
 var apiRequest = require('../../services/api-request');
-var timeTurner = require('../../mixin/time-turner');
+var moment = require('moment');
 
 router.get('/', function (req, res) {
   if(req.session.user) {
@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
       },
       (resp, done) => {
         result = _.assign(result, resp.body);
-        result.birthday = timeTurner.stampToTime(result.birthday);
+        result.birthday = moment.unix(result.birthday).format("MM-DD-YYYY");
 
         done(null, result);
       }
@@ -62,8 +62,7 @@ router.put('/update', function (req, res) {
   var userId = req.session.user.id;
   var userInfo = req.body.data;
 
-  userInfo.birthday = timeTurner.timeToStamp(userInfo.birthday);
-
+  userInfo.birthday = moment(new Date(userInfo.birthday)).unix();
   var result = _.assign({userId: userId}, userInfo);
 
   if (validate(result, userConstraint) === undefined && result.gender !== '') {
