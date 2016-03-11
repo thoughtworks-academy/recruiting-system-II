@@ -12,6 +12,7 @@ var md5 = require('js-md5');
 var constant = require('../../mixin/constant');
 var apiRequest = require('../../services/api-request');
 var moment = require('moment');
+var lang = require('../../mixin/lang-message/chinese');
 
 router.get('/', function (req, res) {
   if(req.session.user) {
@@ -61,6 +62,11 @@ router.get('/', function (req, res) {
 router.put('/update', function (req, res) {
   var userId = req.session.user.id;
   var userInfo = req.body.data;
+
+  var birthdayStamp = moment(new Date(userInfo.birthday)).unix();
+  if(birthdayStamp < parseInt(lang.MIN_DATESTAMP)) {
+    userInfo.birthday = lang.MIN_DATE;
+  }
 
   userInfo.birthday = moment(new Date(userInfo.birthday)).unix();
   var result = _.assign({userId: userId}, userInfo);
