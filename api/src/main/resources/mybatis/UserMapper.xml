@@ -8,7 +8,7 @@
     </select>
 
     <select id="getUserByEmail" resultType="com.thoughtworks.twars.bean.User">
-        select * from users where email = #{email} LIMIT 1
+        select * from users where binary email = #{email} LIMIT 1
     </select>
 
     <select id="getUserByMobilePhone" resultType="com.thoughtworks.twars.bean.User">
