@@ -5,6 +5,7 @@ mongodb:
     - "28017:28017"
   volumes:
     - /home/ubuntu/works/recruiting-system/mongodb/data-db:/data/db
+  command: bash -c "service mongod start"
 node-app:
   build: ./nodejs
   ports:
