@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
       },
       (resp, done) => {
         result = _.assign(result, resp.body);
-        result.birthday = moment.unix(result.birthday).format("MM-DD-YYYY");
+        result.birthday = moment.unix(result.birthday).format('MM-DD-YYYY');
 
         done(null, result);
       }
