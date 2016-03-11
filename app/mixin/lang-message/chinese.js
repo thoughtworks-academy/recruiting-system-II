@@ -5,7 +5,9 @@ var lang = {
   REGISTER_SUCCESS: '注册成功！5秒后跳转至答题页面。',
   REGISTER_FAILED: '注册失败,注册信息有误。',
   EXIST: '手机号或者邮箱已被注册',
-  LOGIN_FAILED: '登录失败'
+  LOGIN_FAILED: '登录失败',
+  MIN_DATE: '01-01-1970',
+  MIN_DATESTAMP: '-946800000'
 };
 
 module.exports = lang;
