@@ -55,8 +55,7 @@ public class LoginResource extends Resource {
 
         if (mobilePhoneMatcher.matches()) {
             resultUser = userMapper.getUserByMobilePhoneAndPassWord(user);
-        } else if (user.getEmail().matches(emailMatches)) {
-
+        } else {
             resultUser = userMapper.getUserByEmailAndPassWord(user);
         }
 
