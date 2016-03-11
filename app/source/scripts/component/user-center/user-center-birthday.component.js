@@ -59,7 +59,7 @@ var UserCenterBirthday = React.createClass({
                 date={this.state.birthday}
                 maxDate={moment().format('L')}
                 onBlur={this.validate}
-                closeOnSelect='true'
+                closeOnSelect={true}
             />
           </div>
           <div className={'error alert alert-danger' + (this.state.birthdayError === '' ? ' hide' : '')}
