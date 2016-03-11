@@ -261,14 +261,10 @@ describe('TaskController', function () {
 
       taskController.status({}, {
         sendStatus: function(status) {
+          expect(status).toEqual(httpCode.INTERNAL_SERVER_ERROR);
           done();
         },
-        send: function(data) {
-          expect(data).toEqual({
-            status: httpCode.OK
-          });
-          done();
-        }
+        send: function() {}
       });
     });
   });
