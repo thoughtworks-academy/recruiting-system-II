@@ -87,7 +87,7 @@ var passwordRetrieveForm = React.createClass({
             <form action="">
               <div className="form-group">
                 <input className="form-control" type="text" placeholder="请输入注册时填写的邮箱" name="email"
-                       onBlur={this.validate}
+                       onBlur={this.validate} onkeypress="if(event.keyCode==13||event.which==13){return false;}"
                        ref="email" autoComplete="off" onChange={this.handleChange} value={this.state.email}/>
                 <div
                     className={'lose' + (this.state.emailError === '' ? ' hide' : '')}>{this.state.emailError}
