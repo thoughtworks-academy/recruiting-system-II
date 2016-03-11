@@ -47,10 +47,6 @@ public class LoginResource extends Resource {
         Pattern mobilePhoneMatches = Pattern
                 .compile("^1([3|4|5|8])[0-9]\\d{8}$");
         Matcher mobilePhoneMatcher = mobilePhoneMatches.matcher(user.getEmail());
-        String emailMatches = "^[a-z0-9\\u007F-\\uffff!#$%&'*+\\/=?^_`{|}~-]"
-                + "+(?:\\.[a-z0-9\\u007F-\\uffff!#$%&'*+\\/=?^_`{|}~-]+)"
-                + "*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z]{2,}";
-
         User resultUser = new User();
 
         if (mobilePhoneMatcher.matches()) {
