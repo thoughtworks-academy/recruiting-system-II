@@ -20,7 +20,6 @@ var ChangePasswordStore = Reflux.createStore({
         })
         .use(errorHandler)
         .end((err, res) => {
-          console.log(res.body.status);
           if (!res) {
             return;
           }
@@ -31,7 +30,7 @@ var ChangePasswordStore = Reflux.createStore({
             });
           } else if (res.body.status === constant.httpCode.BAD_REQUEST) {
             this.trigger({
-              isRespond: true,
+              isRespond: false,
               oldPasswordError: lang.ERROR
             });
           }

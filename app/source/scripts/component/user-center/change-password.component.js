@@ -83,6 +83,7 @@ var ChangePassword = React.createClass({
       return;
     }
     ChangePasswordActions.changePassword(passwordData);
+    this.setState({isRespond: true});
   },
 
   render: function () {
