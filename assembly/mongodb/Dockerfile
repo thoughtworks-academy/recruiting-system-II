@@ -13,4 +13,4 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && \
 RUN mkdir -p /data/db
 
 EXPOSE 27017
-ENTRYPOINT /usr/bin/mongod
+CMD ["mongod"]
