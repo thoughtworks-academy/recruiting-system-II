@@ -169,7 +169,6 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
         .end(done);
     }
   ], (err, data) => {
-    console.log(err)
 
     if (err) {
       if (!data) {
