@@ -13,7 +13,6 @@ node-app:
     - mongodb:mongodb
 mysql:
   build: ./mysql
-  env_file: test.env
   environment:
     - LANG=C.UTF-8
     - TERM=dumb
