@@ -11,4 +11,5 @@ default:
   emailPassword: 'ssww123456'
 test:
   port: 5000
-
+production:
+  database: 'mongodb://mongodb/twars'
