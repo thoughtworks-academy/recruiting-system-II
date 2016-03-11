@@ -251,21 +251,26 @@ HomeworkController.prototype.getResult = (req, res) => {
       userHomeworkQuizzes.findOne({userId: userId}, done);
     },
     (data, done) => {
-      history = data.quizzes[orderId - 1].homeworkSubmitPostHistory;
-      isSubmited = history.length > 0;
-      if(isSubmited){
-        resultURL = history[history.length - 1].resultURL;
-        request.get(resultURL)
-            .end((err, res) => {
-              resultText = res.text;
-              done(err,null);
-            });
-      }else{
-        done(null,null);
+      var integer = (Number(orderId) === parseInt(orderId, 10));
+      if (!integer || orderId === undefined || orderId > data.quizzes.length || orderId < 1) {
+        done(true,null)
+      } else {
+        history = data.quizzes[orderId - 1].homeworkSubmitPostHistory ? data.quizzes[orderId - 1].homeworkSubmitPostHistory : [];
+        isSubmited = history.length > 0;
+        if (isSubmited && history[history.length - 1].resultURL) {
+          resultURL = history[history.length - 1].resultURL;
+          request.get(resultURL)
+              .end((err, res) => {
+                resultText = res.text;
+                done(err, null);
+              });
+        } else {
+          done(null, null);
+        }
       }
     }
   ],function(err){
-    if(err){
+    if(err && err !== true){
       res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     }else{
       res.send({
