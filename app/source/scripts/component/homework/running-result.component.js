@@ -12,14 +12,12 @@ var RunningResult = React.createClass({
       orderId: this.props.orderId,
       isSubmited: false,
       resultText: ''
-    }
+    };
   },
 
   render() {
 
     return (
-        console.log(this.state.orderId), console.log(this.state.isSubmited),
-
         <div className="runningResult">
           {
               this.state.isSubmited ?
