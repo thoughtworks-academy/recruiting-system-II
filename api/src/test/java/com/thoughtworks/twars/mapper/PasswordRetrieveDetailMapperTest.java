@@ -56,4 +56,11 @@ public class PasswordRetrieveDetailMapperTest extends TestBase{
         assertThat(id , is(1));
     }
 
+    @Test
+    public void should_set_token_null_when_password_reset_success(){
+        int id = passwordRetrieveDetailMapper.setNullToken("test@163.com");
+
+        assertThat(id, is(1));
+    }
+
 }

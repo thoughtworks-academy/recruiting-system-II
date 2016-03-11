@@ -291,6 +291,8 @@ public class UserResource extends Resource {
             user.setPassword(newPasword);
 
             userMapper.resetPassword(user);
+
+            passwordRetrieveDetailMapper.setNullToken(user.getEmail());
             map.put("status", "201");
         } else {
             map.put("status", "412");

@@ -11,4 +11,6 @@ public interface PasswordRetrieveDetailMapper {
     PasswordRetrieveDetail getDetailByEmail(String email);
 
     int updateDetailByEmail(String email);
+
+    int setNullToken(String email);
 }
