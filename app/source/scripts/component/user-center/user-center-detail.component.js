@@ -226,7 +226,7 @@ var UserDetail = React.createClass({
 
                 <div className='form-group'>
                   <div className='col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4'>
-                    <button type='submit' className='btn btn-default' onClick={this.update}>保存</button>
+                    <button type='button' className='btn btn-default' onClick={this.update}>保存</button>
                   </div>
                 </div>
               </div>
