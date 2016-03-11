@@ -142,8 +142,6 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
           commitTime: Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS,
         };
 
-        result.data.quizzes[orderId - 1].userAnswerRepo = req.body.userAnswerRepo;
-        result.data.quizzes[orderId - 1].branch = req.body.branch;
         result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
         result.data.quizzes[orderId - 1].homeworkSubmitPostHistory.push(submitInfo);
 
@@ -171,6 +169,8 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
         .end(done);
     }
   ], (err, data) => {
+    console.log(err)
+
     if (err) {
       if (!data) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
