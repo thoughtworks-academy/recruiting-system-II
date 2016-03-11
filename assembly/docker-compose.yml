@@ -5,6 +5,19 @@ node-app:
   volumes:
     - /home/ubuntu/works/recruiting-system/app:/var/app
   command: bash -c "cd /var/app && node app.js"
+  links:
+    - mongodb
+mongodb:
+  build: ./mongodb
+  ports:
+    - "27017:27017"
+    - "28017:28017"
+  environment:
+    - MONGODB_USER=tw
+    - MONGODB_DATABASE=twars
+    - MONGODB_PASS=hahahaha
+  volumes:
+    - /data:/data
 #mysql:
 #  build: ./mysql
 #  ports:
