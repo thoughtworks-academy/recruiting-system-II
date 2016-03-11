@@ -81,7 +81,9 @@ var passwordResetForm = React.createClass({
             </form>
           </div>
           <div id="message" className={messageClassName}>
-            <p>您的密码已经成功重置!再别忘了!<strong>你可长点儿心吧!</strong></p>
+            <p>您的密码已经成功重置!再别忘了!</p>
+            <p><strong>你可长点儿心吧!</strong></p>
+            <a href="register.html">回去登陆</a>
           </div>
         </div>
     );
