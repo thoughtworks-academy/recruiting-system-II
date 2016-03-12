@@ -5,6 +5,7 @@ var validate = require('validate.js');
 var Reflux = require('reflux');
 var getError = require('../../../../mixin/get-error');
 var constraint = require('../../../../mixin/confirm-password-constraint');
+var lang = require('../../../../mixin/lang-message/chinese');
 var PasswordActions = require('../../actions/reuse/password-actions');
 var PasswordStore = require('../../store/reuse/password-store');
 var ChangePasswordStore = require('../../store/user-center/change-password-store');
@@ -41,7 +42,7 @@ var NewPassword = React.createClass({
 
     stateObj.newPasswordError = getError(result, 'newPassword');
     if(this.state.confirmPassword !== this.state.newPassword && this.state.confirmPassword !== '') {
-      stateObj.confirmPasswordError = '两次密码不匹配';
+      stateObj.confirmPasswordError = lang.CONFIRM_ERROR;
     }else {
       stateObj.confirmPasswordError = '';
     }
