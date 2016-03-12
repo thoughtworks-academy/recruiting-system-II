@@ -61,7 +61,7 @@ var NewPassword = React.createClass({
       });
     }
     if (this.state.event === 'submit') {
-    this.validate();
+      this.validate();
       this.setState({event: ''});
     }
   },
