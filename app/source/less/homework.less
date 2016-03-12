@@ -11,6 +11,38 @@ body {
   header {
     margin-bottom: 14px;
   }
+
+  .flashing {
+    animation:flashing 2s infinite;
+    -webkit-animation: flashing 2s infinite;
+    -moz-animation: flashing 2s infinite;
+    -o-animation: flashing 2s infinite;
+  }
+
+  @keyframes flashing {
+    0% {opacity:0;}
+    50%  {opacity:1;}
+    100% {opacity:0;}
+  }
+
+  @-webkit-keyframes flashing {
+    0% {opacity:0;}
+    50%  {opacity:1;}
+    100% {opacity:0;}
+  }
+
+  @-moz-keyframes flashing {
+    0% {opacity:0;}
+    50%  {opacity:1;}
+    100% {opacity:0;}
+  }
+
+  @-o-keyframes flashing {
+    0% {opacity:0;}
+    50%  {opacity:1;}
+    100% {opacity:0;}
+  }
+
   .homework-nav-icon {
     font-size: 25px;
   }
