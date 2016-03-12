@@ -42,16 +42,16 @@ var HomeworkDetails = React.createClass({
 
       if (k === 0 && i === 0) {
         itemNumber.push(
-            <tr key={i}>
+            <tr >
               <td rowSpan={quizzesLength}>{userDetail.name}</td>
               <td rowSpan={quizzesLength}>{userDetail.mobilePhone}</td>
               <td rowSpan={quizzesLength}>{userDetail.email}</td>
               <td rowSpan={quizLength}>{k + 1}</td>
               <td>{k + 1}</td>
               <td>{date}</td>
-              <td>{commitHistory.githubURL}</td>
+              <td><a href={commitHistory.githubURL}>{commitHistory.githubURL}</a></td>
               <td>{commitHistory.branch}</td>
-              <td>{commitHistory.resultURL}</td>
+              <td><a href={commitHistory.resultURL}>{commitHistory.resultURL}</a></td>
             </tr>);
 
       } else {
@@ -61,19 +61,19 @@ var HomeworkDetails = React.createClass({
                 <td rowSpan={quizLength}>{i + 1}</td>
                 <td>{k + 1}</td>
                 <td>{date}</td>
-                <td>{commitHistory.githubURL}</td>
+                <td><a href={commitHistory.githubURL}>{commitHistory.githubURL}</a></td>
                 <td>{commitHistory.branch}</td>
-                <td>{commitHistory.resultURL}</td>
+                <td><a href={commitHistory.resultURL}>{commitHistory.resultURL}</a></td>
               </tr>);
         } else {
 
           itemNumber.push(
               <tr>
-                <td>{k + 1}</td>
+                <td >{k + 1}</td>
                 <td>{date}</td>
-                <td>{commitHistory.githubURL}</td>
+                <td><a href={commitHistory.githubURL}>{commitHistory.githubURL}</a></td>
                 <td>{commitHistory.branch}</td>
-                <td>{commitHistory.resultURL}</td>
+                <td><a href={commitHistory.resultURL}>{commitHistory.resultURL}</a></td>
               </tr>);
         }
 
