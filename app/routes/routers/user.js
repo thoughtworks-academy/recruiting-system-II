@@ -7,5 +7,6 @@ var UserController = require('../../controllers/user-controller');
 var userController = new UserController();
 
 router.get('/:userId/csv', userController.exportCsv);
+router.get('/:userId/homework-details', userController.exportHomeworkDetails);
 
 module.exports = router;
