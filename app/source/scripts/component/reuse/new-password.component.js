@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var validate = require('validate.js');
 var Reflux = require('reflux');
 var getError = require('../../../../mixin/get-error');
@@ -19,12 +20,12 @@ var NewPassword = React.createClass({
       newPasswordError: '',
       confirmPassword: '',
       confirmPasswordError: '',
-      initialStatus: this.props.initialStatus
+      initialStatus: this.props.initialStatus,
+      event: ''
     };
   },
 
   validate: function (evt) {
-
     var target = evt.target;
     var name = target.name;
     this.state[name] = target.value;
@@ -52,6 +53,12 @@ var NewPassword = React.createClass({
         initialStatus: this.state.currentState
       });
     }
+    if (this.state.event === 'submit') {
+      var event = new Event('blur', {bubbles: true});
+      this.refs.newPassword.dispatchEvent(event);
+      this.refs.confirmPassword.dispatchEvent(event);
+      this.setState({event: ''});
+    }
   },
 
   handleChange: function (evt) {
@@ -59,8 +66,6 @@ var NewPassword = React.createClass({
     var stateName = evt.target.name;
 
     this.setState({[stateName]: newState});
-
-
   },
 
   render: function () {
@@ -72,7 +77,7 @@ var NewPassword = React.createClass({
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="newPassword" id="newPassword"
                      placeholder="请输入新密码" onBlur={this.validate}
-                     ref="newPassword" />
+                     ref="newPassword"/>
             </div>
             <span
                 className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.newPasswordError === '' ? ' hide' : '')}
@@ -88,7 +93,7 @@ var NewPassword = React.createClass({
               <input type="password" className="form-control" aria-describedby="helpBlock2"
                      name="confirmPassword" id="confirmPassword"
                      placeholder="请再次确认新密码" onBlur={this.validate}
-                     ref="confirmPassword" />
+                     ref="confirmPassword"/>
             </div>
           <span
               className={'col-sm-3 col-md-3 error alert alert-danger' + (this.state.confirmPasswordError === '' ? ' hide' : '')}

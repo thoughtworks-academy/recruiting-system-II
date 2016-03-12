@@ -5,6 +5,7 @@ var validate = require('validate.js');
 var constraint = require('../../../../mixin/password-constraint');
 var getError = require('../../../../mixin/get-error');
 var ChangePasswordActions = require('../../actions/user-center/change-password-actions');
+var PasswordActions = require('../../actions/reuse/password-actions');
 var ChangePasswordStore = require('../../store/user-center/change-password-store');
 var UserCenterStore = require('../../store/user-center/user-center-store');
 var PasswordStore = require('../../store/reuse/password-store');
@@ -81,6 +82,8 @@ var ChangePassword = React.createClass({
       newPassword: this.state.newPassword,
       confirmPassword: this.state.confirmPassword
     };
+    PasswordActions.submitEvent('submit');
+
     if (!this.checkInfo()) {
       return;
     }
@@ -95,7 +98,7 @@ var ChangePassword = React.createClass({
           <div className="content">
             <form className="form-horizontal form-top-height col-sm-8 col-md-8 col-sm-offset-3 col-md-offset-3">
               <div className="col-sm-3 col-md-3 col-md-offset-4 col-sm-offset-4">
-                <div className={"success-prompt alert alert-success" + (this.state.success ? '' : ' hide')}>
+                <div className={"success-prompt alert alert-success" + (this.state.success ? '' : ' visibility')}>
                   <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
                   修改成功
                 </div>

@@ -4,7 +4,8 @@ var Reflux = require('reflux');
 
 var PasswordActions = Reflux.createActions([
   'changeNewPassword',
-  'getPasswordError'
+  'getPasswordError',
+  'submitEvent'
 ]);
 
 module.exports = PasswordActions;

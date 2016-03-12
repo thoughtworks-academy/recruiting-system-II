@@ -13,6 +13,10 @@ var UserDetailStore = Reflux.createStore({
 
   onGetPasswordError: function(passwordError) {
     this.trigger(passwordError);
+  },
+
+  onSubmitEvent: function(evt) {
+    this.trigger({event: evt});
   }
 });
 
