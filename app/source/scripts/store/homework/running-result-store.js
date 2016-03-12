@@ -9,7 +9,10 @@ var RunningResultStore = Reflux.createStore({
   listenables: [HomeworkActions],
 
   onSubmitUrl: function () {
-    this.trigger({isSubmited: true});
+    this.trigger({
+      resultText: '',
+      isSubmited: true
+    });
   },
 
   onChangeOrderId: function (Number) {
