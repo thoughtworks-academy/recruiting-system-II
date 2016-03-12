@@ -17,7 +17,7 @@
 
     <select id="getUserByEmailAndPassWord" parameterType="com.thoughtworks.twars.bean.User"
             resultType="com.thoughtworks.twars.bean.User">
-        SELECT * FROM users WHERE email = #{email} AND password = MD5(#{password}) LIMIT 1
+        SELECT * FROM users WHERE email regexp binary #{email} AND password = MD5(#{password}) LIMIT 1
     </select>
 
     <select id="getUserByMobilePhoneAndPassWord" parameterType="com.thoughtworks.twars.bean.User"
@@ -44,6 +44,6 @@
     </update>
 
     <update id="resetPassword" parameterType="com.thoughtworks.twars.bean.User">
-        UPDATE users SET password=MD5(#{password}) WHERE email= #{email};
+        UPDATE users SET password=MD5(#{password}) WHERE binary email= #{email};
     </update>
 </mapper>
