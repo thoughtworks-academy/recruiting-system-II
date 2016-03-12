@@ -67,7 +67,7 @@ userHomeworkQuizzesSchema.statics.unlockNext = function (userId, callback) {
         }
       });
 
-      if (data.quizzes.length === (locked + success)) {
+      if (data.quizzes.length === (locked + success) && success !== data.quizzes.length) {
         data.quizzes[success].status = constant.homeworkQuizzesStatus.ACTIVE;
         data.save(callback);
       } else {
