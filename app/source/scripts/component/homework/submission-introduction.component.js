@@ -33,6 +33,10 @@ var SubmissionIntroduction = React.createClass({
       branchesDetail: []
     };
   },
+  componentDidUpdate: function (prevProps, prevState) {
+    this.refs.githubUrl.value = this.state.githubUrl;
+  },
+
   clickBranch: function () {
     HomeworkActions.getBranches(this.state.githubUrl);
   },
@@ -76,10 +80,7 @@ var SubmissionIntroduction = React.createClass({
   onBranchChange: function (event) {
     this.state.githubBranch = event.target.value;
   },
-  handleChange: function(event){
-    var val = event.target.value;
-    HomeworkActions.changeGithubUrl(val);
-  },
+
   render() {
     if (this.state.quizStatus === homeworkQuizzesStatus.PROGRESS) {
       HomeworkActions.submited(this.state.currentHomeworkNumber);
@@ -106,7 +107,7 @@ var SubmissionIntroduction = React.createClass({
                 <label htmlFor="githubUrl" className="col-sm-2 control-label">github仓库地址</label>
                 <div className="col-sm-9">
                   <input type="text" className="form-control" id="githubUrl" name="githubUrl" ref="githubUrl"
-                         onChange={this.handleChange} value={this.state.githubUrl}
+
                          onBlur={this.onUrlBlur} placeholder="https://github.com/用户名/仓库名" disabled={isSubmitted ? 'disabled':''}/>
                   <div
                       className={'lose' + (this.state.githubUrlError === '' ? ' hide' : '')}>{this.state.githubUrlError}</div>

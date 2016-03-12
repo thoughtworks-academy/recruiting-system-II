@@ -65,10 +65,6 @@ var submissionIntroductionStore = Reflux.createStore({
             });
           }
         });
-  },
-
-  onChangeGithubUrl: function(val) {
-    this.trigger({githubUrl:val});
   }
 });
 
