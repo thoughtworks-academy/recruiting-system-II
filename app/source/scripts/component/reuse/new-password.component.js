@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 var validate = require('validate.js');
 var Reflux = require('reflux');
 var getError = require('../../../../mixin/get-error');
@@ -25,22 +24,30 @@ var NewPassword = React.createClass({
     };
   },
 
-  validate: function (evt) {
-    var target = evt.target;
-    var name = target.name;
-    this.state[name] = target.value;
+  validate: function () {
+    var names = Object.keys(this.refs);
+    var value;
+
+    names.forEach((name) => {
+      value = this.refs[name].value;
+      this.state[name] = value;
+    });
     var valObj = {
       newPassword: this.state.newPassword,
       confirmPassword: this.state.confirmPassword
     };
     var result = validate(valObj, constraint);
-    var error = getError(result, name);
     var stateObj = {};
 
-    stateObj[name + 'Error'] = error;
+    stateObj.newPasswordError = getError(result, 'newPassword');
+    if(this.state.confirmPassword !== this.state.newPassword && this.state.confirmPassword !== '') {
+      stateObj.confirmPasswordError = '两次密码不匹配';
+    }else {
+      stateObj.confirmPasswordError = '';
+    }
     this.setState(stateObj);
     PasswordActions.getPasswordError(stateObj);
-    PasswordActions.changeNewPassword({[name]: target.value});
+    PasswordActions.changeNewPassword(valObj);
   },
 
   componentDidUpdate: function (prevProps, prevState) {
@@ -54,9 +61,7 @@ var NewPassword = React.createClass({
       });
     }
     if (this.state.event === 'submit') {
-      var event = new Event('blur', {bubbles: true});
-      this.refs.newPassword.dispatchEvent(event);
-      this.refs.confirmPassword.dispatchEvent(event);
+    this.validate();
       this.setState({event: ''});
     }
   },
