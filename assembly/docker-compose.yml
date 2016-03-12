@@ -6,20 +6,30 @@ mysql:
     - ./production.env
   volumes:
     - ./mysql/create-db.sh:/tmp/create-db.sh
-#mongodb:
-#  build: ./mongodb
-#  volumes:
-#    - /home/ubuntu/works/recruiting-system/mongodb/data-db:/data/db
-#node-app:
-#  build: ./nodejs
-#  ports:
-#    - "3000:3000"
-#  volumes:
-#    - /home/ubuntu/works/recruiting-system/app:/var/app
-#  command: bash -c "cd /var/app && node app.js"
-#  links:
-#    - mongodb:mongodb
-#    - jetty-api:jetty-api
+  ports:
+    - "3306:3306"
+jetty-api:
+  image: jetty:9.3-jre8
+  volumes:
+    - ./assemble/jetty-api:/var/lib/jetty/webapps
+  links:
+    - mysql:mysql
+  ports:
+    - "8080:8080"
+mongodb:
+  image: mongo:3.2
+node-app:
+  build: ./nodejs
+  ports:
+    - "3000:3000"
+  volumes:
+    - /home/ubuntu/works/recruiting-system/app:/var/app
+  command: bash -c "cd /var/app && node app.js"
+  links:
+    - mongodb:mongodb
+    - jetty-api:jetty-api
+  env_file:
+    - ./production.env
 #  env_file:
 #    - ./node.env
 #
