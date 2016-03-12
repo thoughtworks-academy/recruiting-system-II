@@ -260,19 +260,17 @@ HomeworkController.prototype.getResult = (req, res) => {
         if (isSubmited && history[history.length - 1].resultURL) {
           resultURL = history[history.length - 1].resultURL;
           request.get(resultURL)
-              .end((err, res) => {
-                resultText = res.text;
-                done(err, null);
-              });
+              .end(done);
         } else {
           done(null, null);
         }
       }
     }
-  ],function(err){
+  ],function(err,result){
     if(err && err !== true){
       res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     }else{
+      resultText = result ? result.text : null;
       res.send({
         isSubmited: isSubmited,
         resultText: resultText
