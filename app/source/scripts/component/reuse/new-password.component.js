@@ -43,7 +43,6 @@ var NewPassword = React.createClass({
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-
     if (prevState.initialStatus !== this.state.currentState) {
       this.refs.newPassword.value = '';
       this.refs.confirmPassword.value = '';

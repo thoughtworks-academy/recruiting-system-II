@@ -63,11 +63,14 @@ var ChangePassword = React.createClass({
   checkInfo: function () {
     var oldPassword = {oldPassword: this.state.oldPassword};
     var result = validate(oldPassword, constraint);
+    var error = getError(result, 'oldPassword');
 
     if (result === undefined && this.state.newPasswordError === '' && this.state.confirmPasswordError === '') {
       return true;
     }
+    this.setState({oldPasswordError: error});
     return false;
+
   },
 
   savePassword: function (evt) {
@@ -78,7 +81,6 @@ var ChangePassword = React.createClass({
       newPassword: this.state.newPassword,
       confirmPassword: this.state.confirmPassword
     };
-
     if (!this.checkInfo()) {
       return;
     }
