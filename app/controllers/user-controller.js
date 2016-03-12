@@ -150,6 +150,26 @@ function createCSV(userInfo) {
   var userDetail = userInfo.userDetail;
   var logicPuzzle = userInfo.logicPuzle;
   var homework = userInfo.homework;
+  var time = homework.elapsedTime;
+
+  var elapsedDay = 0;
+  var elapsedHour = 0;
+  var elapsedMintues = 0;
+
+  var mintues = constant.time.MINUTE_PER_HOUR;
+  var second = constant.time.SECONDS_PER_MINUTE;
+  var hour = constant.time.HOURSPERDAY;
+
+  var dayToSecond = second * mintues * hour;
+  var hourToSecond = second * mintues;
+  var mintuesToSecond = mintues;
+
+  elapsedDay = Math.floor(time / dayToSecond);
+  time -= elapsedDay * dayToSecond;
+  elapsedHour = Math.floor(time / hourToSecond);
+  time -= hourToSecond * elapsedHour;
+  elapsedMintues = Math.floor(time / mintuesToSecond);
+
 
   var fieldNames = ['姓名', '电话', '邮箱', '逻辑题准确率', '家庭作业详情', '家庭作业花费时间'];
   var fields = ['name', 'mobilePhone', 'email', 'accuracy', 'homeworkDetails', 'homeworkElapsedTime'];
@@ -160,7 +180,7 @@ function createCSV(userInfo) {
     email: userDetail.email,
     accuracy: logicPuzzle.accuracy,
     homeworkDetails: config.appServer + 'homework-details.html?userId=' + userInfo.userId,
-    homeworkElapsedTime: homework.elapsedTime + '分钟'
+    homeworkElapsedTime: elapsedDay + '天' + elapsedHour + '小时' + elapsedMintues + '分'
   }];
 
   json2csv({data: user, fields: fields, fieldNames: fieldNames}, function (err, csv) {
