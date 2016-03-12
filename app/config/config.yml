@@ -14,3 +14,4 @@ test:
   port: 5000
 production:
   database: 'mongodb://mongodb/twars'
+  apiServer: 'http://jetty-api:8080/api/'
