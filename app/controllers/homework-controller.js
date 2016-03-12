@@ -70,13 +70,13 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         error.status = constant.httpCode.FORBIDDEN;
         done(true, error);
       } else {
-        if(quiz.homeworkSubmitPostHistory.length){
+        if (quiz.homeworkSubmitPostHistory.length) {
           var userSubmitInfo = quiz.homeworkSubmitPostHistory.pop();
 
           userAnswerRepo = userSubmitInfo.homeworkURL;
           quizStatus = userSubmitInfo.status;
           branch = userSubmitInfo.branch;
-        }else {
+        } else {
           quizStatus = quiz.status;
         }
         if (!quiz.startTime) {
@@ -156,17 +156,17 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     },
     (result, done) => {
       request
-        .post(config.taskServer + 'tasks')
-        .set('Content-Type', 'application/json')
-        .send({
-          userId: userId,
-          homeworkId: homeworkId,
-          userAnswerRepo: req.body.userAnswerRepo,
-          evaluateScript: result.evaluateScript,
-          callbackURL: config.appServer + 'homework/result',
-          branch: req.body.branch
-        })
-        .end(done);
+          .post(config.taskServer + 'tasks')
+          .set('Content-Type', 'application/json')
+          .send({
+            userId: userId,
+            homeworkId: homeworkId,
+            userAnswerRepo: req.body.userAnswerRepo,
+            evaluateScript: result.evaluateScript,
+            callbackURL: config.appServer + 'homework/result',
+            branch: req.body.branch
+          })
+          .end(done);
     }
   ], (err, data) => {
 
@@ -201,9 +201,9 @@ HomeworkController.prototype.updateResult = (req, res)=> {
     },
     (data, result, done) => {
       done = typeof(result) === 'function' ? result : done;
-      if(!resultStatus){
+      if (!resultStatus) {
         done(null, false);
-      }else {
+      } else {
         userHomeworkQuizzes.findOne({
           userId: userId,
           quizzes: {$elemMatch: {id: homeworkId}}
@@ -215,25 +215,25 @@ HomeworkController.prototype.updateResult = (req, res)=> {
       }
     },
     (data, done) => {
-      if(data){
+      if (data) {
         var homeworkQuiz = data.quizzes.pop();
 
         apiRequest.post('scoresheets', {
           examerId: userId,
           paperId: data.paperId,
-          homeworkSubmits:[{
+          homeworkSubmits: [{
             homeworkQuizId: homeworkId,
             startTime: homeworkQuiz.startTime,
             homeworkSubmitPostHistory: homeworkQuiz.homeworkSubmitPostHistory
           }]
         }, done);
-      }else {
+      } else {
         done(null);
       }
     }], (err, data) => {
-    if(err) {
+    if (err) {
       res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
-    }else {
+    } else {
       res.send({
         status: constant.httpCode.OK
       });
@@ -253,7 +253,7 @@ HomeworkController.prototype.getResult = (req, res) => {
     (data, done) => {
       var integer = (Number(orderId) === parseInt(orderId, 10));
       if (!integer || orderId === undefined || orderId > data.quizzes.length || orderId < 1) {
-        done(true,null);
+        done(true, null);
       } else {
         history = data.quizzes[orderId - 1].homeworkSubmitPostHistory ? data.quizzes[orderId - 1].homeworkSubmitPostHistory : [];
         isSubmited = history.length > 0;
@@ -266,10 +266,10 @@ HomeworkController.prototype.getResult = (req, res) => {
         }
       }
     }
-  ],function(err,result){
-    if(err && err !== true){
+  ], function (err, result) {
+    if (err && err !== true) {
       res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
-    }else{
+    } else {
       resultText = result ? result.text : null;
       res.send({
         isSubmited: isSubmited,
