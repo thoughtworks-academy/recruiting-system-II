@@ -47,6 +47,10 @@ var HomeworkIntroductionStore = Reflux.createStore({
             });
           }
         });
+  },
+
+  onReload: function (orderId) {
+    this.onChangeOrderId(orderId);
   }
 });
 
