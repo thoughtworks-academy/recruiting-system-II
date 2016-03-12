@@ -10,6 +10,12 @@ function LogoutController() {
 LogoutController.prototype.logout = (req, res)=> {
 
   var logoutUri = 'logout';
+
+  if(!req.session.user){
+    res.redirect('/register.html');
+    return;
+  }
+
   var body = {
     userId: req.session.user.id
   };
