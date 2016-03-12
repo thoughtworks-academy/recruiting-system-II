@@ -9,6 +9,10 @@ var UserDetailStore = Reflux.createStore({
 
   onChangeNewPassword: function(passwordObj) {
     this.trigger(passwordObj);
+  },
+
+  onGetPasswordError: function(passwordError) {
+    this.trigger(passwordError);
   }
 });
 

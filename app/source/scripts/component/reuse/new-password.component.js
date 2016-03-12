@@ -38,12 +38,12 @@ var NewPassword = React.createClass({
 
     stateObj[name + 'Error'] = error;
     this.setState(stateObj);
+    PasswordActions.getPasswordError(stateObj);
     PasswordActions.changeNewPassword({[name]: target.value});
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-    console.log('pre-initial: ' + prevState.initialStatus);
-    console.log('current-initial: '+ this.state.initialStatus);
+
     if (prevState.initialStatus !== this.state.currentState) {
       this.refs.newPassword.value = '';
       this.refs.confirmPassword.value = '';

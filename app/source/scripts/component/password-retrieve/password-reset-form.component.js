@@ -58,7 +58,6 @@ var passwordResetForm = React.createClass({
 
     var retrieveClassName = 'password-reset-form-container ' + (this.state.showMessage ? 'hide' : '');
     var messageClassName = 'message-container ' + (this.state.showMessage ? '' : 'hide');
-
     return (
         <div>
           <div id="retrieve" className={retrieveClassName}>
