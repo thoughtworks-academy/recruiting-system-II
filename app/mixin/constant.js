@@ -15,6 +15,7 @@ var constant = {
   time: {
     MINUTE_PER_HOUR: 60,
     SECONDS_PER_MINUTE: 60,
+    HOURSPERDAY: 24,
     MILLISECOND_PER_SECONDS: 1000
   },
   homeworkQuizzesStatus: {
