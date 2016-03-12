@@ -6,6 +6,8 @@ var constant = require('../mixin/constant');
 var async = require('async');
 var userHomeworkQuizzes = require('../models/user-homework-quizzes');
 var json2csv = require('json2csv');
+var yamlConfig = require('node-yaml-config');
+var config = yamlConfig.load('./config/config.yml');
 var fs = require('fs');
 var _percentage = 100;
 
@@ -13,9 +15,7 @@ function UserController() {
 
 }
 
-
 function createUserDetail(data) {
-
   return {
     name: data.name,
     mobilePhone: data.mobilePhone,
@@ -128,6 +128,7 @@ function createUserInfo(userId, callback) {
   getUserDataByUserId(userId, function (userData) {
 
     var userInfo = {};
+    userInfo.userId = userId;
 
     if (userData.httpCode !== constant.httpCode.NOT_FOUND) {
 
@@ -150,17 +151,16 @@ function createCSV(userInfo) {
   var logicPuzzle = userInfo.logicPuzle;
   var homework = userInfo.homework;
 
-  var fieldNames = ['姓名', '电话', '邮箱', '逻辑题准确率', '家庭作业下载地址', '家庭作业花费时间', '日志下载地址'];
-  var fields = ['name', 'mobilePhone', 'email', 'accuracy', 'homeworkAddress', 'homeworkElapsedTime', 'log'];
+  var fieldNames = ['姓名', '电话', '邮箱', '逻辑题准确率', '家庭作业详情', '家庭作业花费时间'];
+  var fields = ['name', 'mobilePhone', 'email', 'accuracy', 'homeworkDetails', 'homeworkElapsedTime'];
 
   var user = [{
     name: userDetail.name,
     mobilePhone: userDetail.mobilePhone,
     email: userDetail.email,
     accuracy: logicPuzzle.accuracy,
-    homeworkAddress: 'url',
-    homeworkElapsedTime: homework.elapsedTime + '分钟',
-    log: 'url'
+    homeworkDetails: config.appServer + 'homework-details.html?userId=' + userInfo.userId,
+    homeworkElapsedTime: homework.elapsedTime + '分钟'
   }];
 
   json2csv({data: user, fields: fields, fieldNames: fieldNames}, function (err, csv) {
@@ -171,7 +171,6 @@ function createCSV(userInfo) {
       }
       console.log('file saved');
     });
-
   });
 }
 
@@ -189,6 +188,21 @@ UserController.prototype.exportCsv = (req, res)=> {
     }
   });
 };
+
+UserController.prototype.exportHomeworkDetails = (req, res)=> {
+
+  var userId = req.params.userId;
+
+  createUserInfo(userId, function (userInfo) {
+
+    if (userInfo.httpCode === constant.httpCode.NOT_FOUND) {
+      res.sendStatus(constant.httpCode.NOT_FOUND);
+    } else {
+      res.send({userInfo});
+    }
+  });
+};
+
 
 module.exports = UserController;
 
