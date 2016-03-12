@@ -23,6 +23,10 @@ var RunningResultStore = Reflux.createStore({
             resultText: res.body.resultText
           });
         });
+  },
+
+  onReload: function (orderId) {
+    this.onChangeOrderId(orderId);
   }
 });
 

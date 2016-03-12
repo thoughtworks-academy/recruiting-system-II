@@ -9,7 +9,8 @@ var HomeworkActions = Reflux.createActions([
   'submitUrl',
   'submited',
   'getBranches',
-  'changeGithubUrl'
+  'changeGithubUrl',
+  'reload'
 ]);
 
 module.exports = HomeworkActions;

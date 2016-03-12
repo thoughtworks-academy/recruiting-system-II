@@ -35,7 +35,7 @@ function onAction(number) {
 var HALF_SECONDS_PER_MINUTE = 30;
 
 setInterval(() => {
-  HomeworkAction.changeOrderId(changeId());
+  HomeworkAction.reload(changeId());
 }, constant.time.MILLISECOND_PER_SECONDS * HALF_SECONDS_PER_MINUTE);
 
 HomeworkAction.changeOrderId(changeId());
