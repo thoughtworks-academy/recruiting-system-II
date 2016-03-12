@@ -10,9 +10,10 @@ var PasswordActions = require('../../actions/reuse/password-actions');
 var PasswordStore = require('../../store/reuse/password-store');
 var ChangePasswordStore = require('../../store/user-center/change-password-store');
 var UserCenterStore = require('../../store/user-center/user-center-store');
+var PasswordResetStore = require('../../store/password-retrieve/password-reset-store');
 
 var NewPassword = React.createClass({
-  mixins: [Reflux.connect(PasswordStore), Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore)],
+  mixins: [Reflux.connect(PasswordStore), Reflux.connect(ChangePasswordStore), Reflux.connect(UserCenterStore),Reflux.connect(PasswordResetStore)],
 
   getInitialState: function () {
     return {

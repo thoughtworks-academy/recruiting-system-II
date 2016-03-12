@@ -7,16 +7,12 @@ var passwordResetActions = require('../../actions/password-retrieve/password-res
 var passwordResetStore = require('../../store/password-retrieve/password-reset-store');
 var Reflux = require('reflux');
 var PasswordStore = require('../../store/reuse/password-store');
-var constraint = require('../../../../mixin/password-retrieve-constraint');
+var constraint = require('../../../../mixin/confirm-password-constraint');
 var page = require('page');
 var constant = require('../../../../mixin/constant');
+var lang = require('../../../../mixin/lang-message/chinese');
+var getError = require('../../../../mixin/get-error');
 
-function getError(validateInfo, field) {
-  if (validateInfo && validateInfo[field] && validateInfo[field].length > 0) {
-    return validateInfo[field][0];
-  }
-  return '';
-}
 
 var passwordResetForm = React.createClass({
   mixins: [Reflux.connect(passwordResetStore), Reflux.connect(PasswordStore)],
@@ -38,11 +34,22 @@ var passwordResetForm = React.createClass({
     var name = event.target.name;
     passwordResetActions.changeValue(name, value);
   },
+  checkInfo: function () {
+    var newPassword = {newPassword: this.state.newPassword};
+    var result = validate(newPassword, constraint);
+    var newPasswordError = getError(result, 'newPassword');
+    var stateObj = {};
+
+    stateObj.newPasswordError = newPasswordError;
+    passwordResetActions.getError(stateObj);
+  },
 
   reset: function () {
     if (this.state.newPasswordError !== '' || this.state.confirmPasswordError !== '') {
       return ;
-    } else {
+    } else if(this.checkInfo()) {
+      return ;
+    }else {
       this.setState({
         clickable: true
       });

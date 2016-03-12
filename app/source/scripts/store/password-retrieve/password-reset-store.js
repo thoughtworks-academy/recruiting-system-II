@@ -45,8 +45,11 @@ var passwordResetStore = Reflux.createStore({
 
   onChangeValue: function (name, value) {
     this.trigger({[name]: value});
-  }
+  },
 
+  onGetError: function(value) {
+    this.trigger(value);
+  }
 });
 
 module.exports = passwordResetStore;
