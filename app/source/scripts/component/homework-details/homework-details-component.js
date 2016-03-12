@@ -26,11 +26,23 @@ var HomeworkDetails = React.createClass({
     HomeworkDetailsActions.loadUserDetail(userId);
   },
 
-  formatData: function (i, itemNumber, itemLength) {
+  getQuizzesLength: function () {
+    var sum = 0;
+
+    var itemLength = this.state.userDetail.homework.quizzes.length;
+    for (var i = 0; i < itemLength; i++) {
+      var quizLength = this.state.userDetail.homework.quizzes[i].commitHistory.length;
+      for (var k = 0; k < quizLength; k++) {
+        sum++;
+      }
+    }
+    return sum;
+  },
+
+
+  formatData: function (i, itemNumber, quizzesLength) {
 
     var quizLength = this.state.userDetail.homework.quizzes[i].commitHistory.length;
-    var quizzesLength = quizLength * itemLength;
-
 
     for (var k = 0; k < quizLength; k++) {
 
@@ -85,10 +97,13 @@ var HomeworkDetails = React.createClass({
 
     var itemNumber = [];
     if (this.state.userDetail !== null) {
+      var quizzesLength = this.getQuizzesLength();
       var itemLength = this.state.userDetail.homework.quizzes.length;
+
       for (var i = 0; i < itemLength; i++) {
-        this.formatData(i, itemNumber, itemLength);
+        this.formatData(i, itemNumber, quizzesLength);
       }
+
     }
 
     return (
