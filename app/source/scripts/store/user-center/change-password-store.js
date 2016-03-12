@@ -33,6 +33,11 @@ var ChangePasswordStore = Reflux.createStore({
               isRespond: false,
               oldPasswordError: lang.ERROR
             });
+          }else {
+            this.trigger({
+              isRespond: false,
+              confirmPasswordError: lang.CONFIRM_ERROR
+            });
           }
         });
   }

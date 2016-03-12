@@ -112,8 +112,6 @@ router.put('/change-password', function (req, res) {
     partResult.password = md5(passwordInfo.newPassword);
     var url = 'users/' + userId + '/password';
 
-
-
     apiRequest.put(url, partResult, function (err, resp) {
       if (resp === undefined) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
@@ -137,7 +135,7 @@ router.put('/change-password', function (req, res) {
     });
   } else {
     res.send({
-      status: constant.httpCode.BAD_REQUEST
+      status: constant.httpCode.PRECONDITION_FAILED
     });
   }
 });
