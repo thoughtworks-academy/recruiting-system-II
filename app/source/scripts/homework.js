@@ -9,6 +9,7 @@ var HomeworkIntroduction = require('./component/homework/homework-introduction.c
 var SubmissionIntroduction = require('./component/homework/submission-introduction.component');
 var RunningResult = require('./component/homework/running-result.component');
 var HomeworkAction = require('./actions/homework/homework-actions');
+var constant = require('../../mixin/constant');
 
 function changeId() {
   var orderId;
@@ -30,6 +31,12 @@ function onAction(number) {
   HomeworkAction.changeOrderId(number);
   history.pushState(null, '', '#' + number);
 }
+
+var HALF_SECONDS_PER_MINUTE = 30;
+
+setInterval(() => {
+  HomeworkAction.changeOrderId(changeId());
+}, constant.time.MILLISECOND_PER_SECONDS * HALF_SECONDS_PER_MINUTE);
 
 HomeworkAction.changeOrderId(changeId());
 
