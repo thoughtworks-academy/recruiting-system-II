@@ -253,7 +253,7 @@ HomeworkController.prototype.getResult = (req, res) => {
     (data, done) => {
       var integer = (Number(orderId) === parseInt(orderId, 10));
       if (!integer || orderId === undefined || orderId > data.quizzes.length || orderId < 1) {
-        done(true,null)
+        done(true,null);
       } else {
         history = data.quizzes[orderId - 1].homeworkSubmitPostHistory ? data.quizzes[orderId - 1].homeworkSubmitPostHistory : [];
         isSubmited = history.length > 0;
