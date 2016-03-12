@@ -18,9 +18,11 @@ mysql:
   environment:
     - LANG=C.UTF-8
     - TERM=dumb
-  volumes:
-    - /tmp/mysql:/var/lib/mysql
+#  volumes:
+#    - /tmp/mysql:/var/lib/mysql
   command: mysqld
+  environment:
+    - MYSQL_RANDOM_ROOT_PASSWORD=1
 #jenkins:
 #  image: jenkins:1.625.3
 #  ports:

@@ -1,6 +1,8 @@
 FROM ubuntu:14.04
 
-RUN apt-get update
+RUN groupadd -r mysql && useradd -r -g mysql mysql
+
+RUN apt-get update && apt-get install -y perl pwgen --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 ENV MYSQL_MAJOR 5.7
 ENV MYSQL_VERSION 5.7.11-1ubuntu14.04
@@ -31,6 +33,9 @@ RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf \
 	&& mv /tmp/my.cnf /etc/mysql/my.cnf
 
 VOLUME /var/lib/mysql
+
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3306
 CMD ["mysqld"]
