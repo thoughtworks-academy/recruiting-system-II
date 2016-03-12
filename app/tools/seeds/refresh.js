@@ -115,6 +115,7 @@ db.once('open', () => {
 
           }, {
             userId: 2,
+            isCommited: true,
             quizItems: [
               {
                 question: '经过以上操作之后，现在3号盒子中的数字是多少?',
@@ -624,8 +625,8 @@ db.once('open', () => {
           userId: 2,
           paperId: 1,
           quizzes: [
-            {id: 1, status: 4, userAnswerRepo: 'www.github.com',uri: 'homeworkQuizzes/1'},
-            {id: 2, status: 3, userAnswerRepo: 'www.repo.com',uri: 'homeworkQuizzes/2'},
+            {id: 1, status: 2,uri: 'homeworkQuizzes/1'},
+            {id: 2, status: 1,uri: 'homeworkQuizzes/2'},
             {id: 3, status: 1,uri: 'homeworkQuizzes/3'},
             {id: 4, status: 1,uri: 'homeworkQuizzes/4'},
             {id: 5, status: 1,uri: 'homeworkQuizzes/5'},

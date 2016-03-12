@@ -24,6 +24,13 @@ var submissionIntroductionStore = Reflux.createStore({
     });
   },
 
+  onReload: function() {
+    this.trigger({
+      disableBranches: true,
+      quizStatus: 0
+    });
+  },
+
   onSubmitUrl: function (url, branch, commitSHA, orderId) {
     superAgent.post('homework/save')
         .set('Content-Type', 'application/json')
