@@ -27,7 +27,7 @@ mysql:
 jetty-api:
   image: jetty:9.3-jre8
   volumes:
-    - ./release/jetty:/var/lib/jetty
+    - ./release/jetty/webapps:/var/lib/jetty/webapps
 #jenkins:
 #  image: jenkins:1.625.3
 #  ports:
