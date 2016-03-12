@@ -2,35 +2,31 @@
 
 set -e
 
-#docker-compose kill
-#docker-compose rm -f
-#docker-compose up -d
-cd assembly
-docker-compose kill jetty-api
-cd -
-
+# 修改apiserver migrate配置项
 mv ./api/gradle.properties ./api/gradle.properties.bak
 cp ./assembly/assemble/jetty-api/gradle.properties ./api/gradle.properties
+# 数据库迁移
 ./gradlew flywayMigrate
+# 恢复apiserver migrate配置项
 mv ./api/gradle.properties.bak ./api/gradle.properties
 
-
+# 修改apiserver配置项
 mv ./api/src/main/resources/config.properties ./api/src/main/resources/config.properties.bak
 cp ./assembly/assemble/jetty-api/config.properties ./api/src/main/resources/config.properties
 ./gradlew clean
 ./gradlew war
+
+# 停用api server
+cd assembly
+docker-compose kill jetty-api
+cd -
+
+# 将生成好的api war包放入指定目录
 cp api/build/libs/api.war assembly/assemble/jetty-api
+# 恢复配置项
 mv ./api/src/main/resources/config.properties.bak ./api/src/main/resources/config.properties
 
+# 启动api server
 cd assembly
 docker-compose up -d
 cd -
-#rm -fr assembly/assemble/*
-#git archive --format=zip HEAD:api -o assembly/assemble/api.zip
-#cd assembly/assemble
-#unzip api.zip -d api/
-#cd -
-#
-#cd assembly/assemble/api
-#./gradlew assemble
-#cd -
