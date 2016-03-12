@@ -92,8 +92,8 @@ var ChangePassword = React.createClass({
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
           <div className="content">
             <form className="form-horizontal form-top-height col-sm-8 col-md-8 col-sm-offset-3 col-md-offset-3">
-              <div className={this.state.success ? '' : 'hide'}>
-                <div className={"success-prompt alert alert-success"}>
+              <div className="col-sm-3 col-md-3 col-md-offset-4 col-sm-offset-4">
+                <div className={"success-prompt alert alert-success" + (this.state.success ? '' : ' hide')}>
                   <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"/>
                   修改成功
                 </div>
