@@ -11,6 +11,8 @@ node-app:
   command: bash -c "cd /var/app && node app.js"
   links:
     - mongodb:mongodb
+  env_file:
+    - ./node.env
 mysql:
   build: ./mysql
   environment:
