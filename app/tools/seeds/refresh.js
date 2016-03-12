@@ -682,7 +682,7 @@ db.once('open', () => {
           ]
         }], function () {
           console.log('mongo insert userHomeworkQuizzes end');
-          done(null)
+          done(null);
         });
       });
     }
