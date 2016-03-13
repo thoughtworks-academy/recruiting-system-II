@@ -47,10 +47,12 @@ node-task-queue:
     - redis:redis
   env_file:
     - ./production.env
-#jenkins:
-#  image: jenkins:1.625.3
-#  ports:
-#    - "8080:8080"
+jenkins:
+  image: jenkins:1.625.3
+  ports:
+    - "8888:8080"
+  env_file:
+      - ./production.env
 #  volumes:
 #    - /Users/Thoughtworks/works/docker-cached/jenkins_home:/var/jenkins_home
 #  links:
