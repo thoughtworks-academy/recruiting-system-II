@@ -19,7 +19,7 @@ jetty-api:
 mongodb:
   image: mongo:3.2
 node-app:
-  build: ./nodejs
+  image: node:5.8
   ports:
     - "3000:3000"
   volumes:
@@ -37,7 +37,7 @@ redis:
   volumes:
     - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
 node-task-queue:
-  build: ./nodejs
+  image: node:5.8
   ports:
     - "4000:4000"
   volumes:
