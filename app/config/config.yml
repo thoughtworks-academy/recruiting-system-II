@@ -12,6 +12,3 @@ default:
   gitHubToken: 'Basic dHdhcnM6c3cxMjM0NTY3OA=='
 test:
   port: 5000
-production:
-  database: 'mongodb://mongodb/twars'
-  apiServer: 'http://jetty-api:8080/api/'
