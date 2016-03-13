@@ -1,4 +1,5 @@
-assemble/jetty-api/api.war
+assemble/jetty-api
+!assemble/jetty-api/.gitkeep
 assemble/node-app
 !assemble/node-app/.gitkeep
 assemble/task-queue
