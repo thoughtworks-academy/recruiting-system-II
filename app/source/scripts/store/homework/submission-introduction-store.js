@@ -6,6 +6,8 @@ var HomeworkActions = require('../../actions/homework/homework-actions');
 var superAgent = require('superagent');
 var constant = require('../../../../mixin/constant');
 var errorHandler = require('../../../../tools/error-handler');
+var homeworkQuizzesStatus = require('../../../../mixin/constant').homeworkQuizzesStatus;
+var request = require('superagent');
 
 var submissionIntroductionStore = Reflux.createStore({
   listenables: [HomeworkActions],
@@ -24,11 +26,30 @@ var submissionIntroductionStore = Reflux.createStore({
     });
   },
 
-  onReload: function() {
-    this.trigger({
-      disableBranches: true,
-      quizStatus: 0
-    });
+  onReload: function(orderId) {
+    request.get('homework/quiz')
+        .set('Content-Type', 'application/json')
+        .query({orderId: orderId})
+        .use(errorHandler)
+        .end((err, res) => {
+          if (res.body.quiz.quizStatus === homeworkQuizzesStatus.PROGRESS) {
+            this.trigger({
+              quizStatus: homeworkQuizzesStatus.PROGRESS,
+              githubUrl: res.body.quiz.userAnswerRepo,
+              branches: [res.body.quiz.branch]
+            });
+          } else if (res.body.quiz.quizStatus === homeworkQuizzesStatus.SUCCESS) {
+            this.trigger({
+              quizStatus: homeworkQuizzesStatus.SUCCESS,
+              githubUrl: res.body.quiz.userAnswerRepo,
+              branches: [res.body.quiz.branch]
+            });
+          } else {
+            this.trigger({
+              quizStatus: res.body.quiz.quizStatus
+            });
+          }
+      });
   },
 
   onSubmitUrl: function (url, branch, commitSHA, orderId) {
