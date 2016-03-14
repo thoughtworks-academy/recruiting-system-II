@@ -53,9 +53,8 @@ var UserDetailStore = Reflux.createStore({
     }
   },
 
-  onChangeGender: function (evt) {
-
-    this.trigger({gender: evt.target.name});
+  onChangeGender: function (name) {
+    this.trigger({gender: name});
   },
 
   onValidateGender: function (genderError) {

@@ -24,15 +24,23 @@ var UserCenterGender = React.createClass({
       });
     }
   },
-  genderChange: function (evt) {
-    UserCenterActions.changeGender(evt);
+  genderChange: function () {
+    var checked;
+
+    if(this.refs.male.checked === true) {
+      checked = 'M';
+    }else {
+      checked = 'F';
+    }
+
+    UserCenterActions.changeGender(checked);
     UserCenterActions.validateGender(this.state.genderError);
   },
 
   render: function () {
     var tags = [
-      {mark: 'M', genderName: 'male', label: '男'},
-      {mark: 'F', genderName: 'female', label: '女'}
+      {genderName: 'male', label: '男'},
+      {genderName: 'female', label: '女'}
     ];
 
     return (
@@ -41,8 +49,8 @@ var UserCenterGender = React.createClass({
             {tags.map((item, index) => {
               return (
                   <div key={index}>
-                    <input type="radio" name={item.mark} className="gender" onChange={this.genderChange}
-                           checked={this.state.gender === item.mark ? 'checked' : ''} id={item.genderName}/>
+                    <input type="radio" name="gender" className="gender" id={item.genderName}
+                           onChange={this.genderChange} ref={item.genderName}/>
                     <label htmlFor={item.genderName}>{item.label}</label>
                   </div>
               );
