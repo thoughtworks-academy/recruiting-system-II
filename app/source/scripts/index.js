@@ -1,9 +1,3 @@
 'use strict';
-
-var $ = require('jquery');
+require('bootstrap/dist/css/bootstrap.min.css');
 require('../less/index.less');
-$(function () {
-  [0, 1, 2].forEach((v, k) => {
-    console.log(v);
-  });
-});

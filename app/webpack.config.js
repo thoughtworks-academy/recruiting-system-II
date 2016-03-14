@@ -2,6 +2,11 @@
 
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require("webpack");
+var path = require('path');
+var node_modules = path.resolve(__dirname, 'node_modules');
+var pathToJQuery = path.resolve(node_modules, 'jquery/dist/jquery.min.js');
+var pathToBootstarp = path.resolve(node_modules, 'bootstrap/dist/');
+
 
 module.exports = {
   entry: {
@@ -32,6 +37,10 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader','css-loader')
+      },
+      {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
       },
@@ -47,13 +56,16 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         loader: 'url-loader?limit=10000&name=build/[name].[ext]'
       }
-    ]
+    ],
+    noParse: [pathToJQuery,pathToBootstarp,]
   },
   plugins: [
     new ExtractTextPlugin("[name].bundle.css")
   ],
-  devtool: '#inline-source-map'
-  //resolve: {
-  //    extensions: [".jpg", ".png"]
-  //}
+  devtool: '#inline-source-map',
+  resolve: {
+    alias: {
+      'jquery': pathToJQuery
+    }
+  }
 };
