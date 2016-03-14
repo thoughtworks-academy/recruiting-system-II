@@ -50,7 +50,7 @@ node-task-queue:
 jenkins:
   image: jenkins:1.625.3
   ports:
-    - "8888:8080"
+    - "8000:8080"
   env_file:
       - ./production.env
 #  volumes:
