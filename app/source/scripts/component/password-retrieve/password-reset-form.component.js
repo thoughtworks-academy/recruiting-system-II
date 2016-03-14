@@ -1,10 +1,10 @@
 'use strict';
 
 var React = global.React = require('react');
-var ReactDOM = require('react-dom');
 var validate = require('validate.js');
-var passwordResetActions = require('../../actions/password-retrieve/password-reset-actions');
-var passwordResetStore = require('../../store/password-retrieve/password-reset-store');
+var PasswordResetActions = require('../../actions/password-retrieve/password-reset-actions');
+var PasswordActions = require('../../actions/reuse/password-actions');
+var PasswordResetStore = require('../../store/password-retrieve/password-reset-store');
 var Reflux = require('reflux');
 var PasswordStore = require('../../store/reuse/password-store');
 var constraint = require('../../../../mixin/confirm-password-constraint');
@@ -15,7 +15,7 @@ var getError = require('../../../../mixin/get-error');
 
 
 var passwordResetForm = React.createClass({
-  mixins: [Reflux.connect(passwordResetStore), Reflux.connect(PasswordStore)],
+  mixins: [Reflux.connect(PasswordResetStore), Reflux.connect(PasswordStore)],
 
   getInitialState: function () {
     return {
@@ -32,8 +32,9 @@ var passwordResetForm = React.createClass({
   handleChange: function (event) {
     var value = event.target.value;
     var name = event.target.name;
-    passwordResetActions.changeValue(name, value);
+    PasswordResetActions.changeValue(name, value);
   },
+
   checkInfo: function () {
     var newPassword = {newPassword: this.state.newPassword};
     var result = validate(newPassword, constraint);
@@ -41,13 +42,20 @@ var passwordResetForm = React.createClass({
     var stateObj = {};
 
     stateObj.newPasswordError = newPasswordError;
-    passwordResetActions.getError(stateObj);
+    PasswordResetActions.getError(stateObj);
+
+    if (newPasswordError === '' && this.state.confirmPasswordError === '') {
+      return true;
+    }else {
+      this.setState(stateObj);
+      return false;
+    }
   },
 
   reset: function () {
-    if (this.state.newPasswordError !== '' || this.state.confirmPasswordError !== '') {
-      return ;
-    } else if(this.checkInfo()) {
+    PasswordActions.submitEvent('submit');
+
+    if(!this.checkInfo()) {
       return ;
     }else {
       this.setState({
@@ -57,7 +65,7 @@ var passwordResetForm = React.createClass({
       var currentUrl = window.location.href;
       var token = currentUrl.split('=')[1];
 
-      passwordResetActions.reset(newPassword,token);
+      PasswordResetActions.reset(newPassword,token);
     }
   },
 

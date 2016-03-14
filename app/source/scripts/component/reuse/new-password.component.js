@@ -42,7 +42,7 @@ var NewPassword = React.createClass({
     var stateObj = {};
 
     stateObj.newPasswordError = getError(result, 'newPassword');
-    if(this.state.confirmPassword !== this.state.newPassword && this.state.confirmPassword !== '') {
+    if(this.state.confirmPassword !== this.state.newPassword) {
       stateObj.confirmPasswordError = lang.CONFIRM_ERROR;
     }else {
       stateObj.confirmPasswordError = '';
