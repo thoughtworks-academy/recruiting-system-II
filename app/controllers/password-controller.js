@@ -5,8 +5,7 @@ var apiRequest = require('../services/api-request');
 var emailServer = require('../services/email');
 var constant = require('../mixin/constant');
 var yamlConfig = require('node-yaml-config');
-var domainName = yamlConfig.load('./config/config.yml').domainName;
-var port = yamlConfig.load('./config/config.yml').port;
+var emailServer = yamlConfig.load('./config/config.yml').emailServer;
 var md5 = require('js-md5');
 
 function PasswordController() {
@@ -32,7 +31,7 @@ PasswordController.prototype.retrieve = (req, res)=> {
 
       if (status === constant.httpCode.OK) {
         var token = result.body.token;
-        var linkAddress = domainName + port + '/password-reset.html?token=' + token;
+        var linkAddress = emailServer + '/password-reset.html?token=' + token;
 
         emailServer.sendEmail(email, linkAddress, (err, status)=> {
           if (err) {
