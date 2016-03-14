@@ -1,7 +1,7 @@
 'use strict';
 
 var ReactDom = require('react-dom');
-var DashBoard = require('./component/dashboard/dashboard.component');
+var Dashboard = require('./component/dashboard/dashboard.component');
 var Navigation = require('./component/navigation/navigation.component');
 require('../less/dashboard.less');
 var Row = require('react-bootstrap/lib/Row');
