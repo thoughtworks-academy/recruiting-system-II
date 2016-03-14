@@ -52,7 +52,7 @@ var SubmissionIntroduction = React.createClass({
         commitSHA = item.commit.sha;
       }
     });
-
+    this.props.startProgress();
     HomeworkActions.submitUrl(this.state.githubUrl, this.state.githubBranch, commitSHA, this.state.currentHomeworkNumber);
   },
   onUrlBlur: function (event) {

@@ -33,6 +33,9 @@ var submissionIntroductionStore = Reflux.createStore({
         .query({orderId: orderId})
         .use(errorHandler)
         .end((err, res) => {
+          if(!res.body.quiz) {
+            return;
+          }
           if (res.body.quiz.quizStatus === homeworkQuizzesStatus.PROGRESS) {
             this.trigger({
               quizStatus: homeworkQuizzesStatus.PROGRESS,
