@@ -50,7 +50,7 @@ var submissionIntroductionStore = Reflux.createStore({
               quizStatus: res.body.quiz.quizStatus
             });
           }
-      });
+        });
   },
 
   onSubmitUrl: function (url, branch, commitSHA, orderId) {
