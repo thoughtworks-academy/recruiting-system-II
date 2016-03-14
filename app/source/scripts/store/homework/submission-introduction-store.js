@@ -13,6 +13,7 @@ var submissionIntroductionStore = Reflux.createStore({
   listenables: [HomeworkActions],
 
   onChangeOrderId: function (clickNumber) {
+    this.onReload(clickNumber);
     this.trigger({
       currentHomeworkNumber: clickNumber,
       githubUrlError: '',
