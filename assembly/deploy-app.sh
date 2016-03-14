@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-mkdir -p assembly/assemble/node-app
-
 # 准备代码
 cd app
 npm install

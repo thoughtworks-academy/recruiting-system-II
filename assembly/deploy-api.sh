@@ -2,8 +2,6 @@
 
 set -e
 
-mkdir -p "assembly/assemble/jetty-api"
-
 rm -fr assembly/assemble/jetty-api/*
 cp -r api/* assembly/assemble/jetty-api
 cp assembly/conf/config.properties assembly/assemble/jetty-api/src/main/resources/config.properties
