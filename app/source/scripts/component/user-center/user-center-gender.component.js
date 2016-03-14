@@ -15,13 +15,17 @@ var UserCenterGender = React.createClass({
     };
   },
   componentDidUpdate: function (prevProps, prevState) {
-
     if (prevState.currentState !== this.state.currentState) {
       this.setState({
         gender: '',
         genderError: false
 
       });
+    }
+    if(this.state.gender === 'M' || this.state.gender === '') {
+      this.refs.male.checked = true;
+    }else {
+      this.refs.female.checked = true;
     }
   },
   genderChange: function () {
@@ -39,8 +43,8 @@ var UserCenterGender = React.createClass({
 
   render: function () {
     var tags = [
-      {genderName: 'male', label: '男'},
-      {genderName: 'female', label: '女'}
+      {mark:'M', genderName: 'male', label: '男'},
+      {mark:'F', genderName: 'female', label: '女'}
     ];
 
     return (
@@ -48,7 +52,7 @@ var UserCenterGender = React.createClass({
           <div className="col-sm-4 col-md-4">
             {tags.map((item, index) => {
               return (
-                  <div key={index}>
+                  <div key={index} className="col-sm-3 col-md-3">
                     <input type="radio" name="gender" className="gender" id={item.genderName}
                            onChange={this.genderChange} ref={item.genderName}/>
                     <label htmlFor={item.genderName}>{item.label}</label>
