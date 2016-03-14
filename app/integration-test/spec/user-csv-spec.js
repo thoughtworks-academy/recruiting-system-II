@@ -78,7 +78,7 @@ function createCsvFile(done) {
           if (error) {
             throw error;
           }
-          var log = '\"姓名\",\"电话\",\"邮箱\",\"逻辑题准确率\",\"家庭作业详情\",\"家庭作业花费时间\"\n\"测试一\",\"18798037893\",\"test@163.com\",\"0%\",\"http://localhost:3000/homework-details.html?userId=1\",\"0天0小时0分\"';
+          var log = '\"姓名\",\"电话\",\"邮箱\",\"逻辑题准确率\",\"逻辑题花费时间\",\"家庭作业详情\",\"家庭作业花费时间\"\n\"测试一\",\"18798037893\",\"test@163.com\",\"0%\",\"0小时0分1秒\",\"http://localhost:3000/homework-details.html?userId=1\",\"0天0小时0分\"';
           expect(data).toBe(log);
           done();
         });
