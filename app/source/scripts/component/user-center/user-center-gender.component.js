@@ -43,8 +43,8 @@ var UserCenterGender = React.createClass({
 
   render: function () {
     var tags = [
-      {mark:'M', genderName: 'male', label: '男'},
-      {mark:'F', genderName: 'female', label: '女'}
+      {genderName: 'male', label: '男'},
+      {genderName: 'female', label: '女'}
     ];
 
     return (
