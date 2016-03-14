@@ -10,7 +10,7 @@ var UserCenterGender = React.createClass({
 
   getInitialState: function () {
     return {
-      gender: '',
+      gender: 'M',
       genderError: false
     };
   },
@@ -19,10 +19,9 @@ var UserCenterGender = React.createClass({
       this.setState({
         gender: '',
         genderError: false
-
       });
     }
-    if(this.state.gender === 'M' || this.state.gender === '') {
+    if(this.state.gender === 'M') {
       this.refs.male.checked = true;
     }else {
       this.refs.female.checked = true;

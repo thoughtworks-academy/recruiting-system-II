@@ -19,7 +19,7 @@ var UserDetail = React.createClass({
       name: '',
       mobilePhone: '',
       email: '',
-      gender: '',
+      gender: 'M',
       major: '',
       degree: '',
       schoolError: '',
@@ -43,7 +43,7 @@ var UserDetail = React.createClass({
         nameError: '',
         major: '',
         majorError: '',
-        gender: '',
+        gender: 'M',
         degree: '',
         degreeError: '',
         birthday: ''
