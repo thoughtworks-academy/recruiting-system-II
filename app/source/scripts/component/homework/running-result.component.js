@@ -15,6 +15,10 @@ var RunningResult = React.createClass({
     };
   },
 
+  componentDidMount: function () {
+    HomeworkActions.getRunningResult(this.props.orderId);
+  },
+
   render() {
 
     return (

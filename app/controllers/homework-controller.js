@@ -246,7 +246,6 @@ HomeworkController.prototype.getResult = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.query.orderId;
   var history, isSubmited, resultURL, resultText;
-
   async.waterfall([
     (done) => {
       userHomeworkQuizzes.findOne({userId: userId}, done);
