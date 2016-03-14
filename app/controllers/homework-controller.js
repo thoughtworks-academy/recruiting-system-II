@@ -173,9 +173,10 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
     if (err) {
       if (!data) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
+      } else {
+        res.status(data.status);
+        res.send({status: data.status});
       }
-      res.status(data.status);
-      res.send({status: data.status});
     } else {
       res.send({
         status: constant.httpCode.OK

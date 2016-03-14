@@ -94,7 +94,6 @@ var SubmissionIntroduction = React.createClass({
         <div className="container-fluid">
           <div className={(this.state.showRepo ? '' : ' hide')}>
             <div className="row last-time">
-              <div className="col-md-12 ">你还有2天10小时完成题目</div>
             </div>
             <div className="form-horizontal">
               <div className="form-group">
