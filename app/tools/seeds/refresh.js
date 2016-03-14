@@ -8,7 +8,11 @@ var homeworkQuizzes = require('../../models/homework-quizzes');
 
 var async = require('async');
 
-mongoose.connect('mongodb://localhost/twars');
+var yamlConfig = require('node-yaml-config');
+
+var config = yamlConfig.load(__dirname + '/../../config/config.yml');
+
+mongoose.connect(config.database);
 var db = mongoose.connection;
 
 db.once('open', () => {
