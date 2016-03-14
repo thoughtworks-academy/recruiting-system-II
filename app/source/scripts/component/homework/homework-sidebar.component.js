@@ -16,8 +16,7 @@ var HomeworkSidebar = React.createClass({
     return {
       homeworkStatusList: list,
       currentHomeworkNumber: this.props.orderId,
-      clickNumber: this.props.orderId,
-      waitingNumber: null
+      clickNumber: this.props.orderId
     };
   },
 
@@ -51,7 +50,7 @@ var HomeworkSidebar = React.createClass({
     var list = this.state.homeworkStatusList;
     var itemHtml = list.map((item, index) => {
       var classStr = 'list-group-item ' + (this.state.clickNumber === index + 1 ? ' selected' : '');
-      var iTagClassStr = index + 1 === this.state.waitingNumber ? this.changeIcon(homeworkQuizzesStatus.PROGRESS):this.changeIcon(item.status);
+      var iTagClassStr = this.changeIcon(item.status);
 
       iTagClassStr += ~iTagClassStr.indexOf('clock-o') ? ' flashing' : '';
 

@@ -19,8 +19,7 @@ var HomeworkSidebarStore = Reflux.createStore({
             return;
           }
           this.trigger({
-            homeworkStatusList:res.body.homeworkQuizzes,
-            waitingNumber: null
+            homeworkStatusList:res.body.homeworkQuizzes
           });
         });
   },
@@ -34,7 +33,7 @@ var HomeworkSidebarStore = Reflux.createStore({
   },
 
   onSubmited: function (orderId) {
-    this.trigger({waitingNumber: orderId});
+    this.onLoadHomeworkList();
   }
 });
 
