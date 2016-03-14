@@ -57,7 +57,7 @@ function startProgress() {
       });
 
     HomeworkAction.reload(changeId());
-  }, constant.time.MILLISECOND_PER_SECONDS);
+  }, constant.time.MILLISECOND_PER_SECONDS * HALF_SECONDS_PER_MINUTE);
 }
 
 startProgress();
