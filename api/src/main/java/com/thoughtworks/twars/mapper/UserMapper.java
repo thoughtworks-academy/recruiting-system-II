@@ -4,6 +4,8 @@ import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
 
     int insertUser(User user);
@@ -28,4 +30,6 @@ public interface UserMapper {
             @Param("password") String password);
 
     int resetPassword(User user);
+
+    List<UserDetail> findUserDetailsByUserIdss(List<Integer> userIds);
 }
