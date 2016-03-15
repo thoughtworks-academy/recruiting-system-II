@@ -18,6 +18,8 @@ jetty-api:
     - "8080:8080"
 mongodb:
   image: mongo:3.2
+  ports:
+    - "27017:27017"
 node-app:
   image: node:5.8
   ports:
@@ -52,4 +54,4 @@ jenkins:
   ports:
     - "8000:8080"
   env_file:
-      - ./production.env
+    - ./production.env
