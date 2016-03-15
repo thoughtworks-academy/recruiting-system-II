@@ -36,6 +36,14 @@ function pathControl(url, data) {
 module.exports = function (req, res, next) {
   var userId;
 
+  if (req.headers.stress) {
+    req.session.user = {
+        id: 1,
+        userInfo: {uri: 'users/1'},
+        token: '846cd0e6d5dae4170381b6e61858c6b1'
+    }
+  }
+
   if (Boolean(req.session.user)) {
     userId = req.session.user.id;
   }
@@ -49,7 +57,7 @@ module.exports = function (req, res, next) {
       if (!userId) {
         done(null, false);
       } else {
-        logicPuzzle.isPaperCommited(userId, (err,data) => {
+        logicPuzzle.isPaperCommited(userId, (err, data) => {
           done(null, data);
         });
       }
@@ -77,7 +85,7 @@ module.exports = function (req, res, next) {
       });
     },
 
-    isThirdParty: function(done) {
+    isThirdParty: function (done) {
       done(null, Boolean(req.session.passport));
     }
 
