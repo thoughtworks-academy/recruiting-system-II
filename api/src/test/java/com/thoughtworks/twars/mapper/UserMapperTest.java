@@ -2,6 +2,7 @@ package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
+import io.swagger.models.auth.In;
 import org.junit.Before;
 import org.junit.Test;
 import scala.Int;
@@ -169,11 +170,24 @@ public class UserMapperTest extends TestBase {
         userIds.add(1);
         userIds.add(2);
         userIds.add(3);
+
         List<UserDetail> userDetails = userMapper.findUserDetailsByUserIds(userIds);
 
         assertThat(userDetails.size(), is(2));
         assertThat(userDetails.get(0).getUserId(), is(1));
         assertThat(userDetails.get(0).getSchool(), is("思沃学院"));
         assertThat(userDetails.get(1).getUserId(), is(2));
+    }
+
+    @Test
+    public void should_return_users() {
+        List<Integer> userIds = new ArrayList<>();
+        userIds.add(1);
+        userIds.add(2);
+        userIds.add(3);
+
+        List<User> users = userMapper.findUsersByUserIds(userIds);
+
+        assertThat(userIds.size(), is(3));
     }
 }
