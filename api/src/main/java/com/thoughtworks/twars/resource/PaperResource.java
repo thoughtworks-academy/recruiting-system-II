@@ -5,6 +5,12 @@ import com.thoughtworks.twars.bean.ItemPost;
 import com.thoughtworks.twars.bean.Paper;
 import com.thoughtworks.twars.bean.ScoreSheet;
 import com.thoughtworks.twars.mapper.*;
+import com.thoughtworks.twars.bean.User;
+import com.thoughtworks.twars.bean.UserDetail;
+import com.thoughtworks.twars.mapper.PaperMapper;
+import com.thoughtworks.twars.mapper.ScoreSheetMapper;
+import com.thoughtworks.twars.mapper.SectionMapper;
+import com.thoughtworks.twars.mapper.UserMapper;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
 import io.swagger.annotations.Api;
@@ -29,6 +35,8 @@ public class PaperResource extends Resource {
 
     @Inject
     private PaperMapper paperMapper;
+    @Inject
+    private UserMapper userMapper;
     @Inject
     private HomeworkQuizDefinitionService homeworkQuizDefinition;
     @Inject
@@ -134,6 +142,29 @@ public class PaperResource extends Resource {
                 .entity(paper.getResponseInfo()).build();
     }
 
+    @GET
+    @Path("/{param}/usersDetail")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserDetailByPaperId(
+            @PathParam("param") int id) {
+        List<Integer> examerIds = scoreSheetMapper.findUserIdsByPaperId(id);
+        List<UserDetail> userDetails = userMapper.findUserDetailsByUserIds(examerIds);
+        List<User> users = userMapper.findUsersByUserIds(examerIds);
+        List<Map> result = new ArrayList<>();
+        for (int i = 0; i < userDetails.size(); i++) {
+            Map userMap = new HashMap<>();
+            userMap.put("userId", users.get(i).getId());
+            userMap.put("mobilePhone", users.get(i).getMobilePhone());
+            userMap.put("email", users.get(i).getEmail());
+            userMap.put("birthday", userDetails.get(i).getBirthday());
+            userMap.put("major", userDetails.get(i).getMajor());
+            userMap.put("degree", userDetails.get(i).getDegree());
+            userMap.put("gender", userDetails.get(i).getGender());
+            userMap.put("name", userDetails.get(i).getName());
+            result.add(userMap);
+        }
+        return Response.status(Response.Status.OK).entity(result).build();
+    }
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200, message = "get enrollment paper successfully"),
