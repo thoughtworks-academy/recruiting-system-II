@@ -2,7 +2,7 @@ default:
   port: 4000
   redisServerIp: 'redis'
   redisServerPort: '6379'
-  CIServer: 'http://jenkins:8080'
+  CIServer: 'http://jenkins-nodejs:8080'
   jobName: 'TASK-RUNNER'
   nginxServer: 'http://nginx:8888/fs'
-  taskServer: 'http://task-queue' #更改为连接data时,你电脑的ip地址
+  taskServer: 'http://172.17.0.8'

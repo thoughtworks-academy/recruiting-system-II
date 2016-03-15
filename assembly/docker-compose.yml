@@ -30,6 +30,7 @@ node-app:
   links:
     - mongodb:mongodb
     - jetty-api:jetty-api
+    - node-task-queue:node-task-queue
   env_file:
     - ./production.env
 redis:
@@ -47,6 +48,7 @@ node-task-queue:
   command: bash -c "cd /var/app && node app.js"
   links:
     - redis:redis
+    - jenkins-nodejs:jenkins-nodejs
   env_file:
     - ./production.env
 jenkins-nodejs:

@@ -2,8 +2,8 @@ default:
   port: 3000
   database: 'mongodb://mongodb/twars'
   apiServer: 'http://jetty-api:8080/jetty-api/'
-  appServer: 'http://node-app:3000/'
-  taskServer: 'http://task-queue:4000/'
+  appServer: 'http://172.17.0.7:3000/'
+  taskServer: 'http://node-task-queue:4000/'
   sessionTtl: 3600 # 60(MINUTE_PER_HOUR) * 60(SECONDS_PER_MINUTE)
   staticFileServer: 'http://10.29.3.221:8888/fs/'
   emailServer: 'http://54.222.191.27:8888'
