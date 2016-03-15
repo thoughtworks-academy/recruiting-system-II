@@ -169,7 +169,7 @@ public class UserMapperTest extends TestBase {
         userIds.add(1);
         userIds.add(2);
         userIds.add(3);
-        List<UserDetail> userDetails = userMapper.findUserDetailsByUserIdss(userIds);
+        List<UserDetail> userDetails = userMapper.findUserDetailsByUserIds(userIds);
 
         assertThat(userDetails.size(), is(2));
         assertThat(userDetails.get(0).getUserId(), is(1));

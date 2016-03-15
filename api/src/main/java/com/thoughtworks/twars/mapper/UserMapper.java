@@ -31,5 +31,7 @@ public interface UserMapper {
 
     int resetPassword(User user);
 
-    List<UserDetail> findUserDetailsByUserIdss(List<Integer> userIds);
+    List<UserDetail> findUserDetailsByUserIds(List<Integer> userIds);
+
+    List<User> findUsersByUserIds(List<Integer> userIds);
 }

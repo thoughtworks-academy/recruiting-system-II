@@ -58,7 +58,7 @@
         UPDATE users SET password=MD5(#{password}) WHERE binary email= #{email};
     </update>
 
-    <select id="findUserDetailsByUserIdss" resultMap="userDetailMap">
+    <select id="findUserDetailsByUserIds" resultMap="userDetailMap">
         SELECT * FROM userDetail WHERE userId IN
         <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
             #{userIds}
