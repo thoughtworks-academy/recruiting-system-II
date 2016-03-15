@@ -1,10 +1,12 @@
 'use strict';
 
-require('bootstrap/dist/css/bootstrap.min.css');
+var $ = global.jQuery = require('jquery');
 var ReactDom = require('react-dom');
+require('bootstrap/dist/js/bootstrap.min.js');
+require('bootstrap/dist/css/bootstrap.min.css');
+require('../less/start.less');
 var StartInfo = require('./component/start-info/start-info.component');
 var Navigation = require('./component/navigation/navigation.component');
-require('../less/start.less');
 
 ReactDom.render(
     <div>
