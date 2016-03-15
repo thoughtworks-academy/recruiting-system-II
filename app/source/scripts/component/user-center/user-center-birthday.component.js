@@ -1,6 +1,5 @@
 'use strict';
 
-var React = require('react');
 var Reflux = require('reflux');
 var Calendar = require('react-input-calendar');
 var UserCenterActions = require('../../actions/user-center/user-center-actions');

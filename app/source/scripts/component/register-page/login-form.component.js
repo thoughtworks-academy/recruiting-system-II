@@ -1,8 +1,7 @@
 'use strict';
 
-var React = global.React = require('react');
+
 var validate = require('validate.js');
-var ReactDOM = require('react-dom');
 var LoginActions = require('../../actions/register-page/login-actions');
 var LoginStore = require('../../store/register-page/login-store');
 var Reflux = require('reflux');

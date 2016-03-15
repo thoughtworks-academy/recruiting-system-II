@@ -1,10 +1,5 @@
 'use strict';
 
-var $ = global.jQuery = require('jquery');
-var ReactDOM = require('react-dom');
-require('bootstrap/dist/js/bootstrap.min.js');
-require('bootstrap/dist/css/bootstrap.min.css');
-require('font-awesome/css/font-awesome.min.css');
 require('../less/logic-puzzle.less');
 require('lightbox2/dist/css/lightbox.min.css');
 require('lightbox2/dist/js/lightbox.min.js');

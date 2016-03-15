@@ -1,7 +1,5 @@
 'use strict';
 
-var React = global.React = require('react');
-var ReactDOM = require('react-dom');
 var validate = require('validate.js');
 var passwordRetrieveActions = require('../../actions/password-retrieve/password-retrieve-actions');
 var passwordRetrieveStore = require('../../store/password-retrieve/password-retrieve-store');

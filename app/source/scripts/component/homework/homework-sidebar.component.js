@@ -2,7 +2,6 @@
 
 'use strict';
 
-var React = require('react');
 var Reflux = require('reflux');
 var HomeworkActions = require('../../actions/homework/homework-actions');
 var HomeworkSidebarStore = require('../../store/homework/homework-sidebar-store');

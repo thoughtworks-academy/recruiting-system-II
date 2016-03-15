@@ -1,6 +1,5 @@
 'use strict';
 
-var React = require('react');
 var validate = require('validate.js');
 var Reflux = require('reflux');
 var getError = require('../../../../mixin/get-error');

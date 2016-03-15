@@ -1,6 +1,5 @@
 'use strict';
 
-var React = require('react');
 var Reflux = require('reflux');
 var HomeworkDetailsStore = require('../../store/homework-details/homework-details-store');
 var HomeworkDetailsActions = require('../../actions/homework-details/homework-details-actions');

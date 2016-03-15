@@ -1,9 +1,6 @@
 'use strict';
 
-require('font-awesome/css/font-awesome.min.css');
-require('bootstrap/dist/css/bootstrap.min.css');
 require('../less/homework.less');
-var ReactDom = require('react-dom');
 var Navigation = require('./component/navigation/navigation.component');
 var HomeworkSidebar = require('./component/homework/homework-sidebar.component');
 var HomeworkContent = require('./component/homework/homework-content.component');

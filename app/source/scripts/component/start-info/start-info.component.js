@@ -1,6 +1,5 @@
 'use strict';
 
-var React = global.React = require('react');
 var Reflux = require('reflux');
 var StartActions = require('../../actions/start/start-actions');
 var StartStore = require('../../store/start/start-store');

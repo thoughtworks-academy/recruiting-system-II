@@ -1,6 +1,5 @@
 'use strict';
 
-var React = require('react');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/password-constraint');
 var getError = require('../../../../mixin/get-error');

@@ -1,10 +1,6 @@
 'use strict';
 
-var $ = global.jQuery = require('jquery');
-var ReactDom = require('react-dom');
-require('bootstrap/dist/js/bootstrap.min.js');
-require('bootstrap/dist/css/bootstrap.min.css');
-require('font-awesome/css/font-awesome.min.css');
+
 require('../less/register.less');
 var RegisterApp = require('./component/register-page/register-app.component');
 var RegisterForm = require('./component/register-page/register-form.component');

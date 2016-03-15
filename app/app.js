@@ -50,10 +50,10 @@ if (env === 'development') {
     }
   }));
 }
-
+console.log(env);
 app.use(sessionCheck);
 
-app.use(express.static('public'));
+app.use(express.static('public/assets'));
 
 route.setRoutes(app);
 

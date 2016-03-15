@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react');
+
 var LoginActions = require('../../actions/register-page/login-actions');
 var LoginStore = require('../../store/register-page/login-store');
 var Reflux = require('reflux');

@@ -1,6 +1,5 @@
 'use strict';
 
-var React = require('react');
 var Reflux = require('reflux');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/url-constraint');

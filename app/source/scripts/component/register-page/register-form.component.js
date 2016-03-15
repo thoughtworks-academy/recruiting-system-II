@@ -1,9 +1,6 @@
 'use strict';
 
-var React = global.React = require('react');
 var Reflux = require('reflux');
-var $ = require('jquery');
-var ReactDOM = require('react-dom');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/register-constraint');
 var page = require('page');

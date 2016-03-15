@@ -1,6 +1,5 @@
 'use strict';
 
-var React = require('react');
 var Reflux = require('reflux');
 var UserCenterActions = require('../../actions/user-center/user-center-actions');
 var UserCenterStore = require('../../store/user-center/user-center-store');

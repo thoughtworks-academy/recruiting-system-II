@@ -1,8 +1,6 @@
 'use strict';
 
 
-var ReactDom = require('react-dom');
-require('bootstrap/dist/css/bootstrap.min.css');
 require('../less/password-reset.less');
 
 var PasswordResetForm = require('./component/password-retrieve/password-reset-form.component');

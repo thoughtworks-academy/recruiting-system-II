@@ -2,7 +2,7 @@
 
 'use strict';
 
-var React = require('react');
+
 var LoginStore = require('../../store/register-page/login-store');
 var RegisterStore = require('../../store/register-page/register-store');
 var RegisterActions = require('../../actions/register-page/register-actions');

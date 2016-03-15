@@ -1,6 +1,5 @@
 'use strict';
 
-var React = global.React = require('react');
 var Input = require('react-bootstrap/lib/Input');
 var UserCenterActions = require('../../actions/user-center/user-center-actions');
 var RegisterActions = require('../../actions/register-page/register-actions');
