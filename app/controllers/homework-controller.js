@@ -125,6 +125,9 @@ HomeworkController.prototype.getQuiz = (req, res) => {
 };
 
 HomeworkController.prototype.saveGithubUrl = (req, res) => {
+  console.log('======================saveGithubUrl======================');
+  console.log(config);
+  console.log(req.body);
   var userId = req.session.user.id;
   var orderId = req.body.orderId;
   var homeworkId;
@@ -169,11 +172,12 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
           .end(done);
     }
   ], (err, data) => {
-
     if (err) {
+      console.log(err);
       if (!data) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       } else {
+        console.log(data);
         res.status(data.status);
         res.send({status: data.status});
       }
@@ -189,6 +193,9 @@ HomeworkController.prototype.updateResult = (req, res)=> {
   var userId = req.body.userId;
   var homeworkId = req.body.homeworkId;
   var resultStatus = req.body.resultStatus;
+
+  console.log('======================updateResult======================');
+  console.log(req.body);
 
   async.waterfall([
     (done) => {
@@ -233,6 +240,7 @@ HomeworkController.prototype.updateResult = (req, res)=> {
       }
     }], (err, data) => {
     if (err) {
+      console.log(err);
       res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
     } else {
       res.send({

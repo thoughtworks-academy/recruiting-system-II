@@ -10,6 +10,9 @@ var httpCode = require('../mixin/constant').httpCode;
 function TaskController () {}
 
 TaskController.prototype.createTask = (req, res) => {
+  console.log('======================createTask======================');
+  console.log(config)
+  console.log(req.body);
   var recordName = 'homework_' + req.body.userId + '_' + req.body.homeworkId;
   client.set(recordName, JSON.stringify(req.body));
 
@@ -27,6 +30,7 @@ TaskController.prototype.createTask = (req, res) => {
     })
     .end((err, response) => {
       if (err){
+        console.log(err);
         res.sendStatus(httpCode.INTERNAL_SERVER_ERROR);
       }else {
         res.send({
