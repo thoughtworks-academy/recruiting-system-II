@@ -9,7 +9,7 @@ var validate = require('validate.js');
 var constraint = require('../../../../mixin/user-detail-constraint');
 var getError = require('../../../../mixin/get-error');
 var moment = require('moment');
-
+var lang = require('../../../../mixin/lang-message/chinese');
 
 var UserCenterBirthday = React.createClass({
   mixins: [Reflux.connect(UserCenterStore)],
@@ -57,6 +57,7 @@ var UserCenterBirthday = React.createClass({
                 inputFieldClass={this.state.birthdayError === '' ? '' : 'calendar'}
                 onChange={this.changeBirthday}
                 date={this.state.birthday}
+                minDate={lang.MIN_DATE}
                 maxDate={moment().format('L')}
                 onBlur={this.validate}
                 closeOnSelect={true}
