@@ -27,9 +27,6 @@ public class UserResource extends Resource {
     private BlankQuizSubmitMapper blankQuizSubmitMapper;
 
     @Inject
-    private BlankQuizMapper blankQuizMapper;
-
-    @Inject
     private ItemPostMapper itemPostMapper;
 
     @Inject
@@ -67,45 +64,36 @@ public class UserResource extends Resource {
     public Response getUserLogicPuzzle(
             @ApiParam(name = "id", value = "userId", required = true)
             @PathParam("param") int userId) {
-
         ScoreSheet scoreSheet = scoreSheetMapper.findOneByUserId(userId);
 
         if (scoreSheet == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        List<BlankQuizSubmit> blankQuizSubmitList =
-                blankQuizSubmitMapper.findByScoreSheetId(scoreSheet.getId());
+        BlankQuizSubmit blankQuizSubmit =
+                blankQuizSubmitMapper.findByScoreSheetId(scoreSheet.getId()).get(0);
 
-        List<Map> result = new ArrayList<>();
+        List<ItemPost> itemPostList = itemPostMapper.findByBlankQuizSubmit(blankQuizSubmit.getId());
 
-        blankQuizSubmitList.forEach(item -> {
-            List<ItemPost> itemPostList = itemPostMapper.findByBlankQuizSubmit(item.getId());
+        Map map = new HashMap();
+        map.put("startTime", blankQuizSubmit.getStartTime());
+        map.put("endTime", blankQuizSubmit.getEndTime());
+        map.put("itemNumber", itemPostList.size());
+        map.put("correctNumber", calculateCorrectNumber(itemPostList));
 
-            Map map = new HashMap();
-            map.put("startTime", item.getStartTime());
-            map.put("endTime", item.getEndTime());
-            map.put("itemNumber", itemPostList.size());
-            map.put("correctNumber", calculateCorrectNumber(itemPostList));
-
-            result.add(map);
-        });
-
-        return Response.status(Response.Status.OK).entity(result).build();
+        return Response.status(Response.Status.OK).entity(map).build();
     }
 
     public int calculateCorrectNumber(List<ItemPost> itemPostList) {
-        int count = 0;
+        List<String> correctList = new ArrayList<>();
 
-        for (int i = 0; i < itemPostList.size(); i++) {
-            String userAnswer = itemPostList.get(i).getAnswer();
-            int quizItemId = itemPostList.get(i).getQuizItemId();
-
-            if (quizItemMapper.getQuizItemById(quizItemId).getAnswer().equals(userAnswer)) {
-                count++;
+        itemPostList.forEach(val -> {
+            String answer = quizItemMapper.getQuizItemById(val.getQuizItemId()).getAnswer();
+            if (val.getAnswer().equals(answer)) {
+                correctList.add("true");
             }
-        }
-        return count;
+        });
+        return correctList.size();
     }
 
     @GET
