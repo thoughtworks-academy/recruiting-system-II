@@ -187,6 +187,11 @@ public class PaperResource extends Resource {
     ) {
 
         List<ScoreSheet> scoreSheets = scoreSheetMapper.findByPaperId(id);
+
+        if (scoreSheets.size() == 0) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
         List<Map> result = new ArrayList<>();
 
         scoreSheets.forEach(item -> {
