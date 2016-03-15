@@ -28,7 +28,7 @@ var constraint = {
   major: {
     presence: {message: '^专业不能为空'},
     format: {
-      pattern: /^[\u4E00-\u9FA5A-Za-z]+$/,
+      pattern: /\s*[\u4E00-\u9FA5A-Za-z]+\s*$/,
       message: '^请输入合法专业'
     }
   },
