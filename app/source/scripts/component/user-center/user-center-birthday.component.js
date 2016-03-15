@@ -55,6 +55,7 @@ var UserCenterBirthday = React.createClass({
             <Calendar
                 inputFieldClass={this.state.birthdayError === '' ? '' : 'calendar'}
                 onChange={this.changeBirthday}
+                format="YYYY年MM月DD日"
                 date={this.state.birthday}
                 minDate={lang.MIN_DATE}
                 maxDate={moment().format('L')}
