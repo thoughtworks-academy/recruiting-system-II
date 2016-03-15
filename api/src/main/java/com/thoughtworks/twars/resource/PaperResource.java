@@ -1,16 +1,7 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.BlankQuizSubmit;
-import com.thoughtworks.twars.bean.ItemPost;
-import com.thoughtworks.twars.bean.Paper;
-import com.thoughtworks.twars.bean.ScoreSheet;
+import com.thoughtworks.twars.bean.*;
 import com.thoughtworks.twars.mapper.*;
-import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.bean.UserDetail;
-import com.thoughtworks.twars.mapper.PaperMapper;
-import com.thoughtworks.twars.mapper.ScoreSheetMapper;
-import com.thoughtworks.twars.mapper.SectionMapper;
-import com.thoughtworks.twars.mapper.UserMapper;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
 import io.swagger.annotations.Api;
@@ -204,7 +195,7 @@ public class PaperResource extends Resource {
             List<String> correctList = new ArrayList<>();
             itemPostList.forEach(val -> {
                 String answer = quizItemMapper.getQuizItemById(val.getQuizItemId()).getAnswer();
-                if (val.getAnswer().equals(answer)) {
+                if (val.getAnswer() != null && val.getAnswer().equals(answer)) {
                     correctList.add("true");
                 }
             });
