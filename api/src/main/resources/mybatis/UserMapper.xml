@@ -14,6 +14,12 @@
         <result column="gender" property="gender"></result>
     </resultMap>
 
+    <resultMap id="userMap" type="com.thoughtworks.twars.bean.User">
+        <id property="id" column="id"></id>
+        <result column="email" property="email"></result>
+        <result column="mobilePhone" property="mobilePhone"></result>
+    </resultMap>
+
     <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
         select * from users where id = #{id}
     </select>
@@ -60,6 +66,13 @@
 
     <select id="findUserDetailsByUserIds" resultMap="userDetailMap">
         SELECT * FROM userDetail WHERE userId IN
+        <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
+            #{userIds}
+        </foreach>
+    </select>
+
+    <select id="findUsersByUserIds" resultMap="userMap">
+        SELECT * FROM users WHERE id IN
         <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
             #{userIds}
         </foreach>
