@@ -17,4 +17,5 @@ public interface ScoreSheetMapper {
     ScoreSheet findOneByUserId(int userId);
 
     List<ScoreSheet> findByPaperId(int paperId);
+    List<Integer> findUserIdsByPaperId(int paperId);
 }
