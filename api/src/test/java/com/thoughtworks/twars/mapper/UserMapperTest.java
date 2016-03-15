@@ -4,6 +4,10 @@ import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
 import org.junit.Test;
+import scala.Int;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -157,5 +161,19 @@ public class UserMapperTest extends TestBase {
 
         assertThat(result, is(1));
         assertThat(resultUser.getPassword(), is("d0521106f6ba7f9ac0a7370fb28d0ec6"));
+    }
+
+    @Test
+    public void should_return_userDetails() {
+        List<Integer> userIds = new ArrayList<>();
+        userIds.add(1);
+        userIds.add(2);
+        userIds.add(3);
+        List<UserDetail> userDetails = userMapper.findUserDetailsByUserIdss(userIds);
+
+        assertThat(userDetails.size(), is(2));
+        assertThat(userDetails.get(0).getUserId(), is(1));
+        assertThat(userDetails.get(0).getSchool(), is("思沃学院"));
+        assertThat(userDetails.get(1).getUserId(), is(2));
     }
 }
