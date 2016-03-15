@@ -38,10 +38,10 @@ module.exports = function (req, res, next) {
 
   if (req.headers.stress) {
     req.session.user = {
-        id: 1,
-        userInfo: {uri: 'users/1'},
-        token: '846cd0e6d5dae4170381b6e61858c6b1'
-    }
+      id: 1,
+      userInfo: {uri: 'users/1'},
+      token: '846cd0e6d5dae4170381b6e61858c6b1'
+    };
   }
 
   if (Boolean(req.session.user)) {
