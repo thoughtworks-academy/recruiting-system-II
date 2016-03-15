@@ -10,6 +10,7 @@ cp assembly/conf/gradle.properties assembly/assemble/jetty-api/gradle.properties
 cd assembly/assemble/jetty-api
 gradle clean
 gradle war
+gradle flywayClean
 gradle flywayMigrate
 cd -
 
