@@ -32,4 +32,8 @@
         SELECT * FROM scoreSheet WHERE examerId = #{userId};
     </select>
 
+    <select id="findByPaperId" resultMap="scoreSheetsMap">
+        SELECT * FROM scoreSheet WHERE paperId = #{paperId};
+    </select>
+
 </mapper>

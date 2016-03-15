@@ -15,4 +15,6 @@ public interface ScoreSheetMapper {
     ScoreSheet selectScoreSheet(ScoreSheet scoreSheet);
 
     ScoreSheet findOneByUserId(int userId);
+
+    List<ScoreSheet> findByPaperId(int paperId);
 }

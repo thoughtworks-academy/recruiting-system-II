@@ -2,13 +2,9 @@ package com.thoughtworks.twars.resource;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.thoughtworks.twars.bean.BlankQuiz;
-import com.thoughtworks.twars.bean.HomeworkQuiz;
-import com.thoughtworks.twars.bean.Paper;
-import com.thoughtworks.twars.bean.Section;
+import com.thoughtworks.twars.bean.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -144,6 +140,38 @@ public class PaperResourceTest extends TestBase {
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON_TYPE);
 
         Response response = target(basePath).request().post(entity);
+        assertThat(response.getStatus(), is(200));
+    }
+
+
+    @Test
+    public void should_return_logic_puzzle_info_by_paper_id(){
+        ScoreSheet scoreSheet = new ScoreSheet();
+        scoreSheet.setExamerId(1);
+        scoreSheet.setId(2);
+        when(scoreSheetMapper.findByPaperId(1)).thenReturn(Arrays.asList(scoreSheet));
+
+        BlankQuizSubmit blankQuizSubmit = new BlankQuizSubmit();
+        blankQuizSubmit.setId(4);
+        blankQuizSubmit.setBlankQuizId(5);
+        blankQuizSubmit.setEndTime(123456);
+        blankQuizSubmit.setStartTime(123456);
+        blankQuizSubmit.setScoreSheetId(2);
+        when(blankQuizSubmitMapper.findByScoreSheetId(2)).thenReturn(Arrays.asList(blankQuizSubmit));
+
+        ItemPost itemPost = new ItemPost();
+        itemPost.setId(6);
+        itemPost.setBlankQuizSubmitsId(4);
+        itemPost.setAnswer("111");
+        itemPost.setQuizItemId(7);
+        when(itemPostMapper.findByBlankQuizSubmit(4)).thenReturn(Arrays.asList(itemPost));
+
+        QuizItem quizItem = new QuizItem();
+        quizItem.setId(7);
+        quizItem.setAnswer("111");
+        when(quizItemMapper.getQuizItemById(7)).thenReturn(quizItem);
+
+        Response response = target(basePath + "/1/logicPuzzle").request().get();
         assertThat(response.getStatus(), is(200));
     }
 
