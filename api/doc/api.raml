@@ -368,6 +368,38 @@ baseUri: http://api.bronzesword.com/
                                 definition_uri: string
                                 [items_uri]: string
                         maker_uri: string
+    /logicPuzzle:
+        get:
+          responses:
+            200:
+              body:
+                application/json:
+                  properties:
+                    []:
+                      properties:
+                        userId: integer
+                        correctNumber: integer
+                        itemNumber: integer
+                        startTime: integer
+                        endTime: integer
+    /usersDetail:
+      get:
+        responses:
+          200:
+           body:
+             application/json:
+               properties:
+                 []:
+                   properties:
+                     userId: integer
+                     birthday: integer
+                     major: string
+                     gender: string
+                     mobilePhone: string
+                     degree: string
+                     name: string
+                     email: string
+
   /enrollment:
     description: 获取固定ID的考卷定义细节
     get:
