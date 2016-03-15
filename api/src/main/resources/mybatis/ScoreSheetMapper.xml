@@ -11,6 +11,10 @@
         <result column="paperId" property="paperId"></result>
     </resultMap>
 
+    <resultMap id="examersMap" type="int">
+        <result column="examerId" property="examerId"></result>
+    </resultMap>
+
     <select id="findAll" resultMap="scoreSheetsMap">
         SELECT * FROM scoreSheet;
     </select>
@@ -34,6 +38,9 @@
 
     <select id="findByPaperId" resultMap="scoreSheetsMap">
         SELECT * FROM scoreSheet WHERE paperId = #{paperId};
+    </select>
+    <select id="findUserIdsByPaperId" resultMap="examersMap">
+        SELECT examerId FROM scoreSheet WHERE paperId = #{paperId};
     </select>
 
 </mapper>
