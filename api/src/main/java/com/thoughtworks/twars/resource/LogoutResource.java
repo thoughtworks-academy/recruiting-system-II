@@ -23,7 +23,6 @@ public class LogoutResource extends Resource {
             @ApiResponse(code = 401, message = "logout failed")})
     public Response logoutUser(Map data) {
 
-        System.out.print(data.get("userId"));
         List<LoginDetail> loginDetailList =
                 loginDetailMapper.getLoginDetailByUserId((Integer) data.get("userId"));
         LoginDetail loginDetail = loginDetailList.get(loginDetailList.size() - 1);

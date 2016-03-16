@@ -2,10 +2,8 @@ package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
-import io.swagger.models.auth.In;
 import org.junit.Before;
 import org.junit.Test;
-import scala.Int;
 
 import java.util.ArrayList;
 import java.util.List;
