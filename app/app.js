@@ -1,6 +1,7 @@
 'use strict';
 
 require('newrelic');
+var path = require('path');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -42,13 +43,14 @@ app.use(bodyParser.json());
 if (env === 'development') {
   var compile = webpack(require('./webpack.config'));
   app.use(webpackDevMiddleware(compile, {
-    publicPath: '/assets/',   // 以/assets/作为请求的公共目录
+    publicPath: '/',   // 以/assets/作为请求的公共目录
     lazy: true,               // 只有请求时才编译
     noInfo: true,             // 只打印警告和错误信息
     stats: {
       colors: true
     }
   }));
+
 }
 console.log(env);
 app.use(sessionCheck);
