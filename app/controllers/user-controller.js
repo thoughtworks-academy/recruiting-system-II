@@ -5,19 +5,10 @@ var apiRequest = require('../services/api-request');
 var constant = require('../mixin/constant');
 var async = require('async');
 var userHomeworkQuizzes = require('../models/user-homework-quizzes');
-var json2csv = require('json2csv');
 var yamlConfig = require('node-yaml-config');
 var config = yamlConfig.load('./config/config.yml');
-var fs = require('fs');
 
 var _percentage = 100;
-var hour = constant.time.HOURSPERDAY;
-var mintues = constant.time.MINUTE_PER_HOUR;
-var second = constant.time.SECONDS_PER_MINUTE;
-
-var dayToSecond = second * mintues * hour;
-var hourToSecond = second * mintues;
-var mintuesToSecond = mintues;
 
 function UserController() {
 
@@ -33,7 +24,7 @@ function createUserDetail(data) {
 
 function createLogicPuzzle(data) {
   var accuracy = 0;
-  var logicPuzzle = data[0];
+  var logicPuzzle = data;
 
   var itemNumber = logicPuzzle.itemNumber;
   var correctNumber = logicPuzzle.correctNumber;
@@ -151,87 +142,6 @@ function createUserInfo(userId, callback) {
   });
 
 }
-
-function calcLogicPuzzleElapsedTime(logicPuzzle) {
-
-  var startTime = logicPuzzle.startTime;
-  var endTime = logicPuzzle.endTime;
-  var time = endTime - startTime;
-
-  var elapsedHour = 0;
-  var elapsedMintues = 0;
-  var elapsedSeconds = 0;
-
-  elapsedHour = Math.floor(time / hourToSecond);
-  time -= hourToSecond * elapsedHour;
-  elapsedMintues = Math.floor(time / mintuesToSecond);
-  time -= mintuesToSecond * elapsedMintues;
-
-  return elapsedHour + '小时' + elapsedMintues + '分' + time + '秒';
-}
-
-function calcHomeworkElapsedTime(homework) {
-
-  var elapsedDay = 0;
-  var elapsedHour = 0;
-  var elapsedMintues = 0;
-  var time = homework.elapsedTime;
-
-  elapsedDay = Math.floor(time / dayToSecond);
-  time -= elapsedDay * dayToSecond;
-  elapsedHour = Math.floor(time / hourToSecond);
-  time -= hourToSecond * elapsedHour;
-  elapsedMintues = Math.floor(time / mintuesToSecond);
-
-  return elapsedDay + '天' + elapsedHour + '小时' + elapsedMintues + '分';
-}
-
-function createCSV(userInfo) {
-
-  var userDetail = userInfo.userDetail;
-  var logicPuzzle = userInfo.logicPuzle;
-  var homework = userInfo.homework;
-
-  var logicPuzzleElapsedTime = 0;
-
-  var fieldNames = ['姓名', '电话', '邮箱', '逻辑题准确率', '逻辑题花费时间', '家庭作业详情', '家庭作业花费时间'];
-  var fields = ['name', 'mobilePhone', 'email', 'accuracy', 'logicPuzzleElapsedTime', 'homeworkDetails', 'homeworkElapsedTime'];
-
-  var user = [{
-    name: userDetail.name,
-    mobilePhone: userDetail.mobilePhone,
-    email: userDetail.email,
-    accuracy: logicPuzzle.accuracy,
-    logicPuzzleElapsedTime: calcLogicPuzzleElapsedTime(logicPuzzle),
-    homeworkDetails: config.appServer + 'homework-details.html?userId=' + userInfo.userId,
-    homeworkElapsedTime: calcHomeworkElapsedTime(homework)
-  }];
-
-  json2csv({data: user, fields: fields, fieldNames: fieldNames}, function (err, csv) {
-
-    fs.writeFile('file.csv', csv, function (err) {
-      if (err) {
-        console.log(err);
-      }
-      console.log('file saved');
-    });
-  });
-}
-
-UserController.prototype.exportCsv = (req, res)=> {
-
-  var userId = req.params.userId;
-  createUserInfo(userId, function (userInfo) {
-
-    if (userInfo.httpCode === constant.httpCode.NOT_FOUND) {
-      res.sendStatus(constant.httpCode.NOT_FOUND);
-    } else {
-
-      createCSV(userInfo);
-      res.end();
-    }
-  });
-};
 
 UserController.prototype.exportHomeworkDetails = (req, res)=> {
 
