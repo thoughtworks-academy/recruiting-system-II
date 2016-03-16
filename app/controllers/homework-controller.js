@@ -48,7 +48,7 @@ HomeworkController.prototype.getList = (req, res) => {
 };
 
 HomeworkController.prototype.getQuiz = (req, res) => {
-  var userId = req.session.user.id;
+  var userId = req.session.user ? req.session.user.id : 'invalid';
   var orderId = req.query.orderId;
   var error = {};
   var quizStatus;
