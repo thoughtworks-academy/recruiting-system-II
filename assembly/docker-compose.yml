@@ -49,11 +49,21 @@ node-task-queue:
   links:
     - redis:redis
     - jenkins-nodejs:jenkins-nodejs
+    - nginx:nginx
   env_file:
     - ./production.env
+nginx:
+  image: nginx:1.8
+  env_file:
+    - ./production.env
+  volumes:
+    - ./nginx/conf.d:/etc/nginx/conf.d
+    - /home/ubuntu/works/docker-cached/nginx_fs:/var/fs
 jenkins-nodejs:
   build: ./jenkins-nodejs
   ports:
     - "8000:8080"
+  links:
+    - nginx:nginx
   env_file:
     - ./production.env
