@@ -242,7 +242,7 @@ HomeworkController.prototype.updateResult = (req, res)=> {
 };
 
 HomeworkController.prototype.getResult = (req, res) => {
-  var userId = req.session.user.id;
+  var userId = req.session.user ? req.session.user.id : 'invalid';
   var orderId = req.query.orderId;
   var history, isSubmited, resultURL, resultText;
   async.waterfall([
