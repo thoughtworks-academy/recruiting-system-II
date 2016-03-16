@@ -4,5 +4,5 @@ default:
   redisServerPort: '6379'
   CIServer: 'http://jenkins-nodejs:8080'
   jobName: 'TASK-RUNNER'
-  nginxServer: 'http://nginx:8888/fs'
+  nginxServer: 'http://nginx/fs'
   taskServer: 'http://172.17.0.8'
