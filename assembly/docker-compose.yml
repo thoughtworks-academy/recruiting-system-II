@@ -30,6 +30,7 @@ node-app:
   links:
     - mongodb:mongodb
     - jetty-api:jetty-api
+    - nginx:nginx
     - node-task-queue:node-task-queue
   env_file:
     - ./production.env
