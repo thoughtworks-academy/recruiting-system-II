@@ -5,7 +5,7 @@ default:
   appServer: 'http://172.17.0.7:3000/'
   taskServer: 'http://node-task-queue:4000/'
   sessionTtl: 3600 # 60(MINUTE_PER_HOUR) * 60(SECONDS_PER_MINUTE)
-  staticFileServer: 'http://nginx/fs'
+  staticFileServer: 'http://172.17.0.9/fs'
   emailServer: 'http://54.222.191.27:8888'
   emailAccount: 'twarss@163.com'
   emailPassword: 'ssww123456'
