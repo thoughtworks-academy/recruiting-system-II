@@ -11,7 +11,7 @@ var config = yamlConfig.load('./config/config.yml');
 var moment = require('moment');
 
 var _percentage = 100;
-var hour = constant.time.HOURSPERDAY;
+var hour = constant.time.HOURS_PER_DAY;
 var mintues = constant.time.MINUTE_PER_HOUR;
 var second = constant.time.SECONDS_PER_MINUTE;
 
