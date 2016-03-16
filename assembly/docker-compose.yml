@@ -53,7 +53,7 @@ node-task-queue:
   env_file:
     - ./production.env
 nginx:
-  image: nginx:1.8
+  image: nginx:alpine
   env_file:
     - ./production.env
   volumes:
