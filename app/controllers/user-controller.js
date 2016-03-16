@@ -8,7 +8,7 @@ var userHomeworkQuizzes = require('../models/user-homework-quizzes');
 var yamlConfig = require('node-yaml-config');
 var config = yamlConfig.load('./config/config.yml');
 
-var _percentage = 100;
+var percentage = 100;
 
 function UserController() {
 
@@ -30,7 +30,7 @@ function createLogicPuzzle(data) {
   var correctNumber = logicPuzzle.correctNumber;
 
   if (correctNumber !== 0) {
-    accuracy = ((correctNumber / itemNumber) * _percentage).toFixed(2);
+    accuracy = ((correctNumber / itemNumber) * percentage).toFixed(2);
   }
 
   return {
@@ -81,7 +81,7 @@ function createHomework(data) {
     homework.quizzes.push(quiz);
   });
 
-  var completion = (correctNumber / data.quizzes.length) * _percentage;
+  var completion = (correctNumber / data.quizzes.length) * percentage;
 
   homework.elapsedTime = sumTime;
   homework.completion = completion.toFixed(2) + '%';
