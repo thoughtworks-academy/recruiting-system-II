@@ -14,7 +14,7 @@ function HomeworkController() {
 }
 
 HomeworkController.prototype.getList = (req, res) => {
-  var userId = req.session.user.id;
+  var userId = req.session.user ? req.session.user.id : 'invalid';
   var quizzesStatus = [];
 
   async.waterfall([
