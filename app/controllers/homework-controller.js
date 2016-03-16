@@ -107,7 +107,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
       if (!data) {
         res.status(constant.httpCode.INTERNAL_SERVER_ERROR);
       }
-      res.send({status: data.status});
+      res.send({status: data ? data.status : constant.httpCode.INTERNAL_SERVER_ERROR});
     } else {
       res.send({
         status: constant.httpCode.OK,
