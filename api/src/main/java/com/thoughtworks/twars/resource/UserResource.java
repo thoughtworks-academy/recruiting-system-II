@@ -89,7 +89,7 @@ public class UserResource extends Resource {
 
         itemPostList.forEach(val -> {
             String answer = quizItemMapper.getQuizItemById(val.getQuizItemId()).getAnswer();
-            if (val.getAnswer().equals(answer)) {
+            if (val.getAnswer() != null && val.getAnswer().equals(answer)) {
                 correctList.add("true");
             }
         });
