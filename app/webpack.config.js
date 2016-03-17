@@ -97,6 +97,7 @@ var config = {
 function htmlwebpackPluginBuilder(fileName, deps) {
   return new HtmlwebpackPlugin ({
     filename: fileName,
+    minify: {collapseWhitespace: true},
     template: __dirname + '/source/' + fileName,
     inject: true,
     chunks: deps
