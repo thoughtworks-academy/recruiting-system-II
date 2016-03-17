@@ -16,12 +16,11 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
 
-    .head {
+    .head{
       padding: 0 10px;
       height: 80px;
       background: @white;
       overflow: hidden;
-
       h1 {
         span {
           color: @blue;
@@ -29,6 +28,14 @@ html, body {
       }
     }
 
+    .head-right {
+      margin-top: 40px;
+      font-size: 18px;
+        a{
+          color: #19abb5;
+          text-decoration: none;
+        }
+    }
     @media only screen and (max-width: 767px) {
       .first-page {
         background-image: url(../images/bg-small.jpg);
