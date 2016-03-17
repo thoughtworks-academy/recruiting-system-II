@@ -5,7 +5,7 @@ var Navigation = React.createClass({
     return (
         <nav>
           <div className="brand">
-            <strong>思沃特训营</strong>
+            <a href="/"><strong>思沃特训营</strong></a>
           </div>
           <div className="header-right">
             <a href="dashboard.html">控制台</a>
