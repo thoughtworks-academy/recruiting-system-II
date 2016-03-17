@@ -7,9 +7,7 @@ var Arrow = React.createClass({
         <div className="col-md-12 col-sm-12">
           <i className="fa fa-arrow-circle-down fa-5x" />
         </div>
-
-
-    )
+    );
   }
 });
 
