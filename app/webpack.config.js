@@ -22,9 +22,8 @@ module.exports = {
     "password-retrieve": './source/scripts/password-retrieve.js',
     "password-reset": './source/scripts/password-reset.js',
     "homework-details": './source/scripts/homework-details.js',
-    "vendors": ['jquery','bootstrap.css','font-awesome','react','react-dom', 'bootstrap.js']
-
-
+    "vendors": ['jquery','react','react-dom', 'bootstrap.js'],
+    "vendor-css": ['bootstrap.css','font-awesome']
   },
   output: {
     path: __dirname + '/public/assets/',
@@ -78,7 +77,7 @@ module.exports = {
       ReactDOM: 'react-dom'
     }),
     new ExtractTextPlugin("[name].bundle.css"),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    //new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -86,7 +85,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'register.html',
-      template: __dirname + '/public/register.html',
+      template: __dirname + '/source/register.html',
       inject: true,
       chunks: ['vendors', 'register'],
 
@@ -99,7 +98,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'index.html',
-      template: __dirname + '/public/index.html',
+      template: __dirname + '/source/index.html',
       inject: true,
       chunks: ['vendors', 'index'],
 
@@ -112,7 +111,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'user-center.html',
-      template: __dirname + '/public/user-center.html',
+      template: __dirname + '/source/user-center.html',
       inject: true,
       chunks: ['vendors', 'user-center'],
 
@@ -125,7 +124,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'user-center.html',
-      template: __dirname + '/public/user-center.html',
+      template: __dirname + '/source/user-center.html',
       inject: true,
       chunks: ['vendors', 'user-center'],
 
@@ -138,7 +137,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'start.html',
-      template: __dirname + '/public/start.html',
+      template: __dirname + '/source/start.html',
       inject: true,
       chunks: ['vendors', 'start'],
 
@@ -151,7 +150,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'password-retrieve.html',
-      template: __dirname + '/public/password-retrieve.html',
+      template: __dirname + '/source/password-retrieve.html',
       inject: true,
       chunks: ['vendors', 'password-retrieve'],
 
@@ -164,7 +163,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'password-reset.html',
-      template: __dirname + '/public/password-reset.html',
+      template: __dirname + '/source/password-reset.html',
       inject: true,
       chunks: ['vendors', 'password-reset'],
 
@@ -177,7 +176,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'logic-puzzle.html',
-      template: __dirname + '/public/logic-puzzle.html',
+      template: __dirname + '/source/logic-puzzle.html',
       inject: true,
       chunks: ['vendors', 'logic-puzzle'],
 
@@ -190,7 +189,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'homework-details.html',
-      template: __dirname + '/public/homework-details.html',
+      template: __dirname + '/source/homework-details.html',
       inject: true,
       chunks: ['vendors', 'homework-details'],
 
@@ -203,7 +202,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'homework.html',
-      template: __dirname + '/public/homework.html',
+      template: __dirname + '/source/homework.html',
       inject: true,
       chunks: ['vendors', 'homework'],
 
@@ -216,7 +215,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: 'dashboard.html',
-      template: __dirname + '/public/dashboard.html',
+      template: __dirname + '/source/dashboard.html',
       inject: true,
       chunks: ['vendors', 'dashboard'],
 
@@ -229,7 +228,7 @@ module.exports = {
     }),
     new HtmlwebpackPlugin({
       filename: '404.html',
-      template: __dirname + '/public/404.html',
+      template: __dirname + '/source/404.html',
       inject: true,
       chunks: ['vendors', '404'],
 
