@@ -33,10 +33,17 @@ var UserDetailStore = Reflux.createStore({
         .set('Content-Type', 'application/json')
         .use(errorHandler)
         .end((err, res) => {
-          this.trigger({
-            logicPuzzle: res.body.logicPuzzle,
-            homework: res.body.homework
-          })
+          if(res.body.httpCode === constant.httpCode.NOT_FOUND){
+            this.trigger({
+              logicPuzzle: '',
+              homework: []
+            });
+          }else{
+            this.trigger({
+              logicPuzzle: res.body.logicPuzzle,
+              homework: res.body.homework
+            });
+          }
         });
   },
 

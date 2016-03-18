@@ -163,7 +163,6 @@ UserController.prototype.exportHomeworkDetails = (req, res)=> {
   });
 };
 
-
 function createLogicPuzzleFeedback(data) {
   var isCompleted = false;
   var time = 0;
@@ -267,6 +266,5 @@ UserController.prototype.getFeedback = (req, res)=> {
   });
 
 };
-
 module.exports = UserController;
 

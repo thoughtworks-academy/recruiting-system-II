@@ -12,7 +12,7 @@ var FeedbackResult = React.createClass({
     return {
       logicPuzzle: '',
       homework: []
-    }
+    };
   },
 
   componentDidMount: function () {
@@ -26,16 +26,16 @@ var FeedbackResult = React.createClass({
 
       return (
           <tr key={index}>
-            <td>{index}</td>
+            <td>{index + 1}</td>
             <td>{item.commitedNumbers}</td>
-            <td>{item.isCommited ? '已提交': '未提交'}</td>
+            <td>{item.isCompleted ? '已提交': '未提交'}</td>
             <td>{item.time}</td>
           </tr>
-      )
+      );
     });
     return (
         <div className={'col-md-9 col-sm-9 col-xs-12' + classString}>
-          <div className="content">
+          <div className="content show-result">
             <div className="logicPuzzle">
               <table className="table table-hover">
                 <caption>逻辑题</caption>
@@ -44,8 +44,8 @@ var FeedbackResult = React.createClass({
                   <th>当前进度</th>
                 </tr></thead>
                 <tbody><tr>
-                  <td>{this.state.logicPuzzle.time}</td>
-                  <td>{this.state.logicPuzzle.isCompleted}</td>
+                  <td>{this.state.logicPuzzle.time ? this.state.logicPuzzle.time: 'N/A'}</td>
+                  <td>{this.state.logicPuzzle.isCompleted ? '已完成': '未完成'}</td>
                 </tr></tbody>
               </table>
             </div>

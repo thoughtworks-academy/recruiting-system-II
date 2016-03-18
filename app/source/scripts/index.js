@@ -11,10 +11,11 @@ var style = {
   transitionTimingFunction: 'linear',
   transitionDelay: '0s'
 };
+var showUnder = 600;
 
 ReactDom.render(
     <div>
-      <ScrollToTop showUnder={600} style={style}>
+      <ScrollToTop showUnder={showUnder} style={style}>
         <div id="scroll-button">
           <i className="fa fa-angle-double-up fa-3x"></i>
         </div>
