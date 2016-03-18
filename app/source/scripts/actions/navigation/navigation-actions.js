@@ -1,3 +1,9 @@
-/**
- * Created by Jessica on 3/18/16.
- */
+'use strict';
+
+var Reflux = require('reflux');
+
+var navigationActions = Reflux.createActions([
+  'loadAccount'
+]);
+
+module.exports = navigationActions;
