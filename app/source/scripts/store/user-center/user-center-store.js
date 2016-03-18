@@ -28,6 +28,18 @@ var UserDetailStore = Reflux.createStore({
       });
   },
 
+  onLoadResult : function () {
+    request.get('/user/feedback-result')
+        .set('Content-Type', 'application/json')
+        .use(errorHandler)
+        .end((err, res) => {
+          this.trigger({
+            logicPuzzle: res.body.logicPuzzle,
+            homework: res.body.homework
+          })
+        });
+  },
+
   onUpdateUserDetail: function (userData) {
     request.put('/user-detail/update')
       .set('Content-Type', 'application/json')
