@@ -1,6 +1,8 @@
 'use strict';
 require('../less/index.less');
 
+var Account = require('./component/reuse/get-account.component');
+
 var ScrollToTop = require('react-scroll-up');
 var style = {
   position: 'fixed',
@@ -13,11 +15,10 @@ var style = {
 };
 var showUnder = 600;
 
-var HeadRight = require('./component/index/head-right.component');
 
 ReactDom.render(
     <div>
-      <HeadRight />
+      <Account />
       <ScrollToTop showUnder={showUnder} style={style}>
         <div id="scroll-button">
           <i className="fa fa-angle-double-up fa-3x"></i>
