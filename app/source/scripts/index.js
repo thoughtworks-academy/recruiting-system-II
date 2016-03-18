@@ -2,8 +2,8 @@
 require('../less/index.less');
 
 var Account = require('./component/reuse/get-account.component');
-
 var ScrollToTop = require('react-scroll-up');
+
 var style = {
   position: 'fixed',
   bottom: 400,
@@ -21,7 +21,7 @@ ReactDom.render(
       <Account />
       <ScrollToTop showUnder={showUnder} style={style}>
         <div id="scroll-button">
-          <i className="fa fa-angle-double-up fa-3x"></i>
+          <i className="fa fa-angle-double-up fa-2x"></i>
         </div>
       </ScrollToTop>
     </div>,
