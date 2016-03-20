@@ -35,9 +35,12 @@ process.on('SIGINT', function() {
   });
 });
 
+process.on('uncaughtException', function (err) {
+  mongoStatus = err;
+  console.log(err);
+});
 
 module.exports = {
   start: start,
-
   status: status
-}
+};

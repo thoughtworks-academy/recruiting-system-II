@@ -6,6 +6,8 @@ var request = require('superagent');
 var async = require('async');
 var apiRequest = require('../../services/api-request');
 var mongoConn = require('../../services/mongo-conn');
+var yamlConfig = require('node-yaml-config');
+var config = yamlConfig.load('./config/config.yml');
 
 function getInfoFromApi(done) {
   apiRequest.get('inspector', function (err, resp) {
@@ -23,18 +25,34 @@ function getMongoInfo(done) {
   done(null, mongoConn.status());
 }
 
+function getTaskQueueInfo(done) {
+  request.get(config.taskServer + 'inspector')
+      .set('Content-Type', 'application/json')
+      .send()
+      .end(function(err, resp) {
+        var data;
+        if(err) {
+          data = {"task-queue": err};
+        } else {
+          data = resp.body;
+        }
+        done(null, data);
+      });
+}
+
 router.get('/', function (req, res) {
   var data = {app: "connected"};
 
   async.parallel([
     getInfoFromApi,
-    getMongoInfo
+    getMongoInfo,
+    getTaskQueueInfo
   ], function(err, result) {
     result.forEach(function(v, k) {
       data = Object.assign(data, v);
     });
     res.send(data);
   })
+});
 
-})
 module.exports = router;
