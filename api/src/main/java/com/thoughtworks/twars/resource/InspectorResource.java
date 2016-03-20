@@ -25,7 +25,7 @@ public class InspectorResource {
     public Response getConnectionInfo() {
         Connection conn;
         Map result = new HashMap<String, String>();
-        result.put("api-server", "connected");
+        result.put("api", "connected");
         try {
             conn = session.getConfiguration().getEnvironment().getDataSource().getConnection();
             Statement st = conn.createStatement();
