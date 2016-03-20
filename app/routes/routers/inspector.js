@@ -5,6 +5,7 @@ var router = express.Router();
 var request = require('superagent');
 var async = require('async');
 var apiRequest = require('../../services/api-request');
+var mongoConn = require('../../services/mongo-conn');
 
 function getInfoFromApi(done) {
   apiRequest.get('inspector', function (err, resp) {
@@ -18,11 +19,16 @@ function getInfoFromApi(done) {
   });
 }
 
+function getMongoInfo(done) {
+  done(null, mongoConn.status());
+}
+
 router.get('/', function (req, res) {
   var data = {app: "connected"};
 
   async.parallel([
     getInfoFromApi,
+    getMongoInfo
   ], function(err, result) {
     result.forEach(function(v, k) {
       data = Object.assign(data, v);
