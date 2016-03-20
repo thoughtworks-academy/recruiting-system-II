@@ -7,8 +7,8 @@ cp assembly/conf/config.properties api/src/main/resources/config.properties
 cp assembly/conf/gradle.properties api/gradle.properties
 
 cd api
-./gradlew clean
-./gradlew war
+gradle clean
+gradle war
 cd -
 
 cp api/build/libs/api.war assembly/assemble/jetty-api.war

@@ -2,15 +2,63 @@
 
 var express = require('express');
 var router = express.Router();
+var request = require('superagent');
+var async = require('async');
+var yamlConfig = require('node-yaml-config');
+var config = yamlConfig.load('./config/config.yml');
 
-var TaskController = require('../../controllers/task-controller');
+var redisData = {
+  "redis": "connecting..."
+};
 
-var taskController = new TaskController();
+function getRedisInfo(done) {
+  done(null, redisData);
+}
 
-router.post('/', taskController.createTask);
+function getHookInfo(done) {
+  done(null, {
+    "hook-server": "unknown"
+  });
+}
 
-router.post('/:homeworkName/completion', taskController.result);
+var CIURL = config.CIServer + '/job/' + config.jobName + '/api/json';
 
-router.post('/status', taskController.status);
+function getCIInfo(done) {
+  console.log("+++++++++++");
+  request.get(CIURL)
+      .timeout(1000)
+      .end(function(err, resp) {
+        console.log("=================");
+        console.log(err);
+        var data = {
+          "ci-server": "connected"
+        };
+        if(err) {
+          data = {
+            "ci-server": err
+          }
+        }
+        done(null, data);
+      })
+}
+
+router.get('/', function (req, res) {
+  var data = {"task-queue": "connected"};
+  async.parallel([
+    getHookInfo,
+    getRedisInfo,
+    getCIInfo
+  ], function(err, result) {
+    result.forEach(function(v) {
+      data = Object.assign(data, v);
+    });
+    res.send(data);
+  });
+});
+
+process.on('uncaughtException', function (err) {
+  redisData['redis'] = err;
+  console.log(err);
+});
 
 module.exports = router;
