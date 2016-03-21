@@ -1,8 +1,6 @@
 package com.thoughtworks.twars;
 
 import com.thoughtworks.twars.filter.CacheContorlFilter;
-import com.thoughtworks.twars.filter.CloseSessionResponseFilter;
-import com.thoughtworks.twars.filter.OpenSessionRequestFilter;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
@@ -87,8 +85,8 @@ public class App extends ResourceConfig {
         blankQuizDefinition.setSectionMapper(sectionMapper);
         blankQuizDefinition.setSectionQuizMapper(sectionQuizMapper);
 
-        register(OpenSessionRequestFilter.class);
-        register(CloseSessionResponseFilter.class);
+//        register(OpenSessionRequestFilter.class);
+//        register(CloseSessionResponseFilter.class);
         register(CacheContorlFilter.class);
 
         packages("com.thoughtworks.twars.resource")
