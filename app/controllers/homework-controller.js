@@ -245,7 +245,7 @@ HomeworkController.prototype.getResult = (req, res) => {
         res.send({
           isSubmited: isSubmited,
           resultText: resultText
-        })
+        });
       } else {
         res.send();
       }
