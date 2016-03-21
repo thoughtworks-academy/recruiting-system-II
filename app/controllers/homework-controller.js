@@ -1,7 +1,6 @@
 'use strict';
 
 var userHomeworkQuizzes = require('../models/user-homework-quizzes');
-var homeworkQuizzes = require('../models/homework-quizzes');
 var async = require('async');
 var constant = require('../mixin/constant');
 var apiRequest = require('../services/api-request');
@@ -83,25 +82,11 @@ HomeworkController.prototype.getQuiz = (req, res) => {
           quiz.startTime = Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS;
           result.save();
         }
-        homeworkQuizzes.findOne({id: quiz.id}, done);
+        apiRequest.get(quiz.uri, (err, result) => {
+          done(err, result.body);
+        });
       }
     },
-    (doc, done) => {
-      if (doc) {
-        done('break', doc);
-      } else {
-        apiRequest.get(quiz.uri, done);
-      }
-    },
-    (res, done) => {
-      homeworkQuizzes.create({
-        id: res.body.id,
-        desc: res.body.description,
-        evaluateScript: res.body.evaluateScript,
-        evaluateRepo: res.body.evaluateRepository,
-        templateRepo: res.body.templateRepository
-      }, done);
-    }
   ], (err, data) => {
     if (err && (err !== 'break')) {
       if (!data) {
@@ -113,8 +98,8 @@ HomeworkController.prototype.getQuiz = (req, res) => {
         status: constant.httpCode.OK,
         quiz: {
           quizStatus: quizStatus,
-          desc: data.desc,
-          templateRepo: data.templateRepo,
+          desc: data.description,
+          templateRepo: data.templateRepository,
           userAnswerRepo: userAnswerRepo,
           branch: branch
         }
@@ -127,7 +112,7 @@ HomeworkController.prototype.getQuiz = (req, res) => {
 HomeworkController.prototype.saveGithubUrl = (req, res) => {
   var userId = req.session.user.id;
   var orderId = req.body.orderId;
-  var homeworkId;
+  var homeworkId, uri;
   async.waterfall([
     (done) => {
       userHomeworkQuizzes.checkDataForSubmit(userId, orderId, done);
@@ -146,13 +131,15 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
         result.data.quizzes[orderId - 1].homeworkSubmitPostHistory.push(submitInfo);
 
         homeworkId = result.data.quizzes[orderId - 1].id;
+        uri = result.data.quizzes[orderId - 1].uri;
+
         result.data.save(done);
       } else {
         done(true, result);
       }
     },
     (product, numAffected, done) => {
-      homeworkQuizzes.findOne({id: homeworkId}, done);
+      apiRequest.get(uri, done);
     },
     (result, done) => {
       request
@@ -162,7 +149,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
             userId: userId,
             homeworkId: homeworkId,
             userAnswerRepo: req.body.userAnswerRepo,
-            evaluateScript: result.evaluateScript,
+            evaluateScript: result.body.evaluateScript,
             callbackURL: config.appServer + 'homework/result',
             branch: req.body.branch
           })
