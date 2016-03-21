@@ -28,7 +28,7 @@ public class CloseSessionResponseFilter implements ContainerResponseFilter {
                     session.rollback(true);
                 }
             }
-            session.close();
+//            session.close();
         } catch (Exception e) {
 
         }
