@@ -28,7 +28,7 @@ function getMongoInfo(done) {
 function getTaskQueueInfo(done) {
   request.get(config.taskServer + 'inspector')
       .set('Content-Type', 'application/json')
-      .query({'hook': config.appServer })
+      .query({'hook': config.appServer})
       .end(function(err, resp) {
         var data;
         if (err) {
