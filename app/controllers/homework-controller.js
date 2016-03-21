@@ -139,7 +139,7 @@ HomeworkController.prototype.saveGithubUrl = (req, res) => {
           status: constant.homeworkQuizzesStatus.PROGRESS,
           version: req.body.commitSHA,
           branch: req.body.branch,
-          commitTime: Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS,
+          commitTime: Date.parse(new Date()) / constant.time.MILLISECOND_PER_SECONDS
         };
 
         result.data.quizzes[orderId - 1].status = constant.homeworkQuizzesStatus.PROGRESS;
@@ -245,35 +245,23 @@ HomeworkController.prototype.getResult = (req, res) => {
   var userId = req.session.user ? req.session.user.id : 'invalid';
   var orderId = req.query.orderId;
   var history, isSubmited, resultURL, resultText;
-  async.waterfall([
-    (done) => {
-      userHomeworkQuizzes.findOne({userId: userId}, done);
-    },
-    (data, done) => {
-      var integer = (Number(orderId) === parseInt(orderId, 10));
-      if (!integer || orderId === undefined || orderId > data.quizzes.length || orderId < 1) {
-        done(true, null);
-      } else {
-        history = data.quizzes[orderId - 1].homeworkSubmitPostHistory ? data.quizzes[orderId - 1].homeworkSubmitPostHistory : [];
-        isSubmited = history.length > 0;
-        if (isSubmited && history[history.length - 1].resultURL) {
-          resultURL = history[history.length - 1].resultURL;
-          request.get(resultURL)
-              .end(done);
-        } else {
-          done(null, null);
-        }
-      }
-    }
-  ], function (err, result) {
-    if (err && err !== true) {
-      res.sendStatus(constant.httpCode.INTERNAL_SERVER_ERROR);
+
+  userHomeworkQuizzes.findOne({userId: userId}, function(err, data) {
+    var integer = (Number(orderId) === parseInt(orderId, 10));
+    if (!integer || orderId === undefined || orderId > data.quizzes.length || orderId < 1) {
+      res.send();
     } else {
-      resultText = result ? result.text : null;
-      res.send({
-        isSubmited: isSubmited,
-        resultText: resultText
-      });
+      history = data.quizzes[orderId - 1].homeworkSubmitPostHistory ? data.quizzes[orderId - 1].homeworkSubmitPostHistory : [];
+      isSubmited = history.length > 0;
+      if (isSubmited && history[history.length - 1].resultURL) {
+        resultText = history[history.length - 1].homeworkDetail;
+        res.send({
+          isSubmited: isSubmited,
+          resultText: resultText
+        })
+      } else {
+        res.send();
+      }
     }
   });
 };
