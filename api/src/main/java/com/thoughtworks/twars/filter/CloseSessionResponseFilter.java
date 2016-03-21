@@ -1,6 +1,6 @@
 package com.thoughtworks.twars.filter;
 
-import org.apache.ibatis.session.SqlSessionManager;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class CloseSessionResponseFilter implements ContainerResponseFilter {
 
     @Inject
-    SqlSessionManager session;
+    SqlSession session;
 
     @Override
     public void filter(ContainerRequestContext requestContext,
