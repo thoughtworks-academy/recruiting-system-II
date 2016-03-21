@@ -3,7 +3,6 @@
 var Reflux = require('reflux');
 var validate = require('validate.js');
 var constraint = require('../../../../mixin/register-constraint');
-var page = require('page');
 var constant = require('../../../../mixin/constant');
 var async = require('async');
 var RegisterActions = require('../../actions/register-page/register-actions');

@@ -6,7 +6,6 @@ var LoginActions = require('../../actions/register-page/login-actions');
 var LoginStore = require('../../store/register-page/login-store');
 var Reflux = require('reflux');
 var constraint = require('../../../../mixin/login-constraint');
-var page = require('page');
 var constant = require('../../../../mixin/constant');
 
 function getError(validateInfo, field) {
