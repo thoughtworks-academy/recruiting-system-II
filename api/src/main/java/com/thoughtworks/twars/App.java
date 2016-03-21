@@ -91,8 +91,8 @@ public class App extends ResourceConfig {
         blankQuizDefinition.setSectionMapper(sectionMapper);
         blankQuizDefinition.setSectionQuizMapper(sectionQuizMapper);
 
-        register(CloseSessionResponseFilter.class);
         register(OpenSessionRequestFilter.class);
+        register(CloseSessionResponseFilter.class);
         register(CacheContorlFilter.class);
 
         packages("com.thoughtworks.twars.resource")
