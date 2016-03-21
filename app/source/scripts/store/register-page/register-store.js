@@ -90,9 +90,7 @@ var RegisterStore = Reflux.createStore({
             });
       }
     }, function (err, data) {
-      if
-
-      (data.initializeQuizzes) {
+      if(data.initializeQuizzes) {
         page('user-center.html');
       } else {
         console.log(err);
