@@ -21,7 +21,7 @@ var RunningResult = React.createClass({
   render() {
     if(this.state.isSubmited){
       if(!this.state.resultText){
-        this.state.resultText = '正在进行测试,请稍候 ... ...'
+        this.state.resultText = '正在进行测试,请稍候 ... ...';
       }
     }
     return (
