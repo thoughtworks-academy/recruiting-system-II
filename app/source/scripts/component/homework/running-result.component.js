@@ -21,7 +21,7 @@ var RunningResult = React.createClass({
   render() {
 
     return (
-        <div className="runningResult">
+        <div className="runningResult tab">
           {
               this.state.isSubmited ?
                   <div className={'prompt ' + (this.state.resultText ? 'hide': '')}>

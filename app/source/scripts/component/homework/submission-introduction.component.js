@@ -90,7 +90,7 @@ var SubmissionIntroduction = React.createClass({
       return (<option key={index}>{branch}</option>);
     });
     return (
-        <div className="container-fluid">
+        <div className="tab">
           <div className={(this.state.showRepo ? '' : ' hide')}>
             <div className="row last-time">
             </div>

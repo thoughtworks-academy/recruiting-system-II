@@ -72,7 +72,6 @@ body {
   }
   .content {
     background-color: @white;
-    height: 600px;
     overflow: hidden;
     .nav-tabs > li > a {
       outline: none;
@@ -94,20 +93,23 @@ body {
           background: #eee;
         }
       }
-      .introduction {
+      .content{
+        text-align: left;
+        word-wrap: break-word;
+        white-space: pre-wrap;
         padding: 20px;
-        margin-top: 10px;
-        .content{
-          text-align: left;
-          word-wrap: break-word;
-          white-space: pre-wrap;
-          padding: 20px;
-          margin-right: 20px;
-          margin-bottom: 20px;
-          border-radius: 4px;
-          max-height: 450px;
-          overflow-y: auto;
-        }
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        max-height: 450px;
+        overflow-y: auto;
+      }
+      .tab {
+        padding: 20px;
+        height: 600px;
+        border:1px solid #ddd;
+        border-top: none;
+
       }
       .runningResult {
         text-align: left;
@@ -123,17 +125,9 @@ body {
           padding-left: 20px;
           margin-top: 10px;
           .content{
-            text-align: left;
-            word-wrap: break-word;
-            white-space: pre-wrap;
             background: #f5f5f5;
             border: 1px solid #e3e3e3;
-            padding: 20px;
-            margin-right: 20px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            max-height: 450px;
-            overflow-y: auto;
+            height: 450px;
           }
         }
 

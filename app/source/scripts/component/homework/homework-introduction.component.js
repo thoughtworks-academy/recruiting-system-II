@@ -23,7 +23,7 @@ var HomeworkIntroduction = React.createClass({
     }
 
     return (
-        <div className="introduction">
+        <div className="tab">
           <div className="content">
             <div id="introduction" dangerouslySetInnerHTML={content()}>
             </div>
