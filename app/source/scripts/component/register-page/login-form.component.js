@@ -107,7 +107,7 @@ var LoginForm = React.createClass({
     data.push(email, loginPassword);
 
     if(!this.checkLoginData(data)) {
-       return false;
+      return false;
     }else {
       this.setState({
         clickable: true
