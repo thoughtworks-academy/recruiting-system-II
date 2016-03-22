@@ -66,9 +66,14 @@ body {
     color: @white;
     opacity: 0.6;
   }
-  button.list-group-item {
-    outline: none;
+  .list-group{
+    padding-left: 7px;
+    padding-right: 7px;
+    button.list-group-item {
+      outline: none;
+    }
   }
+
   .content {
     background-color: @white;
     height: 600px;
@@ -86,14 +91,25 @@ body {
     .tab-content {
       .templateRepo {
         margin: 55px auto;
-        span {
-          margin: 0 10px;
-        }
         em {
           padding: 2px 10px;
           border: none;
           border-radius: 2px;
           background: #eee;
+        }
+      }
+      .introduction {
+        padding: 20px;
+        margin-top: 10px;
+        .content{
+          text-align: left;
+          word-wrap: break-word;
+          white-space: pre-wrap;
+          padding: 20px;
+          margin-right: 20px;
+          margin-bottom: 20px;
+          border-radius: 4px;
+          max-height: 450px;
         }
       }
       .runningResult {
