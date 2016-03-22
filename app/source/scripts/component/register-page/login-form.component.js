@@ -120,7 +120,7 @@ var LoginForm = React.createClass({
     var classString = 'col-md-7 logon-form-container' + (this.state.isLoginState ? '' : ' hide');
     return (
         <div id="logon" className={classString}>
-          <h4 className="welcome">欢迎登陆思沃学院</h4>
+          <h4 className="welcome">欢迎登录思沃学院</h4>
           <div className={'lose' + (this.state.loginFailed === false ? ' hide' : '')} name="loginFailed">用户名或密码错误</div>
           <form action="">
             <div className="form-group">
@@ -139,7 +139,7 @@ var LoginForm = React.createClass({
               </div>
             </div>
             <button type="button" id="login-btn" onClick={this.login}
-                  className="btn btn-lg btn-block btn-primary">登陆
+                  className="btn btn-lg btn-block btn-primary">登录
               <i className={'fa fa-spinner fa-spin loading' + (this.state.clickable ? '' : ' hide')}/>
             </button>
           </form>
