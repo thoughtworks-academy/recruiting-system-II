@@ -23,8 +23,6 @@ var HomeworkIntroductionStore = Reflux.createStore({
               showRepo: false
             });
           } else if (res.body.status === constant.httpCode.OK) {
-
-            console.log(res.body.quiz.desc);
             this.trigger({
               desc: res.body.quiz.desc,
               templateRepo: res.body.quiz.templateRepo,
