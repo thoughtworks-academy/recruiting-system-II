@@ -28,7 +28,6 @@ var RunningResultStore = Reflux.createStore({
             });
           } else {
             this.trigger({
-              isSubmited: false,
               resultText: ''
             });
           }
