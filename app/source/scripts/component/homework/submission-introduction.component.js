@@ -54,7 +54,7 @@ var SubmissionIntroduction = React.createClass({
     this.props.startProgress();
     HomeworkActions.submitUrl(this.state.githubUrl, this.state.githubBranch, commitSHA, this.state.currentHomeworkNumber);
   },
-  onUrlBlur: function (event) {
+  onUrlChange: function (event) {
     var target = event.target;
     var value = target.value;
 
@@ -106,7 +106,7 @@ var SubmissionIntroduction = React.createClass({
                 <div className="col-sm-9">
                   <input type="text" className="form-control" id="githubUrl" name="githubUrl" ref="githubUrl"
 
-                         onBlur={this.onUrlBlur} placeholder="https://github.com/用户名/仓库名" disabled={isSubmitted ? 'disabled':''}/>
+                         onChange={this.onUrlChange} placeholder="https://github.com/用户名/仓库名" disabled={isSubmitted ? 'disabled':''}/>
                   <div
                       className={'lose' + (this.state.githubUrlError === '' ? ' hide' : '')}>{this.state.githubUrlError}</div>
                 </div>
