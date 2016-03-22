@@ -106,7 +106,7 @@ var passwordRetrieveForm = React.createClass({
                 <div className="col-md-6 col-sm-6">
                   <button type="button" id="retrieve-btn"
                   className="btn btn-block btn-default col-md-offset-2 col-xs-offset-4"
-                  onClick={this.back}>返回登陆
+                  onClick={this.back}>返回登录
                   </button>
                 </div>
               </div>
