@@ -12,7 +12,7 @@ var HomeworkContent = React.createClass({
   getInitialState: function (){
     return {
       clickNumber: ''
-    }
+    };
   },
 
   componentDidUpdate: function (prevProps, prevState){
