@@ -23,7 +23,7 @@ DashboardController.prototype.isCommited = (req, res) => {
       var currentQuiz = data.quizzes.filter(function(quiz){
         return quiz.status !== constant.homeworkQuizzesStatus.LOCKED &&
                quiz.status !== constant.homeworkQuizzesStatus.SUCCESS;
-      })[0]
+      })[0];
       if(currentQuiz){
         var currentTime = parseInt(new Date().getTime()) /
             (constant.time.SECONDS_PER_MINUTE
