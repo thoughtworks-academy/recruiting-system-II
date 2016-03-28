@@ -107,7 +107,7 @@ var RegisterForm = React.createClass({
 
   register: function (evt) {
     evt.preventDefault();
-    
+
     if (this.state.mobilePhoneError !== '' || this.state.emailError !== '') {
       return false;
     }
@@ -163,7 +163,9 @@ var RegisterForm = React.createClass({
               <label>
                 <input type="checkbox" className="agree-check" onClick={this.changeAgreeState}/> 同意
               </label>
-              <a id="agreement" data-toggle="modal" data-target="#agreementModal">协议</a>
+              <a id="agreement" data-toggle="modal" data-target="#registerAgreement">注册协议</a>
+              <span>和</span>
+              <a id="agreement" data-toggle="modal" data-target="#securityAgreement">保密协议</a>
             </div>
 
             <button type="submit" id="register-btn" ref="register"
