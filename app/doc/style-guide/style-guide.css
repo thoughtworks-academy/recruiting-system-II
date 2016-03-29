@@ -17,10 +17,11 @@ div.list-group > .select {
 div.avatar {
   width: 100px;
   height: 100px;
-  line-height: 100px;
   text-align: center;
-  border-radius: 100%;
   border: 3px solid #eee;
+  -webkit-border-radius:100%;
+  -moz-border-radius:100%;
+  border-radius:100%;
   overflow: hidden;
   box-shadow: none;
   display: inline-block;
@@ -50,8 +51,31 @@ div.avatar > span > i{
 }
 
 /*群组事件列表组件*/
+div.user-avatar {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 100%;
+  border: 1px solid #eee;
+  overflow: hidden;
+  box-shadow: none;
+  display: inline-block;
+  margin-right: 10px;
+}
 
-div.group-event a{
+div.event-info {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+div.user-avatar > img {
+  width: 100%;
+  height: 100%;
+}
+
+div.group-event a {
   text-decoration: none;
   cursor: pointer;
 }
@@ -65,4 +89,56 @@ div.group-event p{
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+div.group-event > .discuss {
+  overflow: auto;
+  white-space: normal;
+  width: 100%
+}
+
+/*讨论主题列表*/
+
+div.discuss-subject > div.content p{
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+div.discuss-subject > .content > h5 {
+  text-align: left;
+}
+
+div.discuss-subject > .operate > a {
+  display: block;
+}
+
+div.discuss-subject > .unvisible {
+  visibility: hidden;
+}
+
+/*群组头像上传组件*/
+
+div.upload-avatar > .avatar {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+div.upload-avatar {
+  position: relative;
+}
+
+div.upload-avatar > .upload {
+  text-align: center;
+  background-color: rgba(238, 238, 238, 0.68);
+  width: 100px;
+  color: #6B6B6B;
+  position: absolute;
+  top: 100px;
+}
+
+div.upload-avatar > .upload a {
+  color: inherit;
+  cursor: pointer;
 }
