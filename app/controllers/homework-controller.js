@@ -249,7 +249,6 @@ HomeworkController.prototype.getResult = (req, res) => {
       res.send();
     } else {
       history = data.quizzes[orderId - 1].homeworkSubmitPostHistory ? data.quizzes[orderId - 1].homeworkSubmitPostHistory : [];
-      console.log(orderId);
       isSubmited = history.length > 0;
       if (isSubmited && history[history.length - 1].homeworkDetail) {
         resultText = history[history.length - 1].homeworkDetail;
