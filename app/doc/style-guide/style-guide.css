@@ -140,5 +140,49 @@ div.upload-avatar > .upload {
 
 div.upload-avatar > .upload a {
   color: inherit;
-  cursor: pointer;
+}
+
+/*题型按钮*/
+
+div.dashboard-icon{
+  max-width: 460px;
+  margin: 0 auto;
+  min-width: 300px;
+  text-align: center;
+}
+div.dashboard-icon a {
+  display: block;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+div.dashboard-icon > .icon-view {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+div.dashboard-icon .icon {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgb(62, 62, 62);
+}
+
+
+div.dashboard-icon .icon > .icon-img span {
+  font-size: 80px;
+  color: #337ab7;
+}
+
+div.dashboard-icon .icon > .icon-name {
+  color: #337ab7;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-shadow: 0 7px 15px rgba(0,0,0,0.25);
+}
+div.dashboard-icon .icon > .icon-bottom {
+  border: none;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+  padding:10px;
 }
