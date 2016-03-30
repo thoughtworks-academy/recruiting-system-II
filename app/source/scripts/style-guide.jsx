@@ -14,6 +14,7 @@ var AddSection =require('./component/style-guide/add-section.component.jsx');
 var Table =require('./component/style-guide/table.component.jsx');
 var InviteLink = require('./component/style-guide/invite-link.component.jsx');
 var PageMachine =require('./component/style-guide/page-machine.component.jsx');
+var GroupAvatar = require('./component/style-guide/group-avatar.component.jsx');
 
 require('../less/group-title.less');
 require('../less/list-group.less');
@@ -25,6 +26,8 @@ require('../less/marked-paper.less');
 require('../less/unmarked-paper.less');
 require('../less/add-section.less');
 require('../less/page-machine.less');
+require('../less/group-title.less');
+require('../less/group-avatar.less');
 
 ReactDom.render(
   <div>
@@ -43,6 +46,7 @@ ReactDom.render(
     <DiscussList />
     <InviteLink />
     <PageMachine />
+    <GroupAvatar />
   </div>,
   document.getElementById('style-guide')
 );
