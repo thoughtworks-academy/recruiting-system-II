@@ -10,6 +10,7 @@ var DiscussSubject = require('./component/style-guide/discuss-subject.component.
 var DiscussList = require('./component/style-guide/discuss-list.component.jsx');
 var MarkedPaper =require('./component/style-guide/marked-paper.component.jsx');
 var UnmarkedPaper =require('./component/style-guide/unmarked-paper.component.jsx');
+var AddSection =require('./component/style-guide/add-section.component.jsx');
 
 require('../less/group-title.less');
 require('../less/list-group.less');
@@ -19,6 +20,7 @@ require('../less/add-paper.less');
 require('../less/discuss-subject.less');
 require('../less/marked-paper.less');
 require('../less/unmarked-paper.less');
+require('../less/add-section.less');
 
 ReactDom.render(
   <div>
@@ -32,6 +34,7 @@ ReactDom.render(
     <DiscussList />
     <MarkedPaper />
     <UnmarkedPaper />
+    <AddSection />
   </div>,
   document.getElementById('style-guide')
 );
