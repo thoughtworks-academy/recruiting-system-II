@@ -2,69 +2,76 @@
 
 var GroupEvent = React.createClass({
 
+  getInitialState: function () {
+    return ({
+      items: [
+        {
+          avatar: require('../../../images/1.pic_hd.jpg'),
+          name: '某某某',
+          type: 'user',
+          time: '04/01/2016 10:22',
+          action: '发布了一条评论',
+          content: '这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难'
+        },
+        {
+          avatar: require('../../../images/1.pic_hd.jpg'),
+          name: '某某某',
+          type: 'admin',
+          time: '04/01/2016 10:22',
+          action: '增加了一张新试卷 《面向对象 Step By Step》',
+          content: ''
+        },
+        {
+          avatar: require('../../../images/1.pic_hd.jpg'),
+          name: '某某某',
+          type: 'user',
+          time: '04/01/2016 10:22',
+          action: '加入了群组',
+          content: ''
+        },
+        {
+          avatar: require('../../../images/1.pic_hd.jpg'),
+          name: '某某某',
+          type: 'user',
+          time: '04/01/2016 10:22',
+          action: '完成了试卷《集合运算》',
+          content: ''
+        }
+      ]
+    })
+  },
+
   render() {
+
+    var eventList = this.state.items.map((item, index) => {
+      return(
+        <div className="col-md-12 col-sm-12 col-xs-12 group-event" key={index}>
+          <h5>
+            <div className="user-avatar">
+              <img src={item.avatar}/>
+            </div>
+            <div className="event-info">
+              <a href="#">
+                <em>{item.type === 'admin'? '管理员:' : ''}</em>{item.name}
+              </a>
+              <small>{item.time}</small>
+              <span>{item.action}</span>
+            </div>
+          </h5>
+          { item.content !== '' ?
+            <p className="col-md-2 col-sm-4 col-xs-6">
+              <a href="#">{item.content}</a>
+            </p> :
+            null
+          }
+          <hr className="col-md-12 col-sm-12 col-xs-12"/>
+        </div>
+      );
+    });
+
     return (
       <div>
-        <div className="col-md-12 col-sm-12 col-xs-12 group-event">
-          <h5>
-            <div className="user-avatar">
-              <img src={require('../../../images/1.pic_hd.jpg')}/>
-            </div>
-            <div className="event-info">
-              <a href="#">某某某</a>
-              <small>04/01/2016 10:22</small>
-              <span>发布了一条讨论</span>
-            </div>
-          </h5>
-          <a href="#">
-            <p className="col-md-2 col-sm-4 col-xs-6">
-              这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难
-            </p>
-          </a>
-          <hr className="col-md-12 col-sm-12 col-xs-12"/>
-        </div>
-
-        <div className="col-md-12 col-sm-12 col-xs-12 group-event">
-          <h5>
-            <div className="user-avatar">
-              <img src={require('../../../images/1.pic_hd.jpg')}/>
-            </div>
-            <div className="event-info">
-              <a href="#"><em>管理员: </em>某某某</a>
-              <small>04/01/2016 10:22</small>
-              <span>增加了一张新试卷《面向对象 Step By Step》</span>
-            </div>
-          </h5>
-          <hr className="col-md-12 col-sm-12 col-xs-12"/>
-        </div>
-
-        <div className="col-md-12 col-sm-12 col-xs-12 group-event">
-          <h5>
-            <div className="user-avatar">
-              <img src={require('../../../images/1.pic_hd.jpg')}/>
-            </div>
-            <div className="event-info">
-              <a href="#">某某某</a>
-              <small>04/01/2016 10:22</small>
-              <span>加入了群组</span>
-            </div>
-          </h5>
-          <hr className="col-md-12 col-sm-12 col-xs-12"/>
-        </div>
-
-        <div className="col-md-12 col-sm-12 col-xs-12 group-event">
-          <h5>
-            <div className="user-avatar">
-              <img src={require('../../../images/1.pic_hd.jpg')}/>
-            </div>
-            <div className="event-info">
-              <a href="#">某某某</a>
-              <small>04/01/2016 10:22</small>
-              <span>完成了试卷《集合运算》</span>
-            </div>
-          </h5>
-          <hr className="col-md-12 col-sm-12 col-xs-12"/>
-        </div>
+        {eventList}
       </div>
     );
   }
