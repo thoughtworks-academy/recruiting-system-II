@@ -8,8 +8,7 @@ var Arrows = require('./component/style-guide/arrows.component.jsx');
 var AddPaper = require('./component/style-guide/add-paper.component.jsx');
 var DiscussSubject = require('./component/style-guide/discuss-subject.component.jsx');
 var DiscussList = require('./component/style-guide/discuss-list.component.jsx');
-var MarkedPaper =require('./component/style-guide/marked-paper.component.jsx');
-var UnmarkedPaper =require('./component/style-guide/unmarked-paper.component.jsx');
+var Paper =require('./component/style-guide/paper.component.jsx');
 var AddSection =require('./component/style-guide/add-section.component.jsx');
 var Table =require('./component/style-guide/table.component.jsx');
 var InviteLink = require('./component/style-guide/invite-link.component.jsx');
@@ -23,8 +22,7 @@ require('../less/group-event.less');
 require('../less/discuss-frame.less');
 require('../less/add-paper.less');
 require('../less/discuss-subject.less');
-require('../less/marked-paper.less');
-require('../less/unmarked-paper.less');
+require('../less/paper.less');
 require('../less/add-section.less');
 require('../less/page-machine.less');
 require('../less/group-title.less');
@@ -41,8 +39,7 @@ ReactDom.render(
     <AddPaper />
     <DiscussSubject />
     <DiscussList />
-    <MarkedPaper />
-    <UnmarkedPaper />
+    <Paper />
     <AddSection />
     <Table />
     <DiscussList />

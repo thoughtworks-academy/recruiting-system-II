@@ -1,6 +1,6 @@
 'use strict';
 
-var MarkedPaper = React.createClass({
+var Paper = React.createClass({
   render: function() {
     return (
         <div className="paper-button col-xs-12">
@@ -27,4 +27,4 @@ var MarkedPaper = React.createClass({
   }
 });
 
-module.exports = MarkedPaper;
+module.exports = Paper;
