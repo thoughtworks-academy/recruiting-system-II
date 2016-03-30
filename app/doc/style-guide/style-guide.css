@@ -250,3 +250,13 @@ div.add-button {
 div.paper-button > i{
   line-height: 175px;
 }
+
+/* 内容讨论框*/
+div.discuss-part {
+  margin-bottom: 10px;
+}
+div.discuss-content {
+  height: 100px;
+  border: 1px solid #ccc;
+  border-top: none;
+}

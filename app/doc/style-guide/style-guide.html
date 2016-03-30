@@ -341,9 +341,9 @@
       <div>已发布个数：0</div>
     </div>
     <div class="button-buttom">
-      <a href="#" class="text-warning">编辑</a>
-      <a href="#" class="text-info">导出成绩</a>
-      <a href="#" class="text-success">开始答题</a>
+      <a href="#" class="text-warning"><b>编辑</b></a>
+      <a href="#" class="text-info"><b>导出成绩</b></a>
+      <a href="#" class="text-success"><b>开始答题</b></a>
     </div>
   </div>
 
@@ -364,9 +364,9 @@
       <div>已发布个数：0</div>
     </div>
     <div class="button-buttom">
-      <a href="#" class="text-warning">编辑</a>
-      <a href="#" class="text-info">导出成绩</a>
-      <a href="#" class="text-success">开始答题</a>
+      <a href="#" class="text-warning"><b>编辑</b></a>
+      <a href="#" class="text-info"><b>导出成绩</b></a>
+      <a href="#" class="text-success"><b>开始答题</b></a>
     </div>
   </div>
 
@@ -377,6 +377,38 @@
 
 <!-- 箭头-->
 <i class="fa fa-arrow-circle-down fa-5x text-primary"></i>
+
+<!-- 内容讨论框-->
+<hr class="col-md-12 col-sm-12 col-xs-12"><!--分割线-->
+
+
+<form class="form-horizontal col-md-12 col-sm-12 col-xs-12" >
+  <div class="discuss-part">
+    主题:<input class="form-control" type="text" placeholder="请输入主题"/>
+  </div>
+  <div class="discuss-part">
+    内容:
+    <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+        <ul id="myTabs" class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#content" id="content-tab" role="tab" data-toggle="tab" aria-controls="content" aria-expanded="true">内容</a></li>
+          <li role="presentation"><a href="#preview" role="tab" id="preview-tab" data-toggle="tab" aria-controls="preview">预览</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content discuss-content">
+          <div role="tabpanel" class="tab-pane fade in active" id="content" aria-labelledby="content-tab">
+            内容
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="preview" aria-labelledby="preview-tab">
+            预览
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="discuss-button">
+    <button type="button" class="btn btn-default">发布</button>
+  </div>
+</form>
+
+
 
 
 <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
