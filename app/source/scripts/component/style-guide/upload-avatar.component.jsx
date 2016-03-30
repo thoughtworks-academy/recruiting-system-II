@@ -3,14 +3,17 @@
 var UploadAvatar = React.createClass({
   getInitialState() {
     return {
-      headPortrait: require("../../../images/group-default.png")
+      avatar: ''
     }
   },
   render (){
     return (
         <div className="upload-avatar col-md-12 col-sm-12 col-xs-12">
           <div className="avatar">
-            <img src={this.state.headPortrait} />
+            {this.state.avatar !== '' ?
+              <img src={this.state.avatar} />:
+              <span><i className="fa fa-user" /></span>
+            }
           </div>
           <div className="upload">
           <span><a href="#">

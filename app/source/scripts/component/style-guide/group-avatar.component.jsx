@@ -11,7 +11,7 @@ var GroupAvatar = React.createClass({
         },
         {
           groupName: '数据库学习群',
-          groupAvatar: require("../../../images/group-default.png")
+          groupAvatar: ''
         }
       ]
     })
@@ -22,7 +22,10 @@ var GroupAvatar = React.createClass({
       return(
         <div className="col-md-3 col-sm-4 col-xs-6 text-center" key={index}>
           <div className="avatar"><a href="#">
-            <img src={item.groupAvatar} />
+            {item.groupAvatar !== '' ?
+              <img src={item.groupAvatar} />:
+              <span><i className="fa fa-group" /></span>
+            }
           </a></div>
           <div><a href="#">
             {item.groupName}

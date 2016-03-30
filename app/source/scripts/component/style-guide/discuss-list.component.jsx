@@ -11,7 +11,7 @@ var DiscussList = React.createClass({
           discussion: '这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难'
         },
         {
-          avatar: require('../../../images/user-default.png'),
+          avatar: '',
           name: '李煜',
           time: '04/01/2016 10:22',
           discussion: '这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难这道题好难'
@@ -25,7 +25,10 @@ var DiscussList = React.createClass({
         <div className="col-md-12 col-sm-12 col-xs-12 group-event" key={index}>
           <h5>
             <div className="user-avatar">
-              <img src={item.avatar} />
+              {item.avatar !== '' ?
+                <img src={item.avatar} />:
+                <span><i className="fa fa-user" /></span>
+              }
             </div>
             <div className="event-info">
               <a href="#">{item.name}</a>
