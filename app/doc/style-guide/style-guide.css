@@ -217,10 +217,9 @@ div.paper-button {
   padding: 15px 0;
   overflow: hidden;
   font-size: 15px;
-    margin: 0 5px;
+  margin: 0 5px;
 }
-h3{
-  padding: 0;
+div.paper-button >h3{
   margin:0;
 }
 div.button-buttom{
