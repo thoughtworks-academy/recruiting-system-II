@@ -1,7 +1,21 @@
 'use strict';
 
 var PageMachine = React.createClass({
+  getInitialState: function () {
+    return {
+      pageList:[1, 2, 3, 4, 5]
+    }
+  },
   render: function() {
+    var pageList = this.state.pageList;
+    var list = pageList.map((item, index) => {
+      return (
+          <li key={index}>
+            <a href="#">{item}</a>
+          </li>
+      )
+    });
+
     return (
         <nav>
           <ul className="pagination">
@@ -10,11 +24,7 @@ var PageMachine = React.createClass({
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
+            {list}
             <li>
               <a href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
