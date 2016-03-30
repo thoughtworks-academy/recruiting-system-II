@@ -232,10 +232,6 @@ div.button-buttom{
   border-top: 1px solid #ccc;
   padding-right: 10px;
 }
-div.button-buttom button {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
 div.dashboard-icon{
   max-width: 460px;
   margin: 0 auto;
