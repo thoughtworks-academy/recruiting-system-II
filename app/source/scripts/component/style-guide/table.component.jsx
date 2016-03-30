@@ -1,7 +1,38 @@
 'use strict';
 
 var Table = React.createClass({
-  render: function() {
+  getInitialState: function () {
+    return {
+      tableList: [
+        {
+          firstName: 'Mark',
+          lastName: 'Otto',
+          userName: '@mdo'
+        }, {
+          firstName: 'Jacob',
+          lastName: 'Thornton',
+          userName: '@fat'
+        },
+        {
+          firstName: 'Larry',
+          lastName: 'the Bird',
+          userName: '@twitter'
+        }
+      ]
+    }
+  },
+  render: function () {
+    var tableList = this.state.tableList;
+    var list = tableList.map((item, index) => {
+      return (
+          <tr key={index}>
+            <th scope="row">{index + 1}</th>
+            <td>{item.firstName}</td>
+            <td>{item.lastName}</td>
+            <td>{item.userName}</td>
+          </tr>
+      )
+    });
     return (
         <table className="table table-hover">
           <thead>
@@ -13,24 +44,7 @@ var Table = React.createClass({
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+            {list}
           </tbody>
         </table>
     )
