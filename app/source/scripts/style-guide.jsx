@@ -15,6 +15,7 @@ var InviteLink = require('./component/style-guide/invite-link.component.jsx');
 var PageMachine =require('./component/style-guide/page-machine.component.jsx');
 var GroupAvatar = require('./component/style-guide/group-avatar.component.jsx');
 var UploadAvatar = require('./component/style-guide/upload-avatar.component.jsx');
+var LectureButton =require('./component/style-guide/lecture-button.component.jsx');
 
 require('../less/group-title.less');
 require('../less/list-group.less');
@@ -28,6 +29,7 @@ require('../less/page-machine.less');
 require('../less/group-title.less');
 require('../less/group-avatar.less');
 require('../less/upload-avatar.less');
+require('../less/lecture-button.less');
 
 ReactDom.render(
   <div>
@@ -47,6 +49,7 @@ ReactDom.render(
     <PageMachine />
     <GroupAvatar />
     <UploadAvatar />
+    <LectureButton />
   </div>,
   document.getElementById('style-guide')
 );
