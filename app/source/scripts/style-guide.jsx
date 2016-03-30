@@ -12,6 +12,7 @@ var MarkedPaper =require('./component/style-guide/marked-paper.component.jsx');
 var UnmarkedPaper =require('./component/style-guide/unmarked-paper.component.jsx');
 var AddSection =require('./component/style-guide/add-section.component.jsx');
 var Table =require('./component/style-guide/table.component.jsx');
+var InviteLink = require('./component/style-guide/invite-link.component.jsx');
 
 require('../less/group-title.less');
 require('../less/list-group.less');
@@ -38,6 +39,8 @@ ReactDom.render(
     <UnmarkedPaper />
     <AddSection />
     <Table />
+      <DiscussList />
+    <InviteLink />
   </div>,
   document.getElementById('style-guide')
 );
