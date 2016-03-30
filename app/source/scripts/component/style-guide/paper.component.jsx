@@ -3,7 +3,7 @@
 var Paper = React.createClass({
   getInitialState(){
     return {
-      paperName:'PaperName',
+      paperName:'PaperNamePaperName',
       isMarked: false,
       isPublished: false,
       sectionNumber: 10,
@@ -14,7 +14,7 @@ var Paper = React.createClass({
   render: function() {
     return (
         <div className="paper-button col-xs-12">
-          <h3 className="col-xs-9">
+          <h3 className="paper-name col-xs-9">
             {this.state.paperName}
           </h3>
           <div className="col-xs-3">
