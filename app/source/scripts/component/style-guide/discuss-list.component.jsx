@@ -31,7 +31,7 @@ var DiscussList = React.createClass({
               }
             </div>
             <div className="event-info">
-              <a href="#">{item.name}</a>
+              {item.name}
               <small>{item.time}</small>
             </div>
           </h5>

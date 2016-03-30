@@ -27,7 +27,7 @@ var DiscussSubject = React.createClass({
         <div className="discuss-subject col-md-12 col-sm-12 col-xs-12" key={index}>
           <div className="content col-md-10 col-sm-10 col-xs-10">
             <h5 className="col-md-12 col-sm-12 col-xs-12">
-              <a href="#">{item.isMe ? '我' : item.userName}</a>
+              {item.isMe ? '我' : item.userName}
               <small>{item.time}</small>
             </h5>
             <p className="col-md-10 col-sm-9 col-xs-6">

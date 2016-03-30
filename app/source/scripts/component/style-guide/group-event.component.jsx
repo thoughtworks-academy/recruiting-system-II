@@ -51,9 +51,7 @@ var GroupEvent = React.createClass({
               <img src={item.avatar}/>
             </div>
             <div className="event-info">
-              <a href="#">
                 <em>{item.type === 'admin'? '管理员:' : ''}</em>{item.name}
-              </a>
               <small>{item.time}</small>
               <span>{item.action}</span>
             </div>

@@ -38,17 +38,17 @@ ReactDom.render(
     <GroupEvent />
     <DiscussFrame />
     <Arrows />
-    <AddPaper />
     <DiscussSubject />
     <DiscussList />
     <Paper />
-    <AddSection />
+    <AddPaper />
     <Table />
     <InviteLink />
     <PageMachine />
     <GroupAvatar />
     <UploadAvatar />
     <LectureButton />
+    <AddSection />
   </div>,
   document.getElementById('style-guide')
 );
