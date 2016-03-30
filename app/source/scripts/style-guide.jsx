@@ -7,6 +7,8 @@ var DiscussFrame = require('./component/style-guide/discuss-frame.component.jsx'
 var Arrows = require('./component/style-guide/arrows.component.jsx');
 var AddPaper = require('./component/style-guide/add-paper.component.jsx');
 var DiscussSubject = require('./component/style-guide/discuss-subject.component.jsx');
+var DiscussList = require('./component/style-guide/discuss-list.component.jsx');
+
 require('../less/group-title.less');
 require('../less/list-group.less');
 require('../less/group-event.less');
@@ -23,6 +25,7 @@ ReactDom.render(
     <Arrows />
     <AddPaper />
     <DiscussSubject />
+      <DiscussList />
   </div>,
   document.getElementById('style-guide')
 );
