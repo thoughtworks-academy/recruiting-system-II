@@ -19,7 +19,7 @@ var LectureButton =require('./component/style-guide/lecture-button.component.jsx
 
 require('../less/group-title.less');
 require('../less/list-group.less');
-require('../less/group-event.less');
+require('../less/group-event-discuss-list.less');
 require('../less/discuss-frame.less');
 require('../less/add-paper.less');
 require('../less/discuss-subject.less');
@@ -44,7 +44,6 @@ ReactDom.render(
     <Paper />
     <AddSection />
     <Table />
-    <DiscussList />
     <InviteLink />
     <PageMachine />
     <GroupAvatar />
