@@ -1,6 +1,14 @@
 'use strict';
 
 var Paper = React.createClass({
+  getInitialState(){
+    return {
+      isMarked: false,
+      isPublished: false,
+      sectionNumber: 10,
+      publishedNumber:1
+    }
+  },
   render: function() {
     return (
         <div className="paper-button col-xs-12">
@@ -8,14 +16,16 @@ var Paper = React.createClass({
             name
           </h3>
           <div className="col-xs-3">
-            <i className="fa fa-star fa-2x"></i>
+            <i className={"fa fa-2x" + (this.state.isMarkd ? ' fa-star' : ' fa-star-o')}></i>
           </div>
           <div className="col-md-9 col-sm-5 ">
-            <div>未发布：
+            <div className={this.state.isPublished ? 'hide' : ''}>未发布：
               <a href="#">点击发布</a>
             </div>
-            <div>章节个数：10</div>
-            <div>已发布个数：0</div>
+            <div className={this.state.isPublished ? '' : ' hide'}>已发布
+            </div>
+            <div>章节个数：{this.state.sectionNumber}</div>
+            <div>已发布个数：{this.state.publishedNumber}</div>
           </div>
           <div className="button-buttom">
             <a href="#" className="text-warning"><b>编辑</b></a>
