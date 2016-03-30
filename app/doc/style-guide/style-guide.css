@@ -184,6 +184,7 @@ div.dashboard-icon .icon > .icon-name {
   font-size: 20px;
   letter-spacing: 2px;
   text-shadow: 0 7px 15px rgba(0,0,0,0.25);
+  margin-top: 11px;
 }
 
 div.dashboard-icon .icon > .icon-bottom {
@@ -194,8 +195,13 @@ div.dashboard-icon .icon > .icon-bottom {
   font-size: 15px;
 }
 
+div.dashboard-icon .icon > .icon-bottom > .published-option a{
+  display: inline-block;
+  margin-left: 10px;
+}
+
 div.dashboard-icon .icon > .icon-add {
-  height: 183px;
+  height: 191px;
   line-height: 230px;
 }
 
