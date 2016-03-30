@@ -30,6 +30,7 @@ require('../less/group-title.less');
 require('../less/group-avatar.less');
 require('../less/upload-avatar.less');
 require('../less/lecture-button.less');
+require('../less/invite-link.less');
 
 ReactDom.render(
   <div>
