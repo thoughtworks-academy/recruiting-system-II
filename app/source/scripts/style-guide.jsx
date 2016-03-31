@@ -8,14 +8,17 @@ var Arrows = require('./component/style-guide/arrows.component.jsx');
 var AddPaper = require('./component/style-guide/add-paper.component.jsx');
 var DiscussSubject = require('./component/style-guide/discuss-subject.component.jsx');
 var DiscussList = require('./component/style-guide/discuss-list.component.jsx');
-var Paper =require('./component/style-guide/paper.component.jsx');
-var AddSection =require('./component/style-guide/add-section.component.jsx');
-var Table =require('./component/style-guide/table.component.jsx');
+var Paper = require('./component/style-guide/paper.component.jsx');
+var AddSection = require('./component/style-guide/add-section.component.jsx');
+var Table = require('./component/style-guide/table.component.jsx');
 var InviteLink = require('./component/style-guide/invite-link.component.jsx');
-var PageMachine =require('./component/style-guide/page-machine.component.jsx');
+var PageMachine = require('./component/style-guide/page-machine.component.jsx');
 var GroupAvatar = require('./component/style-guide/group-avatar.component.jsx');
 var UploadAvatar = require('./component/style-guide/upload-avatar.component.jsx');
-var LectureButton =require('./component/style-guide/lecture-button.component.jsx');
+var LectureButton = require('./component/style-guide/lecture-button.component.jsx');
+var CompleteSection = require('./component/style-guide/complete-section.component.jsx');
+var LockSection = require('./component/style-guide/lock-section.component.jsx');
+
 
 require('../less/group-title.less');
 require('../less/list-group.less');
@@ -31,25 +34,29 @@ require('../less/group-avatar.less');
 require('../less/upload-avatar.less');
 require('../less/lecture-button.less');
 require('../less/invite-link.less');
+require('../less/complete-section.less');
+require('../less/lock-section.less');
 
 ReactDom.render(
-  <div>
-    <GroupTitle />
-    <ListGroup />
-    <GroupEvent />
-    <DiscussFrame />
-    <Arrows />
-    <DiscussSubject />
-    <DiscussList />
-    <Paper />
-    <AddPaper />
-    <Table />
-    <InviteLink />
-    <PageMachine />
-    <GroupAvatar />
-    <UploadAvatar />
-    <LectureButton />
-    <AddSection />
-  </div>,
-  document.getElementById('style-guide')
+    <div>
+      <GroupTitle />
+      <ListGroup />
+      <GroupEvent />
+      <DiscussFrame />
+      <Arrows />
+      <DiscussSubject />
+      <DiscussList />
+      <Paper />
+      <AddPaper />
+      <Table />
+      <InviteLink />
+      <PageMachine />
+      <GroupAvatar />
+      <UploadAvatar />
+      <LectureButton />
+      <AddSection />
+      <CompleteSection />
+      <LockSection />
+    </div>,
+    document.getElementById('style-guide')
 );
