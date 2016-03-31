@@ -21,15 +21,15 @@ var DiscussFrame = React.createClass({
           主题:<input className="form-control" type="text" placeholder="请输入主题"/>
         </div>
         <div className="discuss-type">
-          <div className={"discuss-item" + (this.state.isContent ? ' selected' : '')} onClick={this.changeState.bind(null, 'content')}>内容</div>
-          <div className={"discuss-item" + (this.state.isContent ? '' : ' selected')} onClick={this.changeState.bind(null, 'preview')}>预览</div>
+          <div className={"discuss-item" + (this.state.isContent ? ' label label-primary' : '')}
+               onClick={this.changeState.bind(null, 'content')}>内容</div>
+          <div className={"discuss-item" + (this.state.isContent ? '' : ' label label-primary')}
+               onClick={this.changeState.bind(null, 'preview')}>预览</div>
         </div>
         <div className="discuss-frame">
-          <span className={"discuss-arrow" + (this.state.isContent ? '' : ' preview')}></span>
-          <div className="discuss-textarea"></div>
-          <div className="discuss-button">
-            <input type="button" value="发布"/>
-          </div>
+          <span className={"discuss-arrow" + (this.state.isContent ? '' : ' preview')} />
+          <textarea className="discuss-textarea"></textarea>
+          <div className="discuss-button"><a href="#">发布</a></div>
         </div>
       </form>
     )
