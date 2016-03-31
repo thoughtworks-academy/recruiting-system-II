@@ -153,6 +153,7 @@ public class PaperResource extends Resource {
             userMap.put("degree", userDetails.get(i).getDegree());
             userMap.put("gender", userDetails.get(i).getGender());
             userMap.put("name", userDetails.get(i).getName());
+            userMap.put("role", users.get(i).getRole());
             result.add(userMap);
         }
         return Response.status(Response.Status.OK).entity(result).build();

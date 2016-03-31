@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
-        select * from users where id = #{id}
+        select id,password, email,mobilePhone, ifnull(role, 2) as role from users where id = #{id}
     </select>
 
     <select id="getUserByEmail" resultType="com.thoughtworks.twars.bean.User">
@@ -42,8 +42,8 @@
     </select>
 
     <insert id="insertUser" parameterType="com.thoughtworks.twars.bean.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users(email, mobilePhone, password, createDate)
-        VALUES (#{email}, #{mobilePhone}, MD5(#{password}), UNIX_TIMESTAMP())
+        INSERT INTO users(email, mobilePhone, password, createDate, role)
+        VALUES (#{email}, #{mobilePhone}, MD5(#{password}), UNIX_TIMESTAMP(), "2")
     </insert>
 
     <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true"
@@ -71,7 +71,7 @@
     </select>
 
     <select id="findUsersByUserIds" resultMap="userMap">
-        SELECT * FROM users WHERE id IN
+        SELECT id,email,mobilePhone,IFNULL(role, 2) role FROM users WHERE id IN
         <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
             #{userIds}
         </foreach>

@@ -34,6 +34,7 @@ public class UserResourceTest extends TestBase {
         when(user.getId()).thenReturn(1);
         when(user.getEmail()).thenReturn("111@222.com");
         when(user.getMobilePhone()).thenReturn("13111111111");
+        when(user.getRole()).thenReturn("2");
 
         Response response = target(basePath + "/1").request().get();
 
@@ -44,6 +45,7 @@ public class UserResourceTest extends TestBase {
         assertThat((Integer) result.get("id"), is(1));
         assertThat((String) result.get("email"), is("111@222.com"));
         assertThat((String) result.get("mobilePhone"), is("13111111111"));
+        assertThat(result.get("role"), is("2"));
     }
 
     @Test

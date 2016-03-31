@@ -25,6 +25,7 @@ public class UserMapperTest extends TestBase {
     public void should_return_user_by_id() throws Exception {
         User user = userMapper.getUserById(1);
         assertThat(user.getMobilePhone(), is("18798037893"));
+        assertThat(user.getRole(), is("2"));
     }
 
     @Test
@@ -66,7 +67,7 @@ public class UserMapperTest extends TestBase {
 
         userMapper.insertUser(user);
 
-        assertThat(user.getId(), is(7));
+        assertThat(user.getId(), is(8));
     }
 
     @Test
@@ -120,12 +121,12 @@ public class UserMapperTest extends TestBase {
         newUser.setMobilePhone("13576826262");
         newUser.setPassword("123");
         int result = userMapper.insertUser(newUser);
+        session.commit();
         int userId = newUser.getId();
         User addedUser = userMapper.getUserById(userId);
-
         assertThat(result, is(1));
 
-        assertThat(addedUser.getPassword(), is("202cb962ac59075b964b07152d234b70"));
+        assertThat(addedUser.getEmail(), is("jingjing@qq.com"));
     }
 
 
@@ -137,6 +138,7 @@ public class UserMapperTest extends TestBase {
         String password = "123";
 
         int result = userMapper.updatePassword(id, oldPassword, password);
+        session.commit();
 
         User resultUser = userMapper.getUserById(1);
 
@@ -152,6 +154,7 @@ public class UserMapperTest extends TestBase {
         user.setEmail("test@163.com");
 
         int result = userMapper.resetPassword(user);
+        session.commit();
 
         User resultUser = userMapper.getUserById(1);
 
@@ -183,6 +186,6 @@ public class UserMapperTest extends TestBase {
 
         List<User> users = userMapper.findUsersByUserIds(userIds);
 
-        assertThat(userIds.size(), is(3));
+        assertThat(users.size(), is(3));
     }
 }

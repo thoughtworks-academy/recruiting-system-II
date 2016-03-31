@@ -198,6 +198,7 @@ public class PaperResourceTest extends TestBase {
         User user = new User();
         user.setEmail("test@qq.com");
         user.setMobilePhone("13804030030");
+        user.setRole("2");
         when(userMapper.findUserDetailsByUserIds(Arrays.asList(examerId))).thenReturn(Arrays.asList(userDetail));
         when(userMapper.findUsersByUserIds(Arrays.asList(examerId))).thenReturn(Arrays.asList(user));
 
