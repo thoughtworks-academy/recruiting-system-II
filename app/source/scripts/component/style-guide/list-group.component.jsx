@@ -10,16 +10,22 @@ var ListGroup = React.createClass({
     })
   },
 
+  handleClick: function (clickNumber) {
+    this.setState({
+      clickNumber: clickNumber
+    });
+  },
+
   render() {
 
     var listContent = this.state.list.map((item, index) => {
       var classStr = "list-group-item " + (this.state.clickNumber === index + 1 ? 'select': '');
       return (
-        <a className={classStr} href="javascript:void(0)" key={index}>
+        <button className={classStr} key={index} onClick={this.handleClick.bind(null, index + 1)}>
           <div className="row">
             <div className="h4 text-center">{item}</div>
           </div>
-        </a>
+        </button>
       )
     });
 
