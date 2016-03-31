@@ -1,1 +1,1 @@
-ALTER TABLE `users` ADD COLUMN `role` ENUM("0", "1");
+ALTER TABLE `users` ADD COLUMN `role` ENUM("1", "2");
