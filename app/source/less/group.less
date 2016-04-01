@@ -1,10 +1,22 @@
-@import './common/main';
+@import "./common/main";
+@import "./group-title";
+@import "./list-group";
+@import "group-avatar";
+@import "group-event-discuss-list";
+
+body{
+  background: @pale-white;
+}
 
 .header-major;
-
 #content {
-  background: @nice-white;
+  background: @white;
   height: 500px;
   padding: 20px;
   margin-bottom: 20px;
+  border-radius: 3px;
+  overflow-y: auto;
+  .group-icon{
+    text-align: center;
+  }
 }

@@ -4,10 +4,6 @@
 var Navigation = require('../component/navigation/navigation.component.jsx');
 var Account = require('../component/reuse/get-account.component.jsx');
 
-require('../../less/list-group.less');
-require('../../less/group-title.less');
-
-
 function asyncRenderAction(action, callBack) {
   var element;
 
@@ -16,20 +12,18 @@ function asyncRenderAction(action, callBack) {
     callBack(element);
   } else {
     require.ensure([
-      "../component/style-guide/list-group.component.jsx",
-      "../component/style-guide/group-title.component.jsx"
+      "../component/group/group-sidebar.component.jsx",
+      "../component/group/group-index.component.jsx"
     ], function(require) {
-      var GroupTitle = require("../component/style-guide/group-title.component.jsx");
+      var GroupIndex = require("../component/group/group-index.component.jsx");
       var contentEnum = {
-        index: <GroupTitle />
+        index: <GroupIndex />
       };
 
-      var ListGroup = require("../component/style-guide/list-group.component.jsx");
+      var GroupSidebar = require("../component/group/group-sidebar.component.jsx");
       element =
       <div>
-        <div className="col-md-3">
-          <ListGroup />
-        </div>
+        <GroupSidebar />
         <div className="col-md-9">
           <div id="content">{contentEnum[action]}</div>
         </div>
