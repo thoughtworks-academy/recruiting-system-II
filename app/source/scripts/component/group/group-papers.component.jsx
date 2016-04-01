@@ -13,7 +13,7 @@ var GroupPapers = React.createClass({
           isPublished: true,
           sectionNumber: 13,
           publishedNumber:6,
-          role: '1',
+          role: '2',
           isFinished: false
         },
         {
@@ -22,7 +22,7 @@ var GroupPapers = React.createClass({
           isPublished: true,
           sectionNumber: 13,
           publishedNumber:6,
-          role: '1',
+          role: '2',
           isFinished: false
         }
       ],
