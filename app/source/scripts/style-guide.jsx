@@ -21,6 +21,7 @@ var LockSection = require('./component/style-guide/lock-section.component.jsx');
 var AddGroup =require('./component/style-guide/add-group.component.jsx');
 var TextArea =require('./component/style-guide/textarea.component.jsx');
 
+require('../less/textarea.less');
 require('../less/group-title.less');
 require('../less/list-group.less');
 require('../less/group-event-discuss-list.less');

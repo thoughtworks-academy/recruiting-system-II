@@ -1,7 +1,5 @@
 'use strict';
 
-require('../../../less/textarea.less');
-
 var TextArea = React.createClass({
 
   getInitialState: function () {
