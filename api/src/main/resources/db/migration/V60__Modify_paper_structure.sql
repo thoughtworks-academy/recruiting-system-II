@@ -1,3 +1,0 @@
-ALTER TABLE `paper` ADD COLUMN `name` VARCHAR(128);
-ALTER TABLE `paper` ADD COLUMN `groupId` INT ;
-ALTER TABLE `paper` ADD CONSTRAINT `fk_group_id` 	FOREIGN KEY (`groupId`) REFERENCES `group` (`id`) ON UPDATE CASCADE;
