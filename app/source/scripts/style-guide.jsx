@@ -18,7 +18,7 @@ var UploadAvatar = require('./component/style-guide/upload-avatar.component.jsx'
 var LectureButton = require('./component/style-guide/lecture-button.component.jsx');
 var CompleteSection = require('./component/style-guide/complete-section.component.jsx');
 var LockSection = require('./component/style-guide/lock-section.component.jsx');
-
+var AddGroup =require('./component/style-guide/add-group.component.jsx');
 
 require('../less/group-title.less');
 require('../less/list-group.less');
@@ -52,6 +52,7 @@ ReactDom.render(
       <InviteLink />
       <PageMachine />
       <GroupAvatar />
+      <AddGroup />
       <UploadAvatar />
       <LectureButton />
       <AddSection />

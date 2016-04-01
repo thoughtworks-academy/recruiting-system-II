@@ -4,7 +4,7 @@ var GroupTitle = React.createClass({
 
   getInitialState: function() {
     return ({
-      titleName: '群组名称'
+      titleName: this.props.titleName || '群组首页'
     })
   },
   render() {

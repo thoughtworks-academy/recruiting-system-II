@@ -10,7 +10,8 @@ var pathToBootstarp = path.resolve(node_modules, 'bootstrap/dist/');
 
 var config = {
   entry: {
-
+    //"group-router": './source/scripts/routers/group-router.jsx',
+    "group": './source/scripts/group.jsx',
     "deadline": './source/scripts/deadline.jsx',
     "style-guide": './source/scripts/style-guide.jsx',
     "404": "./source/scripts/404.js",
@@ -30,7 +31,8 @@ var config = {
   output: {
     path: __dirname + '/public/assets/',
     filename: '[chunkhash:8].[name].js',
-    chunkFilename: '[name].[chunkhash:8].js'
+    chunkFilename: '[name].[chunkhash:8].js',
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -88,11 +90,11 @@ var config = {
     }),
     new ExtractTextPlugin("[chunkhash:8].[name].css"),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
+    //new webpack.optimize.UglifyJsPlugin({
+    //  compress: {
+    //    warnings: false
+    //  }
+    //})
   ],
   //devtool: '#inline-source-map',
   resolve: {
@@ -108,7 +110,7 @@ var config = {
 function htmlwebpackPluginBuilder(fileName, deps) {
   return new HtmlwebpackPlugin({
     filename: fileName,
-    minify: {collapseWhitespace: true},
+    //minify: {collapseWhitespace: true},
     template: __dirname + '/source/' + fileName,
     inject: true,
     chunks: deps
@@ -129,5 +131,7 @@ config.plugins.push(htmlwebpackPluginBuilder('dashboard.html', ['dashboard.css',
 config.plugins.push(htmlwebpackPluginBuilder('404.html', ['404.css', 'vendors', '404']));
 config.plugins.push(htmlwebpackPluginBuilder('deadline.html', ['deadline.css', 'vendors', 'deadline']));
 config.plugins.push(htmlwebpackPluginBuilder('style-guide.html', ['style-guide.css', 'vendors', 'style-guide']));
+config.plugins.push(htmlwebpackPluginBuilder('group.html', ['group.css', 'vendors', 'group']));
+
 
 module.exports = config;
