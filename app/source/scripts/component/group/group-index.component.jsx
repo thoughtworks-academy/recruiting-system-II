@@ -3,7 +3,7 @@
 var GroupTitle = require("../style-guide/group-title.component.jsx");
 var GroupEvent = require("../style-guide/group-event.component.jsx");
 var GroupAvatar = require("../style-guide/group-avatar.component.jsx");
-var TextArea = require("../style-guide/textarea.component.jsx");
+var TextBox = require("../style-guide/textbox.component.jsx");
 
 var GroupIndex = React.createClass({
 
@@ -20,7 +20,7 @@ var GroupIndex = React.createClass({
         <div>
           <div className="col-md-9">
             <GroupTitle titleName="群组公告" />
-            <TextArea content={this.state.announcement} readonly={true} />
+            <TextBox content={this.state.announcement} readonly={true} />
             <GroupTitle titleName="群组事件" />
             <GroupEvent />
           </div>

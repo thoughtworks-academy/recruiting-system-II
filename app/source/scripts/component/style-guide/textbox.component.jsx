@@ -1,6 +1,6 @@
 'use strict';
 
-var TextArea = React.createClass({
+var TextBox = React.createClass({
 
   getInitialState: function () {
     return {
@@ -17,4 +17,4 @@ var TextArea = React.createClass({
   }
 });
 
-module.exports = TextArea;
+module.exports = TextBox;

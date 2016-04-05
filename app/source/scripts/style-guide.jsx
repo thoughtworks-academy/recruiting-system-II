@@ -19,9 +19,9 @@ var LectureButton = require('./component/style-guide/lecture-button.component.js
 var CompleteSection = require('./component/style-guide/complete-section.component.jsx');
 var LockSection = require('./component/style-guide/lock-section.component.jsx');
 var AddGroup =require('./component/style-guide/add-group.component.jsx');
-var TextArea =require('./component/style-guide/textarea.component.jsx');
+var TextBox =require('./component/style-guide/textbox.component.jsx');
 
-require('../less/textarea.less');
+require('../less/textabox.less');
 require('../less/group-title.less');
 require('../less/list-group.less');
 require('../less/group-event-discuss-list.less');
@@ -60,7 +60,7 @@ ReactDom.render(
       <AddSection />
       <CompleteSection />
       <LockSection />
-      <TextArea />
+      <TextBox />
     </div>,
     document.getElementById('style-guide')
 );
