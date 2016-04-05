@@ -1,6 +1,6 @@
 'use strict';
 
-var PageMachine = React.createClass({
+var Pagination = React.createClass({
   getInitialState: function () {
     return {
       pageList:[1, 2, 3, 4, 5]
@@ -36,4 +36,4 @@ var PageMachine = React.createClass({
   }
 });
 
-module.exports = PageMachine;
+module.exports = Pagination;

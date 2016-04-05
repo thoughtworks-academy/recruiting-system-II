@@ -12,7 +12,7 @@ var Paper = require('./component/style-guide/paper.component.jsx');
 var AddSection = require('./component/style-guide/add-section.component.jsx');
 var Table = require('./component/style-guide/table.component.jsx');
 var InviteLink = require('./component/style-guide/invite-link.component.jsx');
-var PageMachine = require('./component/style-guide/page-machine.component.jsx');
+var Pagination = require('./component/style-guide/pagination.component.jsx');
 var GroupAvatar = require('./component/style-guide/group-avatar.component.jsx');
 var UploadAvatar = require('./component/style-guide/upload-avatar.component.jsx');
 var LectureButton = require('./component/style-guide/lecture-button.component.jsx');
@@ -52,7 +52,7 @@ ReactDom.render(
       <AddPaper />
       <Table />
       <InviteLink />
-      <PageMachine />
+      <Pagination />
       <GroupAvatar />
       <AddGroup />
       <UploadAvatar />
