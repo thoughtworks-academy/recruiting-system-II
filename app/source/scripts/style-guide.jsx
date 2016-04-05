@@ -21,7 +21,7 @@ var LockSection = require('./component/style-guide/lock-section.component.jsx');
 var AddGroup =require('./component/style-guide/add-group.component.jsx');
 var TextBox =require('./component/style-guide/textbox.component.jsx');
 
-require('../less/textabox.less');
+require('../less/textbox.less');
 require('../less/group-title.less');
 require('../less/list-group.less');
 require('../less/group-event-discuss-list.less');
@@ -48,7 +48,7 @@ ReactDom.render(
       <Arrows />
       <DiscussSubject />
       <DiscussList />
-      <Paper />
+      <Paper item=""/>
       <AddPaper />
       <Table />
       <InviteLink />
