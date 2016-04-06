@@ -4,3 +4,6 @@
 [submodule "express-api"]
 	path = express-api
 	url = git@github.com:thoughtworks-academy/recruiting-system-express-api.git
+[submodule "user-api"]
+	path = user-api
+	url = git@github.com:thoughtworks-academy/recruiting-system-user-api.git
