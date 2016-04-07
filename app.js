@@ -36,7 +36,7 @@ app.get('/group', function (req, res) {
 });
 //-------group开发阶段路由方法--------
 
-router.get('/styleGuide',function(req, res){
+app.get('/styleGuide',function(req, res){
   res.sendFile(path.join(__dirname, 'web/public/assets', 'style-guide.html'));
 });
 
