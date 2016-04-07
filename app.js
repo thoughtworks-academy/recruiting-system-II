@@ -10,6 +10,7 @@ app.use(express.static('web/public/assets'));
 
 app.use('/api', proxy('192.168.99.100:3000/',{
   forwardPath: function(req, res) {
+
     return require('url').parse(req.url).path;
   }
 }));
