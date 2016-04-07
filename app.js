@@ -26,7 +26,6 @@ app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, 'web/public/assets', 'register.html'));
 });
 
-//-------group开发阶段路由方法--------
 app.get('/group/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'web/public/assets', 'group.html'));
 });
@@ -34,7 +33,6 @@ app.get('/group/*', function (req, res) {
 app.get('/group', function (req, res) {
   res.sendFile(path.join(__dirname, 'web/public/assets', 'group.html'));
 });
-//-------group开发阶段路由方法--------
 
 app.get('/styleGuide',function(req, res){
   res.sendFile(path.join(__dirname, 'web/public/assets', 'style-guide.html'));
