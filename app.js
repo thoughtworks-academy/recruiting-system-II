@@ -14,14 +14,6 @@ app.use('/api', proxy('192.168.99.100:3000/',{
   }
 }));
 
-app.get('/index', function (req, res) {
-  res.sendFile(path.join(__dirname, 'web/public/assets', 'index.html'));
-});
-
-app.get('/register', function (req, res) {
-  res.sendFile(path.join(__dirname, 'web/public/assets', 'register.html'));
-});
-
 app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, 'web/public/assets', 'register.html'));
 });
@@ -30,16 +22,13 @@ app.get('/group/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'web/public/assets', 'group.html'));
 });
 
-app.get('/group', function (req, res) {
-  res.sendFile(path.join(__dirname, 'web/public/assets', 'group.html'));
-});
-
-app.get('/styleGuide',function(req, res){
-  res.sendFile(path.join(__dirname, 'web/public/assets', 'style-guide.html'));
-});
-
-app.get('*', function (req, res){
-  res.sendFile(path.join(__dirname, 'web/public/assets/', '404.html'));
+app.get('/*', function (req, res){
+  var fileName = require('url').parse(req.url).path.substr(1);
+  res.sendFile(path.join(__dirname, 'web/public/assets', fileName + '.html'),function(err){
+    if(err){
+      res.sendFile(path.join(__dirname, 'web/public/assets/', '404.html'));
+    }
+  });
 });
 
 app.listen(3333, function () {
