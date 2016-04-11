@@ -18,12 +18,8 @@ app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, 'web/public/assets', 'register.html'));
 });
 
-app.get('/group/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'web/public/assets', 'group.html'));
-});
-
 app.get('/*', function (req, res){
-  var fileName = require('url').parse(req.url).path.substr(1);
+  var fileName = require('url').parse(req.url).path.split("/")[1];
   res.sendFile(path.join(__dirname, 'web/public/assets', fileName + '.html'),function(err){
     if(err){
       res.sendFile(path.join(__dirname, 'web/public/assets/', '404.html'));
