@@ -19,6 +19,14 @@ jetty-api:
     - mysql:mysql
   ports:
     - "8080:8080"
+user-api:
+  image: jetty:9.3
+  volumes:
+    - ../user-api/build/libs:/var/lib/jetty/webapps
+  links:
+    - mysql:mysql
+  ports:
+    - "8888:8888"
 mongodb:
   image: mongo:3.2
   ports:
