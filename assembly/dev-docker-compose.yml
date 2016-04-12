@@ -26,7 +26,7 @@ user-api:
   links:
     - mysql:mysql
   ports:
-    - "8888:8888"
+    - "8888:8080"
 mongodb:
   image: mongo:3.2
   ports:
@@ -41,6 +41,7 @@ node-app:
   links:
     - mongodb:mongodb
     - jetty-api:jetty-api
+    - user-api:user-api
     - nginx:nginx
     - node-task-queue:node-task-queue
   env_file:
