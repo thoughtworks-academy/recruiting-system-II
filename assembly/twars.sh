@@ -29,6 +29,9 @@ function migrateMysql() {
   cd paper-api
   ./gradlew flywaymigrate
   cd -
+  cd user-api
+  ./gradlew flywaymigrate
+  cd -
 }
 
 action=$1
