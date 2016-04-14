@@ -20,14 +20,14 @@ function initializeJenkins() {
 
 function initMysql() {
   echo "the password of root:"
-  sql=$(cat mysql-init.sql)
+  sql=$(cat assembly/mysql-init.sql)
   read -s password
   docker exec -it assembly_mysql_1 mysql -u root -p$password -e "$sql"
 }
 
 function migrateMysql() {
   cd paper-api
-  gradle flywaymigrate
+  ./gradlew flywaymigrate
   cd -
 }
 
