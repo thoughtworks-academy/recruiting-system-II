@@ -39,6 +39,7 @@ web-api:
   links:
     - mongo:mongo
     - paper-api:paper-api
+    - user-api:user-api
     - task-queue:task-queue
   env_file:
     - ./test.env
